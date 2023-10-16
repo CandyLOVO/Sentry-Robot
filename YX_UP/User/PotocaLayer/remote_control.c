@@ -1,3 +1,4 @@
+//================================================遥控器数据接收================================================//
 #include "remote_control.h"
 #include "main.h"
 
@@ -16,6 +17,8 @@ extern DMA_HandleTypeDef hdma_usart3_rx;
   * @param[out]     rc_ctrl: 遥控器数据指
   * @retval         none
   */
+	
+//================================================遥控器数据解析函数================================================//
 static void sbus_to_rc(volatile const uint8_t *sbus_buf, RC_ctrl_t *rc_ctrl);
 
 //remote control data 
@@ -36,6 +39,8 @@ static uint8_t sbus_rx_buf[2][SBUS_RX_BUF_NUM];
   * @param[in]      none
   * @retval         none
   */
+	
+//================================================遥控器初始化(使能DMA和串口中断)================================================//
 void remote_control_init(void)
 {
     RC_init(sbus_rx_buf[0], sbus_rx_buf[1], SBUS_RX_BUF_NUM);
@@ -55,7 +60,7 @@ const RC_ctrl_t *get_remote_control_point(void)
     return &rc_ctrl;
 }
 
-
+//================================================遥控器串口接收中断================================================//
 //串口中断，需要删除stm32f4xx_it.c中的同样中断
 void USART3_IRQHandler(void)
 {
@@ -147,8 +152,10 @@ void USART3_IRQHandler(void)
   * @param[out]     rc_ctrl: 遥控器数据指
   * @retval         none
   */
+
+//================================================遥控器数据解析函数================================================//
 extern UART_HandleTypeDef huart1;
-extern float target_speed[7];//
+extern float target_speed[8];
 static void sbus_to_rc(volatile const uint8_t *sbus_buf, RC_ctrl_t *rc_ctrl)
 {
     if (sbus_buf == NULL || rc_ctrl == NULL)
@@ -170,14 +177,7 @@ static void sbus_to_rc(volatile const uint8_t *sbus_buf, RC_ctrl_t *rc_ctrl)
     rc_ctrl->mouse.press_r = sbus_buf[13];                                  //!< Mouse Right Is Press ?
     rc_ctrl->key.v = sbus_buf[14] | (sbus_buf[15] << 8);                    //!< KeyBoard value	
     rc_ctrl->rc.ch[4] = sbus_buf[16] | (sbus_buf[17] << 8);                 //NULL
-
-		//HAL_UART_Transmit_DMA(&huart1,sbus_rx_buf[0],18);  
-		can_cnt_2++;
-		if (can_cnt_2 == 200)//闪烁蓝灯代表遥控接收正常通信
-		{
-			can_cnt_2 = 0;
-			HAL_GPIO_TogglePin(GPIOH,GPIO_PIN_10);
-		}
+		
     //rc_ctrl->rc.ch[0] -= RC_CH_VALUE_OFFSET;//这里把回中值调成0了，负的会溢出
     //rc_ctrl->rc.ch[1] -= RC_CH_VALUE_OFFSET;
     //rc_ctrl->rc.ch[2] -= RC_CH_VALUE_OFFSET;

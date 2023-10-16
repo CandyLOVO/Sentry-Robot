@@ -1,5 +1,7 @@
 #include "GPIO_User.h"
 
+//================================================ist8310磁力计(未使用)================================================//
+
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)//GPIO的外部中断
 {
     if(GPIO_Pin == GPIO_PIN_3)

@@ -40,7 +40,7 @@ uint16_t can_cnt_1;
 uint16_t can_cnt_2;
 float target_speed[7];//实测最大空载转速320rpm
 float target_speed_can_2[7];//实测最大空载转速320rpm
-moto_info_t motor_info[MOTOR_MAX_NUM];		//赋予最大的7个字节
+moto_info_t motor_info[8];		//赋予最大的7个字节
 moto_info_t motor_info_can_2[MOTOR_MAX_NUM];		//赋予最大的7个字节
 pid_struct_t motor_pid[7];	
 pid_struct_t motor_pid_sita[7];
@@ -178,12 +178,11 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM10_Init();
   /* USER CODE BEGIN 2 */
-	HAL_TIM_PWM_Start(&htim10,TIM_CHANNEL_1);
-	//ist8310_init();
-	HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);//修改TIM2中断优先级
 	can_1_user_init(&hcan1);//配置can1的过滤器
 	can_2_user_init(&hcan2);//配置can2的过滤器,过滤器bank不一样
-	HAL_NVIC_SetPriority(SysTick_IRQn,1,1);//调高HAL_Delay的时钟中断优先级
+	HAL_TIM_PWM_Start(&htim10,TIM_CHANNEL_1);//BMI088需要使用
+	HAL_TIM_Base_Start_IT(&htim1);//开启定时器1并打开中断
+	HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);//修改TIM2中断优先级
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
