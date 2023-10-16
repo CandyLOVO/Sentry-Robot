@@ -23,10 +23,59 @@
 /* USER CODE BEGIN 0 */
 CAN_TxHeaderTypeDef can_tx_message;
 uint8_t can_send_data[8];
+motor_info motor[4];
 /* USER CODE END 0 */
 
+CAN_HandleTypeDef hcan1;
 CAN_HandleTypeDef hcan2;
 
+/* CAN1 init function */
+void MX_CAN1_Init(void)
+{
+
+  /* USER CODE BEGIN CAN1_Init 0 */
+
+  /* USER CODE END CAN1_Init 0 */
+
+  /* USER CODE BEGIN CAN1_Init 1 */
+
+  /* USER CODE END CAN1_Init 1 */
+  hcan1.Instance = CAN1;
+  hcan1.Init.Prescaler = 3;
+  hcan1.Init.Mode = CAN_MODE_NORMAL;
+  hcan1.Init.SyncJumpWidth = CAN_SJW_1TQ;
+  hcan1.Init.TimeSeg1 = CAN_BS1_10TQ;
+  hcan1.Init.TimeSeg2 = CAN_BS2_3TQ;
+  hcan1.Init.TimeTriggeredMode = DISABLE;
+  hcan1.Init.AutoBusOff = DISABLE;
+  hcan1.Init.AutoWakeUp = DISABLE;
+  hcan1.Init.AutoRetransmission = DISABLE;
+  hcan1.Init.ReceiveFifoLocked = DISABLE;
+  hcan1.Init.TransmitFifoPriority = DISABLE;
+  if (HAL_CAN_Init(&hcan1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN CAN1_Init 2 */
+    CAN_FilterTypeDef  can_filter;
+
+    can_filter.FilterBank = 0;
+    can_filter.FilterMode =  CAN_FILTERMODE_IDMASK;
+    can_filter.FilterScale = CAN_FILTERSCALE_32BIT;
+    can_filter.FilterIdHigh = 0; 
+    can_filter.FilterIdLow  = 0; 
+    can_filter.FilterMaskIdHigh = 0;
+    can_filter.FilterMaskIdLow  = 0;
+    can_filter.FilterFIFOAssignment = CAN_RX_FIFO0;
+    can_filter.FilterActivation = ENABLE;
+    can_filter.SlaveStartFilterBank  = 14;          
+   
+    HAL_CAN_ConfigFilter(&hcan1, &can_filter);
+    HAL_CAN_ActivateNotification(&hcan1,CAN_IT_RX_FIFO0_MSG_PENDING);
+    HAL_CAN_Start(&hcan1);
+  /* USER CODE END CAN1_Init 2 */
+
+}
 /* CAN2 init function */
 void MX_CAN2_Init(void)
 {
@@ -75,18 +124,55 @@ void MX_CAN2_Init(void)
 
 }
 
+static uint32_t HAL_RCC_CAN1_CLK_ENABLED=0;
+
 void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
 {
 
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if(canHandle->Instance==CAN2)
+  if(canHandle->Instance==CAN1)
+  {
+  /* USER CODE BEGIN CAN1_MspInit 0 */
+
+  /* USER CODE END CAN1_MspInit 0 */
+    /* CAN1 clock enable */
+    HAL_RCC_CAN1_CLK_ENABLED++;
+    if(HAL_RCC_CAN1_CLK_ENABLED==1){
+      __HAL_RCC_CAN1_CLK_ENABLE();
+    }
+
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    /**CAN1 GPIO Configuration
+    PB8     ------> CAN1_RX
+    PB9     ------> CAN1_TX
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_9;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStruct.Alternate = GPIO_AF9_CAN1;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+    /* CAN1 interrupt Init */
+    HAL_NVIC_SetPriority(CAN1_TX_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(CAN1_TX_IRQn);
+    HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
+  /* USER CODE BEGIN CAN1_MspInit 1 */
+
+  /* USER CODE END CAN1_MspInit 1 */
+  }
+  else if(canHandle->Instance==CAN2)
   {
   /* USER CODE BEGIN CAN2_MspInit 0 */
 
   /* USER CODE END CAN2_MspInit 0 */
     /* CAN2 clock enable */
     __HAL_RCC_CAN2_CLK_ENABLE();
-    __HAL_RCC_CAN1_CLK_ENABLE();
+    HAL_RCC_CAN1_CLK_ENABLED++;
+    if(HAL_RCC_CAN1_CLK_ENABLED==1){
+      __HAL_RCC_CAN1_CLK_ENABLE();
+    }
 
     __HAL_RCC_GPIOB_CLK_ENABLE();
     /**CAN2 GPIO Configuration
@@ -114,14 +200,41 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
 void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 {
 
-  if(canHandle->Instance==CAN2)
+  if(canHandle->Instance==CAN1)
+  {
+  /* USER CODE BEGIN CAN1_MspDeInit 0 */
+
+  /* USER CODE END CAN1_MspDeInit 0 */
+    /* Peripheral clock disable */
+    HAL_RCC_CAN1_CLK_ENABLED--;
+    if(HAL_RCC_CAN1_CLK_ENABLED==0){
+      __HAL_RCC_CAN1_CLK_DISABLE();
+    }
+
+    /**CAN1 GPIO Configuration
+    PB8     ------> CAN1_RX
+    PB9     ------> CAN1_TX
+    */
+    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_8|GPIO_PIN_9);
+
+    /* CAN1 interrupt Deinit */
+    HAL_NVIC_DisableIRQ(CAN1_TX_IRQn);
+    HAL_NVIC_DisableIRQ(CAN1_RX0_IRQn);
+  /* USER CODE BEGIN CAN1_MspDeInit 1 */
+
+  /* USER CODE END CAN1_MspDeInit 1 */
+  }
+  else if(canHandle->Instance==CAN2)
   {
   /* USER CODE BEGIN CAN2_MspDeInit 0 */
 
   /* USER CODE END CAN2_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_CAN2_CLK_DISABLE();
-    __HAL_RCC_CAN1_CLK_DISABLE();
+    HAL_RCC_CAN1_CLK_ENABLED--;
+    if(HAL_RCC_CAN1_CLK_ENABLED==0){
+      __HAL_RCC_CAN1_CLK_DISABLE();
+    }
 
     /**CAN2 GPIO Configuration
     PB5     ------> CAN2_RX
@@ -155,5 +268,23 @@ void can_cmd_send(int motor1,int motor2,int motor3,int motor4)
 	can_send_data[6] = (motor4>>8)&0xff;
 	can_send_data[7] = motor4&0xff;
 	HAL_CAN_AddTxMessage(&hcan2,&can_tx_message,can_send_data,&send_mail_box);
+}
+
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
+{
+	if(hcan->Instance == CAN2)
+	{
+		CAN_RxHeaderTypeDef can_rx_message;
+		uint8_t can_receive_data[8];
+	  HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,&can_rx_message,can_receive_data);
+	  if((can_rx_message.StdId >= 0x205) && (can_rx_message.StdId < 0x208)){
+			uint8_t index = can_rx_message.StdId - 0x205;
+			motor[index].angle = ((can_receive_data[0] << 8) | can_receive_data[1]);
+			motor[index].speed = ((can_receive_data[2] << 8) | can_receive_data[3]);
+			motor[index].tor_current = ((can_receive_data[4] << 8) | can_receive_data[5]);
+			motor[index].temperture = can_receive_data[6];
+		}
+
+	}
 }
 /* USER CODE END 1 */

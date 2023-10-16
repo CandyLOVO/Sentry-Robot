@@ -32,12 +32,22 @@ extern "C" {
 
 /* USER CODE END Includes */
 
+extern CAN_HandleTypeDef hcan1;
+
 extern CAN_HandleTypeDef hcan2;
 
 /* USER CODE BEGIN Private defines */
 void can_cmd_send(int motor1,int motor2,int motor3,int motor4);
+typedef struct
+{
+	uint16_t angle;
+	uint16_t speed;
+	uint16_t tor_current;
+	uint16_t temperture;
+}motor_info;
 /* USER CODE END Private defines */
 
+void MX_CAN1_Init(void);
 void MX_CAN2_Init(void);
 
 /* USER CODE BEGIN Prototypes */

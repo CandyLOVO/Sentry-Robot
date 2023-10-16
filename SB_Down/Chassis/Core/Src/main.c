@@ -87,8 +87,9 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_CAN2_Init();
+  MX_CAN1_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -98,7 +99,9 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		can_cmd_send(1000,0,0,0);
+		
+		can_cmd_send(3000,0,0,0);
+		HAL_Delay(10);
   }
   /* USER CODE END 3 */
 }
