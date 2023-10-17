@@ -1,5 +1,7 @@
 --cpu=Cortex-M4.fp.sp
 "chassis\startup_stm32f407xx.o"
+"chassis\chassis.o"
+"chassis\pid.o"
 "chassis\main.o"
 "chassis\gpio.o"
 "chassis\freertos.o"
@@ -7,8 +9,6 @@
 "chassis\stm32f4xx_it.o"
 "chassis\stm32f4xx_hal_msp.o"
 "chassis\stm32f4xx_hal_timebase_tim.o"
-"chassis\chassis.o"
-"chassis\pid.o"
 "chassis\stm32f4xx_hal_can.o"
 "chassis\stm32f4xx_hal_rcc.o"
 "chassis\stm32f4xx_hal_rcc_ex.o"
