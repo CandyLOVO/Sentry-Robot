@@ -1,6 +1,7 @@
 #include "bsp_rc.h"
 #include "main.h"
 
+//================================================Ò£¿ØÆ÷DMA³õÊ¼»¯================================================//
 extern UART_HandleTypeDef huart3;
 extern DMA_HandleTypeDef hdma_usart3_rx;
 

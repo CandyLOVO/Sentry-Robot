@@ -22,11 +22,12 @@
 #include "stm32f4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+//================================================外部中断文件================================================//
+#include "Exchange_task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
-#include "Exchange_task.h"
 /* USER CODE END TD */
 
 /* Private define ------------------------------------------------------------*/

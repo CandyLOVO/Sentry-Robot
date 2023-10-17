@@ -47,10 +47,10 @@ int16_t mouse_y;
 
 extern RC_ctrl_t rc_ctrl;
 extern ins_data_t ins_data;
-extern fp32 ins_yaw_update;
 extern uint16_t Remember_pitch;
 extern fp32 Err_pitch;
 extern uint8_t Remember_pitch_flag;
+extern fp32 ins_yaw;
 uint8_t ins_buf[8];
 uint16_t ins_buf_temp;		//define a temp to receive and change float to int16
  
@@ -82,7 +82,7 @@ void Exchange_task(void const * argument)
 	
   for(;;)
   {
-		ins_buf_temp = ins_yaw_update + 180;		// Add 180 to be a positive number
+		ins_buf_temp = ins_yaw + 180;		// Add 180 to be a positive number
 		ins_buf[1] = ins_buf_temp;
 		ins_buf[2] = ins_buf_temp >> 8;		// 2 bytes put together forming a uint_16
 		can_remote(ins_buf,0x55);

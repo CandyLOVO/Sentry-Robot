@@ -111,7 +111,6 @@ void Pitch_task(void const * argument)
   /* USER CODE BEGIN StartTask02 */
   /* Infinite loop */
 
-	HAL_TIM_Base_Start_IT(&htim1);//开启定时器1并打开中断
 	gimbal_init();	//PID参数调整
 	
   for(;;)

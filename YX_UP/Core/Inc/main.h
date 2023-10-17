@@ -97,7 +97,7 @@ extern uint16_t can_cnt_1;
 extern uint16_t can_cnt_2;
 extern float target_speed[7];//实测最大空载转速320rpm
 extern float target_speed_can_2[7];
-extern moto_info_t motor_info[MOTOR_MAX_NUM];		//赋予最大的7个字节
+extern moto_info_t motor_info[8];		//赋予最大的7个字节
 extern moto_info_t motor_info_can_2[MOTOR_MAX_NUM];
 extern pid_struct_t motor_pid[7];	
 extern pid_struct_t motor_pid_sita[7];

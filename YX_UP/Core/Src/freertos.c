@@ -28,7 +28,6 @@
 #include "remote_control.h"
 #include "PID.h"
 #include "MX_FREERTOS_init.h"
-
 #include "arm_math.h"
 #include "INS_task.h"
 #include "Yaw_task.h"
@@ -61,14 +60,6 @@
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
-void StartTask02(void const * argument);
-void StartTask03(void const * argument);
-void StartTask04(void const * argument);
-void StartTask05(void const * argument);
-void StartTask06(void const * argument);
-void StartTask07(void const * argument);
-void StartTask08(void const * argument);
-void StartTask09(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 

@@ -10,34 +10,41 @@
 #include "Friction_task.h"
 #include "INS_task.h"
 
+//================================================任务创建================================================//
 osThreadId insTaskHandle;
-osThreadId fixTaskHandle;
+osThreadId yawTaskHandle;
 osThreadId defaultTaskHandle;
-osThreadId myTask02Handle;
-osThreadId myTask03Handle;
-osThreadId myTask04Handle;
+osThreadId pitchtaskHandle;
+osThreadId exchangeHandle;
+osThreadId frictionHandle;
+
 void MX_FREERTOS_Init(void) {
   
+	//测试任务
   osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
-  /* definition and creation of myTask02 */
-  osThreadDef(myTask02, Pitch_task, osPriorityRealtime, 0, 128);
-  myTask02Handle = osThreadCreate(osThread(myTask02), NULL);
-
-  /* definition and creation of myTask03 */
-  osThreadDef(myTask03, Exchange_task, osPriorityIdle, 0, 256);
-  myTask03Handle = osThreadCreate(osThread(myTask03), NULL);
-
-  osThreadDef(myTask04, Friction_task, osPriorityIdle, 0, 128);
-  myTask04Handle = osThreadCreate(osThread(myTask04), NULL);
-
   /* USER CODE BEGIN RTOS_THREADS */
-	osThreadDef(imutask, INS_Task,  osPriorityRealtime, 0, 512);	//锟斤拷锟斤拷锟角斤拷锟斤拷锟斤拷锟斤拷
+	
+	//YAW控制任务
+	osThreadDef(yawtask, Yaw_task, osPriorityRealtime, 0, 128);		
+  yawTaskHandle = osThreadCreate(osThread(yawtask), NULL);
+	
+	//Pitch控制任务
+	osThreadDef(pitchtask, Pitch_task, osPriorityRealtime, 0, 128);
+  pitchtaskHandle = osThreadCreate(osThread(pitchtask), NULL);
+	
+	//上下C板通信任务
+	osThreadDef(exchangetask, Exchange_task, osPriorityIdle, 0, 256);
+  exchangeHandle = osThreadCreate(osThread(exchangetask), NULL);
+
+	//摩擦轮和拨盘控制任务
+  osThreadDef(frictiontask, Friction_task, osPriorityIdle, 0, 128);
+  frictionHandle = osThreadCreate(osThread(frictiontask), NULL);
+	
+	//六轴IMU任务
+	osThreadDef(imutask, INS_Task,  osPriorityRealtime, 0, 512);
   insTaskHandle = osThreadCreate(osThread(imutask), NULL);
-		
-	osThreadDef(yawtask, Yaw_task, osPriorityRealtime, 0, 128);		//锟斤拷台锟教讹拷锟斤拷锟斤拷小锟斤拷锟捷ｏ拷
-  fixTaskHandle = osThreadCreate(osThread(yawtask), NULL);
 	
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
