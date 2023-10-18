@@ -20,7 +20,7 @@ void pid_init(pidTypeDef *PID,float p,float i,float d)
 	PID->Kd = d;
 }
 
-float pid_cal(pidTypeDef *PID,float get,float set,float Max_out,float Max_iout)
+float pid_cal_s(pidTypeDef *PID,float get,float set,float Max_out,float Max_iout)
 {
 	PID->get = get;
 	PID->set = set;
@@ -28,6 +28,7 @@ float pid_cal(pidTypeDef *PID,float get,float set,float Max_out,float Max_iout)
 	PID->Max_iout = Max_iout;
 	PID->error[0] = PID->error[1];
 	PID->error[1] = PID->set - PID->get;
+	
 	PID->pout = PID->Kp * PID->error[1];
 	PID->iout += PID->Ki * PID->error[1];
 	PID->iout = limit_max(PID->iout,PID->Max_iout);

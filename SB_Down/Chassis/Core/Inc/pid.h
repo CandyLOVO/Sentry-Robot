@@ -15,5 +15,5 @@
 	
 	float limit_max(float value,float Max_out);
 	void pid_init(pidTypeDef *PID,float p,float i,float d);
-	float pid_cal(pidTypeDef *PID,float get,float set,float Max_out,float Max_iout);
+	float pid_cal_s(pidTypeDef *PID,float get,float set,float Max_out,float Max_iout);
 #endif
