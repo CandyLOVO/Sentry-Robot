@@ -1,8 +1,8 @@
 chassis\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/timers.c
-chassis\timers.o: D:\Keil_v5\Keil5\ARM\AC5\Bin\..\include\stdlib.h
+chassis\timers.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stdlib.h
 chassis\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-chassis\timers.o: D:\Keil_v5\Keil5\ARM\AC5\Bin\..\include\stddef.h
-chassis\timers.o: D:\Keil_v5\Keil5\ARM\AC5\Bin\..\include\stdint.h
+chassis\timers.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stddef.h
+chassis\timers.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stdint.h
 chassis\timers.o: ../Core/Inc/FreeRTOSConfig.h
 chassis\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 chassis\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

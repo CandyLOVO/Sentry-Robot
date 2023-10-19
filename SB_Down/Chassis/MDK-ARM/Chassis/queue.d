@@ -1,9 +1,9 @@
 chassis\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/queue.c
-chassis\queue.o: D:\Keil_v5\Keil5\ARM\AC5\Bin\..\include\stdlib.h
-chassis\queue.o: D:\Keil_v5\Keil5\ARM\AC5\Bin\..\include\string.h
+chassis\queue.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stdlib.h
+chassis\queue.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\string.h
 chassis\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-chassis\queue.o: D:\Keil_v5\Keil5\ARM\AC5\Bin\..\include\stddef.h
-chassis\queue.o: D:\Keil_v5\Keil5\ARM\AC5\Bin\..\include\stdint.h
+chassis\queue.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stddef.h
+chassis\queue.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stdint.h
 chassis\queue.o: ../Core/Inc/FreeRTOSConfig.h
 chassis\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 chassis\queue.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
