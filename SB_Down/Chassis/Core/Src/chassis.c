@@ -4,13 +4,13 @@
 #include "cmsis_os.h"
 #include "pid.h"
 float set = 60; //给定速度
-float output[4];
+uint16_t output[4];
 
 void Chassis(void const * argument)
 {
 	pidTypeDef PID_angle[4];
 	pidTypeDef PID_speed[4];
-	float PID_s[3] = {50,0,0};
+	float PID_s[3] = {30,1,0};
 //	float set_angle = 1365; //60degrees
 //	float Max_out_a = 2000;
 //	float Max_iout_a = 2000;
