@@ -5,19 +5,20 @@
 #include "pid.h"
 float set = 60; //给定速度
 float output[4];
+
 void Chassis(void const * argument)
 {
 	pidTypeDef PID_angle[4];
 	pidTypeDef PID_speed[4];
-	float PID_s[3] = {10,30,1};
-	float set_angle = 1365; //60degrees
-	float Max_out_a = 2000;
-	float Max_iout_a = 2000;
-	float Max_out_s = 3000; //电压控制转速，电流控制扭矩
-	float Max_iout_s = 3000;
-	float angle[4];
-	float speed[4];
-//		float output[4];
+	float PID_s[3] = {50,0,0};
+//	float set_angle = 1365; //60degrees
+//	float Max_out_a = 2000;
+//	float Max_iout_a = 2000;
+	float Max_out_s = 30000; //电压控制转速，电流控制扭矩
+	float Max_iout_s = 30000;
+//	float angle[4];
+//	float speed[4];
+//	float output[4];
 	motor_info motor[4];
 	for(int i=0;i<4;i++){
 		pid_init(&PID_speed[i],PID_s[0],PID_s[1],PID_s[2]);
