@@ -6,7 +6,6 @@
 	{
 		float Kp, Ki, Kd;
 		int16_t error[2];
-		int16_t ierror;
 		int16_t get, set;
 		int16_t pout, iout, dout, out;
 		int16_t Max_out;
