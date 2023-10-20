@@ -1,12 +1,15 @@
 #include "pid.h"
 
-float limit_max(float value,float Max_out)
+int16_t limit_max(int16_t value,int16_t Max_out)
 {
 	if(value > Max_out){
 		value = Max_out;
 	}
-	if(value < -Max_out){
+	else if(value < -Max_out){
 		value = -Max_out;
+	}
+	else{
+		value = value;
 	}
 	return value;
 }
@@ -20,14 +23,14 @@ void pid_init(pidTypeDef *PID,float p,float i,float d)
 	PID->Kd = d;
 }
 
-float pid_cal_s(pidTypeDef *PID,float get,float set,float Max_out,float Max_iout)
+int16_t pid_cal_s(pidTypeDef *PID,int16_t get,int16_t set,int16_t Max_out,int16_t Max_iout)
 {
 	PID->get = get;
 	PID->set = set;
 	PID->Max_out = Max_out;
 	PID->Max_iout = Max_iout;
 	PID->error[0] = PID->error[1];
-	PID->error[1] = PID->set - PID->get;
+	PID->error[1] =  PID->set - PID->get;
 	
 	PID->pout = PID->Kp * PID->error[1];
 	PID->iout += PID->Ki * PID->error[1];

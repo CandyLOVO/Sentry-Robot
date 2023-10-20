@@ -41,7 +41,7 @@ void can_cmd_send(int motor1,int motor2,int motor3,int motor4);
 typedef struct
 {
 	uint16_t angle;
-	uint16_t speed;
+	int16_t speed;
 	uint16_t tor_current;
 	uint16_t temperture;
 }motor_info;
