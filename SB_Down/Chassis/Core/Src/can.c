@@ -265,7 +265,8 @@ void can_cmd_send(int motor1,int motor2,int motor3,int motor4)
 	can_send_data[3] = motor2&0xff;
 	can_send_data[4] = (motor3>>8)&0xff;
 	can_send_data[5] = motor3&0xff;
-	can_send_data[6] = motor4;
+	can_send_data[6] = (motor4>>8)&0xff;
+	can_send_data[7] = motor4&0xff;
 
 	HAL_CAN_AddTxMessage(&hcan2,&can_tx_message,can_send_data,&send_mail_box);
 }

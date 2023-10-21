@@ -40,3 +40,30 @@ int16_t pid_cal_s(pidTypeDef *PID,int16_t get,int16_t set,int16_t Max_out,int16_
 	PID->out = limit_max(PID->out,PID->Max_out);
 	return PID->out;
 }
+
+int16_t pid_cal_a(pidTypeDef *PID,int16_t get,int16_t set,int16_t Max_out,int16_t Max_iout)
+{
+	PID->get = get;
+	PID->set = set;
+	PID->Max_out = Max_out;
+	PID->Max_iout = Max_iout;
+	PID->error[0] = PID->error[1];
+	if((PID->set - PID->get) > 4096){
+		PID->get = PID->get + 8191;
+	}
+	else if((PID->set - PID->get) < -4096){
+		PID->get = PID->get - 8191;
+	}
+	else{
+		PID->get = PID->get;
+	}
+	PID->error[1] = PID->set - PID->get;
+	
+	PID->pout = PID->Kp * PID->error[1];
+	PID->iout += PID->Ki * PID->error[1];
+	PID->iout = limit_max(PID->iout,PID->Max_iout);
+	PID->dout = PID->Kd * (PID->error[1] - PID->error[0]);
+	PID->out = PID->pout + PID->iout + PID->dout;
+	PID->out = limit_max(PID->out,PID->Max_out);
+	return PID->out;
+}

@@ -15,4 +15,6 @@
 	int16_t limit_max(int16_t value,int16_t Max_out);
 	void pid_init(pidTypeDef *PID,float p,float i,float d);
 	int16_t pid_cal_s(pidTypeDef *PID,int16_t get,int16_t set,int16_t Max_out,int16_t Max_iout);
+	int16_t pid_cal_a(pidTypeDef *PID,int16_t get,int16_t set,int16_t Max_out,int16_t Max_iout);
+	
 #endif
