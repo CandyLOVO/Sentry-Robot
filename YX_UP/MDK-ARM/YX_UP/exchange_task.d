@@ -1,4 +1,5 @@
 yx_up\exchange_task.o: ..\User\Task\Exchange_task.c
+yx_up\exchange_task.o: ..\User\Task\Exchange_task.h
 yx_up\exchange_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 yx_up\exchange_task.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stddef.h
 yx_up\exchange_task.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdint.h
@@ -64,5 +65,4 @@ yx_up\exchange_task.o: ../Core/Inc/tim.h
 yx_up\exchange_task.o: ../Core/Inc/spi.h
 yx_up\exchange_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 yx_up\exchange_task.o: ../User/pid_imu.h
-yx_up\exchange_task.o: ..\User\Task\Exchange_task.h
 yx_up\exchange_task.o: ../User/DriverLayer/Can_user.h

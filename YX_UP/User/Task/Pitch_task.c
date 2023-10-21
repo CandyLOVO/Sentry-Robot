@@ -1,13 +1,6 @@
-#include "FreeRTOS.h"
-#include "task.h"
-#include "cmsis_os.h"
-#include "remote_control.h"
-#include "PID.h"
-#include "arm_math.h"
-#include "can.h"
-#include "INS_task.h"
 #include "Pitch_task.h"
-#include "Exchange_task.h"
+
+//================================================Pitch轴电机控制任务================================================//
 
 //第一版：
 //此任务用来对云台进行模式选择，控制，校准等
@@ -17,79 +10,48 @@
 
 //第二版：
 //采用双6020结构，新加的Pitch走上C板CAN_2，电机ID为6
-
-//定义一些变量
-//限位参数（机械测量）
-#define Up_inf 35
-#define Down_inf 0
-#define mouse_y_valve 10
-#define mouse_y_weight 12.0f
-#define Pitch_minipc_valve 0.5f
-#define Pitch_minipc_weight	0.5f
-#define Pitch_sita_weight 0.2f
-#define Pitch_sita_minipc_weight 0.002f
+//Pitch值是负的，抬头绝对值增大(但是是负数)
 
 
-#define Pitch_up 4500
-#define Pitch_down 4025
+//===============================================全局变量================================================//
 
-//imu数据
-fp32 Err_pitch;
-int16_t Up_pitch;
-int16_t Down_pitch;
-uint16_t Remember_pitch = 0;
-uint8_t Remember_pitch_flag = 1;
-extern ins_data_t ins_data;
-extern int16_t mouse_y;
-
-uint16_t gimbal_rotor_angle;
-uint16_t gimbal_rotor_angle_2;
-float Pitch_imu;
-float Pitch_imu_speed;
-float init_pitch;
+uint16_t gimbal_rotor_angle;		//ID为5的6020编码器值
+uint16_t gimbal_rotor_angle_2;		//ID为6的6020编码器值
+float Pitch_imu;		//pitch imu解算数据
+float Pitch_imu_speed;		//pitch imu角速度 
+float target_pitch;		//目标pitch
 float ins_pitch_speed;
 
-//定时器计数器
-uint16_t TIM1_Count = 0;
-uint8_t TIM1_Mode = 1;
+//================================================函数================================================//
 
 //初始化PID参数
 static void gimbal_init();	
 
-//初始清零
+//数据清零
 static void gimbal_zero();
-
-//校验连接成功
-static bool gimbal_judge();	
 
 //读取imu参数
 static void gimbal_read_imu();
 
 //读取编码器的值
-static void gimbal_read();
+static void gimbal_read_motor();
 
-//模式选择
-static void gimbal_choice();
+//遥控器控制模式(速度环)
+static void gimbal_control_speed();
 
-//Mode_1下的控制算法(速度环)
-static void gimbal_mode_1();
+//巡航模式(速度环)
+static void gimbal_mode_search_speed();
 
-//Mode_2下的巡逻控制算法(速度环)
-static void gimbal_mode_2();
+//遥控器控制模式(位置环)
+static void gimbal_mode_control_sita();
 
-//Mode_3下的控制算法(位置环--->imu)
-static void gimbal_mode_3();
+//巡航模式(位置环)
+static void gimbal_mode_search_sita();
 
-//Mode_4下的巡逻控制算法(位置环)
-static void gimbal_mode_4();
-
-//Mode_4下的控制算法(位置环--->编码器)
-static void gimbal_mode_5();
-
-//PID计算和发送
+//PID发送至电机
 static void gimbal_can_send();
 
-//限位（编码器）
+//限位（编码器）（未使用）
 static void gimbal_limit();
 
 //限位（陀螺仪）
@@ -98,11 +60,11 @@ static void gimbal_imu_limit();
 //鼠标控制Pitch(叠加)
 static void gimbal_mouse();
 
-//叠加自瞄
+//叠加自瞄(速度环)
 static void gimbal_minipc_control();
 
 //叠加自瞄(位置环)
-static void gimbal_minipc_sita_control();
+static void gimbal_minipc_control_sita();
 
 // pitch
 
@@ -111,48 +73,45 @@ void Pitch_task(void const * argument)
   /* USER CODE BEGIN StartTask02 */
   /* Infinite loop */
 
-	gimbal_init();	//PID参数调整
+	gimbal_init();	//PID参数初始化
 	
   for(;;)
   {
-		gimbal_zero();
-		gimbal_read();
-		gimbal_read_imu();
-		if(rc_ctrl.rc.s[1]==3 || rc_ctrl.rc.s[1]==1	)
+		gimbal_zero();	//速度清零
+		gimbal_read_motor();	//读取编码器值
+		gimbal_read_imu();	//读取Imu值
+		if(rc_ctrl.rc.s[1]==3 || rc_ctrl.rc.s[1]==1	)	//调试模式
 		{
-			gimbal_mode_3();	
-		  gimbal_minipc_sita_control();
+			gimbal_mode_control_sita();	//遥控器位置环控制模式
+		  gimbal_minipc_control_sita();	//位置环视觉瞄准
 		 }
 		  
-		else if(rc_ctrl.rc.s[1]==2)		//哨兵测试，左上角拨到最下端启动
+		else if(rc_ctrl.rc.s[1]==2)		//上场模式
 		{
 			if(foe_flag)	//如果检测到目标
 			{
-				gimbal_minipc_sita_control(); 
-			}
-			
+				gimbal_minipc_control_sita(); //视觉瞄准
+			}			
 			else
 			{
-				gimbal_mode_4();		
+				gimbal_mode_search_sita();	//哨兵巡航模式
 			}
 		}
-		//gimbal_imu_limit();
-//		target_speed_can_2[4] -= pid_calc_sita(&motor_pid_sita_can_2[4], init_pitch, ins_data.angle[1]);
-		target_speed_can_2[5] += pid_calc_sita(&motor_pid_sita_can_2[5], init_pitch, ins_data.angle[1]);
-//		target_speed_can_2[4] -= pid_calc_sita(&motor_pid_sita_can_2[4], init_pitch+3632, motor_info_can_2[4].rotor_angle);
-		//target_speed_can_2[5] += pid_calc_sita(&motor_pid_sita_can_2[5], init_pitch, motor_info_can_2[5].rotor_angle);
-		//motor_info_can_2[4].set_voltage = pid_calc(&motor_pid_can_2[4], target_speed_can_2[4], Pitch_imu_speed * -20);
-//		if(target_speed_can_2[5] > 100)
-//		{
-//			target_speed_can_2[5] = 100;
-//		}
-//		else if(target_speed_can_2[5] < -100)
-//		{
-//			target_speed_can_2[5] = -100;
-//		}
-		ins_pitch_speed = ins_data.gyro[1] * 20;
-		motor_info_can_2[5].set_voltage = pid_calc(&motor_pid_can_2[5], target_speed_can_2[5], ins_pitch_speed );
-//		motor_info_can_2[4].set_voltage = -motor_info_can_2[5].set_voltage;
+		gimbal_imu_limit();	//软件限位
+		target_speed_can_2[4] -= pid_calc_sita(&motor_pid_sita_can_2[4], target_pitch, Pitch_imu_speed);	//imu位置环解算
+		//target_speed_can_2[5] += pid_calc_sita(&motor_pid_sita_can_2[5], target_pitch, Pitch_imu_speed);
+		
+//		编码器解算模式
+//		target_speed_can_2[4] -= pid_calc_sita(&motor_pid_sita_can_2[4], target_pitch*(-22.75)+3632, motor_info_can_2[4].rotor_angle);	//编码器位置环解算(使用这个时注意遥控器映射权重)
+//		target_speed_can_2[5] += pid_calc_sita(&motor_pid_sita_can_2[5], target_pitch*(22.75)+2474, motor_info_can_2[5].rotor_angle);
+
+
+		ins_pitch_speed = Pitch_imu_speed * 9.55f;	//统一速度环单位：以编码器为基准，rad/s -> round/min	60/(2*pi)=9.55
+		motor_info_can_2[4].set_voltage = pid_calc(&motor_pid_can_2[4], target_speed_can_2[4], -ins_pitch_speed);
+		motor_info_can_2[5].set_voltage = -motor_info_can_2[4].set_voltage;
+		//motor_info_can_2[5].set_voltage = pid_calc(&motor_pid_can_2[5], target_speed_can_2[5], ins_pitch_speed );
+		
+//		编码器解算模式
 //		motor_info_can_2[4].set_voltage = pid_calc(&motor_pid_can_2[4], target_speed_can_2[4], motor_info_can_2[4].rotor_speed);
 //		motor_info_can_2[5].set_voltage = pid_calc(&motor_pid_can_2[5], target_speed_can_2[5], motor_info_can_2[5].rotor_speed);
 		gimbal_can_send();		
@@ -162,36 +121,24 @@ void Pitch_task(void const * argument)
   /* USER CODE END StartTask02 */
 }
 
-//初始化PID参数
+//================================================初始化PID参数================================================//
 static void gimbal_init()	
 {
-	//pid_init(&motor_pid_can_2[4],450,0.01,0,30000,30000);// 120 0.01 0
+	pid_init(&motor_pid_can_2[4],250,0.01,0,30000,30000);// 120 0.01 0
 	pid_init(&motor_pid_can_2[5],250,0.01,0,30000,30000);// 120 0.01 0
-	//pid_init(&motor_pid_sita_can_2[4],10,0,200,30000,30000);// 10 0 1300
-	pid_init(&motor_pid_sita_can_2[5],5,0,100,30000,30000);// 10 0 1300
-//	pid_init(&motor_pid_can_2[4],20,0,0,30000,30000);
-//	pid_init(&motor_pid_can_2[5],20,0,0,30000,30000);
-//	pid_init(&motor_pid_sita_can_2[4],10,0,1,30000,30000);
-//	pid_init(&motor_pid_sita_can_2[5],10,0,1,30000,30000);
-	init_pitch = Pitch_imu;
+	pid_init(&motor_pid_sita_can_2[4],5,0,3,30000,30000);// 10 0 1300
+	pid_init(&motor_pid_sita_can_2[5],5,0,3,30000,30000);// 10 0 1300
+	target_pitch = Pitch_imu;
 }
 
-
-//校验连接成功
-static bool gimbal_judge()
-{
-
-}
-
-
-//编码器的值
-static void gimbal_read()
+//================================================读取编码器值================================================//
+static void gimbal_read_motor()
 {
 	gimbal_rotor_angle = motor_info_can_2[4].rotor_angle;	//最下方:0E30   最上方:10B0  换算:3632->4272  ,步长：640
 	gimbal_rotor_angle_2 = motor_info_can_2[5].rotor_angle; //最下方:09AA   最上方:0730   换算:2474->1840  ,步长：634
 }
 
-//陀螺仪的值
+//================================================读取imu值================================================//
 static void gimbal_read_imu()
 {
 	Pitch_imu = ins_data.angle[1];   //陀螺仪Pitch值
@@ -199,15 +146,8 @@ static void gimbal_read_imu()
 }
 
 
-//模式选择
-static void gimbal_choice()
-{
-
-}
-
-
-//Mode_1算法，最简单的云台控制（速度环）
-static void gimbal_mode_1()
+//================================================速度环控制================================================//
+static void gimbal_control_speed()
 {
 		if( (rc_ctrl.rc.ch[1]>1074&&rc_ctrl.rc.ch[1]<=1684 ) || (ctrl_flag))
 		{
@@ -226,11 +166,9 @@ static void gimbal_mode_1()
 		}
 }	
 
-//PID计算和发送
+//================================================Pitch数据发送================================================//
 static void gimbal_can_send()
 {
-		
-  
 	CAN_TxHeaderTypeDef tx_header;
   uint8_t             tx_data[8];
 	
@@ -251,7 +189,7 @@ static void gimbal_can_send()
 }
 
 
-//陀螺仪限位（相对）,停止限位
+//================================================基于编码器的反转限位(未使用)================================================//
 static void gimbal_limit()
 {
 	gimbal_read_imu();
@@ -269,21 +207,20 @@ static void gimbal_limit()
 	}
 }
 
+//================================================Pitch软件限位================================================//
 static void gimbal_imu_limit()
 {
-	if(init_pitch < -25)
+	if(target_pitch < Up_inf && Pitch_imu)
 	{
-		init_pitch = -25;
+		target_pitch = Up_inf;
 	}
-	else if(init_pitch >= -5 && Pitch_imu)
+	else if(target_pitch >= Down_inf && Pitch_imu)
 	{
-		init_pitch = -5;
+		target_pitch = Down_inf;
 	}
 }
 
-
-
-//鼠标控制
+//================================================鼠标控制(未使用)================================================//
 static void gimbal_mouse()
 {
 	if(mouse_y > mouse_y_valve || mouse_y < -mouse_y_valve)
@@ -293,17 +230,15 @@ static void gimbal_mouse()
 	}
 }
 
-//自瞄
+//================================================视觉瞄准(速度环模式)================================================//
 static void gimbal_minipc_control()
 {
-	if((fp32)(Pitch_minipc) > Pitch_minipc_valve || (fp32)(Pitch_minipc) < -Pitch_minipc_valve)
-	{
 		target_speed_can_2[4] -= ((fp32)Pitch_minipc_fp) * Pitch_minipc_weight;
 		target_speed_can_2[5] += ((fp32)Pitch_minipc_fp) * Pitch_minipc_weight;
-	}
 }
 
-static void gimbal_mode_2()
+//================================================巡航模式(速度环模式)================================================//
+static void gimbal_mode_search_speed()
 {
 	switch(TIM1_Mode)
 	{
@@ -312,38 +247,34 @@ static void gimbal_mode_2()
 	}
 }
 
+//================================================速度清零================================================//
 static void gimbal_zero()
 {
 	target_speed_can_2[4] = 0;
 	target_speed_can_2[5] = 0;
 }
 
-static void gimbal_mode_3()
+//================================================遥控器位置环控制模式(基于陀螺仪权重)================================================//
+static void gimbal_mode_control_sita()
 {
 		if( (rc_ctrl.rc.ch[1]>=324 && rc_ctrl.rc.ch[1] <=1684 ) )
 		{
-			init_pitch -= (rc_ctrl.rc.ch[1]- 1024)/660.0 * Pitch_sita_weight; 			
+			target_pitch -= (rc_ctrl.rc.ch[1]- 1024)/660.0 * Pitch_sita_weight; 			
 		}
 }
 
-static void gimbal_minipc_sita_control()
+//================================================视觉瞄准(位置环模式)================================================//
+static void gimbal_minipc_control_sita()
 {
-		init_pitch -= ((fp32)Pitch_minipc_fp) * Pitch_sita_minipc_weight;
+		target_pitch -= ((fp32)Pitch_minipc_fp) * Pitch_sita_minipc_weight;
 }
 
-static void gimbal_mode_4()
+//================================================巡航模式(位置环模式)================================================//
+static void gimbal_mode_search_sita()
 {
 	switch(TIM1_Mode)
 	{
-		case 1: init_pitch -= 0.03f;break;
-		case 2: init_pitch += 0.03f;break;
+		case 1: target_pitch -= 0.03f;break;
+		case 2: target_pitch += 0.03f;break;
 	}
-}
-
-static void gimbal_mode_5()
-{
-		if( (rc_ctrl.rc.ch[1]>=324 && rc_ctrl.rc.ch[1] <=1684 ) )
-		{
-			init_pitch -= (rc_ctrl.rc.ch[1]- 1024)/660.0 * Pitch_sita_weight * 24.0f; 			
-		}
 }

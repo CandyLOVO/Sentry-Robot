@@ -60,7 +60,10 @@ yx_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 yx_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 yx_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 yx_up\yaw_task.o: ../User/pid_imu.h
-yx_up\yaw_task.o: ..\User\AlgorithmLayer\pid.h
+yx_up\yaw_task.o: ..\User\Task\Exchange_task.h
+yx_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 yx_up\yaw_task.o: ../User/PotocaLayer/remote_control.h
 yx_up\yaw_task.o: ../User/bsp_rc.h
-yx_up\yaw_task.o: ..\User\Task\Exchange_task.h
+yx_up\yaw_task.o: ..\User\AlgorithmLayer\PID.h
+yx_up\yaw_task.o: ../Core/Inc/can.h
+yx_up\yaw_task.o: ../User/DriverLayer/Can_user.h

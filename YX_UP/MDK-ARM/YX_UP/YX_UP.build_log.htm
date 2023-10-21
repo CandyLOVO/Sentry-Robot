@@ -26,15 +26,40 @@ Project File Date:  10/16/2023
 
 <h2>Output:</h2>
 Build target 'YX_UP'
-compiling remote_control.c...
+compiling Friction_task.c...
 ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h(51): warning:  #47-D: incompatible redefinition of macro "__FPU_PRESENT"
   #define __FPU_PRESENT             1U       /*!< FPU present                                   */
 ../Drivers/CMSIS/Include/core_cm4.h(79): warning:  #47-D: incompatible redefinition of macro "__FPU_USED"
         #define __FPU_USED       1U
-..\User\PotocaLayer\remote_control.c(158): error:  #147: declaration is incompatible with "float target_speed[7]" (declared at line 98 of "../Core/Inc/main.h")
-  extern float target_speed[8];
-..\User\PotocaLayer\remote_control.c: 2 warnings, 1 error
-"YX_UP\YX_UP.axf" - 1 Error(s), 2 Warning(s).
+..\User\AlgorithmLayer\PID.h(18): warning:  #1-D: last line of file ends without a newline
+                                                        
+..\User\Task\INS_task.h(80): warning:  #1-D: last line of file ends without a newline
+  #endif
+../User/DriverLayer/Can_user.h(13): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\User\Task\Exchange_task.h(47): warning:  #1295-D: Deprecated declaration Get_keyboard - give arg types
+  void Get_keyboard();
+..\User\Task\Exchange_task.h(49): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\User\Task\Friction_task.h(25): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\User\Task\Friction_task.c(20): warning:  #1295-D: Deprecated declaration Friction_init - give arg types
+  static void Friction_init();
+..\User\Task\Friction_task.c(23): warning:  #1295-D: Deprecated declaration Friction_calc - give arg types
+  static void Friction_calc();
+..\User\Task\Friction_task.c(26): warning:  #1295-D: Deprecated declaration Friction_down - give arg types
+  static void Friction_down();
+..\User\Task\Friction_task.c(29): warning:  #1295-D: Deprecated declaration Friction_judge - give arg types
+  static bool Friction_judge();
+..\User\Task\Friction_task.c(32): warning:  #1295-D: Deprecated declaration Friction_send - give arg types
+  static void Friction_send();
+..\User\Task\Friction_task.c(131): warning:  #177-D: function "Friction_judge" was declared but never referenced
+  static bool Friction_judge()
+..\User\Task\Friction_task.c: 14 warnings, 0 errors
+linking...
+Program Size: Code=42046 RO-data=722 RW-data=712 ZI-data=21632  
+FromELF: creating hex file...
+"YX_UP\YX_UP.axf" - 0 Error(s), 14 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -53,7 +78,6 @@ Package Vendor: ARM
 
    * Component: ARM::CMSIS:CORE:3.40.0
       Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
-Target not created.
 </pre>
 </body>
 </html>
