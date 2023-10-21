@@ -5,7 +5,7 @@
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
 extern int16_t Rotate_w;
-extern int16_t Down_pitch;
+int16_t Down_pitch;	//µ×ÅÌpitchÊý¾Ý
 extern int8_t Update_yaw_flag;
 extern fp32 target_yaw;
 extern uint8_t Flag_progress;

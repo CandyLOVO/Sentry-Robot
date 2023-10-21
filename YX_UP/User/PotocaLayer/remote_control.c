@@ -1,6 +1,5 @@
 //================================================遥控器数据接收================================================//
 #include "remote_control.h"
-#include "main.h"
 
 extern UART_HandleTypeDef huart3;
 extern DMA_HandleTypeDef hdma_usart3_rx;
@@ -155,7 +154,7 @@ void USART3_IRQHandler(void)
 
 //================================================遥控器数据解析函数================================================//
 extern UART_HandleTypeDef huart1;
-extern float target_speed[8];
+extern float target_speed[7];
 static void sbus_to_rc(volatile const uint8_t *sbus_buf, RC_ctrl_t *rc_ctrl)
 {
     if (sbus_buf == NULL || rc_ctrl == NULL)
@@ -178,7 +177,7 @@ static void sbus_to_rc(volatile const uint8_t *sbus_buf, RC_ctrl_t *rc_ctrl)
     rc_ctrl->key.v = sbus_buf[14] | (sbus_buf[15] << 8);                    //!< KeyBoard value	
     rc_ctrl->rc.ch[4] = sbus_buf[16] | (sbus_buf[17] << 8);                 //NULL
 		
-    //rc_ctrl->rc.ch[0] -= RC_CH_VALUE_OFFSET;//这里把回中值调成0了，负的会溢出
+    //rc_ctrl->rc.ch[0] -= RC_CH_VALUE_OFFSET;//这里把回中值调成0了
     //rc_ctrl->rc.ch[1] -= RC_CH_VALUE_OFFSET;
     //rc_ctrl->rc.ch[2] -= RC_CH_VALUE_OFFSET;
     //rc_ctrl->rc.ch[3] -= RC_CH_VALUE_OFFSET;

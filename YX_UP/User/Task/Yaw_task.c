@@ -1,6 +1,4 @@
 #include "Yaw_task.h"
-#include "Exchange_task.h"
-#include "main.h"
 
 //================================================YAW轴电机控制任务================================================//
 
@@ -21,21 +19,6 @@ fp32 angle_weight = 1;	//角度环->速度环，映射的权重
 //前馈控制变量
 int16_t Rotate_w;
 int16_t Rotate_W;
-
-//================================================宏定义================================================//
-#define Rotate_gain 1.23f		//角速度前馈控制映射权重
-#define Chassis_R	30.0f		//车自转半径
-#define Chassis_r 7.5f		//麦轮半径
-#define valve 20		//遥控器阈值(死区)
-#define base 1024		//遥控器的回中值
-#define base_max 1684		//遥控器最大值
-#define base_min 364		//遥控器最小值
-#define angle_valve 1		//角度阈值，在这个范围内就不去抖动了(锁定yaw轴时使用)
-#define mouse_x_valve 10		//鼠标控制阈值
-#define mouse_x_weight 0.5f		//鼠标映射权重
-#define Yaw_sita_weight 0.5f 		//遥控器控制位置环权重
-#define Yaw_minipc_weight 1.75f		//视觉跟随映射权重(速度版)
-#define Yaw_minipc_sita_weight 0.003f	//视觉跟随映射权重(位置版)
 
 //================================================函数================================================//
 
@@ -94,7 +77,7 @@ void Yaw_task(void const *pvParameters)
 		Yaw_loop_init();//循环初始化
 		Yaw_read_imu();//获取Imu角度
 
-		//模式判断,左上角开关开到最下方
+		//上场模式，左上角开关开到最下方
 		if(rc_ctrl.rc.s[1] == 2 && ins_yaw)
 		{
 			if(foe_flag)	//如果视觉检测到目标
@@ -110,9 +93,9 @@ void Yaw_task(void const *pvParameters)
 					yaw_fix_flag = 1;		//赋予不锁定的标志位
 			}
 		}
-		else if(rc_ctrl.rc.s[1] == 1 || rc_ctrl.rc.s[1] == 3)
+		else if(rc_ctrl.rc.s[1] == 1 || rc_ctrl.rc.s[1] == 3)	//测试模式
 		{
-			Yaw_Rotate();
+			Yaw_Rotate();		//前馈控制补偿底盘带来的旋转角速度
 			Yaw_mode_remote_site();		//遥控器控制模式(位置控制)
 			Yaw_minipc_control_sita();	//视觉跟随
 			yaw_fix_flag = 1;		//赋予不锁定的标志位
@@ -244,7 +227,7 @@ static void Yaw_mouse()
 //================================================定速巡航控制模式================================================//
 static void Yaw_mode_search()
 {
-	target_yaw -= 0.03f;
+	target_yaw -= 0.05f;
 }
 
 //================================================速度控制模式================================================//

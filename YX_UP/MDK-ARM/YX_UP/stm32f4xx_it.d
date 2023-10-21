@@ -1,4 +1,5 @@
 yx_up\stm32f4xx_it.o: ../Core/Src/stm32f4xx_it.c
+yx_up\stm32f4xx_it.o: ../Core/Inc/stm32f4xx_it.h
 yx_up\stm32f4xx_it.o: ../Core/Inc/main.h
 yx_up\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 yx_up\stm32f4xx_it.o: ../Core/Inc/stm32f4xx_hal_conf.h
@@ -41,5 +42,30 @@ yx_up\stm32f4xx_it.o: E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm
 yx_up\stm32f4xx_it.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
 yx_up\stm32f4xx_it.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
 yx_up\stm32f4xx_it.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdbool.h
-yx_up\stm32f4xx_it.o: ../Core/Inc/stm32f4xx_it.h
 yx_up\stm32f4xx_it.o: ../User/Task/Exchange_task.h
+yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+yx_up\stm32f4xx_it.o: ../Core/Inc/FreeRTOSConfig.h
+yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
+yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
+yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+yx_up\stm32f4xx_it.o: ../User/PotocaLayer/remote_control.h
+yx_up\stm32f4xx_it.o: ../User/bsp_rc.h
+yx_up\stm32f4xx_it.o: ..\User\AlgorithmLayer\PID.h
+yx_up\stm32f4xx_it.o: ../Core/Inc/can.h
+yx_up\stm32f4xx_it.o: ../User/Task/INS_task.h
+yx_up\stm32f4xx_it.o: ../Core/Inc/tim.h
+yx_up\stm32f4xx_it.o: ../Core/Inc/spi.h
+yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+yx_up\stm32f4xx_it.o: ../User/pid_imu.h
+yx_up\stm32f4xx_it.o: ../User/DriverLayer/Can_user.h
+yx_up\stm32f4xx_it.o: ../User/Task/Friction_task.h
+yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h

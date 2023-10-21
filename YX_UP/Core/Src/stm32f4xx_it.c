@@ -18,12 +18,12 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
 #include "stm32f4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 //================================================外部中断文件================================================//
 #include "Exchange_task.h"
+#include "Friction_task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -32,11 +32,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-extern uint16_t TIM1_Count;
-extern uint8_t TIM1_Mode;
+uint16_t TIM1_Count;
+uint8_t TIM1_Mode = 1;
 extern uint8_t foe_count;
-extern uint8_t bopan_count = 0;
-extern uint8_t bopan_fan;
+uint8_t bopan_count = 0;
 uint8_t bopan_fan_count = 0;
 /* USER CODE END PD */
 
@@ -334,11 +333,11 @@ void TIM1_UP_TIM10_IRQHandler(void)
 		if(bopan_fan_count)
 		{
 			bopan_fan_count--;
-			bopan_fan = 1;
+			bopan_reversal_flag = 1;
 		}
 		else
 		{
-			bopan_fan = 0;
+			bopan_reversal_flag = 0;
 		}
 		
 		//巡逻定时计时

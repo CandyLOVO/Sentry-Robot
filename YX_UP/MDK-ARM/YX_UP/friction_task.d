@@ -1,4 +1,5 @@
 yx_up\friction_task.o: ..\User\Task\Friction_task.c
+yx_up\friction_task.o: ..\User\Task\Friction_task.h
 yx_up\friction_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 yx_up\friction_task.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stddef.h
 yx_up\friction_task.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdint.h
@@ -59,5 +60,11 @@ yx_up\friction_task.o: ../User/PotocaLayer/remote_control.h
 yx_up\friction_task.o: ../User/bsp_rc.h
 yx_up\friction_task.o: ..\User\AlgorithmLayer\PID.h
 yx_up\friction_task.o: ../Core/Inc/can.h
-yx_up\friction_task.o: ..\User\Task\Friction_task.h
 yx_up\friction_task.o: ..\User\Task\Exchange_task.h
+yx_up\friction_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+yx_up\friction_task.o: ..\User\Task\INS_task.h
+yx_up\friction_task.o: ../Core/Inc/tim.h
+yx_up\friction_task.o: ../Core/Inc/spi.h
+yx_up\friction_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+yx_up\friction_task.o: ../User/pid_imu.h
+yx_up\friction_task.o: ../User/DriverLayer/Can_user.h

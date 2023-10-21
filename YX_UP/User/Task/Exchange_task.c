@@ -1,14 +1,5 @@
-#include "FreeRTOS.h"
-#include "task.h"
-#include "main.h"
-#include "cmsis_os.h"
-#include "remote_control.h"
-#include "PID.h"
-#include "arm_math.h"
-#include "can.h"
-#include "INS_task.h"
 #include "Exchange_task.h"
-#include "Can_user.h"
+
 
 //针对哨兵
 uint8_t foe_flag = 0;		//视觉检测标志位

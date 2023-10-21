@@ -10,6 +10,7 @@
  extern SPI_HandleTypeDef hspi1;
   extern I2C_HandleTypeDef hi2c3;
   extern TIM_HandleTypeDef htim10;
+
 //  fp32 INS_gyro[3] ;
 // fp32 INS_accel[3] ;
 // fp32 INS_mag[3] ;
@@ -35,6 +36,7 @@ typedef struct INS_DATA
     fp32 angle[3];
     fp32 INS_quat[4];  
 } ins_data_t;
+extern ins_data_t ins_data;
 
 typedef struct ist8310_real_data_t
 {

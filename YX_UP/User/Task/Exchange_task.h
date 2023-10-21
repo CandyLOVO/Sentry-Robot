@@ -1,6 +1,17 @@
 #ifndef EXCHANGE_TASK_H
 #define EXCHANGE_TASK_H
 
+#include "FreeRTOS.h"
+#include "task.h"
+#include "main.h"
+#include "cmsis_os.h"
+#include "remote_control.h"
+#include "PID.h"
+#include "arm_math.h"
+#include "can.h"
+#include "INS_task.h"
+#include "Can_user.h"
+
 void Exchange_task(void const * argument);
 
 extern uint8_t foe_flag;
@@ -30,6 +41,8 @@ extern int16_t Pitch_minipc;
 extern float Yaw_minipc_fp;
 extern float Pitch_minipc_fp;
 extern uint8_t rx_buffer[100];
+extern int16_t mouse_x;
+extern int16_t mouse_y;
 
 void Get_keyboard();
 

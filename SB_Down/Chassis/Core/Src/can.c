@@ -23,7 +23,7 @@
 /* USER CODE BEGIN 0 */
 CAN_TxHeaderTypeDef can_tx_message;
 uint8_t can_send_data[8];
-motor_info motor[4];
+//motor_info motor[4];
 /* USER CODE END 0 */
 
 CAN_HandleTypeDef hcan1;
@@ -278,11 +278,11 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		uint8_t can_receive_data[8];
 	  HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,&can_rx_message,can_receive_data);
 	  if((can_rx_message.StdId >= 0x205) && (can_rx_message.StdId < 0x208)){
-			uint8_t index = can_rx_message.StdId - 0x205;
-			motor[index].angle = ((can_receive_data[0] << 8) | can_receive_data[1]);
-			motor[index].speed = ((can_receive_data[2] << 8) | can_receive_data[3]);
-			motor[index].tor_current = ((can_receive_data[4] << 8) | can_receive_data[5]);
-			motor[index].temperture = can_receive_data[6];
+//			uint8_t index = can_rx_message.StdId - 0x205;
+//			motor[index].angle = ((can_receive_data[0] << 8) | can_receive_data[1]);
+//			motor[index].speed = ((can_receive_data[2] << 8) | can_receive_data[3]);
+//			motor[index].tor_current = ((can_receive_data[4] << 8) | can_receive_data[5]);
+//			motor[index].temperture = can_receive_data[6];
 		}
 
 	}
