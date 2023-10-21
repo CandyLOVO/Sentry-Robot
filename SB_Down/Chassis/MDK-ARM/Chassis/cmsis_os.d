@@ -1,9 +1,9 @@
 chassis\cmsis_os.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c
-chassis\cmsis_os.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
+chassis\cmsis_os.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\string.h
 chassis\cmsis_os.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 chassis\cmsis_os.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-chassis\cmsis_os.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stddef.h
-chassis\cmsis_os.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdint.h
+chassis\cmsis_os.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stddef.h
+chassis\cmsis_os.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stdint.h
 chassis\cmsis_os.o: ../Core/Inc/FreeRTOSConfig.h
 chassis\cmsis_os.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 chassis\cmsis_os.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
