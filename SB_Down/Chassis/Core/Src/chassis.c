@@ -29,7 +29,7 @@ void Chassis(void const * argument)
 		pid_init(&PID_angle[i],PID_a[0],PID_a[1],PID_a[2]);
 	}
 	
-	int16_t set = 1365; //60度
+	int16_t set = 1365; //60
 	
   for(;;)
   {
