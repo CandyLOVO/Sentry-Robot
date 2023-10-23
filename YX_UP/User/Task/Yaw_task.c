@@ -102,7 +102,7 @@ void Yaw_task(void const *pvParameters)
 		}
 		detel_calc();	//越界处理
 		target_speed[6] +=  pid_calc_sita(&motor_pid_sita[6], target_yaw, ins_yaw);//角度->速度（内含越界处理）
-		motor_info[6].set_voltage = pid_calc(&motor_pid[6], target_speed[6], 20 * ins_data.gyro[2]);//用陀螺仪的角速度（rad/s -> r/min），速度->电流
+		motor_info[6].set_voltage = pid_calc(&motor_pid[6], target_speed[6], 20 * INS_gyro[2]);//用陀螺仪的角速度（rad/s -> r/min），速度->电流
 		Yaw_can_send();//电机电流数据发送
     osDelay(1);
   }
@@ -131,9 +131,9 @@ static void Yaw_loop_init()
 static void Yaw_read_imu()
 {
 		//三个角度值读取
-		ins_yaw = ins_data.angle[0];
-		//ins_pitch = ins_data.angle[1];
-		//ins_row = ins_data.angle[2];
+		ins_yaw = INS_angle[0];
+		//ins_pitch = ins_angle_degree[1];
+		//ins_row = ins_angle_degree[2];
 }
 
 //================================================Yaw电机电流发送================================================//

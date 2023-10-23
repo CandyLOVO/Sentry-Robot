@@ -58,7 +58,7 @@ yx_up\startdefaulttask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/sem
 yx_up\startdefaulttask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 yx_up\startdefaulttask.o: ../User/PotocaLayer/remote_control.h
 yx_up\startdefaulttask.o: ../User/bsp_rc.h
-yx_up\startdefaulttask.o: ..\User\AlgorithmLayer\PID.h
+yx_up\startdefaulttask.o: ../User/AlgorithmLayer/PID.h
 yx_up\startdefaulttask.o: ../Core/Inc/can.h
 yx_up\startdefaulttask.o: ..\User\Task\INS_task.h
 yx_up\startdefaulttask.o: ../Core/Inc/tim.h

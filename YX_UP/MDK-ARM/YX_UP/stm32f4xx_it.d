@@ -1,5 +1,4 @@
 yx_up\stm32f4xx_it.o: ../Core/Src/stm32f4xx_it.c
-yx_up\stm32f4xx_it.o: ../Core/Inc/stm32f4xx_it.h
 yx_up\stm32f4xx_it.o: ../Core/Inc/main.h
 yx_up\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 yx_up\stm32f4xx_it.o: ../Core/Inc/stm32f4xx_hal_conf.h
@@ -42,6 +41,7 @@ yx_up\stm32f4xx_it.o: E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm
 yx_up\stm32f4xx_it.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
 yx_up\stm32f4xx_it.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
 yx_up\stm32f4xx_it.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdbool.h
+yx_up\stm32f4xx_it.o: ../Core/Inc/stm32f4xx_it.h
 yx_up\stm32f4xx_it.o: ../User/Task/Exchange_task.h
 yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 yx_up\stm32f4xx_it.o: ../Core/Inc/FreeRTOSConfig.h
@@ -59,7 +59,7 @@ yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.
 yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 yx_up\stm32f4xx_it.o: ../User/PotocaLayer/remote_control.h
 yx_up\stm32f4xx_it.o: ../User/bsp_rc.h
-yx_up\stm32f4xx_it.o: ..\User\AlgorithmLayer\PID.h
+yx_up\stm32f4xx_it.o: ../User/AlgorithmLayer/PID.h
 yx_up\stm32f4xx_it.o: ../Core/Inc/can.h
 yx_up\stm32f4xx_it.o: ../User/Task/INS_task.h
 yx_up\stm32f4xx_it.o: ../Core/Inc/tim.h

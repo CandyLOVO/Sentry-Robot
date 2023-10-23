@@ -45,16 +45,8 @@ typedef struct
     fp32 error[3]; //误差项 0最新 1上一次 2上上次
 
 } pid_type_def;
-/**
-  * @brief          pid struct data init
-  * @param[out]     pid: PID struct data point
-  * @param[in]      mode: PID_POSITION: normal pid
-  *                 PID_DELTA: delta pid
-  * @param[in]      PID: 0: kp, 1: ki, 2:kd
-  * @param[in]      max_out: pid max out
-  * @param[in]      max_iout: pid max iout
-  * @retval         none
-  */
+
+
 /**
   * @brief          pid struct data init
   * @param[out]     pid: PID结构数据指针
@@ -68,13 +60,6 @@ typedef struct
 extern void PID_init(pid_type_def *pid, uint8_t mode, const fp32 PID[3], fp32 max_out, fp32 max_iout);
 
 /**
-  * @brief          pid calculate 
-  * @param[out]     pid: PID struct data point
-  * @param[in]      ref: feedback data 
-  * @param[in]      set: set point
-  * @retval         pid out
-  */
-/**
   * @brief          pid计算
   * @param[out]     pid: PID结构数据指针
   * @param[in]      ref: 反馈数据
@@ -84,10 +69,14 @@ extern void PID_init(pid_type_def *pid, uint8_t mode, const fp32 PID[3], fp32 ma
 extern fp32 PID_calc(pid_type_def *pid, fp32 ref, fp32 set);
 
 /**
-  * @brief          pid out clear
-  * @param[out]     pid: PID struct data point
-  * @retval         none
+  * @brief          pid计算，小陀螺算法
+  * @param[out]     pid: PID结构数据指针
+  * @param[in]      ref: 反馈数据
+  * @param[in]      set: 设定值
+  * @retval         pid输出
   */
+extern fp32 PID_calc_swing_wz(pid_type_def* pid, fp32 ref, fp32 set);
+
 /**
   * @brief          pid 输出清除
   * @param[out]     pid: PID结构数据指针

@@ -3,8 +3,6 @@
 #ifdef __cplusplus
  extern "C" {
 #endif
-	 
-#include "INS_task.h"
 #include "Exchange_task.h"
 #include "main.h"
 #include "pid.h"
@@ -29,7 +27,8 @@
 
 //定义函数
 void Yaw_task(void const *pvParameters);
-
+extern fp32 INS_angle[3];//不知道为啥我在INS_task.h中明明已经声明过了却找不到
+extern fp32 INS_gyro[3];
 #ifdef __cplusplus
 }
 #endif

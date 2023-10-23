@@ -98,8 +98,8 @@ void Pitch_task(void const * argument)
 			}
 		}
 		gimbal_imu_limit();	//软件限位
-		target_speed_can_2[4] -= pid_calc_sita(&motor_pid_sita_can_2[4], target_pitch, Pitch_imu_speed);	//imu位置环解算
-		//target_speed_can_2[5] += pid_calc_sita(&motor_pid_sita_can_2[5], target_pitch, Pitch_imu_speed);
+		target_speed_can_2[4] -= pid_calc_sita(&motor_pid_sita_can_2[4], target_pitch, Pitch_imu);	//imu位置环解算
+		//target_speed_can_2[5] += pid_calc_sita(&motor_pid_sita_can_2[5], target_pitch, Pitch_imu);
 		
 //		编码器解算模式
 //		target_speed_can_2[4] -= pid_calc_sita(&motor_pid_sita_can_2[4], target_pitch*(-22.75)+3632, motor_info_can_2[4].rotor_angle);	//编码器位置环解算(使用这个时注意遥控器映射权重)
@@ -124,12 +124,12 @@ void Pitch_task(void const * argument)
 //================================================初始化PID参数================================================//
 static void gimbal_init()	
 {
-	pid_init(&motor_pid_can_2[4],250,0.01,0,30000,30000);// 120 0.01 0
-	pid_init(&motor_pid_can_2[5],250,0.01,0,30000,30000);// 120 0.01 0
-	pid_init(&motor_pid_sita_can_2[4],5,0,3,30000,30000);// 10 0 1300
-	pid_init(&motor_pid_sita_can_2[5],5,0,3,30000,30000);// 10 0 1300
+	pid_init(&motor_pid_can_2[4],150,0.01,0,30000,30000);// 120 0.01 0
+	pid_init(&motor_pid_can_2[5],150,0.01,0,30000,30000);// 120 0.01 0
+	pid_init(&motor_pid_sita_can_2[4],3,0,1,30000,30000);// 10 0 1300
+	pid_init(&motor_pid_sita_can_2[5],3,0,1,30000,30000);// 10 0 1300
 	target_pitch = Pitch_imu;
-}
+} 
 
 //================================================读取编码器值================================================//
 static void gimbal_read_motor()
@@ -141,8 +141,8 @@ static void gimbal_read_motor()
 //================================================读取imu值================================================//
 static void gimbal_read_imu()
 {
-	Pitch_imu = ins_data.angle[1];   //陀螺仪Pitch值
-	Pitch_imu_speed = ins_data.gyro[1];   //陀螺仪角速度值
+	Pitch_imu = INS_angle[1];;   //陀螺仪Pitch值
+	Pitch_imu_speed = INS_gyro[1];   //陀螺仪角速度值
 }
 
 

@@ -41,5 +41,6 @@ yx_up\bmi088driver.o: E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\arm_mat
 yx_up\bmi088driver.o: E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm4.h
 yx_up\bmi088driver.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
 yx_up\bmi088driver.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
+yx_up\bmi088driver.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdbool.h
 yx_up\bmi088driver.o: ..\User\BMI088reg.h
 yx_up\bmi088driver.o: ..\User\BMI088Middleware.h

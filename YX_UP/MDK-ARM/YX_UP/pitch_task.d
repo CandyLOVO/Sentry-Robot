@@ -58,7 +58,7 @@ yx_up\pitch_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 yx_up\pitch_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 yx_up\pitch_task.o: ../User/PotocaLayer/remote_control.h
 yx_up\pitch_task.o: ../User/bsp_rc.h
-yx_up\pitch_task.o: ..\User\AlgorithmLayer\PID.h
+yx_up\pitch_task.o: ../User/AlgorithmLayer/PID.h
 yx_up\pitch_task.o: ../Core/Inc/can.h
 yx_up\pitch_task.o: ..\User\Task\INS_task.h
 yx_up\pitch_task.o: ../Core/Inc/tim.h

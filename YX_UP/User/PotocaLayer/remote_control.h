@@ -77,6 +77,7 @@ typedef __packed struct
 
 } RC_ctrl_t;
 extern RC_ctrl_t rc_ctrl;
+void USART3_IRQHandler_remote(void);
 /* ----------------------- Internal Data ----------------------------------- */
 
 /**

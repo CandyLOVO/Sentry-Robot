@@ -37,7 +37,7 @@ int16_t mouse_y;
 //extern int16_t mouse_y;
 
 extern RC_ctrl_t rc_ctrl;
-extern ins_data_t ins_data;
+//extern ins_data_t ins_data;
 extern uint16_t Remember_pitch;
 extern fp32 Err_pitch;
 extern uint8_t Remember_pitch_flag;
@@ -161,8 +161,8 @@ void Stm_pc_send()
 {
 	HAL_GPIO_WritePin(GPIOH,GPIO_PIN_11,GPIO_PIN_SET);
 	Temp_pc[0] = 0x10;
-	Temp_pc[1] = ins_data.angle[0];//云台Yaw角度
-	Temp_pc[2] = ins_data.angle[1];//云台Pitch角度
+//	Temp_pc[1] = ins_data.angle[0];//云台Yaw角度
+//	Temp_pc[2] = ins_data.angle[1];//云台Pitch角度
 	Temp_pc[3] = 'a';//状态
 	Temp_pc[4] = '1';
 	Temp_pc[5] = '0';

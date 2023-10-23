@@ -41,3 +41,19 @@ yx_up\bmi088middleware.o: E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\arm
 yx_up\bmi088middleware.o: E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm4.h
 yx_up\bmi088middleware.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
 yx_up\bmi088middleware.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
+yx_up\bmi088middleware.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdbool.h
+yx_up\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+yx_up\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+yx_up\bmi088middleware.o: ../Core/Inc/FreeRTOSConfig.h
+yx_up\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+yx_up\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+yx_up\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+yx_up\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+yx_up\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+yx_up\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+yx_up\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+yx_up\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+yx_up\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
+yx_up\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
+yx_up\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+yx_up\bmi088middleware.o: ..\User\bsp_delay.h

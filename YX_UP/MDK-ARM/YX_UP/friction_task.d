@@ -58,7 +58,7 @@ yx_up\friction_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr
 yx_up\friction_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 yx_up\friction_task.o: ../User/PotocaLayer/remote_control.h
 yx_up\friction_task.o: ../User/bsp_rc.h
-yx_up\friction_task.o: ..\User\AlgorithmLayer\PID.h
+yx_up\friction_task.o: ../User/AlgorithmLayer/PID.h
 yx_up\friction_task.o: ../Core/Inc/can.h
 yx_up\friction_task.o: ..\User\Task\Exchange_task.h
 yx_up\friction_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h

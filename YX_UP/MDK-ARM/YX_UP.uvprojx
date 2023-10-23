@@ -347,7 +347,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>1</Optim>
+            <Optim>0</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -356,7 +356,7 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>3</wLevel>
+            <wLevel>1</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
@@ -365,7 +365,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx,__FPU_PRESENT=1,__FPU_USED=1,ARM_MATH_CM4,__CC_ARM</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../User;../../YX_UP;../User/DriverLayer;../User/PotocaLayer;../User/Task;..\User\AlgorithmLayer</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../../YX_UP;../User/DriverLayer;../User/PotocaLayer;../User/Task;../User/AlgorithmLayer;../User</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -702,14 +702,24 @@
           <GroupName>DriverLayer</GroupName>
           <Files>
             <File>
-              <FileName>GPIO_User.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\DriverLayer\GPIO_User.c</FilePath>
-            </File>
-            <File>
               <FileName>Can_user.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\DriverLayer\Can_user.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_imu_pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_imu_pwm.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\bsp_spi.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -752,14 +762,14 @@
               <FilePath>..\User\Task\Exchange_task.c</FilePath>
             </File>
             <File>
-              <FileName>INS_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Task\INS_task.c</FilePath>
-            </File>
-            <File>
               <FileName>StartDefaultTask.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\Task\StartDefaultTask.c</FilePath>
+            </File>
+            <File>
+              <FileName>INS_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\INS_task.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -770,6 +780,21 @@
               <FileName>PID.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\AlgorithmLayer\PID.c</FilePath>
+            </File>
+            <File>
+              <FileName>pid_imu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\pid_imu.c</FilePath>
+            </File>
+            <File>
+              <FileName>BMI088driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\BMI088driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>BMI088Middleware.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\BMI088Middleware.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -43,7 +43,7 @@ void MX_FREERTOS_Init(void) {
   frictionHandle = osThreadCreate(osThread(frictiontask), NULL);
 	
 	//¡˘÷·IMU»ŒŒÒ
-	osThreadDef(imutask, INS_Task,  osPriorityRealtime, 0, 512);
+	osThreadDef(imutask, INS_Task,  osPriorityRealtime, 0, 1024);
   insTaskHandle = osThreadCreate(osThread(imutask), NULL);
 	
   /* add threads, ... */

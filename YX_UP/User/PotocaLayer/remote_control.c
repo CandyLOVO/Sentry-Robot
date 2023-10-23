@@ -61,7 +61,7 @@ const RC_ctrl_t *get_remote_control_point(void)
 
 //================================================遥控器串口接收中断================================================//
 //串口中断，需要删除stm32f4xx_it.c中的同样中断
-void USART3_IRQHandler(void)
+void USART3_IRQHandler_remote(void)
 {
 
     if(huart3.Instance->SR & UART_FLAG_RXNE)//接收到数据

@@ -31,6 +31,7 @@
 /* USER CODE BEGIN Includes */
 #include "remote_control.h"
 #include "Can_user.h"
+#include "bsp_delay.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -76,7 +77,6 @@ uint8_t buf_gyro[8]={0};
 uint8_t pTxData;
 uint8_t pRxData;
 float quat[4] = {1.0f, 0.0f, 0.0f, 0.0f};
-float INS_angle[3] = {0.0f, 0.0f, 0.0f};
 
 //加速度计解算欧拉角
 float roll_accel;
@@ -183,6 +183,7 @@ int main(void)
 	HAL_TIM_PWM_Start(&htim10,TIM_CHANNEL_1);//BMI088需要使用
 	HAL_TIM_Base_Start_IT(&htim1);//开启定时器1并打开中断
 	HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);//修改TIM2中断优先级
+	delay_init();
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
