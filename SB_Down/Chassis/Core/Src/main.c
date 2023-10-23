@@ -20,6 +20,9 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "can.h"
+#include "dma.h"
+#include "i2c.h"
+#include "spi.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -88,8 +91,11 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_CAN2_Init();
   MX_CAN1_Init();
+  MX_SPI1_Init();
+  MX_I2C3_Init();
   /* USER CODE BEGIN 2 */
   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
   /* USER CODE END 2 */
@@ -99,6 +105,7 @@ int main(void)
 
   /* Start scheduler */
   osKernelStart();
+
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */

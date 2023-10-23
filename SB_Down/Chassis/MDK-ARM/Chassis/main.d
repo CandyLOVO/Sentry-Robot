@@ -27,8 +27,11 @@ chassis\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h
 chassis\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
 chassis\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
 chassis\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
+chassis\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h
+chassis\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h
 chassis\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 chassis\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+chassis\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 chassis\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 chassis\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 chassis\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
@@ -46,4 +49,7 @@ chassis\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 chassis\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 chassis\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 chassis\main.o: ../Core/Inc/can.h
+chassis\main.o: ../Core/Inc/dma.h
+chassis\main.o: ../Core/Inc/i2c.h
+chassis\main.o: ../Core/Inc/spi.h
 chassis\main.o: ../Core/Inc/gpio.h

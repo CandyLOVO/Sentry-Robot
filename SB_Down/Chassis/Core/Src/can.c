@@ -288,4 +288,16 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 
 	}
 }
+
+void can_remote(uint8_t sbus_buf[],uint8_t can_send_id) //can通信发�?�遥控器数据
+{
+  CAN_TxHeaderTypeDef tx_header;
+    
+  tx_header.StdId = can_send_id;
+  tx_header.IDE   = CAN_ID_STD;
+  tx_header.RTR   = CAN_RTR_DATA;
+  tx_header.DLC   = 8;
+
+  HAL_CAN_AddTxMessage(&hcan1, &tx_header, sbus_buf,(uint32_t*)CAN_TX_MAILBOX0);
+}
 /* USER CODE END 1 */
