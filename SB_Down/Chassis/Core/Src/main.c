@@ -23,6 +23,7 @@
 #include "dma.h"
 #include "i2c.h"
 #include "spi.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -96,6 +97,7 @@ int main(void)
   MX_CAN1_Init();
   MX_SPI1_Init();
   MX_I2C3_Init();
+  MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
   /* USER CODE END 2 */
