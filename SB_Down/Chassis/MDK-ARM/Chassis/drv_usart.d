@@ -36,6 +36,6 @@ chassis\drv_usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 chassis\drv_usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 chassis\drv_usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 chassis\drv_usart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
-chassis\drv_usart.o: ..\USER\PotocaLayer\rc_potocal.h
-chassis\drv_usart.o: ..\USER\struct_typedef.h
+chassis\drv_usart.o: ../USER/PotocaLayer/rc_potocal.h
+chassis\drv_usart.o: ../USER/struct_typedef.h
 chassis\drv_usart.o: ../Core/Inc/can.h

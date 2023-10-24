@@ -36,6 +36,6 @@ chassis\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 chassis\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 chassis\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 chassis\stm32f4xx_it.o: ../Core/Inc/stm32f4xx_it.h
-chassis\stm32f4xx_it.o: ..\USER\DriverLayer\drv_usart.h
+chassis\stm32f4xx_it.o: ../USER/DriverLayer/drv_usart.h
 chassis\stm32f4xx_it.o: ../Core/Inc/chassis.h
 chassis\stm32f4xx_it.o: ../Core/Inc/can.h

@@ -107,14 +107,14 @@ static void uart_rx_idle_callback(UART_HandleTypeDef* huart)
 
 
 
-//static void dma_m0_rxcplt_callback(DMA_HandleTypeDef *hdma)
-//{
+static void dma_m0_rxcplt_callback(DMA_HandleTypeDef *hdma)
+{
 
-//		if(hdma== huart3.hdmarx)
-//		{
-//				hdma->Instance->CR |= (uint32_t)(DMA_SxCR_CT);	 // 将当前目标内存设置为Memory1
-//				USART3_rxDataHandler(usart3_dma_rxbuf[0]);
-//		}
+		if(hdma== huart3.hdmarx)
+		{
+				hdma->Instance->CR |= (uint32_t)(DMA_SxCR_CT);	 // 将当前目标内存设置为Memory1
+				USART3_rxDataHandler(usart3_dma_rxbuf[0]);
+		}
 //			
 //		else if(hdma == huart6.hdmarx)
 //		{
@@ -122,24 +122,24 @@ static void uart_rx_idle_callback(UART_HandleTypeDef* huart)
 //			JUDGE_Receive(judge_dma_buffer[0],judge_receive_length);
 //		}
 
-//}
+}
 
 
-//static void dma_m1_rxcplt_callback(DMA_HandleTypeDef *hdma)
-//{
-//	
-//	if(hdma== huart3.hdmarx)
-//	{
-//		hdma->Instance->CR &= ~(uint32_t)(DMA_SxCR_CT);	 // 将当前目标内存设置为Memory0
-//		USART3_rxDataHandler(usart3_dma_rxbuf[1]);
-//	}
-//	
+static void dma_m1_rxcplt_callback(DMA_HandleTypeDef *hdma)
+{
+	
+	if(hdma== huart3.hdmarx)
+	{
+		hdma->Instance->CR &= ~(uint32_t)(DMA_SxCR_CT);	 // 将当前目标内存设置为Memory0
+		USART3_rxDataHandler(usart3_dma_rxbuf[1]);
+	}
+	
 //	else if(hdma == huart6.hdmarx)
 //	{
 //		hdma->Instance->CR &=~ (uint32_t)(DMA_SxCR_CT);	 // 将当前目标内存设置为Memory0
 //		JUDGE_Receive(judge_dma_buffer[1],judge_receive_length);
 //	}
-//}
+}
 
 
 static HAL_StatusTypeDef DMAEx_MultiBufferStart_NoIT(DMA_HandleTypeDef *hdma, \

@@ -163,7 +163,7 @@
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>rc_ctrl</ItemText>
+          <ItemText>rc_ctrl,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>

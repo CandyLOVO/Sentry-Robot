@@ -55,3 +55,4 @@ chassis\main.o: ../Core/Inc/i2c.h
 chassis\main.o: ../Core/Inc/spi.h
 chassis\main.o: ../Core/Inc/usart.h
 chassis\main.o: ../Core/Inc/gpio.h
+chassis\main.o: ../USER/DriverLayer/drv_usart.h

@@ -52,5 +52,6 @@ chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 chassis\chassis.o: ../Core/Inc/pid.h
-chassis\chassis.o: ..\USER\PotocaLayer\rc_potocal.h
-chassis\chassis.o: ..\USER\struct_typedef.h
+chassis\chassis.o: ../USER/PotocaLayer/rc_potocal.h
+chassis\chassis.o: ../USER/struct_typedef.h
+chassis\chassis.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\math.h
