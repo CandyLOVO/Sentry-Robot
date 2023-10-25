@@ -42,6 +42,7 @@ chassis\chassis.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 chassis\chassis.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 chassis\chassis.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 chassis\chassis.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
+chassis\chassis.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 chassis\chassis.o: ../Core/Inc/chassis.h
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
@@ -51,5 +52,6 @@ chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 chassis\chassis.o: ../Core/Inc/pid.h
-chassis\chassis.o: ..\USER\PotocaLayer\rc_potocal.h
+chassis\chassis.o: ../USER/PotocaLayer/rc_potocal.h
 chassis\chassis.o: ../USER/struct_typedef.h
+chassis\chassis.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\math.h

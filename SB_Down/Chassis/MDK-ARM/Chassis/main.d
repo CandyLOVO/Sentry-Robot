@@ -34,6 +34,7 @@ chassis\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 chassis\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 chassis\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 chassis\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
+chassis\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 chassis\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 chassis\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 chassis\main.o: ../Core/Inc/FreeRTOSConfig.h
@@ -52,4 +53,6 @@ chassis\main.o: ../Core/Inc/can.h
 chassis\main.o: ../Core/Inc/dma.h
 chassis\main.o: ../Core/Inc/i2c.h
 chassis\main.o: ../Core/Inc/spi.h
+chassis\main.o: ../Core/Inc/usart.h
 chassis\main.o: ../Core/Inc/gpio.h
+chassis\main.o: ../USER/DriverLayer/drv_usart.h
