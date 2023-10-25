@@ -234,17 +234,17 @@ static void Yaw_mode_search()
 static void Yaw_mode_remote_speed()
 {
 	
-		if(rc_ctrl.rc.ch[0] > base-valve && rc_ctrl.rc.ch[0] < base+valve && (!q_flag) && (!e_flag) && (mouse_x < mouse_x_valve) && (mouse_x > -mouse_x_valve) && (!press_right))
+		if(rc_ctrl.rc.ch[0] > base-valve && rc_ctrl.rc.ch[0] < base+valve && (!remote.key.q) && (!remote.key.e) && (mouse_x < mouse_x_valve) && (mouse_x > -mouse_x_valve) && (!remote.mouse.press_right))
 	{
 		Yaw_fix();
 	}
-	else if( (rc_ctrl.rc.ch[0] >= base+valve && rc_ctrl.rc.ch[0] <= base_max) || (e_flag) )
+	else if( (rc_ctrl.rc.ch[0] >= base+valve && rc_ctrl.rc.ch[0] <= base_max) || (remote.key.e) )
 	{
 		target_speed[6] -= 60;
 		yaw_fix_flag = 1;
 	}
 	
-	else if( (rc_ctrl.rc.ch[0] >= base_min && rc_ctrl.rc.ch[0]<base - valve ) || (q_flag) )
+	else if( (rc_ctrl.rc.ch[0] >= base_min && rc_ctrl.rc.ch[0]<base - valve ) || (remote.key.q) )
 	{
 		target_speed[6] += 60;
 		yaw_fix_flag = 1;

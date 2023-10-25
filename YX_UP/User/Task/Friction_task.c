@@ -11,11 +11,7 @@
 //新摩擦轮ID分别是3和4   ---   上C板CAN_2
 //新增拨盘，拨盘ID是6   ---   CAN_1（上下联通）
 
-//===============================================全局变量================================================//
-int16_t bopan_shoot_speed = 90*36;	//拨盘发射弹丸转速
-int16_t bopan_reversal_speed = -35*36;	//拨盘反转转速
-uint8_t bopan_reversal_flag = 0;	//拨盘反转标志位，0为需要不反转，1为需要反转
-
+//===============================================函数================================================//
 //PID初始化
 static void Friction_init();
 
@@ -31,8 +27,16 @@ static bool Friction_judge();
 //摩擦轮Pid输出值发送
 static void Friction_send();
 
-//拨盘Pid输出值计算和发送
-static void Bopan_send(int16_t speed);
+//拨盘Pid输出值和发送
+static void Bopan_send();
+
+//拨盘PId计算
+static void Bopan_calc(int16_t speed);
+
+//===============================================全局变量================================================//
+int16_t bopan_shoot_speed = 90*36;	//拨盘发射弹丸转速
+int16_t bopan_reversal_speed = -35*36;	//拨盘反转转速
+uint8_t bopan_reversal_flag = 0;	//拨盘反转标志位，0为需要不反转，1为需要反转
 
 void Friction_task(void const * argument)
 {
@@ -59,29 +63,30 @@ void Friction_task(void const * argument)
 		{	
 			if(!bopan_reversal_flag)	//拨盘正转
 			{
-				Bopan_send(bopan_shoot_speed);
+				Bopan_calc(bopan_shoot_speed);
 			}
 			else if(bopan_reversal_flag)	//拨盘反转
 			{
-				Bopan_send(bopan_reversal_speed);
+				Bopan_calc(bopan_reversal_speed);
 			}
 			
 		}
-		else if(rc_ctrl.rc.s[1] == 2  && foe_flag && (Yaw_minipc_fp<5.0f && Yaw_minipc_fp> -5.0f) && (Pitch_minipc_fp<5.0f && Pitch_minipc_fp>-5.0f) && Pitch_minipc_fp!=0 && Yaw_minipc_fp!=0)//检测到目标
+		else if(rc_ctrl.rc.s[1] == 2  && foe_flag)//检测到目标
 		{
 			if(!bopan_reversal_flag)	//拨盘正转
 			{
-				Bopan_send(bopan_shoot_speed);
+				Bopan_calc(bopan_shoot_speed);
 			}
 			else if(bopan_reversal_flag)	//拨盘反转
 			{
-				Bopan_send(bopan_reversal_speed);
+				Bopan_calc(bopan_reversal_speed);
 			}
 		}
 		else
 		{			
-			Bopan_send(0);
+			Bopan_calc(0);
 		}
+		Bopan_send();	//拨盘PID发送
 		
     osDelay(1);
   }
@@ -137,24 +142,56 @@ static bool Friction_judge()
 	return false;
 }
 
+//===============================================拨盘PID计算================================================//
+static void Bopan_calc(int16_t speed)
+{
+	motor_info[4].set_voltage=pid_calc(&motor_pid[4],speed,motor_info[4].rotor_speed);
+	motor_info[5].set_voltage=pid_calc(&motor_pid[5],-speed,motor_info[5].rotor_speed);	
+}
+
 //===============================================摩擦轮电流发送函数================================================//
 static void Friction_send()
 {
-		set_motor_voltage_can_2(0, 
-                      motor_info_can_2[0].set_voltage, 
-                      motor_info_can_2[1].set_voltage, 
-                      motor_info_can_2[2].set_voltage, 
-                      motor_info_can_2[3].set_voltage);
+	CAN_TxHeaderTypeDef tx_header;
+  uint8_t             tx_data[8];
+    
+  tx_header.StdId = 0x200;
+  tx_header.IDE   = CAN_ID_STD;//标准帧
+  tx_header.RTR   = CAN_RTR_DATA;//数据帧
+  tx_header.DLC   = 8;		//发送数据长度（字节）
+
+	tx_data[0] = (motor_info_can_2[0].set_voltage>>8)&0xff;	//先发高八位		
+  tx_data[1] =    (motor_info_can_2[0].set_voltage)&0xff;
+  tx_data[2] = (motor_info_can_2[1].set_voltage>>8)&0xff;
+  tx_data[3] =    (motor_info_can_2[1].set_voltage)&0xff;
+  tx_data[4] = (motor_info_can_2[2].set_voltage>>8)&0xff;
+  tx_data[5] =    (motor_info_can_2[2].set_voltage)&0xff;
+  tx_data[6] = (motor_info_can_2[3].set_voltage>>8)&0xff;
+  tx_data[7] =    (motor_info_can_2[3].set_voltage)&0xff;
+	
+  HAL_CAN_AddTxMessage(&hcan2, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX0);
 }
 
 //===============================================拨盘电流发送函数================================================//
-static void Bopan_send(int16_t speed)
+static void Bopan_send()
 {
-		motor_info[4].set_voltage=pid_calc(&motor_pid[4],speed,motor_info[4].rotor_speed);
-		motor_info[5].set_voltage=pid_calc(&motor_pid[5],-speed,motor_info[5].rotor_speed);
-		set_motor_voltage(1, 
-                      motor_info[4].set_voltage, 
-                      motor_info[5].set_voltage, 
-                      motor_info[6].set_voltage, 
-                      0);
+
+	CAN_TxHeaderTypeDef tx_header;
+  uint8_t             tx_data[8];
+    
+  tx_header.StdId = 0x1ff;
+  tx_header.IDE   = CAN_ID_STD;//标准帧
+  tx_header.RTR   = CAN_RTR_DATA;//数据帧
+  tx_header.DLC   = 8;		//发送数据长度（字节）
+
+	tx_data[0] = (motor_info[4].set_voltage>>8)&0xff;	//先发高八位		
+  tx_data[1] =    (motor_info[4].set_voltage)&0xff;
+  tx_data[2] = (motor_info[5].set_voltage>>8)&0xff;
+  tx_data[3] =    (motor_info[5].set_voltage)&0xff;
+  tx_data[4] = 0;
+  tx_data[5] = 0;
+  tx_data[6] = 0;
+  tx_data[7] = 0;
+	
+  HAL_CAN_AddTxMessage(&hcan1, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX0);
 }

@@ -1,40 +1,15 @@
 #include "Exchange_task.h"
 
+//================================================通信任务================================================//
 
 //针对哨兵
 uint8_t foe_flag = 0;		//视觉检测标志位
 uint8_t foe_count = 0;
 uint8_t Flag_progress;
 uint8_t Flag_judge = 0;
-uint8_t Flag_Tuoluo = 0;  //用来告诉视觉对面是不是小陀螺模式，0代表不是，1代表是
 
-uint8_t Temp_pc[8];
-//Some flag for keyboard
-
-uint16_t w_flag;
-uint16_t s_flag;
-uint16_t a_flag;
-uint16_t d_flag;
-uint16_t q_flag;
-uint16_t e_flag;
-uint16_t shift_flag;
-uint16_t ctrl_flag;
-uint8_t press_left;
-uint8_t press_right;
-uint16_t r_flag;
-uint16_t f_flag;
-uint16_t g_flag;
-uint16_t z_flag;
-uint16_t x_flag;
-uint16_t c_flag;
-uint16_t v_flag;
-uint16_t b_flag;
-
-uint8_t temp_test;
-//向右和向下为正
-int16_t mouse_x;
-int16_t mouse_y;
-//extern int16_t mouse_y;
+uint8_t vision_send[28];	//视觉接口数据帧
+remote_flag_t remote;	//键盘按键读取
 
 extern RC_ctrl_t rc_ctrl;
 extern uint16_t Remember_pitch;
@@ -54,6 +29,7 @@ int16_t Yaw_minipc;
 int16_t Pitch_minipc;
 fp32 Yaw_minipc_fp;
 fp32 Pitch_minipc_fp;
+Vision_t vision;	//视觉通信结构体
 
 void Get_keyboard();
 void Get_minipc();
@@ -66,8 +42,7 @@ void Exchange_task(void const * argument)
   /* Infinite loop */
 	
 	ins_buf[0] = 8;	//imu receive tag
-	
-	__HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE); //使能IDLE中断
+	__HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE); //使能uart1的IDLE中断
 	HAL_UART_Receive_DMA(&huart1,rx_buffer,100); //开启接收
 	
   for(;;)
@@ -91,32 +66,17 @@ void Exchange_task(void const * argument)
   /* USER CODE END StartTask03 */
 } 
 
+//================================================获取键盘数据================================================//
 void Get_keyboard()	
 {
-		w_flag=rc_ctrl.key.v & (0x01 | 0x00 << 8);
-		s_flag=rc_ctrl.key.v & (0x02 | 0x00 << 8);
-		a_flag=rc_ctrl.key.v & (0x04 | 0x00 << 8);
-		d_flag=rc_ctrl.key.v & (0x08 | 0x00 << 8);
-		q_flag=rc_ctrl.key.v & (0x40 | 0x00 << 8);
-		e_flag=rc_ctrl.key.v & (0x80 | 0x00 << 8);
-		shift_flag=rc_ctrl.key.v & (0x10 | 0x00 << 8);
-		ctrl_flag=rc_ctrl.key.v & (0x20 | 0x00 << 8);
-		press_left = rc_ctrl.mouse.press_l;
-		press_right = rc_ctrl.mouse.press_r;
-	  mouse_x = rc_ctrl.mouse.x;
-		mouse_y = rc_ctrl.mouse.y;
-	
-		r_flag = rc_ctrl.key.v & (0x00 | 0x01 << 8);
-		f_flag = rc_ctrl.key.v & (0x00 | 0x02 << 8);
-		g_flag = rc_ctrl.key.v & (0x00 | 0x04 << 8);
-		z_flag = rc_ctrl.key.v & (0x00 | 0x08 << 8);
-		x_flag = rc_ctrl.key.v & (0x00 | 0x10 << 8);
-		c_flag = rc_ctrl.key.v & (0x00 | 0x20 << 8);
-		v_flag = rc_ctrl.key.v & (0x00 | 0x40 << 8);
-		b_flag = rc_ctrl.key.v & (0x00 | 0x80 << 8);
-		
+		memcpy(&remote.key , &rc_ctrl.key , 2);
+		remote.mouse.press_left = rc_ctrl.mouse.press_l;
+		remote.mouse.press_right = rc_ctrl.mouse.press_r;
+	  remote.mouse.x = rc_ctrl.mouse.x;
+		remote.mouse.y = rc_ctrl.mouse.y;
 }
 
+//================================================通信接收任务================================================//
 void Get_minipc()
 {
 
@@ -126,14 +86,7 @@ void Get_minipc()
 			{
 				remote_data_read(rx_buffer);
 			}
-			else if(rx_buffer[0] == 0x02)
-			{
-//				if(Remember_pitch_flag)
-//				{
-//					Remember_pitch_flag = 0;//只在开机的时候读取一次
-//					Pitch_pc_get(rx_buffer);
-//				}
-			}
+			
 			recv_end_flag_uart1 = 0;//清除接收结束标志位
 			for(uint8_t i=0;i<rx_len_uart1;i++)
 				{
@@ -146,6 +99,7 @@ void Get_minipc()
 		}
 }
 
+//================================================通信解算任务================================================//
 void remote_data_read(uint8_t rx_buffer[])
 {
 	Yaw_minipc = (int)(rx_buffer[1] << 8 | rx_buffer[2]);
@@ -156,17 +110,33 @@ void remote_data_read(uint8_t rx_buffer[])
 	Pitch_minipc = (int)(Pitch_minipc * 100)/32767;	
 }
 
+//================================================数据stm32 -> 上位机================================================//
 void Stm_pc_send()
 {
 	HAL_GPIO_WritePin(GPIOH,GPIO_PIN_11,GPIO_PIN_SET);
-	Temp_pc[0] = 0x10;
-	Temp_pc[1] = INS_angle[0];//云台Yaw角度
-	Temp_pc[2] = INS_angle[1];//云台Pitch角度
-	Temp_pc[3] = 'a';//状态
-	Temp_pc[4] = '1';
-	Temp_pc[5] = '0';
-	Temp_pc[6] = 0;
-	Temp_pc[7] = '\n';
-	HAL_UART_Transmit_DMA(&huart1,Temp_pc,8);
+
+	vision.header = 0x5A;
+	vision.official.detect_color = 1;	//读取裁判系统数据判断红蓝方
+	vision.official.reset_tracker = 0;
+	vision.official.reserved = 6;
+	vision.roll = INS_angle[2]/57.3f;
+	vision.pitch = INS_angle[1]/57.3f;
+	vision.yaw = INS_angle[0]/57.3f;
+	vision.aim_x = 0.5;
+	vision.aim_y = 0.5;
+	vision.aim_z = 5;
+	vision.checksum = 0xAAAA;	//CRC16校验，我没用，发了个定值做校验
+	
+	memcpy(&vision_send[0],&vision.header,1);
+	memcpy(&vision_send[1],&vision.official,1);
+	memcpy(&vision_send[2],&vision.roll,4);
+	memcpy(&vision_send[6],&vision.pitch,4);
+	memcpy(&vision_send[10],&vision.yaw,4);
+	memcpy(&vision_send[14],&vision.aim_x,4);
+	memcpy(&vision_send[18],&vision.aim_y,4);
+	memcpy(&vision_send[22],&vision.aim_z,4);
+	memcpy(&vision_send[26],&vision.checksum,2);
+	
+	HAL_UART_Transmit_DMA(&huart1,vision_send,28);
 }
 
