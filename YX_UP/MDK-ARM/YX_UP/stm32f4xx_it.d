@@ -62,9 +62,10 @@ yx_up\stm32f4xx_it.o: ../User/bsp_rc.h
 yx_up\stm32f4xx_it.o: ../User/AlgorithmLayer/PID.h
 yx_up\stm32f4xx_it.o: ../Core/Inc/can.h
 yx_up\stm32f4xx_it.o: ../User/Task/INS_task.h
-yx_up\stm32f4xx_it.o: ../Core/Inc/tim.h
-yx_up\stm32f4xx_it.o: ../Core/Inc/spi.h
 yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+yx_up\stm32f4xx_it.o: ../User/bsp_imu_pwm.h
+yx_up\stm32f4xx_it.o: ../User/bsp_spi.h
+yx_up\stm32f4xx_it.o: ../User/bmi088driver.h
 yx_up\stm32f4xx_it.o: ../User/pid_imu.h
 yx_up\stm32f4xx_it.o: ../User/DriverLayer/Can_user.h
 yx_up\stm32f4xx_it.o: ../User/Task/Friction_task.h

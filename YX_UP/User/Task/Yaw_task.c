@@ -132,8 +132,8 @@ static void Yaw_read_imu()
 {
 		//三个角度值读取
 		ins_yaw = INS_angle[0];
-		//ins_pitch = ins_angle_degree[1];
-		//ins_row = ins_angle_degree[2];
+		//ins_pitch = INS_angle[1];
+		//ins_row = INS_angle[2];
 }
 
 //================================================Yaw电机电流发送================================================//

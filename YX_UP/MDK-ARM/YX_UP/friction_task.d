@@ -63,8 +63,9 @@ yx_up\friction_task.o: ../Core/Inc/can.h
 yx_up\friction_task.o: ..\User\Task\Exchange_task.h
 yx_up\friction_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 yx_up\friction_task.o: ..\User\Task\INS_task.h
-yx_up\friction_task.o: ../Core/Inc/tim.h
-yx_up\friction_task.o: ../Core/Inc/spi.h
 yx_up\friction_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+yx_up\friction_task.o: ../User/bsp_imu_pwm.h
+yx_up\friction_task.o: ../User/bsp_spi.h
+yx_up\friction_task.o: ../User/bmi088driver.h
 yx_up\friction_task.o: ../User/pid_imu.h
 yx_up\friction_task.o: ../User/DriverLayer/Can_user.h

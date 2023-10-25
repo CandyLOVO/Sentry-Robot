@@ -1,6 +1,6 @@
-yx_up\ins_task.o: ..\User\INS_task.c
-yx_up\ins_task.o: ..\User\INS_task.h
-yx_up\ins_task.o: ..\User\struct_typedef.h
+yx_up\ins_task.o: ..\User\Task\INS_task.c
+yx_up\ins_task.o: ..\User\Task\INS_task.h
+yx_up\ins_task.o: ../User/struct_typedef.h
 yx_up\ins_task.o: ../Core/Inc/main.h
 yx_up\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 yx_up\ins_task.o: ../Core/Inc/stm32f4xx_hal_conf.h
@@ -56,7 +56,7 @@ yx_up\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 yx_up\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 yx_up\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 yx_up\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-yx_up\ins_task.o: ..\User\bsp_imu_pwm.h
-yx_up\ins_task.o: ..\User\bsp_spi.h
-yx_up\ins_task.o: ..\User\bmi088driver.h
-yx_up\ins_task.o: ..\User\pid_imu.h
+yx_up\ins_task.o: ../User/bsp_imu_pwm.h
+yx_up\ins_task.o: ../User/bsp_spi.h
+yx_up\ins_task.o: ../User/bmi088driver.h
+yx_up\ins_task.o: ../User/pid_imu.h
