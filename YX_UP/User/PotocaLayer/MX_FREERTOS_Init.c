@@ -27,15 +27,15 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_THREADS */
 	
 	//YAW控制任务
-	osThreadDef(yawtask, Yaw_task, osPriorityRealtime, 0, 128);		
+	osThreadDef(yawtask, Yaw_task, osPriorityIdle, 0, 128);		
   yawTaskHandle = osThreadCreate(osThread(yawtask), NULL);
 	
 	//Pitch控制任务
-	osThreadDef(pitchtask, Pitch_task, osPriorityRealtime, 0, 128);
+	osThreadDef(pitchtask, Pitch_task, osPriorityIdle, 0, 128);
   pitchtaskHandle = osThreadCreate(osThread(pitchtask), NULL);
 	
 	//上下C板通信任务
-	osThreadDef(exchangetask, Exchange_task, osPriorityIdle, 0, 256);
+	osThreadDef(exchangetask, Exchange_task, osPriorityRealtime, 0, 512);
   exchangeHandle = osThreadCreate(osThread(exchangetask), NULL);
 
 	//摩擦轮和拨盘控制任务

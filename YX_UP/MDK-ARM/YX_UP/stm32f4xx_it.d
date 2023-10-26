@@ -68,5 +68,6 @@ yx_up\stm32f4xx_it.o: ../User/bsp_spi.h
 yx_up\stm32f4xx_it.o: ../User/bmi088driver.h
 yx_up\stm32f4xx_it.o: ../User/pid_imu.h
 yx_up\stm32f4xx_it.o: ../User/DriverLayer/Can_user.h
+yx_up\stm32f4xx_it.o: ../User/AlgorithmLayer/SolveTrajectory.h
 yx_up\stm32f4xx_it.o: ../User/Task/Friction_task.h
 yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h

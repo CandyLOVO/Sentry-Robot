@@ -779,6 +779,11 @@
               <FileType>1</FileType>
               <FilePath>..\User\BMI088Middleware.c</FilePath>
             </File>
+            <File>
+              <FileName>SolveTrajectory.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\AlgorithmLayer\SolveTrajectory.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

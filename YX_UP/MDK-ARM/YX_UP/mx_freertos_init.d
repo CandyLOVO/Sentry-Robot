@@ -70,6 +70,7 @@ yx_up\mx_freertos_init.o: ../User/bsp_spi.h
 yx_up\mx_freertos_init.o: ../User/bmi088driver.h
 yx_up\mx_freertos_init.o: ../User/pid_imu.h
 yx_up\mx_freertos_init.o: ../User/DriverLayer/Can_user.h
+yx_up\mx_freertos_init.o: ../User/AlgorithmLayer/SolveTrajectory.h
 yx_up\mx_freertos_init.o: ../User/Task/StartDefaultTask.h
 yx_up\mx_freertos_init.o: ../User/Task/Pitch_task.h
 yx_up\mx_freertos_init.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h

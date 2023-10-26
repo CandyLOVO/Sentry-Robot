@@ -11,6 +11,7 @@
 #include "can.h"
 #include "INS_task.h"
 #include "Can_user.h"
+#include "SolveTrajectory.h"
 
 void Exchange_task(void const * argument);
 
@@ -20,7 +21,8 @@ typedef struct
 	uint8_t reset_tracker : 1;    // 发0
 	uint8_t reserved : 6; 
 }		pByte_t;	//位域
-		
+
+//================================================ stm32 -> minipc (发送结构体)================================================//
 typedef struct
 {
 	uint8_t header;
@@ -33,6 +35,25 @@ typedef struct
   float aim_z;               // 发0.5
   uint16_t checksum;     // crc16校验位 	
 } 	Vision_t; //视觉通信结构体
+
+//================================================ minipc -> stm32 (接收结构体)================================================//
+typedef struct
+{
+  uint8_t header;
+	pByte_t official;
+  float x;
+  float y;
+  float z;
+  float yaw;
+  float vx;
+  float vy;
+  float vz;
+  float v_yaw;
+  float r1;
+  float r2;
+  float dz;
+  uint16_t checksum;
+} vision_receive_t;
 
 typedef __packed struct
 {
@@ -65,6 +86,12 @@ typedef __packed struct
 	}	mouse;
 	
 } 	remote_flag_t; //键盘数据获取
+
+typedef struct
+{
+	float yaw;
+	float pitch;
+} Chase_t;	//传输给电机的值
 
 extern uint8_t foe_flag;
 extern remote_flag_t remote;

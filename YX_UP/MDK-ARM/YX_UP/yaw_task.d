@@ -68,3 +68,4 @@ yx_up\yaw_task.o: ../User/bsp_spi.h
 yx_up\yaw_task.o: ../User/bmi088driver.h
 yx_up\yaw_task.o: ../User/pid_imu.h
 yx_up\yaw_task.o: ../User/DriverLayer/Can_user.h
+yx_up\yaw_task.o: ../User/AlgorithmLayer/SolveTrajectory.h

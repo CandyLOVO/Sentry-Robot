@@ -70,3 +70,4 @@ yx_up\freertos.o: ../User/Task/Exchange_task.h
 yx_up\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 yx_up\freertos.o: ../Core/Inc/can.h
 yx_up\freertos.o: ../User/DriverLayer/Can_user.h
+yx_up\freertos.o: ../User/AlgorithmLayer/SolveTrajectory.h
