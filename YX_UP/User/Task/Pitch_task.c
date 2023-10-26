@@ -149,12 +149,12 @@ static void gimbal_read_imu()
 //================================================速度环控制================================================//
 static void gimbal_control_speed()
 {
-		if( (rc_ctrl.rc.ch[1]>1074&&rc_ctrl.rc.ch[1]<=1684 ) || (ctrl_flag))
+		if( (rc_ctrl.rc.ch[1]>1074&&rc_ctrl.rc.ch[1]<=1684 ) || (remote.key.ctrl))
 		{
 			target_speed_can_2[4]=15;
 			target_speed_can_2[5]=-15;
 		}
-		else if( (rc_ctrl.rc.ch[1]>=324&&rc_ctrl.rc.ch[1]<974) || (shift_flag))
+		else if( (rc_ctrl.rc.ch[1]>=324&&rc_ctrl.rc.ch[1]<974) || (remote.key.shift))
 		{
 			target_speed_can_2[4]=-15;
 			target_speed_can_2[5]=15;
