@@ -1,7 +1,7 @@
 yx_down\starttask05.o: ..\RTOS TASK\StartTask05.c
 yx_down\starttask05.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-yx_down\starttask05.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stddef.h
-yx_down\starttask05.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdint.h
+yx_down\starttask05.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stddef.h
+yx_down\starttask05.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stdint.h
 yx_down\starttask05.o: ../Core/Inc/FreeRTOSConfig.h
 yx_down\starttask05.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 yx_down\starttask05.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -55,11 +55,5 @@ yx_down\starttask05.o: ../User/DriverLayer/drv_can.h
 yx_down\starttask05.o: ../User/Task/chassis_task.h
 yx_down\starttask05.o: ../User/AlgorithmLayer/pid.h
 yx_down\starttask05.o: ../User/DriverLayer/drv_can.h
-yx_down\starttask05.o: ../User/PotocaLayer/rc_potocal.h
 yx_down\starttask05.o: ../User/PotocaLayer/judge.h
 yx_down\starttask05.o: ../User/DriverLayer/drv_usart.h
-yx_down\starttask05.o: E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\arm_math.h
-yx_down\starttask05.o: E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm4.h
-yx_down\starttask05.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
-yx_down\starttask05.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
-yx_down\starttask05.o: ../User/StartTask05.h

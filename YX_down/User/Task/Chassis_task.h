@@ -3,7 +3,7 @@
 #include "struct_typedef.h"
 #include "pid.h"
 #include  "drv_can.h"
-#include "rc_potocal.h"
+//#include "rc_potocal.h"
 #include "main.h"
 #include "judge.h"
 typedef struct

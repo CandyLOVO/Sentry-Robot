@@ -1,9 +1,8 @@
 #include "rc_potocal.h"
-#include "can.h"
 //#include "INS_task.h"
 
 //底盘电机结构体
-extern motor_info motor[4];
+extern motor_info  motor[8];
 int16_t Rotate_w;
 
 //IMU

@@ -3,16 +3,19 @@
 
 #include  "rc_potocal.h"
 //#include  "judge.h"
+
+int value = 0;
+
 extern UART_HandleTypeDef huart3;
 //extern UART_HandleTypeDef huart6;
-//extern DMA_HandleTypeDef hdma_usart6_rx;
-//extern DMA_HandleTypeDef hdma_usart6_tx;
+extern DMA_HandleTypeDef hdma_usart6_rx;
+extern DMA_HandleTypeDef hdma_usart6_tx;
 #define USART3_RX_DATA_FRAME_LEN	(18u)	// 串口3数据帧长度
 #define USART3_RX_BUF_LEN			(USART3_RX_DATA_FRAME_LEN + 6u)	// 串口3接收缓冲区长度
 #define USART6_RX_BUF_LEN   (200)
 uint8_t usart3_dma_rxbuf[2][USART3_RX_BUF_LEN];
 volatile uint8_t judge_dma_buffer[2][USART6_RX_BUF_LEN] ={0}  ;
-uint8_t judge_receive_length=0;
+//uint8_t judge_receive_length=0;
 
 void USART3_Init(void)
 {
@@ -36,6 +39,7 @@ void DRV_USART3_IRQHandler(UART_HandleTypeDef *huart)  //在stm32f4xx_it.c文件
 		__HAL_UART_GET_IT_SOURCE(huart, UART_IT_IDLE))
 	{
 		uart_rx_idle_callback(huart); //空闲中断回调函数
+		value ++;
 	}
 }
 
@@ -52,14 +56,14 @@ void DRV_USART3_IRQHandler(UART_HandleTypeDef *huart)  //在stm32f4xx_it.c文件
 //							    USART6_RX_BUF_LEN);  
 //}
 
-//void DRV_USART6_IRQHandler(UART_HandleTypeDef *huart)  //在stm32f4xx_it.c文件USART6_IRQHandler调用   
-//{
-//	if( __HAL_UART_GET_FLAG(huart, UART_FLAG_IDLE) &&
-//		__HAL_UART_GET_IT_SOURCE(huart, UART_IT_IDLE))  //判断是否为空闲中断
-//	{
-//		uart_rx_idle_callback(huart);
-//	}
-//}
+void DRV_USART6_IRQHandler(UART_HandleTypeDef *huart)  //在stm32f4xx_it.c文件USART6_IRQHandler调用   
+{
+	if( __HAL_UART_GET_FLAG(huart, UART_FLAG_IDLE) &&
+		__HAL_UART_GET_IT_SOURCE(huart, UART_IT_IDLE))  //判断是否为空闲中断
+	{
+		uart_rx_idle_callback(huart);
+	}
+}
 
 
 
@@ -93,7 +97,7 @@ static void uart_rx_idle_callback(UART_HandleTypeDef* huart)
 //    if(huart == &huart6)
 //	{
 //		__HAL_DMA_DISABLE(huart->hdmarx);
-//		judge_receive_length = USART6_RX_BUF_LEN - huart->hdmarx->Instance->NDTR;
+////		judge_receive_length = USART6_RX_BUF_LEN - huart->hdmarx->Instance->NDTR;
 //	
 //		if(huart->hdmarx->Instance->CR & DMA_SxCR_CT)
 //			huart->hdmarx->XferM1CpltCallback(huart->hdmarx);
@@ -115,11 +119,11 @@ static void dma_m0_rxcplt_callback(DMA_HandleTypeDef *hdma)
 				hdma->Instance->CR |= (uint32_t)(DMA_SxCR_CT);	 // 将当前目标内存设置为Memory1
 				USART3_rxDataHandler(usart3_dma_rxbuf[0]);
 		}
-//			
+			
 //		else if(hdma == huart6.hdmarx)
 //		{
 //			hdma->Instance->CR |= (uint32_t)(DMA_SxCR_CT);	 // 将当前目标内存设置为Memory1
-//			JUDGE_Receive(judge_dma_buffer[0],judge_receive_length);
+////			JUDGE_Receive(judge_dma_buffer[0],judge_receive_length);
 //		}
 
 }
@@ -137,7 +141,7 @@ static void dma_m1_rxcplt_callback(DMA_HandleTypeDef *hdma)
 //	else if(hdma == huart6.hdmarx)
 //	{
 //		hdma->Instance->CR &=~ (uint32_t)(DMA_SxCR_CT);	 // 将当前目标内存设置为Memory0
-//		JUDGE_Receive(judge_dma_buffer[1],judge_receive_length);
+////		JUDGE_Receive(judge_dma_buffer[1],judge_receive_length);
 //	}
 }
 
@@ -157,11 +161,11 @@ static HAL_StatusTypeDef DMAEx_MultiBufferStart_NoIT(DMA_HandleTypeDef *hdma, \
 		return HAL_ERROR;
     }   
 
-//	/* Set the UART DMA transfer complete callback */
-//	/* Current memory buffer used is Memory 1 callback */
-//	hdma->XferCpltCallback   = dma_m0_rxcplt_callback;
-//	/* Current memory buffer used is Memory 0 callback */
-//	hdma->XferM1CpltCallback = dma_m1_rxcplt_callback;	
+	/* Set the UART DMA transfer complete callback */
+	/* Current memory buffer used is Memory 1 callback */
+	hdma->XferCpltCallback   = dma_m0_rxcplt_callback;
+	/* Current memory buffer used is Memory 0 callback */
+	hdma->XferM1CpltCallback = dma_m1_rxcplt_callback;	
 
 	/* Check callback functions */
 	if ((NULL == hdma->XferCpltCallback) || (NULL == hdma->XferM1CpltCallback))

@@ -50,6 +50,9 @@ chassis\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 chassis\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 chassis\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 chassis\main.o: ../Core/Inc/can.h
+chassis\main.o: ../USER/struct_typedef.h
+chassis\main.o: ../Core/Inc/chassis.h
+chassis\main.o: ../Core/Inc/can.h
 chassis\main.o: ../Core/Inc/dma.h
 chassis\main.o: ../Core/Inc/i2c.h
 chassis\main.o: ../Core/Inc/spi.h

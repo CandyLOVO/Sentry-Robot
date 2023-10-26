@@ -1,7 +1,7 @@
 #ifndef RC_POTOCAL
 #define RC_POTOCAL
   #include "struct_typedef.h"
-  #include "can.h"
+  #include "drv_can.h"
   #include "main.h"
 	
 

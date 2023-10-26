@@ -51,3 +51,7 @@ chassis\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 chassis\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 chassis\freertos.o: ../Core/Inc/chassis.h
 chassis\freertos.o: ../Core/Inc/can.h
+chassis\freertos.o: ../USER/struct_typedef.h
+chassis\freertos.o: ../Core/Inc/chassis.h
+chassis\freertos.o: ../USER/PotocaLayer/rc_potocal.h
+chassis\freertos.o: ../USER/DriverLayer/drv_can.h

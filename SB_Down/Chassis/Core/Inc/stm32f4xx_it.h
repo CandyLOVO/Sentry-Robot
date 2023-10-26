@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2022 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -56,7 +56,7 @@ void DMA1_Stream1_IRQHandler(void);
 void DMA1_Stream3_IRQHandler(void);
 void CAN1_TX_IRQHandler(void);
 void CAN1_RX0_IRQHandler(void);
-void TIM1_UP_TIM10_IRQHandler(void);
+void TIM3_IRQHandler(void);
 void SPI1_IRQHandler(void);
 void USART3_IRQHandler(void);
 void DMA2_Stream0_IRQHandler(void);

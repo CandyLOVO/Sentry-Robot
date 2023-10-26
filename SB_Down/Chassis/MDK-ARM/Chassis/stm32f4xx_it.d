@@ -39,3 +39,5 @@ chassis\stm32f4xx_it.o: ../Core/Inc/stm32f4xx_it.h
 chassis\stm32f4xx_it.o: ../USER/DriverLayer/drv_usart.h
 chassis\stm32f4xx_it.o: ../Core/Inc/chassis.h
 chassis\stm32f4xx_it.o: ../Core/Inc/can.h
+chassis\stm32f4xx_it.o: ../USER/struct_typedef.h
+chassis\stm32f4xx_it.o: ../Core/Inc/chassis.h

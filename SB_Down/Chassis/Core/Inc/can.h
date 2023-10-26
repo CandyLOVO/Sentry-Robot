@@ -29,7 +29,8 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-
+#include "struct_typedef.h"
+#include "chassis.h"
 /* USER CODE END Includes */
 
 extern CAN_HandleTypeDef hcan1;
@@ -46,6 +47,7 @@ typedef struct
 	uint16_t tor_current;
 	uint16_t temperture;
 }motor_info;
+
 /* USER CODE END Private defines */
 
 void MX_CAN1_Init(void);

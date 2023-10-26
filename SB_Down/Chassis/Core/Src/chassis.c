@@ -8,13 +8,11 @@
 
 extern motor_info motor[4];
 extern RC_ctrl_t rc_ctrl;
-int16_t m;
-//#define start 3045  
+//#define start 3045
 int16_t set_calculate(int16_t x,int16_t y);
 
 void Chassis(void const * argument)
 {
-	m = rc_ctrl.rc.ch[3];
 	uint16_t initial_angle[4];
 	for(int i=0;i<4;i++)
 	{

@@ -2,7 +2,7 @@
 #define __DRV_CAN_H
 
 #include "struct_typedef.h"
-#include "chassis_task.h"
+#include "chassis.h"
 void CAN1_Init(void);
 void CAN2_Init( void );
 void can_remote(uint8_t sbus_buf[],uint8_t can_send_id);

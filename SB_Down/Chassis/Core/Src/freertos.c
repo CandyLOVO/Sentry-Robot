@@ -26,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "chassis.h"
+#include "rc_potocal.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
