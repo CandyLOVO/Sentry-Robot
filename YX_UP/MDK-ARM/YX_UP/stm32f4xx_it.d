@@ -68,7 +68,10 @@ yx_up\stm32f4xx_it.o: ../User/DriverLayer/bsp_spi.h
 yx_up\stm32f4xx_it.o: ../User/AlgorithmLayer/bmi088driver.h
 yx_up\stm32f4xx_it.o: ../User/AlgorithmLayer/pid_imu.h
 yx_up\stm32f4xx_it.o: ../User/DriverLayer/Can_user.h
+<<<<<<< HEAD
 yx_up\stm32f4xx_it.o: ../User/AlgorithmLayer/SolveTrajectory.h
 yx_up\stm32f4xx_it.o: ../User/PotocaLayer/Motor.h
+=======
+>>>>>>> parent of 52bf27f (修改了和视觉的接口)
 yx_up\stm32f4xx_it.o: ../User/Task/Friction_task.h
 yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h

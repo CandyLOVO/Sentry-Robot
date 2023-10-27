@@ -3,9 +3,14 @@
 //================================================通信任务================================================//
 
 
+<<<<<<< HEAD
 //================================================函数================================================//
 //上C板向下C板发送数据
 static void Up_send_to_down();
+=======
+uint8_t vision_send[28];	//视觉接口数据帧
+remote_flag_t remote;	//键盘按键读取
+>>>>>>> parent of 52bf27f (修改了和视觉的接口)
 
 //获取键盘信息
 static void Get_keyboard();
@@ -33,6 +38,7 @@ extern UART_HandleTypeDef huart1;
 volatile uint8_t rx_len_uart1 = 0;  //接收一帧数据的长度
 volatile uint8_t recv_end_flag_uart1 = 0; //一帧数据接收完成标志
 uint8_t rx_buffer[100]={0};  //接收数据缓存数组
+<<<<<<< HEAD
 uint8_t vision_send[28];	//视觉接口发送数据帧
 
 Chase_t chase;	//赋予电机追踪的数据结构体
@@ -41,23 +47,57 @@ vision_receive_t vision_receive;	//视觉数据接收结构体
 remote_flag_t remote;	//键盘按键读取(结构体)
 Sentry_t Sentry;	//哨兵状态量和裁判系统数据结构体
 
+=======
+int16_t Yaw_minipc;
+int16_t Pitch_minipc;
+fp32 Yaw_minipc_fp;
+fp32 Pitch_minipc_fp;
+Vision_t vision;	//视觉通信结构体
+
+void Get_keyboard();
+void Get_minipc();
+void remote_data_read(uint8_t rx_buffer[]);
+void Stm_pc_send();
+>>>>>>> parent of 52bf27f (修改了和视觉的接口)
 
 void Exchange_task(void const * argument)
 {
   /* USER CODE BEGIN StartTask03 */
   /* Infinite loop */
+<<<<<<< HEAD
 	Sentry_Init();	//哨兵状态量及裁判系统数据初始化
 	SolveTrajectory_Init();//初始化参数
+=======
+	
+	ins_buf[0] = 8;	//imu receive tag
+>>>>>>> parent of 52bf27f (修改了和视觉的接口)
 	__HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE); //使能uart1的IDLE中断
 	HAL_UART_Receive_DMA(&huart1,rx_buffer,100); //开启接收
 	
   for(;;)
   {
+<<<<<<< HEAD
 		Up_send_to_down();	//上C向下C发送信息
 		//Get_keyboard();		//解算键盘的信息
 		Get_minipc();		//取出nuc的信息
 		Judge_minipc();		//检测是否识别到目标，识别到目标就解算，没识别到赋0
 		Stm_pc_send();		//向nuc发送信息
+=======
+		ins_buf_temp = ins_yaw + 180;		// Add 180 to be a positive number
+		ins_buf[1] = ins_buf_temp;
+		ins_buf[2] = ins_buf_temp >> 8;		// 2 bytes put together forming a uint_16
+		can_remote(ins_buf,0x55);
+		
+		Get_keyboard();		//解算keyboard flag	
+		Get_minipc();
+		Stm_pc_send();
+		if(Yaw_minipc_fp || Pitch_minipc_fp)	//刚好在正中心不知道会不会出现抖动
+		{
+			foe_flag = 1;
+			foe_count = 0;
+		}
+
+>>>>>>> parent of 52bf27f (修改了和视觉的接口)
     osDelay(1);
   }
   /* USER CODE END StartTask03 */
@@ -80,9 +120,9 @@ static void Get_minipc()
 
 		if(recv_end_flag_uart1 == 1)  //接收完成标志
 		{			
-			if(rx_buffer[0] == 0xA5)
+			if(rx_buffer[0] == 0x01)
 			{
-				Vision_read(rx_buffer);
+				remote_data_read(rx_buffer);
 			}
 			
 			recv_end_flag_uart1 = 0;//清除接收结束标志位
@@ -97,46 +137,20 @@ static void Get_minipc()
 		}
 }
 
+<<<<<<< HEAD
 //================================================通信读取解算任务================================================//
 static void Vision_read(uint8_t rx_buffer[])
+=======
+//================================================通信解算任务================================================//
+void remote_data_read(uint8_t rx_buffer[])
+>>>>>>> parent of 52bf27f (修改了和视觉的接口)
 {
-//	Yaw_minipc = (int)(rx_buffer[1] << 8 | rx_buffer[2]);
-//	Pitch_minipc = (int)(rx_buffer[3] << 8 | rx_buffer[4]);
-//	Yaw_minipc_fp = (float)(Yaw_minipc * 100)/32767;
-//	Pitch_minipc_fp = (float)(Pitch_minipc * 100)/32767;	
-//	Yaw_minipc = (int)(Yaw_minipc * 100)/32767;
-//	Pitch_minipc = (int)(Pitch_minipc * 100)/32767;	
-	memcpy(&vision_receive.official,&rx_buffer[1],1); 
-	memcpy(&vision_receive.x,&rx_buffer[2],4); 
-	memcpy(&vision_receive.y,&rx_buffer[6],4); 
-	memcpy(&vision_receive.z,&rx_buffer[10],4); 
-	memcpy(&vision_receive.yaw,&rx_buffer[14],4); 
-	memcpy(&vision_receive.vx,&rx_buffer[18],4); 
-	memcpy(&vision_receive.vy,&rx_buffer[22],4); 
-	memcpy(&vision_receive.vz,&rx_buffer[26],4); 
-	memcpy(&vision_receive.v_yaw,&rx_buffer[30],4); 
-	memcpy(&vision_receive.r1,&rx_buffer[34],4); 
-	memcpy(&vision_receive.r2,&rx_buffer[38],4);
-	memcpy(&vision_receive.dz,&rx_buffer[42],4);
-	memcpy(&vision_receive.checksum,&rx_buffer[44],2);
-	
-	st.bias_time = 100;
-	st.tar_yaw = vision_receive.yaw;
-	st.v_yaw = vision_receive.v_yaw;
-	st.armor_num = 4;
-	st.xw = vision_receive.x;
-	st.yw = vision_receive.y;
-	st.zw = vision_receive.z;
-	st.r1 = vision_receive.r1;
-	st.r2 = vision_receive.r2;
-	st.dz = vision_receive.dz;
-	st.vxw = vision_receive.vx;
-	st.vyw = vision_receive.vy;
-	st.vzw = vision_receive.vz;
-	st.s_bias = 0.19133;
-  st.z_bias = 0.21265;
-	st.current_v = 30;
-	
+	Yaw_minipc = (int)(rx_buffer[1] << 8 | rx_buffer[2]);
+	Pitch_minipc = (int)(rx_buffer[3] << 8 | rx_buffer[4]);
+	Yaw_minipc_fp = (float)(Yaw_minipc * 100)/32767;
+	Pitch_minipc_fp = (float)(Pitch_minipc * 100)/32767;	
+	Yaw_minipc = (int)(Yaw_minipc * 100)/32767;
+	Pitch_minipc = (int)(Pitch_minipc * 100)/32767;	
 }
 
 //================================================数据stm32 -> 上位机================================================//
@@ -162,11 +176,12 @@ static void Stm_pc_send()
 	memcpy(&vision_send[14],&vision.aim_x,4);
 	memcpy(&vision_send[18],&vision.aim_y,4);
 	memcpy(&vision_send[22],&vision.aim_z,4);
-	memcpy(&vision_send[26],&vision.checksum,1);
+	memcpy(&vision_send[26],&vision.checksum,2);
 	
-	HAL_UART_Transmit_DMA(&huart1,vision_send,27);
+	HAL_UART_Transmit_DMA(&huart1,vision_send,28);
 }
 
+<<<<<<< HEAD
 //================================================弹道补偿API接口================================================//
 static void SolveTrajectory_Init()
 {
@@ -234,3 +249,5 @@ static void Sentry_Init()
 	Sentry.Flag_progress = 0;
 	Sentry.Flag_judge = 0;
 }
+=======
+>>>>>>> parent of 52bf27f (修改了和视觉的接口)

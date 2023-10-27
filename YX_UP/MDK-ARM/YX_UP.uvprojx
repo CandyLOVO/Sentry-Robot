@@ -804,7 +804,11 @@
             <File>
               <FileName>BMI088Middleware.c</FileName>
               <FileType>1</FileType>
+<<<<<<< HEAD
               <FilePath>..\User\AlgorithmLayer\BMI088Middleware.c</FilePath>
+=======
+              <FilePath>..\User\BMI088Middleware.c</FilePath>
+>>>>>>> parent of 52bf27f (修改了和视觉的接口)
             </File>
           </Files>
         </Group>

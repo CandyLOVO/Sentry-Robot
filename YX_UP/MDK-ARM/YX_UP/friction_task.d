@@ -69,5 +69,8 @@ yx_up\friction_task.o: ../User/DriverLayer/bsp_spi.h
 yx_up\friction_task.o: ../User/AlgorithmLayer/bmi088driver.h
 yx_up\friction_task.o: ../User/AlgorithmLayer/pid_imu.h
 yx_up\friction_task.o: ../User/DriverLayer/Can_user.h
+<<<<<<< HEAD
 yx_up\friction_task.o: ../User/AlgorithmLayer/SolveTrajectory.h
 yx_up\friction_task.o: ../User/PotocaLayer/Motor.h
+=======
+>>>>>>> parent of 52bf27f (修改了和视觉的接口)

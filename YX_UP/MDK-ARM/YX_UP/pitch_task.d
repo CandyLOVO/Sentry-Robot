@@ -69,6 +69,9 @@ yx_up\pitch_task.o: ../User/AlgorithmLayer/pid_imu.h
 yx_up\pitch_task.o: ..\User\Task\Exchange_task.h
 yx_up\pitch_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 yx_up\pitch_task.o: ../User/DriverLayer/Can_user.h
+<<<<<<< HEAD
 yx_up\pitch_task.o: ../User/AlgorithmLayer/SolveTrajectory.h
 yx_up\pitch_task.o: ../User/PotocaLayer/Motor.h
+=======
+>>>>>>> parent of 52bf27f (修改了和视觉的接口)
 yx_up\pitch_task.o: ../Core/Inc/stm32f4xx_it.h

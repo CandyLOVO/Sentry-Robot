@@ -27,15 +27,19 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_THREADS */
 	
 	//YAW¿ØÖÆÈÎÎñ
-	osThreadDef(yawtask, Yaw_task, osPriorityIdle, 0, 128);		
+	osThreadDef(yawtask, Yaw_task, osPriorityRealtime, 0, 128);		
   yawTaskHandle = osThreadCreate(osThread(yawtask), NULL);
 	
 	//Pitch¿ØÖÆÈÎÎñ
-	osThreadDef(pitchtask, Pitch_task, osPriorityIdle, 0, 128);
+	osThreadDef(pitchtask, Pitch_task, osPriorityRealtime, 0, 128);
   pitchtaskHandle = osThreadCreate(osThread(pitchtask), NULL);
 	
 	//ÉÏÏÂC°åÍ¨ĞÅÈÎÎñ
+<<<<<<< HEAD
 	osThreadDef(exchangetask, Exchange_task, osPriorityIdle, 0, 512);
+=======
+	osThreadDef(exchangetask, Exchange_task, osPriorityIdle, 0, 256);
+>>>>>>> parent of 52bf27f (ä¿®æ”¹äº†å’Œè§†è§‰çš„æ¥å£)
   exchangeHandle = osThreadCreate(osThread(exchangetask), NULL);
 
 	//Ä¦²ÁÂÖºÍ²¦ÅÌ¿ØÖÆÈÎÎñ

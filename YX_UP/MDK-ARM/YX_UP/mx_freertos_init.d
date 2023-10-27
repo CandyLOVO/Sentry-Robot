@@ -70,8 +70,11 @@ yx_up\mx_freertos_init.o: ../User/DriverLayer/bsp_spi.h
 yx_up\mx_freertos_init.o: ../User/AlgorithmLayer/bmi088driver.h
 yx_up\mx_freertos_init.o: ../User/AlgorithmLayer/pid_imu.h
 yx_up\mx_freertos_init.o: ../User/DriverLayer/Can_user.h
+<<<<<<< HEAD
 yx_up\mx_freertos_init.o: ../User/AlgorithmLayer/SolveTrajectory.h
 yx_up\mx_freertos_init.o: ../User/PotocaLayer/Motor.h
+=======
+>>>>>>> parent of 52bf27f (修改了和视觉的接口)
 yx_up\mx_freertos_init.o: ../User/Task/StartDefaultTask.h
 yx_up\mx_freertos_init.o: ../User/Task/Pitch_task.h
 yx_up\mx_freertos_init.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
