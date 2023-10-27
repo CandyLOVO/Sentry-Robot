@@ -19,11 +19,17 @@
 #define base_max 1684		//遥控器最大值
 #define base_min 364		//遥控器最小值
 #define angle_valve 1		//角度阈值，在这个范围内就不去抖动了(锁定yaw轴时使用)
-#define mouse_x_valve 10		//鼠标控制阈值
+#define mouse_x_valve 10.0f		//鼠标控制阈值
 #define mouse_x_weight 0.5f		//鼠标映射权重
 #define Yaw_sita_weight 0.5f 		//遥控器控制位置环权重
 #define Yaw_minipc_weight 1.75f		//视觉跟随映射权重(速度版)
 #define Yaw_minipc_sita_weight 0.003f	//视觉跟随映射权重(位置版)
+
+//================================================声明================================================//
+extern int16_t Rotate_w;
+extern int16_t Rotate_W;
+extern fp32 target_yaw;
+extern int8_t Update_yaw_flag;
 
 //定义函数
 void Yaw_task(void const *pvParameters);

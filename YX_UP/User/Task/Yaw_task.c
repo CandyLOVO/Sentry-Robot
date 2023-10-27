@@ -80,7 +80,7 @@ void Yaw_task(void const *pvParameters)
 		//上场模式，左上角开关开到最下方
 		if(rc_ctrl.rc.s[1] == 2 && ins_yaw)
 		{
-			if(foe_flag)	//如果视觉检测到目标
+			if(Sentry.foe_flag)	//如果视觉检测到目标
 			{
 					Yaw_Rotate();		//前馈控制补偿底盘带来的旋转角速度
 					Yaw_fix_sita();		//角度控制
@@ -217,10 +217,10 @@ static void Yaw_fix_sita()
 //================================================鼠标控制================================================//
 static void Yaw_mouse()
 {
-	if(mouse_x > mouse_x_valve || mouse_x < -mouse_x_valve)
+	if(remote.mouse.x > mouse_x_valve || remote.mouse.x < -mouse_x_valve)
 	{
 		yaw_fix_flag = 1;
-		target_speed[6] -= (fp32)mouse_x * mouse_x_weight;
+		target_speed[6] -= (fp32)remote.mouse.x * mouse_x_weight;
 	}
 }
 
@@ -234,7 +234,7 @@ static void Yaw_mode_search()
 static void Yaw_mode_remote_speed()
 {
 	
-		if(rc_ctrl.rc.ch[0] > base-valve && rc_ctrl.rc.ch[0] < base+valve && (!remote.key.q) && (!remote.key.e) && (mouse_x < mouse_x_valve) && (mouse_x > -mouse_x_valve) && (!remote.mouse.press_right))
+		if(rc_ctrl.rc.ch[0] > base-valve && rc_ctrl.rc.ch[0] < base+valve && (!remote.key.q) && (!remote.key.e) && (remote.mouse.x < mouse_x_valve) && (remote.mouse.x > -mouse_x_valve) && (!remote.mouse.press_right))
 	{
 		Yaw_fix();
 	}
@@ -254,7 +254,7 @@ static void Yaw_mode_remote_speed()
 //================================================速度视觉跟随================================================//
 static void Yaw_minipc_control()
 {
-		target_speed[6] -= ((fp32)Yaw_minipc_fp) * Yaw_minipc_weight;
+		target_speed[6] -= chase.yaw * Yaw_minipc_weight;
 }
 
 //================================================位置控制模式================================================//
@@ -285,5 +285,5 @@ static void detel_calc()
 //直接叠加角度环控制
 static void Yaw_minipc_control_sita()
 {
-		target_yaw -= ((fp32)Yaw_minipc_fp) * Yaw_minipc_sita_weight;
+		target_yaw -= chase.yaw * Yaw_minipc_sita_weight;
 }

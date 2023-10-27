@@ -1,15 +1,11 @@
 #include "Can_user.h"
 #include "remote_control.h"
+#include "Yaw_task.h"
 
 //	Can µÄÒ»Ğ©ÓÃ»§×«Ğ´µÄ½ÓÊÕº¯Êı
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
-extern int16_t Rotate_w;
 int16_t Down_pitch;	//µ×ÅÌpitchÊı¾İ
-extern int8_t Update_yaw_flag;
-extern fp32 target_yaw;
-extern uint8_t Flag_progress;
-extern uint8_t Flag_judge;
 
 //================================================can1¹ıÂËÆ÷================================================//
 void can_1_user_init(CAN_HandleTypeDef* hcan )
@@ -110,8 +106,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖĞ¶Ï»Øµ÷º¯Ê
 		//±ÈÈü½ø³Ì±êÊ¶·û(²ÃÅĞÏµÍ³Êı¾İ)
 		if(rx_header.StdId==0x10)
 		{
-			Flag_progress = rx_data[0];
-			Flag_judge = rx_data[1];
+			Sentry.Flag_progress = rx_data[0];
+			Sentry.Flag_judge = rx_data[1];
 		}
 		
 		
@@ -171,7 +167,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖĞ¶Ï»Øµ÷º¯Ê
 }
 
 //================================================Ò£¿ØÆ÷Êı¾İ°å¼ä·¢ËÍº¯Êı================================================//
-//×¢£ºÕâÀïÎ´Ê¹ÓÃ
+//×¢£ºÓĞÓÃÀ´¸øÏÂc°å·¢yawµÄĞÅÏ¢
 void can_remote(uint8_t sbus_buf[],uint32_t id)
 {
   CAN_TxHeaderTypeDef tx_header;  
