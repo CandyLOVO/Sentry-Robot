@@ -78,7 +78,7 @@ void Exchange_task(void const * argument)
   {
 <<<<<<< HEAD
 		Up_send_to_down();	//上C向下C发送信息
-		//Get_keyboard();		//解算键盘的信息
+		Get_keyboard();		//解算键盘的信息
 		Get_minipc();		//取出nuc的信息
 		Judge_minipc();		//检测是否识别到目标，识别到目标就解算，没识别到赋0
 		Stm_pc_send();		//向nuc发送信息

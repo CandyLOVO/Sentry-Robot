@@ -31,23 +31,19 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
-
 //================================================备注================================================//
-//TIM1用来做视觉暂留，拨盘堵转计时(想改掉)，巡航模式计时，每0.01s进一次中断
+//TIM1用来做视觉暂留，拨盘堵转计时，巡航模式计时，每0.01s进一次中断
 //Uart1用来做空闲中断接收视觉的数据
-//Uart3是遥控器中断，这里配了但没使用
 //DMA2_Stream2用来作为IMU的接收中断
-
 /* USER CODE END TD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 uint16_t Lock_time = 1;	//视觉停留时间，可直接在这修改，单位是s
-uint16_t Research_time = 1;	//俯仰切换时间，可直接在这修改，单位是s
-uint16_t TIM1_Count;	//巡航模式计数器
-uint8_t TIM1_Mode = 1;	//巡航模式俯仰切换标志位
-uint8_t bopan_count = 0;	//拨盘计数器
-uint8_t bopan_fan_count = 0;	//拨盘反转计数器
+uint16_t TIM1_Count;
+uint8_t TIM1_Mode = 1;
+uint8_t bopan_count = 0;
+uint8_t bopan_fan_count = 0;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -341,35 +337,35 @@ void TIM1_UP_TIM10_IRQHandler(void)
 			}
 		}
 		
-//		//拨盘堵转
-//		if(abs(motor_info[4].rotor_speed) < (19*5))	//检测下拨盘是否堵转
-//		{
-//			bopan_count++;
-//		}
-//		else
-//		{
-//			bopan_count = 0;
-//		}
-//		
-//		if(bopan_count == 20)
-//		{
-//			bopan_fan_count = 7;
-//			bopan_count = 0;
-//		}
-//		
-//		if(bopan_fan_count)
-//		{
-//			bopan_fan_count--;
-//			bopan_reversal_flag = 1;
-//		}
-//		else
-//		{
-//			bopan_reversal_flag = 0;
-//		}
+		//拨盘堵转
+		if(abs(motor_info[4].rotor_speed) < (19*5))	//检测下拨盘是否堵转
+		{
+			bopan_count++;
+		}
+		else
+		{
+			bopan_count = 0;
+		}
+		
+		if(bopan_count == 20)
+		{
+			bopan_fan_count = 7;
+			bopan_count = 0;
+		}
+		
+		if(bopan_fan_count)
+		{
+			bopan_fan_count--;
+			bopan_reversal_flag = 1;
+		}
+		else
+		{
+			bopan_reversal_flag = 0;
+		}
 		
 		//巡逻定时计时
 		TIM1_Count++;
-		if(TIM1_Count == Research_time * 100)		//俯仰切换定时
+		if(TIM1_Count == 100)		//0.5
 		{
 			TIM1_Count =0;
 			if(TIM1_Mode == 1)
@@ -396,7 +392,7 @@ void TIM1_UP_TIM10_IRQHandler(void)
 void TIM2_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM2_IRQn 0 */
-
+	T+=0.00001;//
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);
   /* USER CODE BEGIN TIM2_IRQn 1 */

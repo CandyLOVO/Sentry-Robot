@@ -13,7 +13,6 @@
 #include "Can_user.h"
 <<<<<<< HEAD
 #include "SolveTrajectory.h"
-#include "Motor.h"
 
 #define BUFFER_SIZE 100
 =======

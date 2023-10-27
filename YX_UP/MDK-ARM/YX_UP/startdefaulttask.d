@@ -57,12 +57,12 @@ yx_up\startdefaulttask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/que
 yx_up\startdefaulttask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 yx_up\startdefaulttask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 yx_up\startdefaulttask.o: ../User/PotocaLayer/remote_control.h
-yx_up\startdefaulttask.o: ../User/DriverLayer/bsp_rc.h
+yx_up\startdefaulttask.o: ../User/bsp_rc.h
 yx_up\startdefaulttask.o: ../User/AlgorithmLayer/PID.h
 yx_up\startdefaulttask.o: ../Core/Inc/can.h
 yx_up\startdefaulttask.o: ..\User\Task\INS_task.h
 yx_up\startdefaulttask.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
-yx_up\startdefaulttask.o: ../User/DriverLayer/bsp_imu_pwm.h
-yx_up\startdefaulttask.o: ../User/DriverLayer/bsp_spi.h
-yx_up\startdefaulttask.o: ../User/AlgorithmLayer/bmi088driver.h
-yx_up\startdefaulttask.o: ../User/AlgorithmLayer/pid_imu.h
+yx_up\startdefaulttask.o: ../User/bsp_imu_pwm.h
+yx_up\startdefaulttask.o: ../User/bsp_spi.h
+yx_up\startdefaulttask.o: ../User/bmi088driver.h
+yx_up\startdefaulttask.o: ../User/pid_imu.h

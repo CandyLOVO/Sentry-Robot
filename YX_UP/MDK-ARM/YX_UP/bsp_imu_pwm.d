@@ -1,6 +1,6 @@
-yx_up\bsp_imu_pwm.o: ..\User\DriverLayer\bsp_imu_pwm.c
-yx_up\bsp_imu_pwm.o: ..\User\DriverLayer\bsp_imu_pwm.h
-yx_up\bsp_imu_pwm.o: ../User/struct_typedef.h
+yx_up\bsp_imu_pwm.o: ..\User\bsp_imu_pwm.c
+yx_up\bsp_imu_pwm.o: ..\User\bsp_imu_pwm.h
+yx_up\bsp_imu_pwm.o: ..\User\struct_typedef.h
 yx_up\bsp_imu_pwm.o: ../Core/Inc/main.h
 yx_up\bsp_imu_pwm.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 yx_up\bsp_imu_pwm.o: ../Core/Inc/stm32f4xx_hal_conf.h

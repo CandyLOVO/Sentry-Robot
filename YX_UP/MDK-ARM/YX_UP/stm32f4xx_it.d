@@ -58,20 +58,23 @@ yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 yx_up\stm32f4xx_it.o: ../User/PotocaLayer/remote_control.h
-yx_up\stm32f4xx_it.o: ../User/DriverLayer/bsp_rc.h
+yx_up\stm32f4xx_it.o: ../User/bsp_rc.h
 yx_up\stm32f4xx_it.o: ../User/AlgorithmLayer/PID.h
 yx_up\stm32f4xx_it.o: ../Core/Inc/can.h
 yx_up\stm32f4xx_it.o: ../User/Task/INS_task.h
 yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
-yx_up\stm32f4xx_it.o: ../User/DriverLayer/bsp_imu_pwm.h
-yx_up\stm32f4xx_it.o: ../User/DriverLayer/bsp_spi.h
-yx_up\stm32f4xx_it.o: ../User/AlgorithmLayer/bmi088driver.h
-yx_up\stm32f4xx_it.o: ../User/AlgorithmLayer/pid_imu.h
+yx_up\stm32f4xx_it.o: ../User/bsp_imu_pwm.h
+yx_up\stm32f4xx_it.o: ../User/bsp_spi.h
+yx_up\stm32f4xx_it.o: ../User/bmi088driver.h
+yx_up\stm32f4xx_it.o: ../User/pid_imu.h
 yx_up\stm32f4xx_it.o: ../User/DriverLayer/Can_user.h
 <<<<<<< HEAD
 yx_up\stm32f4xx_it.o: ../User/AlgorithmLayer/SolveTrajectory.h
+<<<<<<< HEAD
 yx_up\stm32f4xx_it.o: ../User/PotocaLayer/Motor.h
 =======
 >>>>>>> parent of 52bf27f (修改了和视觉的接口)
+=======
+>>>>>>> parent of b248010 (yaw疯了，救不了)
 yx_up\stm32f4xx_it.o: ../User/Task/Friction_task.h
 yx_up\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h

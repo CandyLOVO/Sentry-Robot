@@ -36,10 +36,14 @@ void MX_FREERTOS_Init(void) {
 	
 	//ÉÏÏÂC°åÍ¨ĞÅÈÎÎñ
 <<<<<<< HEAD
+<<<<<<< HEAD
 	osThreadDef(exchangetask, Exchange_task, osPriorityIdle, 0, 512);
 =======
 	osThreadDef(exchangetask, Exchange_task, osPriorityIdle, 0, 256);
 >>>>>>> parent of 52bf27f (ä¿®æ”¹äº†å’Œè§†è§‰çš„æ¥å£)
+=======
+	osThreadDef(exchangetask, Exchange_task, osPriorityRealtime, 0, 512);
+>>>>>>> parent of b248010 (yawç–¯äº†ï¼Œæ•‘ä¸äº†)
   exchangeHandle = osThreadCreate(osThread(exchangetask), NULL);
 
 	//Ä¦²ÁÂÖºÍ²¦ÅÌ¿ØÖÆÈÎÎñ

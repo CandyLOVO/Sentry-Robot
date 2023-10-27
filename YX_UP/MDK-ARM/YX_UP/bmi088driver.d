@@ -1,6 +1,6 @@
-yx_up\bmi088driver.o: ..\User\AlgorithmLayer\BMI088driver.c
-yx_up\bmi088driver.o: ..\User\AlgorithmLayer\BMI088driver.h
-yx_up\bmi088driver.o: ../User/struct_typedef.h
+yx_up\bmi088driver.o: ..\User\BMI088driver.c
+yx_up\bmi088driver.o: ..\User\BMI088driver.h
+yx_up\bmi088driver.o: ..\User\struct_typedef.h
 yx_up\bmi088driver.o: ../Core/Inc/main.h
 yx_up\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 yx_up\bmi088driver.o: ../Core/Inc/stm32f4xx_hal_conf.h
@@ -42,5 +42,5 @@ yx_up\bmi088driver.o: E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm
 yx_up\bmi088driver.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
 yx_up\bmi088driver.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
 yx_up\bmi088driver.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdbool.h
-yx_up\bmi088driver.o: ..\User\AlgorithmLayer\BMI088reg.h
-yx_up\bmi088driver.o: ..\User\AlgorithmLayer\BMI088Middleware.h
+yx_up\bmi088driver.o: ..\User\BMI088reg.h
+yx_up\bmi088driver.o: ..\User\BMI088Middleware.h

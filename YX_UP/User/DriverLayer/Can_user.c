@@ -58,7 +58,6 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖÐ¶Ï»Øµ÷º¯Ê
   if(hcan->Instance == CAN1)
   {
 //================================================Ò£¿ØÆ÷Êý¾Ý================================================//
-		uint8_t             rx_data[8];
 		HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data); //receive can1 data
 		if(rx_header.StdId==0x33)//Ë«C°å´«µÝÒ£¿ØÆ÷ÐÅºÅµÄ½Ó¿Ú±êÊ¶·û
 		{

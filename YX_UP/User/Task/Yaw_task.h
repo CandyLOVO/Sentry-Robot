@@ -9,7 +9,6 @@
 #include "struct_typedef.h"
 #include "remote_control.h"
 #include "INS_task.h"
-#include "Motor.h"
 
 //================================================宏定义================================================//
 #define Rotate_gain 1.23f		//角速度前馈控制映射权重

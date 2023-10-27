@@ -1,6 +1,6 @@
-yx_up\bmi088middleware.o: ..\User\AlgorithmLayer\BMI088Middleware.c
-yx_up\bmi088middleware.o: ..\User\AlgorithmLayer\BMI088Middleware.h
-yx_up\bmi088middleware.o: ../User/struct_typedef.h
+yx_up\bmi088middleware.o: ..\User\BMI088Middleware.c
+yx_up\bmi088middleware.o: ..\User\BMI088Middleware.h
+yx_up\bmi088middleware.o: ..\User\struct_typedef.h
 yx_up\bmi088middleware.o: ../Core/Inc/main.h
 yx_up\bmi088middleware.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 yx_up\bmi088middleware.o: ../Core/Inc/stm32f4xx_hal_conf.h
@@ -56,4 +56,4 @@ yx_up\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/tim
 yx_up\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 yx_up\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 yx_up\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-yx_up\bmi088middleware.o: ../User/DriverLayer/bsp_delay.h
+yx_up\bmi088middleware.o: ..\User\bsp_delay.h
