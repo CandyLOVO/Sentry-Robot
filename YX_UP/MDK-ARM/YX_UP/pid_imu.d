@@ -1,6 +1,6 @@
-yx_up\pid_imu.o: ..\User\pid_imu.c
-yx_up\pid_imu.o: ..\User\pid_imu.h
-yx_up\pid_imu.o: ..\User\struct_typedef.h
+yx_up\pid_imu.o: ..\User\AlgorithmLayer\pid_imu.c
+yx_up\pid_imu.o: ..\User\AlgorithmLayer\pid_imu.h
+yx_up\pid_imu.o: ../User/struct_typedef.h
 yx_up\pid_imu.o: ../Core/Inc/main.h
 yx_up\pid_imu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 yx_up\pid_imu.o: ../Core/Inc/stm32f4xx_hal_conf.h

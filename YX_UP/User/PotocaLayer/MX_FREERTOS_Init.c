@@ -35,7 +35,7 @@ void MX_FREERTOS_Init(void) {
   pitchtaskHandle = osThreadCreate(osThread(pitchtask), NULL);
 	
 	//上下C板通信任务
-	osThreadDef(exchangetask, Exchange_task, osPriorityRealtime, 0, 512);
+	osThreadDef(exchangetask, Exchange_task, osPriorityIdle, 0, 512);
   exchangeHandle = osThreadCreate(osThread(exchangetask), NULL);
 
 	//摩擦轮和拨盘控制任务

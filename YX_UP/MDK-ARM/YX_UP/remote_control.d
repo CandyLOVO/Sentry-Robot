@@ -42,4 +42,4 @@ yx_up\remote_control.o: E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_
 yx_up\remote_control.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
 yx_up\remote_control.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
 yx_up\remote_control.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdbool.h
-yx_up\remote_control.o: ../User/bsp_rc.h
+yx_up\remote_control.o: ../User/DriverLayer/bsp_rc.h

@@ -1,6 +1,6 @@
-yx_up\bsp_rc.o: ..\User\bsp_rc.c
-yx_up\bsp_rc.o: ..\User\bsp_rc.h
-yx_up\bsp_rc.o: ..\User\struct_typedef.h
+yx_up\bsp_rc.o: ..\User\DriverLayer\bsp_rc.c
+yx_up\bsp_rc.o: ..\User\DriverLayer\bsp_rc.h
+yx_up\bsp_rc.o: ../User/struct_typedef.h
 yx_up\bsp_rc.o: ../Core/Inc/main.h
 yx_up\bsp_rc.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 yx_up\bsp_rc.o: ../Core/Inc/stm32f4xx_hal_conf.h

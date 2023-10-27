@@ -55,34 +55,8 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-//结构体
-typedef struct
-{
-    uint16_t can_id;		//ID号
-    int16_t  set_voltage;		//发送信息
-    uint16_t rotor_angle;		//现在的角度
-    int16_t  rotor_speed;		//现在的转速
-    int16_t  torque_current;		//实际转矩电流
-    uint8_t  temp;		//电机温度
-}moto_info_t;
 
-typedef struct _pid_struct_t
-{
-  float kp;
-  float ki;
-  float kd;
-  float i_max;
-  float out_max;
-  
-  float ref;      // target value
-  float fdb;      // feedback value  
-  float err[2];   // error and last error
 
-  float p_out;
-  float i_out;
-  float d_out;
-  float output;
-}pid_struct_t;
 
 //宏定义
 #define MOTOR_MAX_NUM 7		//最大数据字节数
@@ -90,89 +64,20 @@ typedef struct _pid_struct_t
 #define FEEDBACK_ID_BASE_6020 0x205
 #define CAN_CONTROL_ID_BASE   0x200
 #define CAN_CONTROL_ID_EXTEND 0x1ff
+
+//================================================声明配置变量================================================//
 extern UART_HandleTypeDef huart3;
 extern DMA_HandleTypeDef hdma_usart3_rx;
-//全局变量
-extern uint16_t can_cnt_1;
-extern uint16_t can_cnt_2;
-extern float target_speed[7];//实测最大空载转速320rpm
-extern float target_speed_can_2[7];
-extern moto_info_t motor_info[8];		//赋予最大的7个字节
-extern moto_info_t motor_info_can_2[MOTOR_MAX_NUM];
-extern pid_struct_t motor_pid[7];	
-extern pid_struct_t motor_pid_sita[7];
-extern pid_struct_t motor_pid_can_2[7];	
-extern pid_struct_t motor_pid_sita_can_2[7];
-extern uint8_t can_flag;
-extern double step; 
-extern double r;
-extern double sin_sita;
-extern double cos_sita;
-extern double target_v;
-extern int16_t target_int1;
-extern int16_t target_int2;//用于叠加旋转和直行
-extern double target_curl;
-extern float yuntai_step;
-
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
-//定时器声明
 extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim8;
 extern TIM_HandleTypeDef htim9;
-//Yaw轴
-extern int16_t target_angle;
-extern int16_t err_angle;
-extern int16_t max_yaw_speed;
-extern float small;
-extern float angle_limit;
-//摩擦轮
-extern uint8_t flag_shooting;
-extern uint8_t             rx_data[8];
-//磁力计
-extern fp32 mag[3];
-//加速度计和陀螺仪
-extern fp32 gyro[3], accel[3], temp;
-#define BMI088_ACCEL_3G_SEN 0.0008974358974f    //这个数字我也不知道哪来的
-#define BMI088_GYRO_2000_SEN 0.00106526443603169529841533860381f    //这个数字我也不知道哪来的
-extern float BMI088_ACCEL_SEN;
-extern float BMI088_GYRO_SEN;
-extern uint8_t buf_accel[8];
-extern uint8_t buf_gyro[8];
-extern uint8_t pTxData;
-extern uint8_t pRxData;
 extern SPI_HandleTypeDef hspi1;
 extern DMA_HandleTypeDef hdma_spi1_rx;
 extern DMA_HandleTypeDef hdma_spi1_tx;
-extern float quat[4];
-extern float INS_angle[3];
-//加速度计解算欧拉角
-extern float roll_accel;
-extern float pitch_accel;
 
-//陀螺仪欧拉角解算
-//extern float gyro_vector[3];
-//extern arm_matrix_instance_f32 gyro_matrix;
-
-//四元素
-extern float q0;
-extern float q1;
-extern float q2;
-extern float q3;
-extern float T;
-extern float halfT;
-extern float pitch;
-extern float roll;
-extern float yaw;
-//一些姿态解算辅助变量
-extern float norm;
-extern float gx, gy, gz;//陀螺仪
-extern float ax, ay, az;//加速度计
-extern float vx, vy, vz, wx, wy, wz;
-extern float ex, ey, ez; 
-extern float exInt, eyInt, ezInt;
-extern float Kp, Ki;
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/

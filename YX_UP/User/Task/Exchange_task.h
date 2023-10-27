@@ -12,6 +12,7 @@
 #include "INS_task.h"
 #include "Can_user.h"
 #include "SolveTrajectory.h"
+#include "Motor.h"
 
 #define BUFFER_SIZE 100
 

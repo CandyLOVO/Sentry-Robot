@@ -1,6 +1,6 @@
-yx_up\bsp_delay.o: ..\User\bsp_delay.c
-yx_up\bsp_delay.o: ..\User\bsp_delay.h
-yx_up\bsp_delay.o: ..\User\struct_typedef.h
+yx_up\bsp_delay.o: ..\User\DriverLayer\bsp_delay.c
+yx_up\bsp_delay.o: ..\User\DriverLayer\bsp_delay.h
+yx_up\bsp_delay.o: ../User/struct_typedef.h
 yx_up\bsp_delay.o: ../Core/Inc/main.h
 yx_up\bsp_delay.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 yx_up\bsp_delay.o: ../Core/Inc/stm32f4xx_hal_conf.h

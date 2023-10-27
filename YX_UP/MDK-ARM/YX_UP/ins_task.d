@@ -56,7 +56,7 @@ yx_up\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 yx_up\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 yx_up\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 yx_up\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-yx_up\ins_task.o: ../User/bsp_imu_pwm.h
-yx_up\ins_task.o: ../User/bsp_spi.h
-yx_up\ins_task.o: ../User/bmi088driver.h
-yx_up\ins_task.o: ../User/pid_imu.h
+yx_up\ins_task.o: ../User/DriverLayer/bsp_imu_pwm.h
+yx_up\ins_task.o: ../User/DriverLayer/bsp_spi.h
+yx_up\ins_task.o: ../User/AlgorithmLayer/bmi088driver.h
+yx_up\ins_task.o: ../User/AlgorithmLayer/pid_imu.h

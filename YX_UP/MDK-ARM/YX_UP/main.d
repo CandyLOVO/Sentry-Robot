@@ -63,6 +63,6 @@ yx_up\main.o: ../Core/Inc/tim.h
 yx_up\main.o: ../Core/Inc/usart.h
 yx_up\main.o: ../Core/Inc/gpio.h
 yx_up\main.o: ../User/PotocaLayer/remote_control.h
-yx_up\main.o: ../User/bsp_rc.h
+yx_up\main.o: ../User/DriverLayer/bsp_rc.h
 yx_up\main.o: ../User/DriverLayer/Can_user.h
-yx_up\main.o: ../User/bsp_delay.h
+yx_up\main.o: ../User/DriverLayer/bsp_delay.h

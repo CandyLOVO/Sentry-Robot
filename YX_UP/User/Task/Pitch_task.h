@@ -16,6 +16,7 @@
 #include "Exchange_task.h"
 #include "Can_user.h"
 #include "stm32f4xx_it.h"
+#include "Motor.h"
 
 //===============================================∫Í∂®“Â================================================//
 

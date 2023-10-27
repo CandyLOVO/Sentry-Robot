@@ -30,13 +30,16 @@ static void Friction_send();
 //拨盘Pid输出值和发送
 static void Bopan_send();
 
+//拨盘堵转检测
+static void Bopan_judge();
+
 //拨盘PId计算
 static void Bopan_calc(int16_t speed);
 
 //===============================================全局变量================================================//
 int16_t bopan_shoot_speed = 90*36;	//拨盘发射弹丸转速
 int16_t bopan_reversal_speed = -35*36;	//拨盘反转转速
-uint8_t bopan_reversal_flag = 0;	//拨盘反转标志位，0为需要不反转，1为需要反转
+uint8_t bopan_reversal_flag = 0;	//拨盘反转标志位，0为正转，1为反转
 
 void Friction_task(void const * argument)
 {
@@ -59,6 +62,7 @@ void Friction_task(void const * argument)
 		Friction_send();	//摩擦轮电流发送
 		
 		//===============================================拨盘================================================//
+		//Bopan_judge();	//拨盘正反转检测，测试后改完参数再用
 		if(rc_ctrl.rc.s[1] == 1)	//开启拨盘(测试模式)
 		{	
 			if(!bopan_reversal_flag)	//拨盘正转
@@ -194,4 +198,18 @@ static void Bopan_send()
   tx_data[7] = 0;
 	
   HAL_CAN_AddTxMessage(&hcan1, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX0);
+}
+
+//===============================================拨盘堵转检测================================================//
+static void Bopan_judge()
+{
+	if(motor_info[4].torque_current > 6000)//拿 monitor看一下，改一下这个paramater和正负值
+	{
+		bopan_reversal_flag = 1;	//改为反转	
+	}
+	
+	if(motor_info[4].torque_current < -6000)
+	{
+		bopan_reversal_flag = 0;	//改为正转	
+	}
 }

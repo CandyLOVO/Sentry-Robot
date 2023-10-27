@@ -1,5 +1,10 @@
 #include "PID.h"
 
+//================================================PID结构体定义================================================//
+pid_struct_t motor_pid[7];	
+pid_struct_t motor_pid_sita[7];
+pid_struct_t motor_pid_can_2[7];	
+pid_struct_t motor_pid_sita_can_2[7];
 
 //================================================PID初始化================================================//
 //	Input parameter: 
