@@ -71,7 +71,7 @@ void Friction_task(void const * argument)
 			}
 			
 		}
-		else if(rc_ctrl.rc.s[1] == 2  && foe_flag)//检测到目标
+		else if(rc_ctrl.rc.s[1] == 2  && Sentry.foe_flag)//检测到目标
 		{
 			if(!bopan_reversal_flag)	//拨盘正转
 			{

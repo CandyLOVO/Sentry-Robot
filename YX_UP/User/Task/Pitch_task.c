@@ -88,7 +88,7 @@ void Pitch_task(void const * argument)
 		  
 		else if(rc_ctrl.rc.s[1]==2)		//上场模式
 		{
-			if(foe_flag)	//如果检测到目标
+			if(Sentry.foe_flag)	//如果检测到目标
 			{
 				gimbal_minipc_control_sita(); //视觉瞄准
 			}			
@@ -223,18 +223,18 @@ static void gimbal_imu_limit()
 //================================================鼠标控制(未使用)================================================//
 static void gimbal_mouse()
 {
-	if(mouse_y > mouse_y_valve || mouse_y < -mouse_y_valve)
+	if(remote.mouse.y > mouse_y_valve || remote.mouse.y < -mouse_y_valve)
 	{
-		target_speed_can_2[4] += (fp32)mouse_y * mouse_y_weight;
-		target_speed_can_2[5] -= (fp32)mouse_y * mouse_y_weight;
+		target_speed_can_2[4] += (fp32)remote.mouse.y * mouse_y_weight;
+		target_speed_can_2[5] -= (fp32)remote.mouse.y * mouse_y_weight;
 	}
 }
 
 //================================================视觉瞄准(速度环模式)================================================//
 static void gimbal_minipc_control()
 {
-		target_speed_can_2[4] -= ((fp32)Pitch_minipc_fp) * Pitch_minipc_weight;
-		target_speed_can_2[5] += ((fp32)Pitch_minipc_fp) * Pitch_minipc_weight;
+		target_speed_can_2[4] -= chase.pitch * Pitch_minipc_weight;
+		target_speed_can_2[5] += chase.pitch * Pitch_minipc_weight;
 }
 
 //================================================巡航模式(速度环模式)================================================//
@@ -266,7 +266,7 @@ static void gimbal_mode_control_sita()
 //================================================视觉瞄准(位置环模式)================================================//
 static void gimbal_minipc_control_sita()
 {
-		target_pitch -= ((fp32)Pitch_minipc_fp) * Pitch_sita_minipc_weight;
+		target_pitch -= chase.pitch * Pitch_sita_minipc_weight;
 }
 
 //================================================巡航模式(位置环模式)================================================//

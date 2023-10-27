@@ -21,7 +21,7 @@
 
 #define Up_inf -10	//imu抬头限位值
 #define Down_inf 20	//imu低头限位值
-#define mouse_y_valve 10	//鼠标死区阈值
+#define mouse_y_valve 10.f	//鼠标死区阈值
 #define mouse_y_weight 12.0f	//鼠标映射权重
 #define Pitch_minipc_weight	0.5f	//视觉瞄准速度环权重
 #define Pitch_sita_minipc_weight 0.002f	//视觉瞄准位置环权重

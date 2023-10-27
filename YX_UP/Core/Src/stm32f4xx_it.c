@@ -31,13 +31,17 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
+//================================================备注================================================//
+//TIM1用来做视觉暂留，拨盘堵转计时，巡航模式计时，每0.01s进一次中断
+//Uart1用来做空闲中断接收视觉的数据
+//DMA2_Stream2用来作为IMU的接收中断
 /* USER CODE END TD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+uint16_t Lock_time = 1;	//视觉停留时间，可直接在这修改，单位是s
 uint16_t TIM1_Count;
 uint8_t TIM1_Mode = 1;
-extern uint8_t foe_count;
 uint8_t bopan_count = 0;
 uint8_t bopan_fan_count = 0;
 /* USER CODE END PD */
@@ -319,20 +323,22 @@ void TIM1_BRK_TIM9_IRQHandler(void)
 void TIM1_UP_TIM10_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM1_UP_TIM10_IRQn 0 */
+	
+	//注：每0.01s进一次中断
 	if (__HAL_TIM_GET_FLAG(&htim1, TIM_FLAG_CC1) != RESET)
 	{
 		//锁车计时
-		if(foe_flag)
+		if(Sentry.foe_flag)	//识别到目标
 		{
-			foe_count++;
-			if(foe_count == 200)		//锁1s
+			Sentry.foe_count++;
+			if(Sentry.foe_count == Lock_time * 100)		//视觉暂留，一直能识别到会一直刷新这个计数值
 			{
-				foe_flag = 0;
+				Sentry.foe_flag = 0;	//暂留结束重新赋0
 			}
 		}
 		
 		//拨盘堵转
-		if(abs(motor_info[4].rotor_speed) < (19*5))
+		if(abs(motor_info[4].rotor_speed) < (19*5))	//检测下拨盘是否堵转
 		{
 			bopan_count++;
 		}

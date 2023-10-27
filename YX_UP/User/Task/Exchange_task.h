@@ -13,8 +13,11 @@
 #include "Can_user.h"
 #include "SolveTrajectory.h"
 
+#define BUFFER_SIZE 100
+
 void Exchange_task(void const * argument);
 
+//================================================发送位域结构体================================================//
 typedef struct
 {
 	uint8_t detect_color : 1;	//从低位开始
@@ -55,6 +58,7 @@ typedef struct
   uint16_t checksum;
 } vision_receive_t;
 
+//================================================遥控器及键盘解算结构体================================================//
 typedef __packed struct
 {
 		__packed struct
@@ -87,25 +91,33 @@ typedef __packed struct
 	
 } 	remote_flag_t; //键盘数据获取
 
+//================================================电机追踪结构体================================================//
+//储存的是已经视觉解算成功的视觉数据
 typedef struct
 {
 	float yaw;
 	float pitch;
 } Chase_t;	//传输给电机的值
 
-extern uint8_t foe_flag;
-extern remote_flag_t remote;
-	
+//================================================官方裁判系统的值存储，以及哨兵的一些状态量================================================//
+typedef struct
+{
+	uint8_t foe_flag;		//视觉检测标志位，1为检测成功，0为未检测到装甲板
+	uint8_t foe_count;	//视觉停留计数器
+	uint8_t Flag_progress;	//裁判系统比赛进程数据
+	uint8_t Flag_judge;	//红蓝方检测
+} Sentry_t;
+
+
 extern volatile uint8_t rx_len_uart1;  //接收一帧数据的长度
 extern volatile uint8_t recv_end_flag_uart1; //一帧数据接收完成标志
-extern int16_t Yaw_minipc;
-extern int16_t Pitch_minipc;
-extern float Yaw_minipc_fp;
-extern float Pitch_minipc_fp;
-extern uint8_t rx_buffer[100];
-extern int16_t mouse_x;
-extern int16_t mouse_y;
 
-void Get_keyboard();
+extern Chase_t chase;	//赋予电机追踪的数据结构体
+extern remote_flag_t remote;	//键盘按键读取(结构体)
+extern Sentry_t Sentry;	//哨兵状态量和裁判系统数据结构体
+	
+
+
+
 
 #endif
