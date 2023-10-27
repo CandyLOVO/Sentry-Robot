@@ -45,6 +45,7 @@
 "chassis\heap_4.o"
 "chassis\port.o"
 "chassis\rc_potocal.o"
+"chassis\handle_value.o"
 "chassis\drv_usart.o"
 --strict --scatter "Chassis\Chassis.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols

@@ -1728,6 +1728,11 @@
               <FileType>1</FileType>
               <FilePath>..\USER\PotocaLayer\rc_potocal.c</FilePath>
             </File>
+            <File>
+              <FileName>handle_value.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\handle_value.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
