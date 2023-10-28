@@ -60,10 +60,9 @@ yx_up\freertos.o: ../User/bsp_rc.h
 yx_up\freertos.o: ../User/AlgorithmLayer/PID.h
 yx_up\freertos.o: ../User/PotocaLayer/MX_FREERTOS_init.h
 yx_up\freertos.o: ../User/Task/INS_task.h
+yx_up\freertos.o: ../Core/Inc/tim.h
+yx_up\freertos.o: ../Core/Inc/spi.h
 yx_up\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
-yx_up\freertos.o: ../User/bsp_imu_pwm.h
-yx_up\freertos.o: ../User/bsp_spi.h
-yx_up\freertos.o: ../User/bmi088driver.h
 yx_up\freertos.o: ../User/pid_imu.h
 yx_up\freertos.o: ../User/Task/Yaw_task.h
 yx_up\freertos.o: ../User/Task/Exchange_task.h

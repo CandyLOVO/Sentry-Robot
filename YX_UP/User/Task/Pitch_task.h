@@ -30,7 +30,8 @@
 #define Pitch_down 3700	//编码器低头限位
 
 void Pitch_task(void const * argument);
-
+extern fp32 INS_angle[3];//不知道为啥我在INS_task.h中明明已经声明过了却找不到
+extern fp32 INS_gyro[3];
 #ifdef __cplusplus
 }
 #endif

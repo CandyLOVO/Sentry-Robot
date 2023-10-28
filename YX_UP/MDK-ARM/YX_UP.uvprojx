@@ -769,7 +769,7 @@
             <File>
               <FileName>INS_task.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User\Task\INS_task.c</FilePath>
+              <FilePath>..\User\INS_task.c</FilePath>
             </File>
           </Files>
         </Group>

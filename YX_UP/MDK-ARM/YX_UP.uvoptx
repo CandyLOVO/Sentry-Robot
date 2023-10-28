@@ -1083,7 +1083,7 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\User\Task\INS_task.c</PathWithFileName>
+      <PathWithFileName>..\User\INS_task.c</PathWithFileName>
       <FilenameWithoutPath>INS_task.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>

@@ -209,6 +209,7 @@ I (../User/PotocaLayer/remote_control.h)(0x65392ED9)
 I (../User/bsp_rc.h)(0x653C0EBE)
 I (../User/AlgorithmLayer/PID.h)(0x653C0EBE)
 I (../User/PotocaLayer/MX_FREERTOS_init.h)(0x642317AA)
+<<<<<<< HEAD
 I (../User/Task/INS_task.h)(0x6538BB48)
 I (../User/bsp_imu_pwm.h)(0x653C0EBE)
 I (../User/bsp_spi.h)(0x653C0EBE)
@@ -216,6 +217,14 @@ I (../User/bmi088driver.h)(0x653C0EBE)
 I (../User/pid_imu.h)(0x653C0EBE)
 I (../User/Task/Yaw_task.h)(0x653C0EBE)
 I (../User/Task/Exchange_task.h)(0x653C1173)
+=======
+I (../User/Task/INS_task.h)(0x653383B0)
+I (../Core/Inc/tim.h)(0x642317A9)
+I (../Core/Inc/spi.h)(0x642317A9)
+I (../User/pid_imu.h)(0x65361E55)
+I (../User/Task/Yaw_task.h)(0x65362C8A)
+I (../User/Task/Exchange_task.h)(0x65338479)
+>>>>>>> parent of 331e8e5 (上下位机通信修改)
 I (../Core/Inc/can.h)(0x642317A9)
 I (../User/DriverLayer/Can_user.h)(0x65338269)
 F (../Core/Src/can.c)(0x643D75E4)(--c99 -c --cpu Cortex-M4.fp -g -W -O2 --apcs=interwork --split_sections -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I..\Drivers\CMSIS\Include -I../../YX_UP -I../User/DriverLayer -I../User/PotocaLayer -I../User/Task -I../User/AlgorithmLayer -I../User-I "F:\Github base\Sentry\YX_UP\MDK-ARM\RTE"-I "E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0"-I "E:\Keil ARM\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM-o yx_up\can.o --omf_browse yx_up\can.crf --depend yx_up\can.d)
@@ -531,11 +540,18 @@ I (../User/PotocaLayer/remote_control.h)(0x65392ED9)
 I (../User/bsp_rc.h)(0x653C0EBE)
 I (../User/AlgorithmLayer/PID.h)(0x653C0EBE)
 I (../Core/Inc/can.h)(0x642317A9)
+<<<<<<< HEAD
 I (../User/Task/INS_task.h)(0x6538BB48)
 I (../User/bsp_imu_pwm.h)(0x653C0EBE)
 I (../User/bsp_spi.h)(0x653C0EBE)
 I (../User/bmi088driver.h)(0x653C0EBE)
 I (../User/pid_imu.h)(0x653C0EBE)
+=======
+I (../User/Task/INS_task.h)(0x653383B0)
+I (../Core/Inc/tim.h)(0x642317A9)
+I (../Core/Inc/spi.h)(0x642317A9)
+I (../User/pid_imu.h)(0x65361E55)
+>>>>>>> parent of 331e8e5 (上下位机通信修改)
 I (../User/DriverLayer/Can_user.h)(0x65338269)
 I (../User/Task/Friction_task.h)(0x653C0EBE)
 F (../Core/Src/stm32f4xx_hal_msp.c)(0x642317A9)(--c99 -c --cpu Cortex-M4.fp -g -W -O2 --apcs=interwork --split_sections -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I..\Drivers\CMSIS\Include -I../../YX_UP -I../User/DriverLayer -I../User/PotocaLayer -I../User/Task -I../User/AlgorithmLayer -I../User-I "F:\Github base\Sentry\YX_UP\MDK-ARM\RTE"-I "E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0"-I "E:\Keil ARM\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM-o yx_up\stm32f4xx_hal_msp.o --omf_browse yx_up\stm32f4xx_hal_msp.crf --depend yx_up\stm32f4xx_hal_msp.d)
@@ -1742,6 +1758,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x63468609)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x63468609)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x63468609)
 I (..\User\PotocaLayer\MX_FREERTOS_Init.h)(0x642317AA)
+<<<<<<< HEAD
 I (../User/Task/Yaw_task.h)(0x653C0EBE)
 I (../User/Task/Exchange_task.h)(0x653C1173)
 I (../User/PotocaLayer/remote_control.h)(0x65392ED9)
@@ -1756,6 +1773,21 @@ I (../User/pid_imu.h)(0x653C0EBE)
 I (../User/DriverLayer/Can_user.h)(0x65338269)
 I (../User/Task/StartDefaultTask.h)(0x642317AA)
 I (../User/Task/Pitch_task.h)(0x653C0EBE)
+=======
+I (../User/Task/Yaw_task.h)(0x65362C8A)
+I (../User/Task/Exchange_task.h)(0x65338479)
+I (../User/PotocaLayer/remote_control.h)(0x653620E2)
+I (../User/bsp_rc.h)(0x642317AA)
+I (../User/AlgorithmLayer/PID.h)(0x64647E6B)
+I (../Core/Inc/can.h)(0x642317A9)
+I (../User/Task/INS_task.h)(0x653383B0)
+I (../Core/Inc/tim.h)(0x642317A9)
+I (../Core/Inc/spi.h)(0x642317A9)
+I (../User/pid_imu.h)(0x65361E55)
+I (../User/DriverLayer/Can_user.h)(0x65338269)
+I (../User/Task/StartDefaultTask.h)(0x642317AA)
+I (../User/Task/Pitch_task.h)(0x65369CE1)
+>>>>>>> parent of 331e8e5 (上下位机通信修改)
 I (../Core/Inc/stm32f4xx_it.h)(0x65362E04)
 I (../User/Task/Friction_task.h)(0x653C0EBE)
 F (..\User\PotocaLayer\remote_control.c)(0x6536211B)(--c99 -c --cpu Cortex-M4.fp -g -W -O2 --apcs=interwork --split_sections -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I..\Drivers\CMSIS\Include -I../../YX_UP -I../User/DriverLayer -I../User/PotocaLayer -I../User/Task -I../User/AlgorithmLayer -I../User-I "F:\Github base\Sentry\YX_UP\MDK-ARM\RTE"-I "E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0"-I "E:\Keil ARM\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM-o yx_up\remote_control.o --omf_browse yx_up\remote_control.crf --depend yx_up\remote_control.d)
@@ -1800,10 +1832,17 @@ I (../User/arm_math.h)(0x634685FB)
 I (E:\Keil ARM\ARM\ARMCC\include\string.h)(0x5475F300)
 I (E:\Keil ARM\ARM\ARMCC\include\math.h)(0x5475F2FE)
 I (E:\Keil ARM\ARM\ARMCC\include\stdbool.h)(0x5475F300)
+<<<<<<< HEAD
 I (../User/bsp_rc.h)(0x653C0EBE)
 F (..\User\Task\Yaw_task.c)(0x653BD019)(--c99 -c --cpu Cortex-M4.fp -g -W -O2 --apcs=interwork --split_sections -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I..\Drivers\CMSIS\Include -I../../YX_UP -I../User/DriverLayer -I../User/PotocaLayer -I../User/Task -I../User/AlgorithmLayer -I../User-I "F:\Github base\Sentry\YX_UP\MDK-ARM\RTE"-I "E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0"-I "E:\Keil ARM\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM-o yx_up\yaw_task.o --omf_browse yx_up\yaw_task.crf --depend yx_up\yaw_task.d)
 I (..\User\Task\Yaw_task.h)(0x653C0EBE)
 I (..\User\Task\Exchange_task.h)(0x653C1173)
+=======
+I (..\User\bsp_rc.h)(0x642317AA)
+F (..\User\Task\Yaw_task.c)(0x65368B53)(--c99 -c --cpu Cortex-M4.fp -g -W -O2 --apcs=interwork --split_sections -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../../YX_UP -I../User/DriverLayer -I../User/PotocaLayer -I../User/Task -I../User/AlgorithmLayer -I../User-I "F:\Github base\Sentry\YX_UP\MDK-ARM\RTE"-I "E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include"-I "E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0"-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM-o yx_up\yaw_task.o --omf_browse yx_up\yaw_task.crf --depend yx_up\yaw_task.d)
+I (..\User\Task\Yaw_task.h)(0x65362C8A)
+I (..\User\Task\Exchange_task.h)(0x65338479)
+>>>>>>> parent of 331e8e5 (上下位机通信修改)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x63468609)
 I (E:\Keil ARM\ARM\ARMCC\include\stddef.h)(0x5475F300)
 I (E:\Keil ARM\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -1862,6 +1901,7 @@ I (../User/PotocaLayer/remote_control.h)(0x65392ED9)
 I (../User/bsp_rc.h)(0x653C0EBE)
 I (../User/AlgorithmLayer/PID.h)(0x653C0EBE)
 I (../Core/Inc/can.h)(0x642317A9)
+<<<<<<< HEAD
 I (..\User\Task\INS_task.h)(0x6538BB48)
 I (../User/bsp_imu_pwm.h)(0x653C0EBE)
 I (../User/bsp_spi.h)(0x653C0EBE)
@@ -1871,6 +1911,16 @@ I (../User/DriverLayer/Can_user.h)(0x65338269)
 F (..\User\Task\Pitch_task.c)(0x653BD019)(--c99 -c --cpu Cortex-M4.fp -g -W -O2 --apcs=interwork --split_sections -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I..\Drivers\CMSIS\Include -I../../YX_UP -I../User/DriverLayer -I../User/PotocaLayer -I../User/Task -I../User/AlgorithmLayer -I../User-I "F:\Github base\Sentry\YX_UP\MDK-ARM\RTE"-I "E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0"-I "E:\Keil ARM\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM-o yx_up\pitch_task.o --omf_browse yx_up\pitch_task.crf --depend yx_up\pitch_task.d)
 I (..\User\Task\Pitch_task.h)(0x653C0EBE)
 I (../Core/Inc/main.h)(0x653C0EBD)
+=======
+I (..\User\Task\INS_task.h)(0x653383B0)
+I (../Core/Inc/tim.h)(0x642317A9)
+I (../Core/Inc/spi.h)(0x642317A9)
+I (../User/pid_imu.h)(0x65361E55)
+I (../User/DriverLayer/Can_user.h)(0x65338269)
+F (..\User\Task\Pitch_task.c)(0x6536AB1E)(--c99 -c --cpu Cortex-M4.fp -g -W -O2 --apcs=interwork --split_sections -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../../YX_UP -I../User/DriverLayer -I../User/PotocaLayer -I../User/Task -I../User/AlgorithmLayer -I../User-I "F:\Github base\Sentry\YX_UP\MDK-ARM\RTE"-I "E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include"-I "E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0"-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM-o yx_up\pitch_task.o --omf_browse yx_up\pitch_task.crf --depend yx_up\pitch_task.d)
+I (..\User\Task\Pitch_task.h)(0x65369CE1)
+I (../Core/Inc/main.h)(0x65361A60)
+>>>>>>> parent of 331e8e5 (上下位机通信修改)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x63468693)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x653C0FB6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x63468693)
@@ -1928,12 +1978,20 @@ I (../User/PotocaLayer/remote_control.h)(0x65392ED9)
 I (../User/bsp_rc.h)(0x653C0EBE)
 I (../User/AlgorithmLayer/PID.h)(0x653C0EBE)
 I (../Core/Inc/can.h)(0x642317A9)
+<<<<<<< HEAD
 I (..\User\Task\INS_task.h)(0x6538BB48)
 I (../User/bsp_imu_pwm.h)(0x653C0EBE)
 I (../User/bsp_spi.h)(0x653C0EBE)
 I (../User/bmi088driver.h)(0x653C0EBE)
 I (../User/pid_imu.h)(0x653C0EBE)
 I (..\User\Task\Exchange_task.h)(0x653C1173)
+=======
+I (..\User\Task\INS_task.h)(0x653383B0)
+I (../Core/Inc/tim.h)(0x642317A9)
+I (../Core/Inc/spi.h)(0x642317A9)
+I (../User/pid_imu.h)(0x65361E55)
+I (..\User\Task\Exchange_task.h)(0x65338479)
+>>>>>>> parent of 331e8e5 (上下位机通信修改)
 I (../User/DriverLayer/Can_user.h)(0x65338269)
 I (../Core/Inc/stm32f4xx_it.h)(0x65362E04)
 F (..\User\Task\Friction_task.c)(0x653C0EBE)(--c99 -c --cpu Cortex-M4.fp -g -W -O2 --apcs=interwork --split_sections -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I..\Drivers\CMSIS\Include -I../../YX_UP -I../User/DriverLayer -I../User/PotocaLayer -I../User/Task -I../User/AlgorithmLayer -I../User-I "F:\Github base\Sentry\YX_UP\MDK-ARM\RTE"-I "E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0"-I "E:\Keil ARM\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM-o yx_up\friction_task.o --omf_browse yx_up\friction_task.crf --depend yx_up\friction_task.d)
@@ -1996,6 +2054,7 @@ I (../User/PotocaLayer/remote_control.h)(0x65392ED9)
 I (../User/bsp_rc.h)(0x653C0EBE)
 I (../User/AlgorithmLayer/PID.h)(0x653C0EBE)
 I (../Core/Inc/can.h)(0x642317A9)
+<<<<<<< HEAD
 I (..\User\Task\Exchange_task.h)(0x653C1173)
 I (..\User\Task\INS_task.h)(0x6538BB48)
 I (../User/bsp_imu_pwm.h)(0x653C0EBE)
@@ -2005,6 +2064,16 @@ I (../User/pid_imu.h)(0x653C0EBE)
 I (../User/DriverLayer/Can_user.h)(0x65338269)
 F (..\User\Task\Exchange_task.c)(0x653C8B17)(--c99 -c --cpu Cortex-M4.fp -g -W -O2 --apcs=interwork --split_sections -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I..\Drivers\CMSIS\Include -I../../YX_UP -I../User/DriverLayer -I../User/PotocaLayer -I../User/Task -I../User/AlgorithmLayer -I../User-I "F:\Github base\Sentry\YX_UP\MDK-ARM\RTE"-I "E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0"-I "E:\Keil ARM\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM-o yx_up\exchange_task.o --omf_browse yx_up\exchange_task.crf --depend yx_up\exchange_task.d)
 I (..\User\Task\Exchange_task.h)(0x653C1173)
+=======
+I (..\User\Task\Exchange_task.h)(0x65338479)
+I (..\User\Task\INS_task.h)(0x653383B0)
+I (../Core/Inc/tim.h)(0x642317A9)
+I (../Core/Inc/spi.h)(0x642317A9)
+I (../User/pid_imu.h)(0x65361E55)
+I (../User/DriverLayer/Can_user.h)(0x65338269)
+F (..\User\Task\Exchange_task.c)(0x65362936)(--c99 -c --cpu Cortex-M4.fp -g -W -O2 --apcs=interwork --split_sections -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../../YX_UP -I../User/DriverLayer -I../User/PotocaLayer -I../User/Task -I../User/AlgorithmLayer -I../User-I "F:\Github base\Sentry\YX_UP\MDK-ARM\RTE"-I "E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include"-I "E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0"-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM-o yx_up\exchange_task.o --omf_browse yx_up\exchange_task.crf --depend yx_up\exchange_task.d)
+I (..\User\Task\Exchange_task.h)(0x65338479)
+>>>>>>> parent of 331e8e5 (上下位机通信修改)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x63468609)
 I (E:\Keil ARM\ARM\ARMCC\include\stddef.h)(0x5475F300)
 I (E:\Keil ARM\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -2063,11 +2132,18 @@ I (../User/PotocaLayer/remote_control.h)(0x65392ED9)
 I (../User/bsp_rc.h)(0x653C0EBE)
 I (../User/AlgorithmLayer/PID.h)(0x653C0EBE)
 I (../Core/Inc/can.h)(0x642317A9)
+<<<<<<< HEAD
 I (..\User\Task\INS_task.h)(0x6538BB48)
 I (../User/bsp_imu_pwm.h)(0x653C0EBE)
 I (../User/bsp_spi.h)(0x653C0EBE)
 I (../User/bmi088driver.h)(0x653C0EBE)
 I (../User/pid_imu.h)(0x653C0EBE)
+=======
+I (..\User\Task\INS_task.h)(0x653383B0)
+I (../Core/Inc/tim.h)(0x642317A9)
+I (../Core/Inc/spi.h)(0x642317A9)
+I (../User/pid_imu.h)(0x65361E55)
+>>>>>>> parent of 331e8e5 (上下位机通信修改)
 I (../User/DriverLayer/Can_user.h)(0x65338269)
 I (../User/SolveTrajectory.h)(0x653A7440)
 F (..\User\Task\StartDefaultTask.c)(0x653C0EBE)(--c99 -c --cpu Cortex-M4.fp -g -W -O2 --apcs=interwork --split_sections -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I..\Drivers\CMSIS\Include -I../../YX_UP -I../User/DriverLayer -I../User/PotocaLayer -I../User/Task -I../User/AlgorithmLayer -I../User-I "F:\Github base\Sentry\YX_UP\MDK-ARM\RTE"-I "E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0"-I "E:\Keil ARM\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM-o yx_up\startdefaulttask.o --omf_browse yx_up\startdefaulttask.crf --depend yx_up\startdefaulttask.d)
@@ -2130,6 +2206,7 @@ I (../User/PotocaLayer/remote_control.h)(0x65392ED9)
 I (../User/bsp_rc.h)(0x653C0EBE)
 I (../User/AlgorithmLayer/PID.h)(0x653C0EBE)
 I (../Core/Inc/can.h)(0x642317A9)
+<<<<<<< HEAD
 I (..\User\Task\INS_task.h)(0x6538BB48)
 I (../User/bsp_imu_pwm.h)(0x653C0EBE)
 I (../User/bsp_spi.h)(0x653C0EBE)
@@ -2139,6 +2216,16 @@ F (..\User\Task\INS_task.c)(0x6538B999)(--c99 -c --cpu Cortex-M4.fp -g -W -O2 --
 I (..\User\Task\INS_task.h)(0x6538BB48)
 I (../User/struct_typedef.h)(0x642317AA)
 I (../Core/Inc/main.h)(0x653C0EBD)
+=======
+I (..\User\Task\INS_task.h)(0x653383B0)
+I (../Core/Inc/tim.h)(0x642317A9)
+I (../Core/Inc/spi.h)(0x642317A9)
+I (../User/pid_imu.h)(0x65361E55)
+F (..\User\INS_task.c)(0x65368772)(--c99 -c --cpu Cortex-M4.fp -g -W -O2 --apcs=interwork --split_sections -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../../YX_UP -I../User/DriverLayer -I../User/PotocaLayer -I../User/Task -I../User/AlgorithmLayer -I../User-I "F:\Github base\Sentry\YX_UP\MDK-ARM\RTE"-I "E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include"-I "E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0"-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM-o yx_up\ins_task.o --omf_browse yx_up\ins_task.crf --depend yx_up\ins_task.d)
+I (..\User\INS_task.h)(0x65362C8A)
+I (..\User\struct_typedef.h)(0x642317AA)
+I (../Core/Inc/main.h)(0x65361A60)
+>>>>>>> parent of 331e8e5 (上下位机通信修改)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x63468693)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x653C0FB6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x63468693)
@@ -2191,6 +2278,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x63468609)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x63468609)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x63468609)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x63468609)
+<<<<<<< HEAD
 I (../User/bsp_imu_pwm.h)(0x653C0EBE)
 I (../User/bsp_spi.h)(0x653C0EBE)
 I (../User/bmi088driver.h)(0x653C0EBE)
@@ -2198,6 +2286,15 @@ I (../User/pid_imu.h)(0x653C0EBE)
 F (..\User\AlgorithmLayer\PID.c)(0x653C0EBE)(--c99 -c --cpu Cortex-M4.fp -g -W -O2 --apcs=interwork --split_sections -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I..\Drivers\CMSIS\Include -I../../YX_UP -I../User/DriverLayer -I../User/PotocaLayer -I../User/Task -I../User/AlgorithmLayer -I../User-I "F:\Github base\Sentry\YX_UP\MDK-ARM\RTE"-I "E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0"-I "E:\Keil ARM\ARM\CMSIS\Include"-D__UVISION_VERSION="514" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM-o yx_up\pid.o --omf_browse yx_up\pid.crf --depend yx_up\pid.d)
 I (..\User\AlgorithmLayer\PID.h)(0x653C0EBE)
 I (../Core/Inc/main.h)(0x653C0EBD)
+=======
+I (..\User\bsp_imu_pwm.h)(0x65314A7A)
+I (..\User\bsp_spi.h)(0x65314A7A)
+I (..\User\bmi088driver.h)(0x65314A7A)
+I (..\User\pid_imu.h)(0x65361E55)
+F (..\User\AlgorithmLayer\PID.c)(0x652CE27B)(--c99 -c --cpu Cortex-M4.fp -g -W -O2 --apcs=interwork --split_sections -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../../YX_UP -I../User/DriverLayer -I../User/PotocaLayer -I../User/Task -I../User/AlgorithmLayer -I../User-I "F:\Github base\Sentry\YX_UP\MDK-ARM\RTE"-I "E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include"-I "E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0"-D__UVISION_VERSION="514" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM-o yx_up\pid.o --omf_browse yx_up\pid.crf --depend yx_up\pid.d)
+I (..\User\AlgorithmLayer\PID.h)(0x64647E6B)
+I (../Core/Inc/main.h)(0x65361A60)
+>>>>>>> parent of 331e8e5 (上下位机通信修改)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x63468693)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x653C0FB6)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h)(0x63468693)
