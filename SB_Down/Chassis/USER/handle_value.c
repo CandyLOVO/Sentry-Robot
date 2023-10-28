@@ -1,48 +1,71 @@
 #include "rc_potocal.h"
 #include "math.h"
 
-#define PI 3.1415926
+#define PI 3.14
 
-extern motor_info motor[4];
-
-int16_t remote_value(int16_t x, int16_t y)
+float remote_value(int16_t x, int16_t y)
 {
-	int16_t alpha;
-	if(y>=0){
-		alpha = atan(x/y);
+	float alpha;
+	if(y>0){
+		alpha = atan((float)x/(float)y);
+		alpha = alpha * 180 / PI;
+		return alpha;
 	}
-	else if(x<=0 && y<0){
-		alpha = atan(x/y) - PI;
+	else if(x<0 && y<0){
+		alpha = atan((float)x/(float)y);
+		alpha = alpha * 180 / PI;
+		alpha = alpha - 180;
+		return alpha;
 	}
-	else{
-		alpha = atan(x/y) + PI;
+	else if(x>0 && y<0){
+		alpha = atan((float)x/(float)y);
+		alpha = alpha * 180 / PI;
+		alpha = alpha + 180;
+		return alpha;
 	}
-	return alpha;
+
+	else if(y<0 && x==0){
+		alpha = 180;
+		return alpha;
+	}
+	else if(x<0 && y==0){
+		alpha = - 90;
+		return alpha;
+	}
+	else if(x>0 && y==0){
+		alpha = 90;
+		return alpha;
+	}
+		else if(x==0 && y==0){
+		alpha = 0;
+		return alpha;
+	}
 }
 
-int16_t motor_value(int16_t get, int16_t set)
+int16_t motor_value(int16_t k, int16_t n) //k:设定的初始角度“0” ； n:想要映射的角度
 {
-	int16_t n = get; //0~8192 当前角度“0”
-	int16_t k = set; //0~360 需要调整的角度
-	n = n * 360.0 / 8192.0;
-	if(k>=0 && k<=PI){
-		if(n>=0 && n<(PI+k)){
+	if(k>=0 && k<4096){
+		if(n>=0 && n<(k+4096)){
 			n = k - n;
+			n = (float)n * 360.f / 8192.f;
 			return n;
 		}
-		if(n>=(PI+k) && n<=(2*PI)){
-			n = 2*PI - n + k;
+		else if(n>=(k+4096) && n<8191){
+			n = 8192 - n + k;
+			n = (float)n * 360.f / 8192.f;
 			return n;
 		}
 	}
 	
-	if(k>PI && k<=2*PI){
-		if(n>=0 && n<(k-PI)){
-			n = -2*PI - n + k;
+	else if(k>=4096 && k<8192){
+		if(n>=0 && n<(k-4096)){
+			n = -8192 + k - n;
+			n = (float)n * 360.f / 8192.f;
 			return n;
 		}
-		if(n>=(k-PI) && n<=(2*PI)){
+		else if(n>=(k-4096) && n<8191){
 			n = k - n;
+			n = (float)n * 360.f / 8192.f;
 			return n;
 		}
 	}

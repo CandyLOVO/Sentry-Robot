@@ -1,7 +1,7 @@
 Dependencies for Project 'Chassis', Target 'Chassis': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\AC5
 F (startup_stm32f407xx.s)(0x653A4BA1)(--cpu Cortex-M4.fp.sp -g --apcs=interwork -I ../Core/Inc-I.\RTE\_Chassis-ID:\Software\KeilMDK538\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Software\KeilMDK538\Pack\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include--pd "__UVISION_VERSION SETA 538" --pd "_RTE_ SETA 1" --pd "STM32F407xx SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f407xx.lst --xref -o chassis\startup_stm32f407xx.o --depend chassis\startup_stm32f407xx.d)
-F (..\Core\Src\chassis.c)(0x653BE118)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../USER/DriverLayer -I ../USER/PotocaLayer -I ../USER-I.\RTE\_Chassis-ID:\Software\KeilMDK538\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Software\KeilMDK538\Pack\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o chassis\chassis.o --omf_browse chassis\chassis.crf --depend chassis\chassis.d)
+F (..\Core\Src\chassis.c)(0x653D19D9)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../USER/DriverLayer -I ../USER/PotocaLayer -I ../USER-I.\RTE\_Chassis-ID:\Software\KeilMDK538\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Software\KeilMDK538\Pack\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o chassis\chassis.o --omf_browse chassis\chassis.crf --depend chassis\chassis.d)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/freertos.h)(0x65311BC1)
 I (D:\Software\KeilMDK538\Core\ARM\AC5\include\stddef.h)(0x5E8E3CC2)
 I (D:\Software\KeilMDK538\Core\ARM\AC5\include\stdint.h)(0x5E8E3CC2)
@@ -11,7 +11,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x65311BC1)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h)(0x65311BC1)
 I (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h)(0x65311BC1)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x65311BC1)
-I (../Core/Inc/can.h)(0x653A2C89)
+I (../Core/Inc/can.h)(0x653CACC4)
 I (../Core/Inc/main.h)(0x65362C66)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65311BFD)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x65378B8A)
@@ -54,12 +54,12 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x65311BC1)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x65311BC1)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x65311BC1)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x65311BC1)
-I (../Core/Inc/pid.h)(0x65350132)
+I (../Core/Inc/pid.h)(0x653CBA6F)
 I (../USER/PotocaLayer/rc_potocal.h)(0x6531371D)
 I (../USER/DriverLayer/drv_can.h)(0x653A3864)
-I (../USER/handle_value.h)(0x653BDD7D)
-F (..\Core\Src\pid.c)(0x65350132)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../USER/DriverLayer -I ../USER/PotocaLayer -I ../USER-I.\RTE\_Chassis-ID:\Software\KeilMDK538\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Software\KeilMDK538\Pack\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o chassis\pid.o --omf_browse chassis\pid.crf --depend chassis\pid.d)
-I (../Core/Inc/pid.h)(0x65350132)
+I (../USER/handle_value.h)(0x653CB8B6)
+F (..\Core\Src\pid.c)(0x653D10A3)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../USER/DriverLayer -I ../USER/PotocaLayer -I ../USER-I.\RTE\_Chassis-ID:\Software\KeilMDK538\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Software\KeilMDK538\Pack\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o chassis\pid.o --omf_browse chassis\pid.crf --depend chassis\pid.d)
+I (../Core/Inc/pid.h)(0x653CBA6F)
 I (../Core/Inc/main.h)(0x65362C66)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65311BFD)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x65378B8A)
@@ -145,7 +145,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x65311BC1)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x65311BC1)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x65311BC1)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x65311BC1)
-I (../Core/Inc/can.h)(0x653A2C89)
+I (../Core/Inc/can.h)(0x653CACC4)
 I (../USER/struct_typedef.h)(0x6531371D)
 I (../Core/Inc/chassis.h)(0x653A3B22)
 I (../Core/Inc/dma.h)(0x65362C66)
@@ -242,12 +242,12 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x65311BC1)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x65311BC1)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x65311BC1)
 I (../Core/Inc/chassis.h)(0x653A3B22)
-I (../Core/Inc/can.h)(0x653A2C89)
+I (../Core/Inc/can.h)(0x653CACC4)
 I (../USER/struct_typedef.h)(0x6531371D)
 I (../USER/PotocaLayer/rc_potocal.h)(0x6531371D)
 I (../USER/DriverLayer/drv_can.h)(0x653A3864)
-F (../Core/Src/can.c)(0x653A40EF)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../USER/DriverLayer -I ../USER/PotocaLayer -I ../USER-I.\RTE\_Chassis-ID:\Software\KeilMDK538\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Software\KeilMDK538\Pack\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o chassis\can.o --omf_browse chassis\can.crf --depend chassis\can.d)
-I (../Core/Inc/can.h)(0x653A2C89)
+F (../Core/Src/can.c)(0x653D19D9)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../USER/DriverLayer -I ../USER/PotocaLayer -I ../USER-I.\RTE\_Chassis-ID:\Software\KeilMDK538\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Software\KeilMDK538\Pack\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o chassis\can.o --omf_browse chassis\can.crf --depend chassis\can.d)
+I (../Core/Inc/can.h)(0x653CACC4)
 I (../Core/Inc/main.h)(0x65362C66)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65311BFD)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x65378B8A)
@@ -472,7 +472,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65311BFD)
 I (../Core/Inc/stm32f4xx_it.h)(0x653A4B67)
 I (../USER/DriverLayer/drv_usart.h)(0x6531371D)
 I (../Core/Inc/chassis.h)(0x653A3B22)
-I (../Core/Inc/can.h)(0x653A2C89)
+I (../Core/Inc/can.h)(0x653CACC4)
 I (../USER/struct_typedef.h)(0x6531371D)
 F (../Core/Src/stm32f4xx_hal_msp.c)(0x65362C66)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../USER/DriverLayer -I ../USER/PotocaLayer -I ../USER-I.\RTE\_Chassis-ID:\Software\KeilMDK538\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Software\KeilMDK538\Pack\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o chassis\stm32f4xx_hal_msp.o --omf_browse chassis\stm32f4xx_hal_msp.crf --depend chassis\stm32f4xx_hal_msp.d)
 I (../Core/Inc/main.h)(0x65362C66)
@@ -1429,7 +1429,7 @@ I (..\USER\PotocaLayer\rc_potocal.h)(0x6531371D)
 I (../USER/struct_typedef.h)(0x6531371D)
 I (../USER/DriverLayer/drv_can.h)(0x653A3864)
 I (../Core/Inc/chassis.h)(0x653A3B22)
-I (../Core/Inc/can.h)(0x653A2C89)
+I (../Core/Inc/can.h)(0x653CACC4)
 I (../Core/Inc/main.h)(0x65362C66)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65311BFD)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x65378B8A)
@@ -1465,12 +1465,12 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x65311BFD)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x65311BFD)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x65311BFD)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65311BFD)
-F (..\USER\handle_value.c)(0x653BE05D)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../USER/DriverLayer -I ../USER/PotocaLayer -I ../USER-I.\RTE\_Chassis-ID:\Software\KeilMDK538\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Software\KeilMDK538\Pack\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o chassis\handle_value.o --omf_browse chassis\handle_value.crf --depend chassis\handle_value.d)
+F (..\USER\handle_value.c)(0x653D1101)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../USER/DriverLayer -I ../USER/PotocaLayer -I ../USER-I.\RTE\_Chassis-ID:\Software\KeilMDK538\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Software\KeilMDK538\Pack\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o chassis\handle_value.o --omf_browse chassis\handle_value.crf --depend chassis\handle_value.d)
 I (../USER/PotocaLayer/rc_potocal.h)(0x6531371D)
 I (../USER/struct_typedef.h)(0x6531371D)
 I (../USER/DriverLayer/drv_can.h)(0x653A3864)
 I (../Core/Inc/chassis.h)(0x653A3B22)
-I (../Core/Inc/can.h)(0x653A2C89)
+I (../Core/Inc/can.h)(0x653CACC4)
 I (../Core/Inc/main.h)(0x65362C66)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65311BFD)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x65378B8A)
@@ -1548,4 +1548,4 @@ I (../USER/PotocaLayer/rc_potocal.h)(0x6531371D)
 I (../USER/struct_typedef.h)(0x6531371D)
 I (../USER/DriverLayer/drv_can.h)(0x653A3864)
 I (../Core/Inc/chassis.h)(0x653A3B22)
-I (../Core/Inc/can.h)(0x653A2C89)
+I (../Core/Inc/can.h)(0x653CACC4)

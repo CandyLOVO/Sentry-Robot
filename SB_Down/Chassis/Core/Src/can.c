@@ -23,7 +23,7 @@
 /* USER CODE BEGIN 0 */
 CAN_TxHeaderTypeDef can_tx_message;
 uint8_t can_send_data[8];
-motor_info motor[4];
+motor_info motor[8];
 /* USER CODE END 0 */
 
 CAN_HandleTypeDef hcan1;
