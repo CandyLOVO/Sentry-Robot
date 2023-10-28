@@ -59,8 +59,8 @@
 "yx_up\pid.o"
 "yx_up\pid_imu.o"
 "yx_up\bmi088driver.o"
-"yx_up\bmi088middleware.o"
 "yx_up\solvetrajectory.o"
+"yx_up\bmi088middleware.o"
 --strict --scatter "YX_UP\YX_UP.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

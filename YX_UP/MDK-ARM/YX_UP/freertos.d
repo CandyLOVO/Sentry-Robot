@@ -17,11 +17,11 @@ yx_up\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h
 yx_up\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 yx_up\freertos.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 yx_up\freertos.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h
-yx_up\freertos.o: ../Drivers/CMSIS/Include/core_cm4.h
-yx_up\freertos.o: ../Drivers/CMSIS/Include/cmsis_version.h
-yx_up\freertos.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
-yx_up\freertos.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
-yx_up\freertos.o: ../Drivers/CMSIS/Include/mpu_armv7.h
+yx_up\freertos.o: ..\Drivers\CMSIS\Include\core_cm4.h
+yx_up\freertos.o: ..\Drivers\CMSIS\Include\cmsis_version.h
+yx_up\freertos.o: ..\Drivers\CMSIS\Include\cmsis_compiler.h
+yx_up\freertos.o: ..\Drivers\CMSIS\Include\cmsis_armcc.h
+yx_up\freertos.o: ..\Drivers\CMSIS\Include\mpu_armv7.h
 yx_up\freertos.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 yx_up\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 yx_up\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
@@ -45,8 +45,8 @@ yx_up\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 yx_up\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 yx_up\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 yx_up\freertos.o: ../User/struct_typedef.h
-yx_up\freertos.o: E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\arm_math.h
-yx_up\freertos.o: E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm4.h
+yx_up\freertos.o: ../User/arm_math.h
+yx_up\freertos.o: ..\Drivers\CMSIS\Include\core_cm4.h
 yx_up\freertos.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
 yx_up\freertos.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
 yx_up\freertos.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdbool.h
@@ -70,11 +70,3 @@ yx_up\freertos.o: ../User/Task/Exchange_task.h
 yx_up\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 yx_up\freertos.o: ../Core/Inc/can.h
 yx_up\freertos.o: ../User/DriverLayer/Can_user.h
-<<<<<<< HEAD
-yx_up\freertos.o: ../User/AlgorithmLayer/SolveTrajectory.h
-<<<<<<< HEAD
-yx_up\freertos.o: ../User/PotocaLayer/Motor.h
-=======
->>>>>>> parent of 52bf27f (修改了和视觉的接口)
-=======
->>>>>>> parent of b248010 (yaw疯了，救不了)

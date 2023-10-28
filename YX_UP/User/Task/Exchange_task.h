@@ -11,12 +11,10 @@
 #include "can.h"
 #include "INS_task.h"
 #include "Can_user.h"
-<<<<<<< HEAD
-#include "SolveTrajectory.h"
+
 
 #define BUFFER_SIZE 100
-=======
->>>>>>> parent of 52bf27f (ä¿®æ”¹äº†å’Œè§†è§‰çš„æ¥å£)
+
 
 void Exchange_task(void const * argument);
 
@@ -41,7 +39,7 @@ typedef struct
   uint16_t checksum;     // crc16Ğ£ÑéÎ» 	
 } 	Vision_t; //ÊÓ¾õÍ¨ĞÅ½á¹¹Ìå
 
-<<<<<<< HEAD
+
 //================================================ minipc -> stm32 (½ÓÊÕ½á¹¹Ìå)================================================//
 typedef struct
 {
@@ -62,8 +60,8 @@ typedef struct
 } vision_receive_t;
 
 //================================================Ò£¿ØÆ÷¼°¼üÅÌ½âËã½á¹¹Ìå================================================//
-=======
->>>>>>> parent of 52bf27f (ä¿®æ”¹äº†å’Œè§†è§‰çš„æ¥å£)
+
+
 typedef __packed struct
 {
 		__packed struct
@@ -96,7 +94,7 @@ typedef __packed struct
 	
 } 	remote_flag_t; //¼üÅÌÊı¾İ»ñÈ¡
 
-<<<<<<< HEAD
+
 //================================================µç»ú×·×Ù½á¹¹Ìå================================================//
 //´¢´æµÄÊÇÒÑ¾­ÊÓ¾õ½âËã³É¹¦µÄÊÓ¾õÊı¾İ
 typedef struct
@@ -115,11 +113,10 @@ typedef struct
 } Sentry_t;
 
 
-=======
 extern uint8_t foe_flag;
 extern remote_flag_t remote;
 	
->>>>>>> parent of 52bf27f (ä¿®æ”¹äº†å’Œè§†è§‰çš„æ¥å£)
+
 extern volatile uint8_t rx_len_uart1;  //½ÓÊÕÒ»Ö¡Êı¾İµÄ³¤¶È
 extern volatile uint8_t recv_end_flag_uart1; //Ò»Ö¡Êı¾İ½ÓÊÕÍê³É±êÖ¾
 
