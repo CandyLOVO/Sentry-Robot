@@ -13,6 +13,7 @@
 #include "arm_math.h"
 #include "can.h"
 #include "Exchange_task.h" 
+#include "Motor.h"
 	 
 //===============================================±äÁ¿ÉùÃ÷================================================//
 extern uint8_t bopan_reversal_flag;

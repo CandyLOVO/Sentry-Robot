@@ -36,76 +36,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-//全局变量
-uint16_t can_cnt_1;
-uint16_t can_cnt_2;
-float target_speed[7];//实测最大空载转速320rpm
-float target_speed_can_2[7];//实测最大空载转速320rpm
-moto_info_t motor_info[8];		//赋予最大的7个字节
-moto_info_t motor_info_can_2[MOTOR_MAX_NUM];		//赋予最大的7个字节
-pid_struct_t motor_pid[7];	
-pid_struct_t motor_pid_sita[7];
-pid_struct_t motor_pid_can_2[7];	
-pid_struct_t motor_pid_sita_can_2[7];
-uint8_t can_flag=0;
-double step=9158/660; 
-double r;
-double sin_sita;
-double cos_sita;
-double target_v;
-int16_t target_int1;
-int16_t target_int2;//用于叠加旋转和直行
-double target_curl;
-float yuntai_step=60*(1024-364);
-
-//Yaw轴
-int16_t target_angle=4096;
-int16_t err_angle;
-float small;
-float angle_limit =8191;//转角的最大值
-
-//摩擦轮
-uint8_t             rx_data[8];
-
-//磁力计
-fp32 mag[3];
-
-//加速度计和陀螺仪
-fp32 gyro[3], accel[3], temp;
-uint8_t buf_accel[8]={0};
-uint8_t buf_gyro[8]={0};
-uint8_t pTxData;
-uint8_t pRxData;
-float quat[4] = {1.0f, 0.0f, 0.0f, 0.0f};
-
-//加速度计解算欧拉角
-float roll_accel;
-float pitch_accel;
 
 
-//陀螺仪解算矩阵变量
-//float gyro_vector[3]={0};//陀螺仪数据存储
-//arm_matrix_instance_f32 gyro_matrix;//矩阵结构体
-
-//四元素
-float q0=1;
-float q1=0;
-float q2=0;
-float q3=0;
-float T;
-float halfT=0.0005;
-float pitch;
-float roll;
-float yaw;
-
-//一些姿态解算辅助变量
-						float norm;
-						float gx, gy, gz;//陀螺仪
-						float ax, ay, az;//加速度计
-						float vx, vy, vz, wx, wy, wz;
-						float ex, ey, ez; 
-						float exInt, eyInt, ezInt;
-						float Kp=0, Ki=0;
 						
 /* USER CODE END PTD */
 
@@ -178,12 +110,13 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM10_Init();
   /* USER CODE BEGIN 2 */
+//	HAL_GPIO_WritePin(GPIOH,GPIO_PIN_11,GPIO_PIN_SET);
 	can_1_user_init(&hcan1);//配置can1的过滤器
 	can_2_user_init(&hcan2);//配置can2的过滤器,过滤器bank不一样
-	HAL_TIM_PWM_Start(&htim10,TIM_CHANNEL_1);//BMI088需要使用
 	HAL_TIM_Base_Start_IT(&htim1);//开启定时器1并打开中断
-	HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);//修改TIM2中断优先级
-	delay_init();
+	//HAL_NVIC_SetPriority(TIM2_IRQn, 1, 1);//修改TIM2中断优先级
+	delay_init();//启动IMU
+	HAL_TIM_PWM_Start(&htim10,TIM_CHANNEL_1);//BMI088需要使用
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

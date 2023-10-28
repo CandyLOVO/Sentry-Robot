@@ -11,10 +11,10 @@
 #include "can.h"
 #include "INS_task.h"
 #include "Can_user.h"
-
+#include "SolveTrajectory.h"
+#include "Motor.h"
 
 #define BUFFER_SIZE 100
-
 
 void Exchange_task(void const * argument);
 
@@ -25,7 +25,8 @@ typedef struct
 	uint8_t reset_tracker : 1;    // 发0
 	uint8_t reserved : 6; 
 }		pByte_t;	//位域
-		
+
+//================================================ stm32 -> minipc (发送结构体)================================================//
 typedef struct
 {
 	uint8_t header;
@@ -38,7 +39,6 @@ typedef struct
   float aim_z;               // 发0.5
   uint16_t checksum;     // crc16校验位 	
 } 	Vision_t; //视觉通信结构体
-
 
 //================================================ minipc -> stm32 (接收结构体)================================================//
 typedef struct
@@ -60,8 +60,6 @@ typedef struct
 } vision_receive_t;
 
 //================================================遥控器及键盘解算结构体================================================//
-
-
 typedef __packed struct
 {
 		__packed struct
@@ -94,7 +92,6 @@ typedef __packed struct
 	
 } 	remote_flag_t; //键盘数据获取
 
-
 //================================================电机追踪结构体================================================//
 //储存的是已经视觉解算成功的视觉数据
 typedef struct
@@ -112,10 +109,6 @@ typedef struct
 	uint8_t Flag_judge;	//红蓝方检测
 } Sentry_t;
 
-
-extern uint8_t foe_flag;
-extern remote_flag_t remote;
-	
 
 extern volatile uint8_t rx_len_uart1;  //接收一帧数据的长度
 extern volatile uint8_t recv_end_flag_uart1; //一帧数据接收完成标志

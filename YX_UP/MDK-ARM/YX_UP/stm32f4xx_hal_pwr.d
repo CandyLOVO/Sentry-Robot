@@ -5,12 +5,12 @@ yx_up\stm32f4xx_hal_pwr.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc
 yx_up\stm32f4xx_hal_pwr.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 yx_up\stm32f4xx_hal_pwr.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 yx_up\stm32f4xx_hal_pwr.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h
-yx_up\stm32f4xx_hal_pwr.o: ..\Drivers\CMSIS\Include\core_cm4.h
+yx_up\stm32f4xx_hal_pwr.o: ../Drivers/CMSIS/Include/core_cm4.h
 yx_up\stm32f4xx_hal_pwr.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdint.h
-yx_up\stm32f4xx_hal_pwr.o: ..\Drivers\CMSIS\Include\cmsis_version.h
-yx_up\stm32f4xx_hal_pwr.o: ..\Drivers\CMSIS\Include\cmsis_compiler.h
-yx_up\stm32f4xx_hal_pwr.o: ..\Drivers\CMSIS\Include\cmsis_armcc.h
-yx_up\stm32f4xx_hal_pwr.o: ..\Drivers\CMSIS\Include\mpu_armv7.h
+yx_up\stm32f4xx_hal_pwr.o: ../Drivers/CMSIS/Include/cmsis_version.h
+yx_up\stm32f4xx_hal_pwr.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
+yx_up\stm32f4xx_hal_pwr.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
+yx_up\stm32f4xx_hal_pwr.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 yx_up\stm32f4xx_hal_pwr.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 yx_up\stm32f4xx_hal_pwr.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 yx_up\stm32f4xx_hal_pwr.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h

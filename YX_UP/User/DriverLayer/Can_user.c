@@ -53,7 +53,7 @@ void can_2_user_init(CAN_HandleTypeDef* hcan )
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖÐ¶Ï»Øµ÷º¯Êý
 {
   CAN_RxHeaderTypeDef rx_header;
-	
+	uint8_t             rx_data[8];
 //================================================can1Êý¾Ý================================================//
   if(hcan->Instance == CAN1)
   {
@@ -138,7 +138,6 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖÐ¶Ï»Øµ÷º¯Ê
 //================================================can2Êý¾Ý================================================//
 	 if(hcan->Instance == CAN2)
   {
-		uint8_t             rx_data[8];
     HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data);
 		
 //================================================µç»úÊý¾Ý½ÓÊÕ================================================//	

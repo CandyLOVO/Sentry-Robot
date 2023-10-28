@@ -849,10 +849,11 @@ erwork --depend=yx_up\startup_stm32f407xx.d -oyx_up\startup_stm32f407xx.o -I..\
 ARM Macro Assembler    Page 14 
 
 
-Core\Inc -I"F:\Github base\Sentry\YX_UP\MDK-ARM\RTE" -I"E:\Keil ARM\ARM\PACK\Ke
-il\STM32F4xx_DFP\2.14.0" -I"E:\Keil ARM\ARM\CMSIS\Include" --predefine="__UVISI
-ON_VERSION SETA 514" --predefine="STM32F407xx SETA 1" --list=startup_stm32f407x
-x.lst startup_stm32f407xx.s
+Core\Inc -I"F:\Github base\Sentry - copy\YX_UP\MDK-ARM\RTE" -I"E:\Keil ARM\ARM\
+PACK\ARM\CMSIS\4.2.0\CMSIS\Include" -I"E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\
+2.14.0" --predefine="__UVISION_VERSION SETA 514" --predefine="_RTE_ SETA 1" --p
+redefine="STM32F407xx SETA 1" --list=startup_stm32f407xx.lst startup_stm32f407x
+x.s
 
 
 
@@ -1956,4 +1957,4 @@ Symbol: __use_two_region_memory
       None
 Comment: __use_two_region_memory unused
 3 symbols
-447 symbols in table
+448 symbols in table

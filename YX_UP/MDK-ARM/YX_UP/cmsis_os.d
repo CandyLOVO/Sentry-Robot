@@ -16,4 +16,4 @@ yx_up\cmsis_os.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 yx_up\cmsis_os.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 yx_up\cmsis_os.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 yx_up\cmsis_os.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-yx_up\cmsis_os.o: ..\Drivers\CMSIS\Include\cmsis_armcc.h
+yx_up\cmsis_os.o: ../Drivers/CMSIS/Include/cmsis_armcc.h

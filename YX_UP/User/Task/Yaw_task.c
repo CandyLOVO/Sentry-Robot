@@ -70,6 +70,8 @@ void Yaw_task(void const *pvParameters)
 {
   //参数初始化设置
 	Yaw_init();
+	osDelay(3000);
+	
 	
 	//循环任务运行
   for(;;)
@@ -101,8 +103,8 @@ void Yaw_task(void const *pvParameters)
 			yaw_fix_flag = 1;		//赋予不锁定的标志位
 		}
 		detel_calc();	//越界处理
-		target_speed[6] +=  pid_calc_sita(&motor_pid_sita[6], target_yaw, ins_yaw);//角度->速度（内含越界处理）
-		motor_info[6].set_voltage = pid_calc(&motor_pid[6], target_speed[6], 20 * INS_gyro[2]);//用陀螺仪的角速度（rad/s -> r/min），速度->电流
+		target_speed[6] +=  pid_calc_sita(&motor_pid_sita[6], target_yaw, INS_angle[0]);//角度->速度（内含越界处理）
+		motor_info[6].set_voltage = pid_calc(&motor_pid[6], target_speed[6], 9.55f * INS_gyro[2]);//用陀螺仪的角速度（rad/s -> r/min），速度->电流
 		Yaw_can_send();//电机电流数据发送
     osDelay(1);
   }
@@ -114,8 +116,8 @@ void Yaw_task(void const *pvParameters)
 static void Yaw_init()	
 {
 	//id为can1的5号
-	pid_init(&motor_pid[6],350,0.01,0,30000,30000);
-	pid_init(&motor_pid_sita[6],20,0,10,30000,30000);
+	pid_init(&motor_pid[6],300,0.01,0,30000,30000);
+	pid_init(&motor_pid_sita[6],18,0,10,30000,30000);
 	target_yaw = ins_yaw;
 }
 
@@ -132,8 +134,8 @@ static void Yaw_read_imu()
 {
 		//三个角度值读取
 		ins_yaw = INS_angle[0];
-		//ins_pitch = ins_angle_degree[1];
-		//ins_row = ins_angle_degree[2];
+		//ins_pitch = INS_angle[1];
+		//ins_row = INS_angle[2];
 }
 
 //================================================Yaw电机电流发送================================================//

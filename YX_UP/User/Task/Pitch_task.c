@@ -74,7 +74,7 @@ void Pitch_task(void const * argument)
   /* Infinite loop */
 
 	gimbal_init();	//PID参数初始化
-	
+	osDelay(3000);
   for(;;)
   {
 		gimbal_zero();	//速度清零
@@ -107,14 +107,14 @@ void Pitch_task(void const * argument)
 
 
 		ins_pitch_speed = Pitch_imu_speed * 9.55f;	//统一速度环单位：以编码器为基准，rad/s -> round/min	60/(2*pi)=9.55
-		motor_info_can_2[4].set_voltage = pid_calc(&motor_pid_can_2[4], target_speed_can_2[4], -ins_pitch_speed);
+		motor_info_can_2[4].set_voltage = pid_calc(&motor_pid_can_2[4], target_speed_can_2[4], ins_pitch_speed);
 		motor_info_can_2[5].set_voltage = -motor_info_can_2[4].set_voltage;
 		//motor_info_can_2[5].set_voltage = pid_calc(&motor_pid_can_2[5], target_speed_can_2[5], ins_pitch_speed );
 		
 //		编码器解算模式
 //		motor_info_can_2[4].set_voltage = pid_calc(&motor_pid_can_2[4], target_speed_can_2[4], motor_info_can_2[4].rotor_speed);
 //		motor_info_can_2[5].set_voltage = pid_calc(&motor_pid_can_2[5], target_speed_can_2[5], motor_info_can_2[5].rotor_speed);
-		gimbal_can_send();		
+			gimbal_can_send();
 		
     osDelay(1);
   }
@@ -124,10 +124,11 @@ void Pitch_task(void const * argument)
 //================================================初始化PID参数================================================//
 static void gimbal_init()	
 {
-	pid_init(&motor_pid_can_2[4],150,0.01,0,30000,30000);// 120 0.01 0
-	pid_init(&motor_pid_can_2[5],150,0.01,0,30000,30000);// 120 0.01 0
-	pid_init(&motor_pid_sita_can_2[4],3,0,1,30000,30000);// 10 0 1300
-	pid_init(&motor_pid_sita_can_2[5],3,0,1,30000,30000);// 10 0 1300
+	
+	pid_init(&motor_pid_can_2[4],120,0.001,50,30000,30000);// 120 0.01 0
+	pid_init(&motor_pid_can_2[5],120,0.001,50,30000,30000);// 120 0.01 0
+	pid_init(&motor_pid_sita_can_2[4],10,0,1000,30000,30000);// 10 0 1300
+	pid_init(&motor_pid_sita_can_2[5],10,0,1000,30000,30000);// 10 0 1300
 	target_pitch = Pitch_imu;
 } 
 
@@ -141,7 +142,7 @@ static void gimbal_read_motor()
 //================================================读取imu值================================================//
 static void gimbal_read_imu()
 {
-	Pitch_imu = INS_angle[1];;   //陀螺仪Pitch值
+	Pitch_imu = INS_angle[1];   //陀螺仪Pitch值
 	Pitch_imu_speed = INS_gyro[1];   //陀螺仪角速度值
 }
 
