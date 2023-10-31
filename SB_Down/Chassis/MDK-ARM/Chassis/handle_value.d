@@ -42,3 +42,4 @@ chassis\handle_value.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex
 chassis\handle_value.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 chassis\handle_value.o: ../Core/Inc/chassis.h
 chassis\handle_value.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\math.h
+chassis\handle_value.o: ..\USER\handle_value.h

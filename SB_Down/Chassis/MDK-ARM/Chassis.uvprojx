@@ -1733,6 +1733,11 @@
               <FileType>1</FileType>
               <FilePath>..\USER\handle_value.c</FilePath>
             </File>
+            <File>
+              <FileName>motion_overlay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\motion_overlay.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

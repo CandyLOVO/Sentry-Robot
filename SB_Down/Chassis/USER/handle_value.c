@@ -1,6 +1,6 @@
 #include "rc_potocal.h"
 #include "math.h"
-
+#include "handle_value.h"
 #define PI 3.14
 
 float remote_value(int16_t x, int16_t y)
