@@ -36,8 +36,8 @@ yx_up\stm32f4xx_hal_msp.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim
 yx_up\stm32f4xx_hal_msp.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 yx_up\stm32f4xx_hal_msp.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 yx_up\stm32f4xx_hal_msp.o: ../User/struct_typedef.h
-yx_up\stm32f4xx_hal_msp.o: E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\arm_math.h
-yx_up\stm32f4xx_hal_msp.o: E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm4.h
+yx_up\stm32f4xx_hal_msp.o: ../User/arm_math.h
+yx_up\stm32f4xx_hal_msp.o: ../Drivers/CMSIS/Include/core_cm4.h
 yx_up\stm32f4xx_hal_msp.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
 yx_up\stm32f4xx_hal_msp.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
 yx_up\stm32f4xx_hal_msp.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdbool.h

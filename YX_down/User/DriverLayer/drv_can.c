@@ -1,4 +1,5 @@
 #include  "drv_can.h"
+#include "rc_potocal.h"
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
  extern RC_ctrl_t rc_ctrl;
