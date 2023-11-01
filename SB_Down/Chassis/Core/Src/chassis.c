@@ -2,6 +2,7 @@
 #include "can.h"
 #include "chassis.h"
 #include "cmsis_os.h"
+#include "user_can.h"
 #include "pid.h"
 #include "rc_potocal.h"
 #include "handle_value.h"
@@ -10,6 +11,7 @@
 extern motor_info motor[8];
 extern RC_ctrl_t rc_ctrl;
 extern int16_t motor_angle[4];
+extern int16_t motor_speed[4];
 
 //float* set;
 //int16_t set[4];
@@ -39,12 +41,15 @@ void Chassis(void const * argument)
 	
   for(;;)
   {
-		if(m==0){
+//		if(m==0){
 //			HAL_Delay(10);
 //			for(int i=0;i<4;i++)
 //			{
 //				initial_angle[i] = motor[i].angle; //读取电机初始角度 0~8192
 //			}
+//			m++;
+//		}
+		if(m==0){
 			initial_angle[0] = 7819; //初始角度（底盘正前方各轮子角度）
 			initial_angle[1] = 1858;
 			initial_angle[2] = 3805;

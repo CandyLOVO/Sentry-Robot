@@ -1,4 +1,5 @@
 #include "rc_potocal.h"
+#include "user_can.h"
 //#include "INS_task.h"
 
 //底盘电机结构体

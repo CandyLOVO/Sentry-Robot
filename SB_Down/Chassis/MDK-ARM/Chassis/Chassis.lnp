@@ -48,6 +48,7 @@
 "chassis\handle_value.o"
 "chassis\motion_overlay.o"
 "chassis\drv_usart.o"
+"chassis\user_can.o"
 --strict --scatter "Chassis\Chassis.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

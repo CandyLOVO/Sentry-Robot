@@ -7,15 +7,14 @@
 #define radius 50 //舵轮距离车体中心的距离
 
 int16_t motor_angle[4];
+int16_t motor_speed[4];
 
-float* compound_movement_3508(int16_t vx,int16_t vy) //使用：float* b; b = compound_movement_3508(); b为数组
+void compound_movement_3508(int16_t vx,int16_t vy) 
 {
-	static float motor_value[4];
-	motor_value[0] = sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy + omega*radius*cosin),2));
-	motor_value[1] = sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
-	motor_value[2] = sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
-	motor_value[3] = sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy + omega*radius*cosin),2));
-	return motor_value;
+	motor_speed[0] = sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy + omega*radius*cosin),2));
+	motor_speed[1] = sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy + omega*radius*cosin),2));
+	motor_speed[2] = sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
+	motor_speed[3] = sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
 }
 
 void compound_movement_6020(int16_t vx,int16_t vy)

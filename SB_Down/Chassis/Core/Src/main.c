@@ -29,6 +29,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "drv_usart.h"
+#include "user_can.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -99,6 +100,8 @@ int main(void)
   MX_I2C3_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
+	CAN1_Init();
+	CAN2_Init();
   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
 	USART3_Init();
   /* USER CODE END 2 */
