@@ -1,7 +1,7 @@
 #include "Chassis_task.h"
 #include "cmsis_os.h"
 #include "INS_task.h"
-
+#include "rc_potocal.h"
 //	X是左右方向，Y是前后方向（底盘）
 
 pid_struct_t motor_pid_chassis[4];
