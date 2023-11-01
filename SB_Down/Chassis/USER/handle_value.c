@@ -3,7 +3,7 @@
 #include "handle_value.h"
 #define PI 3.14
 
-float remote_value(int16_t x, int16_t y)
+float remote_value(int16_t x, int16_t y) //将获得的x,y值转化为角度后再转化为0~-180和0~180
 {
 	float alpha;
 	if(y>0){

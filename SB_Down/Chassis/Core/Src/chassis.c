@@ -15,6 +15,7 @@ extern int16_t motor_speed[4];
 
 //float* set;
 //int16_t set[4];
+int16_t theta = 60; //云台坐标系与底盘坐标系间夹角(此时为0~360度) 后期接收后需要对所得theta进行处理
 int16_t get[4];
 uint16_t initial_angle[4];
 
