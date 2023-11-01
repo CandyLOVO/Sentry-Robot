@@ -2,9 +2,11 @@
 #include "handle_value.h"
 #include "math.h"
 
-#define cosin 0.717 //二分之根号二
-#define omega 3000 //旋转叠加计算中的角速度
-#define radius 500 //舵轮距离车体中心的距离
+#define cosin 0.707106781187 //二分之根号二
+#define omega 13 //旋转叠加计算中的角速度
+#define radius 50 //舵轮距离车体中心的距离
+
+int16_t motor_angle[4];
 
 float* compound_movement_3508(int16_t vx,int16_t vy) //使用：float* b; b = compound_movement_3508(); b为数组
 {
@@ -16,12 +18,30 @@ float* compound_movement_3508(int16_t vx,int16_t vy) //使用：float* b; b = co
 	return motor_value;
 }
 
-float* compound_movement_6020(int16_t vx,int16_t vy)
+void compound_movement_6020(int16_t vx,int16_t vy)
 {
-	static float motor_angle[4];
 	motor_angle[0] = remote_value(((float)vx + omega*radius*cosin), ((float)vy + omega*radius*cosin));
-	motor_angle[1] = remote_value(((float)vx + omega*radius*cosin), ((float)vy - omega*radius*cosin));
+	motor_angle[1] = remote_value(((float)vx - omega*radius*cosin), ((float)vy + omega*radius*cosin));
 	motor_angle[2] = remote_value(((float)vx - omega*radius*cosin), ((float)vy - omega*radius*cosin));
-	motor_angle[3] = remote_value(((float)vx - omega*radius*cosin), ((float)vy + omega*radius*cosin));
-	return motor_angle;
+	motor_angle[3] = remote_value(((float)vx + omega*radius*cosin), ((float)vy - omega*radius*cosin));
 }
+
+//float compound_movement_6020(int16_t vx,int16_t vy,int n)
+//{
+//	float motor_angle;
+////	vx *= 300; //处理扩大遥控器所得数据
+////	vy *= 300;
+//	if(n==0){
+//		motor_angle = remote_value(((float)vx + omega*radius*cosin), ((float)vy + omega*radius*cosin));
+//	}
+//	else if(n==1){
+//		motor_angle = remote_value(((float)vx - omega*radius*cosin), ((float)vy + omega*radius*cosin));
+//	}
+//	else if(n==2){
+//		motor_angle = remote_value(((float)vx - omega*radius*cosin), ((float)vy - omega*radius*cosin));
+//	}
+//	else if(n==3){
+//		motor_angle = remote_value(((float)vx + omega*radius*cosin), ((float)vy - omega*radius*cosin));
+//	}
+//	return motor_angle;
+//}
