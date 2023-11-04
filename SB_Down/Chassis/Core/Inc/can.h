@@ -38,15 +38,15 @@ extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
 
 /* USER CODE BEGIN Private defines */
-void can_cmd_send(int motor1,int motor2,int motor3,int motor4);
-void can_remote(uint8_t sbus_buf[],uint8_t can_send_id);
-typedef struct
-{
-	double angle;
-	int16_t speed;
-	uint16_t tor_current;
-	uint16_t temperture;
-}motor_info;
+//void can_cmd_send(int motor1,int motor2,int motor3,int motor4);
+//void can_remote(uint8_t sbus_buf[],uint8_t can_send_id);
+//typedef struct
+//{
+//	double angle;
+//	int16_t speed;
+//	uint16_t tor_current;
+//	uint16_t temperture;
+//}motor_info;
 
 /* USER CODE END Private defines */
 

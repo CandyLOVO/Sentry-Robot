@@ -59,3 +59,4 @@ chassis\main.o: ../Core/Inc/spi.h
 chassis\main.o: ../Core/Inc/usart.h
 chassis\main.o: ../Core/Inc/gpio.h
 chassis\main.o: ../USER/DriverLayer/drv_usart.h
+chassis\main.o: ../USER/DriverLayer/user_can.h

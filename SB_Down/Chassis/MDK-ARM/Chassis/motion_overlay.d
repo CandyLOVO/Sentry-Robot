@@ -38,3 +38,7 @@ chassis\motion_overlay.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_
 chassis\motion_overlay.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 chassis\motion_overlay.o: ..\USER\handle_value.h
 chassis\motion_overlay.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\math.h
+chassis\motion_overlay.o: ../Core/Inc/chassis.h
+chassis\motion_overlay.o: ../Core/Inc/can.h
+chassis\motion_overlay.o: ../USER/struct_typedef.h
+chassis\motion_overlay.o: ../Core/Inc/chassis.h
