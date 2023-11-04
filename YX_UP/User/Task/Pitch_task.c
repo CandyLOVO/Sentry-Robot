@@ -82,8 +82,8 @@ void Pitch_task(void const * argument)
 		gimbal_read_imu();	//读取Imu值
 		if(rc_ctrl.rc.s[1]==3 || rc_ctrl.rc.s[1]==1	)	//调试模式
 		{
+			gimbal_minipc_control_sita();	//位置环视觉瞄准
 			gimbal_mode_control_sita();	//遥控器位置环控制模式
-		  gimbal_minipc_control_sita();	//位置环视觉瞄准
 		 }
 		  
 		else if(rc_ctrl.rc.s[1]==2)		//上场模式
@@ -125,8 +125,8 @@ void Pitch_task(void const * argument)
 static void gimbal_init()	
 {
 	
-	pid_init(&motor_pid_can_2[4],120,0.001,50,30000,30000);// 120 0.01 0
-	pid_init(&motor_pid_can_2[5],120,0.001,50,30000,30000);// 120 0.01 0
+	pid_init(&motor_pid_can_2[4],120,0.001,5,30000,30000);// 120 0.01 0
+	pid_init(&motor_pid_can_2[5],120,0.001,5,30000,30000);// 120 0.01 0
 	pid_init(&motor_pid_sita_can_2[4],10,0,1000,30000,30000);// 10 0 1300
 	pid_init(&motor_pid_sita_can_2[5],10,0,1000,30000,30000);// 10 0 1300
 	target_pitch = Pitch_imu;
@@ -267,7 +267,8 @@ static void gimbal_mode_control_sita()
 //================================================视觉瞄准(位置环模式)================================================//
 static void gimbal_minipc_control_sita()
 {
-		target_pitch -= chase.pitch * Pitch_sita_minipc_weight;
+	//target_pitch -= (chase.pitch - target_pitch) * Pitch_sita_minipc_weight;
+	target_pitch -= (target_pitch - chase.pitch) * 1.0f;
 }
 
 //================================================巡航模式(位置环模式)================================================//

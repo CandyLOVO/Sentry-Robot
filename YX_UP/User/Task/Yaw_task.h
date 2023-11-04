@@ -31,6 +31,7 @@ extern int16_t Rotate_w;
 extern int16_t Rotate_W;
 extern fp32 target_yaw;
 extern int8_t Update_yaw_flag;
+extern float target_yaw;
 
 //¶¨Òåº¯Êý
 void Yaw_task(void const *pvParameters);

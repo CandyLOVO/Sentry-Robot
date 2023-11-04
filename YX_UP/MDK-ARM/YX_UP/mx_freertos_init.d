@@ -72,9 +72,11 @@ yx_up\mx_freertos_init.o: ../User/AlgorithmLayer/pid_imu.h
 yx_up\mx_freertos_init.o: ../User/DriverLayer/Can_user.h
 yx_up\mx_freertos_init.o: ../User/AlgorithmLayer/SolveTrajectory.h
 yx_up\mx_freertos_init.o: ../User/PotocaLayer/Motor.h
-yx_up\mx_freertos_init.o: ../User/Task/StartDefaultTask.h
+yx_up\mx_freertos_init.o: ../User/Task/Yaw_task.h
 yx_up\mx_freertos_init.o: ../User/Task/Pitch_task.h
 yx_up\mx_freertos_init.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+yx_up\mx_freertos_init.o: ../User/Task/Exchange_task.h
 yx_up\mx_freertos_init.o: ../Core/Inc/stm32f4xx_it.h
+yx_up\mx_freertos_init.o: ../User/Task/StartDefaultTask.h
 yx_up\mx_freertos_init.o: ../User/Task/Friction_task.h
 yx_up\mx_freertos_init.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h

@@ -173,7 +173,7 @@ static void Friction_send()
   tx_data[6] = (motor_info_can_2[3].set_voltage>>8)&0xff;
   tx_data[7] =    (motor_info_can_2[3].set_voltage)&0xff;
 	
-  HAL_CAN_AddTxMessage(&hcan2, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX0);
+  HAL_CAN_AddTxMessage(&hcan2, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX2);
 }
 
 //===============================================²¦ÅÌµçÁ÷·¢ËÍº¯Êý================================================//
@@ -197,7 +197,7 @@ static void Bopan_send()
   tx_data[6] = 0;
   tx_data[7] = 0;
 	
-  HAL_CAN_AddTxMessage(&hcan1, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX0);
+  HAL_CAN_AddTxMessage(&hcan1, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX2);
 }
 
 //===============================================²¦ÅÌ¶Â×ª¼ì²â================================================//

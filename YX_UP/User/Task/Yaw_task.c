@@ -84,9 +84,9 @@ void Yaw_task(void const *pvParameters)
 		{
 			if(Sentry.foe_flag)	//如果视觉检测到目标
 			{
+					Yaw_minipc_control_sita();	//视觉跟随
 					Yaw_Rotate();		//前馈控制补偿底盘带来的旋转角速度
 					Yaw_fix_sita();		//角度控制
-					Yaw_minipc_control_sita();	//视觉跟随
 			}			
 			else//没检测到开巡航模式
 			{					
@@ -95,11 +95,11 @@ void Yaw_task(void const *pvParameters)
 					yaw_fix_flag = 1;		//赋予不锁定的标志位
 			}
 		}
-		else if(rc_ctrl.rc.s[1] == 1 || rc_ctrl.rc.s[1] == 3)	//测试模式
+		else if(rc_ctrl.rc.s[1] == 1 || rc_ctrl.rc.s[1] == 3 || rc_ctrl.rc.s[1] == 0)	//测试模式
 		{
+			Yaw_minipc_control_sita();	//视觉跟随
 			Yaw_Rotate();		//前馈控制补偿底盘带来的旋转角速度
 			Yaw_mode_remote_site();		//遥控器控制模式(位置控制)
-			Yaw_minipc_control_sita();	//视觉跟随
 			yaw_fix_flag = 1;		//赋予不锁定的标志位
 		}
 		detel_calc();	//越界处理
@@ -117,7 +117,7 @@ static void Yaw_init()
 {
 	//id为can1的5号
 	pid_init(&motor_pid[6],300,0.01,0,30000,30000);
-	pid_init(&motor_pid_sita[6],18,0,10,30000,30000);
+	pid_init(&motor_pid_sita[6],22,0,300,30000,30000);
 	target_yaw = ins_yaw;
 }
 
@@ -157,7 +157,7 @@ static void Yaw_can_send()
   tx_data[5] = 0x00;
   tx_data[6] = 0x00;
   tx_data[7] = 0x00;
-  HAL_CAN_AddTxMessage(&hcan1, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX0);
+  HAL_CAN_AddTxMessage(&hcan1, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX1);
 
 }
 
@@ -269,7 +269,7 @@ static void Yaw_mode_remote_site()
 }
 
 //================================================越界处理================================================//
-static void detel_calc()
+static void detel_calc()	//这两种写法的结果应该是一样的，配合PID里的越界处理一起看
 {
 	if(target_yaw >360)
 	{
@@ -280,6 +280,15 @@ static void detel_calc()
 	{
 		target_yaw += 360;
 	}
+//	if(target_yaw >180)
+//	{
+//		target_yaw -=360;
+//	}
+//	
+//	else if(target_yaw<-180)
+//	{
+//		target_yaw += 360;
+//	}
 }
 
 //================================================位置视觉跟随================================================//
@@ -287,5 +296,6 @@ static void detel_calc()
 //直接叠加角度环控制
 static void Yaw_minipc_control_sita()
 {
-		target_yaw -= chase.yaw * Yaw_minipc_sita_weight;
+	//	target_yaw -= chase.yaw * Yaw_minipc_sita_weight;
+	target_yaw -= (target_yaw - chase.yaw) * 1.0f;
 }
