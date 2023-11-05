@@ -20,7 +20,7 @@ Section Cross References
     startup_stm32f407xx.o(RESET) refers to stm32f4xx_it.o(i.DMA1_Stream1_IRQHandler) for DMA1_Stream1_IRQHandler
     startup_stm32f407xx.o(RESET) refers to stm32f4xx_it.o(i.DMA1_Stream3_IRQHandler) for DMA1_Stream3_IRQHandler
     startup_stm32f407xx.o(RESET) refers to stm32f4xx_it.o(i.CAN1_TX_IRQHandler) for CAN1_TX_IRQHandler
-    startup_stm32f407xx.o(RESET) refers to stm32f4xx_it.o(i.CAN1_RX0_IRQHandler) for CAN1_RX0_IRQHandler
+    startup_stm32f407xx.o(RESET) refers to stm32f4xx_it.o(i.CAN1_RX1_IRQHandler) for CAN1_RX1_IRQHandler
     startup_stm32f407xx.o(RESET) refers to stm32f4xx_it.o(i.TIM3_IRQHandler) for TIM3_IRQHandler
     startup_stm32f407xx.o(RESET) refers to stm32f4xx_it.o(i.SPI1_IRQHandler) for SPI1_IRQHandler
     startup_stm32f407xx.o(RESET) refers to stm32f4xx_it.o(i.USART3_IRQHandler) for USART3_IRQHandler
@@ -128,8 +128,8 @@ Section Cross References
     usart.o(i.MX_USART3_UART_Init) refers to stm32f4xx_hal_uart.o(i.HAL_UART_Init) for HAL_UART_Init
     usart.o(i.MX_USART3_UART_Init) refers to main.o(i.Error_Handler) for Error_Handler
     usart.o(i.MX_USART3_UART_Init) refers to usart.o(.bss) for .bss
-    stm32f4xx_it.o(i.CAN1_RX0_IRQHandler) refers to stm32f4xx_hal_can.o(i.HAL_CAN_IRQHandler) for HAL_CAN_IRQHandler
-    stm32f4xx_it.o(i.CAN1_RX0_IRQHandler) refers to can.o(.bss) for hcan1
+    stm32f4xx_it.o(i.CAN1_RX1_IRQHandler) refers to stm32f4xx_hal_can.o(i.HAL_CAN_IRQHandler) for HAL_CAN_IRQHandler
+    stm32f4xx_it.o(i.CAN1_RX1_IRQHandler) refers to can.o(.bss) for hcan1
     stm32f4xx_it.o(i.CAN1_TX_IRQHandler) refers to stm32f4xx_hal_can.o(i.HAL_CAN_IRQHandler) for HAL_CAN_IRQHandler
     stm32f4xx_it.o(i.CAN1_TX_IRQHandler) refers to can.o(.bss) for hcan1
     stm32f4xx_it.o(i.CAN2_RX0_IRQHandler) refers to stm32f4xx_hal_can.o(i.HAL_CAN_IRQHandler) for HAL_CAN_IRQHandler
@@ -2721,7 +2721,7 @@ Image Symbol Table
     .text                                    0x0800055e   Section        0  indicate_semi.o(.text)
     i.BusFault_Handler                       0x0800055e   Section        0  stm32f4xx_it.o(i.BusFault_Handler)
     i.CAN1_Init                              0x08000560   Section        0  user_can.o(i.CAN1_Init)
-    i.CAN1_RX0_IRQHandler                    0x0800059c   Section        0  stm32f4xx_it.o(i.CAN1_RX0_IRQHandler)
+    i.CAN1_RX1_IRQHandler                    0x0800059c   Section        0  stm32f4xx_it.o(i.CAN1_RX1_IRQHandler)
     i.CAN1_TX_IRQHandler                     0x080005a8   Section        0  stm32f4xx_it.o(i.CAN1_TX_IRQHandler)
     i.CAN2_Init                              0x080005b4   Section        0  user_can.o(i.CAN2_Init)
     i.CAN2_RX0_IRQHandler                    0x080005f0   Section        0  stm32f4xx_it.o(i.CAN2_RX0_IRQHandler)
@@ -3126,7 +3126,7 @@ Image Symbol Table
     vPortGetIPSR                             0x080002e1   Thumb Code     6  port.o(.emb_text)
     Reset_Handler                            0x080002e9   Thumb Code     8  startup_stm32f407xx.o(.text)
     ADC_IRQHandler                           0x08000303   Thumb Code     0  startup_stm32f407xx.o(.text)
-    CAN1_RX1_IRQHandler                      0x08000303   Thumb Code     0  startup_stm32f407xx.o(.text)
+    CAN1_RX0_IRQHandler                      0x08000303   Thumb Code     0  startup_stm32f407xx.o(.text)
     CAN1_SCE_IRQHandler                      0x08000303   Thumb Code     0  startup_stm32f407xx.o(.text)
     CAN2_RX1_IRQHandler                      0x08000303   Thumb Code     0  startup_stm32f407xx.o(.text)
     CAN2_SCE_IRQHandler                      0x08000303   Thumb Code     0  startup_stm32f407xx.o(.text)
@@ -3225,7 +3225,7 @@ Image Symbol Table
     BusFault_Handler                         0x0800055f   Thumb Code     2  stm32f4xx_it.o(i.BusFault_Handler)
     __semihosting_library_function           0x0800055f   Thumb Code     0  indicate_semi.o(.text)
     CAN1_Init                                0x08000561   Thumb Code    56  user_can.o(i.CAN1_Init)
-    CAN1_RX0_IRQHandler                      0x0800059d   Thumb Code     6  stm32f4xx_it.o(i.CAN1_RX0_IRQHandler)
+    CAN1_RX1_IRQHandler                      0x0800059d   Thumb Code     6  stm32f4xx_it.o(i.CAN1_RX1_IRQHandler)
     CAN1_TX_IRQHandler                       0x080005a9   Thumb Code     6  stm32f4xx_it.o(i.CAN1_TX_IRQHandler)
     CAN2_Init                                0x080005b5   Thumb Code    56  user_can.o(i.CAN2_Init)
     CAN2_RX0_IRQHandler                      0x080005f1   Thumb Code     6  stm32f4xx_it.o(i.CAN2_RX0_IRQHandler)
@@ -3541,7 +3541,7 @@ Memory Map of the image
     0x0800055e   0x0800055e   0x00000000   Code   RO         6219    .text               c_w.l(indicate_semi.o)
     0x0800055e   0x0800055e   0x00000002   Code   RO          607    i.BusFault_Handler  stm32f4xx_it.o
     0x08000560   0x08000560   0x0000003c   Code   RO         5872    i.CAN1_Init         user_can.o
-    0x0800059c   0x0800059c   0x0000000c   Code   RO          608    i.CAN1_RX0_IRQHandler  stm32f4xx_it.o
+    0x0800059c   0x0800059c   0x0000000c   Code   RO          608    i.CAN1_RX1_IRQHandler  stm32f4xx_it.o
     0x080005a8   0x080005a8   0x0000000c   Code   RO          609    i.CAN1_TX_IRQHandler  stm32f4xx_it.o
     0x080005b4   0x080005b4   0x0000003c   Code   RO         5873    i.CAN2_Init         user_can.o
     0x080005f0   0x080005f0   0x0000000c   Code   RO          610    i.CAN2_RX0_IRQHandler  stm32f4xx_it.o
