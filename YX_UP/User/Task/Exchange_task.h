@@ -13,6 +13,8 @@
 #include "Can_user.h"
 #include "SolveTrajectory.h"
 #include "Motor.h"
+#include "Yaw_task.h"
+#include "Pitch_task.h"
 
 #define BUFFER_SIZE 100
 
@@ -98,7 +100,7 @@ typedef struct
 {
 	float yaw;
 	float pitch;
-} Chase_t;	//传输给电机的值
+} volatile Chase_t;	//传输给电机的值,这个是需要到达的值
 
 //================================================官方裁判系统的值存储，以及哨兵的一些状态量================================================//
 typedef struct

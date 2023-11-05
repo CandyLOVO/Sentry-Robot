@@ -35,7 +35,7 @@ volatile uint8_t recv_end_flag_uart1 = 0; //一帧数据接收完成标志
 uint8_t rx_buffer[100]={0};  //接收数据缓存数组
 uint8_t vision_send[28];	//视觉接口发送数据帧
 
-Chase_t chase;	//赋予电机追踪的数据结构体
+volatile Chase_t chase;	//赋予电机追踪的数据结构体
 Vision_t vision;	//视觉数据发送结构体
 vision_receive_t vision_receive;	//视觉数据接收结构体
 remote_flag_t remote;	//键盘按键读取(结构体)
@@ -54,12 +54,12 @@ void Exchange_task(void const * argument)
 	
   for(;;)
   {
+		osDelay(1);
 		Up_send_to_down();	//上C向下C发送信息
 		Get_keyboard();		//解算键盘的信息
 		Get_minipc();		//取出nuc的信息
 		Judge_minipc();		//检测是否识别到目标，识别到目标就解算，没识别到赋0
 		Stm_pc_send();		//向nuc发送信息
-    osDelay(1);
   }
   /* USER CODE END StartTask03 */
 } 
@@ -136,7 +136,7 @@ static void Vision_read(uint8_t rx_buffer[])
 	st.vzw = vision_receive.vz;
 	st.s_bias = 0.19133;
   st.z_bias = 0.21265;
-	st.current_v = 30;
+	st.current_v = 28;
 	
 }
 
@@ -195,7 +195,20 @@ static void SolveTrajectory_Init()
     st.s_bias = 0.19133;
     st.z_bias = 0.21265;
     st.armor_id = ARMOR_INFANTRY3;
-    st.armor_num = ARMOR_NUM_NORMAL;
+    st.armor_num = 2;//ARMOR_NUM_NORMAL;
+		
+		//初始化vision
+		vision.header = 0x5A;
+		vision.official.detect_color = 1;	//读取裁判系统数据判断红蓝方
+		vision.official.reset_tracker = 0;
+		vision.official.reserved = 6;
+		vision.roll = INS_angle[2]/57.3f;
+		vision.pitch = INS_angle[1]/57.3f;
+		vision.yaw = INS_angle[0]/57.3f;
+		vision.aim_x = 0.5;
+		vision.aim_y = 0.5;
+		vision.aim_z = 5;
+		vision.checksum = 0xAAAA;	//CRC16校验，我没用，发了个定值做校验
 		
 }
 
@@ -215,15 +228,15 @@ static void Judge_minipc()
 		if(vision_receive.x && vision_receive.y && vision_receive.z)
 		{
 			autoSolveTrajectory(&vision.pitch, &vision.yaw, &vision.aim_x, &vision.aim_y, &vision.aim_z);	//弹道解算
-			chase.pitch = vision.pitch * 180 / PI;
-			chase.yaw = vision.yaw * 180 / PI;
+			chase.pitch = vision.pitch * 180/PI;
+			chase.yaw = vision.yaw * 180/PI;
 			Sentry.foe_flag = 1;	//识别标志位
 			Sentry.foe_count = 0;	//计数器清零
 		}
 		else
 		{
-			chase.pitch = 0;
-			chase.yaw = 0;
+			chase.pitch = target_pitch;
+			chase.yaw = target_yaw;
 		}
 }
 

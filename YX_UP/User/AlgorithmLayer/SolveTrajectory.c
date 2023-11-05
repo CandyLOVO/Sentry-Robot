@@ -69,7 +69,7 @@ float pitchTrajectoryCompensation(float s, float z, float v)
     float z_temp, z_actual, dz;
     float angle_pitch;
     int i = 0;
-    z_temp = z;
+    z_temp = z;	//高度
     // iteration
     for (i = 0; i < 20; i++)
     {
@@ -99,8 +99,8 @@ void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, f
 {
 
     // 线性预测
-    float timeDelay = st.bias_time/1000.0 + t;
-    st.tar_yaw += st.v_yaw * timeDelay;
+    float timeDelay = st.bias_time/1000.0 + t;	//偏置时间(移动)加传输时间
+    st.tar_yaw += st.v_yaw * timeDelay;		//v_yaw是目标车yaw转速，乘时间后得到下一时刻目标的航向角
 
     //计算四块装甲板的位置
     //装甲板id顺序，以四块装甲板为例，逆时针编号
@@ -110,6 +110,10 @@ void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, f
 	int use_1 = 1;
 	int i = 0;
     int idx = 0; // 选择的装甲板
+	
+		//接下来将目标车中心的值转换到4块装甲板上，得到4个装甲板在云台坐标系下的x,y,z，并得到4块装甲板基于目标车中心(我方坐标系平移)
+		//下的偏航角，用我方与目标装甲板基于其中心偏航角的差值来选择装甲板
+	
     //armor_num = ARMOR_NUM_BALANCE 为平衡步兵
     if (st.armor_num == ARMOR_NUM_BALANCE) {
         for (i = 0; i<2; i++) {
@@ -192,10 +196,14 @@ void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, f
 
     *aim_z = tar_position[idx].z + st.vzw * timeDelay;
     *aim_x = tar_position[idx].x + st.vxw * timeDelay;
-    *aim_y = tar_position[idx].y + st.vyw * timeDelay;
+    *aim_y = tar_position[idx].y + st.vyw * timeDelay;	//预测下一刻的位置
     //这里符号给错了
+		//float s_bias;  枪口前推的距离
+    //float z_bias;  yaw轴电机到枪口水平面的垂直距离
+		//float current_v;  当前弹速
     *pitch = -pitchTrajectoryCompensation(sqrt((*aim_x) * (*aim_x) + (*aim_y) * (*aim_y)) - st.s_bias,
             *aim_z + st.z_bias, st.current_v);
+		*pitch = -(float)(atan2(*aim_z,sqrt((*aim_x) * (*aim_x) + (*aim_y) * (*aim_y))));
     *yaw = (float)(atan2(*aim_y, *aim_x));
 
 }
