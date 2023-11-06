@@ -297,5 +297,5 @@ static void detel_calc()	//这两种写法的结果应该是一样的，配合PID里的越界处理一起
 static void Yaw_minipc_control_sita()
 {
 	//	target_yaw -= chase.yaw * Yaw_minipc_sita_weight;
-	target_yaw -= (target_yaw - chase.yaw) * 1.0f;
+	target_yaw = chase.yaw;
 }

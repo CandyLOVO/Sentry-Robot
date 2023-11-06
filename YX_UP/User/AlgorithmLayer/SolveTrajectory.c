@@ -18,6 +18,7 @@
 struct SolveTrajectoryParams st;
 struct tar_pos tar_position[4]; //最多只有四块装甲板
 float t = 0.5f; // 飞行时间
+float dz_see[20];
 
 
 
@@ -66,16 +67,17 @@ float completeAirResistanceModel(float s, float v, float angle)
 */
 float pitchTrajectoryCompensation(float s, float z, float v)
 {
-    float z_temp, z_actual, dz;
-    float angle_pitch;
+    float z_temp, z_actual, dz;//调整的枪口z_temp , 根据模型出来的真实z_actual , 误差dz
+    float angle_pitch;	//theta角
     int i = 0;
-    z_temp = z;	//高度
+    z_temp = z;	//初始化高度
     // iteration
     for (i = 0; i < 20; i++)
     {
-        angle_pitch = atan2(z_temp, s); // rad
-        z_actual = monoDirectionalAirResistanceModel(s, v, angle_pitch);
-        dz = 0.3*(z - z_actual);
+        angle_pitch = atan2(z_temp, s); // rad弧度
+        z_actual = monoDirectionalAirResistanceModel(s, v, angle_pitch);	//求解模型理论真实抵达z值
+				dz = 0.3*(z - z_actual);	//通过dz来调整枪口，使得理论模型真实抵达的z值和实际上目标的z值相同，这个参数可调
+				dz_see[i] = dz;	//调试观测窗口
         z_temp = z_temp + dz;
         //printf("iteration num %d: angle_pitch %f, temp target z:%f, err of z:%f, s:%f\n",
         //    i + 1, angle_pitch * 180 / PI, z_temp, dz,s);
@@ -85,6 +87,29 @@ float pitchTrajectoryCompensation(float s, float z, float v)
         }
     }
     return angle_pitch;
+}
+
+/*
+@brief 直接解算Pitch(单方向空气阻力模型)
+@param s:m 距离
+@param z:m 高度
+@param v:m/s
+@return angle_pitch:rad
+*/
+float pitchTrajectoryCompensation_new(float s, float z, float v)
+{
+	float angle_pitch;
+	float k1 = 0.019;//小弹丸的空气阻力系数
+	float a = (exp(k1*s) - 1) / k1;
+	float b = (GRAVITY*pow(exp(k1*s)-1,2)) / (2*pow(k1,2)*pow(v,2));
+	float delta = pow(a,2) - 4*b*(z+b);
+	float tan_angle_1 = (a+sqrt(delta)) / (2*b);
+	float tan_angle_2 = (a-sqrt(delta)) / (2*b);
+	float angle_init = atan2(z, s);	//rad弧度，补偿前的角度
+	float angle_actual_1 = atan2(tan_angle_1,1);
+	float angle_actual_2 = atan2(tan_angle_2,2);//rad
+	angle_pitch = (fabs(angle_actual_1 - angle_init) > fabs(angle_actual_2 - angle_init)) ? angle_actual_2 : angle_actual_1;//取绝对值小的那个 
+	return angle_pitch;
 }
 
 /*
@@ -201,9 +226,9 @@ void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, f
 		//float s_bias;  枪口前推的距离
     //float z_bias;  yaw轴电机到枪口水平面的垂直距离
 		//float current_v;  当前弹速
-    *pitch = -pitchTrajectoryCompensation(sqrt((*aim_x) * (*aim_x) + (*aim_y) * (*aim_y)) - st.s_bias,
-            *aim_z + st.z_bias, st.current_v);
-		*pitch = -(float)(atan2(*aim_z,sqrt((*aim_x) * (*aim_x) + (*aim_y) * (*aim_y))));
+    *pitch = -pitchTrajectoryCompensation_new(sqrt((*aim_x) * (*aim_x) + (*aim_y) * (*aim_y)) - st.s_bias,
+            *aim_z + st.z_bias, st.current_v);//param: s , z , v0
+		//*pitch = -(float)(atan2(*aim_z,sqrt((*aim_x) * (*aim_x) + (*aim_y) * (*aim_y))));
     *yaw = (float)(atan2(*aim_y, *aim_x));
 
 }

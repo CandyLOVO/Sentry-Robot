@@ -82,7 +82,7 @@ void Pitch_task(void const * argument)
 		gimbal_read_imu();	//读取Imu值
 		if(rc_ctrl.rc.s[1]==3 || rc_ctrl.rc.s[1]==1	)	//调试模式
 		{
-			gimbal_minipc_control_sita();	//位置环视觉瞄准
+			//gimbal_minipc_control_sita();	//位置环视觉瞄准
 			gimbal_mode_control_sita();	//遥控器位置环控制模式
 		 }
 		  
@@ -268,7 +268,7 @@ static void gimbal_mode_control_sita()
 static void gimbal_minipc_control_sita()
 {
 	//target_pitch -= (chase.pitch - target_pitch) * Pitch_sita_minipc_weight;
-	target_pitch -= (target_pitch - chase.pitch) * 1.0f;
+	target_pitch =chase.pitch;
 }
 
 //================================================巡航模式(位置环模式)================================================//
