@@ -12,14 +12,14 @@ extern int16_t theta;
 int16_t motor_angle[4];
 int16_t motor_speed[4];
 
-void translate_3508(int16_t x,int16_t y)
+void translate_3508(int16_t x,int16_t y) //仅平移的3508速度
 {
 	for(int i=0;i<4;i++){
-		motor_angle[i] = sqrt(pow((float)x,2) + pow((float)y,2)); //将杆量反映到3508的速度
+		motor_speed[i] = sqrt(pow((float)x,2) + pow((float)y,2)); //将杆量反映到3508的速度
 	}
 }	
 
-void translate_6020(int16_t x,int16_t y)
+void translate_6020(int16_t x,int16_t y) //仅平移的6020角度
 {
 	int16_t vx = x*cos(theta) - y*sin(theta);
 	int16_t vy = x*sin(theta) + y*cos(theta);
@@ -29,7 +29,7 @@ void translate_6020(int16_t x,int16_t y)
 	
 }
 
-void compound_movement_3508(int16_t x,int16_t y) 
+void compound_movement_3508(int16_t x,int16_t y) //旋转+平移的3508速度
 {
 	int16_t vx = x*cos(theta) - y*sin(theta);
 	int16_t vy = x*sin(theta) + y*cos(theta);
@@ -39,7 +39,7 @@ void compound_movement_3508(int16_t x,int16_t y)
 	motor_speed[3] = sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
 }
 
-void compound_movement_6020(int16_t x,int16_t y)
+void compound_movement_6020(int16_t x,int16_t y) //旋转+平移的6020角度
 {
 	int16_t vx = x*cos(theta) - y*sin(theta);
 	int16_t vy = x*sin(theta) + y*cos(theta);
