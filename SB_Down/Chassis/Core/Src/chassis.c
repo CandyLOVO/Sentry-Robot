@@ -26,7 +26,7 @@ void Chassis(void const * argument)
 	pidTypeDef PID_speed_6020[4];
 	float PID_s[3] = {30,0.01,0};
 	float PID_a[3] = {6,0,0.01};
-	float PID[3] = {1,0,0};
+	float PID[3] = {5,0,0};
 	int16_t Max_out_a = 8192;
 	int16_t Max_iout_a = 8192;
 	int16_t Max_out_s = 30000; //电压控制转速，电流控制扭矩
