@@ -26,7 +26,6 @@ void translate_6020(int16_t x,int16_t y) //仅平移的6020角度
 	for(int i=0;i<4;i++){
 		motor_angle[i] = remote_value((float)vx , (float)vy);
 	}
-	
 }
 
 void compound_movement_3508(int16_t x,int16_t y) //旋转+平移的3508速度

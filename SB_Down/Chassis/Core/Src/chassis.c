@@ -68,20 +68,20 @@ void Chassis(void const * argument)
 //		set = remote_value(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]); //遥控器当前角度——set 将遥控器希望转到的角度投影 0~180/0~-180
 		
 		compound_movement_6020(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]); //旋转加平移的6020角度设置 算得motor_angle[4]
-		compound_movement_3508(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]); //旋转加平移的3508速度设置 算得motor_speed[4]
 		HAL_Delay(10);
 		for(int i=0;i<4;i++){
 			
 //			set[i] = compound_movement_6020(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1],i);
 			
-			get_6020[i] = - motor_value(initial_angle[i],motor[i].angle); //电机角度——get 将电机当前角度投影 0~180/0~-180  //逆时针旋转——加负号
+			get_6020[i] = - motor_value(initial_angle[i],motor[i+4].angle); //电机角度——get 将电机当前角度投影 0~180/0~-180  //逆时针旋转——加负号
 			speed_6020[i] = pid_cal_a(&PID_angle[i],get_6020[i],motor_angle[i],Max_out_a,Max_iout_a); 
-			output_6020[i] = pid_cal_s(&PID_speed_6020[i],motor[i].speed,speed_6020[i],Max_out_s,Max_iout_s);
+			output_6020[i] = pid_cal_s(&PID_speed_6020[i],motor[i+4].speed,speed_6020[i],Max_out_s,Max_iout_s);
 		}
 		
-		translate_3508(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]);
+		compound_movement_3508(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]); //旋转加平移的3508速度设置 算得motor_speed[4]
+		HAL_Delay(10);
 		for(int i=0;i<4;i++){
-			output_3508[i] = pid_cal_s(&PID_speed_3508[i],motor[i+4].speed,motor_speed[i],Max_out_s,Max_iout_s); //3508速度控制
+			output_3508[i] = pid_cal_s(&PID_speed_3508[i],motor[i].speed,motor_speed[i],Max_out_s,Max_iout_s); //3508速度控制
 		}
 		can_cmd_send_6020(output_6020[0],output_6020[1],output_6020[2],output_6020[3]);
 		can_cmd_send_3508(output_3508[0],output_3508[1],output_3508[2],output_3508[3]);
