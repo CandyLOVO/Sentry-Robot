@@ -82,7 +82,7 @@ void Pitch_task(void const * argument)
 		gimbal_read_imu();	//读取Imu值
 		if(rc_ctrl.rc.s[1]==3 || rc_ctrl.rc.s[1]==1	)	//调试模式
 		{
-			//gimbal_minipc_control_sita();	//位置环视觉瞄准
+			gimbal_minipc_control_sita();	//位置环视觉瞄准
 			gimbal_mode_control_sita();	//遥控器位置环控制模式
 		 }
 		  
@@ -127,8 +127,8 @@ static void gimbal_init()
 	
 	pid_init(&motor_pid_can_2[4],120,0.001,5,30000,30000);// 120 0.01 0
 	pid_init(&motor_pid_can_2[5],120,0.001,5,30000,30000);// 120 0.01 0
-	pid_init(&motor_pid_sita_can_2[4],10,0,1000,30000,30000);// 10 0 1300
-	pid_init(&motor_pid_sita_can_2[5],10,0,1000,30000,30000);// 10 0 1300
+	pid_init(&motor_pid_sita_can_2[4],10,0,350,30000,30000);// 10 0 1300
+	pid_init(&motor_pid_sita_can_2[5],10,0,350,30000,30000);// 10 0 1300
 	target_pitch = Pitch_imu;
 } 
 

@@ -193,7 +193,7 @@ static void SolveTrajectory_Init()
     st.dz = 0.1;
     st.bias_time = 100;
     st.s_bias = 0.19133;
-    st.z_bias = 0.21265;
+    st.z_bias = 0.05;//0.21265;
     st.armor_id = ARMOR_INFANTRY3;
     st.armor_num = 2;//ARMOR_NUM_NORMAL;
 		

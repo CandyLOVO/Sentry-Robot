@@ -120,11 +120,12 @@ float pitchTrajectoryCompensation_new(float s, float z, float v)
 @param aim_y:传出aim_y  打击目标的y
 @param aim_z:传出aim_z  打击目标的z
 */
+    int idx = 0;
 void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, float *aim_z)
 {
 
     // 线性预测
-    float timeDelay = st.bias_time/1000.0 + t;	//偏置时间(移动)加传输时间
+    float timeDelay ;	//偏置时间(移动)加传输时间
     st.tar_yaw += st.v_yaw * timeDelay;		//v_yaw是目标车yaw转速，乘时间后得到下一时刻目标的航向角
 
     //计算四块装甲板的位置
@@ -134,7 +135,7 @@ void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, f
     //      0
 	int use_1 = 1;
 	int i = 0;
-    int idx = 0; // 选择的装甲板
+ // 选择的装甲板
 	
 		//接下来将目标车中心的值转换到4块装甲板上，得到4个装甲板在云台坐标系下的x,y,z，并得到4块装甲板基于目标车中心(我方坐标系平移)
 		//下的偏航角，用我方与目标装甲板基于其中心偏航角的差值来选择装甲板
@@ -191,34 +192,35 @@ void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, f
             //2.计算距离最近的装甲板
 
             //计算距离最近的装甲板
-        //	float dis_diff_min = sqrt(tar_position[0].x * tar_position[0].x + tar_position[0].y * tar_position[0].y);
-        //	int idx = 0;
-        //	for (i = 1; i<4; i++)
-        //	{
-        //		float temp_dis_diff = sqrt(tar_position[i].x * tar_position[0].x + tar_position[i].y * tar_position[0].y);
-        //		if (temp_dis_diff < dis_diff_min)
-        //		{
-        //			dis_diff_min = temp_dis_diff;
-        //			idx = i;
-        //		}
-        //	}
-        //
+        	float dis_diff_min = sqrt(tar_position[0].x * tar_position[0].x + tar_position[0].y * tar_position[0].y);
+        	//int idx = 0;
+        	for (i = 1; i<4; i++)
+        	{
+        		float temp_dis_diff = sqrt(tar_position[i].x * tar_position[0].x + tar_position[i].y * tar_position[0].y);
+        		if (temp_dis_diff < dis_diff_min)
+        		{
+        			dis_diff_min = temp_dis_diff;
+        			idx = i;
+        		}
+        	}
+        
 
             //计算枪管到目标装甲板yaw最小的那个装甲板
-        float yaw_diff_min = fabsf(*yaw - tar_position[0].yaw);
-        for (i = 1; i<4; i++) {
-            float temp_yaw_diff = fabsf(*yaw - tar_position[i].yaw);
-            if (temp_yaw_diff < yaw_diff_min)
-            {
-                yaw_diff_min = temp_yaw_diff;
-                idx = i;
-            }
-        }
+//        float yaw_diff_min = fabsf(*yaw - tar_position[0].yaw);
+//        for (i = 1; i<4; i++) {
+//            float temp_yaw_diff = fabsf(*yaw - tar_position[i].yaw);
+//            if (temp_yaw_diff < yaw_diff_min)
+//            {
+//                yaw_diff_min = temp_yaw_diff;
+//                idx = i;
+//            }
+//        }
 
     }
 
 	
-
+		t = sqrt(pow(tar_position[idx].x,2) + pow(tar_position[idx].y,2)) / st.current_v;
+		timeDelay = 0;//st.bias_time/1000.0 + t;
     *aim_z = tar_position[idx].z + st.vzw * timeDelay;
     *aim_x = tar_position[idx].x + st.vxw * timeDelay;
     *aim_y = tar_position[idx].y + st.vyw * timeDelay;	//预测下一刻的位置
@@ -228,8 +230,10 @@ void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, f
 		//float current_v;  当前弹速
     *pitch = -pitchTrajectoryCompensation_new(sqrt((*aim_x) * (*aim_x) + (*aim_y) * (*aim_y)) - st.s_bias,
             *aim_z + st.z_bias, st.current_v);//param: s , z , v0
-		//*pitch = -(float)(atan2(*aim_z,sqrt((*aim_x) * (*aim_x) + (*aim_y) * (*aim_y))));
+		*pitch = -(float)(atan2(*aim_z,sqrt((*aim_x) * (*aim_x) + (*aim_y) * (*aim_y))));
+		*pitch = -(float)(atan2(st.zw+ st.z_bias,sqrt(st.xw*st.xw+st.yw*st.yw)));
     *yaw = (float)(atan2(*aim_y, *aim_x));
+		*yaw = (float)(atan2(st.yw,st.xw));
 
 }
 

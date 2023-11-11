@@ -95,7 +95,7 @@ void Yaw_task(void const *pvParameters)
 					yaw_fix_flag = 1;		//赋予不锁定的标志位
 			}
 		}
-		else if(rc_ctrl.rc.s[1] == 1 || rc_ctrl.rc.s[1] == 3 || rc_ctrl.rc.s[1] == 0)	//测试模式
+		else if(rc_ctrl.rc.s[1] == 1 || rc_ctrl.rc.s[1] == 3)	//测试模式
 		{
 			Yaw_minipc_control_sita();	//视觉跟随
 			Yaw_Rotate();		//前馈控制补偿底盘带来的旋转角速度
@@ -116,8 +116,8 @@ void Yaw_task(void const *pvParameters)
 static void Yaw_init()	
 {
 	//id为can1的5号
-	pid_init(&motor_pid[6],300,0.01,0,30000,30000);
-	pid_init(&motor_pid_sita[6],22,0,300,30000,30000);
+	pid_init(&motor_pid[6],300,0.001,0,30000,30000);
+	pid_init(&motor_pid_sita[6],18,0,30,30000,30000);
 	target_yaw = ins_yaw;
 }
 
