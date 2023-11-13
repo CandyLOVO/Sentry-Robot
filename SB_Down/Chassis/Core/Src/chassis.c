@@ -67,6 +67,10 @@ void Chassis(void const * argument)
 		{
 			compound_control(); //旋转加平移运动
 		}
+		else if(rc_ctrl.rc.s[0]==2)
+		{
+			rotate_control(); //小陀螺旋转 无跟随
+		}
     osDelay(10);
   }
 }
