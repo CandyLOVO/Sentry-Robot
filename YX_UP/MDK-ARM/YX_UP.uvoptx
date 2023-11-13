@@ -217,27 +217,27 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>chase</ItemText>
+          <ItemText>t</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>vision</ItemText>
+          <ItemText>angle_actual_1</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>vision_receive</ItemText>
+          <ItemText>angle_actual_2</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>TIM1_Count</ItemText>
+          <ItemText>angle_pitch</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>idx</ItemText>
+          <ItemText>*pitch</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
