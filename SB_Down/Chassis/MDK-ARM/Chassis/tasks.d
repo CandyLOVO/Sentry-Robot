@@ -1,9 +1,9 @@
 chassis\tasks.o: ../Middlewares/Third_Party/FreeRTOS/Source/tasks.c
-chassis\tasks.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stdlib.h
-chassis\tasks.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\string.h
+chassis\tasks.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdlib.h
+chassis\tasks.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
 chassis\tasks.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-chassis\tasks.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stddef.h
-chassis\tasks.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stdint.h
+chassis\tasks.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
+chassis\tasks.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
 chassis\tasks.o: ../Core/Inc/FreeRTOSConfig.h
 chassis\tasks.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 chassis\tasks.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

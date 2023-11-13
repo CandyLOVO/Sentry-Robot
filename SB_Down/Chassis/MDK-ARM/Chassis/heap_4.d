@@ -1,8 +1,8 @@
 chassis\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
-chassis\heap_4.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stdlib.h
+chassis\heap_4.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdlib.h
 chassis\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-chassis\heap_4.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stddef.h
-chassis\heap_4.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stdint.h
+chassis\heap_4.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
+chassis\heap_4.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
 chassis\heap_4.o: ../Core/Inc/FreeRTOSConfig.h
 chassis\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 chassis\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
