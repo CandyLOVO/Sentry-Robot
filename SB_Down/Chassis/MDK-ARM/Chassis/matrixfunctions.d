@@ -1,0 +1,14 @@
+chassis\matrixfunctions.o: D:/Software/KeilMDK538/KeilMDK538/ARM/Pack/ARM/CMSIS-DSP/1.14.2/Source/MatrixFunctions/MatrixFunctions.c
+chassis\matrixfunctions.o: D:/Software/KeilMDK538/KeilMDK538/ARM/Pack/ARM/CMSIS-DSP/1.14.2/Source/MatrixFunctions/arm_mat_add_f32.c
+chassis\matrixfunctions.o: D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.14.2\Include\dsp/matrix_functions.h
+chassis\matrixfunctions.o: D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.14.2\Include\arm_math_types.h
+chassis\matrixfunctions.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
+chassis\matrixfunctions.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
+chassis\matrixfunctions.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
+chassis\matrixfunctions.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
+chassis\matrixfunctions.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h
+chassis\matrixfunctions.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\float.h
+chassis\matrixfunctions.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\limits.h
+chassis\matrixfunctions.o: D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.14.2\Include\arm_math_memory.h
+chassis\matrixfunctions.o: D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.14.2\Include\dsp/none.h
+chassis\matrixfunctions.o: D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.14.2\Include\dsp/utils.h

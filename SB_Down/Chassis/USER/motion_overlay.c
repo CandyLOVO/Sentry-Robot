@@ -24,7 +24,7 @@ void translate_6020(int16_t x,int16_t y) //仅平移的6020角度
 	int16_t vx = x*cos(theta) - y*sin(theta);
 	int16_t vy = x*sin(theta) + y*cos(theta);
 	for(int i=0;i<4;i++){
-		motor_angle[i] = remote_value((float)vx , (float)vy);
+		motor_angle[i] = remote_value((float)vx , (float)vy); //将遥控器希望转到的角度投影 0~180/0~-180
 	}
 }
 
