@@ -121,7 +121,7 @@ static void Vision_read(uint8_t rx_buffer[])
 	memcpy(&vision_receive.dz,&rx_buffer[42],4);
 	memcpy(&vision_receive.checksum,&rx_buffer[44],2);
 	
-	st.bias_time = 100;
+	st.bias_time = 1;
 	st.tar_yaw = vision_receive.yaw;
 	st.v_yaw = vision_receive.v_yaw;
 	st.armor_num = 4;
