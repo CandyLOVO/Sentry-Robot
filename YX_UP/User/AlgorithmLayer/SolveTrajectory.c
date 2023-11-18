@@ -111,8 +111,8 @@ float pitchTrajectoryCompensation_new(float s, float z, float v)
 	float tan_angle_1 = (a+sqrt(delta)) / (2*b);
 	float tan_angle_2 = (a-sqrt(delta)) / (2*b);
 	float angle_init = atan2(z, s);	//rad弧度，补偿前的角度
-	float angle_actual_1 = atan(tan_angle_1) * 57.3f;
-	float angle_actual_2 = atan(tan_angle_2) * 57.3f;//rad
+	float angle_actual_1 = -atan(tan_angle_1) * 57.3f;
+	float angle_actual_2 = -atan(tan_angle_2) * 57.3f;//rad
 	angle_pitch = (fabs(angle_actual_1 - INS_angle[1]) > fabs(angle_actual_2 - INS_angle[1])) ? angle_actual_2 : angle_actual_1;//取绝对值小的那个 
 	t = (float)((exp(k1 * s) - 1) / (k1 * v * cos(angle_pitch/57.3f)));//更新飞行时间
 	return angle_pitch;
@@ -127,16 +127,16 @@ float pitchTrajectoryCompensation_new(float s, float z, float v)
 @param aim_z:传出aim_z  打击目标的z
 */
     int idx = 0;
-		float yaw_Delay;
-float tar_yaw;
-float yaw_diff_min;
+float tar_yaw_test;
+float yaw_test;
 void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, float *aim_z)
 {
-
     // 线性预测
-		float timeDelay = st.bias_time/1000.0 + t; ;	//偏置时间(移动)加传输时间
-    yaw_Delay = st.v_yaw * timeDelay;		//v_yaw是目标车yaw转速，乘时间后得到下一时刻目标的航向角
-		tar_yaw = st.tar_yaw + yaw_Delay;
+		float timeDelay = st.bias_time/1000.0 + t; 	//偏置时间(移动)加传输时间
+    float yaw_Delay = st.v_yaw * timeDelay;		//v_yaw是目标车yaw转速，乘时间后得到下一时刻目标的航向角
+		float tar_yaw = st.tar_yaw + yaw_Delay;
+		tar_yaw_test = tar_yaw * 57.3f;
+		yaw_test = *yaw * 57.3f;
     //计算四块装甲板的位置
     //装甲板id顺序，以四块装甲板为例，逆时针编号
     //      2
@@ -144,6 +144,7 @@ void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, f
     //      0
 	int use_1 = 1;
 	int i = 0;
+			idx = 0;
  // 选择的装甲板
 	
 		//接下来将目标车中心的值转换到4块装甲板上，得到4个装甲板在云台坐标系下的x,y,z，并得到4块装甲板基于目标车中心(我方坐标系平移)
@@ -160,7 +161,7 @@ void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, f
             tar_position[i].yaw = tmp_yaw;
         }
 
-        yaw_diff_min = fabsf(*yaw - tar_position[0].yaw);
+        float yaw_diff_min = fabsf(*yaw - tar_position[0].yaw);
 
         //因为是平衡步兵 只需判断两块装甲板即可
         float temp_yaw_diff = fabsf(*yaw - tar_position[1].yaw);
@@ -217,10 +218,20 @@ void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, f
         
 
             //计算枪管到目标装甲板yaw最小的那个装甲板
-        yaw_diff_min = fabsf(*yaw - 57.3f*tar_position[0].yaw);
+//        float yaw_diff_min = fabsf(*yaw - tar_position[0].yaw);
+//        for (i = 1; i<4; i++) {
+//            float temp_yaw_diff = fabsf(*yaw - tar_position[i].yaw);
+//            if (temp_yaw_diff < yaw_diff_min)
+//            {
+//                yaw_diff_min = temp_yaw_diff;
+//                idx = i;
+//            }
+//        }
+				 //新 计算枪管到目标装甲板yaw最小的那个装甲板
+        float yaw_diff_min = cos(tar_position[0].yaw - *yaw);
         for (i = 1; i<4; i++) {
-            float temp_yaw_diff = fabsf(*yaw - 57.3f*tar_position[i].yaw);
-            if (temp_yaw_diff < yaw_diff_min)
+            float temp_yaw_diff = cos(tar_position[i].yaw - *yaw);
+            if (temp_yaw_diff > yaw_diff_min)
             {
                 yaw_diff_min = temp_yaw_diff;
                 idx = i;

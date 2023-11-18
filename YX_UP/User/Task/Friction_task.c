@@ -37,7 +37,7 @@ static void Bopan_judge();
 static void Bopan_calc(int16_t speed);
 
 //===============================================全局变量================================================//
-int16_t bopan_shoot_speed = 90*36;	//拨盘发射弹丸转速
+int16_t bopan_shoot_speed = 20*36;//90*36;	//拨盘发射弹丸转速
 int16_t bopan_reversal_speed = -35*36;	//拨盘反转转速
 uint8_t bopan_reversal_flag = 0;	//拨盘反转标志位，0为正转，1为反转
 

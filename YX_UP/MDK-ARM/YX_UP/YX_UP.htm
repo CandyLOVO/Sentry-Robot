@@ -3,9 +3,9 @@
 <title>Static Call Graph - [YX_UP\YX_UP.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image YX_UP\YX_UP.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Wed Nov 15 00:32:32 2023
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Sat Nov 18 18:57:28 2023
 <BR><P>
-<H3>Maximum Stack Usage =        464 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        472 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 Exchange_task &rArr; Judge_minipc &rArr; autoSolveTrajectory &rArr; pitchTrajectoryCompensation_new &rArr; __hardfp_pow &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 <P>
@@ -874,7 +874,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[6c]"></a>Exchange_task</STRONG> (Thumb, 196 bytes, Stack size 16 bytes, exchange_task.o(i.Exchange_task))
-<BR><BR>[Stack]<UL><LI>Max Depth = 464<LI>Call Chain = Exchange_task &rArr; Judge_minipc &rArr; autoSolveTrajectory &rArr; pitchTrajectoryCompensation_new &rArr; __hardfp_pow &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
+<BR><BR>[Stack]<UL><LI>Max Depth = 472<LI>Call Chain = Exchange_task &rArr; Judge_minipc &rArr; autoSolveTrajectory &rArr; pitchTrajectoryCompensation_new &rArr; __hardfp_pow &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Receive_DMA
@@ -2255,8 +2255,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan2
 </UL>
 
-<P><STRONG><a name="[123]"></a>autoSolveTrajectory</STRONG> (Thumb, 1228 bytes, Stack size 104 bytes, solvetrajectory.o(i.autoSolveTrajectory))
-<BR><BR>[Stack]<UL><LI>Max Depth = 432<LI>Call Chain = autoSolveTrajectory &rArr; pitchTrajectoryCompensation_new &rArr; __hardfp_pow &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
+<P><STRONG><a name="[123]"></a>autoSolveTrajectory</STRONG> (Thumb, 1256 bytes, Stack size 112 bytes, solvetrajectory.o(i.autoSolveTrajectory))
+<BR><BR>[Stack]<UL><LI>Max Depth = 440<LI>Call Chain = autoSolveTrajectory &rArr; pitchTrajectoryCompensation_new &rArr; __hardfp_pow &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[159]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan2
 <LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
@@ -3367,7 +3367,7 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[ae]"></a>Judge_minipc</STRONG> (Thumb, 118 bytes, Stack size 16 bytes, exchange_task.o(i.Judge_minipc))
-<BR><BR>[Stack]<UL><LI>Max Depth = 448<LI>Call Chain = Judge_minipc &rArr; autoSolveTrajectory &rArr; pitchTrajectoryCompensation_new &rArr; __hardfp_pow &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
+<BR><BR>[Stack]<UL><LI>Max Depth = 456<LI>Call Chain = Judge_minipc &rArr; autoSolveTrajectory &rArr; pitchTrajectoryCompensation_new &rArr; __hardfp_pow &rArr; sqrt &rArr; _dsqrt &rArr; __fpl_dnaninf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;autoSolveTrajectory
 </UL>
@@ -3386,7 +3386,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Exchange_task
 </UL>
 
-<P><STRONG><a name="[ad]"></a>Vision_read</STRONG> (Thumb, 190 bytes, Stack size 0 bytes, exchange_task.o(i.Vision_read))
+<P><STRONG><a name="[ad]"></a>Vision_read</STRONG> (Thumb, 168 bytes, Stack size 0 bytes, exchange_task.o(i.Vision_read))
 <BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Exchange_task
 </UL>
 

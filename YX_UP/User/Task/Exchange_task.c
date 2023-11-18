@@ -121,10 +121,9 @@ static void Vision_read(uint8_t rx_buffer[])
 	memcpy(&vision_receive.dz,&rx_buffer[42],4);
 	memcpy(&vision_receive.checksum,&rx_buffer[44],2);
 	
-	st.bias_time = 1;
 	st.tar_yaw = vision_receive.yaw;
 	st.v_yaw = vision_receive.v_yaw;
-	st.armor_num = 4;
+	st.armor_num = 2;
 	st.xw = vision_receive.x;
 	st.yw = vision_receive.y;
 	st.zw = vision_receive.z;
@@ -134,8 +133,6 @@ static void Vision_read(uint8_t rx_buffer[])
 	st.vxw = vision_receive.vx;
 	st.vyw = vision_receive.vy;
 	st.vzw = vision_receive.vz;
-	st.s_bias = 0.19133;
-  st.z_bias = 0.21265;
 	st.current_v = 28;
 	
 }
@@ -192,8 +189,8 @@ static void SolveTrajectory_Init()
     st.r2 = 0.5;
     st.dz = 0.1;
     st.bias_time = 100;
-    st.s_bias = 0.05;
-    st.z_bias = 0.05;//0.21265;
+    st.s_bias = 0.00;
+    st.z_bias = -0.08;
     st.armor_id = ARMOR_INFANTRY3;
     st.armor_num = 2;//ARMOR_NUM_NORMAL;
 		
