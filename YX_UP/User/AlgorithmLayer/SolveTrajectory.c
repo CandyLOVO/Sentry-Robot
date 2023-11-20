@@ -12,12 +12,12 @@
 
 #include <math.h>
 #include <stdio.h>
-
+#include <INS_task.h>
 #include "SolveTrajectory.h"
 
 struct SolveTrajectoryParams st;
 struct tar_pos tar_position[4]; //最多只有四块装甲板
-float t = 0.5f; // 飞行时间
+float t = 0.1f; // 飞行时间
 float dz_see[20];
 
 
@@ -98,6 +98,11 @@ float pitchTrajectoryCompensation(float s, float z, float v)
 */
 float pitchTrajectoryCompensation_new(float s, float z, float v)
 {
+	//测试用
+//	s = 5;
+//	z = 0;
+//	v = 30;
+	
 	float angle_pitch;
 	float k1 = 0.019;//小弹丸的空气阻力系数
 	float a = (exp(k1*s) - 1) / k1;
@@ -106,9 +111,10 @@ float pitchTrajectoryCompensation_new(float s, float z, float v)
 	float tan_angle_1 = (a+sqrt(delta)) / (2*b);
 	float tan_angle_2 = (a-sqrt(delta)) / (2*b);
 	float angle_init = atan2(z, s);	//rad弧度，补偿前的角度
-	float angle_actual_1 = atan2(tan_angle_1,1);
-	float angle_actual_2 = atan2(tan_angle_2,2);//rad
-	angle_pitch = (fabs(angle_actual_1 - angle_init) > fabs(angle_actual_2 - angle_init)) ? angle_actual_2 : angle_actual_1;//取绝对值小的那个 
+	float angle_actual_1 = -atan(tan_angle_1) * 57.3f;
+	float angle_actual_2 = -atan(tan_angle_2) * 57.3f;//rad
+	angle_pitch = (fabs(angle_actual_1 - INS_angle[1]) > fabs(angle_actual_2 - INS_angle[1])) ? angle_actual_2 : angle_actual_1;//取绝对值小的那个 
+	t = (float)((exp(k1 * s) - 1) / (k1 * v * cos(angle_pitch/57.3f)));//更新飞行时间
 	return angle_pitch;
 }
 
@@ -121,13 +127,16 @@ float pitchTrajectoryCompensation_new(float s, float z, float v)
 @param aim_z:传出aim_z  打击目标的z
 */
     int idx = 0;
+float tar_yaw_test;
+float yaw_test;
 void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, float *aim_z)
 {
-
     // 线性预测
-    float timeDelay ;	//偏置时间(移动)加传输时间
-    st.tar_yaw += st.v_yaw * timeDelay;		//v_yaw是目标车yaw转速，乘时间后得到下一时刻目标的航向角
-
+		float timeDelay = st.bias_time/1000.0 + t; 	//偏置时间(移动)加传输时间
+    float yaw_Delay = st.v_yaw * timeDelay;		//v_yaw是目标车yaw转速，乘时间后得到下一时刻目标的航向角
+		float tar_yaw = st.tar_yaw + yaw_Delay;
+		tar_yaw_test = tar_yaw * 57.3f;
+		yaw_test = *yaw * 57.3f;
     //计算四块装甲板的位置
     //装甲板id顺序，以四块装甲板为例，逆时针编号
     //      2
@@ -135,6 +144,7 @@ void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, f
     //      0
 	int use_1 = 1;
 	int i = 0;
+			idx = 0;
  // 选择的装甲板
 	
 		//接下来将目标车中心的值转换到4块装甲板上，得到4个装甲板在云台坐标系下的x,y,z，并得到4块装甲板基于目标车中心(我方坐标系平移)
@@ -143,7 +153,7 @@ void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, f
     //armor_num = ARMOR_NUM_BALANCE 为平衡步兵
     if (st.armor_num == ARMOR_NUM_BALANCE) {
         for (i = 0; i<2; i++) {
-            float tmp_yaw = st.tar_yaw + i * PI;
+            float tmp_yaw = tar_yaw + i * PI;
             float r = st.r1;
             tar_position[i].x = st.xw - r*cos(tmp_yaw);
             tar_position[i].y = st.yw - r*sin(tmp_yaw);
@@ -164,7 +174,7 @@ void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, f
 
     } else if (st.armor_num == ARMOR_NUM_OUTPOST) {  //前哨站
         for (i = 0; i<3; i++) {
-            float tmp_yaw = st.tar_yaw + i * 2.0 * PI/3.0;  // 2/3PI
+            float tmp_yaw = tar_yaw + i * 2.0 * PI/3.0;  // 2/3PI
             float r =  (st.r1 + st.r2)/2;   //理论上r1=r2 这里取个平均值
             tar_position[i].x = st.xw - r*cos(tmp_yaw);
             tar_position[i].y = st.yw - r*sin(tmp_yaw);
@@ -178,7 +188,7 @@ void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, f
     } else {
 
         for (i = 0; i<4; i++) {
-            float tmp_yaw = st.tar_yaw + i * PI/2.0;
+            float tmp_yaw = tar_yaw + i * PI/2.0;
             float r = use_1 ? st.r1 : st.r2;
             tar_position[i].x = st.xw - r*cos(tmp_yaw);
             tar_position[i].y = st.yw - r*sin(tmp_yaw);
@@ -192,17 +202,19 @@ void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, f
             //2.计算距离最近的装甲板
 
             //计算距离最近的装甲板
-        	float dis_diff_min = sqrt(tar_position[0].x * tar_position[0].x + tar_position[0].y * tar_position[0].y);
-        	//int idx = 0;
-        	for (i = 1; i<4; i++)
-        	{
-        		float temp_dis_diff = sqrt(tar_position[i].x * tar_position[0].x + tar_position[i].y * tar_position[0].y);
-        		if (temp_dis_diff < dis_diff_min)
-        		{
-        			dis_diff_min = temp_dis_diff;
-        			idx = i;
-        		}
-        	}
+//        	float dis_diff_min = sqrt(tar_position[0].x * tar_position[0].x + tar_position[0].y * tar_position[0].y);
+//        	//int idx = 0;
+//        	for (i = 1; i<4; i++)
+//        	{
+//						//这里不知道chenjunnnn为啥写得[i]*[0]
+//        		//float temp_dis_diff = sqrt(tar_position[i].x * tar_position[0].x + tar_position[i].y * tar_position[0].y);
+//						float temp_dis_diff = sqrt(tar_position[i].x * tar_position[i].x + tar_position[i].y * tar_position[i].y);
+//        		if (temp_dis_diff < dis_diff_min)
+//        		{
+//        			dis_diff_min = temp_dis_diff;
+//        			idx = i;
+//        		}
+//        	}
         
 
             //计算枪管到目标装甲板yaw最小的那个装甲板
@@ -215,25 +227,46 @@ void autoSolveTrajectory(float *pitch, float *yaw, float *aim_x, float *aim_y, f
 //                idx = i;
 //            }
 //        }
+				 //新 计算枪管到目标装甲板yaw最小的那个装甲板
+        float yaw_diff_min = cos(tar_position[0].yaw - *yaw);
+        for (i = 1; i<4; i++) {
+            float temp_yaw_diff = cos(tar_position[i].yaw - *yaw);
+            if (temp_yaw_diff > yaw_diff_min)
+            {
+                yaw_diff_min = temp_yaw_diff;
+                idx = i;
+            }
+        }
 
     }
-
-	
-		t = sqrt(pow(tar_position[idx].x,2) + pow(tar_position[idx].y,2)) / st.current_v;
-		timeDelay = 0;//st.bias_time/1000.0 + t;
     *aim_z = tar_position[idx].z + st.vzw * timeDelay;
     *aim_x = tar_position[idx].x + st.vxw * timeDelay;
     *aim_y = tar_position[idx].y + st.vyw * timeDelay;	//预测下一刻的位置
+		
+//		*aim_z = tar_position[0].z + st.vzw * timeDelay;
+//    *aim_x = tar_position[0].x + st.vxw * timeDelay;
+//    *aim_y = tar_position[0].y + st.vyw * timeDelay;	//预测下一刻的位置
+		
+		//不用yaw，只用xyz和他们的速度来预测
+//		*aim_z = st.zw + st.vzw * timeDelay;
+//    *aim_x = st.xw + st.vxw * timeDelay;
+//    *aim_y = st.yw + st.vyw * timeDelay;	//预测下一刻的位置
     //这里符号给错了
 		//float s_bias;  枪口前推的距离
     //float z_bias;  yaw轴电机到枪口水平面的垂直距离
 		//float current_v;  当前弹速
-    *pitch = -pitchTrajectoryCompensation_new(sqrt((*aim_x) * (*aim_x) + (*aim_y) * (*aim_y)) - st.s_bias,
+		
+		//单方向空气阻力模型
+    *pitch = pitchTrajectoryCompensation_new(sqrt((*aim_x) * (*aim_x) + (*aim_y) * (*aim_y)) - st.s_bias,
             *aim_z + st.z_bias, st.current_v);//param: s , z , v0
-		*pitch = -(float)(atan2(*aim_z,sqrt((*aim_x) * (*aim_x) + (*aim_y) * (*aim_y))));
-		*pitch = -(float)(atan2(st.zw+ st.z_bias,sqrt(st.xw*st.xw+st.yw*st.yw)));
-    *yaw = (float)(atan2(*aim_y, *aim_x));
-		*yaw = (float)(atan2(st.yw,st.xw));
+    *yaw = (float)(atan2(*aim_y, *aim_x)) * 57.3f;
+		
+		//对准车中心下一位置
+		//*pitch = -(float)(atan2(*aim_z+st.z_bias , sqrt((*aim_x) * (*aim_x) + (*aim_y) * (*aim_y))))*57.3f;
+		
+		//瞄准车中心
+		//*pitch = -(float)(atan2(st.zw + st.z_bias,sqrt(st.xw*st.xw+st.yw*st.yw)))*57.3f;
+		//*yaw = (float)(atan2(st.yw,st.xw))*57.3f;
 
 }
 
