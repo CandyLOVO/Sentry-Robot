@@ -59,4 +59,4 @@ chassis\chassis.o: ../USER/PotocaLayer/rc_potocal.h
 chassis\chassis.o: ../USER/DriverLayer/drv_can.h
 chassis\chassis.o: ../USER/handle_value.h
 chassis\chassis.o: ../USER/motion_overlay.h
-chassis\chassis.o: ..\USER\Control\channel_changes.h
+chassis\chassis.o: ../USER/Control/channel_changes.h

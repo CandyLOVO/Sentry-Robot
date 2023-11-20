@@ -69,7 +69,7 @@ void Chassis(void const * argument)
 		}
 		else if(rc_ctrl.rc.s[0]==2)
 		{
-			rotate_control(); //小陀螺旋转 无跟随
+			rotate_control(); //小陀螺旋转 无跟随 
 		}
     osDelay(10);
   }
