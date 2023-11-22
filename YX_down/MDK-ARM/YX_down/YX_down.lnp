@@ -1,4 +1,4 @@
---cpu=Cortex-M4.fp.sp
+--cpu Cortex-M4.fp
 "yx_down\startup_stm32f407xx.o"
 "yx_down\main.o"
 "yx_down\gpio.o"
@@ -43,8 +43,6 @@
 "yx_down\cmsis_os.o"
 "yx_down\heap_4.o"
 "yx_down\port.o"
-"yx_down\starttask02.o"
-"yx_down\starttask05.o"
 "yx_down\ins_task.o"
 "yx_down\chassis_task.o"
 "yx_down\drv_can.o"
@@ -53,7 +51,8 @@
 "yx_down\rc_potocal.o"
 "yx_down\crc.o"
 "yx_down\pid.o"
+"yx_down\motor.o"
 --strict --scatter "YX_down\YX_down.sct"
---summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "YX_down.map" -o YX_down\YX_down.axf

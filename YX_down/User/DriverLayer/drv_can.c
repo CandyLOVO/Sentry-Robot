@@ -4,7 +4,6 @@ extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
  extern RC_ctrl_t rc_ctrl;
 uint16_t can_cnt_1=0;
-extern motor_info_t  motor_info_chassis[4];
 extern uint16_t Up_ins_yaw;
 
 void CAN1_Init(void)

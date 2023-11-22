@@ -28,8 +28,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
-extern uint8_t first_x;
-extern uint8_t first_y;
+uint8_t first_x = 0;
+uint8_t first_y = 0;
 uint16_t first_count_x = 0;
 uint16_t first_count_y = 0;
 

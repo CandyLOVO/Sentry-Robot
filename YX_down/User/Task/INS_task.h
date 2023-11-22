@@ -73,6 +73,6 @@ void MahonyAHRSupdate(float q[4], float gx, float gy, float gz, float ax, float 
 void MahonyAHRSupdateIMU(float q[4], float gx, float gy, float gz, float ax, float ay, float az);
 void get_angle(fp32 q[4], fp32 *yaw, fp32 *pitch, fp32 *roll);
 
-
+extern ins_data_t ins_data;//IMU数据声明，方便其他文件调用
 
 #endif

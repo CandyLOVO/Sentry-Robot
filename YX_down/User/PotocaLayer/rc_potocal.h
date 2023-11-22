@@ -50,6 +50,6 @@ extern uint16_t v_flag;
 extern uint16_t b_flag;
 
 
-
+extern RC_ctrl_t rc_ctrl;
 
 #endif
