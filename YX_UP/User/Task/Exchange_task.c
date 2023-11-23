@@ -101,12 +101,6 @@ static void Get_minipc()
 //================================================通信读取解算任务================================================//
 static void Vision_read(uint8_t rx_buffer[])
 {
-//	Yaw_minipc = (int)(rx_buffer[1] << 8 | rx_buffer[2]);
-//	Pitch_minipc = (int)(rx_buffer[3] << 8 | rx_buffer[4]);
-//	Yaw_minipc_fp = (float)(Yaw_minipc * 100)/32767;
-//	Pitch_minipc_fp = (float)(Pitch_minipc * 100)/32767;	
-//	Yaw_minipc = (int)(Yaw_minipc * 100)/32767;
-//	Pitch_minipc = (int)(Pitch_minipc * 100)/32767;	
 	memcpy(&vision_receive.official,&rx_buffer[1],1); 
 	memcpy(&vision_receive.x,&rx_buffer[2],4); 
 	memcpy(&vision_receive.y,&rx_buffer[6],4); 
@@ -134,7 +128,6 @@ static void Vision_read(uint8_t rx_buffer[])
 	st.vyw = vision_receive.vy;
 	st.vzw = vision_receive.vz;
 	st.current_v = 28;
-	
 }
 
 //================================================数据stm32 -> 上位机================================================//

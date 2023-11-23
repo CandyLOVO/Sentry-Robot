@@ -1,6 +1,7 @@
 #ifndef PID_H
 #define PID_H
 #include "struct_typedef.h"
+#include "main.h"
 typedef struct
 {
     
@@ -28,7 +29,7 @@ extern void pid_init(pid_struct_t *pid,
 
 
 extern fp32 pid_calc(pid_struct_t *pid, fp32 ref, fp32 set);
-
+extern pid_struct_t motor_pid_chassis[4];//µ×ÅÌµç»úPID
 
 
 

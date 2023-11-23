@@ -1,6 +1,5 @@
 
 #include "pid.h"
-#include "main.h"
 
 #define LimitMax(input, max)   \
     {                          \
@@ -51,4 +50,4 @@ fp32 pid_calc(pid_struct_t *pid, fp32 fdb, fp32 set)   //µÚ¶ş¸ö²ÎÊıÎª·´À¡Öµ£¬µÚÈ
     return pid->out;
 }
 
-
+pid_struct_t motor_pid_chassis[4];//µ×ÅÌµç»úPID
