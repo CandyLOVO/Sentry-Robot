@@ -1,18 +1,37 @@
 #include "drv_usart.h"
 #include  "main.h"
-
 #include  "rc_potocal.h"
 #include  "judge.h"
+
+extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart3;
 extern UART_HandleTypeDef huart6;
 extern DMA_HandleTypeDef hdma_usart6_rx;
 extern DMA_HandleTypeDef hdma_usart6_tx;
+extern uint8_t Rx;
 #define USART3_RX_DATA_FRAME_LEN	(18u)	// 串口3数据帧长度
 #define USART3_RX_BUF_LEN			(USART3_RX_DATA_FRAME_LEN + 6u)	// 串口3接收缓冲区长度
 #define USART6_RX_BUF_LEN   (200)
 uint8_t usart3_dma_rxbuf[2][USART3_RX_BUF_LEN];
 volatile uint8_t judge_dma_buffer[2][USART6_RX_BUF_LEN] ={0}  ;
 uint8_t judge_receive_length=0;
+
+void USART1_Init(void)
+{
+	__HAL_UART_ENABLE_IT(&huart1,UART_IT_IDLE);
+	HAL_UART_Receive_DMA(&huart1,(uint8_t *)Rx,128);
+}
+
+void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与导航通信 //在stm32f4xx_it.c文件USART1_IRQHandler调用
+{
+	if(huart->Instance == USART1)
+	{
+		if(RESET != __HAL_UART_GET_FLAG(&huart1,UART_FLAG_IDLE)){
+			__HAL_UART_CLEAR_IDLEFLAG(&huart1);
+			HAL_UART_RxCpltCallback(huart);
+		}
+	}
+}
 
 void USART3_Init(void)
 {

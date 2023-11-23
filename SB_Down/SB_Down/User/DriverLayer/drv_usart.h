@@ -3,8 +3,10 @@
 
 #include "main.h"
 
+void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart);
 void DRV_USART3_IRQHandler(UART_HandleTypeDef *huart);
 void DRV_USART6_IRQHandler(UART_HandleTypeDef *huart);
+void USART1_Init(void);
 void USART3_Init(void);
 void USART6_Init(void);
 static void uart_rx_idle_callback(UART_HandleTypeDef* huart);

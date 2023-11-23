@@ -32,7 +32,7 @@
 #include "INS_task.h"
 #include "user_can.h"
 #include "drv_usart.h"
-#
+#include "communication.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -97,7 +97,9 @@ int16_t max_yaw_speed;
 float small;
 float angle_limit =8191;//×ª½ÇµÄ×î´óÖµ
 
-uint8_t rx_data[8];
+uint8_t rx_data[8]; //é¥æ§å™¨æ¥å—å€¼
+
+uint8_t Rx[128]; //å¯¼èˆªæ¥å—å€¼
 /* USER CODE END 0 */
 
 /**
@@ -141,7 +143,7 @@ int main(void)
   MX_I2C3_Init();
   MX_SPI1_Init();
   MX_TIM10_Init();
-  /* USER CODE BEGIN 2 */
+  /* USER CODE BEGIN 2 */	
 	HAL_TIM_PWM_Start(&htim10,TIM_CHANNEL_1);
 	HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);//ĞŞ¸ÄTIM2ÖĞ¶ÏÓÅÏÈ¼¶
 //	HAL_NVIC_SetPriority(SysTick_IRQn,1,1);//µ÷¸ßHAL_DelayµÄÊ±ÖÓÖĞ¶ÏÓÅÏÈ¼¶
@@ -149,6 +151,7 @@ int main(void)
   CAN2_Init();
   USART6_Init();
 	USART3_Init();
+	USART1_Init();
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

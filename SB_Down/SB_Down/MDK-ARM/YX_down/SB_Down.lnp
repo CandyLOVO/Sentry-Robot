@@ -49,6 +49,7 @@
 "yx_down\user_can.o"
 "yx_down\judge.o"
 "yx_down\rc_potocal.o"
+"yx_down\communication.o"
 "yx_down\crc.o"
 "yx_down\pid.o"
 "yx_down\handle_value.o"

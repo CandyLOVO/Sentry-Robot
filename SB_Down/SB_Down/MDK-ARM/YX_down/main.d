@@ -63,3 +63,4 @@ yx_down\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 yx_down\main.o: ../User/pid_imu.h
 yx_down\main.o: ../User/DriverLayer/user_can.h
 yx_down\main.o: ../User/DriverLayer/drv_usart.h
+yx_down\main.o: ../User/PotocaLayer/communication.h

@@ -1026,6 +1026,11 @@
               <FileType>1</FileType>
               <FilePath>..\User\PotocaLayer\rc_potocal.c</FilePath>
             </File>
+            <File>
+              <FileName>communication.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\PotocaLayer\communication.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
