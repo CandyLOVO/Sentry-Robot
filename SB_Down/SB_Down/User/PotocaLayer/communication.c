@@ -20,7 +20,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 			memcpy(&Tx.nav_vy,&Rx[51],4);
 			memcpy(&Tx.nav_yaw,&Rx[55],4);
 //			HAL_UART_Transmit_DMA(&huart6,Rx,data_length);
-			HAL_UART_Receive_DMA(&huart1,(uint8_t *)Rx,128);
+			HAL_UART_Receive_DMA(&huart1,(uint8_t *)Rx,sizeof(Rx));
 		}
 	}
 }

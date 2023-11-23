@@ -15,27 +15,9 @@ extern RC_ctrl_t rc_ctrl;
 extern int16_t motor_angle[4]; //6020角度 在motion_overlay.c中计算 作为全局变量
 extern int16_t motor_speed[4]; //3508速度
 
-/**********************************************外加INS代码****************************************/
 extern ins_data_t ins_data;
-// Save imu data
-uint16_t Up_ins_yaw; 
-uint16_t Down_ins_yaw = 180;
-uint16_t Down_ins_yaw_update = 180;
-fp32 Err_yaw;	
-fp32 Err_yaw_hudu;
-fp32 Err_accident = 0;	//mechanical err	
-fp32 Down_ins_pitch;
-fp32 Down_ins_row;
-fp32 sin_a;		
-fp32 cos_a;
-int8_t chassis_choice_flag = 0;
-int8_t chassis_mode = 1;
- 
-uint8_t first_x = 0;
-uint8_t first_y = 0;
- 
+
 extern uint8_t Flag_first;		//比赛开始标志位
-/*********************************************************************************************/
 
 int16_t theta = 60; //云台坐标系与底盘坐标系间夹角(此时为0~360度) 后期接收后需要对所得theta进行处理
 uint16_t initial_angle[4];

@@ -5,7 +5,7 @@
 
 #define cosin 0.707106781187 //二分之根号二
 #define omega 13 //旋转叠加计算中的角速度
-#define radius 50 //舵轮距离车体中心的距离
+#define radius 248.248 //舵轮距离车体中心的距离 杰舵248.248mm 哨兵313.487mm
 
 extern int16_t theta;
 

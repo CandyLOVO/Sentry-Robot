@@ -33,6 +33,7 @@
 #include "user_can.h"
 #include "drv_usart.h"
 #include "communication.h"
+#include "string.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -151,7 +152,9 @@ int main(void)
   CAN2_Init();
   USART6_Init();
 	USART3_Init();
-	USART1_Init();
+
+	__HAL_UART_ENABLE_IT(&huart1,UART_IT_IDLE);
+	HAL_UART_Receive_DMA(&huart1,(uint8_t *)Rx,sizeof(Rx));
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

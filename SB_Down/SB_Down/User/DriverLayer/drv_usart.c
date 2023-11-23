@@ -16,12 +16,6 @@ uint8_t usart3_dma_rxbuf[2][USART3_RX_BUF_LEN];
 volatile uint8_t judge_dma_buffer[2][USART6_RX_BUF_LEN] ={0}  ;
 uint8_t judge_receive_length=0;
 
-void USART1_Init(void)
-{
-	__HAL_UART_ENABLE_IT(&huart1,UART_IT_IDLE);
-	HAL_UART_Receive_DMA(&huart1,(uint8_t *)Rx,128);
-}
-
 void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与导航通信 //在stm32f4xx_it.c文件USART1_IRQHandler调用
 {
 	if(huart->Instance == USART1)

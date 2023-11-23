@@ -64,3 +64,4 @@ yx_down\main.o: ../User/pid_imu.h
 yx_down\main.o: ../User/DriverLayer/user_can.h
 yx_down\main.o: ../User/DriverLayer/drv_usart.h
 yx_down\main.o: ../User/PotocaLayer/communication.h
+yx_down\main.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
