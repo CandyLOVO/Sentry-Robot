@@ -36,3 +36,6 @@ yx_down\user_can.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 yx_down\user_can.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 yx_down\user_can.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 yx_down\user_can.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+yx_down\user_can.o: ../User/PotocaLayer/rc_potocal.h
+yx_down\user_can.o: ../User/struct_typedef.h
+yx_down\user_can.o: ../User/DriverLayer/user_can.h

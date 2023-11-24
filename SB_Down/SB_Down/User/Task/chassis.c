@@ -19,7 +19,7 @@ extern ins_data_t ins_data;
 
 extern uint8_t Flag_first;		//比赛开始标志位
 
-int16_t theta = 60; //云台坐标系与底盘坐标系间夹角(此时为0~360度) 后期接收后需要对所得theta进行处理
+int16_t theta; //云台坐标系与底盘坐标系间夹角(此时为0~360度) 后期接收后需要对所得theta进行处理
 uint16_t initial_angle[4];
 int16_t Max_out_a = 8192;
 int16_t Max_iout_a = 8192;
@@ -28,8 +28,18 @@ int16_t Max_iout_s = 30000;
 pidTypeDef PID_angle[4];
 pidTypeDef PID_speed_3508[4];
 pidTypeDef PID_speed_6020[4];
-//矫正陀螺仪
-int16_t Drifting_yaw = 0;
+
+int16_t yaw_up;
+int16_t yaw_down;
+int16_t yaw_down_update;
+int16_t Drifting_yaw = 0; //矫正陀螺仪
+
+static void Get_Err()
+{
+	yaw_down = ins_data.angle[0];
+	yaw_down_update = yaw_down - Drifting_yaw; //校正陀螺仪漂移
+	theta = yaw_up - yaw_down_update; //角度值
+}
 
 void Chassis(void const * argument)
 {
@@ -58,6 +68,8 @@ void Chassis(void const * argument)
 //		}
 //********************************************************************************************//
 		
+		Get_Err(); //得到上下位机差值
+		
 		if(m==0){
 			initial_angle[0] = 7819; //初始角度（底盘正前方各轮子角度）
 			initial_angle[1] = 1858;
@@ -80,8 +92,4 @@ void Chassis(void const * argument)
 		}
     osDelay(10);
   }
-}
-
-static void Get_Err()
-{
 }

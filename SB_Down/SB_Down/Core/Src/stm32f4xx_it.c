@@ -28,8 +28,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
-extern uint8_t first_x;
-extern uint8_t first_y;
+uint8_t first_x = 0;
+uint8_t first_y = 0;
 uint16_t first_count_x = 0;
 uint16_t first_count_y = 0;
 
@@ -290,7 +290,7 @@ void EXTI9_5_IRQHandler(void)
 		HAL_CAN_AddTxMessage(&hcan1, &tx_header, sbus_buf,(uint32_t*)CAN_TX_MAILBOX0);
 		
 		//更新漂移的角度
-		Drifting_yaw = (int16_t)(Down_ins_yaw - 180);
+		Drifting_yaw = (int16_t)(yaw_down - 180);
 	}
 
   /* USER CODE END EXTI9_5_IRQn 0 */

@@ -153,7 +153,7 @@ int main(void)
   USART6_Init();
 	USART3_Init();
 
-	__HAL_UART_ENABLE_IT(&huart1,UART_IT_IDLE);
+	__HAL_UART_ENABLE_IT(&huart1,UART_IT_IDLE); //导航数据接收
 	HAL_UART_Receive_DMA(&huart1,(uint8_t *)Rx,sizeof(Rx));
   /* USER CODE END 2 */
 

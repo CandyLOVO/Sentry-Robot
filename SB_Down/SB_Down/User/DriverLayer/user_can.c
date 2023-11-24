@@ -1,7 +1,9 @@
 #include "user_can.h"
+#include "rc_potocal.h"
 
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
+extern uint16_t yaw_up;
 
 CAN_TxHeaderTypeDef can_tx_message;
 uint8_t can_send_data[8];
@@ -148,6 +150,13 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) //can2发送6020
 			motor[index].speed = ((can_receive_data[2] << 8) | can_receive_data[3]);
 			motor[index].tor_current = ((can_receive_data[4] << 8) | can_receive_data[5]);
 			motor[index].temperture = can_receive_data[6];
+		}
+		if(can_rx_message.StdId==0x55) //上C向下C传IMU数据
+		{
+			if(can_receive_data[0] == 8) //校验位
+				{
+					yaw_up = can_receive_data[1] | (can_receive_data[2] << 8);			
+				}
 		}
 	}
 }
