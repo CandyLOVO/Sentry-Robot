@@ -4,23 +4,7 @@
 //X是左右方向，Y是前后方向（底盘）
 //注意平移叠加旋转时候不要超限
 //我如果没记错，上下C板之前有个180度差值的原因是上下两C板有个放反了，但我感觉逻辑全错了，现在改了但未验证
-
-fp32 Err_yaw;	
-fp32 Err_yaw_hudu;
-fp32 Err_accident = 0;	//mechanical err	
-fp32 Down_ins_pitch;
-fp32 Down_ins_row;
-fp32 sin_a;		
-fp32 cos_a;
-int8_t chassis_choice_flag = 0;
-int8_t chassis_mode = 1;
- 
-extern uint8_t Flag_first;		//比赛开始标志位
-
-
 //=======================================================函数===============================================================//
-//矫正陀螺仪
-int16_t Drifting_yaw = 0;
 
 //获取imu——Yaw角度差值参数
 static void Get_Err(); 
@@ -57,9 +41,16 @@ fp32 chassis_motor_pid [3]={30,0.5,10};		//PID原始参数
 volatile int16_t Vx=0,Vy=0,Wz=0;	//沿着各方向的速度，注意这个值是最大9158那个角速度，注意单位转换问题
 volatile int16_t motor_speed_target[4];		//各电机期望值
 
-int16_t Up_ins_yaw; //上C板yaw值
-int16_t Down_ins_yaw = 0;	//下C板yaw值
+float Down_ins_yaw = 0;	//下C板yaw值
+float Down_ins_pitch;
+float Down_ins_row;
 int16_t Down_ins_yaw_update = 0;	//下C板通过光电门矫正后的yaw值
+fp32 Err_yaw;		//差值ERR
+fp32 Err_yaw_hudu;	//差值（弧度版）
+float Drifting_yaw = 0;		//陀螺仪飘逸值（光电门）
+
+int8_t chassis_choice_flag = 0;	//底盘模式切换标志位（未使用）
+int8_t chassis_mode = 1;	//底盘模式（未使用）
 
 //功率限制算法的变量定义
 float Watch_Power_Max;
@@ -92,6 +83,7 @@ void Chassis_task(void const *pvParameters)
             osDelay(1);
 
     }
+		
 
 
 
@@ -336,7 +328,7 @@ static void Chassis_choice()
 static void Chassis_Power_Limit(double Chassis_pidout_target_limit)
 {	
 	//819.2/A，假设最大功率为120W，那么能够通过的最大电流为5A，取一个保守值：800.0 * 5 = 4000
-	Watch_Power_Max=Klimit;	Watch_Power=Hero_chassis_power;	Watch_Buffer=60;//Hero_chassis_power_buffer;//限制值，功率值，缓冲能量值，初始值是1，0，0
+	Watch_Power_Max=Klimit;	Watch_Power=Sentry.Myself_chassis_power;	Watch_Buffer=60;//Hero_chassis_power_buffer;//限制值，功率值，缓冲能量值，初始值是1，0，0
 	//get_chassis_power_and_buffer(&Power, &Power_Buffer, &Power_Max);//通过裁判系统和编码器值获取（限制值，实时功率，实时缓冲能量）
 
 		Chassis_pidout_max=61536;//32768，40，960			15384 * 4，取了4个3508电机最大电流的一个保守值
@@ -421,8 +413,8 @@ static void Chassis_Down()
 static void Chassis_Curl()
 {	
 		//获取旋转矩阵
-		cos_a = cos(Err_yaw_hudu);
-		sin_a = sin(Err_yaw_hudu);
+		fp32 cos_a = cos(Err_yaw_hudu);
+		fp32 sin_a = sin(Err_yaw_hudu);
 	
 		int16_t Temp_Vx = Vx;
 		int16_t Temp_Vy = Vy;

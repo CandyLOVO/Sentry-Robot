@@ -1,4 +1,4 @@
---cpu=Cortex-M4.fp.sp
+--cpu Cortex-M4.fp
 "yx_down\startup_stm32f407xx.o"
 "yx_down\main.o"
 "yx_down\gpio.o"
@@ -56,6 +56,6 @@
 "yx_down\motion_overlay.o"
 "yx_down\channel_changes.o"
 --strict --scatter "YX_down\SB_Down.sct"
---summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "SB_Down.map" -o YX_down\SB_Down.axf

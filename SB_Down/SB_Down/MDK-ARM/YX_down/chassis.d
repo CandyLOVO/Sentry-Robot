@@ -1,7 +1,7 @@
 yx_down\chassis.o: ..\User\Task\chassis.c
 yx_down\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/freertos.h
-yx_down\chassis.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
-yx_down\chassis.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
+yx_down\chassis.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stddef.h
+yx_down\chassis.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdint.h
 yx_down\chassis.o: ../Core/Inc/FreeRTOSConfig.h
 yx_down\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 yx_down\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -62,6 +62,6 @@ yx_down\chassis.o: ..\User\Control\channel_changes.h
 yx_down\chassis.o: ..\User\Task\INS_task.h
 yx_down\chassis.o: ../Core/Inc/tim.h
 yx_down\chassis.o: ../Core/Inc/spi.h
-yx_down\chassis.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h
+yx_down\chassis.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
 yx_down\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 yx_down\chassis.o: ../User/pid_imu.h

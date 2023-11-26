@@ -1,8 +1,8 @@
 #include "drv_usart.h"
 #include  "main.h"
-
 #include  "rc_potocal.h"
 #include  "judge.h"
+//=======================================================uart6用于裁判系统接收===============================================================//
 extern UART_HandleTypeDef huart3;
 extern UART_HandleTypeDef huart6;
 extern DMA_HandleTypeDef hdma_usart6_rx;
