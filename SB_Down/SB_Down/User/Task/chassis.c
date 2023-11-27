@@ -14,10 +14,7 @@ extern motor_info motor[8];
 extern RC_ctrl_t rc_ctrl;
 extern int16_t motor_angle[4]; //6020角度 在motion_overlay.c中计算 作为全局变量
 extern int16_t motor_speed[4]; //3508速度
-
 extern ins_data_t ins_data;
-
-extern uint8_t Flag_first;		//比赛开始标志位
 
 int16_t theta; //云台坐标系与底盘坐标系间夹角(此时为0~360度) 后期接收后需要对所得theta进行处理
 uint16_t initial_angle[4];
@@ -33,6 +30,7 @@ int16_t yaw_up;
 int16_t yaw_down;
 int16_t yaw_down_update;
 int16_t Drifting_yaw = 0; //矫正陀螺仪
+extern uint8_t Flag_first; //比赛开始标志位
 
 static void Get_Err()
 {

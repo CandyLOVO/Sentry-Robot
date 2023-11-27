@@ -1,8 +1,8 @@
 #include "drv_usart.h"
 #include  "main.h"
 
-#include  "rc_potocal.h"
-//#include  "judge.h"
+#include  "rc_potocal.h" //遥控器 DBUS USART3
+//#include  "judge.h" //裁判系统 USART6
 
 int value = 0;
 

@@ -1738,6 +1738,11 @@
               <FileType>1</FileType>
               <FilePath>..\USER\motion_overlay.c</FilePath>
             </File>
+            <File>
+              <FileName>communication.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\PotocaLayer\communication.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
