@@ -1,5 +1,7 @@
 #include "CRC.h"
 
+//=======================================================裁判系统的CRC校验===============================================================//
+
 //crc8 generator polynomial:G(x)=x8+x5+x4+1
 const unsigned char CRC8_INIT = 0xff;
 const unsigned char CRC8_TAB[256] =

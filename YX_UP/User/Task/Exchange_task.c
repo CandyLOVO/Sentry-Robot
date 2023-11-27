@@ -220,13 +220,16 @@ static void Judge_minipc()
 			autoSolveTrajectory(&vision.pitch, &vision.yaw, &vision.aim_x, &vision.aim_y, &vision.aim_z);	//弹道解算
 			chase.pitch = vision.pitch;
 			chase.yaw = vision.yaw;
+			
 			Sentry.foe_flag = 1;	//识别标志位
 			Sentry.foe_count = 0;	//计数器清零
+			Sentry.Flag_shoot = 1;	//射击标识位（无暂留）
 		}
 		else
 		{
 			chase.pitch = target_pitch;
 			chase.yaw = target_yaw;
+			Sentry.Flag_shoot = 0;	//射击标识位（无暂留）
 		}
 }
 

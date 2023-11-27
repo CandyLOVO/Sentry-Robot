@@ -26,8 +26,9 @@ typedef enum {
     CHAS_LB,
 } chassis_motor_cnt_t;
 
-extern int16_t Drifting_yaw;
-extern int16_t Down_ins_yaw;
+extern float Drifting_yaw;
+extern float Down_ins_yaw;
+extern float Up_ins_yaw; 
 
 void Chassis_task(void const *pvParameters);
 void RC_to_Vector(void);

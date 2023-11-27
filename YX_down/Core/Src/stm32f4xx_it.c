@@ -275,23 +275,24 @@ void CAN1_RX0_IRQHandler(void)
 void EXTI9_5_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
-	if( __HAL_GPIO_EXTI_GET_IT(GPIO_PIN_9) != RESET)//判断是否是GPIO_9
-	{
-		//传输这个信号给上C板
-		uint8_t sbus_buf[1];
-		sbus_buf[0] = 0xff;
-		 CAN_TxHeaderTypeDef tx_header;
-    
-		tx_header.StdId = 0x66;
-		tx_header.IDE   = CAN_ID_STD;//标准帧
-		tx_header.RTR   = CAN_RTR_DATA;//数据帧
-		tx_header.DLC   = 1;		//发送数据长度（字节）
+	//=======================================================光电门校准使用===============================================================//
+//	if( __HAL_GPIO_EXTI_GET_IT(GPIO_PIN_9) != RESET)//判断是否是GPIO_9
+//	{
+//		//传输这个信号给上C板
+//		uint8_t sbus_buf[1];
+//		sbus_buf[0] = 0xff;
+//		 CAN_TxHeaderTypeDef tx_header;
+//    
+//		tx_header.StdId = 0x66;
+//		tx_header.IDE   = CAN_ID_STD;//标准帧
+//		tx_header.RTR   = CAN_RTR_DATA;//数据帧
+//		tx_header.DLC   = 1;		//发送数据长度（字节）
 
-		HAL_CAN_AddTxMessage(&hcan1, &tx_header, sbus_buf,(uint32_t*)CAN_TX_MAILBOX0);
-		
-		//更新漂移的角度
-		Drifting_yaw = (int16_t)(Down_ins_yaw - 180);
-	}
+//		HAL_CAN_AddTxMessage(&hcan1, &tx_header, sbus_buf,(uint32_t*)CAN_TX_MAILBOX0);
+//		
+//		//更新漂移的角度
+//		Drifting_yaw = (int16_t)(Down_ins_yaw - 180);
+//	}
 
   /* USER CODE END EXTI9_5_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(INT1_Gyro_Pin);
@@ -408,26 +409,26 @@ void TIM8_UP_TIM13_IRQHandler(void)
   /* USER CODE BEGIN TIM8_UP_TIM13_IRQn 0 */
 	
 	
-	//开始比赛自启动定时器
-	if(Flag_first == 1)
-	{
-		first_count_x++;
-		first_count_y++;
-		if(first_count_x == 650)	//这个应该是左右
-		{
-			first_x = 0;
-		}
-		if(first_count_y == 240)
-		{
-			first_y = 0;
-		}
-		if(first_x == 0 && first_y == 0)
-		{
-			Flag_first = 2;
-			HAL_TIM_Base_Stop_IT(&htim8);
-		}
-		
-	}
+	//开始比赛自启动定时器，不能导航时的开环移动
+//	if(Flag_first == 1)
+//	{
+//		first_count_x++;
+//		first_count_y++;
+//		if(first_count_x == 650)	//这个应该是左右
+//		{
+//			first_x = 0;
+//		}
+//		if(first_count_y == 240)
+//		{
+//			first_y = 0;
+//		}
+//		if(first_x == 0 && first_y == 0)
+//		{
+//			Flag_first = 2;
+//			HAL_TIM_Base_Stop_IT(&htim8);
+//		}
+//		
+//	}
   /* USER CODE END TIM8_UP_TIM13_IRQn 0 */
   HAL_TIM_IRQHandler(&htim8);
   /* USER CODE BEGIN TIM8_UP_TIM13_IRQn 1 */

@@ -1,6 +1,5 @@
 #include "user_can.h"
 #include "rc_potocal.h"
-#include "chassis.h"
 
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;

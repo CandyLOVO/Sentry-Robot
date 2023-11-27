@@ -2,9 +2,10 @@
 #include "rc_potocal.h"
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
- extern RC_ctrl_t rc_ctrl;
+extern RC_ctrl_t rc_ctrl;
 uint16_t can_cnt_1=0;
-extern uint16_t Up_ins_yaw;
+
+float Up_ins_yaw = 0; //上C板yaw值
 
 void CAN1_Init(void)
 {
@@ -54,18 +55,20 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//接受中断回
 
   if(hcan->Instance == CAN1)
   {
-     uint8_t rx_data[8];
+    uint8_t rx_data[8];
 		HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data); //receive can1 data
 		if(rx_header.StdId==0x55)//上C向下C传IMU数据
 		{	
 				if(rx_data[0] == 8)	//校验位
 				{
-					Up_ins_yaw = rx_data[1] | (rx_data[2] << 8);			
+					//Up_ins_yaw = rx_data[1] | (rx_data[2] << 8);			
+					memcpy(&Up_ins_yaw,&rx_data[1],4);
 				}
 		}
   }
 	 if(hcan->Instance == CAN2)
-  {		uint8_t             rx_data[8];
+  {	//
+		uint8_t rx_data[8];
     HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data); //receive can2 data
 		if ((rx_header.StdId >= 0x201)//201-207
    && (rx_header.StdId <  0x208))                  // 判断标识符，标识符为0x200+ID
@@ -75,8 +78,6 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//接受中断回
      motor_info_chassis[index].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);
      motor_info_chassis[index].torque_current = ((rx_data[4] << 8) | rx_data[5]);
      motor_info_chassis[index].temp           =   rx_data[6];
-		if(index==0)
-		{can_cnt_1 ++;}
   }
   }
 

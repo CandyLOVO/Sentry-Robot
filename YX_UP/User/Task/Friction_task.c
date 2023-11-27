@@ -1,13 +1,14 @@
+
 #include "Friction_task.h"
 
 //================================================发射机构控制任务================================================//
 //第一版：
-//这个用来写摩擦轮和拨盘
+//这个用来写摩擦轮和拨盘（下侧）
 //摩擦轮的ID分别是1和2   ---   上C板CAN_2
 //拨盘的ID是5   ---   CAN_1（上下联通）
 
 //第二版：
-//这个新增两个摩擦轮和拨盘
+//这个新增两个摩擦轮和拨盘(上侧)
 //新摩擦轮ID分别是3和4   ---   上C板CAN_2
 //新增拨盘，拨盘ID是6   ---   CAN_1（上下联通）
 
@@ -63,7 +64,7 @@ void Friction_task(void const * argument)
 		
 		//===============================================拨盘================================================//
 		//Bopan_judge();	//拨盘正反转检测，测试后改完参数再用
-		if(rc_ctrl.rc.s[1] == 1)	//开启拨盘(测试模式)
+		if(rc_ctrl.rc.s[1] == 1 && Sentry.Flag_shoot)	//开启拨盘(测试模式)
 		{	
 			if(!bopan_reversal_flag)	//拨盘正转
 			{
@@ -75,7 +76,7 @@ void Friction_task(void const * argument)
 			}
 			
 		}
-		else if(rc_ctrl.rc.s[1] == 2  && Sentry.foe_flag)//检测到目标
+		else if(rc_ctrl.rc.s[1] == 2  && Sentry.Flag_shoot)//检测到目标
 		{
 			if(!bopan_reversal_flag)	//拨盘正转
 			{
