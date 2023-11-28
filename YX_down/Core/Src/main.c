@@ -32,7 +32,7 @@
 #include "INS_task.h"
 #include "drv_can.h"
 #include "drv_usart.h"
-#
+#include "bsp_delay.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -142,13 +142,15 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM10_Init();
   /* USER CODE BEGIN 2 */
-	HAL_TIM_PWM_Start(&htim10,TIM_CHANNEL_1);
-	HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);//修改TIM2中断优先级
+
 //	HAL_NVIC_SetPriority(SysTick_IRQn,1,1);//调高HAL_Delay的时钟中断优先级
 	CAN1_Init();
   CAN2_Init();
   USART6_Init();
 	USART3_Init();
+	HAL_TIM_Base_Start_IT(&htim1);//开启定时器1并打开中断
+	delay_init();//启动IMU
+	HAL_TIM_PWM_Start(&htim10,TIM_CHANNEL_1);//BMI088需要使用
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

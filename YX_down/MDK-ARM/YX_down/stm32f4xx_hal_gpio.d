@@ -6,7 +6,7 @@ yx_down\stm32f4xx_hal_gpio.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_
 yx_down\stm32f4xx_hal_gpio.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 yx_down\stm32f4xx_hal_gpio.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h
 yx_down\stm32f4xx_hal_gpio.o: ../Drivers/CMSIS/Include/core_cm4.h
-yx_down\stm32f4xx_hal_gpio.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
+yx_down\stm32f4xx_hal_gpio.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdint.h
 yx_down\stm32f4xx_hal_gpio.o: ../Drivers/CMSIS/Include/cmsis_version.h
 yx_down\stm32f4xx_hal_gpio.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 yx_down\stm32f4xx_hal_gpio.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -14,7 +14,7 @@ yx_down\stm32f4xx_hal_gpio.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 yx_down\stm32f4xx_hal_gpio.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 yx_down\stm32f4xx_hal_gpio.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 yx_down\stm32f4xx_hal_gpio.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-yx_down\stm32f4xx_hal_gpio.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
+yx_down\stm32f4xx_hal_gpio.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stddef.h
 yx_down\stm32f4xx_hal_gpio.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 yx_down\stm32f4xx_hal_gpio.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
 yx_down\stm32f4xx_hal_gpio.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h
