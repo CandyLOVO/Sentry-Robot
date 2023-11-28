@@ -56,9 +56,11 @@ chassis\main.o: ../Core/Inc/can.h
 chassis\main.o: ../Core/Inc/dma.h
 chassis\main.o: ../Core/Inc/i2c.h
 chassis\main.o: ../Core/Inc/spi.h
+chassis\main.o: ../Core/Inc/tim.h
 chassis\main.o: ../Core/Inc/usart.h
 chassis\main.o: ../Core/Inc/gpio.h
 chassis\main.o: ../USER/DriverLayer/drv_usart.h
 chassis\main.o: ../USER/DriverLayer/user_can.h
 chassis\main.o: ../USER/PotocaLayer/communication.h
 chassis\main.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
+chassis\main.o: ../USER/INS_Task/bsp_delay.h

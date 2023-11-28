@@ -1,0 +1,17 @@
+chassis\tasks_1.o: ..\USER\INS_Task\tasks.c
+chassis\tasks_1.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdlib.h
+chassis\tasks_1.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
+chassis\tasks_1.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+chassis\tasks_1.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
+chassis\tasks_1.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
+chassis\tasks_1.o: ../Core/Inc/FreeRTOSConfig.h
+chassis\tasks_1.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+chassis\tasks_1.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+chassis\tasks_1.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+chassis\tasks_1.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+chassis\tasks_1.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+chassis\tasks_1.o: ..\USER\INS_Task\task.h
+chassis\tasks_1.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+chassis\tasks_1.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+chassis\tasks_1.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+chassis\tasks_1.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/stack_macros.h

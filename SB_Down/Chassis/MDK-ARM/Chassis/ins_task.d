@@ -1,7 +1,6 @@
-chassis\ins_task.o: ..\USER\Task\INS_task.c
-chassis\ins_task.o: ..\USER\Task\INS_task.h
+chassis\ins_task.o: ..\USER\INS_Task\INS_task.c
+chassis\ins_task.o: ..\USER\INS_Task\INS_task.h
 chassis\ins_task.o: ../USER/struct_typedef.h
-chassis\ins_task.o: ../Core/Inc/tim.h
 chassis\ins_task.o: ../Core/Inc/main.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 chassis\ins_task.o: ../Core/Inc/stm32f4xx_hal_conf.h
@@ -10,7 +9,7 @@ chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 chassis\ins_task.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 chassis\ins_task.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h
 chassis\ins_task.o: ../Drivers/CMSIS/Include/core_cm4.h
-chassis\ins_task.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stdint.h
+chassis\ins_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
 chassis\ins_task.o: ../Drivers/CMSIS/Include/cmsis_version.h
 chassis\ins_task.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 chassis\ins_task.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -18,7 +17,7 @@ chassis\ins_task.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 chassis\ins_task.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-chassis\ins_task.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\stddef.h
+chassis\ins_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h
@@ -37,8 +36,7 @@ chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
-chassis\ins_task.o: ../Core/Inc/spi.h
-chassis\ins_task.o: D:\Software\KeilMDK538\Core\ARM\AC5\Bin\..\include\math.h
+chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 chassis\ins_task.o: ../Core/Inc/FreeRTOSConfig.h
@@ -53,4 +51,10 @@ chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-chassis\ins_task.o: ../Core/Inc/pid.h
+chassis\ins_task.o: ..\USER\INS_Task\bsp_imu_pwm.h
+chassis\ins_task.o: ..\USER\INS_Task\bsp_spi.h
+chassis\ins_task.o: ..\USER\INS_Task\bmi088driver.h
+chassis\ins_task.o: ..\USER\INS_Task\ist8310driver.h
+chassis\ins_task.o: ..\USER\INS_Task\pid_tem.h
+chassis\ins_task.o: ..\USER\INS_Task\MahonyAHRS.h
+chassis\ins_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h
