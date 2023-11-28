@@ -6,6 +6,7 @@
 
 int value = 0;
 
+extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart3;
 //extern UART_HandleTypeDef huart6;
 extern DMA_HandleTypeDef hdma_usart6_rx;
@@ -16,6 +17,17 @@ extern DMA_HandleTypeDef hdma_usart6_tx;
 uint8_t usart3_dma_rxbuf[2][USART3_RX_BUF_LEN];
 volatile uint8_t judge_dma_buffer[2][USART6_RX_BUF_LEN] ={0}  ;
 //uint8_t judge_receive_length=0;
+
+void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与导航通信 //在stm32f4xx_it.c文件USART1_IRQHandler调用
+{
+	if(huart->Instance == USART1)
+	{
+		if(RESET != __HAL_UART_GET_FLAG(&huart1,UART_FLAG_IDLE)){
+			__HAL_UART_CLEAR_IDLEFLAG(&huart1);
+			HAL_UART_RxCpltCallback(huart);
+		}
+	}
+}
 
 void USART3_Init(void)
 {

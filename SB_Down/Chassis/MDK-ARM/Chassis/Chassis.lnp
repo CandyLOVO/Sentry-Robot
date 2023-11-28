@@ -47,6 +47,7 @@
 "chassis\rc_potocal.o"
 "chassis\handle_value.o"
 "chassis\motion_overlay.o"
+"chassis\communication.o"
 "chassis\drv_usart.o"
 "chassis\user_can.o"
 "chassis\channel_changes.o"

@@ -3,6 +3,7 @@
 
 #include "main.h"
 
+void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart);
 void DRV_USART3_IRQHandler(UART_HandleTypeDef *huart);
 void DRV_USART6_IRQHandler(UART_HandleTypeDef *huart);
 void USART3_Init(void);

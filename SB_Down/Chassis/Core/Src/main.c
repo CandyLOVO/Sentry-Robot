@@ -30,6 +30,8 @@
 /* USER CODE BEGIN Includes */
 #include "drv_usart.h"
 #include "user_can.h"
+#include "communication.h"
+#include "string.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -62,7 +64,7 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+uint8_t Rx[128]; //导航接受值
 /* USER CODE END 0 */
 
 /**
@@ -106,6 +108,9 @@ int main(void)
 	CAN2_Init();
   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
 	USART3_Init();
+	
+	__HAL_UART_ENABLE_IT(&huart1,UART_IT_IDLE); //导航数据接收
+	HAL_UART_Receive_DMA(&huart1,(uint8_t *)Rx,sizeof(Rx));
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

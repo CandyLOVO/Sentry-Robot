@@ -60,3 +60,5 @@ chassis\main.o: ../Core/Inc/usart.h
 chassis\main.o: ../Core/Inc/gpio.h
 chassis\main.o: ../USER/DriverLayer/drv_usart.h
 chassis\main.o: ../USER/DriverLayer/user_can.h
+chassis\main.o: ../USER/PotocaLayer/communication.h
+chassis\main.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
