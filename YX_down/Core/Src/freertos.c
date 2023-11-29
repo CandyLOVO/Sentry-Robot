@@ -28,10 +28,6 @@
 #include "rc_potocal.h"
 #include "arm_math.h"
 #include "INS_task.h"
-#include "StartTask02.h"
-#include "StartTask03.h"
-#include "StartTask04.h"
-#include "StartTask05.h"
 #include "Chassis_task.h"
 /* USER CODE END Includes */
 
@@ -54,11 +50,6 @@
 /* USER CODE BEGIN Variables */
 osThreadId insTaskHandle;
 osThreadId Chassis_taskHandle;
-osThreadId myTask02Handle;
-
-//osThreadId myTask03Handle;
-//osThreadId myTask04Handle;
-osThreadId myTask05Handle;
 
 
 /* USER CODE END Variables */

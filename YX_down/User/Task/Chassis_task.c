@@ -114,9 +114,9 @@ static void Chassis_loop_Init()
 //=======================================================获取云台底盘角度差值，并做了光电门校准处理===============================================================//
 static void Get_Err()
 {
-			Down_ins_yaw = ins_data.angle[0];
-			Down_ins_pitch = ins_data.angle[1];
-			Down_ins_row = ins_data.angle[2];
+			Down_ins_yaw = INS_angle[0];
+			Down_ins_pitch = INS_angle[1];
+			Down_ins_row = INS_angle[2];
 	
 			//校正陀螺仪漂移
 			Down_ins_yaw_update = Down_ins_yaw - Drifting_yaw;
