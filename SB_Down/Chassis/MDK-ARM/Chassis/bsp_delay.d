@@ -1,5 +1,5 @@
-chassis\bsp_delay.o: ..\USER\INS_Task\bsp\boards\bsp_delay.c
-chassis\bsp_delay.o: ..\USER\INS_Task\bsp\boards\bsp_delay.h
+chassis\bsp_delay.o: ..\USER\INS_Task\ins_task\bsp_delay.c
+chassis\bsp_delay.o: ..\USER\INS_Task\ins_task\bsp_delay.h
 chassis\bsp_delay.o: ../USER/struct_typedef.h
 chassis\bsp_delay.o: ../Core/Inc/main.h
 chassis\bsp_delay.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h

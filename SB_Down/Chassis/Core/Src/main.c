@@ -33,6 +33,7 @@
 #include "user_can.h"
 #include "communication.h"
 #include "string.h"
+#include "bsp_delay.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -107,6 +108,7 @@ int main(void)
   MX_TIM10_Init();
   /* USER CODE BEGIN 2 */
 	delay_init();
+	HAL_TIM_PWM_Start(&htim10,TIM_CHANNEL_1);
 	CAN1_Init();
 	CAN2_Init();
   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);

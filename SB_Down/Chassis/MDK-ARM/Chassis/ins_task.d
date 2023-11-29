@@ -1,6 +1,6 @@
-chassis\ins_task.o: ..\USER\INS_Task\application\INS_task.c
-chassis\ins_task.o: ..\USER\INS_Task\application\INS_task.h
-chassis\ins_task.o: ..\USER\INS_Task\application\struct_typedef.h
+chassis\ins_task.o: ..\USER\INS_Task\ins_task\INS_task.c
+chassis\ins_task.o: ..\USER\INS_Task\ins_task\INS_task.h
+chassis\ins_task.o: ../USER/struct_typedef.h
 chassis\ins_task.o: ../Core/Inc/main.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 chassis\ins_task.o: ../Core/Inc/stm32f4xx_hal_conf.h
@@ -37,6 +37,10 @@ chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+chassis\ins_task.o: ..\Drivers\CMSIS\DSP\Include\arm_math.h
+chassis\ins_task.o: ../Drivers/CMSIS/Include/core_cm4.h
+chassis\ins_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
+chassis\ins_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 chassis\ins_task.o: ../Core/Inc/FreeRTOSConfig.h
@@ -51,9 +55,7 @@ chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-chassis\ins_task.o: ..\USER\INS_Task\bsp\boards\bsp_imu_pwm.h
-chassis\ins_task.o: ../USER/struct_typedef.h
-chassis\ins_task.o: ..\USER\INS_Task\bsp\boards\bsp_spi.h
-chassis\ins_task.o: ..\USER\INS_Task\components\devices\bmi088driver.h
-chassis\ins_task.o: ..\USER\INS_Task\components\controller\pid.h
-chassis\ins_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h
+chassis\ins_task.o: ..\USER\INS_Task\ins_task\bsp_imu_pwm.h
+chassis\ins_task.o: ..\USER\INS_Task\ins_task\bsp_spi.h
+chassis\ins_task.o: ..\USER\INS_Task\ins_task\bmi088driver.h
+chassis\ins_task.o: ..\USER\INS_Task\ins_task\pid.h

@@ -41,5 +41,4 @@ chassis\stm32f4xx_it.o: ../Core/Inc/chassis.h
 chassis\stm32f4xx_it.o: ../Core/Inc/can.h
 chassis\stm32f4xx_it.o: ../USER/struct_typedef.h
 chassis\stm32f4xx_it.o: ../Core/Inc/chassis.h
-chassis\stm32f4xx_it.o: ..\USER\INS_Task\application\INS_task.h
-chassis\stm32f4xx_it.o: ..\USER\INS_Task\application\struct_typedef.h
+chassis\stm32f4xx_it.o: ..\USER\INS_Task\ins_task\INS_task.h

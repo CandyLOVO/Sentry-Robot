@@ -370,11 +370,11 @@ void DMA2_Stream1_IRQHandler(void)
 void DMA2_Stream2_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
-
+	USER_DMA2_Stream2_IRQHandler();
   /* USER CODE END DMA2_Stream2_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_spi1_rx);
   /* USER CODE BEGIN DMA2_Stream2_IRQn 1 */
-	USER_DMA2_Stream2_IRQHandler();
+
   /* USER CODE END DMA2_Stream2_IRQn 1 */
 }
 

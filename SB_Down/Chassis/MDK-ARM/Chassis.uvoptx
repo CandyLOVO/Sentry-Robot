@@ -946,8 +946,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\USER\INS_Task\application\INS_task.c</PathWithFileName>
-      <FilenameWithoutPath>INS_task.c</FilenameWithoutPath>
+      <PathWithFileName>..\USER\INS_Task\ins_task\BMI088driver.c</PathWithFileName>
+      <FilenameWithoutPath>BMI088driver.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -958,8 +958,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\USER\INS_Task\bsp\boards\bsp_delay.c</PathWithFileName>
-      <FilenameWithoutPath>bsp_delay.c</FilenameWithoutPath>
+      <PathWithFileName>..\USER\INS_Task\ins_task\BMI088Middleware.c</PathWithFileName>
+      <FilenameWithoutPath>BMI088Middleware.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -970,8 +970,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\USER\INS_Task\bsp\boards\bsp_imu_pwm.c</PathWithFileName>
-      <FilenameWithoutPath>bsp_imu_pwm.c</FilenameWithoutPath>
+      <PathWithFileName>..\USER\INS_Task\ins_task\bsp_delay.c</PathWithFileName>
+      <FilenameWithoutPath>bsp_delay.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -982,8 +982,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\USER\INS_Task\bsp\boards\bsp_spi.c</PathWithFileName>
-      <FilenameWithoutPath>bsp_spi.c</FilenameWithoutPath>
+      <PathWithFileName>..\USER\INS_Task\ins_task\bsp_imu_pwm.c</PathWithFileName>
+      <FilenameWithoutPath>bsp_imu_pwm.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -994,8 +994,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\USER\INS_Task\components\devices\BMI088driver.c</PathWithFileName>
-      <FilenameWithoutPath>BMI088driver.c</FilenameWithoutPath>
+      <PathWithFileName>..\USER\INS_Task\ins_task\bsp_spi.c</PathWithFileName>
+      <FilenameWithoutPath>bsp_spi.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1006,8 +1006,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\USER\INS_Task\components\devices\BMI088Middleware.c</PathWithFileName>
-      <FilenameWithoutPath>BMI088Middleware.c</FilenameWithoutPath>
+      <PathWithFileName>..\USER\INS_Task\ins_task\INS_task.c</PathWithFileName>
+      <FilenameWithoutPath>INS_task.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1018,7 +1018,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\USER\INS_Task\components\controller\pid.c</PathWithFileName>
+      <PathWithFileName>..\USER\INS_Task\ins_task\pid.c</PathWithFileName>
       <FilenameWithoutPath>pid.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>

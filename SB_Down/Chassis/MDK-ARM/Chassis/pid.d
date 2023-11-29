@@ -1,5 +1,6 @@
-chassis\pid.o: ..\Core\Src\pid.c
-chassis\pid.o: ../Core/Inc/pid.h
+chassis\pid.o: ..\USER\INS_Task\ins_task\pid.c
+chassis\pid.o: ..\USER\INS_Task\ins_task\pid.h
+chassis\pid.o: ../USER/struct_typedef.h
 chassis\pid.o: ../Core/Inc/main.h
 chassis\pid.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 chassis\pid.o: ../Core/Inc/stm32f4xx_hal_conf.h

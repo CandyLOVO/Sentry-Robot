@@ -52,13 +52,13 @@
 "chassis\drv_usart.o"
 "chassis\user_can.o"
 "chassis\channel_changes.o"
-"chassis\ins_task.o"
+"chassis\bmi088driver.o"
+"chassis\bmi088middleware.o"
 "chassis\bsp_delay.o"
 "chassis\bsp_imu_pwm.o"
 "chassis\bsp_spi.o"
-"chassis\bmi088driver.o"
-"chassis\bmi088middleware.o"
-"chassis\pid_1.o"
+"chassis\ins_task.o"
+"chassis\pid.o"
 --strict --scatter "Chassis\Chassis.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

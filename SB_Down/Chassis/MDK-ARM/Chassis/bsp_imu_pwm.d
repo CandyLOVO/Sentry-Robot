@@ -1,5 +1,5 @@
-chassis\bsp_imu_pwm.o: ..\USER\INS_Task\bsp\boards\bsp_imu_pwm.c
-chassis\bsp_imu_pwm.o: ..\USER\INS_Task\bsp\boards\bsp_imu_pwm.h
+chassis\bsp_imu_pwm.o: ..\USER\INS_Task\ins_task\bsp_imu_pwm.c
+chassis\bsp_imu_pwm.o: ..\USER\INS_Task\ins_task\bsp_imu_pwm.h
 chassis\bsp_imu_pwm.o: ../USER/struct_typedef.h
 chassis\bsp_imu_pwm.o: ../Core/Inc/main.h
 chassis\bsp_imu_pwm.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h

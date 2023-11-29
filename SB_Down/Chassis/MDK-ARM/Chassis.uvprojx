@@ -338,9 +338,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_HAL_DRIVER,STM32F407xx</Define>
+              <Define>USE_HAL_DRIVER,STM32F407xx, FPU_PRESENT=1, FPU_USED=1,ARM_MATH_CM4, CC_ARM</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../USER/DriverLayer;../USER/PotocaLayer;../USER;../USER/Control;..\USER\INS_Task\application;..\USER\INS_Task\bsp\boards;..\USER\INS_Task\components\algorithm;..\USER\INS_Task\components\controller;..\USER\INS_Task\components\devices</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../USER/DriverLayer;../USER/PotocaLayer;../USER;../USER/Control;..\USER\INS_Task\ins_task;..\Drivers\CMSIS\DSP\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1830,39 +1830,39 @@
           <GroupName>INS_Task</GroupName>
           <Files>
             <File>
-              <FileName>INS_task.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\USER\INS_Task\application\INS_task.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\USER\INS_Task\bsp\boards\bsp_delay.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_imu_pwm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\USER\INS_Task\bsp\boards\bsp_imu_pwm.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\USER\INS_Task\bsp\boards\bsp_spi.c</FilePath>
-            </File>
-            <File>
               <FileName>BMI088driver.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\USER\INS_Task\components\devices\BMI088driver.c</FilePath>
+              <FilePath>..\USER\INS_Task\ins_task\BMI088driver.c</FilePath>
             </File>
             <File>
               <FileName>BMI088Middleware.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\USER\INS_Task\components\devices\BMI088Middleware.c</FilePath>
+              <FilePath>..\USER\INS_Task\ins_task\BMI088Middleware.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\INS_Task\ins_task\bsp_delay.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_imu_pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\INS_Task\ins_task\bsp_imu_pwm.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\INS_Task\ins_task\bsp_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>INS_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\INS_Task\ins_task\INS_task.c</FilePath>
             </File>
             <File>
               <FileName>pid.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\USER\INS_Task\components\controller\pid.c</FilePath>
+              <FilePath>..\USER\INS_Task\ins_task\pid.c</FilePath>
             </File>
           </Files>
         </Group>

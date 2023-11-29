@@ -1,5 +1,5 @@
-chassis\bsp_spi.o: ..\USER\INS_Task\bsp\boards\bsp_spi.c
-chassis\bsp_spi.o: ..\USER\INS_Task\bsp\boards\bsp_spi.h
+chassis\bsp_spi.o: ..\USER\INS_Task\ins_task\bsp_spi.c
+chassis\bsp_spi.o: ..\USER\INS_Task\ins_task\bsp_spi.h
 chassis\bsp_spi.o: ../USER/struct_typedef.h
 chassis\bsp_spi.o: ../Core/Inc/main.h
 chassis\bsp_spi.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
