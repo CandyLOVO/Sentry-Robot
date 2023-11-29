@@ -30,10 +30,10 @@
 #include "bsp_imu_pwm.h"
 #include "bsp_spi.h"
 #include "bmi088driver.h"
-#include "ist8310driver.h"
-#include "pid_tem.h"
+//#include "ist8310driver.h"
+#include "pid.h"
 
-#include "MahonyAHRS.h"
+//#include "MahonyAHRS.h"
 #include "math.h"
 
 
@@ -92,7 +92,7 @@ volatile uint8_t imu_start_dma_flag = 0;
 
 
 bmi088_real_data_t bmi088_real_data;
-ist8310_real_data_t ist8310_real_data;
+//ist8310_real_data_t ist8310_real_data;
 
 
 static uint8_t first_temperate;
@@ -123,16 +123,16 @@ void INS_task(void const *pvParameters)
     {
         osDelay(100);
     }
-    while(ist8310_init())
-    {
-        osDelay(100);
-    }
+//    while(ist8310_init())
+//    {
+//        osDelay(100);
+//    }
 
     BMI088_read(bmi088_real_data.gyro, bmi088_real_data.accel, &bmi088_real_data.temp);
 
     PID_init(&imu_temp_pid, PID_POSITION, imu_temp_PID, TEMPERATURE_PID_MAX_OUT, TEMPERATURE_PID_MAX_IOUT);
 
-    AHRS_init(INS_quat, bmi088_real_data.accel, ist8310_real_data.mag);
+//    AHRS_init(INS_quat, bmi088_real_data.accel, ist8310_real_data.mag);
 
 
     //get the handle of task
@@ -159,8 +159,7 @@ void INS_task(void const *pvParameters)
         while (ulTaskNotifyTake(pdTRUE, portMAX_DELAY) != pdPASS)
         {
         }
-
-
+				
         if(gyro_update_flag & (1 << IMU_NOTIFY_SHFITS))
         {
             gyro_update_flag &= ~(1 << IMU_NOTIFY_SHFITS);
@@ -181,9 +180,8 @@ void INS_task(void const *pvParameters)
         }
 
 
-        AHRS_update(INS_quat, 0.001f, bmi088_real_data.gyro, bmi088_real_data.accel, ist8310_real_data.mag);
+//        AHRS_update(INS_quat, 0.001f, bmi088_real_data.gyro, bmi088_real_data.accel, ist8310_real_data.mag);
         get_angle(INS_quat, INS_angle + INS_YAW_ADDRESS_OFFSET, INS_angle + INS_PITCH_ADDRESS_OFFSET, INS_angle + INS_ROLL_ADDRESS_OFFSET);
-
 
     }
 }
@@ -197,10 +195,10 @@ void AHRS_init(fp32 quat[4], fp32 accel[3], fp32 mag[3])
 
 }
 
-void AHRS_update(fp32 quat[4], fp32 time, fp32 gyro[3], fp32 accel[3], fp32 mag[3])
-{
-    MahonyAHRSupdate(quat, gyro[0], gyro[1], gyro[2], accel[0], accel[1], accel[2], mag[0], mag[1], mag[2]);
-}
+//void AHRS_update(fp32 quat[4], fp32 time, fp32 gyro[3], fp32 accel[3], fp32 mag[3])
+//{
+//    MahonyAHRSupdate(quat, gyro[0], gyro[1], gyro[2], accel[0], accel[1], accel[2], mag[0], mag[1], mag[2]);
+//}
 void get_angle(fp32 q[4], fp32 *yaw, fp32 *pitch, fp32 *roll)
 {
     *yaw = atan2f(2.0f*(q[0]*q[3]+q[1]*q[2]), 2.0f*(q[0]*q[0]+q[1]*q[1])-1.0f);
@@ -272,18 +270,18 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
             imu_cmd_spi_dma();
         }
     }
-    else if(GPIO_Pin == DRDY_IST8310_Pin)
-    {
-        mag_update_flag |= 1 << IMU_DR_SHFITS;
+//    else if(GPIO_Pin == DRDY_IST8310_Pin)
+//    {
+//        mag_update_flag |= 1 << IMU_DR_SHFITS;
 
-        if(mag_update_flag &= 1 << IMU_DR_SHFITS)
-        {
-            mag_update_flag &= ~(1<< IMU_DR_SHFITS);
-            mag_update_flag |= (1 << IMU_SPI_SHFITS);
+//        if(mag_update_flag &= 1 << IMU_DR_SHFITS)
+//        {
+//            mag_update_flag &= ~(1<< IMU_DR_SHFITS);
+//            mag_update_flag |= (1 << IMU_SPI_SHFITS);
 
-            ist8310_read_mag(ist8310_real_data.mag);
-        }
-    }
+//            ist8310_read_mag(ist8310_real_data.mag);
+//        }
+//    }
     else if(GPIO_Pin == GPIO_PIN_0)
     {
         //wake up the task

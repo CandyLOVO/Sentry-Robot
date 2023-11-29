@@ -55,3 +55,5 @@ chassis\freertos.o: ../USER/struct_typedef.h
 chassis\freertos.o: ../Core/Inc/chassis.h
 chassis\freertos.o: ../USER/PotocaLayer/rc_potocal.h
 chassis\freertos.o: ../USER/DriverLayer/drv_can.h
+chassis\freertos.o: ..\USER\INS_Task\application\INS_task.h
+chassis\freertos.o: ..\USER\INS_Task\application\struct_typedef.h

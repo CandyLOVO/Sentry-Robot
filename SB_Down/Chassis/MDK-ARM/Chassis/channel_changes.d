@@ -45,4 +45,4 @@ chassis\channel_changes.o: ../Core/Inc/chassis.h
 chassis\channel_changes.o: ../USER/motion_overlay.h
 chassis\channel_changes.o: ../USER/handle_value.h
 chassis\channel_changes.o: ../USER/DriverLayer/user_can.h
-chassis\channel_changes.o: ../Core/Inc/pid.h
+chassis\channel_changes.o: ../Core/Inc/user_pid.h

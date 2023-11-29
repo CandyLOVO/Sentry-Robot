@@ -1,5 +1,5 @@
-chassis\bmi088middleware.o: ..\USER\INS_Task\BMI088Middleware.c
-chassis\bmi088middleware.o: ..\USER\INS_Task\BMI088Middleware.h
+chassis\bmi088middleware.o: ..\USER\INS_Task\components\devices\BMI088Middleware.c
+chassis\bmi088middleware.o: ..\USER\INS_Task\components\devices\BMI088Middleware.h
 chassis\bmi088middleware.o: ../USER/struct_typedef.h
 chassis\bmi088middleware.o: ../Core/Inc/main.h
 chassis\bmi088middleware.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
@@ -37,3 +37,18 @@ chassis\bmi088middleware.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_sp
 chassis\bmi088middleware.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 chassis\bmi088middleware.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 chassis\bmi088middleware.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+chassis\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+chassis\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+chassis\bmi088middleware.o: ../Core/Inc/FreeRTOSConfig.h
+chassis\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+chassis\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+chassis\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+chassis\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+chassis\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+chassis\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+chassis\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+chassis\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+chassis\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
+chassis\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
+chassis\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+chassis\bmi088middleware.o: ..\USER\INS_Task\bsp\boards\bsp_delay.h

@@ -27,6 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include "chassis.h"
 #include "rc_potocal.h"
+#include "INS_task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,6 +48,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
 osThreadId ChassisHandle;
+osThreadId InsTaskHandle;
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
 
@@ -109,6 +111,9 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_THREADS */
   osThreadDef(Receive,Chassis,osPriorityNormal,0,1024);
   ChassisHandle = osThreadCreate(osThread(Receive),NULL);
+	
+	osThreadDef(InsTask,INS_task,osPriorityNormal,0,1024);
+	InsTaskHandle = osThreadCreate(osThread(InsTask),NULL);
   /* USER CODE END RTOS_THREADS */
 
 }

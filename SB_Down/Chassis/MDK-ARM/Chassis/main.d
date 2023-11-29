@@ -63,4 +63,3 @@ chassis\main.o: ../USER/DriverLayer/drv_usart.h
 chassis\main.o: ../USER/DriverLayer/user_can.h
 chassis\main.o: ../USER/PotocaLayer/communication.h
 chassis\main.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
-chassis\main.o: ../USER/INS_Task/bsp_delay.h

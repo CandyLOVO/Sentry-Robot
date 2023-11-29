@@ -1,6 +1,6 @@
-chassis\ins_task.o: ..\USER\INS_Task\INS_task.c
-chassis\ins_task.o: ..\USER\INS_Task\INS_task.h
-chassis\ins_task.o: ../USER/struct_typedef.h
+chassis\ins_task.o: ..\USER\INS_Task\application\INS_task.c
+chassis\ins_task.o: ..\USER\INS_Task\application\INS_task.h
+chassis\ins_task.o: ..\USER\INS_Task\application\struct_typedef.h
 chassis\ins_task.o: ../Core/Inc/main.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 chassis\ins_task.o: ../Core/Inc/stm32f4xx_hal_conf.h
@@ -51,10 +51,9 @@ chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-chassis\ins_task.o: ..\USER\INS_Task\bsp_imu_pwm.h
-chassis\ins_task.o: ..\USER\INS_Task\bsp_spi.h
-chassis\ins_task.o: ..\USER\INS_Task\bmi088driver.h
-chassis\ins_task.o: ..\USER\INS_Task\ist8310driver.h
-chassis\ins_task.o: ..\USER\INS_Task\pid_tem.h
-chassis\ins_task.o: ..\USER\INS_Task\MahonyAHRS.h
+chassis\ins_task.o: ..\USER\INS_Task\bsp\boards\bsp_imu_pwm.h
+chassis\ins_task.o: ../USER/struct_typedef.h
+chassis\ins_task.o: ..\USER\INS_Task\bsp\boards\bsp_spi.h
+chassis\ins_task.o: ..\USER\INS_Task\components\devices\bmi088driver.h
+chassis\ins_task.o: ..\USER\INS_Task\components\controller\pid.h
 chassis\ins_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h

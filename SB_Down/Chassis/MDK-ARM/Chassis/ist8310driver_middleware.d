@@ -1,5 +1,5 @@
-chassis\ist8310driver_middleware.o: ..\USER\INS_Task\ist8310driver_middleware.c
-chassis\ist8310driver_middleware.o: ..\USER\INS_Task\ist8310driver_middleware.h
+chassis\ist8310driver_middleware.o: ..\USER\INS_Task\components\devices\ist8310driver_middleware.c
+chassis\ist8310driver_middleware.o: ..\USER\INS_Task\components\devices\ist8310driver_middleware.h
 chassis\ist8310driver_middleware.o: ../USER/struct_typedef.h
 chassis\ist8310driver_middleware.o: ../Core/Inc/main.h
 chassis\ist8310driver_middleware.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
@@ -51,4 +51,4 @@ chassis\ist8310driver_middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/i
 chassis\ist8310driver_middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 chassis\ist8310driver_middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 chassis\ist8310driver_middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-chassis\ist8310driver_middleware.o: ..\USER\INS_Task\bsp_delay.h
+chassis\ist8310driver_middleware.o: ..\USER\INS_Task\bsp\boards\bsp_delay.h

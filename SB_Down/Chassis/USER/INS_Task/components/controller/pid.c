@@ -15,7 +15,7 @@
   ****************************(C) COPYRIGHT 2019 DJI****************************
   */
 
-#include "pid_tem.h"
+#include "pid.h"
 #include "main.h"
 
 #define LimitMax(input, max)   \

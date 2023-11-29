@@ -20,7 +20,6 @@
 #include "main.h"
 #include "cmsis_os.h"
 #include "bsp_delay.h"
-//#include "bsp_i2c.h"
 
 extern I2C_HandleTypeDef hi2c3;
 
