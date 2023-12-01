@@ -2,7 +2,7 @@ chassis\rc_potocal.o: ..\USER\PotocaLayer\rc_potocal.c
 chassis\rc_potocal.o: ..\USER\PotocaLayer\rc_potocal.h
 chassis\rc_potocal.o: ../USER/struct_typedef.h
 chassis\rc_potocal.o: ../USER/DriverLayer/drv_can.h
-chassis\rc_potocal.o: ../Core/Inc/chassis.h
+chassis\rc_potocal.o: ..\USER\Task\chassis.h
 chassis\rc_potocal.o: ../Core/Inc/can.h
 chassis\rc_potocal.o: ../Core/Inc/main.h
 chassis\rc_potocal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
@@ -40,5 +40,5 @@ chassis\rc_potocal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 chassis\rc_potocal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 chassis\rc_potocal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 chassis\rc_potocal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
-chassis\rc_potocal.o: ../Core/Inc/chassis.h
+chassis\rc_potocal.o: ..\USER\Task\chassis.h
 chassis\rc_potocal.o: ../USER/DriverLayer/user_can.h

@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx, FPU_PRESENT=1, FPU_USED=1,ARM_MATH_CM4, CC_ARM</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../USER/DriverLayer;../USER/PotocaLayer;../USER;../USER/Control;..\USER\INS_Task\ins_task;..\Drivers\CMSIS\DSP\Include</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../USER/DriverLayer;../USER/PotocaLayer;../USER;../USER/Control;..\Drivers\CMSIS\DSP\Include;..\USER\Task;..\USER\Task\INS_Task\ins_task</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -394,11 +394,6 @@
         <Group>
           <GroupName>Application/User/Core</GroupName>
           <Files>
-            <File>
-              <FileName>chassis.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Core\Src\chassis.c</FilePath>
-            </File>
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
@@ -815,11 +810,6 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
-            </File>
-            <File>
-              <FileName>user_pid.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Core\Src\user_pid.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1814,6 +1804,11 @@
               <FileType>1</FileType>
               <FilePath>..\USER\DriverLayer\user_can.c</FilePath>
             </File>
+            <File>
+              <FileName>user_pid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\DriverLayer\user_pid.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1827,42 +1822,52 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Task</GroupName>
+          <Files>
+            <File>
+              <FileName>chassis.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\Task\chassis.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>INS_Task</GroupName>
           <Files>
             <File>
               <FileName>BMI088driver.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\USER\INS_Task\ins_task\BMI088driver.c</FilePath>
+              <FilePath>..\USER\Task\INS_Task\ins_task\BMI088driver.c</FilePath>
             </File>
             <File>
               <FileName>BMI088Middleware.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\USER\INS_Task\ins_task\BMI088Middleware.c</FilePath>
+              <FilePath>..\USER\Task\INS_Task\ins_task\BMI088Middleware.c</FilePath>
             </File>
             <File>
               <FileName>bsp_delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\USER\INS_Task\ins_task\bsp_delay.c</FilePath>
+              <FilePath>..\USER\Task\INS_Task\ins_task\bsp_delay.c</FilePath>
             </File>
             <File>
               <FileName>bsp_imu_pwm.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\USER\INS_Task\ins_task\bsp_imu_pwm.c</FilePath>
+              <FilePath>..\USER\Task\INS_Task\ins_task\bsp_imu_pwm.c</FilePath>
             </File>
             <File>
               <FileName>bsp_spi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\USER\INS_Task\ins_task\bsp_spi.c</FilePath>
+              <FilePath>..\USER\Task\INS_Task\ins_task\bsp_spi.c</FilePath>
             </File>
             <File>
               <FileName>INS_task.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\USER\INS_Task\ins_task\INS_task.c</FilePath>
+              <FilePath>..\USER\Task\INS_Task\ins_task\INS_task.c</FilePath>
             </File>
             <File>
               <FileName>pid.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\USER\INS_Task\ins_task\pid.c</FilePath>
+              <FilePath>..\USER\Task\INS_Task\ins_task\pid.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -49,10 +49,10 @@ chassis\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 chassis\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 chassis\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 chassis\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-chassis\freertos.o: ../Core/Inc/chassis.h
+chassis\freertos.o: ..\USER\Task\chassis.h
 chassis\freertos.o: ../Core/Inc/can.h
 chassis\freertos.o: ../USER/struct_typedef.h
-chassis\freertos.o: ../Core/Inc/chassis.h
+chassis\freertos.o: ..\USER\Task\chassis.h
 chassis\freertos.o: ../USER/PotocaLayer/rc_potocal.h
 chassis\freertos.o: ../USER/DriverLayer/drv_can.h
-chassis\freertos.o: ..\USER\INS_Task\ins_task\INS_task.h
+chassis\freertos.o: ..\USER\Task\INS_Task\ins_task\INS_task.h

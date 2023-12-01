@@ -2,7 +2,7 @@ chassis\handle_value.o: ..\USER\handle_value.c
 chassis\handle_value.o: ../USER/PotocaLayer/rc_potocal.h
 chassis\handle_value.o: ../USER/struct_typedef.h
 chassis\handle_value.o: ../USER/DriverLayer/drv_can.h
-chassis\handle_value.o: ../Core/Inc/chassis.h
+chassis\handle_value.o: ..\USER\Task\chassis.h
 chassis\handle_value.o: ../Core/Inc/can.h
 chassis\handle_value.o: ../Core/Inc/main.h
 chassis\handle_value.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
@@ -40,6 +40,6 @@ chassis\handle_value.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 chassis\handle_value.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 chassis\handle_value.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 chassis\handle_value.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
-chassis\handle_value.o: ../Core/Inc/chassis.h
+chassis\handle_value.o: ..\USER\Task\chassis.h
 chassis\handle_value.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h
 chassis\handle_value.o: ..\USER\handle_value.h

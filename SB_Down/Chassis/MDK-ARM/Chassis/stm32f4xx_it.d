@@ -37,8 +37,8 @@ chassis\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex
 chassis\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 chassis\stm32f4xx_it.o: ../Core/Inc/stm32f4xx_it.h
 chassis\stm32f4xx_it.o: ../USER/DriverLayer/drv_usart.h
-chassis\stm32f4xx_it.o: ../Core/Inc/chassis.h
+chassis\stm32f4xx_it.o: ..\USER\Task\chassis.h
 chassis\stm32f4xx_it.o: ../Core/Inc/can.h
 chassis\stm32f4xx_it.o: ../USER/struct_typedef.h
-chassis\stm32f4xx_it.o: ../Core/Inc/chassis.h
-chassis\stm32f4xx_it.o: ..\USER\INS_Task\ins_task\INS_task.h
+chassis\stm32f4xx_it.o: ..\USER\Task\chassis.h
+chassis\stm32f4xx_it.o: ..\USER\Task\INS_Task\ins_task\INS_task.h

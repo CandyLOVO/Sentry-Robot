@@ -39,10 +39,10 @@ chassis\channel_changes.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uar
 chassis\channel_changes.o: ../USER/PotocaLayer/rc_potocal.h
 chassis\channel_changes.o: ../USER/struct_typedef.h
 chassis\channel_changes.o: ../USER/DriverLayer/drv_can.h
-chassis\channel_changes.o: ../Core/Inc/chassis.h
+chassis\channel_changes.o: ..\USER\Task\chassis.h
 chassis\channel_changes.o: ../Core/Inc/can.h
-chassis\channel_changes.o: ../Core/Inc/chassis.h
+chassis\channel_changes.o: ..\USER\Task\chassis.h
 chassis\channel_changes.o: ../USER/motion_overlay.h
 chassis\channel_changes.o: ../USER/handle_value.h
 chassis\channel_changes.o: ../USER/DriverLayer/user_can.h
-chassis\channel_changes.o: ../Core/Inc/user_pid.h
+chassis\channel_changes.o: ../USER/DriverLayer/user_pid.h

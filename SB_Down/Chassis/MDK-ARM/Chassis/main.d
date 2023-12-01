@@ -51,7 +51,7 @@ chassis\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 chassis\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 chassis\main.o: ../Core/Inc/can.h
 chassis\main.o: ../USER/struct_typedef.h
-chassis\main.o: ../Core/Inc/chassis.h
+chassis\main.o: ..\USER\Task\chassis.h
 chassis\main.o: ../Core/Inc/can.h
 chassis\main.o: ../Core/Inc/dma.h
 chassis\main.o: ../Core/Inc/i2c.h
@@ -63,4 +63,4 @@ chassis\main.o: ../USER/DriverLayer/drv_usart.h
 chassis\main.o: ../USER/DriverLayer/user_can.h
 chassis\main.o: ../USER/PotocaLayer/communication.h
 chassis\main.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
-chassis\main.o: ..\USER\INS_Task\ins_task\bsp_delay.h
+chassis\main.o: ..\USER\Task\INS_Task\ins_task\bsp_delay.h

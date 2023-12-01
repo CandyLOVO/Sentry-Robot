@@ -67,7 +67,7 @@ void CAN2_Init()
   HAL_CAN_Start(&hcan2);
 }
 
-void can_cmd_send_3508(int motor1,int motor2,int motor3,int motor4) //3508四个电机（motor:0-3）
+void can_cmd_send_3508(int motor1,int motor2,int motor3,int motor4) //can1 控制3508四个电机（motor:0-3）
 {
 	uint32_t send_mail_box = (uint32_t)CAN_TX_MAILBOX0;
 	can_tx_message.StdId = 0x200;
@@ -86,7 +86,7 @@ void can_cmd_send_3508(int motor1,int motor2,int motor3,int motor4) //3508四个
 	HAL_CAN_AddTxMessage(&hcan1,&can_tx_message,can_send_data,&send_mail_box);
 }
 
-void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4) //控制6020四个电机(motor:4-7)
+void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4) //can2 控制6020四个电机(motor:4-7)
 {
 	uint32_t send_mail_box = (uint32_t)CAN_TX_MAILBOX0;
 	can_tx_message.StdId = 0x1FF;
