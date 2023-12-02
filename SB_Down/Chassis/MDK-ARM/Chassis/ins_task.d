@@ -1,5 +1,5 @@
-chassis\ins_task.o: ..\USER\INS_Task\ins_task\INS_task.c
-chassis\ins_task.o: ..\USER\INS_Task\ins_task\INS_task.h
+chassis\ins_task.o: ..\USER\Task\INS_Task\ins_task\INS_task.c
+chassis\ins_task.o: ..\USER\Task\INS_Task\ins_task\INS_task.h
 chassis\ins_task.o: ../USER/struct_typedef.h
 chassis\ins_task.o: ../Core/Inc/main.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
@@ -55,7 +55,7 @@ chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-chassis\ins_task.o: ..\USER\INS_Task\ins_task\bsp_imu_pwm.h
-chassis\ins_task.o: ..\USER\INS_Task\ins_task\bsp_spi.h
-chassis\ins_task.o: ..\USER\INS_Task\ins_task\bmi088driver.h
-chassis\ins_task.o: ..\USER\INS_Task\ins_task\pid.h
+chassis\ins_task.o: ..\USER\Task\INS_Task\ins_task\bsp_imu_pwm.h
+chassis\ins_task.o: ..\USER\Task\INS_Task\ins_task\bsp_spi.h
+chassis\ins_task.o: ..\USER\Task\INS_Task\ins_task\bmi088driver.h
+chassis\ins_task.o: ..\USER\Task\INS_Task\ins_task\pid.h

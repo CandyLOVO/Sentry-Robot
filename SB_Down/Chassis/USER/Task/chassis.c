@@ -50,7 +50,8 @@ void Chassis(void const * argument)
 //			m++;
 //		}
 //********************************************************************************************//
-		
+
+		//设置初始角度		
 		if(m==0){
 			initial_angle[0] = 7819; //初始角度（底盘正前方各轮子角度）
 			initial_angle[1] = 1858;
@@ -58,7 +59,9 @@ void Chassis(void const * argument)
 			initial_angle[3] = 5735;
 			m++;
 		}
-		
+
+		//遥控器控制底盘不同运动
+		//具体实现方式在"motion_overlay.c"
 		if(rc_ctrl.rc.s[0]==1) //右上拨杆为1（推到最上方）
 		{
 			translational_control(); //平移运动
@@ -67,7 +70,7 @@ void Chassis(void const * argument)
 		{
 			compound_control(); //旋转加平移运动
 		}
-		else if(rc_ctrl.rc.s[0]==2)
+		else if(rc_ctrl.rc.s[0]==2) //右上拨杆为2（推到最下方）
 		{
 			rotate_control(); //小陀螺旋转 无跟随 
 		}

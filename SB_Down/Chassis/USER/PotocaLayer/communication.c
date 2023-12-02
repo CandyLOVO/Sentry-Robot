@@ -9,6 +9,7 @@ uint8_t temp = 0x01; //0x00为视觉数据 0x01为导航数据
 
 DH Tx;
 
+//跟视觉通信UART1接收中断回调函数
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if(huart->Instance == USART1)

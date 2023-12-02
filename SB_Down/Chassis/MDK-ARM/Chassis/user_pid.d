@@ -1,5 +1,5 @@
-chassis\user_pid.o: ..\Core\Src\user_pid.c
-chassis\user_pid.o: ../Core/Inc/user_pid.h
+chassis\user_pid.o: ..\USER\DriverLayer\user_pid.c
+chassis\user_pid.o: ..\USER\DriverLayer\user_pid.h
 chassis\user_pid.o: ../Core/Inc/main.h
 chassis\user_pid.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 chassis\user_pid.o: ../Core/Inc/stm32f4xx_hal_conf.h

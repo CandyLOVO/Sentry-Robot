@@ -1,5 +1,5 @@
-chassis\bmi088middleware.o: ..\USER\INS_Task\ins_task\BMI088Middleware.c
-chassis\bmi088middleware.o: ..\USER\INS_Task\ins_task\BMI088Middleware.h
+chassis\bmi088middleware.o: ..\USER\Task\INS_Task\ins_task\BMI088Middleware.c
+chassis\bmi088middleware.o: ..\USER\Task\INS_Task\ins_task\BMI088Middleware.h
 chassis\bmi088middleware.o: ../USER/struct_typedef.h
 chassis\bmi088middleware.o: ../Core/Inc/main.h
 chassis\bmi088middleware.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
@@ -51,4 +51,4 @@ chassis\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/t
 chassis\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 chassis\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 chassis\bmi088middleware.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-chassis\bmi088middleware.o: ..\USER\INS_Task\ins_task\bsp_delay.h
+chassis\bmi088middleware.o: ..\USER\Task\INS_Task\ins_task\bsp_delay.h

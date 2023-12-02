@@ -1,4 +1,4 @@
-chassis\chassis.o: ..\Core\Src\chassis.c
+chassis\chassis.o: ..\USER\Task\chassis.c
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/freertos.h
 chassis\chassis.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
 chassis\chassis.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
@@ -44,7 +44,7 @@ chassis\chassis.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 chassis\chassis.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 chassis\chassis.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 chassis\chassis.o: ../USER/struct_typedef.h
-chassis\chassis.o: ../Core/Inc/chassis.h
+chassis\chassis.o: ..\USER\Task\chassis.h
 chassis\chassis.o: ../Core/Inc/can.h
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
@@ -54,7 +54,7 @@ chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 chassis\chassis.o: ../USER/DriverLayer/user_can.h
-chassis\chassis.o: ../Core/Inc/user_pid.h
+chassis\chassis.o: ../USER/DriverLayer/user_pid.h
 chassis\chassis.o: ../USER/PotocaLayer/rc_potocal.h
 chassis\chassis.o: ../USER/DriverLayer/drv_can.h
 chassis\chassis.o: ../USER/handle_value.h

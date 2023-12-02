@@ -6,7 +6,7 @@ extern CAN_HandleTypeDef hcan2;
 CAN_TxHeaderTypeDef can_tx_message;
 uint8_t can_send_data[8];
 motor_info motor[8];
-int n=0;
+
 //void CAN1_Init()
 //{
 //	CAN_FilterTypeDef  can_filter;
@@ -67,7 +67,7 @@ void CAN2_Init()
   HAL_CAN_Start(&hcan2);
 }
 
-void can_cmd_send_3508(int motor1,int motor2,int motor3,int motor4) //can1 控制3508四个电机（motor:0-3）
+void can_cmd_send_3508(int motor1,int motor2,int motor3,int motor4) //can2 控制3508四个电机（motor[]:0-3）
 {
 	uint32_t send_mail_box = (uint32_t)CAN_TX_MAILBOX0;
 	can_tx_message.StdId = 0x200;
@@ -83,10 +83,10 @@ void can_cmd_send_3508(int motor1,int motor2,int motor3,int motor4) //can1 控�
 	can_send_data[6] = (motor4>>8)&0xff;
 	can_send_data[7] = motor4&0xff;
 
-	HAL_CAN_AddTxMessage(&hcan1,&can_tx_message,can_send_data,&send_mail_box);
+	HAL_CAN_AddTxMessage(&hcan2,&can_tx_message,can_send_data,&send_mail_box);
 }
 
-void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4) //can2 控制6020四个电机(motor:4-7)
+void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4) //can2 控制6020四个电机(motor[]:4-7)
 {
 	uint32_t send_mail_box = (uint32_t)CAN_TX_MAILBOX0;
 	can_tx_message.StdId = 0x1FF;
@@ -105,6 +105,7 @@ void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4) //can2 控�
 	HAL_CAN_AddTxMessage(&hcan2,&can_tx_message,can_send_data,&send_mail_box);
 }
 
+/**************************************************尝试双can双fifo**************************************************/
 //void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan) //can1发送3508数据 FIFO1
 //{
 //	if(hcan->Instance == CAN1){ 
@@ -120,29 +121,16 @@ void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4) //can2 控�
 //		}
 //	}
 //}
+/*******************************************************************************************************************/
 
-void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) //can2发送6020数据 FIFO0
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) //can2发送6020、3508数据 FIFO0
 {
 	if(hcan->Instance == CAN2)
 	{
 		CAN_RxHeaderTypeDef can_rx_message;
 		uint8_t can_receive_data[8];
 	  HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,&can_rx_message,can_receive_data);
-	  if((can_rx_message.StdId >= 0x205) && (can_rx_message.StdId <= 0x208)){
-			uint8_t index = can_rx_message.StdId - 0x201;
-			motor[index].angle = ((can_receive_data[0] << 8) | can_receive_data[1]);
-			motor[index].speed = ((can_receive_data[2] << 8) | can_receive_data[3]);
-			motor[index].tor_current = ((can_receive_data[4] << 8) | can_receive_data[5]);
-			motor[index].temperture = can_receive_data[6];
-		}
-	}
-
-	if(hcan->Instance == CAN1)
-	{
-		CAN_RxHeaderTypeDef can_rx_message;
-		uint8_t can_receive_data[8];
-	  HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,&can_rx_message,can_receive_data);
-	  if((can_rx_message.StdId >= 0x201) && (can_rx_message.StdId <= 0x204)){
+	  if((can_rx_message.StdId >= 0x201) && (can_rx_message.StdId <= 0x208)){
 			uint8_t index = can_rx_message.StdId - 0x201;
 			motor[index].angle = ((can_receive_data[0] << 8) | can_receive_data[1]);
 			motor[index].speed = ((can_receive_data[2] << 8) | can_receive_data[3]);

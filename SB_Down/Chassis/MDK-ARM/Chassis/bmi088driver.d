@@ -1,5 +1,5 @@
-chassis\bmi088driver.o: ..\USER\INS_Task\ins_task\BMI088driver.c
-chassis\bmi088driver.o: ..\USER\INS_Task\ins_task\BMI088driver.h
+chassis\bmi088driver.o: ..\USER\Task\INS_Task\ins_task\BMI088driver.c
+chassis\bmi088driver.o: ..\USER\Task\INS_Task\ins_task\BMI088driver.h
 chassis\bmi088driver.o: ../USER/struct_typedef.h
 chassis\bmi088driver.o: ../Core/Inc/main.h
 chassis\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
@@ -37,5 +37,5 @@ chassis\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 chassis\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 chassis\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 chassis\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
-chassis\bmi088driver.o: ..\USER\INS_Task\ins_task\BMI088reg.h
-chassis\bmi088driver.o: ..\USER\INS_Task\ins_task\BMI088Middleware.h
+chassis\bmi088driver.o: ..\USER\Task\INS_Task\ins_task\BMI088reg.h
+chassis\bmi088driver.o: ..\USER\Task\INS_Task\ins_task\BMI088Middleware.h
