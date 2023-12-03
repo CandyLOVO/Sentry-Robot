@@ -64,7 +64,7 @@ void Friction_task(void const * argument)
 		
 		//===============================================拨盘================================================//
 		//Bopan_judge();	//拨盘正反转检测，测试后改完参数再用
-		if(rc_ctrl.rc.s[1] == 1 && Sentry.Flag_shoot)	//开启拨盘(测试模式)
+		if(rc_ctrl.rc.s[1] == 1)	//开启拨盘(测试模式)
 		{	
 			if(!bopan_reversal_flag)	//拨盘正转
 			{
