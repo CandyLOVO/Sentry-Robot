@@ -1,4 +1,4 @@
---cpu=Cortex-M4.fp.sp
+--cpu Cortex-M4.fp
 "chassis\startup_stm32f407xx.o"
 "chassis\main.o"
 "chassis\gpio.o"
@@ -60,6 +60,6 @@
 "chassis\ins_task.o"
 "chassis\pid.o"
 --strict --scatter "Chassis\Chassis.sct"
---summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "Chassis.map" -o Chassis\Chassis.axf
