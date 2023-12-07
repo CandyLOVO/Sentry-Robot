@@ -8,13 +8,15 @@
 #include "handle_value.h"
 #include "motion_overlay.h"
 #include "channel_changes.h"
+#include "INS_task.h"
 
-extern motor_info motor[8];
-extern RC_ctrl_t rc_ctrl;
+extern motor_info motor[8]; //底盘电机数据
+extern RC_ctrl_t rc_ctrl; //遥控器数据
+extern fp32 INS_angle[3]; //下C板陀螺仪数据
+extern up_data UpData; //上C板数据
 extern int16_t motor_angle[4]; //6020角度 在motion_overlay.c中计算 作为全局变量
 extern int16_t motor_speed[4]; //3508速度
 
-int16_t theta = 60; //云台坐标系与底盘坐标系间夹角(此时为0~360度) 后期接收后需要对所得theta进行处理
 uint16_t initial_angle[4];
 int16_t Max_out_a = 8192;
 int16_t Max_iout_a = 8192;
@@ -23,6 +25,12 @@ int16_t Max_iout_s = 30000;
 pidTypeDef PID_angle[4];
 pidTypeDef PID_speed_3508[4];
 pidTypeDef PID_speed_6020[4];
+fp32 theta; //云台坐标系与底盘坐标系间夹角(此时为0~360度) 后期接收后需要对所得theta进行处理
+
+void Yaw_Diff()
+{
+	theta = UpData.yaw_up - INS_angle[0];
+}
 
 void Chassis(void const * argument)
 {

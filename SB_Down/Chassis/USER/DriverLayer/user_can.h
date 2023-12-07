@@ -16,4 +16,8 @@ typedef struct
 	uint16_t temperture;
 }motor_info;
 
+typedef struct
+{
+	float yaw_up;
+}up_data;
 #endif
