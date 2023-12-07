@@ -3,32 +3,85 @@
 <pre>
 <h1>礦ision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: μVision V5.14.0.0
-Copyright (C) 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: 555 lenovo, 555, LIC=50D12-9W66F-HQS0I-TZJ6Y-QD6A8-2RKFQ
+IDE-Version: μVision V5.38.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 1 LuoYaqi, 1, LIC=TIVNB-2SM7B-PC4J8-3PHQG-ZAPNR-JLDXV
  
 Tool Versions:
-Toolchain:       MDK-ARM Professional  Version: 5.14.0.0
-Toolchain Path:  E:\Keil ARM\ARM\ARMCC\Bin
-C Compiler:      Armcc.exe V5.05 update 1 (build 106)
-Assembler:       Armasm.exe V5.05 update 1 (build 106)
-Linker/Locator:  ArmLink.exe V5.05 update 1 (build 106)
-Library Manager: ArmAr.exe V5.05 update 1 (build 106)
-Hex Converter:   FromElf.exe V5.05 update 1 (build 106)
-CPU DLL:         SARMCM3.DLL V5.14.0.0
-Dialog DLL:      DCM.DLL V1.13.1.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.14.0_KEIL
-Dialog DLL:      TCM.DLL V1.14.4.0
+Toolchain:       MDK-ARM Plus  Version: 5.38.0.0
+Toolchain Path:  D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin
+C Compiler:      Armcc.exe V5.06 update 7 (build 960)
+Assembler:       Armasm.exe V5.06 update 7 (build 960)
+Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
+Library Manager: ArmAr.exe V5.06 update 7 (build 960)
+Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
+CPU DLL:         SARMCM3.DLL V5.38.0.0
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.1.0.0
+Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
-F:\Github base\Sentry\SB_Down\Chassis\MDK-ARM\Chassis.uvprojx
-Project File Date:  12/03/2023
+D:\Project\RM\Sentry\SB_Down\Chassis\MDK-ARM\Chassis.uvprojx
+Project File Date:  12/07/2023
 
 <h2>Output:</h2>
-Build target 'Chassis'
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin'
+Rebuild target 'Chassis'
 assembling startup_stm32f407xx.s...
+compiling i2c.c...
+compiling stm32f4xx_hal_pwr.c...
+compiling tim.c...
+compiling stm32f4xx_hal_pwr_ex.c...
+compiling stm32f4xx_hal_dma_ex.c...
+compiling stm32f4xx_it.c...
+../USER/DriverLayer/drv_usart.h(18): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\Task\chassis.h(6): warning:  #1295-D: Deprecated declaration Yaw_Diff - give arg types
+  void Yaw_Diff();
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Core/Src/stm32f4xx_it.c: 4 warnings, 0 errors
+compiling stm32f4xx_hal_msp.c...
+compiling dma.c...
+compiling stm32f4xx_hal_flash.c...
+compiling spi.c...
+compiling stm32f4xx_hal_flash_ex.c...
+compiling gpio.c...
+compiling stm32f4xx_hal_gpio.c...
+compiling stm32f4xx_hal_rcc_ex.c...
+compiling usart.c...
+compiling can.c...
+..\USER\Task\chassis.h(6): warning:  #1295-D: Deprecated declaration Yaw_Diff - give arg types
+  void Yaw_Diff();
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Core/Src/can.c: 2 warnings, 0 errors
+compiling stm32f4xx_hal_flash_ramfunc.c...
+compiling stm32f4xx_hal_dma.c...
+compiling stm32f4xx_hal_timebase_tim.c...
+compiling croutine.c...
+compiling stm32f4xx_hal_rcc.c...
+compiling list.c...
+compiling event_groups.c...
+compiling freertos.c...
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\Task\chassis.h(6): warning:  #1295-D: Deprecated declaration Yaw_Diff - give arg types
+  void Yaw_Diff();
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+../USER/DriverLayer/drv_can.h(13): warning:  #1-D: last line of file ends without a newline
+  #endif
+../USER/PotocaLayer/rc_potocal.h(55): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Core/Src/freertos.c: 5 warnings, 0 errors
+compiling stm32f4xx_hal_can.c...
 compiling main.c...
-..\USER\Task\chassis.h(6): warning:  #1-D: last line of file ends without a newline
+..\USER\Task\chassis.h(6): warning:  #1295-D: Deprecated declaration Yaw_Diff - give arg types
+  void Yaw_Diff();
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
   #endif
 ../USER/DriverLayer/drv_usart.h(18): warning:  #1-D: last line of file ends without a newline
   #endif
@@ -36,76 +89,35 @@ compiling main.c...
   void CAN1_Init();
 ../USER/DriverLayer/user_can.h(6): warning:  #1295-D: Deprecated declaration CAN2_Init - give arg types
   void CAN2_Init();
-../USER/DriverLayer/user_can.h(19): warning:  #1-D: last line of file ends without a newline
+../USER/DriverLayer/user_can.h(23): warning:  #1-D: last line of file ends without a newline
   #endif
 ../USER/PotocaLayer/communication.h(13): warning:  #1-D: last line of file ends without a newline
   #endif
-../Core/Src/main.c: 6 warnings, 0 errors
-compiling gpio.c...
-compiling freertos.c...
-..\USER\Task\chassis.h(6): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\USER\Task\chassis.h(6): warning:  #1-D: last line of file ends without a newline
-  #endif
-../USER/DriverLayer/drv_can.h(13): warning:  #1-D: last line of file ends without a newline
-  #endif
-../USER/PotocaLayer/rc_potocal.h(55): warning:  #1-D: last line of file ends without a newline
-  #endif
-../Core/Src/freertos.c: 4 warnings, 0 errors
-compiling can.c...
-..\USER\Task\chassis.h(6): warning:  #1-D: last line of file ends without a newline
-  #endif
-../Core/Src/can.c: 1 warning, 0 errors
-compiling dma.c...
-compiling i2c.c...
-compiling spi.c...
-compiling tim.c...
-compiling usart.c...
-compiling stm32f4xx_it.c...
-../USER/DriverLayer/drv_usart.h(18): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\USER\Task\chassis.h(6): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\USER\Task\chassis.h(6): warning:  #1-D: last line of file ends without a newline
-  #endif
-../Core/Src/stm32f4xx_it.c: 3 warnings, 0 errors
-compiling stm32f4xx_hal_msp.c...
-compiling stm32f4xx_hal_timebase_tim.c...
-compiling stm32f4xx_hal_can.c...
-compiling stm32f4xx_hal_rcc.c...
-compiling stm32f4xx_hal_rcc_ex.c...
-compiling stm32f4xx_hal_flash.c...
-compiling stm32f4xx_hal_flash_ex.c...
-compiling stm32f4xx_hal_flash_ramfunc.c...
-compiling stm32f4xx_hal_gpio.c...
-compiling stm32f4xx_hal_dma_ex.c...
-compiling stm32f4xx_hal_dma.c...
-compiling stm32f4xx_hal_pwr.c...
-compiling stm32f4xx_hal_pwr_ex.c...
-compiling stm32f4xx_hal_cortex.c...
-compiling stm32f4xx_hal.c...
-compiling stm32f4xx_hal_exti.c...
-compiling stm32f4xx_hal_i2c.c...
-compiling stm32f4xx_hal_i2c_ex.c...
-compiling stm32f4xx_hal_spi.c...
-compiling stm32f4xx_hal_tim.c...
-compiling stm32f4xx_hal_tim_ex.c...
-compiling stm32f4xx_hal_uart.c...
-compiling system_stm32f4xx.c...
-compiling croutine.c...
-compiling event_groups.c...
-compiling list.c...
-compiling queue.c...
+../Core/Src/main.c: 7 warnings, 0 errors
 compiling stream_buffer.c...
-compiling tasks.c...
+compiling queue.c...
 compiling timers.c...
-compiling cmsis_os.c...
 compiling heap_4.c...
 compiling port.c...
-compiling rc_potocal.c...
-..\USER\Task\chassis.h(6): warning:  #1-D: last line of file ends without a newline
+compiling tasks.c...
+compiling cmsis_os.c...
+compiling stm32f4xx_hal_cortex.c...
+compiling system_stm32f4xx.c...
+compiling stm32f4xx_hal_exti.c...
+compiling stm32f4xx_hal.c...
+compiling stm32f4xx_hal_tim_ex.c...
+compiling communication.c...
+..\USER\PotocaLayer\communication.h(13): warning:  #1-D: last line of file ends without a newline
   #endif
-..\USER\Task\chassis.h(6): warning:  #1-D: last line of file ends without a newline
+..\USER\PotocaLayer\communication.c(27): warning:  #1-D: last line of file ends without a newline
+  }
+..\USER\PotocaLayer\communication.c: 2 warnings, 0 errors
+compiling rc_potocal.c...
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\Task\chassis.h(6): warning:  #1295-D: Deprecated declaration Yaw_Diff - give arg types
+  void Yaw_Diff();
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
   #endif
 ../USER/DriverLayer/drv_can.h(13): warning:  #1-D: last line of file ends without a newline
   #endif
@@ -115,15 +127,54 @@ compiling rc_potocal.c...
   void CAN1_Init();
 ../USER/DriverLayer/user_can.h(6): warning:  #1295-D: Deprecated declaration CAN2_Init - give arg types
   void CAN2_Init();
-../USER/DriverLayer/user_can.h(19): warning:  #1-D: last line of file ends without a newline
+../USER/DriverLayer/user_can.h(23): warning:  #1-D: last line of file ends without a newline
   #endif
 ..\USER\PotocaLayer\rc_potocal.c(106): warning:  #1-D: last line of file ends without a newline
   }
-..\USER\PotocaLayer\rc_potocal.c: 8 warnings, 0 errors
-compiling handle_value.c...
-..\USER\Task\chassis.h(6): warning:  #1-D: last line of file ends without a newline
+..\USER\PotocaLayer\rc_potocal.c: 9 warnings, 0 errors
+compiling bsp_delay.c...
+compiling user_pid.c...
+..\USER\DriverLayer\user_pid.h(20): warning:  #1-D: last line of file ends without a newline
   #endif
-..\USER\Task\chassis.h(6): warning:  #1-D: last line of file ends without a newline
+..\USER\DriverLayer\user_pid.c(79): warning:  #1-D: last line of file ends without a newline
+  }
+..\USER\DriverLayer\user_pid.c: 2 warnings, 0 errors
+compiling drv_usart.c...
+..\USER\DriverLayer\drv_usart.h(18): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\Task\chassis.h(6): warning:  #1295-D: Deprecated declaration Yaw_Diff - give arg types
+  void Yaw_Diff();
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+../USER/DriverLayer/drv_can.h(13): warning:  #1-D: last line of file ends without a newline
+  #endif
+../USER/PotocaLayer/rc_potocal.h(55): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\DriverLayer\drv_usart.c: 6 warnings, 0 errors
+compiling motion_overlay.c...
+..\USER\motion_overlay.h(10): warning:  #1295-D: Deprecated declaration rotate_6020 - give arg types
+  void rotate_6020();
+..\USER\motion_overlay.h(12): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\handle_value.h(8): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\Task\chassis.h(6): warning:  #1295-D: Deprecated declaration Yaw_Diff - give arg types
+  void Yaw_Diff();
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\motion_overlay.c(90): warning:  #1-D: last line of file ends without a newline
+  //}
+..\USER\motion_overlay.c: 7 warnings, 0 errors
+compiling handle_value.c...
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\Task\chassis.h(6): warning:  #1295-D: Deprecated declaration Yaw_Diff - give arg types
+  void Yaw_Diff();
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
   #endif
 ../USER/DriverLayer/drv_can.h(13): warning:  #1-D: last line of file ends without a newline
   #endif
@@ -132,66 +183,30 @@ compiling handle_value.c...
 ..\USER\handle_value.h(8): warning:  #1-D: last line of file ends without a newline
   #endif
 ..\USER\handle_value.c(12): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-                alpha = alpha * 180 / PI;
+  		alpha = alpha * 180 / PI;
 ..\USER\handle_value.c(17): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-                alpha = alpha * 180 / PI;
+  		alpha = alpha * 180 / PI;
 ..\USER\handle_value.c(23): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-                alpha = alpha * 180 / PI;
-..\USER\handle_value.c(44): warning:  #940-D: missing return statement at end of non-void function "remote_value"
+  		alpha = alpha * 180 / PI;
+..\USER\handle_value.c(44): warning:  #940-D: missing return statement at end of non-void function "remote_value" 
   }
 ..\USER\handle_value.c(74): warning:  #1-D: last line of file ends without a newline
   }
-..\USER\handle_value.c(74): warning:  #940-D: missing return statement at end of non-void function "motor_value"
+..\USER\handle_value.c(74): warning:  #940-D: missing return statement at end of non-void function "motor_value" 
   }
-..\USER\handle_value.c: 11 warnings, 0 errors
-compiling motion_overlay.c...
-..\USER\motion_overlay.h(10): warning:  #1295-D: Deprecated declaration rotate_6020 - give arg types
-  void rotate_6020();
-..\USER\motion_overlay.h(12): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\USER\handle_value.h(8): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\USER\Task\chassis.h(6): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\USER\Task\chassis.h(6): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\USER\motion_overlay.c(90): warning:  #1-D: last line of file ends without a newline
-  //}
-..\USER\motion_overlay.c: 6 warnings, 0 errors
-compiling communication.c...
-..\USER\PotocaLayer\communication.h(13): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\USER\PotocaLayer\communication.c(27): warning:  #1-D: last line of file ends without a newline
-  }
-..\USER\PotocaLayer\communication.c: 2 warnings, 0 errors
-compiling drv_usart.c...
-..\USER\DriverLayer\drv_usart.h(18): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\USER\Task\chassis.h(6): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\USER\Task\chassis.h(6): warning:  #1-D: last line of file ends without a newline
-  #endif
-../USER/DriverLayer/drv_can.h(13): warning:  #1-D: last line of file ends without a newline
-  #endif
-../USER/PotocaLayer/rc_potocal.h(55): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\USER\DriverLayer\drv_usart.c: 5 warnings, 0 errors
+..\USER\handle_value.c: 12 warnings, 0 errors
+compiling stm32f4xx_hal_i2c_ex.c...
 compiling user_can.c...
 ..\USER\DriverLayer\user_can.h(5): warning:  #1295-D: Deprecated declaration CAN1_Init - give arg types
   void CAN1_Init();
 ..\USER\DriverLayer\user_can.h(6): warning:  #1295-D: Deprecated declaration CAN2_Init - give arg types
   void CAN2_Init();
-..\USER\DriverLayer\user_can.h(19): warning:  #1-D: last line of file ends without a newline
+..\USER\DriverLayer\user_can.h(23): warning:  #1-D: last line of file ends without a newline
   #endif
-..\USER\DriverLayer\user_can.c(153): warning:  #1-D: last line of file ends without a newline
+..\USER\DriverLayer\user_can.c(164): warning:  #1-D: last line of file ends without a newline
   }
 ..\USER\DriverLayer\user_can.c: 4 warnings, 0 errors
-compiling user_pid.c...
-..\USER\DriverLayer\user_pid.h(20): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\USER\DriverLayer\user_pid.c(79): warning:  #1-D: last line of file ends without a newline
-  }
-..\USER\DriverLayer\user_pid.c: 2 warnings, 0 errors
+compiling bsp_imu_pwm.c...
 compiling channel_changes.c...
 ..\USER\Control\channel_changes.h(4): warning:  #1295-D: Deprecated declaration translational_control - give arg types
   void translational_control();
@@ -201,9 +216,11 @@ compiling channel_changes.c...
   void rotate_control();
 ..\USER\Control\channel_changes.h(7): warning:  #1-D: last line of file ends without a newline
   #endif
-..\USER\Task\chassis.h(6): warning:  #1-D: last line of file ends without a newline
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
   #endif
-..\USER\Task\chassis.h(6): warning:  #1-D: last line of file ends without a newline
+..\USER\Task\chassis.h(6): warning:  #1295-D: Deprecated declaration Yaw_Diff - give arg types
+  void Yaw_Diff();
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
   #endif
 ../USER/DriverLayer/drv_can.h(13): warning:  #1-D: last line of file ends without a newline
   #endif
@@ -219,21 +236,24 @@ compiling channel_changes.c...
   void CAN1_Init();
 ../USER/DriverLayer/user_can.h(6): warning:  #1295-D: Deprecated declaration CAN2_Init - give arg types
   void CAN2_Init();
-../USER/DriverLayer/user_can.h(19): warning:  #1-D: last line of file ends without a newline
+../USER/DriverLayer/user_can.h(23): warning:  #1-D: last line of file ends without a newline
   #endif
 ../USER/DriverLayer/user_pid.h(20): warning:  #1-D: last line of file ends without a newline
   #endif
 ..\USER\Control\channel_changes.c(87): warning:  #1-D: last line of file ends without a newline
   /****************************************************************************************************************************/
-..\USER\Control\channel_changes.c: 16 warnings, 0 errors
+..\USER\Control\channel_changes.c: 17 warnings, 0 errors
+compiling BMI088Middleware.c...
 compiling chassis.c...
-..\USER\Task\chassis.h(6): warning:  #1-D: last line of file ends without a newline
+..\USER\Task\chassis.h(6): warning:  #1295-D: Deprecated declaration Yaw_Diff - give arg types
+  void Yaw_Diff();
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
   #endif
 ../USER/DriverLayer/user_can.h(5): warning:  #1295-D: Deprecated declaration CAN1_Init - give arg types
   void CAN1_Init();
 ../USER/DriverLayer/user_can.h(6): warning:  #1295-D: Deprecated declaration CAN2_Init - give arg types
   void CAN2_Init();
-../USER/DriverLayer/user_can.h(19): warning:  #1-D: last line of file ends without a newline
+../USER/DriverLayer/user_can.h(23): warning:  #1-D: last line of file ends without a newline
   #endif
 ../USER/DriverLayer/user_pid.h(20): warning:  #1-D: last line of file ends without a newline
   #endif
@@ -255,14 +275,16 @@ compiling chassis.c...
   void rotate_control();
 ../USER/Control/channel_changes.h(7): warning:  #1-D: last line of file ends without a newline
   #endif
-..\USER\Task\chassis.c(79): warning:  #1-D: last line of file ends without a newline
+..\USER\Task\chassis.c(87): warning:  #1-D: last line of file ends without a newline
   }
-..\USER\Task\chassis.c: 15 warnings, 0 errors
+..\USER\Task\chassis.c: 16 warnings, 0 errors
+compiling stm32f4xx_hal_uart.c...
 compiling BMI088driver.c...
-compiling BMI088Middleware.c...
-compiling bsp_delay.c...
-compiling bsp_imu_pwm.c...
+compiling stm32f4xx_hal_spi.c...
+compiling stm32f4xx_hal_i2c.c...
+compiling stm32f4xx_hal_tim.c...
 compiling bsp_spi.c...
+compiling pid.c...
 compiling INS_task.c...
 ..\USER\Task\INS_Task\ins_task\INS_task.c(250): warning:  #1035-D: single-precision operand implicitly converted to double-precision
       *yaw = atan2f(2.0f*(q[0]*q[3]+q[1]*q[2]), 2.0f*(q[0]*q[0]+q[1]*q[1])-1.0f) *57.3;
@@ -271,37 +293,42 @@ compiling INS_task.c...
 ..\USER\Task\INS_Task\ins_task\INS_task.c(252): warning:  #1035-D: single-precision operand implicitly converted to double-precision
       *roll = atan2f(2.0f*(q[0]*q[1]+q[2]*q[3]),2.0f*(q[0]*q[0]+q[3]*q[3])-1.0f) *57.3;
 ..\USER\Task\INS_Task\ins_task\INS_task.c(261): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-           gyrooffset[0]-=bmi088_real_data.gyro[0]*0.00005;
+  	   gyrooffset[0]-=bmi088_real_data.gyro[0]*0.00005;
 ..\USER\Task\INS_Task\ins_task\INS_task.c(262): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-                 gyrooffset[1]-=bmi088_real_data.gyro[1]*0.00005;
+  		 gyrooffset[1]-=bmi088_real_data.gyro[1]*0.00005;
 ..\USER\Task\INS_Task\ins_task\INS_task.c(263): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-                 gyrooffset[2]-=bmi088_real_data.gyro[2]*0.00005;
-..\USER\Task\INS_Task\ins_task\INS_task.c(134): warning:  #177-D: variable "timing_time" was declared but never referenced
+  		 gyrooffset[2]-=bmi088_real_data.gyro[2]*0.00005;
+..\USER\Task\INS_Task\ins_task\INS_task.c(134): warning:  #177-D: variable "timing_time"  was declared but never referenced
   static const float timing_time = 0.001f;   //tast run time , unit s.任务运行的时间 单位 s
 ..\USER\Task\INS_Task\ins_task\INS_task.c: 7 warnings, 0 errors
-compiling pid.c...
 linking...
-Program Size: Code=40548 RO-data=1224 RW-data=464 ZI-data=20192  
+Program Size: Code=40748 RO-data=1224 RW-data=468 ZI-data=20196  
 FromELF: creating hex file...
-"Chassis\Chassis.axf" - 0 Error(s), 90 Warning(s).
+"Chassis\Chassis.axf" - 0 Error(s), 100 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: ARM
-                http://www.keil.com/pack/ARM.CMSIS.4.2.0.pack
-                ARM::CMSIS:CORE:3.40.0
-                CMSIS (Cortex Microcontroller Software Interface Standard)
-   * Component: CORE Version: 3.40.0
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM.CMSIS.5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F4xx_DFP.2.17.1.pack
+                Keil.STM32F4xx_DFP.2.17.1
+                STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
 
 <h2>Collection of Component include folders:</h2>
-  F:\Github base\Sentry\SB_Down\Chassis\MDK-ARM\RTE
-  E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include
-  E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\2.14.0
+  ./RTE/_Chassis
+  D:/Software/KeilMDK538/KeilMDK538/ARM/Pack/ARM/CMSIS/5.9.0/CMSIS/Core/Include
+  D:/Software/KeilMDK538/KeilMDK538/ARM/Pack/Keil/STM32F4xx_DFP/2.17.1/Drivers/CMSIS/Device/ST/STM32F4xx/Include
 
 <h2>Collection of Component Files used:</h2>
 
-   * Component: ARM::CMSIS:CORE:3.40.0
-      Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
+   * Component: ARM::CMSIS:CORE:5.6.0
+      Include file:  CMSIS/Core/Include/tz_context.h
+Build Time Elapsed:  00:00:07
 </pre>
 </body>
 </html>

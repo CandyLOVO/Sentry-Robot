@@ -1,4 +1,5 @@
 #include "user_can.h"
+#include "string.h"
 
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
@@ -6,6 +7,7 @@ extern CAN_HandleTypeDef hcan2;
 CAN_TxHeaderTypeDef can_tx_message;
 uint8_t can_send_data[8];
 motor_info motor[8];
+up_data UpData;
 
 //void CAN1_Init()
 //{
@@ -123,9 +125,18 @@ void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4) //can2 控�
 //}
 /*******************************************************************************************************************/
 
-void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) //can2发送6020、3508数据 FIFO0
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
-	if(hcan->Instance == CAN2)
+	if(hcan->Instance == CAN1) //接收上C板数据
+	{
+		CAN_RxHeaderTypeDef can_rx_message;
+		uint8_t can_recevie_data[8];
+		HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,&can_rx_message,can_recevie_data);
+		if(can_rx_message.StdId == 0x404){
+			memcpy(&UpData.yaw_up,&can_recevie_data,4); //接收上C板yaw(float)
+		}
+	}
+	if(hcan->Instance == CAN2) //can2发送6020、3508数据 FIFO0
 	{
 		CAN_RxHeaderTypeDef can_rx_message;
 		uint8_t can_receive_data[8];

@@ -1,7 +1,7 @@
 chassis\chassis.o: ..\USER\Task\chassis.c
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/freertos.h
-chassis\chassis.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stddef.h
-chassis\chassis.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdint.h
+chassis\chassis.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
+chassis\chassis.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
 chassis\chassis.o: ../Core/Inc/FreeRTOSConfig.h
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -60,3 +60,4 @@ chassis\chassis.o: ../USER/DriverLayer/drv_can.h
 chassis\chassis.o: ../USER/handle_value.h
 chassis\chassis.o: ../USER/motion_overlay.h
 chassis\chassis.o: ../USER/Control/channel_changes.h
+chassis\chassis.o: ..\USER\Task\INS_Task\ins_task\INS_task.h

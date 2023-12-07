@@ -1,8 +1,8 @@
 chassis\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c
-chassis\stream_buffer.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdint.h
-chassis\stream_buffer.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
+chassis\stream_buffer.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
+chassis\stream_buffer.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
 chassis\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-chassis\stream_buffer.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stddef.h
+chassis\stream_buffer.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
 chassis\stream_buffer.o: ../Core/Inc/FreeRTOSConfig.h
 chassis\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 chassis\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

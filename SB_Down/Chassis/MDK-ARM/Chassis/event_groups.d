@@ -1,8 +1,8 @@
 chassis\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
-chassis\event_groups.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdlib.h
+chassis\event_groups.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdlib.h
 chassis\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-chassis\event_groups.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stddef.h
-chassis\event_groups.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdint.h
+chassis\event_groups.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
+chassis\event_groups.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
 chassis\event_groups.o: ../Core/Inc/FreeRTOSConfig.h
 chassis\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 chassis\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
