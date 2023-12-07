@@ -1,6 +1,6 @@
 sb_up\bmi088driver.o: ..\User\AlgorithmLayer\BMI088driver.c
 sb_up\bmi088driver.o: ..\User\AlgorithmLayer\BMI088driver.h
-sb_up\bmi088driver.o: ..\User\struct_typedef.h
+sb_up\bmi088driver.o: ../User/struct_typedef.h
 sb_up\bmi088driver.o: ../Core/Inc/main.h
 sb_up\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 sb_up\bmi088driver.o: ../Core/Inc/stm32f4xx_hal_conf.h
@@ -25,6 +25,7 @@ sb_up\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h
 sb_up\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h
 sb_up\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h
 sb_up\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h
+sb_up\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h
 sb_up\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
 sb_up\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
 sb_up\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
@@ -33,5 +34,6 @@ sb_up\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 sb_up\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 sb_up\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 sb_up\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
+sb_up\bmi088driver.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 sb_up\bmi088driver.o: ..\User\AlgorithmLayer\BMI088reg.h
 sb_up\bmi088driver.o: ..\User\AlgorithmLayer\BMI088Middleware.h

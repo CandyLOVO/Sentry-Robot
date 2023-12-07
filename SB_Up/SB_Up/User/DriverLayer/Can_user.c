@@ -1,6 +1,7 @@
 #include "Can_user.h"
 #include "remote_control.h"
 #include "Yaw_task.h"
+#include "Motor.h"
 
 //	Can µÄÒ»Ð©ÓÃ»§×«Ð´µÄ½ÓÊÕº¯Êý
 extern CAN_HandleTypeDef hcan1;
@@ -81,34 +82,16 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖÐ¶Ï»Øµ÷º¯Ê
 		if(rx_header.StdId==0x35)//Ë«C°å´«µÝÒ£¿ØÆ÷ÐÅºÅµÄ½Ó¿Ú±êÊ¶·û
 		{
     rc_ctrl.rc.ch[4] = rx_data[0] | (rx_data[1] << 8);                 
-			
-//================================================µ×ÅÌÊý¾Ý================================================//
-		//½ÓÊÕµ×ÅÌÐý×ªÁ¿(ÓÃÀ´ÐÞÕýyawÖá£¬×÷ÎªÇ°À¡¿ØÖÆ)
-			Rotate_w = (rx_data[3] << 8) | rx_data[4];
-			
-		//½ÓÊÕµ×ÅÌimuµÄPitchÊý¾Ý(ÓÃÀ´¼ì²âÉÏÏÂÆÂÏÞÎ»)
-			Down_pitch = (rx_data[5] << 8) | rx_data[6];
-			
 		}
 
-//================================================¹âµçÃÅ½ÃÕýyaw================================================//		
-		//YAWÐ£Õý½ÓÊÕ(¹âµçÃÅ£¬Î´Ê¹ÓÃ)
-		if(rx_header.StdId==0x66)
-		{
-			if(rx_data[0] == 0xff)
-			{
-				Update_yaw_flag = 1;
-				target_yaw = 0;//»ØÕýËøÔÆÌ¨µÄÖµ
-			}
-		}
 	
 //================================================²ÃÅÐÏµÍ³================================================//		
 		//±ÈÈü½ø³Ì±êÊ¶·û(²ÃÅÐÏµÍ³Êý¾Ý)
-		if(rx_header.StdId==0x10)
-		{
-			Sentry.Flag_progress = rx_data[0];
-			Sentry.Flag_judge = rx_data[1];
-		}
+//		if(rx_header.StdId==0x10)
+//		{
+//			Sentry.Flag_progress = rx_data[0];
+//			Sentry.Flag_judge = rx_data[1];
+//		}
 		
 		
 //================================================µç»úÊý¾Ý½ÓÊÕ================================================//		
@@ -123,13 +106,13 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖÐ¶Ï»Øµ÷º¯Ê
   }
 	
 	//¶ÔYaw(6020µç»ú)½øÐÐµ¥¶ÀµÄ´¦Àí£¬Æä6020µç»úIDÎª6£¬¶ÔÆäµ¥¶À¸³Öµ
-	else if(rx_header.StdId == 0x20A)
-	{
-		motor_info[6].rotor_angle    = ((rx_data[0] << 8) | rx_data[1]);
-    motor_info[6].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);
-    motor_info[6].torque_current = ((rx_data[4] << 8) | rx_data[5]);
-    motor_info[6].temp           =   rx_data[6];
-	}
+//	else if(rx_header.StdId == 0x20A)
+//	{
+//		motor_info[6].rotor_angle    = ((rx_data[0] << 8) | rx_data[1]);
+//    motor_info[6].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);
+//    motor_info[6].torque_current = ((rx_data[4] << 8) | rx_data[5]);
+//    motor_info[6].temp           =   rx_data[6];
+//	}
 
 	
   }

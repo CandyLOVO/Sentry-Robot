@@ -177,11 +177,11 @@ static void sbus_to_rc(volatile const uint8_t *sbus_buf, RC_ctrl_t *rc_ctrl)
     rc_ctrl->key.v = sbus_buf[14] | (sbus_buf[15] << 8);                    //!< KeyBoard value	
     rc_ctrl->rc.ch[4] = sbus_buf[16] | (sbus_buf[17] << 8);                 //NULL
 		
-    //rc_ctrl->rc.ch[0] -= RC_CH_VALUE_OFFSET;//这里把回中值调成0了
-    //rc_ctrl->rc.ch[1] -= RC_CH_VALUE_OFFSET;
-    //rc_ctrl->rc.ch[2] -= RC_CH_VALUE_OFFSET;
-    //rc_ctrl->rc.ch[3] -= RC_CH_VALUE_OFFSET;
-    //rc_ctrl->rc.ch[4] -= RC_CH_VALUE_OFFSET;
+    rc_ctrl->rc.ch[0] -= 1024;//这里把回中值调成0了
+    rc_ctrl->rc.ch[1] -= 1024;
+    rc_ctrl->rc.ch[2] -= 1024;
+    rc_ctrl->rc.ch[3] -= 1024;
+    rc_ctrl->rc.ch[4] -= 1024;
 		
 		
 	}

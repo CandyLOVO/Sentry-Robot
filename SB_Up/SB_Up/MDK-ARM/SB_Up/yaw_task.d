@@ -24,6 +24,7 @@ sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h
 sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h
 sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h
 sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h
+sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h
 sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
 sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
 sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
@@ -32,9 +33,10 @@ sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
-sb_up\yaw_task.o: ..\User\struct_typedef.h
+sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+sb_up\yaw_task.o: ../User/struct_typedef.h
 sb_up\yaw_task.o: ..\User\Task\INS_task.h
-sb_up\yaw_task.o: ..\User\arm_math.h
+sb_up\yaw_task.o: ../User/arm_math.h
 sb_up\yaw_task.o: ../Drivers/CMSIS/Include/core_cm4.h
 sb_up\yaw_task.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
 sb_up\yaw_task.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
@@ -52,8 +54,12 @@ sb_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 sb_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 sb_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 sb_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-sb_up\yaw_task.o: ..\User\DriverLayer\bsp_imu_pwm.h
-sb_up\yaw_task.o: ..\User\DriverLayer\bsp_spi.h
-sb_up\yaw_task.o: ..\User\AlgorithmLayer\bmi088driver.h
-sb_up\yaw_task.o: ..\User\AlgorithmLayer\pid_imu.h
-sb_up\yaw_task.o: ..\User\AlgorithmLayer\PID.h
+sb_up\yaw_task.o: ../User/DriverLayer/bsp_imu_pwm.h
+sb_up\yaw_task.o: ../User/DriverLayer/bsp_spi.h
+sb_up\yaw_task.o: ../User/AlgorithmLayer/bmi088driver.h
+sb_up\yaw_task.o: ../User/AlgorithmLayer/pid_imu.h
+sb_up\yaw_task.o: ../User/AlgorithmLayer/PID.h
+sb_up\yaw_task.o: ../User/PotocaLayer/remote_control.h
+sb_up\yaw_task.o: ../User/DriverLayer/bsp_rc.h
+sb_up\yaw_task.o: ../User/AlgorithmLayer/handle_value.h
+sb_up\yaw_task.o: ../User/PotocaLayer/Motor.h

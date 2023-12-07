@@ -1,6 +1,6 @@
 sb_up\pid_imu.o: ..\User\AlgorithmLayer\pid_imu.c
 sb_up\pid_imu.o: ..\User\AlgorithmLayer\pid_imu.h
-sb_up\pid_imu.o: ..\User\struct_typedef.h
+sb_up\pid_imu.o: ../User/struct_typedef.h
 sb_up\pid_imu.o: ../Core/Inc/main.h
 sb_up\pid_imu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 sb_up\pid_imu.o: ../Core/Inc/stm32f4xx_hal_conf.h
@@ -25,6 +25,7 @@ sb_up\pid_imu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h
 sb_up\pid_imu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h
 sb_up\pid_imu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h
 sb_up\pid_imu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h
+sb_up\pid_imu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h
 sb_up\pid_imu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
 sb_up\pid_imu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
 sb_up\pid_imu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
@@ -33,3 +34,4 @@ sb_up\pid_imu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 sb_up\pid_imu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 sb_up\pid_imu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 sb_up\pid_imu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
+sb_up\pid_imu.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
