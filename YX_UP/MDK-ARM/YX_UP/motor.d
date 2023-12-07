@@ -1,5 +1,5 @@
-yx_up\motor.o: ..\User\PotocaLayer\Motor.c
-yx_up\motor.o: ..\User\PotocaLayer\Motor.h
+yx_up\motor.o: ..\User\AlgorithmLayer\Motor.c
+yx_up\motor.o: ..\User\AlgorithmLayer\Motor.h
 yx_up\motor.o: ../Core/Inc/main.h
 yx_up\motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 yx_up\motor.o: ../Core/Inc/stm32f4xx_hal_conf.h

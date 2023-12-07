@@ -71,7 +71,7 @@ yx_up\mx_freertos_init.o: ../User/AlgorithmLayer/bmi088driver.h
 yx_up\mx_freertos_init.o: ../User/AlgorithmLayer/pid_imu.h
 yx_up\mx_freertos_init.o: ../User/DriverLayer/Can_user.h
 yx_up\mx_freertos_init.o: ../User/AlgorithmLayer/SolveTrajectory.h
-yx_up\mx_freertos_init.o: ../User/PotocaLayer/Motor.h
+yx_up\mx_freertos_init.o: ../User/AlgorithmLayer/Motor.h
 yx_up\mx_freertos_init.o: ../User/Task/Yaw_task.h
 yx_up\mx_freertos_init.o: ../User/Task/Pitch_task.h
 yx_up\mx_freertos_init.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h

@@ -69,7 +69,7 @@ yx_up\stm32f4xx_it.o: ../User/AlgorithmLayer/bmi088driver.h
 yx_up\stm32f4xx_it.o: ../User/AlgorithmLayer/pid_imu.h
 yx_up\stm32f4xx_it.o: ../User/DriverLayer/Can_user.h
 yx_up\stm32f4xx_it.o: ../User/AlgorithmLayer/SolveTrajectory.h
-yx_up\stm32f4xx_it.o: ../User/PotocaLayer/Motor.h
+yx_up\stm32f4xx_it.o: ../User/AlgorithmLayer/Motor.h
 yx_up\stm32f4xx_it.o: ../User/Task/Yaw_task.h
 yx_up\stm32f4xx_it.o: ../User/Task/Exchange_task.h
 yx_up\stm32f4xx_it.o: ../User/Task/Pitch_task.h

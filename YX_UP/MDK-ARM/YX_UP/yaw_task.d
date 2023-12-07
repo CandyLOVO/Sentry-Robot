@@ -69,7 +69,7 @@ yx_up\yaw_task.o: ../User/AlgorithmLayer/bmi088driver.h
 yx_up\yaw_task.o: ../User/AlgorithmLayer/pid_imu.h
 yx_up\yaw_task.o: ../User/DriverLayer/Can_user.h
 yx_up\yaw_task.o: ../User/AlgorithmLayer/SolveTrajectory.h
-yx_up\yaw_task.o: ../User/PotocaLayer/Motor.h
+yx_up\yaw_task.o: ../User/AlgorithmLayer/Motor.h
 yx_up\yaw_task.o: ..\User\Task\Yaw_task.h
 yx_up\yaw_task.o: ..\User\Task\Pitch_task.h
 yx_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h

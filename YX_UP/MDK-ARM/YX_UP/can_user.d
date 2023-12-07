@@ -69,7 +69,7 @@ yx_up\can_user.o: ../User/DriverLayer/bsp_spi.h
 yx_up\can_user.o: ../User/AlgorithmLayer/bmi088driver.h
 yx_up\can_user.o: ../User/AlgorithmLayer/pid_imu.h
 yx_up\can_user.o: ../User/AlgorithmLayer/SolveTrajectory.h
-yx_up\can_user.o: ../User/PotocaLayer/Motor.h
+yx_up\can_user.o: ../User/AlgorithmLayer/Motor.h
 yx_up\can_user.o: ../User/Task/Yaw_task.h
 yx_up\can_user.o: ../User/Task/Pitch_task.h
 yx_up\can_user.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h

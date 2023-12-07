@@ -66,7 +66,7 @@ yx_down\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_
 yx_down\freertos.o: ../User/DriverLayer/bsp_imu_pwm.h
 yx_down\freertos.o: ../User/DriverLayer/bsp_spi.h
 yx_down\freertos.o: ../User/AlgorithmLayer/bmi088driver.h
-yx_down\freertos.o: ../User/pid_imu.h
+yx_down\freertos.o: ../User/AlgorithmLayer/pid_imu.h
 yx_down\freertos.o: ../User/PotocaLayer/rc_potocal.h
 yx_down\freertos.o: ../User/AlgorithmLayer/motor.h
 yx_down\freertos.o: ../User/AlgorithmLayer/pid.h

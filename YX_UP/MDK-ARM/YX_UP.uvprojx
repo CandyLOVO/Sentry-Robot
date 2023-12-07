@@ -736,11 +736,6 @@
               <FileType>1</FileType>
               <FilePath>..\User\PotocaLayer\remote_control.c</FilePath>
             </File>
-            <File>
-              <FileName>Motor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\PotocaLayer\Motor.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -805,6 +800,11 @@
               <FileName>BMI088Middleware.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\AlgorithmLayer\BMI088Middleware.c</FilePath>
+            </File>
+            <File>
+              <FileName>Motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\AlgorithmLayer\Motor.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -66,7 +66,7 @@ yx_down\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 yx_down\main.o: ../User/DriverLayer/bsp_imu_pwm.h
 yx_down\main.o: ../User/DriverLayer/bsp_spi.h
 yx_down\main.o: ../User/AlgorithmLayer/bmi088driver.h
-yx_down\main.o: ../User/pid_imu.h
+yx_down\main.o: ../User/AlgorithmLayer/pid_imu.h
 yx_down\main.o: ../User/DriverLayer/drv_can.h
 yx_down\main.o: ../User/Task/chassis_task.h
 yx_down\main.o: ../User/DriverLayer/drv_can.h
