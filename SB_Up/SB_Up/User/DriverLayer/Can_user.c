@@ -124,16 +124,6 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖÐ¶Ï»Øµ÷º¯Ê
     HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data);
 		
 //================================================µç»úÊý¾Ý½ÓÊÕ================================================//	
-//µ×ÅÌ4¸ö3508ÂóÂÖµç»úÊý¾Ý
-	if ((rx_header.StdId >= 0x201) && (rx_header.StdId <  0x205)) 
-  {
-    uint8_t index = rx_header.StdId - 0x201;
-    motor_info_can_2[index].rotor_angle    = ((rx_data[0] << 8) | rx_data[1]);
-    motor_info_can_2[index].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);
-    motor_info_can_2[index].torque_current = ((rx_data[4] << 8) | rx_data[5]);
-    motor_info_can_2[index].temp           =   rx_data[6];
-
-  }
 	
 //6020Êý¾Ý£¬ÕâÀï×¢Òâ6020µÄidÐèÒª´óÓÚ4£¬²»È»»á¸²¸Ç3508µ×ÅÌµç»úµÄÖµ
 	  if ((rx_header.StdId >= 0x205) && (rx_header.StdId <  0x20F))
