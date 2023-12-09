@@ -29,6 +29,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "bsp_delay.h"
+#include "Can_user.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -103,6 +104,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	delay_init();//启动IMU
 	HAL_TIM_PWM_Start(&htim10,TIM_CHANNEL_1);//BMI088需要使用
+	can_1_user_init(&hcan1);//??can1????
+	can_2_user_init(&hcan2);//??can2????,???bank???
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

@@ -7,8 +7,8 @@
 //================================================全局变量================================================//
 float target_yaw_left;	//左右脑袋的目标yaw
 float target_yaw_right;
-int16_t Init_encoder_left = 1000;		//左脑袋编码器正前方初始值(安装好后值固定)
-int16_t Init_encoder_right = 2000;		//右脑袋
+int16_t Init_encoder_left = 2250;		//左脑袋编码器正前方初始值(安装好后值固定)
+int16_t Init_encoder_right = 1095;		//右脑袋
 float Yaw_left;	//现在时刻左脑袋的yaw（相对坐标）
 float Yaw_right;	
 float Yaw_left_c;	//现在时刻左脑袋的yaw（绝对坐标）

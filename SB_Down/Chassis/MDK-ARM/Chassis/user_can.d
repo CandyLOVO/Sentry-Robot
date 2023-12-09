@@ -37,3 +37,9 @@ chassis\user_can.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 chassis\user_can.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 chassis\user_can.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 chassis\user_can.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
+chassis\user_can.o: ../USER/PotocaLayer/rc_potocal.h
+chassis\user_can.o: ../USER/struct_typedef.h
+chassis\user_can.o: ../USER/DriverLayer/drv_can.h
+chassis\user_can.o: ..\USER\Task\chassis.h
+chassis\user_can.o: ../Core/Inc/can.h
+chassis\user_can.o: ..\USER\Task\chassis.h
