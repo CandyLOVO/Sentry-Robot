@@ -55,3 +55,4 @@ sb_up\main.o: ../Core/Inc/usart.h
 sb_up\main.o: ../Core/Inc/gpio.h
 sb_up\main.o: ../User/DriverLayer/bsp_delay.h
 sb_up\main.o: ../User/struct_typedef.h
+sb_up\main.o: ../User/DriverLayer/Can_user.h

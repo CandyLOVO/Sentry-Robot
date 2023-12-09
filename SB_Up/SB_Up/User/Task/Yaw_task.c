@@ -24,6 +24,9 @@ static void Yaw_loop_init();
 //获取C板IMU值
 static void Yaw_read_imu();
 
+//两个脑袋的位置控制模式
+static void Yaw_mode_remote_site();
+
 //================================================YAW轴控制主函数================================================//
 void Yaw_task(void const *pvParameters)
 {

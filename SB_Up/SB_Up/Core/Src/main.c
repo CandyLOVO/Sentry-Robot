@@ -29,6 +29,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "bsp_delay.h"
+#include "Can_user.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -101,6 +102,8 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
+	can_1_user_init(&hcan1);//配置can1的过滤器
+	can_2_user_init(&hcan2);//配置can2的过滤器,过滤器bank不一样
 	delay_init();//启动IMU
 	HAL_TIM_PWM_Start(&htim10,TIM_CHANNEL_1);//BMI088需要使用
   /* USER CODE END 2 */
