@@ -63,3 +63,4 @@ sb_up\yaw_task.o: ../User/PotocaLayer/remote_control.h
 sb_up\yaw_task.o: ../User/DriverLayer/bsp_rc.h
 sb_up\yaw_task.o: ../User/AlgorithmLayer/handle_value.h
 sb_up\yaw_task.o: ../User/PotocaLayer/Motor.h
+sb_up\yaw_task.o: ../User/DriverLayer/Can_user.h

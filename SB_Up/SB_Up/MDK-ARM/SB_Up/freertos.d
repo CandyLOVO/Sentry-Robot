@@ -64,3 +64,4 @@ sb_up\freertos.o: ../User/PotocaLayer/remote_control.h
 sb_up\freertos.o: ../User/DriverLayer/bsp_rc.h
 sb_up\freertos.o: ../User/AlgorithmLayer/handle_value.h
 sb_up\freertos.o: ../User/PotocaLayer/Motor.h
+sb_up\freertos.o: ../User/DriverLayer/Can_user.h

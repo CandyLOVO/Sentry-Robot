@@ -2,7 +2,8 @@
 #define CAN_USER_H
 
 #include "main.h"
-
+extern CAN_HandleTypeDef hcan1;
+extern CAN_HandleTypeDef hcan2;
 extern int16_t Down_pitch;	//µ×ÅÌpitchÊý¾Ý
 void can_1_user_init(CAN_HandleTypeDef* hcan );
 void can_2_user_init(CAN_HandleTypeDef* hcan );

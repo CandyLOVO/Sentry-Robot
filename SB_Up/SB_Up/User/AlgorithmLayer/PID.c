@@ -68,14 +68,14 @@ float pid_calc_sita(pid_struct_t *pid,float target, float respond) //位置环PID计
 	float err = 0;
 	err = target - respond;
 	//越界处理
-	if(err > 180)
-	{
-		err -= 360;
-	}
-	else if(err < -180)
-	{
-		err += 360;
-	}
+//	if(err > 180)
+//	{
+//		err -= 360;
+//	}
+//	else if(err < -180)
+//	{
+//		err += 360;
+//	}
   pid->err[0] = err;
 	
   pid->p_out  = pid->kp * pid->err[0];

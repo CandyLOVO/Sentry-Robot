@@ -4,8 +4,7 @@
 #include "Motor.h"
 
 //	Can 的一些用户撰写的接收函数
-extern CAN_HandleTypeDef hcan1;
-extern CAN_HandleTypeDef hcan2;
+
 int16_t Down_pitch;	//底盘pitch数据
 
 //================================================can1过滤器================================================//
