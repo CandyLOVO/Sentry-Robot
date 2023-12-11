@@ -1,6 +1,5 @@
 #include "user_can.h"
 #include "string.h"
-#include "rc_potocal.h"
 
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
@@ -10,7 +9,6 @@ uint8_t can_send_data[8];
 motor_info motor[8];
 up_data UpData;
 
-/**************************************************尝试双can双fifo**************************************************/
 //void CAN1_Init()
 //{
 //	CAN_FilterTypeDef  can_filter;
@@ -30,7 +28,6 @@ up_data UpData;
 //  HAL_CAN_ActivateNotification(&hcan1,CAN_IT_RX_FIFO1_MSG_PENDING);
 //  HAL_CAN_Start(&hcan1);
 //}
-/*******************************************************************************************************************/
 
 void CAN1_Init()
 {
@@ -110,17 +107,6 @@ void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4) //can2 控�
 	HAL_CAN_AddTxMessage(&hcan2,&can_tx_message,can_send_data,&send_mail_box);
 }
 
-void can_cmd_send_C(uint8_t tx_rc_data[],uint8_t send_id) //can1发送下C板遥控器数值到上C板
-{
-	uint32_t send_mail_box = (uint32_t)CAN_TX_MAILBOX0;
-	can_tx_message.StdId = send_id;
-	can_tx_message.IDE = CAN_ID_STD;
-	can_tx_message.RTR = CAN_RTR_DATA;
-	can_tx_message.DLC = 0x08;
-	
-	HAL_CAN_AddTxMessage(&hcan1,&can_tx_message,tx_rc_data,&send_mail_box);
-}
-
 /**************************************************尝试双can双fifo**************************************************/
 //void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan) //can1发送3508数据 FIFO1
 //{
@@ -146,7 +132,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		CAN_RxHeaderTypeDef can_rx_message;
 		uint8_t can_recevie_data[8];
 		HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,&can_rx_message,can_recevie_data);
-		if(can_rx_message.StdId == 0x40){ //上C板发送数据ID：0x40
+		if(can_rx_message.StdId == 0x404){
 			memcpy(&UpData.yaw_up,&can_recevie_data,4); //接收上C板yaw(float)
 		}
 	}

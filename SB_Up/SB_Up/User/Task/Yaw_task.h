@@ -10,6 +10,9 @@
 #include "remote_control.h"
 #include "handle_value.h"
 #include "Motor.h"
+#include "Can_user.h"
+
+#define Yaw_sita_weight 0.5f 		//遥控器控制位置环权重
 	 
 //定义函数
 void Yaw_task(void const *pvParameters);

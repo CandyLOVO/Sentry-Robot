@@ -36,7 +36,7 @@ void Chassis(void const * argument)
 {
 	float PID_s[3] = {30,0.01,0};
 	float PID_a[3] = {6,0,0.01};
-	float PID[3] = {20,0.1,0.1};
+	float PID[3] = {5,0,0};
 	
 	int m = 0;
 	

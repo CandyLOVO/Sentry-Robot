@@ -102,10 +102,10 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
+	can_1_user_init(&hcan1);//配置can1的过滤器
+	can_2_user_init(&hcan2);//配置can2的过滤器,过滤器bank不一样
 	delay_init();//启动IMU
 	HAL_TIM_PWM_Start(&htim10,TIM_CHANNEL_1);//BMI088需要使用
-	can_1_user_init(&hcan1);//??can1????
-	can_2_user_init(&hcan2);//??can2????,???bank???
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

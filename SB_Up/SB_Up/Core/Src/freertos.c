@@ -53,6 +53,7 @@ osThreadId defaultTaskHandle;
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
 osThreadId insTaskHandle;
+osThreadId yawTaskHandle;
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
@@ -110,6 +111,10 @@ void MX_FREERTOS_Init(void) {
   /* add threads, ... */
 	osThreadDef(imutask, INS_Task,  osPriorityRealtime, 0, 512);
   insTaskHandle = osThreadCreate(osThread(imutask), NULL);
+	
+	//YAW¿ØÖÆÈÎÎñ
+	osThreadDef(yawtask, Yaw_task, osPriorityRealtime, 0, 256);		
+  yawTaskHandle = osThreadCreate(osThread(yawtask), NULL);
   /* USER CODE END RTOS_THREADS */
 
 }
