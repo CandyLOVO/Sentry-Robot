@@ -60,7 +60,7 @@ const RC_ctrl_t *get_remote_control_point(void)
 }
 
 //================================================遥控器串口接收中断================================================//
-//串口中断，需要删除stm32f4xx_it.c中的同样中断
+//涓插彛涓柇锛岄渶瑕佹坊鍔犲埌stm32f4xx_it.c鐨勪腑鏂腑
 void USART3_IRQHandler_remote(void)
 {
 

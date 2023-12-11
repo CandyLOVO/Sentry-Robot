@@ -30,6 +30,7 @@
 /* USER CODE BEGIN Includes */
 #include "bsp_delay.h"
 #include "Can_user.h"
+#include "remote_control.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -106,6 +107,7 @@ int main(void)
 	can_2_user_init(&hcan2);//配置can2的过滤器,过滤器bank不一样
 	delay_init();//启动IMU
 	HAL_TIM_PWM_Start(&htim10,TIM_CHANNEL_1);//BMI088需要使用
+	remote_control_init();//閬ユ帶鍣ㄥ垵濮嬪寲
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

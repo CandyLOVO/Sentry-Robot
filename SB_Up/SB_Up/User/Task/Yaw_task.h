@@ -16,6 +16,7 @@
 	 
 //¶¨Òåº¯Êý
 void Yaw_task(void const *pvParameters);
+static void Yaw_can_send();
 
 #ifdef __cplusplus
 }
