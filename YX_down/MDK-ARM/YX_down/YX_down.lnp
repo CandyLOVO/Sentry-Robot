@@ -1,4 +1,4 @@
---cpu Cortex-M4.fp
+--cpu=Cortex-M4.fp.sp
 "yx_down\startup_stm32f407xx.o"
 "yx_down\main.o"
 "yx_down\gpio.o"
@@ -60,6 +60,6 @@
 "yx_down\pid_imu.o"
 "yx_down\crc.o"
 --strict --scatter "YX_down\YX_down.sct"
---summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "YX_down.map" -o YX_down\YX_down.axf

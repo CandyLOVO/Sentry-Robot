@@ -29,7 +29,7 @@ up_data UpData;
 //  HAL_CAN_Start(&hcan1);
 //}
 
-void CAN1_Init()
+void CAN1_Init() //CAN1过滤器配置
 {
 	CAN_FilterTypeDef  can_filter;
 
@@ -49,7 +49,7 @@ void CAN1_Init()
   HAL_CAN_Start(&hcan1);
 }
 
-void CAN2_Init()
+void CAN2_Init() //CAN2过滤器配置
 {
 	CAN_FilterTypeDef  can_filter;
 
@@ -69,7 +69,24 @@ void CAN2_Init()
   HAL_CAN_Start(&hcan2);
 }
 
-void can_cmd_send_3508(int motor1,int motor2,int motor3,int motor4) //can2 控制3508四个电机（motor[]:0-3）
+
+/****************************************************CAN1发送函数***************************************************/
+void can_remote(uint8_t sbus_buf[],uint8_t can_send_id)
+{
+	CAN_TxHeaderTypeDef can_remote_message;
+	uint32_t remote_mail_box = (uint32_t)CAN_TX_MAILBOX1; //邮箱2
+	can_remote_message.StdId = can_send_id;
+	can_remote_message.IDE = CAN_ID_STD;
+	can_remote_message.RTR = CAN_RTR_DATA;
+	can_remote_message.DLC = 0x08;
+	
+	HAL_CAN_AddTxMessage(&hcan1,&can_remote_message,sbus_buf,&remote_mail_box);
+}
+/*******************************************************************************************************************/
+
+
+/****************************************************CAN2发送函数***************************************************/
+void can_cmd_send_3508(int motor1,int motor2,int motor3,int motor4) //can2发送 控制3508四个电机（motor[]:0-3）
 {
 	uint32_t send_mail_box = (uint32_t)CAN_TX_MAILBOX0;
 	can_tx_message.StdId = 0x200;
@@ -88,7 +105,7 @@ void can_cmd_send_3508(int motor1,int motor2,int motor3,int motor4) //can2 控�
 	HAL_CAN_AddTxMessage(&hcan2,&can_tx_message,can_send_data,&send_mail_box);
 }
 
-void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4) //can2 控制6020四个电机(motor[]:4-7)
+void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4) //can2发送 控制6020四个电机(motor[]:4-7)
 {
 	uint32_t send_mail_box = (uint32_t)CAN_TX_MAILBOX0;
 	can_tx_message.StdId = 0x1FF;
@@ -106,6 +123,8 @@ void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4) //can2 控�
 
 	HAL_CAN_AddTxMessage(&hcan2,&can_tx_message,can_send_data,&send_mail_box);
 }
+/*******************************************************************************************************************/
+
 
 /**************************************************尝试双can双fifo**************************************************/
 //void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan) //can1发送3508数据 FIFO1
@@ -125,6 +144,8 @@ void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4) //can2 控�
 //}
 /*******************************************************************************************************************/
 
+
+/*********************************************CAN通信接收回调函数 fifo0*********************************************/
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
 	if(hcan->Instance == CAN1) //接收上C板数据
@@ -136,6 +157,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 			memcpy(&UpData.yaw_up,&can_recevie_data,4); //接收上C板yaw(float)
 		}
 	}
+	
 	if(hcan->Instance == CAN2) //can2发送6020、3508数据 FIFO0
 	{
 		CAN_RxHeaderTypeDef can_rx_message;
@@ -150,15 +172,4 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		}
 	}
 }
-
-void can_remote(uint8_t sbus_buf[],uint8_t can_send_id) //can通信发送遥控器数据
-{
-  CAN_TxHeaderTypeDef tx_header;
-    
-  tx_header.StdId = can_send_id;
-  tx_header.IDE   = CAN_ID_STD;
-  tx_header.RTR   = CAN_RTR_DATA;
-  tx_header.DLC   = 8;
-
-  HAL_CAN_AddTxMessage(&hcan1, &tx_header, sbus_buf,(uint32_t*)CAN_TX_MAILBOX0);
-}
+/*******************************************************************************************************************/

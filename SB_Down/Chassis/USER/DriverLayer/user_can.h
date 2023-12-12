@@ -8,7 +8,7 @@ void can_cmd_send_3508(int motor1,int motor2,int motor3,int motor4);
 void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4);
 void can_remote(uint8_t sbus_buf[],uint8_t can_send_id);
 
-typedef struct
+typedef struct //CAN
 {
 	double angle;
 	int16_t speed;
@@ -16,7 +16,7 @@ typedef struct
 	uint16_t temperture;
 }motor_info;
 
-typedef struct
+typedef struct //C
 {
 	float yaw_up;
 }up_data;

@@ -28,7 +28,11 @@ uint16_t c_flag;
 uint16_t v_flag;
 uint16_t b_flag;
 
-  uint8_t temp_remote[8];
+//  uint8_t temp_remote[8];
+ uint8_t remote_data_rc[12]; //传给上C板rc_ctrl.rc
+ uint8_t remote_data_mouse[8]; //传给上C板rc_ctrl.mouse
+ uint8_t remote_data_key[2]; //传给上C板rc_ctrl.key
+ 
  RC_ctrl_t rc_ctrl;
  #define RC_CH_VALUE_OFFSET      ((uint16_t)1024)
    void USART3_rxDataHandler(uint8_t *rxBuf)
@@ -53,34 +57,70 @@ uint16_t b_flag;
     rc_ctrl.rc.ch[2]-=RC_CH_VALUE_OFFSET;
     rc_ctrl.rc.ch[3]-=RC_CH_VALUE_OFFSET;
     rc_ctrl.rc.ch[4]-=RC_CH_VALUE_OFFSET;
-		for(int i=0;i<=7;i++)
-		{
-			temp_remote[i]=rxBuf[i];//volatile const uint8_t和uint8_t不一样不能直接带入can_remote这个函数
+	
+	/*********************************************传给上C板rc_ctrl.rc****************************************/
+	for(int i=0;i<10;i++){
+		if(i%2==0){
+			remote_data_rc[i] = (rc_ctrl.rc.ch[(i/2)]>>8) & 0xff; //先发数据高八位
 		}
-		can_remote(temp_remote,0x33);
-		
-		for(int i=8;i<=15;i++)
-		{
-			temp_remote[i-8]=rxBuf[i];//volatile const uint8_t和uint8_t不一样不能直接带入can_remote这个函数
+		else{
+			remote_data_rc[i] = rc_ctrl.rc.ch[((i-1)/2)] & 0xff; //再发低八位
 		}
-		can_remote(temp_remote,0x34);
-		
-		temp_remote[0]=rxBuf[16];
-		temp_remote[1]=rxBuf[17];
-		temp_remote[2]=rxBuf[18];
-		
-		//crul_w用来传递底盘旋转量
-		Rotate_w = (motor[0].speed + motor[1].speed + motor[2].speed + motor[3].speed)/(4*19);
-		temp_remote[3]=( (Rotate_w>>8) & 0xff);//先发高8位
-		temp_remote[4]=(Rotate_w & 0xff);
-		
-		//传输下C板的Pitch数据给上C
-//		temp_remote[5]=((int)ins_data.angle[1]>>8) & 0xff;//先发高8位
-//		temp_remote[6]=(int)ins_data.angle[1] & 0xff;
-		
-		temp_remote[7]=0;
+	}
+	for(int i=10;i<12;i++){
+		remote_data_rc[i] = rc_ctrl.rc.s[(i-10)];
+	}
+	can_remote(remote_data_rc,0x30); //CAN发送ID：0x30
+	/********************************************************************************************************/
+	
+	
+	/*******************************************传给上C板rc_ctrl.mouse***************************************/
+	remote_data_mouse[0] = (rc_ctrl.mouse.x>>8) & 0xff;
+	remote_data_mouse[1] = rc_ctrl.mouse.x & 0xff;
+	remote_data_mouse[2] = (rc_ctrl.mouse.y>>8) & 0xff;
+	remote_data_mouse[3] = rc_ctrl.mouse.y & 0xff;
+	remote_data_mouse[4] = (rc_ctrl.mouse.z>>8) & 0xff;
+	remote_data_mouse[5] = rc_ctrl.mouse.z & 0xff;
+	remote_data_mouse[6] = rc_ctrl.mouse.press_l;
+	remote_data_mouse[7] = rc_ctrl.mouse.press_r;
+	can_remote(remote_data_mouse,0x31);
+	/********************************************************************************************************/
+	
+	
+	/********************************************传给上C板rc_ctrl.key****************************************/
+	remote_data_key[0] = (rc_ctrl.key.v>>8) & 0xff;
+	remote_data_key[1] = rc_ctrl.key.v & 0xff;
+	can_remote(remote_data_key,0x32);
+	/********************************************************************************************************/
+	
+//		for(int i=0;i<=7;i++)
+//		{
+//			temp_remote[i]=rxBuf[i];//volatile const uint8_t和uint8_t不一样不能直接带入can_remote这个函数
+//		}
+//		can_remote(temp_remote,0x33);
+//		
+//		for(int i=8;i<=15;i++)
+//		{
+//			temp_remote[i-8]=rxBuf[i];//volatile const uint8_t和uint8_t不一样不能直接带入can_remote这个函数
+//		}
+//		can_remote(temp_remote,0x34);
+//		
+//		temp_remote[0]=rxBuf[16];
+//		temp_remote[1]=rxBuf[17];
+//		temp_remote[2]=rxBuf[18];
+//		
+//		//crul_w用来传递底盘旋转量
+//		Rotate_w = (motor[0].speed + motor[1].speed + motor[2].speed + motor[3].speed)/(4*19);
+//		temp_remote[3]=( (Rotate_w>>8) & 0xff);//先发高8位
+//		temp_remote[4]=(Rotate_w & 0xff);
+//		
+//		//传输下C板的Pitch数据给上C
+////		temp_remote[5]=((int)ins_data.angle[1]>>8) & 0xff;//先发高8位
+////		temp_remote[6]=(int)ins_data.angle[1] & 0xff;
+//		
+//		temp_remote[7]=0;
 
-		can_remote(temp_remote,0x35);
+//		can_remote(temp_remote,0x35);
     
 
 //Some flag of keyboard
