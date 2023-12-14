@@ -20,8 +20,8 @@ extern int16_t motor_speed[4]; //3508速度
 uint16_t initial_angle[4];
 int16_t Max_out_a = 8192;
 int16_t Max_iout_a = 8192;
-int16_t Max_out_s = 30000; //电压控制转速，电流控制扭矩
-int16_t Max_iout_s = 30000;
+int16_t Max_out_s = 16384; //电压控制转速，电流控制扭矩
+int16_t Max_iout_s = 16384;
 pidTypeDef PID_angle[4];
 pidTypeDef PID_speed_3508[4];
 pidTypeDef PID_speed_6020[4];

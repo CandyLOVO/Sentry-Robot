@@ -5,8 +5,7 @@
 
 #define cosin 0.707106781187 //二分之根号二
 #define omega 13 //旋转叠加计算中的角速度
-#define radius 50 //舵轮距离车体中心的距离
-
+#define radius 248.248 //舵轮距离车体中心的距离 杰舵248.248mm 哨兵313.487mm
 extern int16_t theta;
 
 int16_t motor_angle[4];
@@ -20,7 +19,8 @@ void translate_3508(int16_t x,int16_t y)
 {
 	for(int i=0;i<4;i++){
 		//将杆量反映到3508的速度
-		motor_speed[i] = sqrt(pow((float)x,2) + pow((float)y,2));
+		//		motor_speed[i] = sqrt(pow((float)x,2) + pow((float)y,2)); //该处理方式使得速度较小，且对角线处速度最大，前后平移时速度不大
+		motor_speed[i] = sqrt(pow((float)x,2) + pow((float)y,2))*(16384/660); //对角线处通过PID最大值限幅限制到16384
 	}
 }	
 
@@ -49,9 +49,9 @@ void rotate_6020()
 //旋转+平移的3508速度
 void compound_movement_3508(int16_t x,int16_t y)
 {
-	int16_t vx = x*cos(theta) - y*sin(theta);
+	int16_t vx = x*cos(theta) - y*sin(theta); //底盘跟随云台处理后的x、y方向的速度
 	int16_t vy = x*sin(theta) + y*cos(theta);
-	motor_speed[0] = sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy + omega*radius*cosin),2));
+	motor_speed[0] = sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy + omega*radius*cosin),2)); //平移与旋转叠加后的向量长度
 	motor_speed[1] = sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy + omega*radius*cosin),2));
 	motor_speed[2] = sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
 	motor_speed[3] = sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
