@@ -38,12 +38,17 @@ static void Yaw_voltage_calc();
 
 //循环初始化
 static void Yaw_loop_init();
+
+//MF9025力控(等比缩放)
+static void Current_Control_MF();
+	
 //================================================YAW轴控制主函数================================================//
 void Yaw_task(void const *pvParameters)
 {
   //参数初始化设置
 	osDelay(2000);//上电等待IMU启动成功
 	Yaw_init();
+	Start_MF_send(1);//初始化9025
 	
 	//循环任务运行
   for(;;)
@@ -51,10 +56,12 @@ void Yaw_task(void const *pvParameters)
 		Yaw_loop_init();//循环初始化
 		Yaw_read_imu();//获取Imu角度
 		Yaw_mode_remote_site();//位置控制模式
+		Current_Control_MF();//MF9025力控模式(遥控器)
 		Yaw_restrict();//相对角度限制
 		Yaw_speed_calc();//速度环计算
 		Yaw_voltage_calc();//电压环计算
 		Yaw_can_send();
+		Current_Control_MF_send(1,motor_info[0].set_voltage);
     osDelay(1);
   }
 
@@ -75,6 +82,7 @@ static void Yaw_init()
 	
 	target_yaw_left = Yaw_left;
 	target_yaw_right = Yaw_right;
+	
 }
 
 //================================================YAW轴角度读取===============================================//
@@ -100,7 +108,7 @@ static void Yaw_read_imu()
 //================================================位置控制模式================================================//
 static void Yaw_mode_remote_site()
 {
-		if(rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[0]<= 660)
+		if(rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1]<= 660)
 		{			
 			target_yaw_left -= rc_ctrl.rc.ch[1]/660.0 * Yaw_sita_weight; 	
 			target_yaw_right = -target_yaw_left;
@@ -172,3 +180,13 @@ static void Yaw_loop_init()
 	target_speed_can_2[1] = 0;
 }
 	
+//================================================MF9025力控(等比缩放)===============================================//
+static void Current_Control_MF()
+{
+	if(rc_ctrl.rc.ch[0] >= -660 && rc_ctrl.rc.ch[0]<= 660)
+	{
+		motor_info[0].set_voltage = 2048*(rc_ctrl.rc.ch[0]/660);
+	}
+	//限制函数调用
+	motor_info[0].set_voltage = Current_Limit_MF(motor_info[0].set_voltage);
+}

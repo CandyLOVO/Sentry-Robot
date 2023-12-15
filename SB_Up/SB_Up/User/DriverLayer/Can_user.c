@@ -104,14 +104,16 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖÐ¶Ï»Øµ÷º¯Ê
     motor_info[index].temp           =   rx_data[6];
   }
 	
-	//¶ÔYaw(6020µç»ú)½øÐÐµ¥¶ÀµÄ´¦Àí£¬Æä6020µç»úIDÎª6£¬¶ÔÆäµ¥¶À¸³Öµ
-//	else if(rx_header.StdId == 0x20A)
-//	{
-//		motor_info[6].rotor_angle    = ((rx_data[0] << 8) | rx_data[1]);
-//    motor_info[6].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);
-//    motor_info[6].torque_current = ((rx_data[4] << 8) | rx_data[5]);
-//    motor_info[6].temp           =   rx_data[6];
-//	}
+//================================================MF9025£¨×¢ÒâÒ»ÏÂµ¥Î»£©================================================//	
+	if(rx_header.StdId == 0x141)//MF9025µç»úIDÎª1
+	{
+		if(rx_data[0] == 0xA1)	//¿ØÖÆÄ£Ê½ÏÂµÄ·µ»ØÖµ
+		{
+			motor_info[0].torque_current = (rx_data[2] | (rx_data[3] << 8));//ÏÈ·¢µÄµÍÎ»×Ö½Ú
+			motor_info[0].rotor_speed = (rx_data[4] | (rx_data[5] << 8));
+			motor_info[0].rotor_angle = (rx_data[6] | (rx_data[7] << 8));
+		}
+	}
 
 	
   }
