@@ -61,7 +61,7 @@ void Yaw_task(void const *pvParameters)
 		Yaw_speed_calc();//速度环计算
 		Yaw_voltage_calc();//电压环计算
 		Yaw_can_send();
-		Current_Control_MF_send(1,motor_info[0].set_voltage);
+		Current_Control_MF_send(1,&motor_info[0].set_voltage);
     osDelay(1);
   }
 
@@ -185,7 +185,7 @@ static void Current_Control_MF()
 {
 	if(rc_ctrl.rc.ch[0] >= -660 && rc_ctrl.rc.ch[0]<= 660)
 	{
-		motor_info[0].set_voltage = 2048*(rc_ctrl.rc.ch[0]/660);
+		motor_info[0].set_voltage = 2048*((float)rc_ctrl.rc.ch[0]/660);
 	}
 	//限制函数调用
 	motor_info[0].set_voltage = Current_Limit_MF(motor_info[0].set_voltage);
