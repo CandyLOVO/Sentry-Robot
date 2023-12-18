@@ -1,4 +1,4 @@
---cpu=Cortex-M4.fp.sp
+--cpu Cortex-M4.fp
 "sb_up\startup_stm32f407xx.o"
 "sb_up\main.o"
 "sb_up\gpio.o"
@@ -56,6 +56,6 @@
 "sb_up\ins_task.o"
 "sb_up\yaw_task.o"
 --strict --scatter "SB_Up\SB_Up.sct"
---summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "SB_Up.map" -o SB_Up\SB_Up.axf

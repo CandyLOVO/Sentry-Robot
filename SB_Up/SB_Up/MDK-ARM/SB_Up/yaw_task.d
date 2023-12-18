@@ -8,7 +8,7 @@ sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 sb_up\yaw_task.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 sb_up\yaw_task.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h
 sb_up\yaw_task.o: ../Drivers/CMSIS/Include/core_cm4.h
-sb_up\yaw_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
+sb_up\yaw_task.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdint.h
 sb_up\yaw_task.o: ../Drivers/CMSIS/Include/cmsis_version.h
 sb_up\yaw_task.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 sb_up\yaw_task.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -16,7 +16,7 @@ sb_up\yaw_task.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 sb_up\yaw_task.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-sb_up\yaw_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
+sb_up\yaw_task.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stddef.h
 sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
 sb_up\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h
@@ -38,8 +38,8 @@ sb_up\yaw_task.o: ../User/struct_typedef.h
 sb_up\yaw_task.o: ..\User\Task\INS_task.h
 sb_up\yaw_task.o: ../User/arm_math.h
 sb_up\yaw_task.o: ../Drivers/CMSIS/Include/core_cm4.h
-sb_up\yaw_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
-sb_up\yaw_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h
+sb_up\yaw_task.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
+sb_up\yaw_task.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
 sb_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 sb_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 sb_up\yaw_task.o: ../Core/Inc/FreeRTOSConfig.h

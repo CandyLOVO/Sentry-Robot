@@ -15,6 +15,7 @@
 
 #define Yaw_sita_weight 0.5f 		//遥控器控制位置环权重
 	 
+extern float Yaw_middle;	//一级云台yaw(只有绝对坐标)
 //定义函数
 void Yaw_task(void const *pvParameters);
 static void Yaw_can_send();

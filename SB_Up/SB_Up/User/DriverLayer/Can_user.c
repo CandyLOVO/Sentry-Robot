@@ -113,6 +113,10 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//Ω” ‹÷–∂œªÿµ˜∫Ø 
 			motor_info[0].rotor_speed = (rx_data[4] | (rx_data[5] << 8));
 			motor_info[0].rotor_angle = (rx_data[6] | (rx_data[7] << 8));
 		}
+		else if(rx_data[0] == 0x90)	//∂¡»°±‡¬Î∆˜£®”√”⁄≥ı ºªØ£©
+		{
+			motor_info[0].rotor_angle = (rx_data[2] | (rx_data[3] << 8));//œ»∑¢µƒµÕŒª◊÷Ω⁄
+		}
 	}
 
 	

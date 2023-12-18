@@ -88,3 +88,33 @@ float pid_calc_sita(pid_struct_t *pid,float target, float respond) //位置环PID计
   LIMIT_MIN_MAX(pid->output, -pid->out_max, pid->out_max);//防止总体越界
   return pid->output;
 }
+
+float pid_calc_sita_span(pid_struct_t *pid,float target, float respond)//带越界处理
+{
+  pid->ref = target;
+  pid->fdb = respond;
+	pid->err[1] = pid->err[0];
+	
+	float err = 0;
+	err = target - respond;
+	//越界处理
+	if(err > 180)
+	{
+		err -= 360;
+	}
+	else if(err < -180)
+	{
+		err += 360;
+	}
+  pid->err[0] = err;
+	
+  pid->p_out  = pid->kp * pid->err[0];
+  pid->i_out += pid->ki * pid->err[0];
+  pid->d_out  = pid->kd * (pid->err[0] - pid->err[1]);
+	
+  LIMIT_MIN_MAX(pid->i_out, -pid->i_max, pid->i_max);//防止i值叠加越界
+  
+  pid->output = pid->p_out + pid->i_out + pid->d_out;
+  LIMIT_MIN_MAX(pid->output, -pid->out_max, pid->out_max);//防止总体越界
+  return pid->output;
+}
