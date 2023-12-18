@@ -70,8 +70,13 @@ void compound_movement_6020(int16_t x,int16_t y) //旋转+平移的6020角度
 
 void rotate_6020() //仅旋转的6020角度
 {
+//	motor_angle[0] = remote_value(omega*radius*cosin, omega*radius*cosin);
+//	motor_angle[1] = remote_value(- omega*radius*cosin, omega*radius*cosin);
+//	motor_angle[2] = remote_value(- omega*radius*cosin, - omega*radius*cosin);
+//	motor_angle[3] = remote_value(omega*radius*cosin, - omega*radius*cosin);
+	
 	motor_angle[0] = remote_value(omega*radius*cosin, omega*radius*cosin);
 	motor_angle[1] = remote_value(- omega*radius*cosin, omega*radius*cosin);
-	motor_angle[2] = remote_value(- omega*radius*cosin, - omega*radius*cosin);
-	motor_angle[3] = remote_value(omega*radius*cosin, - omega*radius*cosin);
+	motor_angle[2] = remote_value(omega*radius*cosin, - omega*radius*cosin);
+	motor_angle[3] = remote_value(- omega*radius*cosin, - omega*radius*cosin);
 }

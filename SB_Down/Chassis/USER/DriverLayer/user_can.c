@@ -146,6 +146,7 @@ void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4) //can2发送
 
 
 /*********************************************CAN通信接收回调函数 fifo0*********************************************/
+int error = 0;
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
 	if(hcan->Instance == CAN1) //接收上C板数据

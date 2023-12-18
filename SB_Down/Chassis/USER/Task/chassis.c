@@ -25,17 +25,19 @@ int16_t Max_iout_s = 16384;
 pidTypeDef PID_angle[4];
 pidTypeDef PID_speed_3508[4];
 pidTypeDef PID_speed_6020[4];
-fp32 theta; //云台坐标系与底盘坐标系间夹角(此时为0~360度) 后期接收后需要对所得theta进行处理
+fp32 error_theta; //云台坐标系与底盘坐标系间夹角(此时为0~360度) 后期接收后需要对所得theta进行处理
 
 void Yaw_Diff()
 {
-	theta = UpData.yaw_up - INS_angle[0];
+	UpData.yaw_up = 0; //测试舵轮 可删
+	error_theta = UpData.yaw_up - INS_angle[0]; 
+	error_theta = error_theta*3.1415926/180; //转化为弧度制
 }
 
 void Chassis(void const * argument)
 {
 	float PID_s[3] = {30,0.01,0};
-	float PID_a[3] = {6,0,0.01};
+	float PID_a[3] = {7,0,0.01};
 	float PID[3] = {5,0,0};
 	
 	int m = 0;
@@ -61,12 +63,14 @@ void Chassis(void const * argument)
 
 		//设置初始角度		
 		if(m==0){
-			initial_angle[0] = 7819; //初始角度（底盘正前方各轮子角度）
-			initial_angle[1] = 1858;
-			initial_angle[2] = 3805;
-			initial_angle[3] = 5735;
+			initial_angle[0] = 3684; //初始角度（底盘正前方各轮子角度）
+			initial_angle[1] = 4421;
+			initial_angle[2] = 6442;
+			initial_angle[3] = 7188;
 			m++;
 		}
+		
+		Yaw_Diff(); //得到上C板与下C板间yaw的差值
 
 		//遥控器控制底盘不同运动
 		//具体实现方式在"motion_overlay.c"

@@ -30,7 +30,7 @@ void Start_MF_send(int16_t ID)
 /*数值范围-2048~ 2048，对应 MF 电机实际转矩电流范围-16.5A~16.5A，对应 MG 电机实际转矩电流范围-33A~33A，
 母线电流和电机的实际扭矩因不同电机而异。*/
 
-//para:ID号,电流值
+//para:ID号,电流值的地址
 void Current_Control_MF_send(int16_t ID,int16_t iqControl)
 {
 	CAN_TxHeaderTypeDef tx_header;
@@ -46,7 +46,7 @@ void Current_Control_MF_send(int16_t ID,int16_t iqControl)
   tx_data[2] = 0x00;	
   tx_data[3] = 0x00;
   tx_data[4] = *(uint8_t *)(&iqControl);
-  tx_data[5] =  *((uint8_t *)(&iqControl)+1);
+  tx_data[5] = *((uint8_t *)(&iqControl)+1);
   tx_data[6] = 0x00;
   tx_data[7] = 0x00;
   HAL_CAN_AddTxMessage(&hcan1, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX1);

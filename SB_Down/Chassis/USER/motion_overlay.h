@@ -7,6 +7,7 @@ void translate_6020(int16_t x,int16_t y);
 void compound_movement_3508(int16_t vx,int16_t vy);
 void compound_movement_6020(int16_t vx,int16_t vy);
 //float compound_movement_6020(int16_t vx,int16_t vy,int n);
+void rotate_3508(int16_t x,int16_t y);
 void rotate_6020();
 
 #endif
