@@ -36,8 +36,8 @@ void Yaw_Diff()
 
 void Chassis(void const * argument)
 {
-	float PID_s[3] = {30,0.01,0};
-	float PID_a[3] = {7,0,0.01};
+	float PID_s[3] = {33,0.02,0};
+	float PID_a[3] = {6,0,0.01};
 	float PID[3] = {5,0,0};
 	
 	int m = 0;
@@ -63,10 +63,10 @@ void Chassis(void const * argument)
 
 		//设置初始角度		
 		if(m==0){
-			initial_angle[0] = 3684; //初始角度（底盘正前方各轮子角度）
-			initial_angle[1] = 4421;
-			initial_angle[2] = 6442;
-			initial_angle[3] = 7188;
+			initial_angle[0] = 1014; //初始角度（底盘正前方各轮子角度）
+			initial_angle[1] = 4404;
+			initial_angle[2] = 6452;
+			initial_angle[3] = 7192;
 			m++;
 		}
 		

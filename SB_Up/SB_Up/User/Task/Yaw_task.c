@@ -11,7 +11,7 @@ float target_yaw_right;
 float target_yaw_middle;
 int16_t Init_encoder_left = 6818;		//左脑袋编码器正前方初始值(安装好后值固定)
 int16_t Init_encoder_right = 7154;		//右脑袋
-int16_t Init_encoder_middle = 0;		//一级云台,正前方要和底盘C板正前方朝向一致
+int16_t Init_encoder_middle = 15693;		//一级云台,正前方要和底盘C板正前方朝向一致
 float Yaw_middle;	//一级云台yaw(只有绝对坐标)
 float Yaw_left;	//现在时刻左脑袋的yaw（相对坐标）
 float Yaw_right;	
@@ -66,7 +66,7 @@ void Yaw_task(void const *pvParameters)
 		Yaw_read_imu();//获取Imu角度
 		Yaw_mode_remote_site();//位置控制模式
 		Encoder_MF_read(motor_info[0].can_id);//读取当前编码器值，读完之后用下面那一行的位置模式
-//		Site_Control_MF();//MF9025位置模式(遥控器)
+		Site_Control_MF();//MF9025位置模式(遥控器)
 //		Current_Control_MF();//MF9025力控模式(遥控器)
 		Yaw_restrict();//相对角度限制
 		Yaw_speed_calc();//速度环计算
