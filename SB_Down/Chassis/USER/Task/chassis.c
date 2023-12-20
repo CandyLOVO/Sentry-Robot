@@ -21,7 +21,7 @@ uint16_t initial_angle[4];
 int16_t Max_out_a = 20000;
 int16_t Max_iout_a = 20000;
 int16_t Max_out_s = 16384; //电压控制转速，电流控制扭矩
-int16_t Max_iout_s = 16384;
+int16_t Max_iout_s = 2000;
 pidTypeDef PID_angle[4];
 pidTypeDef PID_speed_3508[4];
 pidTypeDef PID_speed_6020[4];
@@ -36,8 +36,8 @@ void Yaw_Diff()
 
 void Chassis(void const * argument)
 {
-	float PID_s[3] = {30,0.1,0};
-	float PID_a[3] = {5,0,0.01};
+	float PID_s[3] = {20,0.1,0};
+	float PID_a[3] = {20,0,0.1};
 	float PID[3] = {5,0,0};
 	
 	int m = 0;

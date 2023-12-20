@@ -1,6 +1,6 @@
 #include "user_pid.h"
 
-int16_t limit_max(int16_t value,int16_t Max_out)
+int16_t limit_max(int32_t value,int32_t Max_out)
 {
 	if(value > Max_out){
 		value = Max_out;
