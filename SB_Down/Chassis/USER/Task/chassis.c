@@ -18,8 +18,8 @@ extern int16_t motor_angle[4]; //6020角度 在motion_overlay.c中计算 作为�
 extern int16_t motor_speed[4]; //3508速度
 
 uint16_t initial_angle[4];
-int16_t Max_out_a = 8192;
-int16_t Max_iout_a = 8192;
+int16_t Max_out_a = 20000;
+int16_t Max_iout_a = 20000;
 int16_t Max_out_s = 16384; //电压控制转速，电流控制扭矩
 int16_t Max_iout_s = 16384;
 pidTypeDef PID_angle[4];
@@ -36,8 +36,8 @@ void Yaw_Diff()
 
 void Chassis(void const * argument)
 {
-	float PID_s[3] = {33,0.02,0};
-	float PID_a[3] = {6,0,0.01};
+	float PID_s[3] = {30,0.1,0};
+	float PID_a[3] = {5,0,0.01};
 	float PID[3] = {5,0,0};
 	
 	int m = 0;
@@ -62,7 +62,7 @@ void Chassis(void const * argument)
 //********************************************************************************************//
 
 		//设置初始角度		
-		if(m==0){
+		if(m==0&&rc_ctrl.rc.s[0]==1){
 			initial_angle[0] = 1014; //初始角度（底盘正前方各轮子角度）
 			initial_angle[1] = 4404;
 			initial_angle[2] = 6452;

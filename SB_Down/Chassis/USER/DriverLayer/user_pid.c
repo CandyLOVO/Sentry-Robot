@@ -41,7 +41,7 @@ int16_t pid_cal_s(pidTypeDef *PID,int16_t get,int16_t set,int16_t Max_out,int16_
 	return PID->out;
 }
 
-int16_t pid_cal_a(pidTypeDef *PID,float get,float set,int16_t Max_out,int16_t Max_iout)
+int16_t pid_cal_a(pidTypeDef *PID,float get,float set,int16_t Max_out,int16_t Max_iout) //set is target
 {
 	PID->get = get;
 	PID->set = set;
@@ -62,7 +62,7 @@ int16_t pid_cal_a(pidTypeDef *PID,float get,float set,int16_t Max_out,int16_t Ma
 	if(PID->error[1] > 180){
 		PID->error[1] = PID->error[1] - 360;
 	}
-	else if((PID->set - PID->get) < -180){
+	else if(PID->error[1] < -180){
 		PID->error[1] = PID->error[1] + 360;
 	}
 	else{

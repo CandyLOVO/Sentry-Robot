@@ -8,7 +8,7 @@
 #define radius 248.248 //舵轮距离车体中心的距离 杰舵248.248mm 哨兵313.487mm
 extern fp32 error_theta;
 
-int16_t motor_angle[4];
+int16_t motor_angle[4]; //需要6020转到的角度
 int16_t motor_speed[4];
 
 //3508和6020各运动方式的分别控制

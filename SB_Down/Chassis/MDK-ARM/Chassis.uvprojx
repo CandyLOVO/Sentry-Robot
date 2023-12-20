@@ -1795,14 +1795,14 @@
           <GroupName>DriverLayer</GroupName>
           <Files>
             <File>
-              <FileName>drv_usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\USER\DriverLayer\drv_usart.c</FilePath>
-            </File>
-            <File>
               <FileName>user_can.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\USER\DriverLayer\user_can.c</FilePath>
+            </File>
+            <File>
+              <FileName>drv_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\DriverLayer\drv_usart.c</FilePath>
             </File>
             <File>
               <FileName>user_pid.c</FileName>

@@ -10,7 +10,7 @@ void can_remote(uint8_t sbus_buf[],uint8_t can_send_id);
 
 typedef struct //CAN
 {
-	double angle;
+	uint16_t angle;
 	int16_t speed;
 	uint16_t tor_current;
 	uint16_t temperture;

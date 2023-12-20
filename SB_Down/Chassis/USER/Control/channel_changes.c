@@ -32,9 +32,10 @@ void translational_control()
 	translate_6020(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]);
 	for(int i=0;i<4;i++){
 		//电机角度：get;将当前电机角度投影范围为 0 至 180/0 至 -180
-		//逆时针旋转——添加负号
-		get_6020[i] = - motor_value(initial_angle[i],motor[i+4].angle);
+		get_6020[i] =  motor_value(initial_angle[i],motor[i+4].angle);
+		//PID计算(get,set)->(当前值，目标值)
 		speed_6020[i] = pid_cal_a(&PID_angle[i],get_6020[i],motor_angle[i],Max_out_a,Max_iout_a); 
+//		output_6020[i] = pid_cal_s(&PID_speed_6020[i],speed_6020[i],motor[i+4].speed,Max_out_s,Max_iout_s);
 		output_6020[i] = pid_cal_s(&PID_speed_6020[i],motor[i+4].speed,speed_6020[i],Max_out_s,Max_iout_s);
 	}
 	
@@ -53,9 +54,9 @@ void rotate_control()
 {
 	rotate_6020(); 
 	for(int i=0;i<4;i++){
-		get_6020[i] = - motor_value(initial_angle[i],motor[i+4].angle);
+		get_6020[i] = motor_value(initial_angle[i],motor[i+4].angle);
 		speed_6020[i] = pid_cal_a(&PID_angle[i],get_6020[i],motor_angle[i],Max_out_a,Max_iout_a); 
-		output_6020[i] = pid_cal_s(&PID_speed_6020[i],motor[i+4].speed,speed_6020[i],Max_out_s,Max_iout_s);
+		output_6020[i] = pid_cal_s(&PID_speed_6020[i],speed_6020[i],motor[i+4].speed,Max_out_s,Max_iout_s);
 	}
 	rotate_3508(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]);
 	for(int i=0;i<4;i++){
@@ -73,9 +74,9 @@ void compound_control()
 	//设置6020的旋转和平移角度，计算公式为motor_angle[4]
 	compound_movement_6020(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]); 
 	for(int i=0;i<4;i++){
-		get_6020[i] = - motor_value(initial_angle[i],motor[i+4].angle);
+		get_6020[i] = motor_value(initial_angle[i],motor[i+4].angle);
 		speed_6020[i] = pid_cal_a(&PID_angle[i],get_6020[i],motor_angle[i],Max_out_a,Max_iout_a); 
-		output_6020[i] = pid_cal_s(&PID_speed_6020[i],motor[i+4].speed,speed_6020[i],Max_out_s,Max_iout_s);
+		output_6020[i] = pid_cal_s(&PID_speed_6020[i],speed_6020[i],motor[i+4].speed,Max_out_s,Max_iout_s);
 	}
 	
 	//设置3508的旋转和平移速度，计算公式为motor_speed[4]

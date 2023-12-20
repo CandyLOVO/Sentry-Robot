@@ -8,8 +8,8 @@ float remote_value(int16_t x, int16_t y)
 {
 	float alpha;
 	if(y>0){
-		alpha = atan((float)x/(float)y);
-		alpha = alpha * 180 / PI;
+		alpha = atan((float)x/(float)y); //得到弧度制
+		alpha = alpha * 180 / PI; //得到角度
 		return alpha;
 	}
 	else if(x<0 && y<0){
