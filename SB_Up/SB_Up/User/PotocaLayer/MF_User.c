@@ -43,10 +43,11 @@ void Start_MF_send(int16_t ID)
 母线电流和电机的实际扭矩因不同电机而异。*/
 
 //para:ID号,电流值的地址
+uint8_t             tx_data[8];
 void Current_Control_MF_send(int16_t ID,int16_t iqControl)
 {
 	CAN_TxHeaderTypeDef tx_header;
-  uint8_t             tx_data[8];
+//  uint8_t             tx_data[8];
 	
 	tx_header.StdId = 0x140+ID;
   tx_header.IDE   = CAN_ID_STD;//标准帧
@@ -58,7 +59,7 @@ void Current_Control_MF_send(int16_t ID,int16_t iqControl)
   tx_data[2] = 0x00;	
   tx_data[3] = 0x00;
   tx_data[4] = *(uint8_t *)(&iqControl);//iqControl&0xff
-  tx_data[5] =  *((uint8_t *)(&iqControl)+1);//(iqControl>>8)&0xff
+  tx_data[5] = *((uint8_t *)(&iqControl)+1);//(iqControl>>8)&0xff
   tx_data[6] = 0x00;
   tx_data[7] = 0x00;
   HAL_CAN_AddTxMessage(&hcan1, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX1);
@@ -81,9 +82,9 @@ int16_t Current_Limit_MF(int16_t current)
 
 //将MF9025电机(通用版)的角度以初始角度为0，映射到0~+-180度 (k:设定的初始角度“0” ； n:想要映射的角度)
 //第3个参数是编码器最大值
-float MF_value(int16_t k, int16_t n, int16_t max)
+float MF_value(int32_t k, int32_t n, int32_t max)
 {
-	int32_t middle = (max/2)+1;
+	int32_t middle = (max+1)/2;
 	float output;
 	if(k>=0 && k<middle){
 		if(n>=0 && n<(k+middle)){
@@ -113,7 +114,7 @@ float MF_value(int16_t k, int16_t n, int16_t max)
 }
 
 //================================================只读取编码器(用于初始化)================================================//
-void Encoder_MF_read(int16_t ID)
+ void Encoder_MF_read(int16_t ID)
 {
 	CAN_TxHeaderTypeDef tx_header;
   uint8_t             tx_data[8];

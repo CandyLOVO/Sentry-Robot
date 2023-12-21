@@ -10,7 +10,7 @@
 void Start_MF_send(int16_t ID);
 void Current_Control_MF_send(int16_t ID,int16_t iqControl);
 int16_t Current_Limit_MF(int16_t current);
-float MF_value(int16_t k, int16_t n, int16_t max);
+float MF_value(int32_t k, int32_t n, int32_t max);
 void Encoder_MF_read(int16_t ID);
 	 
 #ifdef __cplusplus
