@@ -65,7 +65,7 @@ void Yaw_task(void const *pvParameters)
 		Yaw_loop_init();//循环初始化
 		Yaw_read_imu();//获取Imu角度
 		Yaw_mode_remote_site();//位置控制模式
-		Encoder_MF_read(motor_info[0].can_id);//读取当前编码器值，读完之后用下面那一行的位置模式
+//		Encoder_MF_read(motor_info[0].can_id);//读取当前编码器值，读完之后用下面那一行的位置模式
 //		Site_Control_MF();//MF9025位置模式(遥控器)
 		Current_Control_MF();//MF9025力控模式(遥控器)
 		Yaw_restrict();//相对角度限制
@@ -73,7 +73,7 @@ void Yaw_task(void const *pvParameters)
 		Yaw_voltage_calc();//电压环计算
 		Yaw_can_send();
 		Current_Control_MF_send(motor_info[0].can_id,motor_info[0].set_voltage);
-    osDelay(1);
+    osDelay(5);
   }
 
 }
@@ -208,7 +208,15 @@ static void Site_Control_MF()
 	if(rc_ctrl.rc.ch[0] >= -660 && rc_ctrl.rc.ch[0]<= 660)
 	{
 		target_yaw_middle -= rc_ctrl.rc.ch[0]/660.0 * Yaw_sita_weight;
-		motor_info[0].set_voltage = pid_calc_sita(&motor_pid_sita[0], target_yaw_middle, Yaw_middle);
+		motor_info[0].set_voltage = -pid_calc_sita_span(&motor_pid_sita[0], target_yaw_middle, Yaw_middle);
+		if(target_yaw_middle > 180)
+		{
+			target_yaw_middle -= 360;
+		}
+		else if(target_yaw_middle < -180)
+		{
+			target_yaw_middle += 360;
+		}
 	}
 	
 	//限制函数调用
