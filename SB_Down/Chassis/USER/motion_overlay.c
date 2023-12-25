@@ -15,13 +15,13 @@ int16_t motor_speed[4];
 
 /**********************************************************仅旋转****************************************************************/
 //仅旋转的3508速度
-void rotate_3508(int16_t x,int16_t y)
+void rotate_3508(int16_t vw)
 {
 	for(int i=0;i<4;i++){
 		//将杆量反映到3508的速度
 //		motor_speed[i] = sqrt(pow((float)x,2) + pow((float)y,2)); //该处理方式使得速度较小，且对角线处速度最大，前后平移时速度不大
 //		motor_speed[i] = sqrt(pow((float)x,2) + pow((float)y,2))*(16384/660); //对角线处通过PID最大值限幅限制到16384
-		motor_speed[i] = sqrt(pow((float)x,2) + pow((float)y,2))*(9000/660);
+		motor_speed[i] = vw*(9000/660);
 //		motor_speed[i] = 3000;
 	}
 }	

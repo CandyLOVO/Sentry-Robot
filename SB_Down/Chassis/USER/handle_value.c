@@ -4,9 +4,9 @@
 #define PI 3.14
 
 //将获得的x,y值(来自遥控器/视觉导航)转化为角度后再转化为0~-180和0~180
+float alpha; //定义为全局变量
 float remote_value(int16_t x, int16_t y)
 {
-	float alpha;
 	if(y>0){
 		alpha = atan((float)x/(float)y); //得到弧度制
 		alpha = alpha * 180 / PI; //得到角度
@@ -38,7 +38,6 @@ float remote_value(int16_t x, int16_t y)
 		return alpha;
 	}
 		else if(x==0 && y==0){
-		alpha = 0;
 		return alpha;
 	}
 }

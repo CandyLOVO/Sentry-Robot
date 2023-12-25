@@ -76,15 +76,16 @@ void Chassis(void const * argument)
 		//具体实现方式在"motion_overlay.c"
 		if(rc_ctrl.rc.s[0]==1) //右上拨杆为1（推到最上方）
 		{
-			translational_control(); //平移运动
+			if(rc_ctrl.rc.ch[4]!=0){
+				rotate_control(); //小陀螺旋转 无跟随
+			}
+			else{
+				translational_control(); //平移运动
+			}
 		}
 		else if(rc_ctrl.rc.s[0]==3) //右上拨杆为3（推到中间位置）
 		{
 			compound_control(); //旋转加平移运动
-		}
-		else if(rc_ctrl.rc.s[0]==2) //右上拨杆为2（推到最下方）
-		{
-			rotate_control(); //小陀螺旋转 无跟随 
 		}
     osDelay(10);
   }

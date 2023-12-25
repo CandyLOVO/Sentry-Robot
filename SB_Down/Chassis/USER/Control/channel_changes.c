@@ -58,7 +58,7 @@ void rotate_control()
 		speed_6020[i] = pid_cal_a(&PID_angle[i],get_6020[i],motor_angle[i],Max_out_a,Max_iout_a); 
 		output_6020[i] = pid_cal_s(&PID_speed_6020[i],motor[i+4].speed,speed_6020[i],Max_out_s,Max_iout_s);
 	}
-	rotate_3508(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]);
+	rotate_3508(rc_ctrl.rc.ch[4]);
 	for(int i=0;i<4;i++){
 		output_3508[i] = pid_cal_s(&PID_speed_3508[i],motor[i].speed,motor_speed[i],Max_out_s,Max_iout_s); //3508????
 	}
