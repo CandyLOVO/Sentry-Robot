@@ -6,6 +6,10 @@ extern RC_ctrl_t rc_ctrl;
 uint16_t can_cnt_1=0;
 
 float Up_ins_yaw = 0; //上C板yaw值
+uint8_t frame_id; //识别码 视觉信息发0 导航信息发1
+float nav_vx; //nav前缀的是导航信息
+float nav_vy;
+float nav_yaw;
 
 void CAN1_Init(void)
 {
@@ -55,7 +59,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//接受中断回
 
   if(hcan->Instance == CAN1)
   {
-    uint8_t rx_data[8];
+    uint8_t rx_data[15];
 		HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data); //receive can1 data
 		if(rx_header.StdId==0x55)//上C向下C传IMU数据
 		{	
@@ -63,6 +67,10 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//接受中断回
 				{
 					//Up_ins_yaw = rx_data[1] | (rx_data[2] << 8);			
 					memcpy(&Up_ins_yaw,&rx_data[1],4);
+					memcpy(&frame_id,&rx_data[5],1);
+					memcpy(&nav_vx,&rx_data[6],4);
+					memcpy(&nav_vy,&rx_data[10],4);
+					memcpy(&nav_yaw,&rx_data[14],4);
 				}
 		}
   }

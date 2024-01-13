@@ -1789,6 +1789,16 @@
               <FileType>1</FileType>
               <FilePath>..\USER\motion_overlay.c</FilePath>
             </File>
+            <File>
+              <FileName>CRC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\CRC.c</FilePath>
+            </File>
+            <File>
+              <FileName>judge.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\PotocaLayer\judge.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

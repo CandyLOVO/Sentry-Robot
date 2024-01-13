@@ -28,7 +28,11 @@ typedef enum {
 
 extern float Drifting_yaw;
 extern float Down_ins_yaw;
-extern float Up_ins_yaw; 
+extern float Up_ins_yaw;
+extern uint8_t frame_id;
+extern float nav_vx;
+extern float nav_vy;
+extern float nav_yaw;
 
 void Chassis_task(void const *pvParameters);
 void RC_to_Vector(void);

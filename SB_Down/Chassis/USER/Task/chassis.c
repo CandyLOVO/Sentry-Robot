@@ -1,3 +1,12 @@
+/*
+*@author     CandyL
+*@brief      舵轮底盘控制代码  
+*@date       2023.12.30
+*@param      None
+*@return     None
+*@warning    该文件为主函数，功能可根据需求修改，具体功能函数在"motion_overlay.c"中。
+*/
+
 #include "freertos.h"
 #include "can.h"
 #include "chassis.h"

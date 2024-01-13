@@ -86,34 +86,40 @@ static void Get_minipc()
 				Vision_read(rx_buffer);
 			}
 			
-			recv_end_flag_uart1 = 0;//清除接收结束标志位
-			for(uint8_t i=0;i<rx_len_uart1;i++)
-				{
-					rx_buffer[i]=0;//清接收缓存
-				}
-				//memset(rx_buffer,0,rx_len);
-			rx_len_uart1 = 0;//清除计数
-			HAL_UART_Receive_DMA(&huart1,rx_buffer,BUFFER_SIZE);//重新打开DMA接收
-			
+			if(vision_receive.frame_id==0){
+				recv_end_flag_uart1 = 0;//清除接收结束标志位
+				for(uint8_t i=0;i<rx_len_uart1;i++)
+					{
+						rx_buffer[i]=0;//清接收缓存
+					}
+					//memset(rx_buffer,0,rx_len);
+				rx_len_uart1 = 0;//清除计数
+				HAL_UART_Receive_DMA(&huart1,rx_buffer,BUFFER_SIZE);//重新打开DMA接收
+			}
 		}
 }
 
 //================================================通信读取解算任务================================================//
 static void Vision_read(uint8_t rx_buffer[])
 {
-	memcpy(&vision_receive.official,&rx_buffer[1],1); 
-	memcpy(&vision_receive.x,&rx_buffer[2],4); 
-	memcpy(&vision_receive.y,&rx_buffer[6],4); 
-	memcpy(&vision_receive.z,&rx_buffer[10],4); 
-	memcpy(&vision_receive.yaw,&rx_buffer[14],4); 
-	memcpy(&vision_receive.vx,&rx_buffer[18],4); 
-	memcpy(&vision_receive.vy,&rx_buffer[22],4); 
-	memcpy(&vision_receive.vz,&rx_buffer[26],4); 
-	memcpy(&vision_receive.v_yaw,&rx_buffer[30],4); 
-	memcpy(&vision_receive.r1,&rx_buffer[34],4); 
-	memcpy(&vision_receive.r2,&rx_buffer[38],4);
-	memcpy(&vision_receive.dz,&rx_buffer[42],4);
-	memcpy(&vision_receive.checksum,&rx_buffer[44],2);
+	memcpy(&vision_receive.header,&rx_buffer[0],1); 
+	memcpy(&vision_receive.frame_id,&rx_buffer[1],1); 
+	memcpy(&vision_receive.official,&rx_buffer[2],1); 
+	memcpy(&vision_receive.x,&rx_buffer[3],4); 
+	memcpy(&vision_receive.y,&rx_buffer[7],4); 
+	memcpy(&vision_receive.z,&rx_buffer[11],4); 
+	memcpy(&vision_receive.yaw,&rx_buffer[15],4); 
+	memcpy(&vision_receive.vx,&rx_buffer[19],4); 
+	memcpy(&vision_receive.vy,&rx_buffer[23],4); 
+	memcpy(&vision_receive.vz,&rx_buffer[27],4); 
+	memcpy(&vision_receive.v_yaw,&rx_buffer[31],4); 
+	memcpy(&vision_receive.r1,&rx_buffer[35],4); 
+	memcpy(&vision_receive.r2,&rx_buffer[39],4);
+	memcpy(&vision_receive.dz,&rx_buffer[43],4);
+	memcpy(&vision_receive.nav_vx,&rx_buffer[47],4);
+	memcpy(&vision_receive.nav_vy,&rx_buffer[51],4);
+	memcpy(&vision_receive.nav_yaw,&rx_buffer[55],4);
+	memcpy(&vision_receive.checksum,&rx_buffer[59],2);
 	
 	st.tar_yaw = vision_receive.yaw;
 	st.v_yaw = vision_receive.v_yaw;
@@ -127,6 +133,7 @@ static void Vision_read(uint8_t rx_buffer[])
 	st.vxw = vision_receive.vx;
 	st.vyw = vision_receive.vy;
 	st.vzw = vision_receive.vz;
+	
 	st.current_v = 28;
 }
 
@@ -205,9 +212,13 @@ static void SolveTrajectory_Init()
 //================================================上C向下C发送数据================================================//
 static void Up_send_to_down()
 {
-		uint8_t ins_buf[8] = {0};
+		uint8_t ins_buf[15] = {0};
 		ins_buf[0] = 8;	//	imu头帧标识
 		memcpy(&ins_buf[1],&INS_angle[0],4); //获取yaw的角度并储存在发送的字节中
+		memcpy(&ins_buf[5],&vision_receive.frame_id,1);
+		memcpy(&ins_buf[6],&vision_receive.nav_vx,4);
+		memcpy(&ins_buf[10],&vision_receive.nav_vy,4);
+		memcpy(&ins_buf[14],&vision_receive.nav_yaw,4);
 		can_remote(ins_buf,0x55);
 }
 

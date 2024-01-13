@@ -1037,11 +1037,6 @@
           <GroupName>PotocaLayer</GroupName>
           <Files>
             <File>
-              <FileName>judge.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\PotocaLayer\judge.c</FilePath>
-            </File>
-            <File>
               <FileName>rc_potocal.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\PotocaLayer\rc_potocal.c</FilePath>
@@ -1060,6 +1055,11 @@
               <FileName>motor.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\User\AlgorithmLayer\motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>judge.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\PotocaLayer\judge.c</FilePath>
             </File>
             <File>
               <FileName>BMI088driver.c</FileName>

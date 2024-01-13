@@ -2,7 +2,8 @@
 #include "CRC.h"
 #include "main.h"
 #include "struct_typedef.h"
-#include "drv_can.h"
+#include "user_can.h"
+
 JUDGE_MODULE_DATA Judge_Hero;
 
 uint8_t Hero_level;
@@ -186,7 +187,7 @@ void Update_data()
 	
 	CAN_TxHeaderTypeDef tx_header;
     
-  tx_header.StdId = 0x10;//如果id_range==0则等于0x1ff,id_range==1则等于0x2ff（ID号）
+  tx_header.StdId = 0x10;
   tx_header.IDE   = CAN_ID_STD;//标准帧
   tx_header.RTR   = CAN_RTR_DATA;//数据帧
   tx_header.DLC   = 2;		//发送数据长度（字节）

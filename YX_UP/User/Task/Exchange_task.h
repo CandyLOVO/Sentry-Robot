@@ -47,6 +47,7 @@ typedef struct
 {
   uint8_t header;
 	pByte_t official;
+	uint8_t frame_id;
   float x;
   float y;
   float z;
@@ -58,6 +59,9 @@ typedef struct
   float r1;
   float r2;
   float dz;
+	float nav_vx;
+  float nav_vy;
+  float nav_yaw;
   uint16_t checksum;
 } vision_receive_t;
 

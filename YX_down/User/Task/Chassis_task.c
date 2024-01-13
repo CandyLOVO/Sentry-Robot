@@ -92,14 +92,20 @@ void Chassis_task(void const *pvParameters)
 //=======================================================模式选择，计算VX,VY,WZ分量===============================================================//
 void RC_to_Vector()
 {
-    if(rc_ctrl.rc.s[1]==3 || rc_ctrl.rc.s[1]==1)    
-    {
-			Chassis_mode_test();
-    }
-		else if(rc_ctrl.rc.s[1]==2)			
+//    if(rc_ctrl.rc.s[1]==3 || rc_ctrl.rc.s[1]==1)    
+//    {
+//			Chassis_mode_test();
+//    }
+//		else if(rc_ctrl.rc.s[1]==2)			
+//		{
+//			
+//			Chassis_mode_ready();//直接启动小陀螺,上场模式
+//		}
+		if(frame_id==1)
 		{
-			
-			Chassis_mode_ready();//直接启动小陀螺,上场模式
+			Vx = nav_vx;
+			Vy = nav_vy;
+			Wz = nav_yaw;
 		}
 }
 
