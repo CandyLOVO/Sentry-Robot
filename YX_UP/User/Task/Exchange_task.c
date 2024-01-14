@@ -86,7 +86,7 @@ static void Get_minipc()
 				Vision_read(rx_buffer);
 			}
 			
-			if(vision_receive.frame_id==0){
+			
 				recv_end_flag_uart1 = 0;//清除接收结束标志位
 				for(uint8_t i=0;i<rx_len_uart1;i++)
 					{
@@ -96,13 +96,12 @@ static void Get_minipc()
 				rx_len_uart1 = 0;//清除计数
 				HAL_UART_Receive_DMA(&huart1,rx_buffer,BUFFER_SIZE);//重新打开DMA接收
 			}
-		}
 }
 
 //================================================通信读取解算任务================================================//
 static void Vision_read(uint8_t rx_buffer[])
 {
-	memcpy(&vision_receive.header,&rx_buffer[0],1); 
+//	memcpy(&vision_receive.header,&rx_buffer[0],1); 
 	memcpy(&vision_receive.frame_id,&rx_buffer[1],1); 
 	memcpy(&vision_receive.official,&rx_buffer[2],1); 
 	memcpy(&vision_receive.x,&rx_buffer[3],4); 
@@ -212,14 +211,30 @@ static void SolveTrajectory_Init()
 //================================================上C向下C发送数据================================================//
 static void Up_send_to_down()
 {
-		uint8_t ins_buf[15] = {0};
+		uint8_t ins_buf[8] = {0};
 		ins_buf[0] = 8;	//	imu头帧标识
 		memcpy(&ins_buf[1],&INS_angle[0],4); //获取yaw的角度并储存在发送的字节中
 		memcpy(&ins_buf[5],&vision_receive.frame_id,1);
-		memcpy(&ins_buf[6],&vision_receive.nav_vx,4);
-		memcpy(&ins_buf[10],&vision_receive.nav_vy,4);
-		memcpy(&ins_buf[14],&vision_receive.nav_yaw,4);
 		can_remote(ins_buf,0x55);
+		osDelay(1);
+		
+		uint8_t ins_buf1[8] = {0};
+		ins_buf1[0] = 9;	//	imu头帧标识
+		memcpy(&ins_buf1[1],&vision_receive.nav_vx,4);
+		can_remote(ins_buf1,0x56);
+		osDelay(1);
+		
+		uint8_t ins_buf2[8] = {0};
+		ins_buf2[0] = 10;	//	imu头帧标识
+		memcpy(&ins_buf2[1],&vision_receive.nav_vy,4);
+		can_remote(ins_buf2,0x57);
+		osDelay(1);
+		
+		uint8_t ins_buf3[8] = {0};
+		ins_buf3[0] = 11;	//	imu头帧标识
+		memcpy(&ins_buf3[1],&vision_receive.nav_yaw,4);
+		can_remote(ins_buf3,0x58);
+		osDelay(1);
 }
 
 //================================================视觉识别检测判断================================================//

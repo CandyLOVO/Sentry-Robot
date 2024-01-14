@@ -2,7 +2,6 @@
 #include "CRC.h"
 #include "main.h"
 #include "struct_typedef.h"
-#include "user_can.h"
 
 JUDGE_MODULE_DATA Judge_Hero;
 
@@ -16,8 +15,9 @@ float Hero_42mm_speed;
 uint8_t Flag_progress;
 uint8_t Flag_judge = 0;
 uint8_t Flag_first = 0;
-extern uint8_t first_x;
-extern uint8_t first_y;
+//extern uint8_t first_x;
+//extern uint8_t first_y;
+extern CAN_HandleTypeDef hcan1;
 
 void Update_data();//定义一些需要用到的变量并实时更新数值方便其他文件调用
 void JUDGE_Receive(volatile uint8_t *databuffer,uint8_t length)
@@ -148,10 +148,10 @@ void Update_data()
 	Flag_progress =  Judge_Hero.status.game_progress;
 	if(Flag_progress == 4 && Flag_first == 0)		//比赛开始
 	{
-		first_x = 1;
-		first_y = 1;
+//		first_x = 1;
+//		first_y = 1;
 		Flag_first = 1;
-		HAL_TIM_Base_Start_IT(&htim8);
+//		HAL_TIM_Base_Start_IT(&htim8);
 	}
 	//判断我方是红方还是蓝方
 	if(Hero_id == 7)//红色方

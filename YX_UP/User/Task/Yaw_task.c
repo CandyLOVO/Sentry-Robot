@@ -20,6 +20,8 @@ fp32 angle_weight = 1;	//角度环->速度环，映射的权重
 int16_t Rotate_w;
 int16_t Rotate_W;
 
+extern vision_receive_t vision_receive;
+int n = 0;
 //================================================函数================================================//
 
 //初始化PID参数
@@ -64,7 +66,6 @@ static void Yaw_minipc_control();
 //叠加视觉自瞄(位置环)
 static void Yaw_minipc_control_sita();
 
-
 //================================================YAW轴控制主函数================================================//
 void Yaw_task(void const *pvParameters)
 {
@@ -72,12 +73,17 @@ void Yaw_task(void const *pvParameters)
 	Yaw_init();
 	osDelay(3000);
 	
-	
 	//循环任务运行
   for(;;)
   {
 		Yaw_loop_init();//循环初始化
 		Yaw_read_imu();//获取Imu角度
+//		if(n==0){
+//			n = 1;
+//			osDelay(10000);
+//		}
+//		Yaw_mode_search();			//哨兵巡航模式
+//		yaw_fix_flag = 1;		//赋予不锁定的标志位
 
 		//上场模式，左上角开关开到最下方
 		if(rc_ctrl.rc.s[1] == 2 && ins_yaw)
@@ -102,10 +108,14 @@ void Yaw_task(void const *pvParameters)
 			Yaw_mode_remote_site();		//遥控器控制模式(位置控制)
 			yaw_fix_flag = 1;		//赋予不锁定的标志位
 		}
+		if(vision_receive.frame_id==1){
+		Yaw_mode_search();			//哨兵巡航模式
+		yaw_fix_flag = 1;		//赋予不锁定的标志位
 		detel_calc();	//越界处理
 		target_speed[6] +=  pid_calc_sita(&motor_pid_sita[6], target_yaw, INS_angle[0]);//角度->速度（内含越界处理）
 		motor_info[6].set_voltage = pid_calc(&motor_pid[6], target_speed[6], 9.55f * INS_gyro[2]);//用陀螺仪的角速度（rad/s -> r/min），速度->电流
 		Yaw_can_send();//电机电流数据发送
+		}
     osDelay(1);
   }
 

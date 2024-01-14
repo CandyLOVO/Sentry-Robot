@@ -105,7 +105,9 @@ void RC_to_Vector()
 		{
 			Vx = nav_vx;
 			Vy = nav_vy;
-			Wz = nav_yaw;
+//			Wz = nav_yaw;
+			Wz = 2000;
+ 			Chassis_Curl();
 		}
 }
 

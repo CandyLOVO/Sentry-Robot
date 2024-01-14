@@ -47,6 +47,8 @@
 "chassis\handle_value.o"
 "chassis\communication.o"
 "chassis\motion_overlay.o"
+"chassis\crc.o"
+"chassis\judge.o"
 "chassis\user_can.o"
 "chassis\drv_usart.o"
 "chassis\user_pid.o"
