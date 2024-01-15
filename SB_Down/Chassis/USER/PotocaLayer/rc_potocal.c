@@ -1,5 +1,6 @@
 #include "rc_potocal.h"
 #include "user_can.h"
+#include "cmsis_os.h"
 //#include "INS_task.h"
 
 //底盘电机结构体
@@ -29,9 +30,9 @@ uint16_t v_flag;
 uint16_t b_flag;
 
 //  uint8_t temp_remote[8];
- uint8_t remote_data_rc[12]; //传给上C板rc_ctrl.rc
+ uint8_t remote_data_rc1[8]; //传给上C板rc_ctrl.rc.ch[0]~[3]
+ uint8_t remote_data_rc2[8]; //传给上C板rc_ctrl.rc[4]&rc_ctrl.rc.s&rc_ctrl.key
  uint8_t remote_data_mouse[8]; //传给上C板rc_ctrl.mouse
- uint8_t remote_data_key[2]; //传给上C板rc_ctrl.key
  
  RC_ctrl_t rc_ctrl;
  #define RC_CH_VALUE_OFFSET      ((uint16_t)1024)
@@ -47,7 +48,7 @@ uint16_t b_flag;
     rc_ctrl.mouse.x = rxBuf[6] | (rxBuf[7] << 8);                    //!< Mouse X axis
     rc_ctrl.mouse.y = rxBuf[8] | (rxBuf[9] << 8);                    //!< Mouse Y axis
     rc_ctrl.mouse.z = rxBuf[10] | (rxBuf[11] << 8);                  //!< Mouse Z axis
-    rc_ctrl.mouse.press_l = rxBuf[12];                                  //!< Mouse Left Is Press ?
+    rc_ctrl.mouse.press_l = rxBuf[12];                                    //!< Mouse Left Is Press ?
     rc_ctrl.mouse.press_r = rxBuf[13];                                  //!< Mouse Right Is Press ?
     rc_ctrl.key.v = rxBuf[14] | (rxBuf[15] << 8);                    //!< KeyBoard value	
     rc_ctrl.rc.ch[4] = rxBuf[16] | (rxBuf[17] << 8);                 //NULL
@@ -58,19 +59,33 @@ uint16_t b_flag;
     rc_ctrl.rc.ch[3]-=RC_CH_VALUE_OFFSET;
     rc_ctrl.rc.ch[4]-=RC_CH_VALUE_OFFSET;
 	
-	/*********************************************传给上C板rc_ctrl.rc****************************************/
-	for(int i=0;i<10;i++){
+	/****************************************传给上C板rc_ctrl.rc.ch[0]~[3]***********************************/
+	for(int i=0;i<8;i++){
 		if(i%2==0){
-			remote_data_rc[i] = (rc_ctrl.rc.ch[(i/2)]>>8) & 0xff; //先发数据高八位
+			remote_data_rc1[i] = (rc_ctrl.rc.ch[(i/2)]>>8) & 0xff; //先发数据高八位
 		}
 		else{
-			remote_data_rc[i] = rc_ctrl.rc.ch[((i-1)/2)] & 0xff; //再发低八位
+			remote_data_rc1[i] = rc_ctrl.rc.ch[((i-1)/2)] & 0xff; //再发低八位
 		}
 	}
-	for(int i=10;i<12;i++){
-		remote_data_rc[i] = rc_ctrl.rc.s[(i-10)];
+	can_remote(remote_data_rc1,0x30); //CAN发送ID：0x30
+	/********************************************************************************************************/
+	
+	
+	/*******************************传给上C板rc_ctrl.rc[4]&rc_ctrl.rc.s&rc_ctrl.key**************************/
+	//传给上C板rc_ctrl.rc[4]
+	remote_data_rc2[0] = (rc_ctrl.rc.ch[4]>>8) & 0xff;
+	remote_data_rc2[1] = rc_ctrl.rc.ch[4] & 0xff;
+	
+	//传给上C板rc_ctrl.rc.s
+	for(int i=2;i<4;i++){
+		remote_data_rc2[i] = rc_ctrl.rc.s[(i-10)];
 	}
-	can_remote(remote_data_rc,0x30); //CAN发送ID：0x30
+	
+	//传给上C板rc_ctrl.key
+	remote_data_rc2[4] = (rc_ctrl.key.v>>8) & 0xff;
+	remote_data_rc2[5] = rc_ctrl.key.v & 0xff;
+	can_remote(remote_data_rc2,0x31);
 	/********************************************************************************************************/
 	
 	
@@ -83,14 +98,7 @@ uint16_t b_flag;
 	remote_data_mouse[5] = rc_ctrl.mouse.z & 0xff;
 	remote_data_mouse[6] = rc_ctrl.mouse.press_l;
 	remote_data_mouse[7] = rc_ctrl.mouse.press_r;
-	can_remote(remote_data_mouse,0x31);
-	/********************************************************************************************************/
-	
-	
-	/********************************************传给上C板rc_ctrl.key****************************************/
-	remote_data_key[0] = (rc_ctrl.key.v>>8) & 0xff;
-	remote_data_key[1] = rc_ctrl.key.v & 0xff;
-	can_remote(remote_data_key,0x32);
+	can_remote(remote_data_mouse,0x32);
 	/********************************************************************************************************/
 	
 //		for(int i=0;i<=7;i++)

@@ -59,30 +59,54 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖÐ¶Ï»Øµ÷º¯Ê
   {
 //================================================Ò£¿ØÆ÷Êý¾Ý================================================//
 		HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data); //receive can1 data
-		if(rx_header.StdId==0x33)//Ë«C°å´«µÝÒ£¿ØÆ÷ÐÅºÅµÄ½Ó¿Ú±êÊ¶·û
-		{
-			rc_ctrl.rc.ch[0] = (rx_data[0] | (rx_data[1] << 8)) & 0x07ff;        //!< Channel 0  ÖÐÖµÎª1024£¬×î´óÖµ1684£¬×îÐ¡Öµ364£¬²¨¶¯·¶Î§£º660
-			rc_ctrl.rc.ch[1] = (((rx_data[1] >> 3)&0xff) | (rx_data[2] << 5)) & 0x07ff; //!< Channel 1
-			rc_ctrl.rc.ch[2] = (((rx_data[2] >> 6)&0xff) | (rx_data[3] << 2) |          //!< Channel 2
-                         (rx_data[4] << 10)) &0x07ff;
-			rc_ctrl.rc.ch[3] = (((rx_data[4] >> 1)&0xff) | (rx_data[5] << 7)) & 0x07ff; //!< Channel 3
-			rc_ctrl.rc.s[0] = ((rx_data[5] >> 4) & 0x0003);                  //ÕâÊÇÓÒ
-			rc_ctrl.rc.s[1] = ((rx_data[5] >> 4) & 0x000C) >> 2;    		//Õâ²ÅÊÇ×ó
-			rc_ctrl.mouse.x = rx_data[6] | (rx_data[7] << 8);                    //!< Mouse X axis
-			}
-		if(rx_header.StdId==0x34)//Ë«C°å´«µÝÒ£¿ØÆ÷ÐÅºÅµÄ½Ó¿Ú±êÊ¶·û
-		{
-			rc_ctrl.mouse.y = rx_data[0] | (rx_data[1] << 8);                    //!< Mouse Y axis
-			rc_ctrl.mouse.z = rx_data[2] | (rx_data[3] << 8);                  //!< Mouse Z axis
-			rc_ctrl.mouse.press_l = rx_data[4];                                  //!< Mouse Left Is Press ?
-			rc_ctrl.mouse.press_r = rx_data[5];                                  //!< Mouse Right Is Press ?
-			rc_ctrl.key.v = rx_data[6] | (rx_data[7] << 8); 
-		}
-		if(rx_header.StdId==0x35)//Ë«C°å´«µÝÒ£¿ØÆ÷ÐÅºÅµÄ½Ó¿Ú±êÊ¶·û
-		{
-    rc_ctrl.rc.ch[4] = rx_data[0] | (rx_data[1] << 8);                 
-		}
+//		if(rx_header.StdId==0x33)//Ë«C°å´«µÝÒ£¿ØÆ÷ÐÅºÅµÄ½Ó¿Ú±êÊ¶·û
+//		{
+//			rc_ctrl.rc.ch[0] = (rx_data[0] | (rx_data[1] << 8)) & 0x07ff;        //!< Channel 0  ÖÐÖµÎª1024£¬×î´óÖµ1684£¬×îÐ¡Öµ364£¬²¨¶¯·¶Î§£º660
+//			rc_ctrl.rc.ch[1] = (((rx_data[1] >> 3)&0xff) | (rx_data[2] << 5)) & 0x07ff; //!< Channel 1
+//			rc_ctrl.rc.ch[2] = (((rx_data[2] >> 6)&0xff) | (rx_data[3] << 2) |          //!< Channel 2
+//                         (rx_data[4] << 10)) &0x07ff;
+//			rc_ctrl.rc.ch[3] = (((rx_data[4] >> 1)&0xff) | (rx_data[5] << 7)) & 0x07ff; //!< Channel 3
+//			rc_ctrl.rc.s[0] = ((rx_data[5] >> 4) & 0x0003);                  //ÕâÊÇÓÒ
+//			rc_ctrl.rc.s[1] = ((rx_data[5] >> 4) & 0x000C) >> 2;    		//Õâ²ÅÊÇ×ó
+//			rc_ctrl.mouse.x = rx_data[6] | (rx_data[7] << 8);                    //!< Mouse X axis
+//			}
+//		if(rx_header.StdId==0x34)//Ë«C°å´«µÝÒ£¿ØÆ÷ÐÅºÅµÄ½Ó¿Ú±êÊ¶·û
+//		{
+//			rc_ctrl.mouse.y = rx_data[0] | (rx_data[1] << 8);                    //!< Mouse Y axis
+//			rc_ctrl.mouse.z = rx_data[2] | (rx_data[3] << 8);                  //!< Mouse Z axis
+//			rc_ctrl.mouse.press_l = rx_data[4];                                  //!< Mouse Left Is Press ?
+//			rc_ctrl.mouse.press_r = rx_data[5];                                  //!< Mouse Right Is Press ?
+//			rc_ctrl.key.v = rx_data[6] | (rx_data[7] << 8); 
+//		}
+//		if(rx_header.StdId==0x35)//Ë«C°å´«µÝÒ£¿ØÆ÷ÐÅºÅµÄ½Ó¿Ú±êÊ¶·û
+//		{
+//    rc_ctrl.rc.ch[4] = rx_data[0] | (rx_data[1] << 8);                 
+//		}
 
+		if(rx_header.StdId == 0x30)
+		{
+			rc_ctrl.rc.ch[0] = (rx_data[0]<<8) | rx_data[1];
+			rc_ctrl.rc.ch[1] = (rx_data[2]<<8) | rx_data[3];
+			rc_ctrl.rc.ch[2] = (rx_data[4]<<8) | rx_data[5];
+			rc_ctrl.rc.ch[3] = (rx_data[6]<<8) | rx_data[7];
+		}
+		
+		if(rx_header.StdId == 0x31)
+		{
+			rc_ctrl.rc.ch[4] = (rx_data[0]<<8) | rx_data[1];
+			rc_ctrl.rc.s[0] = rx_data[2];
+			rc_ctrl.rc.s[1] = rx_data[3];
+			rc_ctrl.key.v = (rx_data[4]<<8) | rx_data[5];
+		}
+		
+		if(rx_header.StdId == 0x32)
+		{
+			rc_ctrl.mouse.x = (rx_data[0]<<8) | rx_data[1];
+			rc_ctrl.mouse.y = (rx_data[2]<<8) | rx_data[3];
+			rc_ctrl.mouse.z = (rx_data[4]<<8) | rx_data[5];
+			rc_ctrl.mouse.press_l = rx_data[6];
+			rc_ctrl.mouse.press_r = rx_data[7];
+		}
 	
 //================================================²ÃÅÐÏµÍ³================================================//		
 		//±ÈÈü½ø³Ì±êÊ¶·û(²ÃÅÐÏµÍ³Êý¾Ý)

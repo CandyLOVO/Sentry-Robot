@@ -42,3 +42,17 @@ chassis\rc_potocal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 chassis\rc_potocal.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 chassis\rc_potocal.o: ..\USER\Task\chassis.h
 chassis\rc_potocal.o: ../USER/DriverLayer/user_can.h
+chassis\rc_potocal.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+chassis\rc_potocal.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+chassis\rc_potocal.o: ../Core/Inc/FreeRTOSConfig.h
+chassis\rc_potocal.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+chassis\rc_potocal.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+chassis\rc_potocal.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+chassis\rc_potocal.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+chassis\rc_potocal.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+chassis\rc_potocal.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+chassis\rc_potocal.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+chassis\rc_potocal.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+chassis\rc_potocal.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
+chassis\rc_potocal.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
+chassis\rc_potocal.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h

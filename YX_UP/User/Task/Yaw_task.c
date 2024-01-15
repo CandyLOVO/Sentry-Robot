@@ -10,6 +10,7 @@
 //================================================全局变量================================================//
 int yaw_fix_flag = 1;		//yaw锁定标识符，为1时不锁定，为0时锁定yaw
 int8_t Update_yaw_flag;		//光电门更新yaw轴标志位(未使用)
+int8_t Start_yaw_cruise_flag = 1;		//Flag for initiating cruise. 0->start; 1->still
 
 fp32 ins_yaw;		//Imu实际角度值
 fp32 target_yaw;	//目标角度值
@@ -95,10 +96,15 @@ void Yaw_task(void const *pvParameters)
 					Yaw_fix_sita();		//角度控制
 			}			
 			else//没检测到开巡航模式
-			{					
+			{
+				if(vision_receive.frame_id==1){		//If navigation data is received.	
+					Start_yaw_cruise_flag = 0;
+				}
+				if(Start_yaw_cruise_flag==0){
 					Yaw_Rotate();			//前馈控制补偿底盘带来的旋转角速度	
 					Yaw_mode_search();			//哨兵巡航模式
 					yaw_fix_flag = 1;		//赋予不锁定的标志位
+				}
 			}
 		}
 		else if(rc_ctrl.rc.s[1] == 1 || rc_ctrl.rc.s[1] == 3)	//测试模式
@@ -108,14 +114,10 @@ void Yaw_task(void const *pvParameters)
 			Yaw_mode_remote_site();		//遥控器控制模式(位置控制)
 			yaw_fix_flag = 1;		//赋予不锁定的标志位
 		}
-		if(vision_receive.frame_id==1){
-		Yaw_mode_search();			//哨兵巡航模式
-		yaw_fix_flag = 1;		//赋予不锁定的标志位
 		detel_calc();	//越界处理
 		target_speed[6] +=  pid_calc_sita(&motor_pid_sita[6], target_yaw, INS_angle[0]);//角度->速度（内含越界处理）
 		motor_info[6].set_voltage = pid_calc(&motor_pid[6], target_speed[6], 9.55f * INS_gyro[2]);//用陀螺仪的角速度（rad/s -> r/min），速度->电流
 		Yaw_can_send();//电机电流数据发送
-		}
     osDelay(1);
   }
 
