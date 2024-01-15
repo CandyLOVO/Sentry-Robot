@@ -124,7 +124,7 @@ extern Chase_t chase;	//赋予电机追踪的数据结构体
 extern remote_flag_t remote;	//键盘按键读取(结构体)
 extern Sentry_t Sentry;	//哨兵状态量和裁判系统数据结构体
 	
-
+extern void Vision_read(uint8_t rx_buffer[]);
 
 
 

@@ -42,8 +42,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-uint16_t Lock_time = 1;	//视觉停留时间，可直接在这修改，单位是s
-uint16_t Research_time = 1;	//俯仰切换时间，可直接在这修改，单位是s
+uint16_t Lock_time = 2;	//视觉停留时间，可直接在这修改，单位是s
+uint16_t Research_time = 2;	//俯仰切换时间，可直接在这修改，单位是s
 uint16_t TIM1_Count;	//巡航模式计数器
 uint8_t TIM1_Mode = 1;	//巡航模式俯仰切换标志位
 uint8_t bopan_count = 0;	//拨盘计数器
@@ -93,7 +93,7 @@ extern UART_HandleTypeDef huart6;
 extern TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN EV */
-
+extern uint8_t rx_buffer[100];
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -439,7 +439,26 @@ void USART1_IRQHandler(void)
 		//这句和上面那句等效
 		rx_len_uart1 =  100 - temp; //总计数减去未传输的数据个数，得到已经接收的数据个数
 		recv_end_flag_uart1 = 1;	// 接受完成标志位置1	
+		
+		if(recv_end_flag_uart1 == 1)  //??????
+		{			
+			if(rx_buffer[0] == 0xA5)
+			{
+				Vision_read(rx_buffer);
+			}
+			
+			
+				recv_end_flag_uart1 = 0;//?????????
+				for(uint8_t i=0;i<rx_len_uart1;i++)
+					{
+						rx_buffer[i]=0;//?????
+					}
+					//memset(rx_buffer,0,rx_len);
+				rx_len_uart1 = 0;//????
+			}
+
 	 }
+			HAL_UART_Receive_DMA(&huart1,rx_buffer,BUFFER_SIZE);//????DMA??
   /* USER CODE END USART1_IRQn 0 */
   HAL_UART_IRQHandler(&huart1);
   /* USER CODE BEGIN USART1_IRQn 1 */

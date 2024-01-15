@@ -72,7 +72,7 @@ void Yaw_task(void const *pvParameters)
 {
   //参数初始化设置
 	Yaw_init();
-	osDelay(3000);
+	osDelay(5000);
 	
 	//循环任务运行
   for(;;)
@@ -128,8 +128,8 @@ void Yaw_task(void const *pvParameters)
 static void Yaw_init()	
 {
 	//id为can1的5号
-	pid_init(&motor_pid[6],300,0.001,0,30000,30000);
-	pid_init(&motor_pid_sita[6],18,0,30,30000,30000);
+	pid_init(&motor_pid[6],650,0.001,0,30000,30000);
+	pid_init(&motor_pid_sita[6],20,0,50,30000,30000);
 	target_yaw = ins_yaw;
 }
 
@@ -241,7 +241,7 @@ static void Yaw_mouse()
 //================================================定速巡航控制模式================================================//
 static void Yaw_mode_search()
 {
-	target_yaw -= 0.05f;
+	target_yaw -= 0.03f;
 }
 
 //================================================速度控制模式================================================//

@@ -16,9 +16,6 @@ static void Get_minipc();
 //判断上位机检测到目标，检测到就进行解算，没检测到赋0
 static void Judge_minipc();
 
-//对来自Nuc的信息进行解码
-static void Vision_read(uint8_t rx_buffer[]);
-
 //向Nuc发送信息
 static void Stm_pc_send();
 
@@ -57,7 +54,7 @@ void Exchange_task(void const * argument)
 		osDelay(1);
 		Up_send_to_down();	//上C向下C发送信息
 		Get_keyboard();		//解算键盘的信息
-		Get_minipc();		//取出nuc的信息
+		//Get_minipc();		//取出nuc的信息
 		Judge_minipc();		//检测是否识别到目标，识别到目标就解算，没识别到赋0
 		Stm_pc_send();		//向nuc发送信息
   }
@@ -79,27 +76,11 @@ static void Get_keyboard()
 static void Get_minipc()
 {
 
-		if(recv_end_flag_uart1 == 1)  //接收完成标志
-		{			
-			if(rx_buffer[0] == 0xA5)
-			{
-				Vision_read(rx_buffer);
-			}
-			
-			
-				recv_end_flag_uart1 = 0;//清除接收结束标志位
-				for(uint8_t i=0;i<rx_len_uart1;i++)
-					{
-						rx_buffer[i]=0;//清接收缓存
-					}
-					//memset(rx_buffer,0,rx_len);
-				rx_len_uart1 = 0;//清除计数
-				HAL_UART_Receive_DMA(&huart1,rx_buffer,BUFFER_SIZE);//重新打开DMA接收
-			}
+		
 }
 
 //================================================通信读取解算任务================================================//
-static void Vision_read(uint8_t rx_buffer[])
+void Vision_read(uint8_t rx_buffer[])
 {
 //	memcpy(&vision_receive.header,&rx_buffer[0],1); 
 	memcpy(&vision_receive.frame_id,&rx_buffer[1],1); 

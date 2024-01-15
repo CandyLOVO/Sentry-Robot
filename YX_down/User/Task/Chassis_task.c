@@ -65,6 +65,7 @@ float Chassis_pidout_max;
 
 void Chassis_task(void const *pvParameters)
 {
+	osDelay(5000);
 	//PID初始化
    for (uint8_t i = 0; i < 4; i++)
 	{
@@ -73,6 +74,7 @@ void Chassis_task(void const *pvParameters)
   
    for(;;)
     {     
+			
           	Chassis_loop_Init();	                   //数据循环清零
 						Get_Err();															 //获取云台底盘角度差值，光电门矫正IMU漂移
             RC_to_Vector();                          //遥控器信息转换为底盘速度Vy,Vx,Wz，包括2种模式
@@ -101,14 +103,18 @@ void RC_to_Vector()
 //			
 //			Chassis_mode_ready();//直接启动小陀螺,上场模式
 //		}
-		if(frame_id==1)
-		{
+
+	if(rc_ctrl.rc.s[1]==3)
+	{
+		Chassis_loop_Init();
+	}
+	else{
 			Vx = nav_vx;
 			Vy = nav_vy;
 //			Wz = nav_yaw;
-			Wz = 2000;
+			Wz = 4000;
  			Chassis_Curl();
-		}
+	}
 }
 
 //=======================================================数据循环清零===============================================================//

@@ -72,9 +72,8 @@ void Pitch_task(void const * argument)
 {
   /* USER CODE BEGIN StartTask02 */
   /* Infinite loop */
-
 	gimbal_init();	//PID参数初始化
-	osDelay(3000);
+	osDelay(5000);
   for(;;)
   {
 		gimbal_zero();	//速度清零
