@@ -92,7 +92,7 @@ void Yaw_task(void const *pvParameters)
 			if(Sentry.foe_flag)	//如果视觉检测到目标
 			{
 					Yaw_minipc_control_sita();	//视觉跟随
-					Yaw_Rotate();		//前馈控制补偿底盘带来的旋转角速度
+//					Yaw_Rotate();		//前馈控制补偿底盘带来的旋转角速度
 					Yaw_fix_sita();		//角度控制
 			}			
 			else//没检测到开巡航模式
@@ -107,7 +107,12 @@ void Yaw_task(void const *pvParameters)
 				}
 			}
 		}
-		else if(rc_ctrl.rc.s[1] == 1 || rc_ctrl.rc.s[1] == 3)	//测试模式
+		else if (rc_ctrl.rc.s[1] == 1)
+		{
+			Yaw_mode_search();			//哨兵巡航模式
+			yaw_fix_flag = 1;		//赋予不锁定的标志位
+		}
+		else if(rc_ctrl.rc.s[1] == 3)	//测试模式
 		{
 			Yaw_minipc_control_sita();	//视觉跟随
 			Yaw_Rotate();		//前馈控制补偿底盘带来的旋转角速度
@@ -128,8 +133,8 @@ void Yaw_task(void const *pvParameters)
 static void Yaw_init()	
 {
 	//id为can1的5号
-	pid_init(&motor_pid[6],650,0.001,0,30000,30000);
-	pid_init(&motor_pid_sita[6],20,0,50,30000,30000);
+	pid_init(&motor_pid[6],1600,0.001,0,10000,30000);
+	pid_init(&motor_pid_sita[6],1,0,10,10000,30000);
 	target_yaw = ins_yaw;
 }
 

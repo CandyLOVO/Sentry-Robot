@@ -43,7 +43,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 uint16_t Lock_time = 2;	//视觉停留时间，可直接在这修改，单位是s
-uint16_t Research_time = 2;	//俯仰切换时间，可直接在这修改，单位是s
+uint16_t Research_time = 1;	//俯仰切换时间，可直接在这修改，单位是s
 uint16_t TIM1_Count;	//巡航模式计数器
 uint8_t TIM1_Mode = 1;	//巡航模式俯仰切换标志位
 uint8_t bopan_count = 0;	//拨盘计数器

@@ -94,26 +94,19 @@ void Chassis_task(void const *pvParameters)
 //=======================================================模式选择，计算VX,VY,WZ分量===============================================================//
 void RC_to_Vector()
 {
-//    if(rc_ctrl.rc.s[1]==3 || rc_ctrl.rc.s[1]==1)    
-//    {
-//			Chassis_mode_test();
-//    }
-//		else if(rc_ctrl.rc.s[1]==2)			
-//		{
-//			
-//			Chassis_mode_ready();//直接启动小陀螺,上场模式
-//		}
+    if(rc_ctrl.rc.s[1]==1)    
+    {
+			Chassis_mode_test();
+    }
+		else if(rc_ctrl.rc.s[1]==2)			
+		{
+			
+			Chassis_mode_ready();//直接启动小陀螺,上场模式
+		}
 
-	if(rc_ctrl.rc.s[1]==3)
+	else if(rc_ctrl.rc.s[1]==3)
 	{
 		Chassis_loop_Init();
-	}
-	else{
-			Vx = nav_vx;
-			Vy = nav_vy;
-//			Wz = nav_yaw;
-			Wz = 4000;
- 			Chassis_Curl();
 	}
 }
 
@@ -271,47 +264,53 @@ static void Chassis_mode_test()
 static void Chassis_mode_ready()
 {
 
-			Wz = 5000;
-			
-		//云台坐标系下的平移（遥控器）
-    if( !w_flag && !s_flag && !a_flag && !d_flag)
-    {
-    
-        Vy= rc_ctrl.rc.ch[3]/660.0*2000;
-        Vx= rc_ctrl.rc.ch[2]/660.0*2000;
-    }
-		
-		//云台坐标系下的平移（键盘）
-		else 
-		{
-				if(w_flag)
-				{
-					Vy = 9158;
-				}
-				else if(s_flag)
-				{
-					Vy = -9158;
-				}
-				else
-				{
-					Vy = 0;
-				}
-				
-				if(a_flag)
-				{
-					Vx = -9158;
-				}
-				else if(d_flag)
-				{
-					Vx = 9158;
-				}	
-				
-				else 
-				{
-					Vx = 0;
-				}
-		}
-			Chassis_Curl();//旋转到云台坐标系下
+//			Wz = 5000;
+//			
+//		//云台坐标系下的平移（遥控器）
+//    if( !w_flag && !s_flag && !a_flag && !d_flag)
+//    {
+//    
+//        Vy= rc_ctrl.rc.ch[3]/660.0*2000;
+//        Vx= rc_ctrl.rc.ch[2]/660.0*2000;
+//    }
+//		
+//		//云台坐标系下的平移（键盘）
+//		else 
+//		{
+//				if(w_flag)
+//				{
+//					Vy = 9158;
+//				}
+//				else if(s_flag)
+//				{
+//					Vy = -9158;
+//				}
+//				else
+//				{
+//					Vy = 0;
+//				}
+//				
+//				if(a_flag)
+//				{
+//					Vx = -9158;
+//				}
+//				else if(d_flag)
+//				{
+//					Vx = 9158;
+//				}	
+//				
+//				else 
+//				{
+//					Vx = 0;
+//				}
+//		}
+//			Chassis_Curl();//旋转到云台坐标系下
+
+			Vx = nav_vx;
+			Vy = nav_vy;
+//			Wz = nav_yaw;
+			Wz = 4000;
+ 			Chassis_Curl();
 }
 
 //=======================================================模式选择(未使用)===============================================================//
