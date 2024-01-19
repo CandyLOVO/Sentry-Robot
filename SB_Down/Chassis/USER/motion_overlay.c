@@ -4,8 +4,7 @@
 #include "chassis.h"
 
 #define cosin 0.707106781187 //二分之根号二
-//#define omega 20 //旋转叠加计算中的角速度
-#define omega 20
+#define omega 10 //旋转叠加计算中的角速度 【严禁给15以上!!! yaw的6020给转烂了！！！！！！！！！】
 #define radius 248.248 //舵轮距离车体中心的距离 杰舵248.248mm 哨兵313.487mm
 extern fp32 error_theta;
 
