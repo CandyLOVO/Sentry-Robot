@@ -79,13 +79,13 @@ void Pitch_task(void const * argument)
 		gimbal_zero();	//速度清零
 		gimbal_read_motor();	//读取编码器值
 		gimbal_read_imu();	//读取Imu值
-		if(rc_ctrl.rc.s[1]==3 || rc_ctrl.rc.s[1]==1	)	//调试模式
+		if(rc_ctrl.rc.s[1]==1	)	//调试模式
 		{
 			gimbal_minipc_control_sita();	//位置环视觉瞄准
 			gimbal_mode_control_sita();	//遥控器位置环控制模式
 		 }
 		  
-		else if(rc_ctrl.rc.s[1]==2)		//上场模式
+		else if(rc_ctrl.rc.s[1]==2 || rc_ctrl.rc.s[1]==3)
 		{
 			if(Sentry.foe_flag)	//如果检测到目标
 			{

@@ -64,19 +64,19 @@ void Friction_task(void const * argument)
 		osDelay(1);
 		//===============================================拨盘================================================//
 		//Bopan_judge();	//拨盘正反转检测，测试后改完参数再用
-		if(rc_ctrl.rc.s[1] == 1)	//开启拨盘(测试模式)
-		{	
-			if(!bopan_reversal_flag)	//拨盘正转
-			{
-				Bopan_calc(bopan_shoot_speed);
-			}
-			else if(bopan_reversal_flag)	//拨盘反转
-			{
-				Bopan_calc(bopan_reversal_speed);
-			}
-			
-		}
-		else if(rc_ctrl.rc.s[1] == 2  && Sentry.Flag_shoot)//检测到目标
+//		if(rc_ctrl.rc.s[1] == 1)	//开启拨盘
+//		{	
+//			if(!bopan_reversal_flag)	//拨盘正转
+//			{
+//				Bopan_calc(bopan_shoot_speed);
+//			}
+//			else if(bopan_reversal_flag)	//拨盘反转
+//			{
+//				Bopan_calc(bopan_reversal_speed);
+//			}
+//			
+//		}
+		if(rc_ctrl.rc.s[1] == 2  && Sentry.Flag_shoot)//检测到目标
 		{
 			if(!bopan_reversal_flag)	//拨盘正转
 			{

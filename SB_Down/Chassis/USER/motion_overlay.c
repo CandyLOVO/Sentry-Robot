@@ -4,7 +4,8 @@
 #include "chassis.h"
 
 #define cosin 0.707106781187 //二分之根号二
-#define omega 20 //旋转叠加计算中的角速度
+//#define omega 20 //旋转叠加计算中的角速度
+#define omega 20
 #define radius 248.248 //舵轮距离车体中心的距离 杰舵248.248mm 哨兵313.487mm
 extern fp32 error_theta;
 
@@ -76,10 +77,10 @@ void compound_movement_3508(int16_t x,int16_t y)
 //	motor_speed[2] = sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
 //	motor_speed[3] = sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
 	
-	motor_speed[0] = sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy + omega*radius*cosin),2)); //平移与旋转叠加后的向量长度
-	motor_speed[1] = sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy + omega*radius*cosin),2));
-	motor_speed[2] = sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
-	motor_speed[3] = sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
+		motor_speed[0] = sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy + omega*radius*cosin),2)); //平移与旋转叠加后的向量长度
+		motor_speed[1] = sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy + omega*radius*cosin),2));
+		motor_speed[2] = -sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
+		motor_speed[3] = -sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
 }
 
 //旋转+平移的6020角度
@@ -94,8 +95,8 @@ void compound_movement_6020(int16_t x,int16_t y)
 	
 	motor_angle[0] = remote_value(((float)vx - omega*radius*cosin), ((float)vy + omega*radius*cosin));
 	motor_angle[1] = remote_value(((float)vx + omega*radius*cosin), ((float)vy + omega*radius*cosin));
-	motor_angle[2] = remote_value(((float)vx - omega*radius*cosin), ((float)vy + omega*radius*cosin));
-	motor_angle[3] = remote_value(((float)vx + omega*radius*cosin), ((float)vy + omega*radius*cosin));
+	motor_angle[2] = remote_value(((float)vx + omega*radius*cosin), ((float)vy - omega*radius*cosin));
+	motor_angle[3] = remote_value(((float)vx - omega*radius*cosin), ((float)vy - omega*radius*cosin));
 }
 /********************************************************************************************************************************/
 
