@@ -7,7 +7,7 @@ yx_up\stm32f4xx_hal_msp.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def
 yx_up\stm32f4xx_hal_msp.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 yx_up\stm32f4xx_hal_msp.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h
 yx_up\stm32f4xx_hal_msp.o: ../Drivers/CMSIS/Include/core_cm4.h
-yx_up\stm32f4xx_hal_msp.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
+yx_up\stm32f4xx_hal_msp.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdint.h
 yx_up\stm32f4xx_hal_msp.o: ../Drivers/CMSIS/Include/cmsis_version.h
 yx_up\stm32f4xx_hal_msp.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 yx_up\stm32f4xx_hal_msp.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -15,7 +15,7 @@ yx_up\stm32f4xx_hal_msp.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 yx_up\stm32f4xx_hal_msp.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 yx_up\stm32f4xx_hal_msp.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 yx_up\stm32f4xx_hal_msp.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-yx_up\stm32f4xx_hal_msp.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
+yx_up\stm32f4xx_hal_msp.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stddef.h
 yx_up\stm32f4xx_hal_msp.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 yx_up\stm32f4xx_hal_msp.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
 yx_up\stm32f4xx_hal_msp.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h
@@ -38,6 +38,6 @@ yx_up\stm32f4xx_hal_msp.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uar
 yx_up\stm32f4xx_hal_msp.o: ../User/struct_typedef.h
 yx_up\stm32f4xx_hal_msp.o: ../User/arm_math.h
 yx_up\stm32f4xx_hal_msp.o: ../Drivers/CMSIS/Include/core_cm4.h
-yx_up\stm32f4xx_hal_msp.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
-yx_up\stm32f4xx_hal_msp.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h
-yx_up\stm32f4xx_hal_msp.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdbool.h
+yx_up\stm32f4xx_hal_msp.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
+yx_up\stm32f4xx_hal_msp.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
+yx_up\stm32f4xx_hal_msp.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdbool.h

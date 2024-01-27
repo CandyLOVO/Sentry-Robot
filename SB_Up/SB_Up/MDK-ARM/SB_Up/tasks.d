@@ -1,9 +1,9 @@
 sb_up\tasks.o: ../Middlewares/Third_Party/FreeRTOS/Source/tasks.c
-sb_up\tasks.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdlib.h
-sb_up\tasks.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
+sb_up\tasks.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdlib.h
+sb_up\tasks.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
 sb_up\tasks.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-sb_up\tasks.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
-sb_up\tasks.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
+sb_up\tasks.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stddef.h
+sb_up\tasks.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdint.h
 sb_up\tasks.o: ../Core/Inc/FreeRTOSConfig.h
 sb_up\tasks.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 sb_up\tasks.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

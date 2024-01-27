@@ -86,7 +86,7 @@ void Yaw_task(void const *pvParameters)
 			if(vision_receive.tracking==1)	//如果视觉检测到目标
 			{
 					Yaw_minipc_control_sita();	//视觉跟随
-					Yaw_fix_sita();		//角度控制
+					//Yaw_fix_sita();		//角度控制
 			}			
 			else//没检测到开巡航模式
 			{
@@ -114,7 +114,7 @@ void Yaw_task(void const *pvParameters)
 			if(vision_receive.tracking==1)	//如果视觉检测到目标
 			{
 					Yaw_minipc_control_sita();	//视觉跟随
-					Yaw_fix_sita();		//角度控制
+					//Yaw_fix_sita();		//角度控制
 			}			
 			else//没检测到开巡航模式
 			{
@@ -141,8 +141,8 @@ void Yaw_task(void const *pvParameters)
 static void Yaw_init()	
 {
 	//id为can1的5号
-	pid_init(&motor_pid[6],1500,0.001,0,10000,30000);
-	pid_init(&motor_pid_sita[6],1,0,11,10000,30000);
+	pid_init(&motor_pid[6],200,0.001,0,10000,30000);
+	pid_init(&motor_pid_sita[6],30,0,1000,10000,30000);
 	target_yaw = ins_yaw;
 }
 

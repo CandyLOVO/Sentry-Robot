@@ -91,13 +91,22 @@ void Friction_task(void const * argument)
 			}
 		}
 		
-		//左上角到最上方 遥控器模式，可以测试发射
-		else if(rc_ctrl.rc.s[1] == 1)
+		else if(rc_ctrl.rc.s[1] == 3  && rc_ctrl.rc.s[0] == 2 && vision_receive.tracking==1)
 		{
-			if(rc_ctrl.rc.s[0] == 2)
+			if(!bopan_reversal_flag)	//拨盘正转
 			{
 				Bopan_calc(bopan_shoot_speed);
 			}
+			else if(bopan_reversal_flag)	//拨盘反转
+			{
+				Bopan_calc(bopan_reversal_speed);
+			}
+		}
+		
+		//左上角到最上方 遥控器模式，可以测试发射
+		else if(rc_ctrl.rc.s[1] == 1 && rc_ctrl.rc.s[0] == 2)
+		{
+				Bopan_calc(bopan_shoot_speed);
 		}
 		
 		//其他 拨盘静止

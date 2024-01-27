@@ -130,8 +130,8 @@ static void gimbal_init()
 	
 	pid_init(&motor_pid_can_2[4],420,0.01,0,30000,30000);// 120 0.01 0
 	pid_init(&motor_pid_can_2[5],420,0.01,0,30000,30000);// 120 0.01 0
-	pid_init(&motor_pid_sita_can_2[4],5,0.003,500,30000,30000);// 10 0 1300
-	pid_init(&motor_pid_sita_can_2[5],5,0.003,500,30000,30000);// 10 0 1300
+	pid_init(&motor_pid_sita_can_2[4],9,0.003,500,30000,30000);// 10 0 1300
+	pid_init(&motor_pid_sita_can_2[5],9,0.003,500,30000,30000);// 10 0 1300
 	target_pitch = Pitch_imu;
 } 
 

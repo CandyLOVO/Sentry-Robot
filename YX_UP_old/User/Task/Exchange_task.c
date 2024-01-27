@@ -25,6 +25,7 @@ static void SolveTrajectory_Init();
 //哨兵状态量及官方裁判系统数据初始化
 static void Sentry_Init();
 
+
 //================================================全局变量================================================//
 extern UART_HandleTypeDef huart1;
 volatile uint8_t rx_len_uart1 = 0;  //接收一帧数据的长度

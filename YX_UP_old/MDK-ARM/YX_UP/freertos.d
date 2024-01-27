@@ -1,7 +1,7 @@
 yx_up\freertos.o: ../Core/Src/freertos.c
 yx_up\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-yx_up\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
-yx_up\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
+yx_up\freertos.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stddef.h
+yx_up\freertos.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdint.h
 yx_up\freertos.o: ../Core/Inc/FreeRTOSConfig.h
 yx_up\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 yx_up\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -47,9 +47,9 @@ yx_up\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 yx_up\freertos.o: ../User/struct_typedef.h
 yx_up\freertos.o: ../User/arm_math.h
 yx_up\freertos.o: ../Drivers/CMSIS/Include/core_cm4.h
-yx_up\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
-yx_up\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h
-yx_up\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdbool.h
+yx_up\freertos.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
+yx_up\freertos.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
+yx_up\freertos.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdbool.h
 yx_up\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 yx_up\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 yx_up\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
