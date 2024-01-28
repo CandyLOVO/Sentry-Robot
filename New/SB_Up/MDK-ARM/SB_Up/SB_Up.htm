@@ -3,7 +3,7 @@
 <title>Static Call Graph - [SB_Up\SB_Up.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image SB_Up\SB_Up.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Sat Jan 27 18:17:35 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Mon Jan 29 00:00:21 2024
 <BR><P>
 <H3>Maximum Stack Usage =        256 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -944,7 +944,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_IRQHandler
 </UL>
 
-<P><STRONG><a name="[a3]"></a>HAL_CAN_RxFifo0MsgPendingCallback</STRONG> (Thumb, 576 bytes, Stack size 48 bytes, can_user.o(i.HAL_CAN_RxFifo0MsgPendingCallback))
+<P><STRONG><a name="[a3]"></a>HAL_CAN_RxFifo0MsgPendingCallback</STRONG> (Thumb, 668 bytes, Stack size 48 bytes, can_user.o(i.HAL_CAN_RxFifo0MsgPendingCallback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = HAL_CAN_RxFifo0MsgPendingCallback &rArr; HAL_CAN_GetRxMessage
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_CAN_GetRxMessage
@@ -1676,18 +1676,19 @@ Global Symbols
 <P><STRONG><a name="[8]"></a>UsageFault_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.UsageFault_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
-<P><STRONG><a name="[65]"></a>Yaw_task</STRONG> (Thumb, 88 bytes, Stack size 0 bytes, yaw_task.o(i.Yaw_task))
+<P><STRONG><a name="[65]"></a>Yaw_task</STRONG> (Thumb, 110 bytes, Stack size 0 bytes, yaw_task.o(i.Yaw_task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = Yaw_task &rArr; Yaw_mode_remote_site &rArr; __aeabi_ddiv
 </UL>
 <BR>[Calls]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 <LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_voltage_calc
 <LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_speed_calc
-<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_restrict
+<LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_remote_restrict
 <LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_read_imu
 <LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_mode_remote_site
-<LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_loop_init
+<LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_loop_init
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_init
 <LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_can_send
+<LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_area_restrict
 <LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Site_Control_MF
 <LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start_MF_send
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Current_Control_MF_send
@@ -1867,7 +1868,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[11d]"></a>motor_value</STRONG> (Thumb, 260 bytes, Stack size 0 bytes, handle_value.o(i.motor_value))
+<P><STRONG><a name="[11d]"></a>motor_value</STRONG> (Thumb, 226 bytes, Stack size 0 bytes, handle_value.o(i.motor_value))
 <BR><BR>[Called By]<UL><LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_read_imu
 <LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_init
 </UL>
@@ -1909,12 +1910,9 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_voltage_calc
 </UL>
 
-<P><STRONG><a name="[121]"></a>pid_calc_sita</STRONG> (Thumb, 258 bytes, Stack size 0 bytes, pid.o(i.pid_calc_sita))
-<BR><BR>[Called By]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_speed_calc
-</UL>
-
 <P><STRONG><a name="[110]"></a>pid_calc_sita_span</STRONG> (Thumb, 316 bytes, Stack size 0 bytes, pid.o(i.pid_calc_sita_span))
-<BR><BR>[Called By]<UL><LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Site_Control_MF
+<BR><BR>[Called By]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_speed_calc
+<LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Site_Control_MF
 </UL>
 
 <P><STRONG><a name="[11b]"></a>pid_init</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, pid.o(i.pid_init))
@@ -2516,16 +2514,20 @@ Local Symbols
 <P><STRONG><a name="[10d]"></a>Site_Control_MF</STRONG> (Thumb, 238 bytes, Stack size 48 bytes, yaw_task.o(i.Site_Control_MF))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = Site_Control_MF &rArr; __aeabi_ddiv
 </UL>
-<BR>[Calls]<UL><LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
-<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<BR>[Calls]<UL><LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
 <LI><a href="#[111]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Current_Limit_MF
 <LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_calc_sita_span
 <LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
 </UL>
 <BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_task
+</UL>
+
+<P><STRONG><a name="[123]"></a>Yaw_area_restrict</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, yaw_task.o(i.Yaw_area_restrict))
+<BR><BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_task
 </UL>
 
 <P><STRONG><a name="[119]"></a>Yaw_can_send</STRONG> (Thumb, 90 bytes, Stack size 40 bytes, yaw_task.o(i.Yaw_can_send))
@@ -2536,7 +2538,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_task
 </UL>
 
-<P><STRONG><a name="[11a]"></a>Yaw_init</STRONG> (Thumb, 276 bytes, Stack size 16 bytes, yaw_task.o(i.Yaw_init))
+<P><STRONG><a name="[11a]"></a>Yaw_init</STRONG> (Thumb, 296 bytes, Stack size 16 bytes, yaw_task.o(i.Yaw_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = Yaw_init &rArr; Encoder_MF_read &rArr; HAL_CAN_AddTxMessage
 </UL>
 <BR>[Calls]<UL><LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MF_value
@@ -2547,25 +2549,25 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_task
 </UL>
 
-<P><STRONG><a name="[122]"></a>Yaw_loop_init</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, yaw_task.o(i.Yaw_loop_init))
+<P><STRONG><a name="[121]"></a>Yaw_loop_init</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, yaw_task.o(i.Yaw_loop_init))
 <BR><BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_task
 </UL>
 
-<P><STRONG><a name="[11e]"></a>Yaw_mode_remote_site</STRONG> (Thumb, 130 bytes, Stack size 48 bytes, yaw_task.o(i.Yaw_mode_remote_site))
+<P><STRONG><a name="[11e]"></a>Yaw_mode_remote_site</STRONG> (Thumb, 154 bytes, Stack size 48 bytes, yaw_task.o(i.Yaw_mode_remote_site))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = Yaw_mode_remote_site &rArr; __aeabi_ddiv
 </UL>
-<BR>[Calls]<UL><LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
-<LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<BR>[Calls]<UL><LI><a href="#[10f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
 <LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
 <LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
 </UL>
 <BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_task
 </UL>
 
-<P><STRONG><a name="[11f]"></a>Yaw_read_imu</STRONG> (Thumb, 140 bytes, Stack size 16 bytes, yaw_task.o(i.Yaw_read_imu))
-<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = Yaw_read_imu &rArr; MF_value
+<P><STRONG><a name="[11f]"></a>Yaw_read_imu</STRONG> (Thumb, 116 bytes, Stack size 8 bytes, yaw_task.o(i.Yaw_read_imu))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = Yaw_read_imu &rArr; MF_value
 </UL>
 <BR>[Calls]<UL><LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MF_value
 <LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;motor_value
@@ -2573,14 +2575,14 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_task
 </UL>
 
-<P><STRONG><a name="[123]"></a>Yaw_restrict</STRONG> (Thumb, 112 bytes, Stack size 0 bytes, yaw_task.o(i.Yaw_restrict))
+<P><STRONG><a name="[122]"></a>Yaw_remote_restrict</STRONG> (Thumb, 204 bytes, Stack size 0 bytes, yaw_task.o(i.Yaw_remote_restrict))
 <BR><BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_task
 </UL>
 
 <P><STRONG><a name="[120]"></a>Yaw_speed_calc</STRONG> (Thumb, 70 bytes, Stack size 8 bytes, yaw_task.o(i.Yaw_speed_calc))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Yaw_speed_calc
 </UL>
-<BR>[Calls]<UL><LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_calc_sita
+<BR>[Calls]<UL><LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_calc_sita_span
 </UL>
 <BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_task
 </UL>

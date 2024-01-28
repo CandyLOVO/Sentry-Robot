@@ -8,6 +8,8 @@
 //================================================全局变量================================================//
 float target_yaw_left;	//左右脑袋的目标yaw（相对坐标）
 float target_yaw_right;
+float target_yaw_remote_left;
+float target_yaw_remote_right;
 float target_yaw_middle;
 int16_t Init_encoder_left = 6818;		//左脑袋编码器正前方初始值(安装好后值固定)
 int16_t Init_encoder_right = 7154;		//右脑袋
@@ -31,8 +33,11 @@ static void Yaw_read_imu();
 //两个脑袋的位置控制模式
 static void Yaw_mode_remote_site();
 
-//相对角度限制
-static void Yaw_restrict();
+//遥控器相对角度限制
+static void Yaw_remote_restrict();
+
+//死区角度限制
+static void Yaw_area_restrict();
 
 //速度环计算
 static void Yaw_speed_calc();
@@ -68,7 +73,13 @@ void Yaw_task(void const *pvParameters)
 //		Encoder_MF_read(motor_info[0].can_id);//读取当前编码器值，读完之后用下面那一行的位置模式
 		Site_Control_MF();//MF9025位置模式(遥控器)
 //		Current_Control_MF();//MF9025力控模式(遥控器)
-		Yaw_restrict();//相对角度限制
+		Yaw_remote_restrict();//遥控器相对角度限制
+//以下为测试死区角度限制专用
+	if(rc_ctrl.rc.s[1] == 1)
+	{
+		target_yaw_left=-160;
+	}
+		Yaw_area_restrict();//死区角度限制
 		Yaw_speed_calc();//速度环计算
 		Yaw_voltage_calc();//电压环计算
 		Yaw_can_send();
@@ -114,11 +125,8 @@ static void Yaw_read_imu()
 	//180 -180
 	
 	Yaw_middle = MF_value(Init_encoder_middle , motor_info[0].rotor_angle , 65535);
-	
-	int16_t Yaw_left_int = motor_value(Init_encoder_left,motor_info_can_2[0].rotor_angle);
-	int16_t Yaw_right_int = motor_value(Init_encoder_right,motor_info_can_2[1].rotor_angle);
-	Yaw_left = (float)Yaw_left_int;
-	Yaw_right = (float)Yaw_right_int;
+	Yaw_left = motor_value(Init_encoder_left,motor_info_can_2[0].rotor_angle);
+	Yaw_right = motor_value(Init_encoder_right,motor_info_can_2[1].rotor_angle);
 	
 	//以C板上电那一刻的坐标系为基坐标系(绝对坐标系)
 	Yaw_left_c = Yaw_left + Yaw_middle;
@@ -132,8 +140,10 @@ static void Yaw_mode_remote_site()
 {
 		if(rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1]<= 660)
 		{			
-			target_yaw_left -= rc_ctrl.rc.ch[1]/660.0 * Yaw_sita_weight; 	
-			target_yaw_right = -target_yaw_left;
+			target_yaw_remote_left -= rc_ctrl.rc.ch[1]/660.0 * Yaw_sita_weight; 	
+			target_yaw_remote_right = -target_yaw_remote_left;
+			target_yaw_left = target_yaw_remote_left;
+			target_yaw_right = target_yaw_remote_right;
 		}
 }
 
@@ -156,36 +166,103 @@ static void Yaw_can_send()
   tx_data[5] = 0x00;
   tx_data[6] = 0x00;
   tx_data[7] = 0x00;
-  HAL_CAN_AddTxMessage(&hcan2, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX1);
+  HAL_CAN_AddTxMessage(&hcan1, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX1);
 }
 
 //================================================Yaw角度限制================================================//
-static void Yaw_restrict()
+static void Yaw_remote_restrict()
 {
-	if(target_yaw_left<0)
+	if(target_yaw_remote_left<-20)
 	{
-		target_yaw_left=0; 
+		target_yaw_remote_left=-20; 
+		target_yaw_left=target_yaw_remote_left;
 	}
-	else if(target_yaw_left>180)
+	else if(target_yaw_remote_left>180)
 	{
-		target_yaw_left=180; 
+		if(target_yaw_remote_left>200)
+		{
+			target_yaw_remote_left=200;
+		}
+		target_yaw_left=target_yaw_remote_left-360; 
 	}
 	
-	if(target_yaw_right>0)
+	if(target_yaw_remote_right>20)
 	{
-		target_yaw_left=0; 
+		target_yaw_remote_right=20; 
 	}
-	else if(target_yaw_left<-180)
+	else if(target_yaw_remote_right<-180)
 	{
-		target_yaw_left=-180; 
+		if(target_yaw_remote_right<-200)
+		{
+			target_yaw_remote_right=-200;
+		}
+		target_yaw_right=target_yaw_remote_right+360; 
 	}
 }
+
+//================================================6020死区角度限制===============================================//
+static void Yaw_area_restrict()
+{
+	//限制目标角度
+	if(target_yaw_left<-20 && target_yaw_left>-160)
+	{
+		target_yaw_left=0;
+	}
+	if(target_yaw_right>20 && target_yaw_right<160)
+	{
+		target_yaw_right=0;
+	}
+	
+	//限制当前角度进入死区
+	if(Yaw_left<-30 && Yaw_left>-150)
+	{
+		target_yaw_left=0;
+	}
+	if(Yaw_right>30 && Yaw_right<150)
+	{
+		target_yaw_right=0;
+	}
+	
+	//限制旋转方向(左脑袋)
+	if(Yaw_left>=155 || Yaw_left<=-155)
+	{
+		if(target_yaw_left>=-20 && target_yaw_left<=20)
+		{
+			target_yaw_left=30;
+		}
+	}
+	else if(Yaw_left>=-25 && Yaw_left<=25)
+	{
+		if(target_yaw_left<=-160 || target_yaw_left>=160)
+		{
+			target_yaw_left=150;
+		}
+	}
+	
+		//限制旋转方向(右脑袋)
+	if(Yaw_right>=155 || Yaw_right<=-155)
+	{
+		if(target_yaw_right>=-20 && target_yaw_right<=20)
+		{
+			target_yaw_right=-30;
+		}
+	}
+	else if(Yaw_right>=-25 && Yaw_right<=25)
+	{
+		if(target_yaw_left<=-160 || target_yaw_left>=160)
+		{
+			target_yaw_left=-150;
+		}
+	}
+	
+}
+
 
 //================================================速度环输入计算（倒装6020取负值）================================================//
 static void Yaw_speed_calc()
 {
-	target_speed_can_2[0] -=  pid_calc_sita(&motor_pid_sita_can_2[0], target_yaw_left, Yaw_left);
-	target_speed_can_2[1] -=  pid_calc_sita(&motor_pid_sita_can_2[1], target_yaw_right, Yaw_right);
+	target_speed_can_2[0] -=  pid_calc_sita_span(&motor_pid_sita_can_2[0], target_yaw_left, Yaw_left);
+	target_speed_can_2[1] -=  pid_calc_sita_span(&motor_pid_sita_can_2[1], target_yaw_right, Yaw_right);
 }
 
 //================================================电压环计算================================================//

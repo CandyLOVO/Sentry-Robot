@@ -3,6 +3,6 @@
 #include "main.h"
 
 float remote_value(int16_t x, int16_t y);
-int16_t motor_value(int16_t get, int16_t set);
+float motor_value(int16_t get, int16_t set);
 
 #endif

@@ -126,6 +126,12 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//Ω” ‹÷–∂œªÿµ˜∫Ø 
     motor_info[index].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);
     motor_info[index].torque_current = ((rx_data[4] << 8) | rx_data[5]);
     motor_info[index].temp           =   rx_data[6];
+		
+		index = rx_header.StdId - 0x205;   
+    motor_info_can_2[index].rotor_angle    = ((rx_data[0] << 8) | rx_data[1]);
+    motor_info_can_2[index].rotor_speed    = ((rx_data[2] << 8) | rx_data[3]);
+    motor_info_can_2[index].torque_current = ((rx_data[4] << 8) | rx_data[5]);
+    motor_info_can_2[index].temp           =   rx_data[6];
   }
 	
 //================================================MF9025£®◊¢“‚“ªœ¬µ•Œª£©================================================//	

@@ -849,11 +849,10 @@ erwork --depend=sb_up\startup_stm32f407xx.d -osb_up\startup_stm32f407xx.o -I../
 ARM Macro Assembler    Page 14 
 
 
-Core/Inc -I"F:\Github base\Sentry\SB_Up\SB_Up\MDK-ARM\RTE" -I"E:\Keil ARM\ARM\P
-ACK\ARM\CMSIS\4.2.0\CMSIS\Include" -I"E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\2
-.14.0" --predefine="__UVISION_VERSION SETA 514" --predefine="_RTE_ SETA 1" --pr
-edefine="STM32F407xx SETA 1" --list=startup_stm32f407xx.lst startup_stm32f407xx
-.s
+Core/Inc -I"F:\Github base\Sentry\New\SB_Up\MDK-ARM\RTE" -I"E:\Keil ARM\ARM\PAC
+K\ARM\CMSIS\4.2.0\CMSIS\Include" -I"E:\Keil ARM\ARM\PACK\Keil\STM32F4xx_DFP\2.1
+4.0" --predefine="__UVISION_VERSION SETA 514" --predefine="_RTE_ SETA 1" --pred
+efine="STM32F407xx SETA 1" --list=startup_stm32f407xx.lst startup_stm32f407xx.s
 
 
 
