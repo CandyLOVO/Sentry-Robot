@@ -22,11 +22,11 @@ void TestTask(void const * argument)
   for(;;)
   {
 		for(int i=0;i<4;i++){
-			motor_speed[i] = pid_cal_s(&PID_6020,motor[i].speed,(rc_ctrl.rc.ch[0]*3),30000,30000);
+			motor_speed[i] = pid_cal_s(&PID_6020,motor[i].speed,(rc_ctrl.rc.ch[0]*8),30000,30000);
 		}
 		//遥控器控制电机转动
 		can_send_6020(motor_speed[0],motor_speed[1],motor_speed[2],motor_speed[3]); //右拨杆左右 转四个6020电机
-		can_send_9025(rc_ctrl.rc.ch[1]*5); //右拨杆上下 转MF9025
+		can_send_9025(rc_ctrl.rc.ch[1]*80); //右拨杆上下 转MF9025
     osDelay(1);
   }
 }
