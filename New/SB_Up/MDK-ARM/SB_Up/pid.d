@@ -35,3 +35,33 @@ sb_up\pid.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 sb_up\pid.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 sb_up\pid.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 sb_up\pid.o: ../User/struct_typedef.h
+sb_up\pid.o: ../User/Task/Yaw_task.h
+sb_up\pid.o: ../User/Task/INS_task.h
+sb_up\pid.o: ../User/arm_math.h
+sb_up\pid.o: ../Drivers/CMSIS/Include/core_cm4.h
+sb_up\pid.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
+sb_up\pid.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
+sb_up\pid.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+sb_up\pid.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+sb_up\pid.o: ../Core/Inc/FreeRTOSConfig.h
+sb_up\pid.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+sb_up\pid.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+sb_up\pid.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+sb_up\pid.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+sb_up\pid.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+sb_up\pid.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+sb_up\pid.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+sb_up\pid.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+sb_up\pid.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
+sb_up\pid.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
+sb_up\pid.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+sb_up\pid.o: ../User/DriverLayer/bsp_imu_pwm.h
+sb_up\pid.o: ../User/DriverLayer/bsp_spi.h
+sb_up\pid.o: ../User/AlgorithmLayer/bmi088driver.h
+sb_up\pid.o: ../User/AlgorithmLayer/pid_imu.h
+sb_up\pid.o: ../User/PotocaLayer/remote_control.h
+sb_up\pid.o: ../User/DriverLayer/bsp_rc.h
+sb_up\pid.o: ../User/AlgorithmLayer/handle_value.h
+sb_up\pid.o: ../User/PotocaLayer/Motor.h
+sb_up\pid.o: ../User/DriverLayer/Can_user.h
+sb_up\pid.o: ../User/PotocaLayer/MF_User.h

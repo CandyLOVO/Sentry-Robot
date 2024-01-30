@@ -78,6 +78,7 @@ void Yaw_task(void const *pvParameters)
 	if(rc_ctrl.rc.s[1] == 1)
 	{
 		target_yaw_left=-160;
+		target_yaw_right=160;
 	}
 		Yaw_area_restrict();//死区角度限制
 		Yaw_speed_calc();//速度环计算
@@ -189,6 +190,7 @@ static void Yaw_remote_restrict()
 	if(target_yaw_remote_right>20)
 	{
 		target_yaw_remote_right=20; 
+		target_yaw_right=target_yaw_remote_right;
 	}
 	else if(target_yaw_remote_right<-180)
 	{
@@ -212,57 +214,25 @@ static void Yaw_area_restrict()
 	{
 		target_yaw_right=0;
 	}
-	
-	//限制当前角度进入死区
-	if(Yaw_left<-30 && Yaw_left>-150)
-	{
-		target_yaw_left=0;
-	}
-	if(Yaw_right>30 && Yaw_right<150)
-	{
-		target_yaw_right=0;
-	}
-	
-	//限制旋转方向(左脑袋)
-	if(Yaw_left>=155 || Yaw_left<=-155)
-	{
-		if(target_yaw_left>=-20 && target_yaw_left<=20)
-		{
-			target_yaw_left=30;
-		}
-	}
-	else if(Yaw_left>=-25 && Yaw_left<=25)
-	{
-		if(target_yaw_left<=-160 || target_yaw_left>=160)
-		{
-			target_yaw_left=150;
-		}
-	}
-	
-		//限制旋转方向(右脑袋)
-	if(Yaw_right>=155 || Yaw_right<=-155)
-	{
-		if(target_yaw_right>=-20 && target_yaw_right<=20)
-		{
-			target_yaw_right=-30;
-		}
-	}
-	else if(Yaw_right>=-25 && Yaw_right<=25)
-	{
-		if(target_yaw_left<=-160 || target_yaw_left>=160)
-		{
-			target_yaw_left=-150;
-		}
-	}
-	
+//	
+//	//限制当前角度进入死区,别用，感觉是一坨答辩
+//	if(Yaw_left<-30 && Yaw_left>-150)
+//	{
+//		target_yaw_left=0;
+//	}
+//	if(Yaw_right>30 && Yaw_right<150)
+//	{
+//		target_yaw_right=0;
+//	}
+//	
 }
 
 
 //================================================速度环输入计算（倒装6020取负值）================================================//
 static void Yaw_speed_calc()
 {
-	target_speed_can_2[0] -=  pid_calc_sita_span(&motor_pid_sita_can_2[0], target_yaw_left, Yaw_left);
-	target_speed_can_2[1] -=  pid_calc_sita_span(&motor_pid_sita_can_2[1], target_yaw_right, Yaw_right);
+	target_speed_can_2[0] -=  pid_calc_sita_span_left(&motor_pid_sita_can_2[0], target_yaw_left, Yaw_left);
+	target_speed_can_2[1] -=  pid_calc_sita_span_right(&motor_pid_sita_can_2[1], target_yaw_right, Yaw_right);
 }
 
 //================================================电压环计算================================================//

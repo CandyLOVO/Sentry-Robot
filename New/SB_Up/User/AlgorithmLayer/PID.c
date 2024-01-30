@@ -1,5 +1,5 @@
 #include "PID.h"
-
+#include "Yaw_task.h"
 //================================================PID½á¹¹Ìå¶¨Òå================================================//
 pid_struct_t motor_pid[7];	
 pid_struct_t motor_pid_sita[7];
@@ -89,6 +89,7 @@ float pid_calc_sita(pid_struct_t *pid,float target, float respond) //Î»ÖÃ»·PID¼Æ
   return pid->output;
 }
 
+
 float pid_calc_sita_span(pid_struct_t *pid,float target, float respond)//´øÔ½½ç´¦Àí
 {
   pid->ref = target;
@@ -106,6 +107,98 @@ float pid_calc_sita_span(pid_struct_t *pid,float target, float respond)//´øÔ½½ç´
 	{
 		err += 360;
 	}
+  pid->err[0] = err;
+	
+  pid->p_out  = pid->kp * pid->err[0];
+  pid->i_out += pid->ki * pid->err[0];
+  pid->d_out  = pid->kd * (pid->err[0] - pid->err[1]);
+	
+  LIMIT_MIN_MAX(pid->i_out, -pid->i_max, pid->i_max);//·ÀÖ¹iÖµµþ¼ÓÔ½½ç
+  
+  pid->output = pid->p_out + pid->i_out + pid->d_out;
+  LIMIT_MIN_MAX(pid->output, -pid->out_max, pid->out_max);//·ÀÖ¹×ÜÌåÔ½½ç
+  return pid->output;
+}
+
+float pid_calc_sita_span_left(pid_struct_t *pid,float target, float respond)//´øËÀÇø´¦Àí
+{
+  pid->ref = target;
+  pid->fdb = respond;
+	pid->err[1] = pid->err[0];
+	
+	float err = 0;
+	err = target - respond;
+	//Ô½½ç´¦Àí
+	if(err > 180)
+	{
+		err -= 360;
+	}
+	else if(err < -180)
+	{
+		err += 360;
+	}
+		
+	if(Yaw_left>=160 || Yaw_left<=-160)
+	{
+		if(err>=140)
+		{
+			err -= 360;
+		}
+	}
+	else if(Yaw_left>=-20 && Yaw_left<=20)
+	{
+		if(err<=-140)
+		{
+			err += 360;
+		}
+	}
+	
+  pid->err[0] = err;
+	
+  pid->p_out  = pid->kp * pid->err[0];
+  pid->i_out += pid->ki * pid->err[0];
+  pid->d_out  = pid->kd * (pid->err[0] - pid->err[1]);
+	
+  LIMIT_MIN_MAX(pid->i_out, -pid->i_max, pid->i_max);//·ÀÖ¹iÖµµþ¼ÓÔ½½ç
+  
+  pid->output = pid->p_out + pid->i_out + pid->d_out;
+  LIMIT_MIN_MAX(pid->output, -pid->out_max, pid->out_max);//·ÀÖ¹×ÜÌåÔ½½ç
+  return pid->output;
+}
+
+float pid_calc_sita_span_right(pid_struct_t *pid,float target, float respond)//´øËÀÇø´¦Àí
+{
+  pid->ref = target;
+  pid->fdb = respond;
+	pid->err[1] = pid->err[0];
+	
+	float err = 0;
+	err = target - respond;
+	//Ô½½ç´¦Àí
+	if(err > 180)
+	{
+		err -= 360;
+	}
+	else if(err < -180)
+	{
+		err += 360;
+	}
+		
+	if(Yaw_right>=160 || Yaw_right<=-160)
+	{
+		if(err<=-140)
+		{
+			err += 360;
+		}
+	}
+	else if(Yaw_right>=-20 && Yaw_right<=20)
+	{
+		if(err>=140)
+		{
+			err -= 360;
+		}
+	}
+	
   pid->err[0] = err;
 	
   pid->p_out  = pid->kp * pid->err[0];

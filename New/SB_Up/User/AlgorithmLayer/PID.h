@@ -34,6 +34,8 @@ void pid_init(pid_struct_t *pid,
 float pid_calc(pid_struct_t *pid, float ref, float fdb);	//速度环PID计算,ref是速度目标值，fdb是速度返回值
 float pid_calc_sita(pid_struct_t *pid,float ref, float fdb);	//位置环PID计算，单位是角度，ref是角度目标值，fdb是角度返回值
 float pid_calc_sita_span(pid_struct_t *pid,float target, float respond);
+float pid_calc_sita_span_left(pid_struct_t *pid,float target, float respond);//带死区处理（左）
+float pid_calc_sita_span_right(pid_struct_t *pid,float target, float respond);//带死区处理（右）
 
 //================================================PID结构体声明================================================//
 extern pid_struct_t motor_pid[7];	
