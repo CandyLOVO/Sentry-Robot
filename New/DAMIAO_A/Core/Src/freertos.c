@@ -25,7 +25,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "testTask.h"
+#include "Yaw_task.h"
+#include "Pitch_task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -51,7 +52,8 @@ osThreadId defaultTaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
-osThreadId testTaskHandle;
+osThreadId yawTaskHandle;
+osThreadId pitchTaskHandle;
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
@@ -107,8 +109,14 @@ void MX_FREERTOS_Init(void) {
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
-	osThreadDef(test, TestTask, osPriorityNormal, 0, 512);
-  testTaskHandle = osThreadCreate(osThread(test), NULL);
+	//YAW控制任务
+	osThreadDef(yawtask, Yaw_task, osPriorityRealtime, 0, 256);		
+  yawTaskHandle = osThreadCreate(osThread(yawtask), NULL);
+	
+	//Pitch控制任务
+//	osThreadDef(pitchtask, Pitch_task, osPriorityRealtime, 0, 256);		
+//  pitchTaskHandle = osThreadCreate(osThread(pitchtask), NULL);
+	
   /* USER CODE END RTOS_THREADS */
 
 }
