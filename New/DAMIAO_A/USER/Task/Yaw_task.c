@@ -92,8 +92,8 @@ void Yaw_task(void const *pvParameters)
 //================================================YAW轴PID参数和目标IMU初始化================================================//
 static void Yaw_init()
 {
-	pid_init(&motor_pid_can_2[7],3,0,1,2048,2048);
-	pid_init(&motor_pid_sita_can_2[7],6,0.01,0,2048,2048);
+	pid_init(&motor_pid_can_2[7],1,0,0,2048,2048);
+	pid_init(&motor_pid_sita_can_2[7],5,0.01,0,2048,2048);
 	
 	pid_init(&motor_pid_can_2[0],30,0.001,0,30000,30000);
 	pid_init(&motor_pid_sita_can_2[0],3,0,1,30000,30000);
