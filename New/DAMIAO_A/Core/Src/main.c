@@ -98,7 +98,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	can_1_user_init(&hcan1);//配置can1的过滤器
 	can_2_user_init(&hcan2);//配置can2的过滤器
-	remote_control_init(); //閬ユ帶鍣ㄥ垵濮嬪寲
+	remote_control_init();
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

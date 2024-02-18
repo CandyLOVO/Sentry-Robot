@@ -51,8 +51,8 @@ damiao_test\pitch_task.o: ../USER/PotocaLayer/remote_control.h
 damiao_test\pitch_task.o: ../USER/struct_typedef.h
 damiao_test\pitch_task.o: ../USER/DriverLayer/bsp_rc.h
 damiao_test\pitch_task.o: ../USER/AlgorithmLayer/PID.h
-damiao_test\pitch_task.o: E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\arm_math.h
-damiao_test\pitch_task.o: E:\Keil ARM\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include\core_cm4.h
+damiao_test\pitch_task.o: ..\Drivers\CMSIS\DSP\Include\arm_math.h
+damiao_test\pitch_task.o: ../Drivers/CMSIS/Include/core_cm4.h
 damiao_test\pitch_task.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
 damiao_test\pitch_task.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
 damiao_test\pitch_task.o: ../Core/Inc/can.h

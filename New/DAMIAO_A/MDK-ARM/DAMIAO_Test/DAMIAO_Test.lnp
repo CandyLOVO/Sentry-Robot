@@ -1,4 +1,4 @@
---cpu=Cortex-M4.fp.sp
+--cpu Cortex-M4.fp
 "damiao_test\startup_stm32f446xx.o"
 "damiao_test\main.o"
 "damiao_test\gpio.o"
@@ -38,6 +38,7 @@
 "damiao_test\heap_4.o"
 "damiao_test\port.o"
 "damiao_test\yaw_task.o"
+"damiao_test\pitch_task.o"
 "damiao_test\mf_user.o"
 "damiao_test\motor.o"
 "damiao_test\remote_control.o"
@@ -47,6 +48,6 @@
 "damiao_test\pid.o"
 "damiao_test\handle_value.o"
 --strict --scatter "DAMIAO_Test\DAMIAO_Test.sct"
---summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "DAMIAO_Test.map" -o DAMIAO_Test\DAMIAO_Test.axf
