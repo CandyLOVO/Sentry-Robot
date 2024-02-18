@@ -114,8 +114,8 @@ void MX_FREERTOS_Init(void) {
   yawTaskHandle = osThreadCreate(osThread(yawtask), NULL);
 	
 	//Pitch¿ØÖÆÈÎÎñ
-//	osThreadDef(pitchtask, Pitch_task, osPriorityRealtime, 0, 256);		
-//  pitchTaskHandle = osThreadCreate(osThread(pitchtask), NULL);
+	osThreadDef(pitchtask, Pitch_task, osPriorityRealtime, 0, 256);		
+  pitchTaskHandle = osThreadCreate(osThread(pitchtask), NULL);
 	
   /* USER CODE END RTOS_THREADS */
 

@@ -43,11 +43,10 @@ void Start_MF_send(int16_t ID)
 母线电流和电机的实际扭矩因不同电机而异。*/
 
 //para:ID号,电流值的地址
-uint8_t             tx_data[8];
 void Current_Control_MF_send(int16_t ID,int16_t iqControl)
 {
 	CAN_TxHeaderTypeDef tx_header;
-//  uint8_t             tx_data[8];
+  uint8_t             tx_data[8];
 	
 	tx_header.StdId = 0x140+ID;
   tx_header.IDE   = CAN_ID_STD;//标准帧

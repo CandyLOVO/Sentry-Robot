@@ -55,7 +55,7 @@ void Pitch_task(void const * argument)
 		Gimbal_minipc_control_sita();	//位置环视觉瞄准
 		Gimbal_mode_control_sita();	//遥控器位置环控制模式
 		Gimbal_target_restrict();	//目标值限制
-		Gimbal_imu_restrict();	//实际值限位
+//		Gimbal_imu_restrict();	//实际值限位
 		Gimbal_voltage_calc();	//电流值计算
 		Gimbal_can_send();
 //		else if(rc_ctrl.rc.s[1]==2)		//上场模式
@@ -136,14 +136,14 @@ static void Gimbal_target_restrict()
 static void Gimbal_imu_restrict()
 {
 	if(Gimbal_left > 25)
-		target_gimbal_left=25;
+		target_gimbal_left=20;
 	else if(Gimbal_left < -40)
-		target_gimbal_left=-40;
+		target_gimbal_left=-35;
 	
 	if(Gimbal_right > 25)
-		target_gimbal_right=25;
+		target_gimbal_right=20;
 	else if(Gimbal_right < -40)
-		target_gimbal_right=-40;
+		target_gimbal_right=-35;
 }
 
 //================================================电流值计算================================================//
@@ -167,8 +167,8 @@ static void Gimbal_mode_control_sita()
 {
 		if(rc_ctrl.rc.ch[3] >= -660 && rc_ctrl.rc.ch[3]<= 660)
 		{
-			target_gimbal_left -= (rc_ctrl.rc.ch[1]- 1024)/660.0 * Pitch_sita_weight; 
-			target_gimbal_right = -target_gimbal_left;		
+			target_gimbal_left -= (rc_ctrl.rc.ch[3])/660.0 * Pitch_sita_weight; 
+			target_gimbal_right = target_gimbal_left;		
 		}
 }
 
