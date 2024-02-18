@@ -34,13 +34,11 @@ static void Gimbal_voltage_calc();
 //目标值限制
 static void Gimbal_target_restrict();
 
-//实际值限位
+//实际值限位,稳态误差会有Bug,未使用
 static void Gimbal_imu_restrict();
 
 //叠加自瞄(位置环)
 static void Gimbal_minipc_control_sita();
-
-// pitch
 
 void Pitch_task(void const * argument)
 {
@@ -55,7 +53,6 @@ void Pitch_task(void const * argument)
 		Gimbal_minipc_control_sita();	//位置环视觉瞄准
 		Gimbal_mode_control_sita();	//遥控器位置环控制模式
 		Gimbal_target_restrict();	//目标值限制
-//		Gimbal_imu_restrict();	//实际值限位
 		Gimbal_voltage_calc();	//电流值计算
 		Gimbal_can_send();
 //		else if(rc_ctrl.rc.s[1]==2)		//上场模式
@@ -114,6 +111,7 @@ static void Gimbal_can_send()
   tx_data[5] = (motor_info_can_2[2].set_voltage)&0xff;
   tx_data[6] = (motor_info_can_2[3].set_voltage>>8)&0xff;
   tx_data[7] = (motor_info_can_2[3].set_voltage)&0xff;
+	
   HAL_CAN_AddTxMessage(&hcan2, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX1);
 }
 
@@ -132,18 +130,18 @@ static void Gimbal_target_restrict()
 		target_gimbal_right=-40;
 }
 
-//================================================实际值限位================================================//
+//================================================实际值限位（注意有稳态误差时会有bug，未使用）================================================//
 static void Gimbal_imu_restrict()
 {
 	if(Gimbal_left > 25)
-		target_gimbal_left=20;
+		target_gimbal_left=25;
 	else if(Gimbal_left < -40)
-		target_gimbal_left=-35;
+		target_gimbal_left=-40;
 	
 	if(Gimbal_right > 25)
-		target_gimbal_right=20;
+		target_gimbal_right=25;
 	else if(Gimbal_right < -40)
-		target_gimbal_right=-35;
+		target_gimbal_right=-40;
 }
 
 //================================================电流值计算================================================//
@@ -162,12 +160,12 @@ static void Gimbal_zero()
 	target_speed_can_2[3] = 0;
 }
 
-//================================================遥控器位置环控制模式(基于陀螺仪权重)================================================//
+//================================================遥控器位置环控制模式================================================//
 static void Gimbal_mode_control_sita()
 {
 		if(rc_ctrl.rc.ch[3] >= -660 && rc_ctrl.rc.ch[3]<= 660)
 		{
-			target_gimbal_left -= (rc_ctrl.rc.ch[3])/660.0 * Pitch_sita_weight; 
+			target_gimbal_left -= rc_ctrl.rc.ch[3]/660.0 * Pitch_sita_weight; 
 			target_gimbal_right = target_gimbal_left;		
 		}
 }
