@@ -49,7 +49,7 @@ damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event
 damiao_test\freertos.o: ../USER/Task/Yaw_task.h
 damiao_test\freertos.o: ../USER/struct_typedef.h
 damiao_test\freertos.o: ../USER/Task/INS_task.h
-damiao_test\freertos.o: ..\Drivers\CMSIS\DSP\Include\arm_math.h
+damiao_test\freertos.o: ../Drivers/CMSIS/DSP/Include/arm_math.h
 damiao_test\freertos.o: ../Drivers/CMSIS/Include/core_cm4.h
 damiao_test\freertos.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
 damiao_test\freertos.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h

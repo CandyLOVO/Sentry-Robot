@@ -15,8 +15,10 @@
 
 #define Yaw_sita_weight 0.5f 		//遥控器控制位置环权重
 	 
-extern float Yaw_middle;	//一级云台yaw(只有绝对坐标)
-extern float Yaw_left;	//现在时刻左脑袋的yaw（相对坐标）
+extern float Yaw_middle_c;	//一级云台yaw(只有绝对坐标)
+extern float Yaw_left_c;	//现在时刻左脑袋的yaw（相对坐标）
+extern float Yaw_right_c;
+extern float Yaw_left;
 extern float Yaw_right;
 	 
 //定义函数

@@ -30,8 +30,8 @@
 #define Pitch_down 3700	//±àÂëÆ÷µÍÍ·ÏŞÎ»
 
 void Pitch_task(void const * argument);
-extern float target_pitch;
-
+extern float Gimbal_left;
+extern float Gimbal_right;
 #ifdef __cplusplus
 }
 #endif

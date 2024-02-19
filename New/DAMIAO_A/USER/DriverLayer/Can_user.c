@@ -121,7 +121,6 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖĞ¶Ï»Øµ÷º¯Ê
 }
 
 //================================================Ò£¿ØÆ÷Êı¾İ°å¼ä·¢ËÍº¯Êı================================================//
-//×¢£ºÓĞÓÃÀ´¸øÏÂc°å·¢yawµÄĞÅÏ¢
 void can_remote(uint8_t sbus_buf[],uint32_t id)
 {
   CAN_TxHeaderTypeDef tx_header;  

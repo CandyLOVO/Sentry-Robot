@@ -35,7 +35,7 @@ damiao_test\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex
 damiao_test\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 damiao_test\yaw_task.o: ../USER/struct_typedef.h
 damiao_test\yaw_task.o: ..\USER\Task\INS_task.h
-damiao_test\yaw_task.o: ..\Drivers\CMSIS\DSP\Include\arm_math.h
+damiao_test\yaw_task.o: ../Drivers/CMSIS/DSP/Include/arm_math.h
 damiao_test\yaw_task.o: ../Drivers/CMSIS/Include/core_cm4.h
 damiao_test\yaw_task.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
 damiao_test\yaw_task.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h

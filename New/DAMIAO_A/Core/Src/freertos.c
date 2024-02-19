@@ -54,6 +54,7 @@ osThreadId defaultTaskHandle;
 /* USER CODE BEGIN FunctionPrototypes */
 osThreadId yawTaskHandle;
 osThreadId pitchTaskHandle;
+osThreadId exchangeHandle;
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
@@ -110,12 +111,16 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
 	//YAW控制任务
-	osThreadDef(yawtask, Yaw_task, osPriorityRealtime, 0, 256);		
+	osThreadDef(yawtask, Yaw_task, osPriorityNormal, 0, 256);		
   yawTaskHandle = osThreadCreate(osThread(yawtask), NULL);
 	
 	//Pitch控制任务
-	osThreadDef(pitchtask, Pitch_task, osPriorityRealtime, 0, 256);		
+	osThreadDef(pitchtask, Pitch_task, osPriorityNormal, 0, 256);		
   pitchTaskHandle = osThreadCreate(osThread(pitchtask), NULL);
+	
+	//通信任务，更新所有标志位和信息
+	osThreadDef(exchangetask, Exchange_task,  osPriorityRealtime, 0, 1024);
+  exchangeHandle = osThreadCreate(osThread(exchangetask), NULL);
 	
   /* USER CODE END RTOS_THREADS */
 
