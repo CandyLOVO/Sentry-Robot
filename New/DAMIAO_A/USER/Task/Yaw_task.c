@@ -33,6 +33,9 @@ static void Yaw_read_imu();
 //两个脑袋的位置控制模式
 static void Yaw_mode_remote_site();
 
+//两个脑袋的巡航模式
+static void Yaw_mode_searching();
+
 //遥控器相对角度限制
 static void Yaw_remote_restrict();
 
@@ -51,9 +54,18 @@ static void Yaw_loop_init();
 //MF9025位置控制
 static void Site_Control_MF();
 
-//MF9025力控(等比缩放)
-static void Current_Control_MF();
-	
+//模式选择
+static void Yaw_mode_judge();
+
+//9025电流环计算
+static void Voltage_Control_MF();
+
+//9025巡航模式
+static void Searching_Control_MF();
+
+//Mode2自瞄响应时计算偏差角
+float Delta_calc(float distance);
+
 //================================================YAW轴控制主函数================================================//
 void Yaw_task(void const *pvParameters)
 {
@@ -69,21 +81,13 @@ void Yaw_task(void const *pvParameters)
   {
 		Yaw_loop_init();//循环初始化
 		Yaw_read_imu();//获取Imu角度
-		Yaw_mode_remote_site();//位置控制模式
-		Site_Control_MF();//MF9025位置模式(遥控器)
-//		Current_Control_MF();//MF9025力控模式(遥控器)
-		Yaw_remote_restrict();//遥控器控制下的目标角度限制
+		Yaw_mode_judge();//模式选择
 		Yaw_target_restrict();//目标角度限制(目标角度进入死区时，自瞄和上电初始化时专用)
-//以下为测试相对角度限制专用
-	if(rc_ctrl.rc.s[1] == 1)
-	{
-		target_yaw_left=-160;
-		target_yaw_right=160;
-	}
 		Yaw_speed_calc();//速度环计算（带有相对角度限制处理）
 		Yaw_voltage_calc();//电压环计算
-		Yaw_can_send();
-		Current_Control_MF_send(motor_info_can_2[7].can_id,motor_info_can_2[7].set_voltage);
+		Yaw_can_send();//发送6020
+		Voltage_Control_MF();//电流环计算
+		Current_Control_MF_send(motor_info_can_2[7].can_id,motor_info_can_2[7].set_voltage);//发送9025
     osDelay(1);
   }
 
@@ -127,20 +131,73 @@ static void Yaw_read_imu()
 	//以C板上电那一刻的坐标系为基坐标系(绝对坐标系)
 	Yaw_left_c = Yaw_left + Yaw_middle_c;
 	Yaw_right_c = Yaw_right + Yaw_middle_c;
-	//越界处理还没写！！
+	//越界处理
+	if(Yaw_left_c>180)
+		Yaw_left_c-=360;
+	else if(Yaw_left_c<-180)
+		Yaw_left_c+=360;
 	
+	if(Yaw_right_c>180)
+		Yaw_right_c-=360;
+	else if(Yaw_right_c<-180)
+		Yaw_right_c+=360;	
 }
 
 //================================================位置控制模式================================================//
 static void Yaw_mode_remote_site()
 {
-		if(rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1]<= 660)
+		if(rc_ctrl.rc.ch[0] >= -660 && rc_ctrl.rc.ch[0]<= 660)
 		{			
-			target_yaw_remote_left -= rc_ctrl.rc.ch[1]/660.0 * Yaw_sita_weight; 	
-			target_yaw_remote_right = -target_yaw_remote_left;
+			target_yaw_remote_left -= rc_ctrl.rc.ch[0]/660.0 * Yaw_sita_weight; 	
 			target_yaw_left = target_yaw_remote_left;
+		}
+		if(rc_ctrl.rc.ch[2] >= -660 && rc_ctrl.rc.ch[2]<= 660)
+		{
+			target_yaw_remote_right -= rc_ctrl.rc.ch[2]/660.0 * Yaw_sita_weight;
 			target_yaw_right = target_yaw_remote_right;
 		}
+}
+
+//================================================巡航模式================================================//
+static void Yaw_mode_searching()
+{
+	if(Sentry.L_Flag_yaw_direction == 1)
+	{
+		target_yaw_remote_left-=0.09;
+		if(target_yaw_remote_left<=-20)
+		{
+			Sentry.L_Flag_yaw_direction=2;
+			target_yaw_remote_left+=0.09;
+		}
+	}
+	else if(Sentry.L_Flag_yaw_direction == 2)
+	{
+		target_yaw_remote_left+=0.09;
+		if(target_yaw_remote_left>=200)
+		{
+			Sentry.L_Flag_yaw_direction=1;
+			target_yaw_remote_left-=0.09;
+		}		
+	}
+	
+	if(Sentry.R_Flag_yaw_direction == 1)
+	{
+		target_yaw_remote_right+=0.09;
+		if(target_yaw_remote_right>=20)
+		{
+			Sentry.R_Flag_yaw_direction=2;
+			target_yaw_remote_right-=0.09;
+		}
+	}
+	else if(Sentry.R_Flag_yaw_direction == 2)
+	{
+		target_yaw_remote_right-=0.09;
+		if(target_yaw_remote_right<=-200)
+		{
+			Sentry.R_Flag_yaw_direction=1;
+			target_yaw_remote_right+=0.09;
+		}		
+	}
 }
 
 //================================================Yaw电机电流发送================================================//
@@ -165,7 +222,7 @@ static void Yaw_can_send()
   HAL_CAN_AddTxMessage(&hcan2, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX1);
 }
 
-//================================================遥控器控制角度限制================================================//
+//================================================控制角度限制================================================//
 static void Yaw_remote_restrict()
 {
 	if(target_yaw_remote_left<-20)
@@ -248,22 +305,112 @@ static void Site_Control_MF()
 		{
 			target_yaw_middle += 360;
 		}
-		
-		target_speed_can_2[7] -= pid_calc_sita_span(&motor_pid_sita_can_2[7], target_yaw_middle, Yaw_middle_c);
-		motor_info_can_2[7].set_voltage = pid_calc(&motor_pid_can_2[7], target_speed_can_2[7],motor_info_can_2[7].rotor_speed);
 	}
-	
-	//限制函数调用
-	motor_info_can_2[7].set_voltage = Current_Limit_MF(motor_info_can_2[7].set_voltage);
 }
 
-//================================================MF9025力控(等比缩放)===============================================//
-static void Current_Control_MF()
+//================================================MF9025电流环计算(调用了限制函数)===============================================//
+static void Voltage_Control_MF()
 {
-	if(rc_ctrl.rc.ch[0] >= -660 && rc_ctrl.rc.ch[0]<= 660)
+	target_speed_can_2[7] -= pid_calc_sita_span(&motor_pid_sita_can_2[7], target_yaw_middle, Yaw_middle_c);
+	motor_info_can_2[7].set_voltage = pid_calc(&motor_pid_can_2[7], target_speed_can_2[7],motor_info_can_2[7].rotor_speed);
+	motor_info_can_2[7].set_voltage = Current_Limit_MF(motor_info_can_2[7].set_voltage);//调用电流限制函数
+}
+
+//================================================9025巡航模式===============================================//
+static void Searching_Control_MF()
+{
+	target_yaw_middle+=0.1;
+	if(target_yaw_middle>180)
 	{
-		motor_info_can_2[7].set_voltage = 2048*((float)rc_ctrl.rc.ch[0]/660);
+		target_yaw_middle-=360;
 	}
-	//限制函数调用
-	motor_info_can_2[7].set_voltage = Current_Limit_MF(motor_info_can_2[7].set_voltage);
+}
+
+//================================================Yaw控制模式旋转===============================================//
+static void Yaw_mode_judge()
+{
+	if(Sentry.Remote_mode==33)
+	{
+		Site_Control_MF();//MF9025位置模式(遥控器)
+		target_yaw_remote_left = 0;
+		target_yaw_remote_right = 0;
+		Yaw_remote_restrict();
+	}
+	else if(Sentry.Remote_mode==13)
+	{
+		target_yaw_middle=0;
+		Yaw_mode_remote_site();//位置控制模式
+		Yaw_remote_restrict();//遥控器控制下的目标角度限制
+	}
+	
+	
+	else if(Sentry.Remote_mode==22)	//上场模式
+	{
+		if(Sentry.Flag_mode==0)  //搜寻目标
+		{
+			Searching_Control_MF();
+			Yaw_mode_searching();
+			Yaw_remote_restrict();
+		}
+		else if(Sentry.Flag_mode==1)  //识别到目标等待第一次响应
+		{
+			float Delta;	//规定它一直是个正数
+			if(Sentry.L_Flag_foe)
+			{
+				target_yaw_middle=vision.L_yaw;
+				Delta_calc(vision_receive.L_distance);
+			}
+			else if(Sentry.R_Flag_foe)
+			{
+				target_yaw_middle=vision.R_yaw;
+				Delta_calc(vision_receive.R_distance);
+			}
+			target_yaw_left = -Delta;
+			target_yaw_right = Delta;
+			
+			target_yaw_remote_left = -Delta;	//刷新巡航初始值，恢复巡航时更丝滑
+			target_yaw_remote_right = Delta;
+			
+			osDelay(1);//给pitch时间响应一下
+			Sentry.Flag_mode = 2;  //响应一次就置位
+		}
+		else if(Sentry.Flag_mode==2)  //后续不断调整小yaw姿态击打目标
+		{
+			if(Sentry.L_Flag_foe)
+				target_yaw_left = vision.L_yaw - Yaw_middle_c;
+			if(Sentry.R_Flag_foe)
+				target_yaw_right = vision.R_yaw - Yaw_middle_c;
+			//越界处理
+			if(target_yaw_left>180)
+				target_yaw_left-=360;
+			else if(target_yaw_left<-180)
+				target_yaw_left+=360;
+			if(target_yaw_right>180)
+				target_yaw_right-=360;
+			else if(target_yaw_right<-180)
+				target_yaw_right+=360;
+			
+			//头卡限位重置大Yaw
+			if((target_yaw_left<-20 && target_yaw_left>-160) || (target_yaw_right>20 && target_yaw_right<160))
+			{
+				Sentry.Flag_mode = 1;
+			}
+			
+			//均丢失目标恢复巡航模式
+			if(Sentry.L_Flag_foe == 0 && Sentry.R_Flag_foe == 0)
+			{
+				Sentry.Flag_mode = 0;
+			}
+		}
+	}
+}
+
+//================================================Mode2自瞄响应时计算偏差角(单位统一为m，角度制)===============================================//
+float Delta_calc(float distance)
+{
+	float Delta = 0;
+	float d = 0.1023885;
+	Delta = (float)asin(d/distance) * 57.3f;
+	Delta = fabs(Delta);
+	return Delta;
 }

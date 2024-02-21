@@ -115,7 +115,7 @@ void MX_FREERTOS_Init(void) {
   yawTaskHandle = osThreadCreate(osThread(yawtask), NULL);
 	
 	//Pitch控制任务
-	osThreadDef(pitchtask, Pitch_task, osPriorityNormal, 0, 256);		
+	osThreadDef(pitchtask, Pitch_task, osPriorityAboveNormal, 0, 256);		
   pitchTaskHandle = osThreadCreate(osThread(pitchtask), NULL);
 	
 	//通信任务，更新所有标志位和信息

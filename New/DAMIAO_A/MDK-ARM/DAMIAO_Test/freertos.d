@@ -65,11 +65,12 @@ damiao_test\freertos.o: ../USER/AlgorithmLayer/handle_value.h
 damiao_test\freertos.o: ../USER/PotocaLayer/Motor.h
 damiao_test\freertos.o: ../USER/DriverLayer/Can_user.h
 damiao_test\freertos.o: ../USER/PotocaLayer/MF_User.h
-damiao_test\freertos.o: ../USER/Task/Pitch_task.h
-damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
-damiao_test\freertos.o: ../Core/Inc/can.h
 damiao_test\freertos.o: ../USER/Task/Exchange_task.h
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+damiao_test\freertos.o: ../Core/Inc/can.h
 damiao_test\freertos.o: ../USER/AlgorithmLayer/SolveTrajectory.h
+damiao_test\freertos.o: ../USER/Task/Yaw_task.h
 damiao_test\freertos.o: ../USER/Task/Pitch_task.h
+damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+damiao_test\freertos.o: ../USER/Task/Exchange_task.h
 damiao_test\freertos.o: ../Core/Inc/stm32f4xx_it.h

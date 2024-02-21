@@ -42,8 +42,10 @@ typedef struct
 	uint8_t naving; //导航标志位，为1导航
 	float nav_vx; //导航中x的速度
 	float nav_vy; //导航中y的速度
+	float L_distance;	//左头识别到的目标距离(单位：m)
+	float R_distance; //右头识别到的目标距离
 	uint16_t checksum;
-} vision_receive_t;
+} Vision_receive_t;
 
 //================================================遥控器及键盘解算结构体================================================//
 typedef __packed struct
@@ -81,9 +83,14 @@ typedef __packed struct
 //================================================官方裁判系统的值存储，以及哨兵的一些状态量================================================//
 typedef struct
 {
-	uint8_t Flag_mode;	//目前的模式
+	uint8_t Flag_mode;	//目前的自瞄模式
+	uint8_t Remote_mode;	//遥控器模式
 	uint8_t L_Flag_foe;		//视觉检测标志位，1为检测成功，0为未检测到装甲板
 	uint8_t R_Flag_foe;		
+	uint8_t L_Flag_yaw_direction;		//巡航转动方向，0为停止巡航，1为向前转动，2为向后转动
+	uint8_t R_Flag_yaw_direction;		
+	uint8_t L_Flag_pitch_direction;		//巡航转动方向，0为停止巡航，1为向上转动，2为向下转动
+	uint8_t R_Flag_pitch_direction;	
 	uint8_t Flag_progress;	//裁判系统比赛进程数据
 	uint8_t Flag_judge;	//红蓝方检测，置0为裁判系统寄了，置1为我方是红色方，置2为我方是蓝色方
 	uint8_t Flag_armour;	//受击打的装甲板编号，未被击打时为0
@@ -101,7 +108,9 @@ extern volatile uint8_t recv_end_flag_uart1; //一帧数据接收完成标志
 extern uint8_t rx_buffer[100];  //接收数据缓存数组
 extern remote_flag_t remote;	//键盘按键读取(结构体)
 extern Sentry_t Sentry;	//哨兵状态量和裁判系统数据结构体
-	
+extern Vision_t vision;
+extern Vision_receive_t vision_receive;
+
 void Vision_read(uint8_t rx_buffer[]);
 
 

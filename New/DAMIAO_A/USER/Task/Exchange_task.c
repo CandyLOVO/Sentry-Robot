@@ -39,7 +39,7 @@ uint8_t rx_buffer[100]={0};  //接收数据缓存数组
 uint8_t vision_send[100];	//视觉接口发送数据帧
 
 Vision_t vision;	//视觉数据发送结构体
-vision_receive_t vision_receive;	//视觉数据接收结构体
+Vision_receive_t vision_receive;	//视觉数据接收结构体
 remote_flag_t remote;	//键盘按键读取(结构体)
 Sentry_t Sentry;	//哨兵状态量和裁判系统数据结构体
 
@@ -106,7 +106,9 @@ void Vision_read(uint8_t rx_buffer[])
 	memcpy(&vision_receive.naving,&rx_buffer[17],1);
 	memcpy(&vision_receive.nav_vx,&rx_buffer[18],4);
 	memcpy(&vision_receive.nav_vy,&rx_buffer[22],4);
-	memcpy(&vision_receive.checksum,&rx_buffer[26],2);
+	memcpy(&vision_receive.L_distance,&rx_buffer[26],4);
+	memcpy(&vision_receive.R_distance,&rx_buffer[30],4);
+	memcpy(&vision_receive.checksum,&rx_buffer[34],2);
 }
 
 //================================================数据stm32 -> 上位机================================================//
@@ -200,10 +202,83 @@ static void Send_to_CAN1()
 }
 
 //================================================通过上位机数据更新哨兵状态结构体================================================//
-//判断上位机检测到目标，检测到就进行解算，没检测到赋0
 static void Judge_minipc()
 {
+	//遥控器模式判断
+	if(rc_ctrl.rc.s[1]==1 && rc_ctrl.rc.s[0]==1)
+		Sentry.Remote_mode = 11;
+	else if(rc_ctrl.rc.s[1]==1 && rc_ctrl.rc.s[0]==3)
+		Sentry.Remote_mode = 13;
+	else if(rc_ctrl.rc.s[1]==1 && rc_ctrl.rc.s[0]==2)
+		Sentry.Remote_mode = 12;
+	
+	else if(rc_ctrl.rc.s[1]==3 && rc_ctrl.rc.s[0]==1)
+		Sentry.Remote_mode = 31;
+	else if(rc_ctrl.rc.s[1]==3 && rc_ctrl.rc.s[0]==3)
+		Sentry.Remote_mode = 33;
+	else if(rc_ctrl.rc.s[1]==3 && rc_ctrl.rc.s[0]==2)
+		Sentry.Remote_mode = 32;
+	
+	else if(rc_ctrl.rc.s[1]==2 && rc_ctrl.rc.s[0]==1)
+		Sentry.Remote_mode = 21;
+	else if(rc_ctrl.rc.s[1]==2 && rc_ctrl.rc.s[0]==3)
+		Sentry.Remote_mode = 23;
+	else if(rc_ctrl.rc.s[1]==2 && rc_ctrl.rc.s[0]==2)
+		Sentry.Remote_mode = 22;
+	
+	else if(rc_ctrl.rc.s[1]==0 && rc_ctrl.rc.s[0]==0)//未开启遥控器默认为上场模式
+		Sentry.Remote_mode = 22;		
+	
+	//左右脑袋目标识别判断
+	if(vision.L_pitch && vision.L_yaw)
+	{
+		Sentry.L_Flag_foe = 1;	//目标识别标志位
+	}
+	else
+	{
+		Sentry.L_Flag_foe = 0;
+	}
+	
+	if(vision.R_pitch && vision.R_yaw)
+	{
+		Sentry.R_Flag_foe = 1;
+	}
+	else
+	{
+		Sentry.R_Flag_foe = 0;
+	}
+	
+	//自瞄触发
+	if(Sentry.L_Flag_foe == 1 || Sentry.R_Flag_foe == 1)
+	{
+		Sentry.Flag_mode = 1;	//等候响应模式
+		Sentry.L_Flag_pitch_direction = 0;	//关闭巡航
+		Sentry.L_Flag_yaw_direction = 0;
+		Sentry.R_Flag_pitch_direction = 0;
+		Sentry.R_Flag_yaw_direction = 0;
+	}
 
+	//巡航恢复
+	if(Sentry.Flag_mode == 0)
+	{
+		if(Sentry.L_Flag_pitch_direction == 0)	//注意需要判断，因为只能触发一次
+		{
+			Sentry.L_Flag_pitch_direction = 1;
+		}
+		if(Sentry.L_Flag_yaw_direction == 0)
+		{
+			Sentry.L_Flag_yaw_direction = 1;
+		}
+		if(Sentry.R_Flag_pitch_direction == 0)
+		{
+			Sentry.R_Flag_pitch_direction = 1;
+		}
+		if(Sentry.R_Flag_yaw_direction == 0)
+		{
+			Sentry.R_Flag_yaw_direction = 1;
+		}
+	}
+	
 }
 
 //================================================哨兵状态及裁判系统数据初始化================================================//
