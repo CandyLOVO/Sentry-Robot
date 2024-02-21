@@ -2,7 +2,7 @@
 #include "remote_control.h"
 #include "Yaw_task.h"
 #include "Motor.h"
-
+#include "Exchange_task.h"
 //	Can µÄÒ»Ğ©ÓÃ»§×«Ğ´µÄ½ÓÊÕº¯Êı
 
 int16_t Down_pitch;	//µ×ÅÌpitchÊı¾İ
@@ -82,6 +82,23 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖĞ¶Ï»Øµ÷º¯Ê
 			rc_ctrl.mouse.z = (rx_data[4]<<8) | rx_data[5];
 			rc_ctrl.mouse.press_l = rx_data[6];
 			rc_ctrl.mouse.press_r = rx_data[7];
+		}
+		
+//================================================ĞÅÏ¢Êı¾İ================================================//		
+		if(rx_header.StdId == 0x54)
+		{
+			Sentry.Flag_progress = rx_data[0];  //±ÈÈü½ø³Ì
+			Sentry.Flag_judge = rx_data[1];  //ÅĞ¶ÏÎÒ·½ÊÇºìÉ«·½»¹ÊÇÀ¶É«·½
+			Sentry.Flag_armour = rx_data[2];  //ÊÜ»÷´ò×°¼×°å±àºÅ
+			Sentry.Time_remain = (rx_data[4]<<8) | rx_data[3];  //±ÈÈüÊ£ÓàÊ±¼ä
+			//memcpy(&Sentry.Time_remain,&rx_data[3],2);//ÓëÉÏÃæµÈ¼Û			
+		}
+		
+		if(rx_header.StdId == 0x55)
+		{
+			Sentry.Myself_remain_HP = (rx_data[1]<<8) | rx_data[0];	//±¾»úÆ÷ÈËÊ£ÓàÑªÁ¿
+			Sentry.Myself_17mm_cooling_heat_id1 = (rx_data[3]<<8) | rx_data[2];	//ÊµÊ±Ç¹¹Ü1ÈÈÁ¿
+			Sentry.Myself_17mm_cooling_heat_id2 = (rx_data[5]<<8) | rx_data[4];	//ÊµÊ±Ç¹¹Ü1ÈÈÁ¿	
 		}
 		
   }

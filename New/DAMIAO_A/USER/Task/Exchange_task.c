@@ -178,24 +178,24 @@ static void Stm_pc_send()
 //================================================向can1上发送信息================================================//
 static void Send_to_CAN1()
 {
-	//发送导航数据
+	  //0x51，9025编码器值(范围为-180到180)和导航标志位
 		uint8_t ins_buf[8] = {0};
-		ins_buf[0] = 8;	//	imu头帧标识
-		memcpy(&ins_buf[1],&Yaw_middle_c,4); //获取yaw的角度并储存在发送的字节中
+		memcpy(&ins_buf[1],&Yaw_middle_c,4);
 		memcpy(&ins_buf[5],&vision_receive.naving,1);
-		can_remote(ins_buf,0x55);
+		can_remote(ins_buf,0x51);
 		osDelay(1);
 		
-		uint8_t ins_buf1[8] = {0};
-		ins_buf1[0] = 9;	//	imu头帧标识
-		memcpy(&ins_buf1[1],&vision_receive.nav_vx,4);
-		can_remote(ins_buf1,0x56);
+		//0x52，导航的x和y值
+		memcpy(&ins_buf[0],&vision_receive.nav_vx,4);
+		memcpy(&ins_buf[4],&vision_receive.nav_vy,4);
+		can_remote(ins_buf,0x52);
 		osDelay(1);
 		
-		uint8_t ins_buf2[8] = {0};
-		ins_buf2[0] = 10;	//	imu头帧标识
-		memcpy(&ins_buf2[1],&vision_receive.nav_vy,4);
-		can_remote(ins_buf2,0x57);
+		//0x53，哨兵状态信息
+		memcpy(&ins_buf[0],&Sentry.Flag_mode,1);//目前的自瞄模式
+		memcpy(&ins_buf[1],&Sentry.L_Flag_foe,1);//左头视觉识别标志位
+		memcpy(&ins_buf[2],&Sentry.R_Flag_foe,1);//右头视觉识别标志位
+		can_remote(ins_buf,0x53);
 		osDelay(1);
 }
 

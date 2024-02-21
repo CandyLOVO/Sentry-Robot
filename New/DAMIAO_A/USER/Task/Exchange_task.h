@@ -86,6 +86,13 @@ typedef struct
 	uint8_t R_Flag_foe;		
 	uint8_t Flag_progress;	//裁判系统比赛进程数据
 	uint8_t Flag_judge;	//红蓝方检测，置0为裁判系统寄了，置1为我方是红色方，置2为我方是蓝色方
+	uint8_t Flag_armour;	//受击打的装甲板编号，未被击打时为0
+	uint16_t Time_remain;		//比赛剩余时间
+	
+	uint16_t Myself_remain_HP;	//本机器人剩余血量
+	uint16_t Myself_17mm_cooling_heat_id1;		//实时枪管1热量
+	uint16_t Myself_17mm_cooling_heat_id2;		//实时枪管2热量
+	
 } Sentry_t;
 
 
