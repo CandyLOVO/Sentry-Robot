@@ -158,6 +158,47 @@ static void Gimbal_mode_control_sita()
 		}
 }
 
+//================================================巡航模式================================================//
+static void Gimbal_mode_searching()
+{
+	if(Sentry.L_Flag_pitch_direction == 1)
+	{
+		target_gimbal_left-=0.05;
+		if(target_gimbal_left<-40)
+		{
+			target_gimbal_left+=0.05;
+			Sentry.L_Flag_pitch_direction=2;
+		}
+	}
+	else if(Sentry.L_Flag_pitch_direction == 2)
+	{
+		target_gimbal_left+=0.05;
+		if(target_gimbal_left>25)
+		{
+			target_gimbal_left-=0.05;
+			Sentry.L_Flag_pitch_direction=1;
+		}
+	}
+	
+	if(Sentry.R_Flag_pitch_direction == 1)
+	{
+		target_gimbal_right-=0.05;
+		if(target_gimbal_right<-40)
+		{
+			target_gimbal_right+=0.05;
+			Sentry.R_Flag_pitch_direction=2;
+		}
+	}
+	else if(Sentry.R_Flag_pitch_direction == 2)
+	{
+		target_gimbal_right+=0.05;
+		if(target_gimbal_right>25)
+		{
+			target_gimbal_right-=0.05;
+			Sentry.R_Flag_pitch_direction=1;
+		}
+	}
+}
 //================================================模式选择================================================//
 static void Gimbal_mode_judge()
 {
@@ -182,7 +223,7 @@ static void Gimbal_mode_judge()
 	{
 		if(Sentry.Flag_mode==0)  //搜寻目标，还没写
 		{
-			
+			Gimbal_mode_searching();
 		}
 		
 		else if(Sentry.Flag_mode==1)  //响应一次
