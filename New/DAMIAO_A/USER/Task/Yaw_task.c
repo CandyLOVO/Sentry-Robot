@@ -334,6 +334,8 @@ static void Yaw_mode_judge()
 		Site_Control_MF();//MF9025位置模式(遥控器)
 		target_yaw_remote_left = 0;
 		target_yaw_remote_right = 0;
+		target_yaw_left = target_yaw_remote_left;
+		target_yaw_right = target_yaw_remote_right;
 		Yaw_remote_restrict();
 	}
 	else if(Sentry.Remote_mode==13)
@@ -352,17 +354,17 @@ static void Yaw_mode_judge()
 			Yaw_mode_searching();
 			Yaw_remote_restrict();
 		}
-		else if(Sentry.Flag_mode==1)  //识别到目标等待第一次响应
+		else if(Sentry.Flag_mode==2)  //识别到目标等待第一次响应
 		{
 			float Delta;	//规定它一直是个正数
 			if(Sentry.L_Flag_foe)
 			{
-				target_yaw_middle=vision.L_yaw;
+				target_yaw_middle=vision_receive.L_chase_yaw;
 				Delta_calc(vision_receive.L_distance);
 			}
 			else if(Sentry.R_Flag_foe)
 			{
-				target_yaw_middle=vision.R_yaw;
+				target_yaw_middle=vision_receive.R_chase_yaw;
 				Delta_calc(vision_receive.R_distance);
 			}
 			target_yaw_left = -Delta;
@@ -371,15 +373,15 @@ static void Yaw_mode_judge()
 			target_yaw_remote_left = -Delta;	//刷新巡航初始值，恢复巡航时更丝滑
 			target_yaw_remote_right = Delta;
 			
-			osDelay(1);//给pitch时间响应一下
-			Sentry.Flag_mode = 2;  //响应一次就置位
+			Sentry.Flag_mode = 3;  //响应一次就置位
 		}
-		else if(Sentry.Flag_mode==2)  //后续不断调整小yaw姿态击打目标
+		
+		else if(Sentry.Flag_mode==3)  //后续不断调整小yaw姿态击打目标
 		{
 			if(Sentry.L_Flag_foe)
-				target_yaw_left = vision.L_yaw - Yaw_middle_c;
+				target_yaw_left = vision_receive.L_chase_yaw - Yaw_middle_c;
 			if(Sentry.R_Flag_foe)
-				target_yaw_right = vision.R_yaw - Yaw_middle_c;
+				target_yaw_right = vision_receive.R_chase_yaw - Yaw_middle_c;
 			//越界处理
 			if(target_yaw_left>180)
 				target_yaw_left-=360;
@@ -390,22 +392,33 @@ static void Yaw_mode_judge()
 			else if(target_yaw_right<-180)
 				target_yaw_right+=360;
 			
-			//头卡限位重置大Yaw
-			if((target_yaw_left<-20 && target_yaw_left>-160) || (target_yaw_right>20 && target_yaw_right<160))
+			//左头卡限位，重新响应一次大Yaw
+			if(target_yaw_left<-20 && target_yaw_left>-160)
 			{
-				Sentry.Flag_mode = 1;
+				float Delta;	//规定它一直是个正数
+				target_yaw_middle=vision_receive.L_chase_yaw;
+				Delta_calc(vision_receive.L_distance);
+				target_yaw_left = -Delta;
+				target_yaw_right = Delta;
+				target_yaw_remote_left = -Delta;	//刷新巡航初始值，恢复巡航时更丝滑
+				target_yaw_remote_right = Delta;
 			}
-			
-			//均丢失目标恢复巡航模式
-			if(Sentry.L_Flag_foe == 0 && Sentry.R_Flag_foe == 0)
+			//右头卡限位
+			if(target_yaw_right>20 && target_yaw_right<160)
 			{
-				Sentry.Flag_mode = 0;
+				float Delta;	//规定它一直是个正数
+				target_yaw_middle=vision_receive.R_chase_yaw;
+				Delta_calc(vision_receive.R_distance);
+				target_yaw_left = -Delta;
+				target_yaw_right = Delta;
+				target_yaw_remote_left = -Delta;	//刷新巡航初始值，恢复巡航时更丝滑
+				target_yaw_remote_right = Delta;				
 			}
 		}
 	}
 }
 
-//================================================Mode2自瞄响应时计算偏差角(单位统一为m，角度制)===============================================//
+//================================================Mode3自瞄响应时计算偏差角(单位统一为m，角度制)===============================================//
 float Delta_calc(float distance)
 {
 	float Delta = 0;

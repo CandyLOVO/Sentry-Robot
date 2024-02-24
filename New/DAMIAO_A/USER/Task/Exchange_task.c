@@ -230,7 +230,7 @@ static void Judge_minipc()
 		Sentry.Remote_mode = 22;		
 	
 	//左右脑袋目标识别判断
-	if(vision.L_pitch && vision.L_yaw)
+	if(vision_receive.L_chase_pitch && vision_receive.L_chase_yaw)
 	{
 		Sentry.L_Flag_foe = 1;	//目标识别标志位
 	}
@@ -239,7 +239,7 @@ static void Judge_minipc()
 		Sentry.L_Flag_foe = 0;
 	}
 	
-	if(vision.R_pitch && vision.R_yaw)
+	if(vision_receive.R_chase_pitch && vision_receive.R_chase_yaw)
 	{
 		Sentry.R_Flag_foe = 1;
 	}
@@ -248,14 +248,20 @@ static void Judge_minipc()
 		Sentry.R_Flag_foe = 0;
 	}
 	
-	//自瞄触发
-	if(Sentry.L_Flag_foe == 1 || Sentry.R_Flag_foe == 1)
+  //自瞄触发，注意只触发置位一次
+	if((Sentry.L_Flag_foe == 1 || Sentry.R_Flag_foe == 1) && Sentry.Flag_mode==0)
 	{
 		Sentry.Flag_mode = 1;	//等候响应模式
 		Sentry.L_Flag_pitch_direction = 0;	//关闭巡航
 		Sentry.L_Flag_yaw_direction = 0;
 		Sentry.R_Flag_pitch_direction = 0;
 		Sentry.R_Flag_yaw_direction = 0;
+	}
+	
+	//均丢失目标恢复巡航标志位
+	if((Sentry.L_Flag_foe == 0 && Sentry.R_Flag_foe == 0) && Sentry.Flag_mode!=0)
+	{
+		Sentry.Flag_mode = 0;
 	}
 
 	//巡航恢复
@@ -289,6 +295,10 @@ static void Sentry_Init()
 	Sentry.R_Flag_foe = 0;	
 	Sentry.Flag_progress = 0;
 	Sentry.Flag_judge = 0;
+	Sentry.L_Flag_yaw_direction = 1;
+	Sentry.R_Flag_yaw_direction = 1;
+	Sentry.L_Flag_pitch_direction = 1;
+	Sentry.R_Flag_pitch_direction = 1;
 }
 
 static void Vision_Init()

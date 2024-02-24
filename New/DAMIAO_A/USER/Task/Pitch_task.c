@@ -221,7 +221,7 @@ static void Gimbal_mode_judge()
 	
 	else if(Sentry.Remote_mode==22)	//上场模式
 	{
-		if(Sentry.Flag_mode==0)  //搜寻目标，还没写
+		if(Sentry.Flag_mode==0)  //搜寻目标
 		{
 			Gimbal_mode_searching();
 		}
@@ -230,17 +230,18 @@ static void Gimbal_mode_judge()
 		{
 			if(Sentry.L_Flag_foe)
 			{
-				target_gimbal_left=vision.L_yaw;
+				target_gimbal_left=vision_receive.L_chase_pitch;
 				target_gimbal_right=target_gimbal_left;
 			}
 			else if(Sentry.R_Flag_foe)
 			{
-				target_gimbal_right=vision.R_yaw;
+				target_gimbal_right=vision_receive.R_chase_pitch;
 				target_gimbal_left=target_gimbal_right;
 			}
+			Sentry.Flag_mode = 2;	//pitch响应完后置为2，令yaw去响应
 		}
 		
-		else if(Sentry.Flag_mode==2)	//各自追踪目标
+		else if(Sentry.Flag_mode==3)	//各自追踪目标
 		{
 			if(Sentry.L_Flag_foe)
 				target_gimbal_left=vision.L_yaw;
