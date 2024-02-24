@@ -148,7 +148,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		uint8_t can_receive_data[8];
 	  HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,&can_rx_message,can_receive_data);
 		
-		//接收四个摩擦轮3508返回值
+		/*接收四个摩擦轮3508返回值*/
 	  if((can_rx_message.StdId >= 0x201) && (can_rx_message.StdId <= 0x204)){
 			uint8_t index = can_rx_message.StdId - 0x200;
 			motor_m3508[index].angle = ((can_receive_data[0] << 8) | can_receive_data[1]);
