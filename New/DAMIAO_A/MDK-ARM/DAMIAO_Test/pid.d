@@ -36,7 +36,7 @@ damiao_test\pid.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 damiao_test\pid.o: ../USER/Task/Yaw_task.h
 damiao_test\pid.o: ../USER/struct_typedef.h
 damiao_test\pid.o: ../USER/Task/INS_task.h
-damiao_test\pid.o: ..\Drivers\CMSIS\DSP\Include\arm_math.h
+damiao_test\pid.o: ../Drivers/CMSIS/DSP/Include/arm_math.h
 damiao_test\pid.o: ../Drivers/CMSIS/Include/core_cm4.h
 damiao_test\pid.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
 damiao_test\pid.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
@@ -64,3 +64,12 @@ damiao_test\pid.o: ../USER/AlgorithmLayer/handle_value.h
 damiao_test\pid.o: ../USER/PotocaLayer/Motor.h
 damiao_test\pid.o: ../USER/DriverLayer/Can_user.h
 damiao_test\pid.o: ../USER/PotocaLayer/MF_User.h
+damiao_test\pid.o: ../USER/Task/Exchange_task.h
+damiao_test\pid.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+damiao_test\pid.o: ../Core/Inc/can.h
+damiao_test\pid.o: ../USER/AlgorithmLayer/SolveTrajectory.h
+damiao_test\pid.o: ../USER/Task/Yaw_task.h
+damiao_test\pid.o: ../USER/Task/Pitch_task.h
+damiao_test\pid.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+damiao_test\pid.o: ../USER/Task/Exchange_task.h
+damiao_test\pid.o: ../Core/Inc/stm32f4xx_it.h

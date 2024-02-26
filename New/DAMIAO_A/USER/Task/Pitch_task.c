@@ -22,8 +22,8 @@ static void Gimbal_read_motor();
 //遥控器控制模式(位置环)
 static void Gimbal_mode_control_sita();
 
-//巡航模式(位置环)
-//static void gimbal_mode_search_sita();
+//巡航模式
+static void Gimbal_mode_searching();
 
 //PID发送至电机
 static void Gimbal_can_send();
@@ -37,9 +37,9 @@ static void Gimbal_target_restrict();
 //实际值限位,稳态误差会有Bug,未使用
 static void Gimbal_imu_restrict();
 
-//叠加自瞄(位置环)
-static void Gimbal_minipc_control_sita();
-
+//模式选择
+static void Gimbal_mode_judge();
+	
 void Pitch_task(void const * argument)
 {
   /* USER CODE BEGIN StartTask02 */
@@ -50,22 +50,10 @@ void Pitch_task(void const * argument)
   {
 		Gimbal_zero();	//速度清零
 		Gimbal_read_motor();	//读取编码器值
-		Gimbal_minipc_control_sita();	//位置环视觉瞄准
-		Gimbal_mode_control_sita();	//遥控器位置环控制模式
+		Gimbal_mode_judge();  //，模式选择
 		Gimbal_target_restrict();	//目标值限制
 		Gimbal_voltage_calc();	//电流值计算
 		Gimbal_can_send();
-//		else if(rc_ctrl.rc.s[1]==2)		//上场模式
-//		{
-//			if(Sentry.foe_flag)	//如果检测到目标
-//			{
-//				gimbal_minipc_control_sita(); //视觉瞄准
-//			}			
-//			else
-//			{
-//				gimbal_mode_search_sita();	//哨兵巡航模式
-//			}
-//		}
     osDelay(1);
   }
   /* USER CODE END StartTask02 */
@@ -163,25 +151,102 @@ static void Gimbal_zero()
 //================================================遥控器位置环控制模式================================================//
 static void Gimbal_mode_control_sita()
 {
-		if(rc_ctrl.rc.ch[3] >= -660 && rc_ctrl.rc.ch[3]<= 660)
+		if(rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1]<= 660)
 		{
 			target_gimbal_left -= rc_ctrl.rc.ch[3]/660.0 * Pitch_sita_weight; 
 			target_gimbal_right = target_gimbal_left;		
 		}
 }
 
-//================================================视觉瞄准(位置环模式)================================================//
-static void Gimbal_minipc_control_sita()
+//================================================巡航模式================================================//
+static void Gimbal_mode_searching()
 {
-//	target_pitch =chase.pitch;
+	if(Sentry.L_Flag_pitch_direction == 1)
+	{
+		target_gimbal_left-=0.05;
+		if(target_gimbal_left<-40)
+		{
+			target_gimbal_left+=0.05;
+			Sentry.L_Flag_pitch_direction=2;
+		}
+	}
+	else if(Sentry.L_Flag_pitch_direction == 2)
+	{
+		target_gimbal_left+=0.05;
+		if(target_gimbal_left>25)
+		{
+			target_gimbal_left-=0.05;
+			Sentry.L_Flag_pitch_direction=1;
+		}
+	}
+	
+	if(Sentry.R_Flag_pitch_direction == 1)
+	{
+		target_gimbal_right-=0.05;
+		if(target_gimbal_right<-40)
+		{
+			target_gimbal_right+=0.05;
+			Sentry.R_Flag_pitch_direction=2;
+		}
+	}
+	else if(Sentry.R_Flag_pitch_direction == 2)
+	{
+		target_gimbal_right+=0.05;
+		if(target_gimbal_right>25)
+		{
+			target_gimbal_right-=0.05;
+			Sentry.R_Flag_pitch_direction=1;
+		}
+	}
 }
-
-//================================================巡航模式(位置环模式)================================================//
-//static void gimbal_mode_search_sita()
-//{
-//	switch(TIM1_Mode)
-//	{
-//		case 1: target_pitch -= 0.03f;break;
-//		case 2: target_pitch += 0.03f;break;
-//	}
-//}
+//================================================模式选择================================================//
+static void Gimbal_mode_judge()
+{
+	if(Sentry.Remote_mode==33)
+	{
+		Gimbal_mode_control_sita();
+	}
+	
+	else if(Sentry.Remote_mode==13)
+	{
+		if(rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1]<= 660)
+		{
+			target_gimbal_right -= rc_ctrl.rc.ch[1]/660.0 * Pitch_sita_weight; 
+		}
+		if(rc_ctrl.rc.ch[3] >= -660 && rc_ctrl.rc.ch[3]<= 660)
+		{
+			target_gimbal_left -= rc_ctrl.rc.ch[3]/660.0 * Pitch_sita_weight; 
+		}
+	}
+	
+	else if(Sentry.Remote_mode==22)	//上场模式
+	{
+		if(Sentry.Flag_mode==0)  //搜寻目标
+		{
+			Gimbal_mode_searching();
+		}
+		
+		else if(Sentry.Flag_mode==1)  //响应一次
+		{
+			if(Sentry.L_Flag_foe)
+			{
+				target_gimbal_left=vision_receive.L_chase_pitch;
+				target_gimbal_right=target_gimbal_left;
+			}
+			else if(Sentry.R_Flag_foe)
+			{
+				target_gimbal_right=vision_receive.R_chase_pitch;
+				target_gimbal_left=target_gimbal_right;
+			}
+			Sentry.Flag_mode = 2;	//pitch响应完后置为2，令yaw去响应
+		}
+		
+		else if(Sentry.Flag_mode==3)	//各自追踪目标
+		{
+			if(Sentry.L_Flag_foe)
+				target_gimbal_left=vision.L_yaw;
+			if(Sentry.R_Flag_foe)
+				target_gimbal_right=vision.R_yaw;
+		}
+	}
+}

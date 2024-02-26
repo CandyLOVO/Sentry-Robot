@@ -51,7 +51,7 @@ damiao_test\pitch_task.o: ../USER/PotocaLayer/remote_control.h
 damiao_test\pitch_task.o: ../USER/struct_typedef.h
 damiao_test\pitch_task.o: ../USER/DriverLayer/bsp_rc.h
 damiao_test\pitch_task.o: ../USER/AlgorithmLayer/PID.h
-damiao_test\pitch_task.o: ..\Drivers\CMSIS\DSP\Include\arm_math.h
+damiao_test\pitch_task.o: ../Drivers/CMSIS/DSP/Include/arm_math.h
 damiao_test\pitch_task.o: ../Drivers/CMSIS/Include/core_cm4.h
 damiao_test\pitch_task.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
 damiao_test\pitch_task.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
@@ -70,5 +70,6 @@ damiao_test\pitch_task.o: ../USER/PotocaLayer/Motor.h
 damiao_test\pitch_task.o: ..\USER\Task\Yaw_task.h
 damiao_test\pitch_task.o: ../USER/AlgorithmLayer/handle_value.h
 damiao_test\pitch_task.o: ../USER/PotocaLayer/MF_User.h
+damiao_test\pitch_task.o: ..\USER\Task\Exchange_task.h
 damiao_test\pitch_task.o: ..\USER\Task\Pitch_task.h
 damiao_test\pitch_task.o: ../Core/Inc/stm32f4xx_it.h
