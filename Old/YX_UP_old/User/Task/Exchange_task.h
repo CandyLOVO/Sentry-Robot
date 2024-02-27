@@ -104,6 +104,7 @@ typedef struct
 	uint8_t Flag_progress;	//裁判系统比赛进程数据
 	uint8_t Flag_judge;	//红蓝方检测
 	uint8_t Flag_shoot;	//射击标识位（无暂留）
+	uint16_t Cooling_heat;//枪管热量
 } Sentry_t;
 
 

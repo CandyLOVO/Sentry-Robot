@@ -1,7 +1,7 @@
 yx_up\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/port.c
 yx_up\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-yx_up\port.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stddef.h
-yx_up\port.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdint.h
+yx_up\port.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stddef.h
+yx_up\port.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stdint.h
 yx_up\port.o: ../Core/Inc/FreeRTOSConfig.h
 yx_up\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 yx_up\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

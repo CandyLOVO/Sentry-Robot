@@ -37,8 +37,11 @@ static void Bopan_judge();
 //拨盘PId计算
 static void Bopan_calc(int16_t speed);
 
+//热量控制
+static void Bopan_Q_control(int speed);
+
 //===============================================全局变量================================================//
-int16_t bopan_shoot_speed = 15*36;//90*36;	//拨盘发射弹丸转速
+int16_t bopan_shoot_speed ;	//拨盘发射弹丸转速
 int16_t bopan_reversal_speed = -35*36;	//拨盘反转转速
 uint8_t bopan_reversal_flag = 0;	//拨盘反转标志位，0为正转，1为反转
 
@@ -77,7 +80,7 @@ void Friction_task(void const * argument)
 //				Bopan_calc(bopan_reversal_speed);
 //			}
 //		}
-		
+		Bopan_Q_control( 36*45 ); //拨盘发射转速
 		//左上角到最下方 若识别到目标，转动拨盘
 		if(rc_ctrl.rc.s[1] == 2  && vision_receive.tracking==1)//检测到目标
 		{
@@ -114,6 +117,7 @@ void Friction_task(void const * argument)
 		{			
 			Bopan_calc(0);
 		}
+		
 		Bopan_send();	//拨盘PID发送
 		
     osDelay(1);
@@ -222,6 +226,15 @@ static void Bopan_send()
   tx_data[7] = 0;
 	
   HAL_CAN_AddTxMessage(&hcan1, &tx_header, tx_data,(uint32_t*)CAN_TX_MAILBOX2);
+}
+//===========================================热量控制=========================================================//
+static void Bopan_Q_control(int speed)
+{if (Sentry.Cooling_heat<=350)
+	{bopan_shoot_speed=speed;
+	}
+else if(Sentry.Cooling_heat>350)
+{bopan_shoot_speed=36*(220-0.5*Sentry.Cooling_heat);
+}
 }
 
 //===============================================拨盘堵转检测================================================//

@@ -105,7 +105,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖĞ¶Ï»Øµ÷º¯Ê
 //================================================²ÃÅĞÏµÍ³================================================//		
 		//±ÈÈü½ø³Ì±êÊ¶·û(²ÃÅĞÏµÍ³Êı¾İ)
 		if(rx_header.StdId==0x10)
-		{
+		{	Sentry.Cooling_heat=0; //²ÃÅĞÊı¾İ½ÓÊÜ
 			Sentry.Flag_progress = rx_data[0];
 			Sentry.Flag_judge = rx_data[1];
 		}
