@@ -13,14 +13,14 @@ typedef struct
 {
 	uint16_t angle;
 	int16_t speed;
-	uint16_t tor_current;
+	int16_t tor_current;
 	uint16_t temperture;
 	int16_t set_v,send_I;
 }motor_info;
 
 typedef struct
 {int16_t Cooling_heat_L,Cooling_heat_R,remainHP;
-	int Fire_flag_L,Fire_flag_R,Fire_mode;
+	int Fire_flag_L,Fire_flag_R,Flag_mode;
 }ROBOT;
 
 extern motor_info motor_m3508[6];/*Ä¦²ÁÂÖµç»ú id 1~4*/

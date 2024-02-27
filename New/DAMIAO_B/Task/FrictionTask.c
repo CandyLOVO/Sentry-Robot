@@ -17,8 +17,10 @@ static void Friction_init(void);
 static void Friction_calc(void);
 
 //摩擦轮减速赋值 
-//static void Friction_down(void);
+static void Friction_down(void);
 
+//拨盘堵转检测
+static void Bopan_judge(void);
 
 //摩擦轮Pid输出值发送
 extern void can_send_mocalun(int16_t motor1,int16_t motor2,int16_t motor3,int16_t motor4);
@@ -37,8 +39,8 @@ static void Bopan_speed_calc_R(int speed);
 extern ROBOT Sentry;
 extern RC_ctrl_t rc_ctrl;
 int16_t bopan_shoot_speed = 19*3;//90*36;	//拨盘发射弹丸转速
-//int16_t bopan_reversal_speed = -35*36;	//拨盘反转转速
-//uint8_t bopan_reversal_flag_L= 0,bopan_reversal_flag_R= 0;	//拨盘反转标志位，0为正转，1为反转
+int16_t bopan_reversal_speed = -35*36;	//拨盘反转转速
+uint8_t bopan_reversal_flag_L= 0,bopan_reversal_flag_R= 0;	//拨盘反转标志位，0为正转，1为反转
 
 void FrictionTask(void const * argument)
 {
@@ -51,8 +53,14 @@ void FrictionTask(void const * argument)
   {
 		//===============================================摩擦轮================================================//
 		//开启摩擦轮
-		
+		if(1)//摩擦轮开启条件
+		{
 		Friction_calc();	//转速->电流
+		}
+		else//摩擦轮关闭
+		{
+			Friction_down();	
+		}
 		can_send_mocalun(motor_m3508[1].send_I,motor_m3508[2].send_I,motor_m3508[3].send_I,motor_m3508[4].send_I);//摩擦轮电流发送
 		osDelay(1);
 		//===============================================拨盘================================================//
@@ -60,29 +68,39 @@ void FrictionTask(void const * argument)
 		
 		
 		if(Sentry.Cooling_heat_L==1)//左枪管发射
-		{   Bopan_speed_calc_L(bopan_shoot_speed);		
-		}
-		
-		else if(Sentry.Fire_flag_R==1)//右枪管发射
-		{
-			Bopan_speed_calc_R(bopan_shoot_speed);
-			
-		}
-		
-	
-	/*	else if()//拨盘反转
-		{
+	{  if(bopan_reversal_flag_L==1)
+				{
+					Bopan_speed_calc_L(bopan_reversal_speed);
+				}
+			else if(bopan_reversal_flag_L==0)
+			{
+			Bopan_speed_calc_L(bopan_shoot_speed);		
+	   	}
+	}
 				
-		}*/
+		if(Sentry.Cooling_heat_R==1)//右枪管发射
+	{  if(bopan_reversal_flag_R==1)
+				{
+					Bopan_speed_calc_R(bopan_reversal_speed);
+				}
+			else if(bopan_reversal_flag_R==0)
+			{
+			Bopan_speed_calc_R(bopan_shoot_speed);		
+	   	}
+	}
+	
+
 		
 		//其他 拨盘静止
 		else
 		{		Bopan_speed_calc_L(0);
-			Bopan_speed_calc_R(0);
-			
-		}                
-		//拨盘电流发射and发射标志位归零
+			Bopan_speed_calc_R(0);	
+		}
+
+		
+		//拨盘电流发射
 		Bopan_calc();//转速-->电流
+		Bopan_judge();//拨盘堵转检测
 		can_send_bopan(motor_m2006[5].send_I,motor_m2006[6].send_I);
     osDelay(1);
   }
@@ -101,7 +119,7 @@ static void Friction_init()
 	pid_init(&motor_m2006_pid[6],20,0.03,0.5);
 }
 
-//===============================================摩擦轮转速->电流================================================//
+//==============================================摩擦轮转速->电流================================================//
 static void Friction_calc()
 {
 	motor_m3508[1].set_v=-15*350;
@@ -116,7 +134,7 @@ static void Friction_calc()
 }
 
 //===============================================摩擦轮减速到零================================================//
-/*static void Friction_down()
+static void Friction_down()
 {
 	motor_m3508[1].set_v=0;
 	motor_m3508[2].set_v=0;
@@ -129,7 +147,7 @@ static void Friction_calc()
 	motor_m3508[4].send_I = pid_cal_s(&motor_m3508_pid[4], motor_m3508[4].speed, motor_m3508[4].set_v,16384,16384);
 }
 
-*/
+
 
 //===============================================拨盘PID计算================================================//
 static void Bopan_calc()
@@ -157,4 +175,21 @@ else if(Sentry.Cooling_heat_R>350)
 }
 }
 
-
+//拨盘堵转检测
+static void Bopan_judge()
+{if(motor_m2006[5].tor_current>5000)//修改堵转电流
+	{bopan_reversal_flag_L=1;
+	}
+	else if(0>motor_m2006[5].tor_current && motor_m2006[5].tor_current>-100)
+	{bopan_reversal_flag_L=0;
+	
+	}		
+	
+	if(motor_m2006[6].tor_current>5000)
+	{bopan_reversal_flag_R=1;
+	}
+	else if(0>motor_m2006[6].tor_current && motor_m2006[6].tor_current>-100)
+	{bopan_reversal_flag_R=0;
+	}		
+	
+}
