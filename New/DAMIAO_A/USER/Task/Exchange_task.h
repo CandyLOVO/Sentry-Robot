@@ -103,8 +103,8 @@ typedef struct
 } Sentry_t;
 
 
-extern volatile uint8_t rx_len_uart1;  //接收一帧数据的长度
-extern volatile uint8_t recv_end_flag_uart1; //一帧数据接收完成标志
+extern volatile uint8_t rx_len_uart4;  //接收一帧数据的长度
+extern volatile uint8_t recv_end_flag_uart4; //一帧数据接收完成标志
 extern uint8_t rx_buffer[100];  //接收数据缓存数组
 extern remote_flag_t remote;	//键盘按键读取(结构体)
 extern Sentry_t Sentry;	//哨兵状态量和裁判系统数据结构体

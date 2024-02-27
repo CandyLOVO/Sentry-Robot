@@ -1,8 +1,8 @@
 damiao_test\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
-damiao_test\heap_4.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdlib.h
+damiao_test\heap_4.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdlib.h
 damiao_test\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-damiao_test\heap_4.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stddef.h
-damiao_test\heap_4.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdint.h
+damiao_test\heap_4.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
+damiao_test\heap_4.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
 damiao_test\heap_4.o: ../Core/Inc/FreeRTOSConfig.h
 damiao_test\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 damiao_test\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

@@ -32,9 +32,9 @@ static void Sentry_Init();
 static void Vision_Init();
 
 //================================================全局变量================================================//
-extern UART_HandleTypeDef huart1;
-volatile uint8_t rx_len_uart1 = 0;  //接收一帧数据的长度
-volatile uint8_t recv_end_flag_uart1 = 0; //一帧数据接收完成标志
+extern UART_HandleTypeDef huart4;
+volatile uint8_t rx_len_uart4 = 0;  //接收一帧数据的长度
+volatile uint8_t recv_end_flag_uart4 = 0; //一帧数据接收完成标志
 uint8_t rx_buffer[100]={0};  //接收数据缓存数组
 uint8_t vision_send[100];	//视觉接口发送数据帧
 
@@ -50,8 +50,8 @@ void Exchange_task(void const * argument)
   /* Infinite loop */
 	Vision_Init();
 	Sentry_Init();	//哨兵状态量及裁判系统数据初始化
-	__HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE); //使能uart1的IDLE中断
-	HAL_UART_Receive_DMA(&huart1,rx_buffer,100); //开启接收
+	__HAL_UART_ENABLE_IT(&huart4, UART_IT_IDLE); //使能uart1的IDLE中断
+	HAL_UART_Receive_DMA(&huart4,rx_buffer,100); //开启接收
   for(;;)
   {
 		osDelay(1);
@@ -77,21 +77,21 @@ static void Get_keyboard()
 //================================================通信接收任务（未使用，已经移植到中断中）================================================//
 static void Get_minipc()
 {
-		if(recv_end_flag_uart1 == 1)  //接收完成标志
+		if(recv_end_flag_uart4 == 1)  //接收完成标志
 		{			
 			if(rx_buffer[0] == 0xA5)
 			{
 				Vision_read(rx_buffer);
 			}
 			
-			recv_end_flag_uart1 = 0;//清除接收结束标志位
-			for(uint8_t i=0;i<rx_len_uart1;i++)
+			recv_end_flag_uart4 = 0;//清除接收结束标志位
+			for(uint8_t i=0;i<rx_len_uart4;i++)
 				{
 					rx_buffer[i]=0;//清接收缓存
 				}
 				//memset(rx_buffer,0,rx_len);
-			rx_len_uart1 = 0;//清除计数
-			HAL_UART_Receive_DMA(&huart1,rx_buffer,BUFFER_SIZE);//重新打开DMA接收			
+			rx_len_uart4 = 0;//清除计数
+			HAL_UART_Receive_DMA(&huart4,rx_buffer,BUFFER_SIZE);//重新打开DMA接收			
 		}
 }
 
@@ -130,7 +130,7 @@ static void Stm_pc_send()
 	memcpy(&vision_send[19],&Sentry.Flag_judge,1);//红蓝方检测，置0为裁判系统寄了，置1为我方是红色方，置2为我方是蓝色方
 	memcpy(&vision_send[20],&vision.checksum,2);
 	
-	HAL_UART_Transmit_DMA(&huart1,vision_send,22);
+	HAL_UART_Transmit_DMA(&huart4,vision_send,22);
 }
 
 //================================================弹道补偿API接口================================================//

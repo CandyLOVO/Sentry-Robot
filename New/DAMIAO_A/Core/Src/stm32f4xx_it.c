@@ -59,11 +59,15 @@
 /* External variables --------------------------------------------------------*/
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
+extern DMA_HandleTypeDef hdma_uart4_rx;
+extern DMA_HandleTypeDef hdma_uart4_tx;
 extern DMA_HandleTypeDef hdma_usart1_rx;
 extern DMA_HandleTypeDef hdma_usart1_tx;
 extern DMA_HandleTypeDef hdma_usart3_rx;
 extern DMA_HandleTypeDef hdma_usart3_tx;
+extern UART_HandleTypeDef huart4;
 extern UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef huart2;
 extern UART_HandleTypeDef huart3;
 extern TIM_HandleTypeDef htim14;
 
@@ -184,6 +188,20 @@ void DMA1_Stream1_IRQHandler(void)
 }
 
 /**
+  * @brief This function handles DMA1 stream2 global interrupt.
+  */
+void DMA1_Stream2_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Stream2_IRQn 0 */
+
+  /* USER CODE END DMA1_Stream2_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_uart4_rx);
+  /* USER CODE BEGIN DMA1_Stream2_IRQn 1 */
+
+  /* USER CODE END DMA1_Stream2_IRQn 1 */
+}
+
+/**
   * @brief This function handles DMA1 stream3 global interrupt.
   */
 void DMA1_Stream3_IRQHandler(void)
@@ -195,6 +213,20 @@ void DMA1_Stream3_IRQHandler(void)
   /* USER CODE BEGIN DMA1_Stream3_IRQn 1 */
 
   /* USER CODE END DMA1_Stream3_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA1 stream4 global interrupt.
+  */
+void DMA1_Stream4_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Stream4_IRQn 0 */
+
+  /* USER CODE END DMA1_Stream4_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_uart4_tx);
+  /* USER CODE BEGIN DMA1_Stream4_IRQn 1 */
+
+  /* USER CODE END DMA1_Stream4_IRQn 1 */
 }
 
 /**
@@ -245,46 +277,56 @@ void CAN1_RX1_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-	uint32_t tmp_flag = 0;
-	uint32_t temp;
-	tmp_flag =__HAL_UART_GET_FLAG(&huart1,UART_FLAG_IDLE); //获取IDLE标志位
-	if((tmp_flag != RESET))//idle标志被置位
-	{ 
-		__HAL_UART_CLEAR_IDLEFLAG(&huart1);//清除标志位
-		//temp = huart1.Instance->SR;  //清除状态寄存器SR,读取SR寄存器可以实现清除SR寄存器的功能
-		//temp = huart1.Instance->DR; //读取数据寄存器中的数据
-		//这两句和上面那句等效
-		HAL_UART_DMAStop(&huart1); //停止DMA
-		temp  =  __HAL_DMA_GET_COUNTER(&hdma_usart1_rx);// 获取DMA中未传输的数据个数   
-		//temp  = hdma_usart1_rx.Instance->NDTR;//读取NDTR寄存器 获取DMA中未传输的数据个数，
-		//这句和上面那句等效
-		rx_len_uart1 =  100 - temp; //总计数减去未传输的数据个数，得到已经接收的数据个数
-		recv_end_flag_uart1 = 1;	// 接受完成标志位置1	
-		
-		if(recv_end_flag_uart1 == 1)  //??????
-		{			
-			if(rx_buffer[0] == 0xA5)
-			{
-				Vision_read(rx_buffer);
-			}
-			
-			
-				recv_end_flag_uart1 = 0;//?????????
-				for(uint8_t i=0;i<rx_len_uart1;i++)
-					{
-						rx_buffer[i]=0;//?????
-					}
-					//memset(rx_buffer,0,rx_len);
-				rx_len_uart1 = 0;//????
-			}
-
-	 }
-			HAL_UART_Receive_DMA(&huart1,rx_buffer,BUFFER_SIZE);//????DMA??
+//	uint32_t tmp_flag = 0;
+//	uint32_t temp;
+//	tmp_flag =__HAL_UART_GET_FLAG(&huart1,UART_FLAG_IDLE); //获取IDLE标志位
+//	if((tmp_flag != RESET))//idle标志被置位
+//	{ 
+//		__HAL_UART_CLEAR_IDLEFLAG(&huart1);//清除标志位
+//		//temp = huart1.Instance->SR;  //清除状态寄存器SR,读取SR寄存器可以实现清除SR寄存器的功能
+//		//temp = huart1.Instance->DR; //读取数据寄存器中的数据
+//		//这两句和上面那句等效
+//		HAL_UART_DMAStop(&huart1); //停止DMA
+//		temp  =  __HAL_DMA_GET_COUNTER(&hdma_usart1_rx);// 获取DMA中未传输的数据个数   
+//		//temp  = hdma_usart1_rx.Instance->NDTR;//读取NDTR寄存器 获取DMA中未传输的数据个数，
+//		//这句和上面那句等效
+//		rx_len_uart4 =  100 - temp; //总计数减去未传输的数据个数，得到已经接收的数据个数
+//		recv_end_flag_uart4 = 1;	// 接受完成标志位置1	
+//		
+//		if(recv_end_flag_uart4 == 1)
+//		{			
+//			if(rx_buffer[0] == 0xA5)
+//			{
+//				Vision_read(rx_buffer);
+//			}	
+//			recv_end_flag_uart4 = 0;
+//			for(uint8_t i=0;i<rx_len_uart4;i++)
+//			{
+//				rx_buffer[i]=0;
+//			}
+//			rx_len_uart4 = 0;
+//		}
+//	 }
+//	HAL_UART_Receive_DMA(&huart1,rx_buffer,BUFFER_SIZE);
   /* USER CODE END USART1_IRQn 0 */
   HAL_UART_IRQHandler(&huart1);
   /* USER CODE BEGIN USART1_IRQn 1 */
 
   /* USER CODE END USART1_IRQn 1 */
+}
+
+/**
+  * @brief This function handles USART2 global interrupt.
+  */
+void USART2_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART2_IRQn 0 */
+
+  /* USER CODE END USART2_IRQn 0 */
+  HAL_UART_IRQHandler(&huart2);
+  /* USER CODE BEGIN USART2_IRQn 1 */
+
+  /* USER CODE END USART2_IRQn 1 */
 }
 
 /**
@@ -313,6 +355,47 @@ void TIM8_TRG_COM_TIM14_IRQHandler(void)
   /* USER CODE BEGIN TIM8_TRG_COM_TIM14_IRQn 1 */
 
   /* USER CODE END TIM8_TRG_COM_TIM14_IRQn 1 */
+}
+
+/**
+  * @brief This function handles UART4 global interrupt.
+  */
+void UART4_IRQHandler(void)
+{
+  /* USER CODE BEGIN UART4_IRQn 0 */
+	uint32_t tmp_flag = 0;
+	uint32_t temp;
+	tmp_flag =__HAL_UART_GET_FLAG(&huart4,UART_FLAG_IDLE); //获取IDLE标志位
+	if((tmp_flag != RESET))//idle标志被置位
+	{ 
+		__HAL_UART_CLEAR_IDLEFLAG(&huart4);//清除标志位
+		HAL_UART_DMAStop(&huart4); //停止DMA
+		temp  =  __HAL_DMA_GET_COUNTER(&hdma_usart1_rx);// 获取DMA中未传输的数据个数   
+		//temp  = hdma_usart1_rx.Instance->NDTR;//读取NDTR寄存器 获取DMA中未传输的数据个数，
+		//这句和上面那句等效
+		rx_len_uart4 =  100 - temp; //总计数减去未传输的数据个数，得到已经接收的数据个数
+		recv_end_flag_uart4 = 1;	// 接受完成标志位置1	
+		
+		if(recv_end_flag_uart4 == 1)
+		{			
+			if(rx_buffer[0] == 0xA5)
+			{
+				Vision_read(rx_buffer);
+			}	
+			recv_end_flag_uart4 = 0;
+			for(uint8_t i=0;i<rx_len_uart4;i++)
+			{
+				rx_buffer[i]=0;
+			}
+			rx_len_uart4 = 0;
+		}
+	 }
+	HAL_UART_Receive_DMA(&huart4,rx_buffer,BUFFER_SIZE);
+  /* USER CODE END UART4_IRQn 0 */
+  HAL_UART_IRQHandler(&huart4);
+  /* USER CODE BEGIN UART4_IRQn 1 */
+
+  /* USER CODE END UART4_IRQn 1 */
 }
 
 /**

@@ -96,6 +96,8 @@ int main(void)
   MX_CAN2_Init();
   MX_USART3_UART_Init();
   MX_USART1_UART_Init();
+  MX_USART2_UART_Init();
+  MX_UART4_Init();
   /* USER CODE BEGIN 2 */
 	can_1_user_init(&hcan1);//配置can1的过滤器
 	can_2_user_init(&hcan2);//配置can2的过滤器

@@ -153,7 +153,7 @@ void USART3_IRQHandler_remote(void)
   */
 
 //================================================遥控器数据解析函数================================================//
-extern UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef huart4;
 extern float target_speed[7];
 static void sbus_to_rc(volatile const uint8_t *sbus_buf, RC_ctrl_t *rc_ctrl)
 {
