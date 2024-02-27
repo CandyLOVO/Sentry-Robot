@@ -104,7 +104,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		
 		//接收发射标志
 	  if(can_rx_message.StdId == 0x53)
-		{Sentry.Fire_mode = can_receive_data[0];
+		{Sentry.Flag_mode = can_receive_data[0];
 		 Sentry.Fire_flag_L = can_receive_data[1];
      Sentry.Fire_flag_R = can_receive_data[2];
 		}
@@ -115,6 +115,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
      Sentry.Cooling_heat_L = (can_receive_data[3]<<8) | can_receive_data[2];        //实时枪管1热量
      Sentry.Cooling_heat_R = (can_receive_data[5]<<8) | can_receive_data[4];        //实时枪管1热量       
 	 }
+	 
 	 if(can_rx_message.StdId == 0x30)
      {
      rc_ctrl.rc.ch[0] = (can_receive_data[0]<<8) | can_receive_data[1];

@@ -50,7 +50,7 @@ I (../Core/Inc/can.h)(0x65AFB574)
 I (../Core/Inc/dma.h)(0x65B66870)
 I (../Core/Inc/usart.h)(0x65B66870)
 I (../Core/Inc/gpio.h)(0x65AFB4B8)
-I (../USER/user_can.h)(0x65D8642A)
+I (../USER/user_can.h)(0x65DC9E79)
 I (../USER/remote/drv_usart.h)(0x65B7135A)
 F (../Core/Src/gpio.c)(0x65AFCAE4)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Task -I ../USER -I ../USER/remote-I.\RTE\_DAMIAO_Test-ID:\RoboterMaster\keil\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\RoboterMaster\keil\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o damiao_test\gpio.o --omf_browse damiao_test\gpio.crf --depend damiao_test\gpio.d)
 I (../Core/Inc/gpio.h)(0x65AFB4B8)
@@ -983,7 +983,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x65311BC2)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x65311BC2)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x65311BC2)
-F (..\Task\FrictionTask.c)(0x65DA3C17)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Task -I ../USER -I ../USER/remote-I.\RTE\_DAMIAO_Test-ID:\RoboterMaster\keil\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\RoboterMaster\keil\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o damiao_test\frictiontask.o --omf_browse damiao_test\frictiontask.crf --depend damiao_test\frictiontask.d)
+F (..\Task\FrictionTask.c)(0x65DC9E79)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Task -I ../USER -I ../USER/remote-I.\RTE\_DAMIAO_Test-ID:\RoboterMaster\keil\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\RoboterMaster\keil\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o damiao_test\frictiontask.o --omf_browse damiao_test\frictiontask.crf --depend damiao_test\frictiontask.d)
 I (..\Task\FrictionTask.h)(0x65D857AB)
 I (../Core/Inc/main.h)(0x65AFCAE4)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65311BFE)
@@ -1015,7 +1015,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h)(0x65311BFE
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h)(0x65311BFE)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x65311BFE)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65311BFE)
-I (..\Task\testTask.h)(0x65B255CC)
+I (..\Task\testTask.h)(0x65DA5743)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x65311BC2)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x65311BC2)
 I (../Core/Inc/FreeRTOSConfig.h)(0x65AFC95E)
@@ -1030,12 +1030,12 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x65311BC2)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x65311BC2)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x65311BC2)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x65311BC2)
-I (../USER/user_can.h)(0x65D8642A)
+I (../USER/user_can.h)(0x65DC9E79)
 I (../USER/user_pid.h)(0x65AFCB14)
 I (../USER/remote/rc_potocal.h)(0x65D85F8E)
 I (../USER/remote/struct_typedef.h)(0x657497D4)
-F (..\USER\user_can.c)(0x65D86351)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Task -I ../USER -I ../USER/remote-I.\RTE\_DAMIAO_Test-ID:\RoboterMaster\keil\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\RoboterMaster\keil\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o damiao_test\user_can.o --omf_browse damiao_test\user_can.crf --depend damiao_test\user_can.d)
-I (..\USER\user_can.h)(0x65D8642A)
+F (..\USER\user_can.c)(0x65DC9E89)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Task -I ../USER -I ../USER/remote-I.\RTE\_DAMIAO_Test-ID:\RoboterMaster\keil\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\RoboterMaster\keil\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o damiao_test\user_can.o --omf_browse damiao_test\user_can.crf --depend damiao_test\user_can.d)
+I (..\USER\user_can.h)(0x65DC9E79)
 I (../Core/Inc/main.h)(0x65AFCAE4)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65311BFE)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x65B66870)
@@ -1068,7 +1068,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x65311BFE)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65311BFE)
 I (../USER/remote/rc_potocal.h)(0x65D85F8E)
 I (../USER/remote/struct_typedef.h)(0x657497D4)
-I (../USER/user_can.h)(0x65D8642A)
+I (../USER/user_can.h)(0x65DC9E79)
 F (..\USER\user_pid.c)(0x65B663E6)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Task -I ../USER -I ../USER/remote-I.\RTE\_DAMIAO_Test-ID:\RoboterMaster\keil\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\RoboterMaster\keil\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o damiao_test\user_pid.o --omf_browse damiao_test\user_pid.crf --depend damiao_test\user_pid.d)
 I (..\USER\user_pid.h)(0x65AFCB14)
 I (../Core/Inc/main.h)(0x65AFCAE4)
@@ -1167,11 +1167,11 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x65311BFE)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x65311BFE)
 I (..\USER\remote\rc_potocal.h)(0x65D85F8E)
 I (..\USER\remote\struct_typedef.h)(0x657497D4)
-I (../USER/user_can.h)(0x65D8642A)
+I (../USER/user_can.h)(0x65DC9E79)
 F (..\USER\remote\rc_potocal.c)(0x65D85F8E)(--c99 -c --cpu Cortex-M4.fp.sp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Task -I ../USER -I ../USER/remote-I.\RTE\_DAMIAO_Test-ID:\RoboterMaster\keil\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\RoboterMaster\keil\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="535" -D_RTE_ -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o damiao_test\rc_potocal.o --omf_browse damiao_test\rc_potocal.crf --depend damiao_test\rc_potocal.d)
 I (..\USER\remote\rc_potocal.h)(0x65D85F8E)
 I (..\USER\remote\struct_typedef.h)(0x657497D4)
-I (../USER/user_can.h)(0x65D8642A)
+I (../USER/user_can.h)(0x65DC9E79)
 I (../Core/Inc/main.h)(0x65AFCAE4)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x65311BFE)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x65B66870)
