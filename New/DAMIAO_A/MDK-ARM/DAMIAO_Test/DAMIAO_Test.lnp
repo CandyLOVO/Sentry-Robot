@@ -40,6 +40,7 @@
 "damiao_test\yaw_task.o"
 "damiao_test\pitch_task.o"
 "damiao_test\exchange_task.o"
+"damiao_test\ins_task.o"
 "damiao_test\mf_user.o"
 "damiao_test\motor.o"
 "damiao_test\remote_control.o"

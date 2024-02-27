@@ -60,7 +60,7 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+uint8_t Rx[11];
 /* USER CODE END 0 */
 
 /**
@@ -101,7 +101,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	can_1_user_init(&hcan1);//配置can1的过滤器
 	can_2_user_init(&hcan2);//配置can2的过滤器
-	remote_control_init();
+	remote_control_init(); //遥控器初始化
+	HAL_UART_Receive_IT(&huart2,Rx,sizeof(Rx)); //陀螺仪接收中断
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

@@ -27,6 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include "Yaw_task.h"
 #include "Pitch_task.h"
+#include "Ins_task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,6 +56,7 @@ osThreadId defaultTaskHandle;
 osThreadId yawTaskHandle;
 osThreadId pitchTaskHandle;
 osThreadId exchangeHandle;
+osThreadId insTaskHandle;
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
@@ -121,6 +123,10 @@ void MX_FREERTOS_Init(void) {
 	//通信任务，更新所有标志位和信息
 	osThreadDef(exchangetask, Exchange_task,  osPriorityRealtime, 0, 1024);
   exchangeHandle = osThreadCreate(osThread(exchangetask), NULL);
+	
+	//陀螺仪任务
+	osThreadDef(insTask, InsTask, osPriorityRealtime, 0, 1024);
+	insTaskHandle = osThreadCreate(osThread(insTask), NULL);
 	
   /* USER CODE END RTOS_THREADS */
 

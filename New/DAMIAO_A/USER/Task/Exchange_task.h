@@ -9,7 +9,6 @@
 #include "PID.h"
 #include "arm_math.h"
 #include "can.h"
-#include "INS_task.h"
 #include "Can_user.h"
 #include "SolveTrajectory.h"
 #include "Motor.h"

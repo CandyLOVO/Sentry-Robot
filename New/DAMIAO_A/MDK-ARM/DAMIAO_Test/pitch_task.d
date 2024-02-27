@@ -58,12 +58,6 @@ damiao_test\pitch_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\inclu
 damiao_test\pitch_task.o: ../Core/Inc/can.h
 damiao_test\pitch_task.o: ..\USER\Task\Exchange_task.h
 damiao_test\pitch_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
-damiao_test\pitch_task.o: ..\USER\Task\INS_task.h
-damiao_test\pitch_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
-damiao_test\pitch_task.o: ../USER/DriverLayer/bsp_imu_pwm.h
-damiao_test\pitch_task.o: ../USER/DriverLayer/bsp_spi.h
-damiao_test\pitch_task.o: ../USER/AlgorithmLayer/bmi088driver.h
-damiao_test\pitch_task.o: ../USER/AlgorithmLayer/pid_imu.h
 damiao_test\pitch_task.o: ../USER/DriverLayer/Can_user.h
 damiao_test\pitch_task.o: ../USER/AlgorithmLayer/SolveTrajectory.h
 damiao_test\pitch_task.o: ../USER/PotocaLayer/Motor.h

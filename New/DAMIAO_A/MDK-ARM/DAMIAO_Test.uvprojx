@@ -1601,6 +1601,11 @@
               <FileType>1</FileType>
               <FilePath>..\USER\Task\Exchange_task.c</FilePath>
             </File>
+            <File>
+              <FileName>Ins_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\Task\Ins_task.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

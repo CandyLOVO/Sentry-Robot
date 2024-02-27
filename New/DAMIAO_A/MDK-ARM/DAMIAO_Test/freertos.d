@@ -48,16 +48,6 @@ damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semph
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 damiao_test\freertos.o: ../USER/Task/Yaw_task.h
 damiao_test\freertos.o: ../USER/struct_typedef.h
-damiao_test\freertos.o: ../USER/Task/INS_task.h
-damiao_test\freertos.o: ../Drivers/CMSIS/DSP/Include/arm_math.h
-damiao_test\freertos.o: ../Drivers/CMSIS/Include/core_cm4.h
-damiao_test\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
-damiao_test\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h
-damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
-damiao_test\freertos.o: ../USER/DriverLayer/bsp_imu_pwm.h
-damiao_test\freertos.o: ../USER/DriverLayer/bsp_spi.h
-damiao_test\freertos.o: ../USER/AlgorithmLayer/bmi088driver.h
-damiao_test\freertos.o: ../USER/AlgorithmLayer/pid_imu.h
 damiao_test\freertos.o: ../USER/AlgorithmLayer/PID.h
 damiao_test\freertos.o: ../USER/PotocaLayer/remote_control.h
 damiao_test\freertos.o: ../USER/DriverLayer/bsp_rc.h
@@ -67,6 +57,10 @@ damiao_test\freertos.o: ../USER/DriverLayer/Can_user.h
 damiao_test\freertos.o: ../USER/PotocaLayer/MF_User.h
 damiao_test\freertos.o: ../USER/Task/Exchange_task.h
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+damiao_test\freertos.o: ../Drivers/CMSIS/DSP/Include/arm_math.h
+damiao_test\freertos.o: ../Drivers/CMSIS/Include/core_cm4.h
+damiao_test\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
+damiao_test\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h
 damiao_test\freertos.o: ../Core/Inc/can.h
 damiao_test\freertos.o: ../USER/AlgorithmLayer/SolveTrajectory.h
 damiao_test\freertos.o: ../USER/Task/Yaw_task.h
@@ -74,3 +68,4 @@ damiao_test\freertos.o: ../USER/Task/Pitch_task.h
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 damiao_test\freertos.o: ../USER/Task/Exchange_task.h
 damiao_test\freertos.o: ../Core/Inc/stm32f4xx_it.h
+damiao_test\freertos.o: ../USER/Task/Ins_task.h
