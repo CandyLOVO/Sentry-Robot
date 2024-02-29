@@ -41,7 +41,7 @@ static void Bopan_calc(int16_t speed);
 static void Bopan_Q_control(int speed);
 
 //===============================================全局变量================================================//
-int16_t bopan_shoot_speed ;	//拨盘发射弹丸转速
+int16_t bopan_shoot_speed =36*45;	//拨盘发射弹丸转速
 int16_t bopan_reversal_speed = -35*36;	//拨盘反转转速
 uint8_t bopan_reversal_flag = 0;	//拨盘反转标志位，0为正转，1为反转
 
@@ -80,7 +80,7 @@ void Friction_task(void const * argument)
 //				Bopan_calc(bopan_reversal_speed);
 //			}
 //		}
-		Bopan_Q_control( 36*45 ); //拨盘发射转速
+//		Bopan_Q_control( 36*45 ); //拨盘发射转速
 		//左上角到最下方 若识别到目标，转动拨盘
 		if(rc_ctrl.rc.s[1] == 2  && vision_receive.tracking==1)//检测到目标
 		{
