@@ -83,7 +83,7 @@ void Yaw_task(void const *pvParameters)
 		//左上角开关开到最下方 全自动模式
 		if(rc_ctrl.rc.s[1] == 2 && ins_yaw)
 		{
-			if(vision_receive.tracking==1)	//如果视觉检测到目标
+			if(vision_receive.tracking_L==1)	//如果视觉检测到目标
 			{
 					Yaw_minipc_control_sita();	//视觉跟随
 					//Yaw_fix_sita();		//角度控制
@@ -111,7 +111,7 @@ void Yaw_task(void const *pvParameters)
 		//左上角到中间 静态调试自瞄
 		else if(rc_ctrl.rc.s[1] == 3)
 		{
-			if(vision_receive.tracking==1)	//如果视觉检测到目标
+			if(vision_receive.tracking_L==1)	//如果视觉检测到目标
 			{
 					Yaw_minipc_control_sita();	//视觉跟随
 					//Yaw_fix_sita();		//角度控制
@@ -322,5 +322,5 @@ static void detel_calc()	//这两种写法的结果应该是一样的，配合PID里的越界处理一起
 static void Yaw_minipc_control_sita()
 {
 	//	target_yaw -= chase.yaw * Yaw_minipc_sita_weight;
-	target_yaw = vision_receive.yaw;
+	target_yaw = vision_receive.yaw_L;
 }

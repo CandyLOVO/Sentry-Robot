@@ -79,7 +79,7 @@ void Friction_task(void const * argument)
 //		}
 		
 		//左上角到最下方 若识别到目标，转动拨盘
-		if(rc_ctrl.rc.s[1] == 2  && vision_receive.tracking==1)//检测到目标
+		if(rc_ctrl.rc.s[1] == 2  && vision_receive.tracking_L==1)//检测到目标
 		{
 			if(!bopan_reversal_flag)	//拨盘正转
 			{
@@ -91,7 +91,7 @@ void Friction_task(void const * argument)
 			}
 		}
 		
-		else if(rc_ctrl.rc.s[1] == 3  && rc_ctrl.rc.s[0] == 2 && vision_receive.tracking==1)
+		else if(rc_ctrl.rc.s[1] == 3  && rc_ctrl.rc.s[0] == 2 && vision_receive.tracking_L==1)
 		{
 			if(!bopan_reversal_flag)	//拨盘正转
 			{
