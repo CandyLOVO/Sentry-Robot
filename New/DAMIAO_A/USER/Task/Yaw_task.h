@@ -5,7 +5,6 @@
 #endif
 #include "main.h"
 #include "struct_typedef.h"
-#include "INS_task.h"
 #include "PID.h"
 #include "remote_control.h"
 #include "handle_value.h"
