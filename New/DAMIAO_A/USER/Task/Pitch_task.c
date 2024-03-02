@@ -44,13 +44,15 @@ void Pitch_task(void const * argument)
 {
   /* USER CODE BEGIN StartTask02 */
   /* Infinite loop */
+	
 	Gimbal_init();	//PID参数初始化
+	
 	osDelay(2000);
   for(;;)
   {
-		Gimbal_zero();	//速度清零
-		Gimbal_read_motor();	//读取编码器值
-		Gimbal_mode_judge();  //，模式选择
+		Gimbal_zero();	//电机目标速度值清零
+		Gimbal_read_motor();	//读取编码器值 将编码值转化为0~+-180 【左右头数值为镜像】
+		Gimbal_mode_judge();  //模式选择
 		Gimbal_target_restrict();	//目标值限制
 		Gimbal_voltage_calc();	//电流值计算
 		Gimbal_can_send();
@@ -65,6 +67,7 @@ static void Gimbal_init()
 	
 	pid_init(&motor_pid_can_2[2],30,0.001,0,30000,30000);
 	pid_init(&motor_pid_sita_can_2[2],3,0,1,30000,30000);
+	
 	pid_init(&motor_pid_can_2[3],30,0.001,0,30000,30000);
 	pid_init(&motor_pid_sita_can_2[3],3,0,1,30000,30000);
 	Gimbal_read_motor();
