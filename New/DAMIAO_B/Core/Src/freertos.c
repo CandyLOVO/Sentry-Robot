@@ -26,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "FrictionTask.h"
+#include "FrictionTask_v2.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -35,7 +36,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define Friction_control_plan 1 //选择控制方案 1为方案1 2为方案2
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -52,6 +53,7 @@ osThreadId defaultTaskHandle;
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
 osThreadId FrictionTaskHandle;
+osThreadId FrictionTask_v2Handle;
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
@@ -107,9 +109,14 @@ void MX_FREERTOS_Init(void) {
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
+	if(Friction_control_plan==1){
 	osThreadDef(Friction,FrictionTask, osPriorityNormal, 0, 512);
   FrictionTaskHandle = osThreadCreate(osThread(Friction), NULL);
-	
+	}
+	else if(Friction_control_plan==2){
+  osThreadDef(Friction_v2,FrictionTask_v2, osPriorityNormal, 0, 512);
+  FrictionTask_v2Handle = osThreadCreate(osThread(Friction_v2), NULL);
+	}
   /* USER CODE END RTOS_THREADS */
 
 }

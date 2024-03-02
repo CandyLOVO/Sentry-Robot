@@ -45,3 +45,4 @@ damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 damiao_test\freertos.o: ../Task/FrictionTask.h
+damiao_test\freertos.o: ../Task/FrictionTask_v2.h

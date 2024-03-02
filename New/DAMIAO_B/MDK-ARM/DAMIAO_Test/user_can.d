@@ -34,3 +34,4 @@ damiao_test\user_can.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 damiao_test\user_can.o: ../USER/remote/rc_potocal.h
 damiao_test\user_can.o: ../USER/remote/struct_typedef.h
 damiao_test\user_can.o: ../USER/user_can.h
+damiao_test\user_can.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\string.h

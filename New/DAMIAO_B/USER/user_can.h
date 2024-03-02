@@ -19,9 +19,14 @@ typedef struct
 }motor_info;
 
 typedef struct
-{int16_t Cooling_heat_L,Cooling_heat_R,remainHP;
-	int Fire_flag_L,Fire_flag_R,Flag_mode;
-}ROBOT;
+{	uint8_t Fire_Flag ;  //视觉识别标志
+	uint16_t speed_limit ; //射速限制
+	uint16_t heat_limit ; //热量上限
+	uint16_t cooling_rate; //热量每秒冷却值
+	uint16_t shooter_heat; //实时枪管热量
+	uint8_t shoot_rate; //实时射频
+	float shoot_speed; //实时射速 
+}Shooter_t;
 
 extern motor_info motor_m3508[6];/*摩擦轮电机 id 1~4*/
 extern motor_info motor_m2006[8];/*拨盘电机 id 5~6*/
