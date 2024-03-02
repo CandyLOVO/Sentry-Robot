@@ -75,7 +75,7 @@ static void Get_keyboard()
 }
 
 //================================================通信接收任务（未使用，已经移植到中断中）================================================//
-static void Get_minipc()
+static void Get_minipc() //UART4_IRQHandler()中
 {
 		if(recv_end_flag_uart4 == 1)  //接收完成标志
 		{			
@@ -116,7 +116,7 @@ static void Stm_pc_send()
 {
 	//更新姿态数据
 	vision.L_pitch = Gimbal_left;
-	vision.L_yaw = Yaw_left_c;
+	vision.L_yaw = Yaw_left_c; //现在时刻左脑袋的yaw（绝对坐标） 相对于整车IMU正方向的角度值
 	vision.R_pitch = Gimbal_right;
 	vision.R_yaw = Yaw_right_c;
 	

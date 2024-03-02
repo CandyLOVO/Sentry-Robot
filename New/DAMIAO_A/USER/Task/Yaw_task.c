@@ -20,7 +20,7 @@ int16_t Init_encoder_middle = 20612;		//一级云台,正前方要和底盘C板正前方朝向一致
 float Yaw_middle_c;	//一级云台yaw(只有绝对坐标) 9025转化为0~+-180后的编码值
 float Yaw_left;	//现在时刻左脑袋的yaw（相对坐标） 编码值转化为0~+-180后的编码值
 float Yaw_right;	//编码值转化为0~+-180后的编码值
-float Yaw_left_c;	//现在时刻左脑袋的yaw（绝对坐标） 相对于整车正方向的角度值
+float Yaw_left_c;	//现在时刻左脑袋的yaw（绝对坐标） 相对于整车IMU正方向的角度值
 float Yaw_right_c; //相对于整车正方向的角度值
 //================================================函数================================================//
 
@@ -94,8 +94,8 @@ void Yaw_task(void const *pvParameters)
 		Yaw_target_restrict();//目标角度限制(目标角度进入死区时，自瞄和上电初始化时专用)
 		
 		//PID
-		Yaw_speed_calc();//速度环计算（带有相对角度限制处理）
-		Yaw_voltage_calc();//电压环计算
+		Yaw_speed_calc();//角度环计算（带有相对角度限制处理）->速度环输入值
+		Yaw_voltage_calc();//电压环计算（速度环）
 		
 		//CAN发送
 		Yaw_can_send();//发送6020
@@ -353,7 +353,7 @@ static void Yaw_mode_judge()
 		target_yaw_right = target_yaw_remote_right;
 		Yaw_remote_restrict(); //遥控器数据限制[-20,200] 并将处理后的数值赋给电机目标值
 	}
-	else if(Sentry.Remote_mode==13)
+	else if(Sentry.Remote_mode==13) //左杆控制左头，右杆控制右头，小yaw相对位置不变
 	{
 		target_yaw_middle=0;
 		Yaw_mode_remote_site();//位置控制模式

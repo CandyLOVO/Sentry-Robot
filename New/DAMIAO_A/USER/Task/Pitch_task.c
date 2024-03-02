@@ -1,9 +1,10 @@
 #include "Pitch_task.h"
 
 //===============================================全局变量================================================//
+//安装好后测量水平时两个pitch的值
 int16_t Init_encoder_left_gimbal = 6818;		//左脑袋编码器水平时初始值(安装好后值固定)
 int16_t Init_encoder_right_gimbal = 7154;		//右脑袋
-float target_gimbal_left;	//左右脑袋的目标yaw（相对坐标）
+float target_gimbal_left;	//左右脑袋的目标pitch（相对坐标）
 float target_gimbal_right;
 float Gimbal_left;
 float Gimbal_right;	
@@ -53,7 +54,7 @@ void Pitch_task(void const * argument)
 		Gimbal_zero();	//电机目标速度值清零
 		Gimbal_read_motor();	//读取编码器值 将编码值转化为0~+-180 【左右头数值为镜像】
 		Gimbal_mode_judge();  //模式选择
-		Gimbal_target_restrict();	//目标值限制
+		Gimbal_target_restrict();	//目标值限制 仰角限位40度，俯角限位25度
 		Gimbal_voltage_calc();	//电流值计算
 		Gimbal_can_send();
     osDelay(1);
@@ -65,11 +66,11 @@ void Pitch_task(void const * argument)
 static void Gimbal_init()	
 {
 	
-	pid_init(&motor_pid_can_2[2],30,0.001,0,30000,30000);
-	pid_init(&motor_pid_sita_can_2[2],3,0,1,30000,30000);
+	pid_init(&motor_pid_can_2[2],30,0.001,0,30000,30000); //左头速度环
+	pid_init(&motor_pid_sita_can_2[2],3,0,1,30000,30000); //左头角度环
 	
-	pid_init(&motor_pid_can_2[3],30,0.001,0,30000,30000);
-	pid_init(&motor_pid_sita_can_2[3],3,0,1,30000,30000);
+	pid_init(&motor_pid_can_2[3],30,0.001,0,30000,30000); //右头速度环
+	pid_init(&motor_pid_sita_can_2[3],3,0,1,30000,30000); //右头角度环
 	Gimbal_read_motor();
 	target_gimbal_left = Gimbal_left;
 	target_gimbal_right = Gimbal_right;
@@ -138,10 +139,11 @@ static void Gimbal_imu_restrict()
 //================================================电流值计算================================================//
 static void Gimbal_voltage_calc()
 {
-		target_speed_can_2[2] += pid_calc_sita_span(&motor_pid_sita_can_2[2], target_gimbal_left, Gimbal_left);
-		target_speed_can_2[3] -= pid_calc_sita_span(&motor_pid_sita_can_2[3], target_gimbal_right, Gimbal_right);
-		motor_info_can_2[2].set_voltage = pid_calc(&motor_pid_can_2[2], target_speed_can_2[2], motor_info_can_2[2].rotor_speed);
-		motor_info_can_2[3].set_voltage = pid_calc(&motor_pid_can_2[3], target_speed_can_2[3], motor_info_can_2[3].rotor_speed);	
+		target_speed_can_2[2] += pid_calc_sita_span(&motor_pid_sita_can_2[2], target_gimbal_left, Gimbal_left); //左头角度环
+		motor_info_can_2[2].set_voltage = pid_calc(&motor_pid_can_2[2], target_speed_can_2[2], motor_info_can_2[2].rotor_speed); //左头速度环
+		
+		target_speed_can_2[3] -= pid_calc_sita_span(&motor_pid_sita_can_2[3], target_gimbal_right, Gimbal_right); //右头角度环
+		motor_info_can_2[3].set_voltage = pid_calc(&motor_pid_can_2[3], target_speed_can_2[3], motor_info_can_2[3].rotor_speed);	//右头速度环
 }
 
 //================================================速度清零================================================//
@@ -207,10 +209,10 @@ static void Gimbal_mode_judge()
 {
 	if(Sentry.Remote_mode==33)
 	{
-		Gimbal_mode_control_sita();
+		Gimbal_mode_control_sita(); //右杆上下控制Pitch轴
 	}
 	
-	else if(Sentry.Remote_mode==13)
+	else if(Sentry.Remote_mode==13) //左杆控制左头，右杆控制右头
 	{
 		if(rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1]<= 660)
 		{
@@ -226,17 +228,18 @@ static void Gimbal_mode_judge()
 	{
 		if(Sentry.Flag_mode==0)  //搜寻目标
 		{
-			Gimbal_mode_searching();
+			Gimbal_mode_searching(); //以0.05进行巡航，[-40,25]
 		}
 		
-		else if(Sentry.Flag_mode==1)  //响应一次
+		//自瞄触发，注意只触发置位一次
+		else if(Sentry.Flag_mode==1)  //一个头识别到目标，Pitch响应一次，两头目标值同时改变
 		{
-			if(Sentry.L_Flag_foe)
+			if(Sentry.L_Flag_foe) //左头识别到目标
 			{
-				target_gimbal_left=vision_receive.L_chase_pitch;
+				target_gimbal_left=vision_receive.L_chase_pitch; //视觉传来的pitch值
 				target_gimbal_right=target_gimbal_left;
 			}
-			else if(Sentry.R_Flag_foe)
+			else if(Sentry.R_Flag_foe) //右头识别到目标
 			{
 				target_gimbal_right=vision_receive.R_chase_pitch;
 				target_gimbal_left=target_gimbal_right;
@@ -244,12 +247,13 @@ static void Gimbal_mode_judge()
 			Sentry.Flag_mode = 2;	//pitch响应完后置为2，令yaw去响应
 		}
 		
-		else if(Sentry.Flag_mode==3)	//各自追踪目标
+		else if(Sentry.Flag_mode==3)	//至少一个识别到，大yaw不动，小yaw调整，各自追踪目标
 		{
-			if(Sentry.L_Flag_foe)
-				target_gimbal_left=vision.L_yaw;
-			if(Sentry.R_Flag_foe)
-				target_gimbal_right=vision.R_yaw;
+			if(Sentry.L_Flag_foe) //左头识别到目标
+				target_gimbal_left=vision_receive.L_chase_pitch;
+			
+			if(Sentry.R_Flag_foe) //右头识别到目标
+				target_gimbal_right=vision_receive.R_chase_pitch;
 		}
 	}
 }
