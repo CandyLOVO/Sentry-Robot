@@ -66,3 +66,4 @@ damiao_test\stm32f4xx_it.o: ../USER/PotocaLayer/MF_User.h
 damiao_test\stm32f4xx_it.o: ../USER/Task/Exchange_task.h
 damiao_test\stm32f4xx_it.o: ../USER/Task/Pitch_task.h
 damiao_test\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+damiao_test\stm32f4xx_it.o: ../USER/Task/Ins_task.h

@@ -14,8 +14,8 @@ float target_yaw_remote_right;
 float target_yaw_middle; //9025电机转动的目标值
 
 //需要修改对应的数值，根据安装后读取的电机编码值修改
-int16_t Init_encoder_left = 6818;		//左脑袋编码器正前方初始值(安装好后值固定)
-int16_t Init_encoder_right = 7154;		//右脑袋
+int16_t Init_encoder_left = 1561;		//左脑袋编码器正前方初始值(安装好后值固定)
+int16_t Init_encoder_right = 34;		//右脑袋
 int16_t Init_encoder_middle; //一级云台,正前方要和底盘C板正前方朝向一致
 
 //float Yaw_middle_c;	//一级云台yaw(只有绝对坐标) 9025转化为0~+-180后的编码值
@@ -85,24 +85,24 @@ void Yaw_task(void const *pvParameters)
 	//循环任务运行
   for(;;)
   {
-		Yaw_loop_init();//循环初始化
-		
-		//三个电机编码值转化
-		Yaw_read_imu();//获取Imu角度
-		
-		//模式选择，计算目标值
-		Yaw_mode_judge();//模式选择
-		Yaw_target_restrict();//目标角度限制(目标角度进入死区时，自瞄和上电初始化时专用)
-		
-		//PID
-		Yaw_speed_calc();//角度环计算（带有相对角度限制处理）->速度环输入值
-		Yaw_voltage_calc();//电压环计算（速度环）
-		
-		//CAN发送
-		Yaw_can_send();//发送6020
-		Voltage_Control_MF();//电流环计算
-		Current_Control_MF_send(motor_info_can_2[7].can_id,motor_info_can_2[7].set_voltage);//发送9025
-    osDelay(1);
+//		Yaw_loop_init();//循环初始化
+//		
+//		//三个电机编码值转化
+//		Yaw_read_imu();//获取Imu角度
+//		
+//		//模式选择，计算目标值
+//		Yaw_mode_judge();//模式选择
+//		Yaw_target_restrict();//目标角度限制(目标角度进入死区时，自瞄和上电初始化时专用)
+//		
+//		//PID
+//		Yaw_speed_calc();//角度环计算（带有相对角度限制处理）->速度环输入值
+//		Yaw_voltage_calc();//电压环计算（速度环）
+//		
+//		//CAN发送
+//		Yaw_can_send();//发送6020
+//		Voltage_Control_MF();//电流环计算
+//		Current_Control_MF_send(motor_info_can_2[7].can_id,motor_info_can_2[7].set_voltage);//发送9025
+//    osDelay(1);
   }
 
 }
