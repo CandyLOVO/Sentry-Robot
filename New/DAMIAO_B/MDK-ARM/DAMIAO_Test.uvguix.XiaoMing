@@ -101,10 +101,10 @@
         <yPos>-1</yPos>
       </MaxPosition>
       <NormalPosition>
-        <Top>145</Top>
-        <Left>14</Left>
-        <Right>1295</Right>
-        <Bottom>963</Bottom>
+        <Top>34</Top>
+        <Left>99</Left>
+        <Right>1380</Right>
+        <Bottom>852</Bottom>
       </NormalPosition>
     </WindowPosition>
     <MDIClientArea>
@@ -3660,9 +3660,9 @@
       </Doc>
       <Doc>
         <Name>..\Task\FrictionTask.c</Name>
-        <ColumnNumber>1</ColumnNumber>
-        <TopLine>172</TopLine>
-        <CurrentLine>211</CurrentLine>
+        <ColumnNumber>0</ColumnNumber>
+        <TopLine>1</TopLine>
+        <CurrentLine>51</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>

@@ -48,7 +48,7 @@ int16_t bopan_shoot_rate_min = 240; //最低射频
 int16_t bopan_shoot_rate_test = 100;//无裁判系统射频
 int16_t bopan_reversal_shoot_rate = -100;	//拨盘反转射频
 uint8_t bopan_reversal_flag_L= 0,bopan_reversal_flag_R= 0;	//拨盘反转标志位，0为正转，1为反转
-int test_I;
+
 void FrictionTask(void const * argument)
 {
   /* USER CODE BEGIN StartTask06 */
@@ -139,14 +139,11 @@ static void Friction_calc()
 	motor_m3508[3].set_v=mocalun_speed;
 	motor_m3508[4].set_v=-mocalun_speed;
 	
-	/*motor_m3508[1].send_I = pid_cal_s(&motor_m3508_pid[1], motor_m3508[1].speed, motor_m3508[1].set_v,5000,2500);
+	motor_m3508[1].send_I = pid_cal_s(&motor_m3508_pid[1], motor_m3508[1].speed, motor_m3508[1].set_v,5000,2500);
 	motor_m3508[2].send_I = pid_cal_s(&motor_m3508_pid[2], motor_m3508[2].speed, motor_m3508[2].set_v,5000,2500);
 	motor_m3508[3].send_I = pid_cal_s(&motor_m3508_pid[3], motor_m3508[3].speed, motor_m3508[3].set_v,5000,2500);
-	motor_m3508[4].send_I = pid_cal_s(&motor_m3508_pid[4], motor_m3508[4].speed, motor_m3508[4].set_v,5000,2500);*/
-	motor_m3508[1].send_I = test_I;
-	motor_m3508[2].send_I = test_I;
-	motor_m3508[3].send_I = test_I;
-	motor_m3508[4].send_I = test_I;
+	motor_m3508[4].send_I = pid_cal_s(&motor_m3508_pid[4], motor_m3508[4].speed, motor_m3508[4].set_v,5000,2500);
+
 }
 
 //===============================================摩擦轮减速到零================================================//
