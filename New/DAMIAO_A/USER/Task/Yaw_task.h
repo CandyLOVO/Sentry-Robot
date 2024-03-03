@@ -20,6 +20,9 @@ extern float Yaw_left_c;	//现在时刻左脑袋的yaw（绝对坐标） 相对于整车IMU正方向的
 extern float Yaw_right_c;
 extern float Yaw_left;
 extern float Yaw_right;
+extern float Roll;
+extern float Pitch;
+extern float Yaw;
 	 
 //定义函数
 void Yaw_task(void const *pvParameters);
