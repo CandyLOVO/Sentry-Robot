@@ -37,6 +37,7 @@
 "damiao_test\heap_4.o"
 "damiao_test\port.o"
 "damiao_test\frictiontask.o"
+"damiao_test\frictiontask_v2.o"
 "damiao_test\user_can.o"
 "damiao_test\user_pid.o"
 "damiao_test\user_static.o"

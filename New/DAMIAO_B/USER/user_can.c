@@ -1,5 +1,6 @@
 #include "user_can.h"
 #include "rc_potocal.h"
+#include "string.h"
 
 
 extern CAN_HandleTypeDef hcan1;
@@ -8,8 +9,9 @@ extern CAN_HandleTypeDef hcan2;
 extern RC_ctrl_t rc_ctrl;
 motor_info motor_m3508[6];/*摩擦轮电机 id 1~4*/
 motor_info motor_m2006[8];/*拨盘电机 id 5~6*/
-ROBOT Sentry;
-
+Shooter_t Shooter_L;
+Shooter_t Shooter_R;
+uint8_t Flag_mode;
 void CAN1_Init()
 {
 	CAN_FilterTypeDef  can_filter;
@@ -104,17 +106,36 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		
 		//接收发射标志
 	  if(can_rx_message.StdId == 0x53)
-		{Sentry.Flag_mode = can_receive_data[0];
-		 Sentry.Fire_flag_L = can_receive_data[1];
-     Sentry.Fire_flag_R = can_receive_data[2];
+		{Flag_mode = can_receive_data[0];              //发射模式
+		 Shooter_L.Fire_Flag = can_receive_data[1];   //视觉目标识别标识left
+			Shooter_R.Fire_Flag = can_receive_data[2];   //视觉目标识别表示right
 		}
-		//接受裁判系统数据
-		if(can_rx_message.StdId == 0x55)
+	
+		if(can_rx_message.StdId == 0x61)//左枪管数据接收
    {
-     Sentry.remainHP = (can_receive_data[1]<<8) | can_receive_data[0];        //本机器人剩余血量
-     Sentry.Cooling_heat_L = (can_receive_data[3]<<8) | can_receive_data[2];        //实时枪管1热量
-     Sentry.Cooling_heat_R = (can_receive_data[5]<<8) | can_receive_data[4];        //实时枪管1热量       
+     Shooter_L.speed_limit = (can_receive_data[1]<<8) | can_receive_data[0];        //射速上限
+     Shooter_L.heat_limit = (can_receive_data[3]<<8) | can_receive_data[2];        //热量上限
+     Shooter_L.cooling_rate = (can_receive_data[5]<<8) | can_receive_data[4];     //热量每秒冷却值      
 	 }
+	 if(can_rx_message.StdId == 0x62)
+	 {
+		 memcpy(&Shooter_L.shoot_speed,&can_receive_data[0],4);                  //实时射速（m/s）
+		 Shooter_L.shooter_heat=(can_receive_data[5]<<8) | can_receive_data[4]; //实时枪管热量
+		 Shooter_L.shoot_rate=can_receive_data[6];                             //实时射频（hz）
+	 }
+	 		if(can_rx_message.StdId == 0x63)//右枪管数据接收
+   {
+     Shooter_R.speed_limit = (can_receive_data[1]<<8) | can_receive_data[0];        //射速上限
+     Shooter_R.heat_limit = (can_receive_data[3]<<8) | can_receive_data[2];        //热量上限
+     Shooter_R.cooling_rate = (can_receive_data[5]<<8) | can_receive_data[4];     //热量每秒冷却值      
+	 }
+	 if(can_rx_message.StdId == 0x64)
+	 {
+		 memcpy(&Shooter_R.shoot_speed,&can_receive_data[0],4);                  //实时射速（m/s）
+		 Shooter_R.shooter_heat=(can_receive_data[5]<<8) | can_receive_data[4]; //实时枪管热量
+		 Shooter_R.shoot_rate=can_receive_data[6];                             //实时射频（hz）
+	 }
+	 
 	 
 	 if(can_rx_message.StdId == 0x30)
      {
