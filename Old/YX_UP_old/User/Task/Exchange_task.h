@@ -33,12 +33,11 @@ typedef struct
 {
 	uint8_t header;
 	pByte_t official;
-	float roll;                // rad 发0
-  float pitch;               // rad       
-  float yaw;                 // rad
-  float aim_x;               // 发0.5
-  float aim_y;               // 发0.5
-  float aim_z;               // 发0.5
+  float pitch_L;               // rad       
+  float yaw_L;                 // rad
+	float pitch_R;
+	float yaw_R;
+	uint8_t color;
   uint16_t checksum;     // crc16校验位 	
 } 	Vision_t; //视觉通信结构体
 
@@ -46,12 +45,17 @@ typedef struct
 typedef struct
 {
   uint8_t header;
-	uint8_t tracking; //自瞄标志位，为1瞄准
+	uint8_t tracking_L; //自瞄标志位，为1瞄准
+	float yaw_L;
+	float pitch_L;
+	uint8_t tracking_R;
+	float yaw_R; //自瞄所需yaw到达的角度
+	float pitch_R; //自瞄所需pitch到达的角度
 	uint8_t naving; //导航标志位，为1导航
-	float yaw; //自瞄所需yaw到达的角度
-	float pitch; //自瞄所需pitch到达的角度
 	float nav_vx; //导航中x的速度
 	float nav_vy; //导航中y的速度
+	float distance_L;
+	float distance_R;
 	uint16_t checksum;
 } vision_receive_t;
 

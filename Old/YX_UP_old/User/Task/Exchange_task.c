@@ -31,7 +31,7 @@ extern UART_HandleTypeDef huart1;
 volatile uint8_t rx_len_uart1 = 0;  //接收一帧数据的长度
 volatile uint8_t recv_end_flag_uart1 = 0; //一帧数据接收完成标志
 uint8_t rx_buffer[100]={0};  //接收数据缓存数组
-uint8_t vision_send[28];	//视觉接口发送数据帧
+uint8_t vision_send[20];	//视觉接口发送数据帧
 
 volatile Chase_t chase;	//赋予电机追踪的数据结构体
 Vision_t vision;	//视觉数据发送结构体
@@ -116,13 +116,18 @@ void Vision_read(uint8_t rx_buffer[])
 //	st.vzw = vision_receive.vz;
 	
 	memcpy(&vision_receive.header,&rx_buffer[0],1);
-	memcpy(&vision_receive.tracking,&rx_buffer[1],1);
-	memcpy(&vision_receive.naving,&rx_buffer[2],1);
-	memcpy(&vision_receive.yaw,&rx_buffer[3],4);
-	memcpy(&vision_receive.pitch,&rx_buffer[7],4);
-	memcpy(&vision_receive.nav_vx,&rx_buffer[11],4);
-	memcpy(&vision_receive.nav_vy,&rx_buffer[15],4);
-	memcpy(&vision_receive.checksum,&rx_buffer[19],2);
+	memcpy(&vision_receive.tracking_L,&rx_buffer[1],1);
+	memcpy(&vision_receive.yaw_L,&rx_buffer[2],4);
+	memcpy(&vision_receive.pitch_L,&rx_buffer[6],4);
+	memcpy(&vision_receive.tracking_R,&rx_buffer[10],1);
+	memcpy(&vision_receive.yaw_R,&rx_buffer[11],4);
+	memcpy(&vision_receive.pitch_R,&rx_buffer[15],4);
+	memcpy(&vision_receive.naving,&rx_buffer[19],1);
+	memcpy(&vision_receive.nav_vx,&rx_buffer[20],4);
+	memcpy(&vision_receive.nav_vy,&rx_buffer[24],4);
+	memcpy(&vision_receive.distance_L,&rx_buffer[28],4);
+	memcpy(&vision_receive.distance_R,&rx_buffer[32],4);
+	memcpy(&vision_receive.checksum,&rx_buffer[36],2);
 	
 	st.current_v = 28;
 }
@@ -134,25 +139,22 @@ static void Stm_pc_send()
 	vision.official.detect_color = 1;	//读取裁判系统数据判断红蓝方
 	vision.official.reset_tracker = 0;
 	vision.official.reserved = 6;
-	vision.roll = INS_angle[2];
-	vision.pitch = INS_angle[1];
-	vision.yaw = INS_angle[0];
-	vision.aim_x = 0.5;
-	vision.aim_y = 0.5;
-	vision.aim_z = 5;
+	vision.pitch_L = INS_angle[1];
+	vision.yaw_L = INS_angle[0];
+	vision.pitch_R = INS_angle[1];
+	vision.yaw_R = INS_angle[0];
+	vision.color = 1;
 	vision.checksum = 0xAAAA;	//CRC16校验，我没用，发了个定值做校验
 	
 	memcpy(&vision_send[0],&vision.header,1);
-	memcpy(&vision_send[1],&vision.official,1);
-	memcpy(&vision_send[2],&vision.roll,4);
-	memcpy(&vision_send[6],&vision.pitch,4);
-	memcpy(&vision_send[10],&vision.yaw,4);
-	memcpy(&vision_send[14],&vision.aim_x,4);
-	memcpy(&vision_send[18],&vision.aim_y,4);
-	memcpy(&vision_send[22],&vision.aim_z,4);
-	memcpy(&vision_send[26],&vision.checksum,1);
+	memcpy(&vision_send[1],&vision.color,1);
+	memcpy(&vision_send[2],&vision.yaw_L,4);
+	memcpy(&vision_send[6],&vision.pitch_L,4);
+	memcpy(&vision_send[10],&vision.yaw_R,4);
+	memcpy(&vision_send[14],&vision.pitch_R,4);
+	memcpy(&vision_send[18],&vision.checksum,2);
 	
-	HAL_UART_Transmit_DMA(&huart1,vision_send,27);
+	HAL_UART_Transmit_DMA(&huart1,vision_send,20);
 }
 
 //================================================弹道补偿API接口================================================//
@@ -189,12 +191,12 @@ static void SolveTrajectory_Init()
 		vision.official.detect_color = 1;	//读取裁判系统数据判断红蓝方
 		vision.official.reset_tracker = 0;
 		vision.official.reserved = 6;
-		vision.roll = INS_angle[2]/57.3f;
-		vision.pitch = INS_angle[1]/57.3f;
-		vision.yaw = INS_angle[0]/57.3f;
-		vision.aim_x = 0.5;
-		vision.aim_y = 0.5;
-		vision.aim_z = 5;
+//		vision.roll = INS_angle[2]/57.3f;
+//		vision.pitch = INS_angle[1]/57.3f;
+//		vision.yaw = INS_angle[0]/57.3f;
+//		vision.aim_x = 0.5;
+//		vision.aim_y = 0.5;
+//		vision.aim_z = 5;
 		vision.checksum = 0xAAAA;	//CRC16校验，我没用，发了个定值做校验
 		
 }

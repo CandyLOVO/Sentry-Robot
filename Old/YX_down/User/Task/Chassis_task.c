@@ -208,6 +208,7 @@ static void Chassis_following()
 //=======================================================底盘调试模式===============================================================//
 static void Chassis_mode_test()
 {			
+	Wz  = 0;
 			//braking to stop quickly
 		if( (rc_ctrl.rc.ch[2]>=-50&&rc_ctrl.rc.ch[2]<=50)&&((rc_ctrl.rc.ch[3]>=-50)&&(rc_ctrl.rc.ch[3]<=50))&&(rc_ctrl.rc.ch[4]<=50)&&(rc_ctrl.rc.ch[4]>=-50)
 			&& ( !w_flag && !s_flag && !a_flag && !d_flag) && (Err_yaw <= angle_valve) && (Err_yaw >= -angle_valve))
@@ -309,7 +310,7 @@ static void Chassis_mode_ready()
 			Vx = nav_vx;
 			Vy = nav_vy;
 //			Wz = nav_yaw;
-			Wz = 4000;
+			Wz = 0;
  			Chassis_Curl();
 }
 

@@ -91,7 +91,7 @@ void Pitch_task(void const * argument)
 		//左上角到中间/最下方 调试自瞄
 		else if(rc_ctrl.rc.s[1]==2 || rc_ctrl.rc.s[1]==3)		//上场模式
 		{
-			if(vision_receive.tracking==1)	//如果检测到目标
+			if(vision_receive.tracking_L==1)	//如果检测到目标
 			{
 				gimbal_minipc_control_sita(); //视觉瞄准
 			}			
@@ -271,7 +271,7 @@ static void gimbal_mode_control_sita()
 static void gimbal_minipc_control_sita()
 {
 	//target_pitch -= (chase.pitch - target_pitch) * Pitch_sita_minipc_weight;
-	target_pitch = vision_receive.pitch;
+	target_pitch = vision_receive.pitch_L;
 }
 
 //================================================巡航模式(位置环模式)================================================//

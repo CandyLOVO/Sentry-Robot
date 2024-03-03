@@ -59,6 +59,7 @@ uint16_t b_flag;
     rc_ctrl.rc.ch[3]-=RC_CH_VALUE_OFFSET;
     rc_ctrl.rc.ch[4]-=RC_CH_VALUE_OFFSET;
 	
+	//向上C板传值：先发高八位，再发第八位
 	/****************************************传给上C板rc_ctrl.rc.ch[0]~[3]***********************************/
 	for(int i=0;i<8;i++){
 		if(i%2==0){

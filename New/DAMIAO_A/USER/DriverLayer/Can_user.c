@@ -59,7 +59,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖÐ¶Ï»Øµ÷º¯Ê
   {
 //================================================Ò£¿ØÆ÷Êý¾Ý================================================//
 		HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data); //receive can1 data
-		if(rx_header.StdId == 0x30)
+		if(rx_header.StdId == 0x30) //rc_ctrl.rc.ch[0]~[3]
 		{
 			rc_ctrl.rc.ch[0] = (rx_data[0]<<8) | rx_data[1];
 			rc_ctrl.rc.ch[1] = (rx_data[2]<<8) | rx_data[3];
@@ -67,7 +67,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖÐ¶Ï»Øµ÷º¯Ê
 			rc_ctrl.rc.ch[3] = (rx_data[6]<<8) | rx_data[7];
 		}
 		
-		if(rx_header.StdId == 0x31)
+		if(rx_header.StdId == 0x31) //rc_ctrl.rc[4]&rc_ctrl.rc.s&rc_ctrl.key
 		{
 			rc_ctrl.rc.ch[4] = (rx_data[0]<<8) | rx_data[1];
 			rc_ctrl.rc.s[0] = rx_data[2];
@@ -75,7 +75,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖÐ¶Ï»Øµ÷º¯Ê
 			rc_ctrl.key.v = (rx_data[4]<<8) | rx_data[5];
 		}
 		
-		if(rx_header.StdId == 0x32)
+		if(rx_header.StdId == 0x32) //rc_ctrl.mouse
 		{
 			rc_ctrl.mouse.x = (rx_data[0]<<8) | rx_data[1];
 			rc_ctrl.mouse.y = (rx_data[2]<<8) | rx_data[3];
@@ -98,7 +98,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖÐ¶Ï»Øµ÷º¯Ê
 		{
 			Sentry.Myself_remain_HP = (rx_data[1]<<8) | rx_data[0];	//±¾»úÆ÷ÈËÊ£ÓàÑªÁ¿
 			Sentry.Myself_17mm_cooling_heat_id1 = (rx_data[3]<<8) | rx_data[2];	//ÊµÊ±Ç¹¹Ü1ÈÈÁ¿
-			Sentry.Myself_17mm_cooling_heat_id2 = (rx_data[5]<<8) | rx_data[4];	//ÊµÊ±Ç¹¹Ü1ÈÈÁ¿	
+			Sentry.Myself_17mm_cooling_heat_id2 = (rx_data[5]<<8) | rx_data[4];	//ÊµÊ±Ç¹¹Ü2ÈÈÁ¿	
 		}
 		
   }

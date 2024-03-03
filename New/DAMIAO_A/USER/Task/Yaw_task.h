@@ -15,8 +15,8 @@
 
 #define Yaw_sita_weight 0.5f 		//遥控器控制位置环权重
 	 
-extern float Yaw_middle_c;	//一级云台yaw(只有绝对坐标)
-extern float Yaw_left_c;	//现在时刻左脑袋的yaw（相对坐标）
+extern float Yaw_middle_c;	//一级云台yaw(只有绝对坐标) 9025转化为0~+-180后的编码值
+extern float Yaw_left_c;	//现在时刻左脑袋的yaw（绝对坐标） 相对于整车IMU正方向的角度值
 extern float Yaw_right_c;
 extern float Yaw_left;
 extern float Yaw_right;

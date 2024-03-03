@@ -3,7 +3,7 @@
 <title>Static Call Graph - [DAMIAO_Test\DAMIAO_Test.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image DAMIAO_Test\DAMIAO_Test.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sun Mar 03 00:02:47 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sun Mar 03 10:20:09 2024
 <BR><P>
 <H3>Maximum Stack Usage =        232 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1115,7 +1115,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[cf]"></a>MX_GPIO_Init</STRONG> (Thumb, 168 bytes, Stack size 32 bytes, gpio.o(i.MX_GPIO_Init))
+<P><STRONG><a name="[cf]"></a>MX_GPIO_Init</STRONG> (Thumb, 174 bytes, Stack size 32 bytes, gpio.o(i.MX_GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = MX_GPIO_Init &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -1265,8 +1265,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;limit_max
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Friction_calc
-<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Bopan_calc
+<BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Bopan_calc
 </UL>
 
 <P><STRONG><a name="[95]"></a>pid_init</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, user_pid.o(i.pid_init))
@@ -1633,12 +1632,8 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FrictionTask
 </UL>
 
-<P><STRONG><a name="[8e]"></a>Friction_calc</STRONG> (Thumb, 148 bytes, Stack size 8 bytes, frictiontask.o(i.Friction_calc))
-<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = Friction_calc &rArr; pid_cal_s
-</UL>
-<BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_cal_s
-</UL>
-<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FrictionTask
+<P><STRONG><a name="[8e]"></a>Friction_calc</STRONG> (Thumb, 60 bytes, Stack size 0 bytes, frictiontask.o(i.Friction_calc))
+<BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FrictionTask
 </UL>
 
 <P><STRONG><a name="[8d]"></a>Friction_init</STRONG> (Thumb, 132 bytes, Stack size 8 bytes, frictiontask.o(i.Friction_init))
