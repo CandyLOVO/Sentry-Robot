@@ -10,9 +10,9 @@ uint8_t Tx_save[8] = {0x50,0x06,0x00,0x00,0x00,0x00,0x84,0x4B}; //保存
 float Roll;
 float Pitch;
 float Yaw;
-float Yaw_middle_c;	//一级云台yaw(只有绝对坐标) 9025转化为0~+-180后的编码值
 
 extern uint8_t Rx[11];
+extern float Yaw_middle_c;	//一级云台yaw(只有绝对坐标) 9025转化为0~+-180后的编码值
 
 void InsTask(void const * argument)
 {
@@ -47,10 +47,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		HAL_UART_DMAStop(&huart2);
 		if(Rx[0]==0x50 && Rx[1]==0x03 && Rx[2]==0x06)
 		{
-			Roll = (((short)Rx[3]<<8)|Rx[4])/32768.0*180;
+			Roll = (((short)Rx[3]<<8)|Rx[4])/32768.0*180; //角度制 0~360
 			Pitch = (((short)Rx[5]<<8)|Rx[6])/32768.0*180;
 			Yaw = (((short)Rx[7]<<8)|Rx[8])/32768.0*180;
-			Yaw_middle_c = Yaw;
+			if(Yaw>180)
+			{
+				Yaw -= 360;
+			}
+			Yaw_middle_c = -Yaw;
 		}
 		HAL_UART_Receive_DMA(&huart2,(uint8_t *)Rx,sizeof(Rx));
 	}
