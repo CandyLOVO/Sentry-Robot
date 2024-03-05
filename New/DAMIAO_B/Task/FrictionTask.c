@@ -166,8 +166,8 @@ static void Friction_down()
 //===============================================≤¶≈ÃPIDº∆À„================================================//
 static void Bopan_calc()
 {
-	motor_m2006[0].set_v = -5*36; 
-	motor_m2006[1].set_v = -5*36; 
+	motor_m2006[0].set_v = -30*36; 
+	motor_m2006[1].set_v = -30*36; 
 	motor_m2006[0].send_I = pid_cal_s(&motor_m2006_pid[0], motor_m2006[0].speed, motor_m2006[0].set_v,16384,16384);
 	motor_m2006[1].send_I = pid_cal_s(&motor_m2006_pid[1], motor_m2006[1].speed, motor_m2006[1].set_v,16384,16384);
 }
