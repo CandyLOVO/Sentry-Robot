@@ -5,9 +5,9 @@
 #include "user_pid.h"
 #include "rc_potocal.h"
 
-#define mocalun_speed 120*15    //摩擦轮转速(根据实际情况更改快速调整射速）
+#define mocalun_speed 19*350    //摩擦轮转速(根据实际情况更改快速调整射速）
 #define K_shoot_rate_correct 1 //射频修正参数（根据实际情况更改快速调整射频）
-#define C_bopan_block_I 5000   //拨盘堵转电流（测试后更改）
+#define C_bopan_block_I 16384   //拨盘堵转电流（测试后更改）
 #define C_bopan_unblock_I 50   //拨盘正常旋转电流（测试后更改）
 
 pidTypeDef motor_m3508_pid[4];
@@ -119,13 +119,13 @@ void FrictionTask(void const * argument)
 //===============================================PID初始化================================================//
 static void Friction_init()
 {
-	pid_init(&motor_m3508_pid[0],15,0.8,1);//摩擦轮
-	pid_init(&motor_m3508_pid[1],15,0.8,1);
-	pid_init(&motor_m3508_pid[2],15,0.8,1);
-	pid_init(&motor_m3508_pid[3],15,0.8,1);
+	pid_init(&motor_m3508_pid[0],40,0.8,1);//摩擦轮
+	pid_init(&motor_m3508_pid[1],40,0.8,1);
+	pid_init(&motor_m3508_pid[2],40,0.8,1);
+	pid_init(&motor_m3508_pid[3],40,0.8,1);
 	
-	pid_init(&motor_m2006_pid[0],15,0.8,1);//拨盘(拨爪)
-	pid_init(&motor_m2006_pid[1],15,0.8,1);//20，0.03，0.5
+	pid_init(&motor_m2006_pid[0],20,0.03,0.5);//拨盘(拨爪)
+	pid_init(&motor_m2006_pid[1],20,0.03,0.5);//20，0.03，0.5
 	
 	Shooter_L.shooter_heat=1025;
 	Shooter_R.shooter_heat=1025;
@@ -139,10 +139,10 @@ static void Friction_calc()
 	motor_m3508[2].set_v=-mocalun_speed;
 	motor_m3508[3].set_v= mocalun_speed;
 	
-	motor_m3508[0].send_I = pid_cal_s(&motor_m3508_pid[0], motor_m3508[0].speed, motor_m3508[0].set_v,5000,2500);
-	motor_m3508[1].send_I = pid_cal_s(&motor_m3508_pid[1], motor_m3508[1].speed, motor_m3508[1].set_v,5000,2500);
-	motor_m3508[2].send_I = pid_cal_s(&motor_m3508_pid[2], motor_m3508[2].speed, motor_m3508[2].set_v,5000,2500);
-	motor_m3508[3].send_I = pid_cal_s(&motor_m3508_pid[3], motor_m3508[3].speed, motor_m3508[3].set_v,5000,2500);
+	motor_m3508[0].send_I = pid_cal_s(&motor_m3508_pid[0], motor_m3508[0].speed, motor_m3508[0].set_v,16384,16384);
+	motor_m3508[1].send_I = pid_cal_s(&motor_m3508_pid[1], motor_m3508[1].speed, motor_m3508[1].set_v,16384,16384);
+	motor_m3508[2].send_I = pid_cal_s(&motor_m3508_pid[2], motor_m3508[2].speed, motor_m3508[2].set_v,16384,16384);
+	motor_m3508[3].send_I = pid_cal_s(&motor_m3508_pid[3], motor_m3508[3].speed, motor_m3508[3].set_v,16384,16384);
 
 }
 
@@ -166,10 +166,10 @@ static void Friction_down()
 //===============================================拨盘PID计算================================================//
 static void Bopan_calc()
 {
-	motor_m2006[0].set_v = -800; 
-	motor_m2006[1].set_v = -800; 
-	motor_m2006[0].send_I = pid_cal_s(&motor_m2006_pid[0], motor_m2006[0].speed, motor_m2006[0].set_v,5000,2500);
-	motor_m2006[1].send_I = pid_cal_s(&motor_m2006_pid[1], motor_m2006[1].speed, motor_m2006[1].set_v,5000,2500);
+	motor_m2006[0].set_v = -5*36; 
+	motor_m2006[1].set_v = -5*36; 
+	motor_m2006[0].send_I = pid_cal_s(&motor_m2006_pid[0], motor_m2006[0].speed, motor_m2006[0].set_v,16384,16384);
+	motor_m2006[1].send_I = pid_cal_s(&motor_m2006_pid[1], motor_m2006[1].speed, motor_m2006[1].set_v,16384,16384);
 }
 //==========================================波盘速度计算（热量控制）======================================//
 
