@@ -7,8 +7,8 @@ extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
 
 extern RC_ctrl_t rc_ctrl;
-motor_info motor_m3508[6];/*摩擦轮电机 id 1~4*/
-motor_info motor_m2006[8];/*拨盘电机 id 5~6*/
+motor_info motor_m3508[4];/*摩擦轮电机 id 1~4*/
+motor_info motor_m2006[2];/*拨盘电机 id 5~6*/
 Shooter_t Shooter_L;
 Shooter_t Shooter_R;
 uint8_t Flag_mode;
@@ -172,7 +172,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		
 		/*接收四个摩擦轮3508返回值*/
 	  if((can_rx_message.StdId >= 0x201) && (can_rx_message.StdId <= 0x204)){
-			uint8_t index = can_rx_message.StdId - 0x200;
+			uint8_t index = can_rx_message.StdId - 0x201;
 			motor_m3508[index].angle = ((can_receive_data[0] << 8) | can_receive_data[1]);
 			motor_m3508[index].speed = ((can_receive_data[2] << 8) | can_receive_data[3]);
 			motor_m3508[index].tor_current = ((can_receive_data[4] << 8) | can_receive_data[5]);
@@ -181,7 +181,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		
 		//接收拨盘m2006返回值
 		if(can_rx_message.StdId >= 0x205 && can_rx_message.StdId <= 0x206){
-			uint8_t index = can_rx_message.StdId - 0x200;
+			uint8_t index = can_rx_message.StdId - 0x205;
 			motor_m2006[index].angle = ((can_receive_data[0] << 8) | can_receive_data[1]);
 			motor_m2006[index].speed = ((can_receive_data[2] << 8) | can_receive_data[3]);
 			motor_m2006[index].tor_current = ((can_receive_data[4] << 8) | can_receive_data[5]);

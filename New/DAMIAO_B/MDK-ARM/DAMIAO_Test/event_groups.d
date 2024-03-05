@@ -1,8 +1,8 @@
 damiao_test\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
-damiao_test\event_groups.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stdlib.h
+damiao_test\event_groups.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdlib.h
 damiao_test\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-damiao_test\event_groups.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stddef.h
-damiao_test\event_groups.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stdint.h
+damiao_test\event_groups.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
+damiao_test\event_groups.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
 damiao_test\event_groups.o: ../Core/Inc/FreeRTOSConfig.h
 damiao_test\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 damiao_test\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
