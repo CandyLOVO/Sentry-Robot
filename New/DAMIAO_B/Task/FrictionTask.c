@@ -76,16 +76,17 @@ void FrictionTask(void const * argument)
 		
 		if(Shooter_L.Fire_Flag==1)//左枪管发射
 	{  if(bopan_reversal_flag_L==1)
-				{
-					Bopan_speed_calc_L(bopan_reversal_shoot_rate,bopan_reversal_shoot_rate,bopan_reversal_shoot_rate);//最高射频，最低射频，无裁判系统射频
-				}
+			{
+			Bopan_speed_calc_L(bopan_reversal_shoot_rate,bopan_reversal_shoot_rate,bopan_reversal_shoot_rate);//最高射频，最低射频，无裁判系统射频
+			}
 			else if(bopan_reversal_flag_L==0)
 			{
 			Bopan_speed_calc_L(bopan_shoot_rate_max,bopan_shoot_rate_min,bopan_shoot_rate_test);		
 	   	}
 	}
 				
-	else{
+	  else
+	{
 	  Bopan_speed_calc_L(0,0,0);
 	}
 	
@@ -93,16 +94,17 @@ void FrictionTask(void const * argument)
 	
 		if(Shooter_R.Fire_Flag==1)//右枪管发射
 	{  if(bopan_reversal_flag_R==1)
-				{
-					Bopan_speed_calc_R(bopan_reversal_shoot_rate,bopan_reversal_shoot_rate,bopan_reversal_shoot_rate);//最高射频，最低射频，无裁判系统射频
-				}
-			else if(bopan_reversal_flag_R==0)
+		  {
+			Bopan_speed_calc_R(bopan_reversal_shoot_rate,bopan_reversal_shoot_rate,bopan_reversal_shoot_rate);//最高射频，最低射频，无裁判系统射频
+			}
+		 else if(bopan_reversal_flag_R==0)
 			{
 			Bopan_speed_calc_R(bopan_shoot_rate_max,bopan_shoot_rate_min,bopan_shoot_rate_test);		
 	   	}
 	}
 				
-	else{
+	  else
+ {
 	  Bopan_speed_calc_R(0,0,0);
 	}
 

@@ -18,6 +18,8 @@ typedef struct
 	int16_t set_v,send_I;
 }motor_info;
 
+
+
 typedef struct
 {	uint8_t Fire_Flag ;  //视觉识别标志
 	uint16_t speed_limit ; //射速限制
