@@ -9,26 +9,6 @@ uint8_t can_send_data[8];
 motor_info motor[8];
 up_data UpData;
 
-//void CAN1_Init()
-//{
-//	CAN_FilterTypeDef  can_filter;
-
-//  can_filter.FilterBank = 0;
-//  can_filter.FilterMode =  CAN_FILTERMODE_IDMASK;
-//  can_filter.FilterScale = CAN_FILTERSCALE_32BIT;
-//  can_filter.FilterIdHigh = 0; 
-//  can_filter.FilterIdLow  = 0; 
-//  can_filter.FilterMaskIdHigh = 0;
-//  can_filter.FilterMaskIdLow  = 0;
-//  can_filter.FilterFIFOAssignment = CAN_RX_FIFO1;
-//  can_filter.FilterActivation = ENABLE;
-//  can_filter.SlaveStartFilterBank  = 14;          
-//   
-//  HAL_CAN_ConfigFilter(&hcan1, &can_filter);
-//  HAL_CAN_ActivateNotification(&hcan1,CAN_IT_RX_FIFO1_MSG_PENDING);
-//  HAL_CAN_Start(&hcan1);
-//}
-
 void CAN1_Init() //CAN1过滤器配置
 {
 	CAN_FilterTypeDef  can_filter;
@@ -124,26 +104,6 @@ void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4) //can2发送
 	HAL_CAN_AddTxMessage(&hcan2,&can_tx_message,can_send_data,&send_mail_box);
 }
 /*******************************************************************************************************************/
-
-
-/**************************************************尝试双can双fifo**************************************************/
-//void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *hcan) //can1发送3508数据 FIFO1
-//{
-//	if(hcan->Instance == CAN1){ 
-//		CAN_RxHeaderTypeDef can_rx_message;
-//		uint8_t can_receive_data[8];
-//	  HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO1,&can_rx_message,can_receive_data);
-//	  if((can_rx_message.StdId >= 0x201) && (can_rx_message.StdId <= 0x204)){
-//			uint8_t index = can_rx_message.StdId - 0x201 + 4;
-//			motor[index].angle = ((can_receive_data[0] << 8) | can_receive_data[1]);
-//			motor[index].speed = ((can_receive_data[2] << 8) | can_receive_data[3]);
-//			motor[index].tor_current = ((can_receive_data[4] << 8) | can_receive_data[5]);
-//			motor[index].temperture = can_receive_data[6];
-//		}
-//	}
-//}
-/*******************************************************************************************************************/
-
 
 /*********************************************CAN通信接收回调函数 fifo0*********************************************/
 int error = 0;

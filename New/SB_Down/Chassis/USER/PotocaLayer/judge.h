@@ -252,19 +252,49 @@ typedef __packed struct JUDGE_MODULE_DATA
      ext_dart_client_cmd_t dart_client_cmd;
 }JUDGE_MODULE_DATA;
 
+typedef __packed struct Sentry_t
+{
+	//=======================================================各种上限状态(10HZ)===============================================================//
+	uint8_t Myself_level;		//本机器人的等级
+	uint8_t Myself_id;	//本机器人的ID
+	uint16_t Myself_remain_HP;	//本机器人剩余血量
+	uint16_t Myself_max_HP;	//本机器人血量上限
+	//枪管1
+	uint16_t Myself_17mm_speed_limit_id1;	//本机器人17mm射速限制
+	uint16_t Myself_17mm_cooling_limit_id1;		//本机器人17mm热量上限
+	uint16_t Myself_17mm_cooling_rate_id1;	//本机器人17mm热量每秒冷却值
+	//枪管2
+	uint16_t Myself_17mm_speed_limit_id2;	//本机器人17mm射速限制
+	uint16_t Myself_17mm_cooling_limit_id2;		//本机器人17mm热量上限
+	uint16_t Myself_17mm_cooling_rate_id2;	//本机器人17mm热量每秒冷却值
+	
+	uint16_t Myself_42mm_speed_limit;	//本机器人42mm射速限制
+	uint16_t Myself_chassis_power_limit;	//底盘功率上限
+
+	//=======================================================实时数据(50HZ)===============================================================//
+	uint16_t Myself_chassis_power_buffer;	//实时缓冲能量
+	float Myself_chassis_power;		//实时底盘功率
+	uint16_t Myself_17mm_speed_id1;		//实时枪管1热量
+	uint16_t Myself_17mm_speed_id2;		//实时枪管2热量
+	
+	//实时
+	uint8_t bullet_frequence;	//实时射频（单位为HZ）
+	float bullet_speed;	//实时射速(单位m/s)
+	uint8_t armor_id:4;	//受伤的装甲板编号（应该0是非装甲板受伤，1-4是装甲板伤害，需测试验证）
+	uint8_t hurt_type:4;	//受伤类型
+	
+	//=======================================================比赛数据===============================================================//
+	uint8_t Flag_progress;	//比赛进程
+	uint16_t Time_remain;		//比赛剩余时间
+	uint8_t Flag_judge;		//判断红蓝方
+	uint8_t Flag_first;		//哨兵开环方案专用
+}Sentry_t;
+
 extern JUDGE_MODULE_DATA Judge_Hero;
 
 
-extern uint8_t Hero_level;
-extern uint8_t Hero_id;
-extern uint16_t Hero_42mm_speed_limit;
-extern uint16_t Hero_chassis_power_limit;
-extern uint16_t Hero_chassis_power_buffer;
-extern float Hero_chassis_power;
-extern float Hero_42mm_speed;
-extern uint8_t Flag_progress;
-extern uint8_t Flag_judge;
-extern uint8_t Flag_first;
+extern Sentry_t Sentry;
+
 
 
 

@@ -2,8 +2,8 @@
 
 //===============================================全局变量================================================//
 //安装好后测量水平时两个pitch的值
-int16_t Init_encoder_left_gimbal = 4536;		//左脑袋编码器水平时初始值(安装好后值固定)
-int16_t Init_encoder_right_gimbal = 4488;		//右脑袋
+int16_t Init_encoder_left_gimbal = 90;		//左脑袋编码器水平时初始值(安装好后值固定)
+int16_t Init_encoder_right_gimbal = 8164;		//右脑袋
 float target_gimbal_left;	//左右脑袋的目标pitch（相对坐标）
 float target_gimbal_right;
 float Gimbal_left;
@@ -66,11 +66,11 @@ void Pitch_task(void const * argument)
 static void Gimbal_init()	
 {
 	
-	pid_init(&motor_pid_can_2[2],30,0.001,0,30000,30000); //左头速度环
+	pid_init(&motor_pid_can_2[2],1,0,0,30000,30000); //左头速度环
 	pid_init(&motor_pid_sita_can_2[2],3,0,1,30000,30000); //左头角度环
 	
-	pid_init(&motor_pid_can_2[3],30,0.001,0,30000,30000); //右头速度环
-	pid_init(&motor_pid_sita_can_2[3],3,0,1,30000,30000); //右头角度环
+	pid_init(&motor_pid_can_2[3],400,0,0,30000,30000); //右头速度环
+	pid_init(&motor_pid_sita_can_2[3],1,0,0,30000,30000); //右头角度环
 	Gimbal_read_motor();
 	target_gimbal_left = Gimbal_left;
 	target_gimbal_right = Gimbal_right;

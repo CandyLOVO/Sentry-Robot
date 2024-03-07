@@ -42,3 +42,4 @@ chassis\drv_usart.o: ../USER/DriverLayer/drv_can.h
 chassis\drv_usart.o: ..\USER\Task\chassis.h
 chassis\drv_usart.o: ../Core/Inc/can.h
 chassis\drv_usart.o: ..\USER\Task\chassis.h
+chassis\drv_usart.o: ../USER/PotocaLayer/judge.h

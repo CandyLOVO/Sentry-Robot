@@ -1,3 +1,12 @@
+/*
+*@author     CandyL
+*@brief      底盘平移、旋转、平移+旋转控制代码 
+*@date       2023.12.30
+*@param      None
+*@return     None
+*@warning    计算3508与6020的PID
+*/
+
 #include "channel_changes.h"
 #include "rc_potocal.h"
 #include "chassis.h"
@@ -29,7 +38,7 @@ int16_t output_3508[4];
 /********************************************************底盘平移控制********************************************************/
 void translational_control()
 {
-	translate_6020(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]); //还没有用导航数值
+	translate_6020(rc_ctrl.rc.ch[2], rc_ctrl.rc.ch[3]); //还没有用导航数值
 	for(int i=0;i<4;i++){
 		//电机角度：get;将当前电机角度投影范围为 0 至 180/0 至 -180
 		//加负号：使得电机解算方向与遥控器相符合（解算+-180时的小bug）
@@ -39,7 +48,7 @@ void translational_control()
 		output_6020[i] = pid_cal_s(&PID_speed_6020[i],motor[i+4].speed,speed_6020[i],Max_out_s,Max_iout_s);
 	}
 	
-	translate_3508(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]);
+	translate_3508(rc_ctrl.rc.ch[2], rc_ctrl.rc.ch[3]);
 	for(int i=0;i<4;i++){
 		output_3508[i] = pid_cal_s(&PID_speed_3508[i],motor[i].speed,motor_speed[i],Max_out_s,Max_iout_s); //3508????
 	}
@@ -58,7 +67,7 @@ void rotate_control()
 		speed_6020[i] = pid_cal_a(&PID_angle[i],get_6020[i],motor_angle[i],Max_out_a,Max_iout_a); 
 		output_6020[i] = pid_cal_s(&PID_speed_6020[i],motor[i+4].speed,speed_6020[i],Max_out_s,Max_iout_s);
 	}
-	rotate_3508(rc_ctrl.rc.ch[4]);
+	rotate_3508(rc_ctrl.rc.ch[4]); //滚轮控制旋转
 	for(int i=0;i<4;i++){
 		output_3508[i] = pid_cal_s(&PID_speed_3508[i],motor[i].speed,motor_speed[i],Max_out_s,Max_iout_s); //3508????
 	}
@@ -72,7 +81,7 @@ void rotate_control()
 void compound_control()
 {
 	//设置6020的旋转和平移角度，计算公式为motor_angle[4]
-	compound_movement_6020(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]); 
+	compound_movement_6020(rc_ctrl.rc.ch[2], rc_ctrl.rc.ch[3]); 
 	for(int i=0;i<4;i++){
 		get_6020[i] = -motor_value(initial_angle[i],motor[i+4].angle);
 		speed_6020[i] = pid_cal_a(&PID_angle[i],get_6020[i],motor_angle[i],Max_out_a,Max_iout_a); 
@@ -80,7 +89,7 @@ void compound_control()
 	}
 	
 	//设置3508的旋转和平移速度，计算公式为motor_speed[4]
-	compound_movement_3508(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]);
+	compound_movement_3508(rc_ctrl.rc.ch[2], rc_ctrl.rc.ch[3]);
 	for(int i=0;i<4;i++){
 		output_3508[i] = pid_cal_s(&PID_speed_3508[i],motor[i].speed,motor_speed[i],Max_out_s,Max_iout_s);
 	}
