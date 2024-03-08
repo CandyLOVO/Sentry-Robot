@@ -340,7 +340,7 @@ static void Voltage_Control_MF()
 //================================================9025巡航模式===============================================//
 static void Searching_Control_MF()
 {
-	target_yaw_middle+=0.1;
+	target_yaw_middle+=0.05;
 	if(target_yaw_middle>180)
 	{
 		target_yaw_middle-=360;
@@ -371,9 +371,10 @@ static void Yaw_mode_judge()
 	{
 		if(Sentry.Flag_mode==0)  //搜寻目标
 		{
-			Searching_Control_MF(); //9025巡航0.01
+			Searching_Control_MF(); //9025巡航0.05
 			Yaw_mode_searching(); //执行一次小yaw正/反转0.09度
-			Yaw_remote_restrict(); //遥控器数据限制 并将处理后的数值赋给电机目标值
+			target_yaw_left = target_yaw_remote_left;
+			target_yaw_right = target_yaw_remote_right;
 		}
 		else if(Sentry.Flag_mode==2)  //识别到目标等待第一次响应
 		{
