@@ -1,7 +1,7 @@
 sb_up\freertos.o: ../Core/Src/freertos.c
 sb_up\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-sb_up\freertos.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stddef.h
-sb_up\freertos.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\stdint.h
+sb_up\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
+sb_up\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
 sb_up\freertos.o: ../Core/Inc/FreeRTOSConfig.h
 sb_up\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 sb_up\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -51,8 +51,8 @@ sb_up\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_group
 sb_up\freertos.o: ../User/Task/INS_task.h
 sb_up\freertos.o: ../User/arm_math.h
 sb_up\freertos.o: ../Drivers/CMSIS/Include/core_cm4.h
-sb_up\freertos.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\string.h
-sb_up\freertos.o: E:\Keil ARM\ARM\ARMCC\Bin\..\include\math.h
+sb_up\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
+sb_up\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h
 sb_up\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 sb_up\freertos.o: ../User/DriverLayer/bsp_imu_pwm.h
 sb_up\freertos.o: ../User/DriverLayer/bsp_spi.h

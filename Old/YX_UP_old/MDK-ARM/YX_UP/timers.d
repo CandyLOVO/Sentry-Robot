@@ -1,8 +1,8 @@
 yx_up\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/timers.c
-yx_up\timers.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdlib.h
+yx_up\timers.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stdlib.h
 yx_up\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-yx_up\timers.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
-yx_up\timers.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
+yx_up\timers.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stddef.h
+yx_up\timers.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stdint.h
 yx_up\timers.o: ../Core/Inc/FreeRTOSConfig.h
 yx_up\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 yx_up\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

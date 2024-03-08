@@ -1,8 +1,8 @@
 yx_up\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c
-yx_up\stream_buffer.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
-yx_up\stream_buffer.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
+yx_up\stream_buffer.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stdint.h
+yx_up\stream_buffer.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\string.h
 yx_up\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-yx_up\stream_buffer.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
+yx_up\stream_buffer.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stddef.h
 yx_up\stream_buffer.o: ../Core/Inc/FreeRTOSConfig.h
 yx_up\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 yx_up\stream_buffer.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

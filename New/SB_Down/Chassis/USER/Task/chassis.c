@@ -36,40 +36,18 @@ pidTypeDef PID_speed_3508[4];
 pidTypeDef PID_speed_6020[4];
 fp32 error_theta; //云台坐标系与底盘坐标系间夹角(此时为0~360度) 后期接收后需要对所得theta进行处理
 
-void Yaw_Diff()
-{
-	UpData.yaw_up = 0; //测试舵轮 可删
-	error_theta = UpData.yaw_up - INS_angle[0]; 
-	error_theta = error_theta*3.1415926/180; //转化为弧度制
-}
+//PID初始化
+void Chassis_init(void);
+
+//得到上C板与下C板间yaw的差值
+void Yaw_Diff(void);
 
 void Chassis(void const * argument)
 {
-	float PID_s[3] = {10,0.05,0};
-	float PID_a[3] = {35,0,3};
-	float PID[3] = {5,0,0};
-	
+	Chassis_init();
 	int m = 0;
-	
-	for(int i=0;i<4;i++){
-		pid_init(&PID_speed_6020[i],PID_s[0],PID_s[1],PID_s[2]);
-		pid_init(&PID_angle[i],PID_a[0],PID_a[1],PID_a[2]);
-		pid_init(&PID_speed_3508[i],PID[0],PID[1],PID[2]);
-	}
-	
   for(;;)
   {
-//**************************************读取6020初始角度**************************************//
-//		if(m==0){
-//			HAL_Delay(10);
-//			for(int i=0;i<4;i++)
-//			{
-//				initial_angle[i] = motor[i].angle; //读取电机初始角度 0~8192
-//			}
-//			m++;
-//		}
-//********************************************************************************************//
-
 		//设置初始角度		
 		if(m==0&&rc_ctrl.rc.s[0]==1){
 			initial_angle[0] = 3653; //初始角度（底盘正前方各轮子角度）
@@ -98,4 +76,24 @@ void Chassis(void const * argument)
 		}
     osDelay(10);
   }
+}
+
+void Chassis_init()
+{
+	float PID_s[3] = {10,0.05,0};
+	float PID_a[3] = {35,0,3};
+	float PID[3] = {5,0,0};
+	
+	for(int i=0;i<4;i++){
+		pid_init(&PID_speed_6020[i],PID_s[0],PID_s[1],PID_s[2]);
+		pid_init(&PID_angle[i],PID_a[0],PID_a[1],PID_a[2]);
+		pid_init(&PID_speed_3508[i],PID[0],PID[1],PID[2]);
+	}
+}
+
+void Yaw_Diff()
+{
+	UpData.yaw_up = 0; //测试舵轮 可删
+	error_theta = UpData.yaw_up - INS_angle[0]; 
+	error_theta = error_theta*3.1415926/180; //转化为弧度制
 }

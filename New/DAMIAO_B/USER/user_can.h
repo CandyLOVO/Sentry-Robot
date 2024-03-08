@@ -30,7 +30,7 @@ typedef struct
 	float shoot_speed; //实时射速 
 }Shooter_t;
 
-extern motor_info motor_m3508[6];/*摩擦轮电机 id 1~4*/
-extern motor_info motor_m2006[8];/*拨盘电机 id 5~6*/
+extern motor_info motor_m3508[4];/*摩擦轮电机 id 1~4*/
+extern motor_info motor_m2006[2];/*拨盘电机 id 5~6*/
 
 #endif

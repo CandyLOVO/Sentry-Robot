@@ -102,7 +102,9 @@ int main(void)
 	can_1_user_init(&hcan1);//配置can1的过滤器
 	can_2_user_init(&hcan2);//配置can2的过滤器
 	remote_control_init(); //遥控器初始化
-	HAL_UART_Receive_IT(&huart2,Rx,sizeof(Rx)); //陀螺仪接收中断
+	
+	__HAL_UART_ENABLE_IT(&huart2,UART_IT_IDLE);
+	HAL_UART_Receive_DMA(&huart2,(uint8_t *)Rx,sizeof(Rx)); //陀螺仪接收中断
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

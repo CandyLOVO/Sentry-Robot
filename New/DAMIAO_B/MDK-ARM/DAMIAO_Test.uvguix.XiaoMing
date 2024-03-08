@@ -101,10 +101,10 @@
         <yPos>-1</yPos>
       </MaxPosition>
       <NormalPosition>
-        <Top>76</Top>
+        <Top>55</Top>
         <Left>156</Left>
         <Right>1437</Right>
-        <Bottom>894</Bottom>
+        <Bottom>873</Bottom>
       </NormalPosition>
     </WindowPosition>
     <MDIClientArea>
@@ -3606,9 +3606,9 @@
       <ActiveTab>6</ActiveTab>
       <Doc>
         <Name>..\USER\user_can.c</Name>
-        <ColumnNumber>51</ColumnNumber>
-        <TopLine>158</TopLine>
-        <CurrentLine>175</CurrentLine>
+        <ColumnNumber>4</ColumnNumber>
+        <TopLine>143</TopLine>
+        <CurrentLine>176</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>
@@ -3633,9 +3633,9 @@
       </Doc>
       <Doc>
         <Name>..\Task\FrictionTask_v2.c</Name>
-        <ColumnNumber>1</ColumnNumber>
-        <TopLine>134</TopLine>
-        <CurrentLine>157</CurrentLine>
+        <ColumnNumber>0</ColumnNumber>
+        <TopLine>211</TopLine>
+        <CurrentLine>154</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>
@@ -3660,9 +3660,9 @@
       </Doc>
       <Doc>
         <Name>..\Task\FrictionTask.c</Name>
-        <ColumnNumber>33</ColumnNumber>
-        <TopLine>1</TopLine>
-        <CurrentLine>47</CurrentLine>
+        <ColumnNumber>0</ColumnNumber>
+        <TopLine>65</TopLine>
+        <CurrentLine>135</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>

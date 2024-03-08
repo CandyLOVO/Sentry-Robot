@@ -144,6 +144,7 @@ static void Yaw_init()
 	pid_init(&motor_pid[6],200,0.001,0,10000,30000);
 	pid_init(&motor_pid_sita[6],30,0,1000,10000,30000);
 	target_yaw = ins_yaw;
+	
 }
 
 
