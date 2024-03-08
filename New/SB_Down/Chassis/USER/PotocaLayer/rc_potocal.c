@@ -101,36 +101,6 @@ uint16_t b_flag;
 	remote_data_mouse[7] = rc_ctrl.mouse.press_r;
 	can_remote(remote_data_mouse,0x32);
 	/********************************************************************************************************/
-	
-//		for(int i=0;i<=7;i++)
-//		{
-//			temp_remote[i]=rxBuf[i];//volatile const uint8_t和uint8_t不一样不能直接带入can_remote这个函数
-//		}
-//		can_remote(temp_remote,0x33);
-//		
-//		for(int i=8;i<=15;i++)
-//		{
-//			temp_remote[i-8]=rxBuf[i];//volatile const uint8_t和uint8_t不一样不能直接带入can_remote这个函数
-//		}
-//		can_remote(temp_remote,0x34);
-//		
-//		temp_remote[0]=rxBuf[16];
-//		temp_remote[1]=rxBuf[17];
-//		temp_remote[2]=rxBuf[18];
-//		
-//		//crul_w用来传递底盘旋转量
-//		Rotate_w = (motor[0].speed + motor[1].speed + motor[2].speed + motor[3].speed)/(4*19);
-//		temp_remote[3]=( (Rotate_w>>8) & 0xff);//先发高8位
-//		temp_remote[4]=(Rotate_w & 0xff);
-//		
-//		//传输下C板的Pitch数据给上C
-////		temp_remote[5]=((int)ins_data.angle[1]>>8) & 0xff;//先发高8位
-////		temp_remote[6]=(int)ins_data.angle[1] & 0xff;
-//		
-//		temp_remote[7]=0;
-
-//		can_remote(temp_remote,0x35);
-    
 
 //Some flag of keyboard
 		w_flag=(rxBuf[14]&0x01);

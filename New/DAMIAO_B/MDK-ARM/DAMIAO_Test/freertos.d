@@ -1,7 +1,7 @@
 damiao_test\freertos.o: ../Core/Src/freertos.c
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-damiao_test\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
-damiao_test\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
+damiao_test\freertos.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stddef.h
+damiao_test\freertos.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stdint.h
 damiao_test\freertos.o: ../Core/Inc/FreeRTOSConfig.h
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

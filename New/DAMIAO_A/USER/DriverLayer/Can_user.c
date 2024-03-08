@@ -120,10 +120,13 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖÐ¶Ï»Øµ÷º¯Ê
     motor_info_can_2[index].temp           =   rx_data[6];
   }
 	
-//================================================MF9025£¨×¢ÒâÒ»ÏÂµ¥Î»£©================================================//	
+//================================================MF9025£¨×¢ÒâÒ»ÏÂµ¥Î»£©================================================//
+int16_t iq;
+int16_t speed;
+int16_t encoder;	
 	if(rx_header.StdId == 0x141)//MF9025µç»úIDÎª1
 	{
-		if(rx_data[0] == 0xA1)	//¿ØÖÆÄ£Ê½ÏÂµÄ·µ»ØÖµ
+		if(rx_data[0] == 0xA2)	//¿ØÖÆÄ£Ê½ÏÂµÄ·µ»ØÖµ
 		{
 			motor_info_can_2[7].torque_current = (rx_data[2] | (rx_data[3] << 8));//ÏÈ·¢µÄµÍÎ»×Ö½Ú
 			motor_info_can_2[7].rotor_speed = (rx_data[4] | (rx_data[5] << 8));
@@ -131,7 +134,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖÐ¶Ï»Øµ÷º¯Ê
 		}
 		else if(rx_data[0] == 0x90)	//¶ÁÈ¡±àÂëÆ÷£¨ÓÃÓÚ³õÊ¼»¯£©
 		{
-			motor_info_can_2[7].rotor_angle = (rx_data[2] | (rx_data[3] << 8));//ÏÈ·¢µÄµÍÎ»×Ö½Ú
+			motor_info_can_2[7].rotor_angle = (rx_data[2] | (rx_data[3] <<8));//ÏÈ·¢µÄµÍÎ»×Ö½Ú
 		}
 	}
   }

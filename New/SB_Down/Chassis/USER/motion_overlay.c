@@ -71,10 +71,6 @@ void compound_movement_3508(int16_t x,int16_t y)
 {
 	int16_t vx = (x*cos(error_theta) - y*sin(error_theta))*(3000/660); //底盘跟随云台处理后的x、y方向的速度
 	int16_t vy = (x*sin(error_theta) + y*cos(error_theta))*(3000/660);
-//	motor_speed[0] = sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy + omega*radius*cosin),2)); //平移与旋转叠加后的向量长度
-//	motor_speed[1] = sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy + omega*radius*cosin),2));
-//	motor_speed[2] = sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
-//	motor_speed[3] = sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
 	
 	//两个3508朝内 两个3508朝外
 //	motor_speed[0] = sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy + omega*radius*cosin),2)); //平移与旋转叠加后的向量长度
@@ -94,10 +90,6 @@ void compound_movement_6020(int16_t x,int16_t y)
 {
 	int16_t vx = (x*cos(error_theta) - y*sin(error_theta))*(3000/660);
 	int16_t vy = (x*sin(error_theta) + y*cos(error_theta))*(3000/660);
-//	motor_angle[0] = remote_value(((float)vx + omega*radius*cosin), ((float)vy + omega*radius*cosin));
-//	motor_angle[1] = remote_value(((float)vx - omega*radius*cosin), ((float)vy + omega*radius*cosin));
-//	motor_angle[2] = remote_value(((float)vx - omega*radius*cosin), ((float)vy - omega*radius*cosin));
-//	motor_angle[3] = remote_value(((float)vx + omega*radius*cosin), ((float)vy - omega*radius*cosin));
 	
 	//两个3508朝内 两个3508朝外
 //	motor_angle[0] = remote_value(((float)vx - omega*radius*cosin), ((float)vy + omega*radius*cosin));
@@ -112,23 +104,3 @@ void compound_movement_6020(int16_t x,int16_t y)
 	motor_angle[3] = remote_value(((float)vx - omega*radius*cosin), ((float)vy - omega*radius*cosin)) - 180;
 }
 /********************************************************************************************************************************/
-
-//float compound_movement_6020(int16_t vx,int16_t vy,int n)
-//{
-//	float motor_angle;
-////	vx *= 300; //处理扩大遥控器所得数据
-////	vy *= 300;
-//	if(n==0){
-//		motor_angle = remote_value(((float)vx + omega*radius*cosin), ((float)vy + omega*radius*cosin));
-//	}
-//	else if(n==1){
-//		motor_angle = remote_value(((float)vx - omega*radius*cosin), ((float)vy + omega*radius*cosin));
-//	}
-//	else if(n==2){
-//		motor_angle = remote_value(((float)vx - omega*radius*cosin), ((float)vy - omega*radius*cosin));
-//	}
-//	else if(n==3){
-//		motor_angle = remote_value(((float)vx + omega*radius*cosin), ((float)vy - omega*radius*cosin));
-//	}
-//	return motor_angle;
-//}

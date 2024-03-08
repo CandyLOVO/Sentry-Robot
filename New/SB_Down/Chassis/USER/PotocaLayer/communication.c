@@ -1,5 +1,6 @@
 #include "communication.h"
 #include "string.h"
+#include "judge.h" //裁判系统 USART6
 
 extern UART_HandleTypeDef huart1;
 extern uint8_t Rx[128];

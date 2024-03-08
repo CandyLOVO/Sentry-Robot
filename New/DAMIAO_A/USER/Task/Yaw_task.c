@@ -14,8 +14,8 @@ float target_yaw_remote_right;
 float target_yaw_middle; //9025电机转动的目标值
 
 //需要修改对应的数值，根据安装后读取的电机编码值修改
-int16_t Init_encoder_left = 4312;		//左脑袋编码器正前方初始值(安装好后值固定)
-int16_t Init_encoder_right = 5112;		//右脑袋
+int16_t Init_encoder_left = 7788;		//左脑袋编码器正前方初始值(安装好后值固定)
+int16_t Init_encoder_right = 3479;		//右脑袋
 int16_t Init_encoder_middle; //一级云台,正前方要和底盘C板正前方朝向一致
 
 float Yaw_middle_c;	//一级云台yaw(只有绝对坐标) 9025转化为0~+-180后的编码值
@@ -110,14 +110,14 @@ void Yaw_task(void const *pvParameters)
 //================================================YAW轴PID参数和目标IMU初始化================================================//
 static void Yaw_init()
 {
-	pid_init(&motor_pid_can_2[7],1,0,0,2048,2048); //9025电机速度环
-	pid_init(&motor_pid_sita_can_2[7],5,0.01,0,2048,2048); //9025电机角度环
+	pid_init(&motor_pid_can_2[7],500,0,0,30000,30000); //9025电机速度环
+	pid_init(&motor_pid_sita_can_2[7],1,0,0,30000,30000); //9025电机角度环
 	
-	pid_init(&motor_pid_can_2[0],30,0.001,0,30000,30000); //左头速度环
-	pid_init(&motor_pid_sita_can_2[0],3,0,1,30000,30000); //左头角度环
+	pid_init(&motor_pid_can_2[0],300,0.01,0,30000,30000); //左头速度环
+	pid_init(&motor_pid_sita_can_2[0],3,0,10,30000,30000); //左头角度环
 	
-	pid_init(&motor_pid_can_2[1],30,0.001,0,30000,30000); //右头速度环
-	pid_init(&motor_pid_sita_can_2[1],3,0,1,30000,30000); //右头角度环
+	pid_init(&motor_pid_can_2[1],300,0.01,0,30000,30000); //右头速度环
+	pid_init(&motor_pid_sita_can_2[1],3,0,10,30000,30000); //右头角度环
 	
 //	Encoder_MF_read(motor_info_can_2[7].can_id);//读取当前编码器值
 //	Yaw_middle_c = MF_value(Init_encoder_middle , motor_info_can_2[7].rotor_angle , 65535); //将9025编码值转换到-180~0、0~180
@@ -157,11 +157,6 @@ static void Yaw_read_imu()
 		Yaw_right_c-=360;
 	else if(Yaw_right_c<-180)
 		Yaw_right_c+=360;	
-	
-	if(Yaw_middle_c>180)
-		Yaw_middle_c-=360;
-	else if(Yaw_middle_c<-180)
-		Yaw_middle_c+=360;
 }
 
 //================================================位置控制模式================================================//
@@ -185,7 +180,7 @@ static void Yaw_mode_searching()
 	if(Sentry.L_Flag_yaw_direction == 1)
 	{
 		target_yaw_remote_left-=0.09;
-		if(target_yaw_remote_left<=-20)
+		if(target_yaw_remote_left<=-10)
 		{
 			Sentry.L_Flag_yaw_direction=2; //反方向旋转
 			target_yaw_remote_left+=0.09;
@@ -194,7 +189,7 @@ static void Yaw_mode_searching()
 	else if(Sentry.L_Flag_yaw_direction == 2)
 	{
 		target_yaw_remote_left+=0.09;
-		if(target_yaw_remote_left>=200)
+		if(target_yaw_remote_left>=190)
 		{
 			Sentry.L_Flag_yaw_direction=1;
 			target_yaw_remote_left-=0.09;
@@ -204,7 +199,7 @@ static void Yaw_mode_searching()
 	if(Sentry.R_Flag_yaw_direction == 1)
 	{
 		target_yaw_remote_right+=0.09;
-		if(target_yaw_remote_right>=20)
+		if(target_yaw_remote_right>=10)
 		{
 			Sentry.R_Flag_yaw_direction=2;
 			target_yaw_remote_right-=0.09;
@@ -213,7 +208,7 @@ static void Yaw_mode_searching()
 	else if(Sentry.R_Flag_yaw_direction == 2)
 	{
 		target_yaw_remote_right-=0.09;
-		if(target_yaw_remote_right<=-200)
+		if(target_yaw_remote_right<=-190)
 		{
 			Sentry.R_Flag_yaw_direction=1;
 			target_yaw_remote_right+=0.09;
@@ -246,30 +241,30 @@ static void Yaw_can_send()
 //================================================控制角度限制================================================//
 static void Yaw_remote_restrict()
 {
-	if(target_yaw_remote_left<-20)
+	if(target_yaw_remote_left<-10)
 	{
-		target_yaw_remote_left=-20; 
+		target_yaw_remote_left=-10; 
 		target_yaw_left=target_yaw_remote_left;
 	}
 	else if(target_yaw_remote_left>180)
 	{
-		if(target_yaw_remote_left>200)
+		if(target_yaw_remote_left>190)
 		{
-			target_yaw_remote_left=200;
+			target_yaw_remote_left=190;
 		}
 		target_yaw_left=target_yaw_remote_left-360; 
 	}
 	
-	if(target_yaw_remote_right>20)
+	if(target_yaw_remote_right>10)
 	{
-		target_yaw_remote_right=20; 
+		target_yaw_remote_right=10; 
 		target_yaw_right=target_yaw_remote_right;
 	}
 	else if(target_yaw_remote_right<-180)
 	{
-		if(target_yaw_remote_right<-200)
+		if(target_yaw_remote_right<-190)
 		{
-			target_yaw_remote_right=-200;
+			target_yaw_remote_right=-190;
 		}
 		target_yaw_right=target_yaw_remote_right+360; 
 	}
@@ -279,11 +274,11 @@ static void Yaw_remote_restrict()
 static void Yaw_target_restrict()
 {
 	//限制目标角度
-	if(target_yaw_left<-20 && target_yaw_left>-160)
+	if(target_yaw_left<-10 && target_yaw_left>-170)
 	{
 		target_yaw_left=0;
 	}
-	if(target_yaw_right>20 && target_yaw_right<160)
+	if(target_yaw_right>10 && target_yaw_right<170)
 	{
 		target_yaw_right=0;
 	}
@@ -332,9 +327,9 @@ static void Site_Control_MF()
 //================================================MF9025电流环计算(调用了限制函数)===============================================//
 static void Voltage_Control_MF()
 {
-	target_speed_can_2[7] -= pid_calc_sita_span(&motor_pid_sita_can_2[7], target_yaw_middle, Yaw_middle_c);  //Yaw_middle_c->IMU
+	target_speed_can_2[7] -= pid_calc_sita_span(&motor_pid_sita_can_2[7], target_yaw_middle, Yaw_middle_c);  //Yaw_middle_c->IMU -180~+180
 	motor_info_can_2[7].set_voltage = pid_calc(&motor_pid_can_2[7], target_speed_can_2[7],motor_info_can_2[7].rotor_speed);
-	motor_info_can_2[7].set_voltage = Current_Limit_MF(motor_info_can_2[7].set_voltage);//调用电流限制函数
+//	motor_info_can_2[7].set_voltage = Current_Limit_MF(motor_info_can_2[7].set_voltage);//调用电流限制函数
 }
 
 //================================================9025巡航模式===============================================//
@@ -414,7 +409,7 @@ static void Yaw_mode_judge()
 				target_yaw_right+=360;
 			
 			//左头卡限位，重新响应一次大Yaw
-			if(target_yaw_left<-20 && target_yaw_left>-160)
+			if(target_yaw_left<-10 && target_yaw_left>-170)
 			{
 				float Delta;	//规定它一直是个正数
 				target_yaw_middle=vision_receive.L_chase_yaw;
@@ -425,7 +420,7 @@ static void Yaw_mode_judge()
 				target_yaw_remote_right = Delta;
 			}
 			//右头卡限位
-			if(target_yaw_right>20 && target_yaw_right<160)
+			if(target_yaw_right>10 && target_yaw_right<170)
 			{
 				float Delta;	//规定它一直是个正数
 				target_yaw_middle=vision_receive.R_chase_yaw;

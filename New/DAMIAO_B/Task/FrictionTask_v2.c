@@ -142,14 +142,15 @@ static void Friction_calc()
 	motor_m3508[2].set_v=target_shoot_speed_R;
 	motor_m3508[3].set_v=-target_shoot_speed_R;
 	
-/*	motor_m3508[0].send_I = pid_cal_s(&motor_m3508_pid[0], Shooter_L.shoot_speed, motor_m3508[0].set_v,5000,2500);
+	motor_m3508[0].send_I = pid_cal_s(&motor_m3508_pid[0], Shooter_L.shoot_speed, motor_m3508[0].set_v,5000,2500);
 	motor_m3508[1].send_I = pid_cal_s(&motor_m3508_pid[1], Shooter_L.shoot_speed, motor_m3508[1].set_v,5000,2500);
 	motor_m3508[2].send_I = pid_cal_s(&motor_m3508_pid[2], Shooter_R.shoot_speed, motor_m3508[2].set_v,5000,2500);
-	motor_m3508[3].send_I = pid_cal_s(&motor_m3508_pid[3], Shooter_R.shoot_speed, motor_m3508[3].set_v,5000,2500);*/
-	motor_m3508[0].send_I = I_test;
+	motor_m3508[3].send_I = pid_cal_s(&motor_m3508_pid[3], Shooter_R.shoot_speed, motor_m3508[3].set_v,5000,2500);
+	//测试代码
+	/*motor_m3508[0].send_I = I_test;
 	motor_m3508[1].send_I = I_test;
 	motor_m3508[2].send_I = I_test;
-	motor_m3508[3].send_I = I_test;
+	motor_m3508[3].send_I = I_test;*/
 }
 
 //===============================================摩擦轮减速到零================================================//
@@ -161,10 +162,10 @@ static void Friction_down()
 	motor_m3508[3].set_v=0;
 	
 	
-	motor_m3508[0].send_I = pid_cal_s(&motor_m3508_pid[1], motor_m3508[1].speed, motor_m3508[1].set_v,5000,2500);
-	motor_m3508[1].send_I = pid_cal_s(&motor_m3508_pid[2], motor_m3508[2].speed, motor_m3508[2].set_v,5000,2500);
-	motor_m3508[2].send_I = pid_cal_s(&motor_m3508_pid[3], motor_m3508[3].speed, motor_m3508[3].set_v,5000,2500);
-	motor_m3508[3].send_I = pid_cal_s(&motor_m3508_pid[4], motor_m3508[4].speed, motor_m3508[4].set_v,5000,2500);
+	motor_m3508[0].send_I = pid_cal_s(&motor_m3508_pid[0], motor_m3508[0].speed, motor_m3508[0].set_v,5000,2500);
+	motor_m3508[1].send_I = pid_cal_s(&motor_m3508_pid[1], motor_m3508[1].speed, motor_m3508[1].set_v,5000,2500);
+	motor_m3508[2].send_I = pid_cal_s(&motor_m3508_pid[2], motor_m3508[2].speed, motor_m3508[2].set_v,5000,2500);
+	motor_m3508[3].send_I = pid_cal_s(&motor_m3508_pid[3], motor_m3508[3].speed, motor_m3508[3].set_v,5000,2500);
 }
 
 
@@ -183,23 +184,23 @@ static void Bopan_speed_calc_L()
 	heat_space=Shooter_L.heat_limit-Shooter_L.shooter_heat; //热量增长空间=热量上限-实时热量
 	if(heat_space>=100)
 	{
-	target_shoot_rate_L=Shooter_L.cooling_rate/10*2;
+	target_shoot_rate_L=Shooter_L.cooling_rate/10*2;        //热量增长空间超100，两倍最高射频
 	}
 	else if(100>heat_space && heat_space>=50)
 	{
-	target_shoot_rate_L=Shooter_L.cooling_rate/10;
+	target_shoot_rate_L=Shooter_L.cooling_rate/10;           //热量增长空间在50~100，一倍最高射频
 	
 	}
-	else if(50>heat_space && heat_space>=C_heat_protect)
+	else if(50>heat_space && heat_space>=C_heat_protect)     //热量增长空间在C_heat_protect~50，0.8倍最高射频
  {
 	target_shoot_rate_L=Shooter_L.cooling_rate/10*0.8;
 	}
  else
  {
- target_shoot_rate_L=0;
+ target_shoot_rate_L=0;                                   //超热量停发
  }
 	
-motor_m2006[0].set_v=target_shoot_rate_L*K_shoot_rate_correct;
+motor_m2006[0].set_v=target_shoot_rate_L*K_shoot_rate_correct;      //注意：此处set_v代表的是目标射频，不是2006目标转速，通过调整K可快速更改射频   
 	
 }
 
@@ -210,16 +211,16 @@ static void Bopan_speed_calc_R()
 	heat_space=Shooter_R.heat_limit-Shooter_R.shooter_heat; //热量增长空间=热量上限-实时热量
 	if(heat_space>100)
 	{
-	target_shoot_rate_R=Shooter_R.cooling_rate/10*2;
+	target_shoot_rate_R=Shooter_R.cooling_rate/10*2;       //热量增长空间超100，两倍最高射频
 	}
 	else if(100>heat_space && heat_space>50)
 	{
-	target_shoot_rate_R=Shooter_R.cooling_rate/10;
+	target_shoot_rate_R=Shooter_R.cooling_rate/10;             //热量增长空间在50~100，一倍最高射频
 	
 	}
 	else if(50>heat_space && heat_space>=5)
  {
-	target_shoot_rate_R=Shooter_R.cooling_rate/10*0.8;
+	target_shoot_rate_R=Shooter_R.cooling_rate/10*0.8;          //热量增长空间在C_heat_protect~50，0.8倍最高射频
 	
 	}
  else
@@ -227,25 +228,29 @@ static void Bopan_speed_calc_R()
  target_shoot_rate_R=0;
  }
 	
-motor_m2006[1].set_v=target_shoot_rate_R*K_shoot_rate_correct;//目标射频*射频修正系数
+motor_m2006[1].set_v=target_shoot_rate_R*K_shoot_rate_correct;//目标射频*射频修正系数， 注意：此处set_v代表的是目标射频，不是2006目标转速!!!通过调整K可快速更改射频   
 	
 }
 
 //==========================================拨盘堵转检测==========================================//
 static void Bopan_judge()
 {if(motor_m2006[0].tor_current>C_bopan_block_I)//修改堵转电流
-	{bopan_reversal_flag_L=1;
+	{
+		bopan_reversal_flag_L=1;
 	}
-	else if(motor_m2006[0].tor_current<0 && motor_m2006[0].tor_current>-C_bopan_unblock_I)
-	{bopan_reversal_flag_L=0;
+	else if(motor_m2006[0].tor_current<0 && motor_m2006[0].tor_current>-C_bopan_unblock_I)                //正负号需要上车修改！！！！！
+	{
+		bopan_reversal_flag_L=0;
 	
 	}		
 	
 	if(motor_m2006[1].tor_current>C_bopan_block_I)
-	{bopan_reversal_flag_R=1;
+	{
+		bopan_reversal_flag_R=1;
 	}
 	else if(motor_m2006[1].tor_current<0 && motor_m2006[1].tor_current>-C_bopan_unblock_I)
-	{bopan_reversal_flag_R=0;
+	{
+		bopan_reversal_flag_R=0;
 	}		
 	
 }

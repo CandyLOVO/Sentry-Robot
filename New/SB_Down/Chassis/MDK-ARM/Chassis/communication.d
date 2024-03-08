@@ -37,3 +37,5 @@ chassis\communication.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 chassis\communication.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 chassis\communication.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 chassis\communication.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
+chassis\communication.o: ..\USER\PotocaLayer\judge.h
+chassis\communication.o: ../USER/DriverLayer/drv_usart.h

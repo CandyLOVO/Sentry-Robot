@@ -23,7 +23,8 @@ void Exchange_task(void const * argument);
 typedef struct
 {
 	uint8_t header;
-  float L_pitch;	//角度制     
+	uint8_t color; //1-red 2-blue
+  float L_pitch; //角度制     
   float L_yaw;
 	float R_pitch;
 	float R_yaw;
@@ -34,6 +35,9 @@ typedef struct
 typedef struct
 {
   uint8_t header;
+	uint8_t tracking;
+	uint8_t L_shoot;
+	uint8_t R_shoot;
 	float L_chase_pitch; //自瞄所需pitch到达的角度
 	float L_chase_yaw; //自瞄所需yaw到达的角度
 	float R_chase_pitch; //自瞄所需pitch到达的角度
