@@ -5,7 +5,8 @@
 #include "user_pid.h"
 #include "rc_potocal.h"
 
-#define mocalun_speed 19*350    //摩擦轮转速(根据实际情况更改快速调整射速）
+//#define mocalun_speed 19*350    //摩擦轮转速(根据实际情况更改快速调整射速）
+#define mocalun_speed 16384
 #define K_shoot_rate_correct 1 //射频修正参数（根据实际情况更改快速调整射频）
 #define C_bopan_block_I 16384   //拨盘堵转电流（测试后更改）
 #define C_bopan_unblock_I 50   //拨盘正常旋转电流（测试后更改）

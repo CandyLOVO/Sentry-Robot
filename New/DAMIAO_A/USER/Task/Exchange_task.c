@@ -33,10 +33,12 @@ static void Vision_Init();
 
 //================================================全局变量================================================//
 extern UART_HandleTypeDef huart4;
+extern UART_HandleTypeDef huart5;
 volatile uint8_t rx_len_uart4 = 0;  //接收一帧数据的长度
 volatile uint8_t recv_end_flag_uart4 = 0; //一帧数据接收完成标志
 uint8_t rx_buffer[100]={0};  //接收数据缓存数组
-uint8_t vision_send[100];	//视觉接口发送数据帧
+uint8_t vision_send_L[100];	//视觉接口发送数据帧
+uint8_t vision_send_R[100];
 
 Vision_t vision;	//视觉数据发送结构体
 Vision_receive_t vision_receive;	//视觉数据接收结构体
@@ -50,7 +52,7 @@ void Exchange_task(void const * argument)
   /* Infinite loop */
 	Vision_Init();
 	Sentry_Init();	//哨兵状态量及裁判系统数据初始化
-	__HAL_UART_ENABLE_IT(&huart4, UART_IT_IDLE); //使能uart1的IDLE中断
+	__HAL_UART_ENABLE_IT(&huart4, UART_IT_IDLE); //使能uart4的IDLE中断
 	HAL_UART_Receive_DMA(&huart4,rx_buffer,100); //开启接收
   for(;;)
   {
@@ -74,41 +76,17 @@ static void Get_keyboard()
 		remote.mouse.y = rc_ctrl.mouse.y;
 }
 
-//================================================通信接收任务（未使用，已经移植到中断中）================================================//
-static void Get_minipc() //UART4_IRQHandler()中
-{
-		if(recv_end_flag_uart4 == 1)  //接收完成标志
-		{			
-			if(rx_buffer[0] == 0xA5)
-			{
-				Vision_read(rx_buffer);
-			}
-			
-			recv_end_flag_uart4 = 0;//清除接收结束标志位
-			for(uint8_t i=0;i<rx_len_uart4;i++)
-				{
-					rx_buffer[i]=0;//清接收缓存
-				}
-				//memset(rx_buffer,0,rx_len);
-			rx_len_uart4 = 0;//清除计数
-			HAL_UART_Receive_DMA(&huart4,rx_buffer,BUFFER_SIZE);//重新打开DMA接收			
-		}
-}
-
 //================================================通信读取解算任务================================================//
 void Vision_read(uint8_t rx_buffer[])
 {
-	memcpy(&vision_receive.header,&rx_buffer[0],1);
-	memcpy(&vision_receive.L_chase_pitch,&rx_buffer[1],4);
-	memcpy(&vision_receive.L_chase_yaw,&rx_buffer[5],4);
-	memcpy(&vision_receive.R_chase_pitch,&rx_buffer[9],4);
-	memcpy(&vision_receive.R_chase_yaw,&rx_buffer[13],4);
-	memcpy(&vision_receive.naving,&rx_buffer[17],1);
-	memcpy(&vision_receive.nav_vx,&rx_buffer[18],4);
-	memcpy(&vision_receive.nav_vy,&rx_buffer[22],4);
-	memcpy(&vision_receive.L_distance,&rx_buffer[26],4);
-	memcpy(&vision_receive.R_distance,&rx_buffer[30],4);
-	memcpy(&vision_receive.checksum,&rx_buffer[34],2);
+	memcpy(&vision_receive.L_tracking,&rx_buffer[1],1);
+	memcpy(&vision_receive.L_shoot,&rx_buffer[2],1);
+	memcpy(&vision_receive.L_chase_yaw,&rx_buffer[3],4);
+	memcpy(&vision_receive.L_chase_pitch,&rx_buffer[7],4);
+	memcpy(&vision_receive.L_distance,&rx_buffer[11],4);
+//	memcpy(&vision_receive.naving,&rx_buffer[17],1);
+//	memcpy(&vision_receive.nav_vx,&rx_buffer[18],4);
+//	memcpy(&vision_receive.nav_vy,&rx_buffer[22],4);
 }
 
 //================================================数据stm32 -> 上位机================================================//
@@ -120,17 +98,21 @@ static void Stm_pc_send()
 	vision.R_pitch = Gimbal_right;
 	vision.R_yaw = Yaw_right_c;
 	
-	memcpy(&vision_send[0],&vision.header,1);
-	memcpy(&vision_send[1],&vision.L_pitch,4);
-	memcpy(&vision_send[5],&vision.L_yaw,4);
-	memcpy(&vision_send[9],&vision.R_pitch,4);
-	memcpy(&vision_send[13],&vision.R_yaw,4);
-	memcpy(&vision_send[17],&Sentry.Flag_mode,1);//哨兵目前的模式
-	memcpy(&vision_send[18],&Sentry.Flag_progress,1);//裁判系统比赛进程数据
-	memcpy(&vision_send[19],&Sentry.Flag_judge,1);//红蓝方检测，置0为裁判系统寄了，置1为我方是红色方，置2为我方是蓝色方
-	memcpy(&vision_send[20],&vision.checksum,2);
+	memcpy(&vision_send_L[0],&vision.header,1);
+	memcpy(&vision_send_L[1],&Sentry.Flag_judge,1); //红蓝方检测，置0为裁判系统寄了，置1为我方是红色方，置2为我方是蓝色方
+	memcpy(&vision_send_L[2],&vision.L_yaw,4);
+	memcpy(&vision_send_L[6],&vision.L_pitch,4);
+	memcpy(&vision_send_L[10],&vision.checksum,2);
+//	memcpy(&vision_send_L[17],&Sentry.Flag_mode,1);//哨兵目前的模式
+//	memcpy(&vision_send_L[18],&Sentry.Flag_progress,1);//裁判系统比赛进程数据
+	HAL_UART_Transmit_DMA(&huart4,vision_send_L,12);
 	
-	HAL_UART_Transmit_DMA(&huart4,vision_send,22);
+	memcpy(&vision_send_R[0],&vision.header,1);
+	memcpy(&vision_send_R[1],&Sentry.Flag_judge,1); //红蓝方检测，置0为裁判系统寄了，置1为我方是红色方，置2为我方是蓝色方
+	memcpy(&vision_send_R[2],&vision.R_yaw,4);
+	memcpy(&vision_send_R[6],&vision.R_pitch,4);
+	memcpy(&vision_send_R[10],&vision.checksum,2);
+	HAL_UART_Transmit_DMA(&huart5,vision_send_R,12);
 }
 
 //================================================弹道补偿API接口================================================//
@@ -180,8 +162,8 @@ static void Stm_pc_send()
 //================================================向can1上发送信息================================================//
 static void Send_to_CAN1()
 {
-	  //0x51，9025编码器值(范围为-180到180)和导航标志位
 		uint8_t ins_buf[8] = {0};
+		//0x51，陀螺仪值(范围为-180到180)和导航标志位
 		memcpy(&ins_buf[1],&Yaw_middle_c,4);
 		memcpy(&ins_buf[5],&vision_receive.naving,1);
 		can_remote(ins_buf,0x51);

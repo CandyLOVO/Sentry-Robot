@@ -110,8 +110,8 @@ void Yaw_task(void const *pvParameters)
 //================================================YAW轴PID参数和目标IMU初始化================================================//
 static void Yaw_init()
 {
-	pid_init(&motor_pid_can_2[7],500,0,0,30000,30000); //9025电机速度环
-	pid_init(&motor_pid_sita_can_2[7],1,0,0,30000,30000); //9025电机角度环
+	pid_init(&motor_pid_can_2[7],1000,0.01,0,30000,30000); //9025电机速度环
+	pid_init(&motor_pid_sita_can_2[7],3,0,35,30000,30000); //9025电机角度环
 	
 	pid_init(&motor_pid_can_2[0],300,0.01,0,30000,30000); //左头速度环
 	pid_init(&motor_pid_sita_can_2[0],3,0,10,30000,30000); //左头角度环
@@ -119,8 +119,10 @@ static void Yaw_init()
 	pid_init(&motor_pid_can_2[1],300,0.01,0,30000,30000); //右头速度环
 	pid_init(&motor_pid_sita_can_2[1],3,0,10,30000,30000); //右头角度环
 	
+//	//////////////////////
 //	Encoder_MF_read(motor_info_can_2[7].can_id);//读取当前编码器值
 //	Yaw_middle_c = MF_value(Init_encoder_middle , motor_info_can_2[7].rotor_angle , 65535); //将9025编码值转换到-180~0、0~180
+//	/////////////////////
 	
 	Yaw_left = motor_value(Init_encoder_left,motor_info_can_2[0].rotor_angle); //将6020编码值转换到-180~0、0~180
 	Yaw_right = motor_value(Init_encoder_right,motor_info_can_2[1].rotor_angle);
@@ -140,7 +142,10 @@ static void Yaw_read_imu()
 	//180 -180
 	
 	//三个电机编码值转化到0~+-180
+//	//////////////////////
 //	Yaw_middle_c = MF_value(Init_encoder_middle,motor_info_can_2[7].rotor_angle , 65535);  //IMU
+//	//////////////////////
+	
 	Yaw_left = motor_value(Init_encoder_left,motor_info_can_2[0].rotor_angle);
 	Yaw_right = motor_value(Init_encoder_right,motor_info_can_2[1].rotor_angle);
 	

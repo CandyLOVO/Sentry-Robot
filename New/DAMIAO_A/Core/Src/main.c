@@ -61,6 +61,7 @@ void MX_FREERTOS_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 uint8_t Rx[11];
+uint8_t Rx_R[128];
 /* USER CODE END 0 */
 
 /**
@@ -76,6 +77,11 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+
+
+
+
+
   HAL_Init();
 
   /* USER CODE BEGIN Init */
@@ -98,6 +104,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   MX_UART4_Init();
+  MX_UART5_Init();
   /* USER CODE BEGIN 2 */
 	can_1_user_init(&hcan1);//配置can1的过滤器
 	can_2_user_init(&hcan2);//配置can2的过滤器
@@ -105,6 +112,9 @@ int main(void)
 	
 	__HAL_UART_ENABLE_IT(&huart2,UART_IT_IDLE);
 	HAL_UART_Receive_DMA(&huart2,(uint8_t *)Rx,sizeof(Rx)); //陀螺仪接收中断
+	
+	__HAL_UART_ENABLE_IT(&huart5,UART_IT_IDLE); 
+	HAL_UART_Receive_DMA(&huart5,(uint8_t *)Rx_R,sizeof(Rx_R));
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

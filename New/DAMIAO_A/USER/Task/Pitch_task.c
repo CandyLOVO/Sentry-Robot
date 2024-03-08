@@ -2,8 +2,8 @@
 
 //===============================================全局变量================================================//
 //安装好后测量水平时两个pitch的值
-int16_t Init_encoder_left_gimbal = 90;		//左脑袋编码器水平时初始值(安装好后值固定)
-int16_t Init_encoder_right_gimbal = 8164;		//右脑袋
+int16_t Init_encoder_left_gimbal = 53;		//左脑袋编码器水平时初始值(安装好后值固定)
+int16_t Init_encoder_right_gimbal = 52;		//右脑袋
 float target_gimbal_left;	//左右脑袋的目标pitch（相对坐标）
 float target_gimbal_right;
 float Gimbal_left;
@@ -66,14 +66,14 @@ void Pitch_task(void const * argument)
 static void Gimbal_init()	
 {
 	
-	pid_init(&motor_pid_can_2[2],1,0,0,30000,30000); //左头速度环
-	pid_init(&motor_pid_sita_can_2[2],3,0,1,30000,30000); //左头角度环
+	pid_init(&motor_pid_can_2[2],270,0.3,0,30000,30000); //左头速度环  
+	pid_init(&motor_pid_sita_can_2[2],2.5,0,100,30000,30000); //左头角度环
 	
-	pid_init(&motor_pid_can_2[3],400,0,0,30000,30000); //右头速度环
-	pid_init(&motor_pid_sita_can_2[3],1,0,0,30000,30000); //右头角度环
+	pid_init(&motor_pid_can_2[3],270,0.3,0,30000,30000); //右头速度环
+	pid_init(&motor_pid_sita_can_2[3],2.5,0,100,30000,30000); //右头角度环
 	Gimbal_read_motor();
-	target_gimbal_left = Gimbal_left;
-	target_gimbal_right = Gimbal_right;
+	target_gimbal_left = 0;
+	target_gimbal_right = 0;
 } 
 
 //================================================解算当前编码器值================================================//
@@ -113,13 +113,13 @@ static void Gimbal_target_restrict()
 {
 	if(target_gimbal_left > 25)
 		target_gimbal_left=25;
-	else if(target_gimbal_left < -40)
-		target_gimbal_left=-40;
+	else if(target_gimbal_left < -30)
+		target_gimbal_left=-30;
 	
 	if(target_gimbal_right > 25)
 		target_gimbal_right=25;
-	else if(target_gimbal_right < -40)
-		target_gimbal_right=-40;
+	else if(target_gimbal_right < -30)
+		target_gimbal_right=-30;
 }
 
 //================================================实际值限位（注意有稳态误差时会有bug，未使用）================================================//
@@ -127,13 +127,13 @@ static void Gimbal_imu_restrict()
 {
 	if(Gimbal_left > 25)
 		target_gimbal_left=25;
-	else if(Gimbal_left < -40)
-		target_gimbal_left=-40;
+	else if(Gimbal_left < -30)
+		target_gimbal_left=-30;
 	
 	if(Gimbal_right > 25)
 		target_gimbal_right=25;
-	else if(Gimbal_right < -40)
-		target_gimbal_right=-40;
+	else if(Gimbal_right < -30)
+		target_gimbal_right=-30;
 }
 
 //================================================电流值计算================================================//
@@ -169,7 +169,7 @@ static void Gimbal_mode_searching()
 	if(Sentry.L_Flag_pitch_direction == 1)
 	{
 		target_gimbal_left-=0.05;
-		if(target_gimbal_left<-40)
+		if(target_gimbal_left<-30)
 		{
 			target_gimbal_left+=0.05;
 			Sentry.L_Flag_pitch_direction=2;
@@ -188,7 +188,7 @@ static void Gimbal_mode_searching()
 	if(Sentry.R_Flag_pitch_direction == 1)
 	{
 		target_gimbal_right-=0.05;
-		if(target_gimbal_right<-40)
+		if(target_gimbal_right<-30 )
 		{
 			target_gimbal_right+=0.05;
 			Sentry.R_Flag_pitch_direction=2;

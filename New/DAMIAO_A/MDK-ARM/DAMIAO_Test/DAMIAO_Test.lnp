@@ -49,6 +49,7 @@
 "damiao_test\crc.o"
 "damiao_test\pid.o"
 "damiao_test\handle_value.o"
+"damiao_test\communicate.o"
 --strict --scatter "DAMIAO_Test\DAMIAO_Test.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

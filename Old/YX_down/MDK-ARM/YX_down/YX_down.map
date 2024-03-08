@@ -4521,7 +4521,7 @@ Image component sizes
         12          4          0          0          0        502   bsp_imu_pwm.o
        452         40          0          0          0       1502   bsp_spi.o
        420         42          0          4         80       2478   can.o
-      2038        220          0        116          0     607643   chassis_task.o
+      2038        220          0        116          0     607639   chassis_task.o
        120          0          0          0          0      23233   cmsis_os.o
        170         16        768          2          0       3615   crc.o
        172          4          0          0          0        858   dma.o
@@ -4564,7 +4564,7 @@ Image component sizes
        900         78          0          0        780       3742   usart.o
 
     ----------------------------------------------------------------------
-     28366       1876       1376        524      20676    1652819   Object Totals
+     28366       1876       1376        524      20676    1652815   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         42          0          6          5          5          0   (incl. Padding)
 
@@ -4654,8 +4654,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     35880       2504       1664        524      20772    1630791   Grand Totals
-     35880       2504       1664        104      20772    1630791   ELF Image Totals (compressed)
+     35880       2504       1664        524      20772    1630787   Grand Totals
+     35880       2504       1664        104      20772    1630787   ELF Image Totals (compressed)
      35880       2504       1664        104          0          0   ROM Totals
 
 ==============================================================================

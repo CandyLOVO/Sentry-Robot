@@ -85,7 +85,7 @@ void Chassis_init()
 
 void Yaw_Diff()
 {
-	UpData.yaw_up = 0; //测试舵轮 可删
+//	UpData.yaw_up = 0; //测试舵轮 可删
 	error_theta = UpData.yaw_up - INS_angle[0]; 
 	error_theta = error_theta*3.1415926/180; //转化为弧度制
 }

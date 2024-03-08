@@ -35,7 +35,8 @@ typedef struct
 typedef struct
 {
   uint8_t header;
-	uint8_t tracking;
+	uint8_t L_tracking;
+	uint8_t R_tracking;
 	uint8_t L_shoot;
 	uint8_t R_shoot;
 	float L_chase_pitch; //自瞄所需pitch到达的角度
