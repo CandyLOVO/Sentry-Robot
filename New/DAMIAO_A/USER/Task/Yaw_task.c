@@ -110,14 +110,21 @@ void Yaw_task(void const *pvParameters)
 //================================================YAW轴PID参数和目标IMU初始化================================================//
 static void Yaw_init()
 {
-	pid_init(&motor_pid_can_2[7],1000,0.01,0,30000,30000); //9025电机速度环
-	pid_init(&motor_pid_sita_can_2[7],3,0,35,30000,30000); //9025电机角度环
+//	pid_init(&motor_pid_can_2[7],1000,0.01,0,30000,30000); //9025电机速度环
+//	pid_init(&motor_pid_sita_can_2[7],3,0,35,30000,30000); //9025电机角度环
 	
-	pid_init(&motor_pid_can_2[0],200,0.01,0,30000,30000); //左头速度环
-	pid_init(&motor_pid_sita_can_2[0],25,0,10,30000,30000); //左头角度环
+//	pid_init(&motor_pid_can_2[0],200,0.01,0,30000,30000); //左头速度环
+//	pid_init(&motor_pid_sita_can_2[0],25,0,10,30000,30000); //左头角度环
 	
-	pid_init(&motor_pid_can_2[1],200,0.01,0,30000,30000); //右头速度环
-	pid_init(&motor_pid_sita_can_2[1],25,0,10,30000,30000); //右头角度环
+//	pid_init(&motor_pid_can_2[1],200,0.01,0,30000,30000); //右头速度环
+//	pid_init(&motor_pid_sita_can_2[1],25,0,10,30000,30000); //右头角度环
+	
+	pid_init(&motor_pid_can_2[7],10,0,0,30000,30000); //9025电机速度环
+	pid_init(&motor_pid_sita_can_2[7],1,0,0,30000,30000);
+	pid_init(&motor_pid_can_2[0],10,0,0,30000,30000); //左头速度环
+	pid_init(&motor_pid_sita_can_2[0],1,0,0,30000,30000);
+	pid_init(&motor_pid_can_2[1],10,0,0,30000,30000); //右头速度环
+	pid_init(&motor_pid_sita_can_2[1],1,0,0,30000,30000);
 	
 //	//////////////////////
 //	Encoder_MF_read(motor_info_can_2[7].can_id);//读取当前编码器值

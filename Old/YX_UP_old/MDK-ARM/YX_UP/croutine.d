@@ -1,7 +1,7 @@
 yx_up\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/croutine.c
 yx_up\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-yx_up\croutine.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stddef.h
-yx_up\croutine.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stdint.h
+yx_up\croutine.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
+yx_up\croutine.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
 yx_up\croutine.o: ../Core/Inc/FreeRTOSConfig.h
 yx_up\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 yx_up\croutine.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
