@@ -310,7 +310,7 @@ static void Chassis_mode_ready()
 			Vx = nav_vx;
 			Vy = nav_vy;
 //			Wz = nav_yaw;
-			Wz = 0;
+			Wz = 2500;
  			Chassis_Curl();
 }
 
@@ -345,6 +345,7 @@ static void Chassis_Power_Limit(double Chassis_pidout_target_limit)
 	Watch_Power_Max=Klimit;	//限制值
 	Watch_Power=Sentry.Myself_chassis_power;	//功率值
 	Watch_Buffer=60;//Hero_chassis_power_buffer;//缓冲能量值，初始值是1，0，0
+//	Watch_Buffer = Sentry.Myself_chassis_power;
 	//get_chassis_power_and_buffer(&Power, &Power_Buffer, &Power_Max);//通过裁判系统和编码器值获取（限制值，实时功率，实时缓冲能量）
 
 	Chassis_pidout_max=61536;//32768，40，960			15384 * 4，取了4个3508电机最大电流的一个保守值

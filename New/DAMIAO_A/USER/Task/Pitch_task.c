@@ -66,11 +66,11 @@ void Pitch_task(void const * argument)
 static void Gimbal_init()	
 {
 	
-	pid_init(&motor_pid_can_2[2],270,0.3,0,30000,30000); //左头速度环  
-	pid_init(&motor_pid_sita_can_2[2],2.5,0,100,30000,30000); //左头角度环
+	pid_init(&motor_pid_can_2[2],200,0.1,0,30000,30000); //左头速度环  
+	pid_init(&motor_pid_sita_can_2[2],30,0,100,30000,30000); //左头角度环
 	
-	pid_init(&motor_pid_can_2[3],270,0.3,0,30000,30000); //右头速度环
-	pid_init(&motor_pid_sita_can_2[3],2.5,0,100,30000,30000); //右头角度环
+	pid_init(&motor_pid_can_2[3],200,0.1,0,30000,30000); //右头速度环
+	pid_init(&motor_pid_sita_can_2[3],30,0,100,30000,30000); //右头角度环
 	Gimbal_read_motor();
 	target_gimbal_left = 0;
 	target_gimbal_right = 0;
@@ -216,11 +216,11 @@ static void Gimbal_mode_judge()
 	{
 		if(rc_ctrl.rc.ch[1] >= -660 && rc_ctrl.rc.ch[1]<= 660)
 		{
-			target_gimbal_right -= rc_ctrl.rc.ch[1]/660.0 * Pitch_sita_weight; 
+			target_gimbal_left -= rc_ctrl.rc.ch[1]/660.0 * Pitch_sita_weight; 
 		}
 		if(rc_ctrl.rc.ch[3] >= -660 && rc_ctrl.rc.ch[3]<= 660)
 		{
-			target_gimbal_left -= rc_ctrl.rc.ch[3]/660.0 * Pitch_sita_weight; 
+			target_gimbal_right -= rc_ctrl.rc.ch[3]/660.0 * Pitch_sita_weight; 
 		}
 	}
 	

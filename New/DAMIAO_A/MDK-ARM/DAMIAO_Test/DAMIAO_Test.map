@@ -1164,7 +1164,7 @@ Section Cross References
     pitch_task.o(i.Gimbal_mode_judge) refers to pitch_task.o(i.Gimbal_mode_searching) for Gimbal_mode_searching
     pitch_task.o(i.Gimbal_mode_judge) refers to exchange_task.o(.bss) for Sentry
     pitch_task.o(i.Gimbal_mode_judge) refers to remote_control.o(.bss) for rc_ctrl
-    pitch_task.o(i.Gimbal_mode_judge) refers to pitch_task.o(.data) for target_gimbal_right
+    pitch_task.o(i.Gimbal_mode_judge) refers to pitch_task.o(.data) for target_gimbal_left
     pitch_task.o(i.Gimbal_mode_searching) refers to f2d.o(x$fpl$f2d) for __aeabi_f2d
     pitch_task.o(i.Gimbal_mode_searching) refers to daddsub_clz.o(x$fpl$dsub) for __aeabi_dsub
     pitch_task.o(i.Gimbal_mode_searching) refers to d2f.o(x$fpl$d2f) for __aeabi_d2f
