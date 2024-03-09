@@ -137,19 +137,19 @@ float pid_calc_sita_span_left(pid_struct_t *pid,float target, float respond)//´ø
 	{
 		err += 360;
 	}
-		
-	if(Yaw_left>=160 || Yaw_left<=-160)
+	
+	if((Yaw_left>=170 && Yaw_left<=180) || (Yaw_left<=-170 && Yaw_left>=-180))
 	{
-		if(err>=140)
-		{
-			err -= 360;
-		}
-	}
-	else if(Yaw_left>=-20 && Yaw_left<=20)
-	{
-		if(err<=-140)
+		if(err<-20)
 		{
 			err += 360;
+		}
+	}
+	else if(Yaw_left>=-10 && Yaw_left<=10)
+	{
+		if(err>20)
+		{
+			err -= 360;
 		}
 	}
 	
@@ -183,19 +183,19 @@ float pid_calc_sita_span_right(pid_struct_t *pid,float target, float respond)//´
 	{
 		err += 360;
 	}
-		
-	if(Yaw_right>=160 || Yaw_right<=-160)
+	
+	if((Yaw_right>=170 && Yaw_right<=180) || (Yaw_right<=-170 && Yaw_right>=-180))
 	{
-		if(err<=-140)
-		{
-			err += 360;
-		}
-	}
-	else if(Yaw_right>=-20 && Yaw_right<=20)
-	{
-		if(err>=140)
+		if(err>20)
 		{
 			err -= 360;
+		}
+	}
+	else if(Yaw_right>=-10 && Yaw_right<=10)
+	{
+		if(err<-20)
+		{
+			err += 360;
 		}
 	}
 	

@@ -158,77 +158,72 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>target_yaw_middle,0x0A</ItemText>
+          <ItemText>Yaw_middle_c</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Yaw_middle_c,0x0A</ItemText>
+          <ItemText>Yaw_left</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>target_speed_can_2[7],0x0A</ItemText>
+          <ItemText>Yaw_right</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>motor_info_can_2[7],0x0A</ItemText>
+          <ItemText>motor_info_can_2[0],0x0A</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Roll</ItemText>
+          <ItemText>motor_info_can_2[1],0x0A</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Pitch</ItemText>
+          <ItemText>target_yaw_left,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>6</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Yaw</ItemText>
+          <ItemText>target_speed_can_2[0]</ItemText>
         </Ww>
         <Ww>
           <count>7</count>
           <WinNumber>1</WinNumber>
-          <ItemText>rc_ctrl,0x0A</ItemText>
+          <ItemText>target_yaw_right</ItemText>
         </Ww>
         <Ww>
           <count>8</count>
           <WinNumber>1</WinNumber>
-          <ItemText>motor_info_can_2[2],0x0A</ItemText>
+          <ItemText>target_yaw_middle</ItemText>
         </Ww>
         <Ww>
           <count>9</count>
           <WinNumber>1</WinNumber>
-          <ItemText>motor_info_can_2[3],0x0A</ItemText>
+          <ItemText>motor_info_can_2[7],0x0A</ItemText>
         </Ww>
         <Ww>
           <count>10</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Gimbal_left</ItemText>
+          <ItemText>target_speed_can_2[7]</ItemText>
         </Ww>
         <Ww>
           <count>11</count>
           <WinNumber>1</WinNumber>
-          <ItemText>target_gimbal_left</ItemText>
+          <ItemText>Sentry,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>12</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Gimbal_right</ItemText>
+          <ItemText>vision_receive</ItemText>
         </Ww>
         <Ww>
           <count>13</count>
           <WinNumber>1</WinNumber>
-          <ItemText>target_gimbal_right</ItemText>
-        </Ww>
-        <Ww>
-          <count>14</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>target_speed_can_2[2]</ItemText>
+          <ItemText>vision_send_R[0]</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
