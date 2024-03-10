@@ -176,7 +176,7 @@ static void gimbal_can_send()
 	CAN_TxHeaderTypeDef tx_header;
   uint8_t             tx_data[8];
 	
-	tx_header.StdId = 0x2ff;
+	tx_header.StdId = 0x1ff;
   tx_header.IDE   = CAN_ID_STD;//标准帧
   tx_header.RTR   = CAN_RTR_DATA;//数据帧
   tx_header.DLC   = 8;		//发送数据长度（字节）

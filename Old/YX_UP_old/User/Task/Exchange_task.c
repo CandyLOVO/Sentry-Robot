@@ -31,7 +31,7 @@ extern UART_HandleTypeDef huart1;
 volatile uint8_t rx_len_uart1 = 0;  //接收一帧数据的长度
 volatile uint8_t recv_end_flag_uart1 = 0; //一帧数据接收完成标志
 uint8_t rx_buffer[100]={0};  //接收数据缓存数组
-uint8_t vision_send[12];	//视觉接口发送数据帧
+uint8_t vision_send[15];	//视觉接口发送数据帧
 
 volatile Chase_t chase;	//赋予电机追踪的数据结构体
 Vision_t vision;	//视觉数据发送结构体
@@ -150,11 +150,13 @@ static void Stm_pc_send()
 	memcpy(&vision_send[1],&vision.color,1);
 	memcpy(&vision_send[2],&vision.yaw_L,4);
 	memcpy(&vision_send[6],&vision.pitch_L,4);
+	memcpy(&vision_send[10],&vision.process,1);
+	memcpy(&vision_send[11],&vision.self_help,2);
 //	memcpy(&vision_send[10],&vision.yaw_R,4);
 //	memcpy(&vision_send[14],&vision.pitch_R,4);
-	memcpy(&vision_send[10],&vision.checksum,2);
+	memcpy(&vision_send[13],&vision.checksum,2);
 	
-	HAL_UART_Transmit_DMA(&huart1,vision_send,12);
+	HAL_UART_Transmit_DMA(&huart1,vision_send,15);
 }
 
 //================================================弹道补偿API接口================================================//

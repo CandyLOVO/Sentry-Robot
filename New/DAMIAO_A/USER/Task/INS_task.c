@@ -54,7 +54,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 			{
 				Yaw -= 360;
 			}
-			Yaw_middle_c = -Yaw;
+			Yaw_middle_c = Yaw;
 		}
 		HAL_UART_Receive_DMA(&huart2,(uint8_t *)Rx,sizeof(Rx));
 	}

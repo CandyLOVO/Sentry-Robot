@@ -38,7 +38,9 @@ typedef struct
 	float pitch_R;
 	float yaw_R;
 	uint8_t color;
-  uint16_t checksum;     // crc16校验位 	
+  uint16_t checksum;     // crc16校验位
+	uint8_t process;
+	uint16_t self_help;
 } 	Vision_t; //视觉通信结构体
 
 //================================================ minipc -> stm32 (接收结构体)================================================//
