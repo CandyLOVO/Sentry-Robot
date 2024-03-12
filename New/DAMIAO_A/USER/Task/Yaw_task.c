@@ -20,6 +20,7 @@ int16_t Init_encoder_middle; //一级云台,正前方要和底盘C板正前方朝向一致
 
 float Yaw_middle_c;	//一级云台yaw(只有绝对坐标) 9025转化为0~+-180后的编码值
 //逆时针：0~180,-180~0
+float Yaw_value;
 float Yaw_left;	//现在时刻左脑袋的yaw（相对坐标） 编码值转化为0~+-180后的编码值
 float Yaw_right;	//编码值转化为0~+-180后的编码值
 float Yaw_left_c;	//现在时刻左脑袋的yaw（绝对坐标） 相对于整车IMU正方向的角度值
@@ -128,11 +129,8 @@ static void Yaw_init()
 //	pid_init(&motor_pid_can_2[1],80,0.01,0,30000,30000); //右头速度环
 //	pid_init(&motor_pid_sita_can_2[1],3,0,5,30000,30000); //右头角度环
 	
-	
-//	//////////////////////
-//	Encoder_MF_read(motor_info_can_2[7].can_id);//读取当前编码器值
-//	Yaw_middle_c = MF_value(Init_encoder_middle , motor_info_can_2[7].rotor_angle , 65535); //将9025编码值转换到-180~0、0~180
-//	/////////////////////
+	Encoder_MF_read(motor_info_can_2[7].can_id);//9025读取当前编码器值
+	Yaw_value = MF_value(Init_encoder_middle , motor_info_can_2[7].rotor_angle , 65535); //将9025编码值转换到-180~0、0~180
 	
 	Yaw_left = -motor_value(Init_encoder_left,motor_info_can_2[0].rotor_angle); //将6020编码值转换到-180~0、0~180
 	Yaw_right = -motor_value(Init_encoder_right,motor_info_can_2[1].rotor_angle);
@@ -152,10 +150,7 @@ static void Yaw_read_imu()
 	//180 -180
 	
 	//三个电机编码值转化到0~+-180
-//	//////////////////////
-//	Yaw_middle_c = MF_value(Init_encoder_middle,motor_info_can_2[7].rotor_angle , 65535);  //IMU
-//	//////////////////////
-	
+	Yaw_value = MF_value(Init_encoder_middle,motor_info_can_2[7].rotor_angle , 65535);	
 	Yaw_left = -motor_value(Init_encoder_left,motor_info_can_2[0].rotor_angle);
 	Yaw_right = -motor_value(Init_encoder_right,motor_info_can_2[1].rotor_angle);
 	
@@ -452,7 +447,8 @@ static void Yaw_mode_judge()
 			}
 			else if(Sentry.R_Flag_foe) //如果右头识别到目标
 			{
-				target_yaw_middle=vision_receive.R_chase_yaw;
+//				target_yaw_middle=vision_receive.R_chase_yaw;
+				target_yaw_middle=vision_receive.M_chase_yaw;
 				Delta_calc(vision_receive.R_distance);
 			}
 			target_yaw_left = -Delta; //左/右头向中间靠齐
@@ -482,26 +478,27 @@ static void Yaw_mode_judge()
 				target_yaw_right+=360;
 			
 			//左头卡限位，重新响应一次大Yaw
-			if(target_yaw_left>10 && target_yaw_left<170)
-			{
-				float Delta;	//规定它一直是个正数
-				target_yaw_middle=vision_receive.L_chase_yaw;
-				Delta_calc(vision_receive.L_distance);
-				target_yaw_left = -Delta;
-				target_yaw_right = Delta;
-				target_yaw_remote_left = -Delta;	//刷新巡航初始值，恢复巡航时更丝滑
-				target_yaw_remote_right = Delta;
-			}
+//			if(target_yaw_left>10 && target_yaw_left<170)
+//			{
+//				float Delta;	//规定它一直是个正数
+//				target_yaw_middle=vision_receive.L_chase_yaw;
+//				Delta_calc(vision_receive.L_distance);
+//				target_yaw_left = -Delta;
+//				target_yaw_right = Delta;
+//				target_yaw_remote_left = -Delta;	//刷新巡航初始值，恢复巡航时更丝滑
+//				target_yaw_remote_right = Delta;
+//			}
 			//右头卡限位
 			if(target_yaw_right<-10 && target_yaw_right>-170)
 			{
 				float Delta;	//规定它一直是个正数
-				target_yaw_middle=vision_receive.R_chase_yaw;
-				Delta_calc(vision_receive.R_distance);
-				target_yaw_left = -Delta;
-				target_yaw_right = Delta;
-				target_yaw_remote_left = -Delta;	//刷新巡航初始值，恢复巡航时更丝滑
-				target_yaw_remote_right = Delta;				
+//				target_yaw_middle=vision_receive.R_chase_yaw;
+				target_yaw_middle=vision_receive.M_chase_yaw;
+//				Delta_calc(vision_receive.R_distance);
+//				target_yaw_left = -Delta;
+//				target_yaw_right = Delta;
+//				target_yaw_remote_left = -Delta;	//刷新巡航初始值，恢复巡航时更丝滑
+//				target_yaw_remote_right = Delta;				
 			}
 		}
 	}

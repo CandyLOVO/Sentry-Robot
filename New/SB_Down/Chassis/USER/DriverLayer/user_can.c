@@ -109,20 +109,17 @@ void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4) //can2发送
 int error = 0;
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
-	if(hcan->Instance == CAN1) //接收上C板数据
+	if(hcan->Instance == CAN1) //CAN1接收上C板数据
 	{
 		CAN_RxHeaderTypeDef can_rx_message;
 		uint8_t can_recevie_data[8];
 		HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,&can_rx_message,can_recevie_data);
-//	if(can_rx_message.StdId == 0x404){
-//		memcpy(&UpData.yaw_up,&can_recevie_data,4); //接收上C板yaw(float)
-//	}
 		if(can_rx_message.StdId == 0x55){
 			UpData.yaw_up = can_recevie_data[1] | (can_recevie_data[2] << 8);
 		}
 	}
 	
-	if(hcan->Instance == CAN2) //can2发送6020、3508数据 FIFO0
+	if(hcan->Instance == CAN2) //CAN2接收6020、3508数据
 	{
 		CAN_RxHeaderTypeDef can_rx_message;
 		uint8_t can_receive_data[8];

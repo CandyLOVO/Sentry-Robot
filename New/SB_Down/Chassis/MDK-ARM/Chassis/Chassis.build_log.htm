@@ -17,7 +17,7 @@ Library Manager: ArmAr.exe V5.06 update 7 (build 960)
 Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
 CPU DLL:         SARMCM3.DLL V5.38.0.0
 Dialog DLL:      DCM.DLL V1.17.5.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.1.0.0
+Target DLL:      CMSIS_AGDI.dll V1.33.15.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
@@ -27,38 +27,24 @@ Project File Date:  02/25/2024
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin'
 Build target 'Chassis'
-compiling user_can.c...
-..\USER\DriverLayer\user_can.h(5): warning:  #1295-D: Deprecated declaration CAN1_Init - give arg types
-  void CAN1_Init();
-..\USER\DriverLayer\user_can.h(6): warning:  #1295-D: Deprecated declaration CAN2_Init - give arg types
-  void CAN2_Init();
-..\USER\DriverLayer\user_can.h(23): warning:  #1-D: last line of file ends without a newline
+compiling motion_overlay.c...
+..\USER\motion_overlay.h(11): warning:  #1295-D: Deprecated declaration rotate_6020 - give arg types
+  void rotate_6020();
+..\USER\motion_overlay.h(13): warning:  #1-D: last line of file ends without a newline
   #endif
-..\USER\DriverLayer\user_can.c: 3 warnings, 0 errors
-compiling rc_potocal.c...
+..\USER\handle_value.h(8): warning:  #1-D: last line of file ends without a newline
+  #endif
 ..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
   #endif
 ..\USER\Task\chassis.h(6): warning:  #1295-D: Deprecated declaration Yaw_Diff - give arg types
   void Yaw_Diff();
 ..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
   #endif
-../USER/DriverLayer/drv_can.h(13): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\USER\PotocaLayer\rc_potocal.h(55): warning:  #1-D: last line of file ends without a newline
-  #endif
-../USER/DriverLayer/user_can.h(5): warning:  #1295-D: Deprecated declaration CAN1_Init - give arg types
-  void CAN1_Init();
-../USER/DriverLayer/user_can.h(6): warning:  #1295-D: Deprecated declaration CAN2_Init - give arg types
-  void CAN2_Init();
-../USER/DriverLayer/user_can.h(23): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\USER\PotocaLayer\rc_potocal.c(125): warning:  #1-D: last line of file ends without a newline
-  }
-..\USER\PotocaLayer\rc_potocal.c: 9 warnings, 0 errors
+..\USER\motion_overlay.c: 6 warnings, 0 errors
 linking...
-Program Size: Code=40840 RO-data=1988 RW-data=496 ZI-data=20824  
+Program Size: Code=42268 RO-data=1992 RW-data=496 ZI-data=20824  
 FromELF: creating hex file...
-"Chassis\Chassis.axf" - 0 Error(s), 12 Warning(s).
+"Chassis\Chassis.axf" - 0 Error(s), 6 Warning(s).
 
 <h2>Software Packages used:</h2>
 

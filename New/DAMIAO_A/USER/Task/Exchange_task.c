@@ -111,6 +111,7 @@ static void Stm_pc_send()
 	memcpy(&vision_send_R[1],&Sentry.Flag_judge,1); //红蓝方检测，置0为裁判系统寄了，置1为我方是红色方，置2为我方是蓝色方
 	memcpy(&vision_send_R[2],&vision.R_yaw,4);
 	memcpy(&vision_send_R[6],&vision.R_pitch,4);
+	//crc
 	memcpy(&vision_send_R[10],&vision.checksum,2);
 	HAL_UART_Transmit_DMA(&huart5,vision_send_R,12);
 }
@@ -179,6 +180,7 @@ static void Send_to_CAN1()
 		memcpy(&ins_buf[0],&Sentry.Flag_mode,1);//目前的自瞄模式
 		memcpy(&ins_buf[1],&Sentry.L_Flag_foe,1);//左头视觉识别标志位
 		memcpy(&ins_buf[2],&Sentry.R_Flag_foe,1);//右头视觉识别标志位
+		memcmp(&ins_buf[3],&Yaw_value,4);//9025编码值（转化为0~+-180）
 		can_remote(ins_buf,0x53);
 		osDelay(1);
 }

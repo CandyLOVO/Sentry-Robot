@@ -43,6 +43,7 @@ typedef struct
 	float L_chase_yaw; //自瞄所需yaw到达的角度
 	float R_chase_pitch; //自瞄所需pitch到达的角度
 	float R_chase_yaw; //自瞄所需yaw到达的角度
+	float M_chase_yaw;
 	uint8_t naving; //导航标志位，为1导航
 	float nav_vx; //导航中x的速度
 	float nav_vy; //导航中y的速度

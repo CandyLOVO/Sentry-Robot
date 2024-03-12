@@ -50,7 +50,7 @@ void translational_control()
 	
 	translate_3508(rc_ctrl.rc.ch[2], rc_ctrl.rc.ch[3]);
 	for(int i=0;i<4;i++){
-		output_3508[i] = pid_cal_s(&PID_speed_3508[i],motor[i].speed,motor_speed[i],Max_out_s,Max_iout_s); //3508????
+		output_3508[i] = pid_cal_s(&PID_speed_3508[i],motor[i].speed,motor_speed[i],Max_out_s,Max_iout_s);
 	}
 	can_cmd_send_6020(output_6020[0],output_6020[1],output_6020[2],output_6020[3]);
 	can_cmd_send_3508(output_3508[0],output_3508[1],output_3508[2],output_3508[3]);
@@ -69,7 +69,7 @@ void rotate_control()
 	}
 	rotate_3508(rc_ctrl.rc.ch[4]); //滚轮控制旋转
 	for(int i=0;i<4;i++){
-		output_3508[i] = pid_cal_s(&PID_speed_3508[i],motor[i].speed,motor_speed[i],Max_out_s,Max_iout_s); //3508????
+		output_3508[i] = pid_cal_s(&PID_speed_3508[i],motor[i].speed,motor_speed[i],Max_out_s,Max_iout_s);
 	}
 	can_cmd_send_6020(output_6020[0],output_6020[1],output_6020[2],output_6020[3]);
 	can_cmd_send_3508(output_3508[0],output_3508[1],output_3508[2],output_3508[3]);
