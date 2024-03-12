@@ -59,7 +59,7 @@ void Chassis(void const * argument)
 		//遥控器控制底盘不同运动
 		//具体实现方式在"motion_overlay.c"
 		
-		if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==1)
+		if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3)
 		{
 			if(rc_ctrl.rc.ch[4]==0)
 			{
@@ -71,10 +71,10 @@ void Chassis(void const * argument)
 			}
 		}
 		
-//		else if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3)
-//		{
-//			compound_control(); //旋转加平移运动
-//		}
+		else if(rc_ctrl.rc.s[0]==2 && rc_ctrl.rc.s[1]==1)
+		{
+			compound_control(); //旋转加平移运动
+		}
     osDelay(2);
   }
 }
@@ -94,6 +94,10 @@ void Chassis_init()
 
 void Yaw_Diff()
 {
-	error_theta = Receive.yaw_value; //计算云台与底盘的夹角，后使用9025编码值【底盘传来0~180、0~-180】
+//	if(Receive.yaw_value<0)
+//		Receive.yaw_value += 360;
+//	else
+//		Receive.yaw_value = Receive.yaw_value;
+	error_theta = INS_angle[0]; //计算云台与底盘的夹角，后使用9025编码值【底盘传来0~180、0~-180】
 	error_theta = error_theta*3.1415926/180; //转化为弧度制
 }

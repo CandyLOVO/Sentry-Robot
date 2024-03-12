@@ -64,5 +64,7 @@ void Exchange_task(void const * argument)
 		Trans[6] = Sentry.bullet_frequence; //实时射频（单位为HZ）
 		can_remote(Trans,0x64);
 		osDelay(1);
+		
+		osDelay(1);
   }
 }

@@ -180,7 +180,7 @@ static void Send_to_CAN1()
 		memcpy(&ins_buf[0],&Sentry.Flag_mode,1);//目前的自瞄模式
 		memcpy(&ins_buf[1],&Sentry.L_Flag_foe,1);//左头视觉识别标志位
 		memcpy(&ins_buf[2],&Sentry.R_Flag_foe,1);//右头视觉识别标志位
-		memcmp(&ins_buf[3],&Yaw_value,4);//9025编码值（转化为0~+-180）
+		memcpy(&ins_buf[3],&Yaw_value,4);//9025编码值（转化为0~+-180）
 		can_remote(ins_buf,0x53);
 		osDelay(1);
 }
