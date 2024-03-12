@@ -18,6 +18,9 @@ typedef struct //CAN
 
 typedef struct //C
 {
-	float yaw_up;
+	float yaw_value;
+	uint8_t naving;
+	float nav_vx;
+	float nav_vy;
 }up_data;
 #endif

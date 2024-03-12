@@ -54,6 +54,7 @@
 "chassis\user_pid.o"
 "chassis\channel_changes.o"
 "chassis\chassis.o"
+"chassis\exchange_task.o"
 "chassis\bmi088driver.o"
 "chassis\bmi088middleware.o"
 "chassis\bsp_delay.o"

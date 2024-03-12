@@ -7,7 +7,7 @@ extern CAN_HandleTypeDef hcan2;
 CAN_TxHeaderTypeDef can_tx_message;
 uint8_t can_send_data[8];
 motor_info motor[8];
-up_data UpData;
+up_data Receive;
 
 void CAN1_Init() //CAN1过滤器配置
 {
@@ -54,12 +54,12 @@ void CAN2_Init() //CAN2过滤器配置
 void can_remote(uint8_t sbus_buf[],uint8_t can_send_id)
 {
 	CAN_TxHeaderTypeDef can_remote_message;
-	uint32_t remote_mail_box = (uint32_t)CAN_TX_MAILBOX1; //邮箱2
+	uint32_t remote_mail_box = (uint32_t)CAN_TX_MAILBOX0; //邮箱2
 	can_remote_message.StdId = can_send_id;
 	can_remote_message.IDE = CAN_ID_STD;
 	can_remote_message.RTR = CAN_RTR_DATA;
 	can_remote_message.DLC = 0x08;
-	
+		
 	HAL_CAN_AddTxMessage(&hcan1,&can_remote_message,sbus_buf,&remote_mail_box);
 }
 /*******************************************************************************************************************/
@@ -114,8 +114,18 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		CAN_RxHeaderTypeDef can_rx_message;
 		uint8_t can_recevie_data[8];
 		HAL_CAN_GetRxMessage(hcan,CAN_RX_FIFO0,&can_rx_message,can_recevie_data);
-		if(can_rx_message.StdId == 0x55){
-			UpData.yaw_up = can_recevie_data[1] | (can_recevie_data[2] << 8);
+		if(can_rx_message.StdId == 0x53)
+		{
+			memcpy(&Receive.yaw_value,&can_recevie_data[3],4); //9025编码值
+		}
+		if(can_rx_message.StdId == 0x51)
+		{
+			memcpy(&Receive.naving,&can_recevie_data[4],1);
+		}
+		if(can_rx_message.StdId == 0x52)
+		{
+			memcpy(&Receive.nav_vx,&can_recevie_data[0],4);
+			memcpy(&Receive.nav_vy,&can_recevie_data[4],4);
 		}
 	}
 	

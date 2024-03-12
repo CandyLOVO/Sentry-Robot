@@ -22,7 +22,7 @@
 extern motor_info motor[8]; //底盘电机数据
 extern RC_ctrl_t rc_ctrl; //遥控器数据
 extern fp32 INS_angle[3]; //下C板陀螺仪数据
-extern up_data UpData; //上C板数据
+extern up_data Receive; //上C板数据
 extern int16_t motor_angle[4]; //6020角度 在motion_overlay.c中计算 作为全局变量
 extern int16_t motor_speed[4]; //3508速度
 
@@ -94,7 +94,6 @@ void Chassis_init()
 
 void Yaw_Diff()
 {
-	UpData.yaw_up = 0; //测试舵轮 可删
-	error_theta = UpData.yaw_up - INS_angle[0]; //计算云台与底盘的夹角，后使用9025编码值【底盘传来0~180、0~-180】
+	error_theta = Receive.yaw_value; //计算云台与底盘的夹角，后使用9025编码值【底盘传来0~180、0~-180】
 	error_theta = error_theta*3.1415926/180; //转化为弧度制
 }

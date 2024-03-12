@@ -165,8 +165,8 @@ static void Send_to_CAN1()
 {
 		uint8_t ins_buf[8] = {0};
 		//0x51，陀螺仪值(范围为-180到180)和导航标志位
-		memcpy(&ins_buf[1],&Yaw_middle_c,4);
-		memcpy(&ins_buf[5],&vision_receive.naving,1);
+		memcpy(&ins_buf[0],&Yaw_middle_c,4);
+		memcpy(&ins_buf[4],&vision_receive.naving,1);
 		can_remote(ins_buf,0x51);
 		osDelay(1);
 		

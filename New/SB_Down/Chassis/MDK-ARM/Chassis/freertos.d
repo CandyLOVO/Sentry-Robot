@@ -56,3 +56,4 @@ chassis\freertos.o: ..\USER\Task\chassis.h
 chassis\freertos.o: ../USER/PotocaLayer/rc_potocal.h
 chassis\freertos.o: ../USER/DriverLayer/drv_can.h
 chassis\freertos.o: ..\USER\Task\INS_Task\ins_task\INS_task.h
+chassis\freertos.o: ..\USER\Task\Exchange_task.h

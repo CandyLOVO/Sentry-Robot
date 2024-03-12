@@ -28,6 +28,7 @@
 #include "chassis.h"
 #include "rc_potocal.h"
 #include "INS_task.h"
+#include "Exchange_task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -49,6 +50,7 @@
 /* USER CODE BEGIN Variables */
 osThreadId ChassisHandle;
 osThreadId InsTaskHandle;
+osThreadId ExchangeTaskHandle;
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
 
@@ -114,6 +116,9 @@ void MX_FREERTOS_Init(void) {
 	
 	osThreadDef(InsTask,INS_task,osPriorityRealtime,0,1024);
 	InsTaskHandle = osThreadCreate(osThread(InsTask),NULL);
+	
+	osThreadDef(Exchange,Exchange_task,osPriorityRealtime,0,1024);
+	ExchangeTaskHandle = osThreadCreate(osThread(Exchange),NULL);
   /* USER CODE END RTOS_THREADS */
 
 }

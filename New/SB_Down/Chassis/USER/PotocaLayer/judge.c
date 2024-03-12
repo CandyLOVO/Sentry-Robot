@@ -159,4 +159,14 @@ static void Update_data()
 	//比赛进程
 	Sentry.Flag_progress =  Judge_Hero.status.game_progress;	//比赛进程,1为准备阶段，2为自检，3为倒计时，4为对战阶段，5为比赛结束(结算时)
 	Sentry.Time_remain = Judge_Hero.status.stage_remain_time;		//比赛剩余时间
+	
+	//判断我方是红方还是蓝方（数字针对我是哨兵）
+	if(Sentry.Myself_id == 7)//红色方
+	{
+		Sentry.Flag_judge = 1;
+	}
+	else if(Sentry.Myself_id == 107)
+	{
+		Sentry.Flag_judge = 2;
+	}
 }
