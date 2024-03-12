@@ -54,7 +54,7 @@ void CAN2_Init() //CAN2过滤器配置
 void can_remote(uint8_t sbus_buf[],uint8_t can_send_id)
 {
 	CAN_TxHeaderTypeDef can_remote_message;
-	uint32_t remote_mail_box = (uint32_t)CAN_TX_MAILBOX0; //邮箱2
+	uint32_t remote_mail_box = (uint32_t)CAN_TX_MAILBOX0;
 	can_remote_message.StdId = can_send_id;
 	can_remote_message.IDE = CAN_ID_STD;
 	can_remote_message.RTR = CAN_RTR_DATA;

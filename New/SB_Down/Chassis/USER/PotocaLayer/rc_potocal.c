@@ -30,6 +30,7 @@ uint16_t v_flag;
 uint16_t b_flag;
 
 //  uint8_t temp_remote[8];
+
  uint8_t remote_data_rc1[8]; //传给上C板rc_ctrl.rc.ch[0]~[3]
  uint8_t remote_data_rc2[8]; //传给上C板rc_ctrl.rc[4]&rc_ctrl.rc.s&rc_ctrl.key
  uint8_t remote_data_mouse[8]; //传给上C板rc_ctrl.mouse
@@ -80,7 +81,7 @@ uint16_t b_flag;
 	
 	//传给上C板rc_ctrl.rc.s
 	for(int i=2;i<4;i++){
-		remote_data_rc2[i] = rc_ctrl.rc.s[(i-10)];
+		remote_data_rc2[i] = rc_ctrl.rc.s[(i-2)];
 	}
 	
 	//传给上C板rc_ctrl.key

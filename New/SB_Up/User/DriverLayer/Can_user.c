@@ -50,10 +50,11 @@ void can_2_user_init(CAN_HandleTypeDef* hcan )
 }
 
 //================================================can回调函数(中断)================================================//
+uint8_t             rx_data[8];
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//接受中断回调函数
 {
   CAN_RxHeaderTypeDef rx_header;
-	uint8_t             rx_data[8];
+//	uint8_t             rx_data[8];
 //================================================can1数据================================================//
   if(hcan->Instance == CAN1)
   {

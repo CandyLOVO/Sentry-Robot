@@ -71,10 +71,10 @@ void Chassis(void const * argument)
 			}
 		}
 		
-		else if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3)
-		{
-			compound_control(); //旋转加平移运动
-		}
+//		else if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3)
+//		{
+//			compound_control(); //旋转加平移运动
+//		}
     osDelay(2);
   }
 }

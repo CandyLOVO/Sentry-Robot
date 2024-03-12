@@ -432,7 +432,7 @@ static void Yaw_mode_judge()
 	{
 		if(Sentry.Flag_mode==0)  //搜寻目标
 		{
-//			Searching_Control_MF(); //9025巡航0.05
+			Searching_Control_MF(); //9025巡航0.05
 			Yaw_mode_searching(); //执行一次小yaw正/反转0.09度
 			target_yaw_left = target_yaw_remote_left;
 			target_yaw_right = target_yaw_remote_right;
