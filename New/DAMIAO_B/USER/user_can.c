@@ -11,7 +11,6 @@ motor_info motor_m3508[4];/*摩擦轮电机 id 1~4*/
 motor_info motor_m2006[2];/*拨盘电机 id 5~6*/
 Shooter_t Shooter_L;
 Shooter_t Shooter_R;
-uint8_t Flag_mode;
 void CAN1_Init()
 {
 	CAN_FilterTypeDef  can_filter;
@@ -108,9 +107,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		//接收发射标志
 	  if(can_rx_message.StdId == 0x53)
 		{
-			Flag_mode = can_receive_data[0];              //发射模式
-			Shooter_L.Fire_Flag = can_receive_data[1];   //视觉目标识别标识left
-			Shooter_R.Fire_Flag = can_receive_data[2];   //视觉目标识别表示right
+			Shooter_L.Fire_Flag = can_receive_data[0];   //视觉目标识别标识left
+			Shooter_R.Fire_Flag = can_receive_data[1];   //视觉目标识别表示right
 		}
 	
 		if(can_rx_message.StdId == 0x61)//左枪管数据接收

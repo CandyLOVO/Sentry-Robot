@@ -213,12 +213,12 @@
         <Ww>
           <count>11</count>
           <WinNumber>1</WinNumber>
-          <ItemText>can_recevie_data,0x0A</ItemText>
+          <ItemText>UpData,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>12</count>
           <WinNumber>1</WinNumber>
-          <ItemText>rc_ctrl</ItemText>
+          <ItemText>Receive</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>

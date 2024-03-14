@@ -1478,7 +1478,7 @@ Section Cross References
     chassis.o(i.Yaw_Diff) refers to dmul.o(x$fpl$dmul) for __aeabi_dmul
     chassis.o(i.Yaw_Diff) refers to ddiv.o(x$fpl$ddiv) for __aeabi_ddiv
     chassis.o(i.Yaw_Diff) refers to d2f.o(x$fpl$d2f) for __aeabi_d2f
-    chassis.o(i.Yaw_Diff) refers to ins_task.o(.bss) for INS_angle
+    chassis.o(i.Yaw_Diff) refers to user_can.o(.bss) for Receive
     chassis.o(i.Yaw_Diff) refers to chassis.o(.data) for .data
     exchange_task.o(i.Exchange_task) refers to user_can.o(i.can_remote) for can_remote
     exchange_task.o(i.Exchange_task) refers to cmsis_os.o(i.osDelay) for osDelay

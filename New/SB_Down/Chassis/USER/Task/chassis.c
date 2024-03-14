@@ -94,10 +94,6 @@ void Chassis_init()
 
 void Yaw_Diff()
 {
-//	if(Receive.yaw_value<0)
-//		Receive.yaw_value += 360;
-//	else
-//		Receive.yaw_value = Receive.yaw_value;
-	error_theta = INS_angle[0]; //计算云台与底盘的夹角，后使用9025编码值【底盘传来0~180、0~-180】
+	error_theta = Receive.yaw_value; //计算云台与底盘的夹角，后使用9025编码值【底盘传来0~180、0~-180】
 	error_theta = error_theta*3.1415926/180; //转化为弧度制
 }
