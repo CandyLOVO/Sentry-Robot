@@ -27,10 +27,36 @@ Project File Date:  03/12/2024
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin'
 Build target 'Chassis'
-compiling chassis.c...
+compiling user_pid.c...
+..\USER\DriverLayer\user_pid.h(20): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\DriverLayer\user_pid.c(78): warning:  #1-D: last line of file ends without a newline
+  }
+..\USER\DriverLayer\user_pid.c: 2 warnings, 0 errors
+compiling channel_changes.c...
+..\USER\Control\channel_changes.h(4): warning:  #1295-D: Deprecated declaration translational_control - give arg types
+  void translational_control();
+..\USER\Control\channel_changes.h(5): warning:  #1295-D: Deprecated declaration compound_control - give arg types
+  void compound_control();
+..\USER\Control\channel_changes.h(6): warning:  #1295-D: Deprecated declaration rotate_control - give arg types
+  void rotate_control();
+..\USER\Control\channel_changes.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
 ..\USER\Task\chassis.h(6): warning:  #1295-D: Deprecated declaration Yaw_Diff - give arg types
   void Yaw_Diff();
 ..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+../USER/DriverLayer/drv_can.h(13): warning:  #1-D: last line of file ends without a newline
+  #endif
+../USER/PotocaLayer/rc_potocal.h(55): warning:  #1-D: last line of file ends without a newline
+  #endif
+../USER/motion_overlay.h(11): warning:  #1295-D: Deprecated declaration rotate_6020 - give arg types
+  void rotate_6020();
+../USER/motion_overlay.h(13): warning:  #1-D: last line of file ends without a newline
+  #endif
+../USER/handle_value.h(8): warning:  #1-D: last line of file ends without a newline
   #endif
 ../USER/DriverLayer/user_can.h(5): warning:  #1295-D: Deprecated declaration CAN1_Init - give arg types
   void CAN1_Init();
@@ -40,33 +66,13 @@ compiling chassis.c...
   #endif
 ../USER/DriverLayer/user_pid.h(20): warning:  #1-D: last line of file ends without a newline
   #endif
-../USER/DriverLayer/drv_can.h(13): warning:  #1-D: last line of file ends without a newline
-  #endif
-../USER/PotocaLayer/rc_potocal.h(55): warning:  #1-D: last line of file ends without a newline
-  #endif
-../USER/handle_value.h(8): warning:  #1-D: last line of file ends without a newline
-  #endif
-../USER/motion_overlay.h(11): warning:  #1295-D: Deprecated declaration rotate_6020 - give arg types
-  void rotate_6020();
-../USER/motion_overlay.h(13): warning:  #1-D: last line of file ends without a newline
-  #endif
-../USER/Control/channel_changes.h(4): warning:  #1295-D: Deprecated declaration translational_control - give arg types
-  void translational_control();
-../USER/Control/channel_changes.h(5): warning:  #1295-D: Deprecated declaration compound_control - give arg types
-  void compound_control();
-../USER/Control/channel_changes.h(6): warning:  #1295-D: Deprecated declaration rotate_control - give arg types
-  void rotate_control();
-../USER/Control/channel_changes.h(7): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\USER\Task\chassis.c(98): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  	error_theta = error_theta*3.1415926/180; //转化为弧度制
-..\USER\Task\chassis.c(99): warning:  #1-D: last line of file ends without a newline
-  }
-..\USER\Task\chassis.c: 17 warnings, 0 errors
+..\USER\Control\channel_changes.c(112): warning:  #1-D: last line of file ends without a newline
+  /****************************************************************************************************************************/
+..\USER\Control\channel_changes.c: 17 warnings, 0 errors
 linking...
-Program Size: Code=42676 RO-data=2028 RW-data=504 ZI-data=20840  
+Program Size: Code=42768 RO-data=2032 RW-data=508 ZI-data=20844  
 FromELF: creating hex file...
-"Chassis\Chassis.axf" - 0 Error(s), 17 Warning(s).
+"Chassis\Chassis.axf" - 0 Error(s), 19 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -90,7 +96,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.6.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

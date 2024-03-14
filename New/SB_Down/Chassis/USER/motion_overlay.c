@@ -66,8 +66,8 @@ void compound_movement_3508(int16_t x,int16_t y)
 	
 	//两个3508朝内 两个3508朝外
 	motor_speed[0] =  sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy + omega*radius*cosin),2)); //平移与旋转叠加后的向量长度
-	motor_speed[1] =  sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
-	motor_speed[2] =  sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
+	motor_speed[1] = -sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
+	motor_speed[2] = -sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
 	motor_speed[3] =  sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy + omega*radius*cosin),2));
 }
 
@@ -79,8 +79,8 @@ void compound_movement_6020(int16_t x,int16_t y)
 	
 	//两个3508朝内 两个3508朝外
 	motor_angle[0] = remote_value(((float)vx + omega*radius*cosin), ((float)vy + omega*radius*cosin));
-	motor_angle[1] = remote_value(((float)vx + omega*radius*cosin), ((float)vy - omega*radius*cosin))-180;
-	motor_angle[2] = remote_value(((float)vx - omega*radius*cosin), ((float)vy - omega*radius*cosin))-180;
+	motor_angle[1] = remote_value(((float)vx + omega*radius*cosin), ((float)vy - omega*radius*cosin));
+	motor_angle[2] = remote_value(((float)vx - omega*radius*cosin), ((float)vy - omega*radius*cosin));
 	motor_angle[3] = remote_value(((float)vx - omega*radius*cosin), ((float)vy + omega*radius*cosin));
 }
 /********************************************************************************************************************************/

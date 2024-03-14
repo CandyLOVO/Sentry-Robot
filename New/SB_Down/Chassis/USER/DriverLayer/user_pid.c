@@ -1,5 +1,7 @@
 #include "user_pid.h"
 
+extern int16_t limit;
+
 int16_t limit_max(int32_t value,int32_t Max_out)
 {
 	if(value > Max_out){
@@ -49,15 +51,7 @@ int16_t pid_cal_a(pidTypeDef *PID,float get,float set,int16_t Max_out,int16_t Ma
 	PID->Max_iout = Max_iout;
 	PID->error[0] = PID->error[1];
 	PID->error[1] = PID->set - PID->get;
-//	if((PID->set - PID->get) > 4096){
-//		PID->get = PID->get + 8192;
-//	}
-//	else if((PID->set - PID->get) < -4096){
-//		PID->get = PID->get - 8192;
-//	}
-//	else{
-//		PID->get = PID->get;
-//	}
+	limit = PID->error[1];
 	
 	if(PID->error[1] > 180){
 		PID->error[1] = PID->error[1] - 360;
@@ -67,6 +61,11 @@ int16_t pid_cal_a(pidTypeDef *PID,float get,float set,int16_t Max_out,int16_t Ma
 	}
 	else{
 		PID->error[1] = PID->error[1];
+	}
+	
+	if ((PID->error[1]==180) || (PID->error[1]==-180))
+	{
+		PID->error[1] = 0;
 	}
 	
 	PID->pout = PID->Kp * PID->error[1];
