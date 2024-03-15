@@ -37,7 +37,7 @@ float remote_value(int16_t x, int16_t y)
 		alpha = 90;
 		return alpha;
 	}
-		else if(x==0 && y==0){
+	else{
 		return alpha;
 	}
 }

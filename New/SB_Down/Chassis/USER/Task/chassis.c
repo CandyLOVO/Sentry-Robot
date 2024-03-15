@@ -75,6 +75,7 @@ void Chassis(void const * argument)
 		{
 			compound_control(); //旋转加平移运动
 		}
+
     osDelay(2);
   }
 }
