@@ -66,4 +66,5 @@ damiao_test\pitch_task.o: ../USER/AlgorithmLayer/handle_value.h
 damiao_test\pitch_task.o: ../USER/PotocaLayer/MF_User.h
 damiao_test\pitch_task.o: ..\USER\Task\Exchange_task.h
 damiao_test\pitch_task.o: ..\USER\Task\Pitch_task.h
+damiao_test\pitch_task.o: ../USER/AlgorithmLayer/CRC.h
 damiao_test\pitch_task.o: ../Core/Inc/stm32f4xx_it.h

@@ -52,7 +52,7 @@ void translational_control()
 	translate_3508(rc_ctrl.rc.ch[2], rc_ctrl.rc.ch[3]);
 	for(int i=0;i<4;i++){
 		output_3508[i] = pid_cal_s(&PID_speed_3508[i],motor[i].speed,motor_speed[i],Max_out_s,Max_iout_s);
-		if (limit==180 || limit==-180)
+		if (limit>90 || limit<-90)
 		{
 			output_3508[i] = -output_3508[i];
 		}
@@ -75,7 +75,7 @@ void rotate_control()
 	rotate_3508(rc_ctrl.rc.ch[4]); //滚轮控制旋转
 	for(int i=0;i<4;i++){
 		output_3508[i] = pid_cal_s(&PID_speed_3508[i],motor[i].speed,motor_speed[i],Max_out_s,Max_iout_s);
-		if (limit==180 || limit==-180)
+		if (limit>90 || limit<-90)
 		{
 			output_3508[i] = -output_3508[i];
 		}
@@ -101,7 +101,7 @@ void compound_control()
 	compound_movement_3508(rc_ctrl.rc.ch[2], rc_ctrl.rc.ch[3]);
 	for(int i=0;i<4;i++){
 		output_3508[i] = pid_cal_s(&PID_speed_3508[i],motor[i].speed,motor_speed[i],Max_out_s,Max_iout_s);
-		if (limit==180 || limit==-180)
+		if (limit>90 || limit<-90)
 		{
 			output_3508[i] = -output_3508[i];
 		}

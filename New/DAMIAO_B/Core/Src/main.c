@@ -60,7 +60,7 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+uint8_t Rx[101];
 /* USER CODE END 0 */
 
 /**
@@ -95,10 +95,15 @@ int main(void)
   MX_CAN1_Init();
   MX_CAN2_Init();
   MX_USART3_UART_Init();
+  MX_USART1_UART_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 	CAN1_Init();
 	CAN2_Init();
 	USART3_Init();
+	
+	__HAL_UART_ENABLE_IT(&huart2,UART_IT_IDLE);
+	HAL_UART_Receive_DMA(&huart2,(uint8_t *)Rx,sizeof(Rx)); //Õ”¬›“«Ω” ’÷–∂œ
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

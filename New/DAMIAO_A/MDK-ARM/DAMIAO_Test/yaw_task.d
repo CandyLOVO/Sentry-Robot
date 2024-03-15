@@ -67,4 +67,5 @@ damiao_test\yaw_task.o: ..\USER\Task\Pitch_task.h
 damiao_test\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 damiao_test\yaw_task.o: ..\USER\Task\Exchange_task.h
 damiao_test\yaw_task.o: ../Core/Inc/stm32f4xx_it.h
+damiao_test\yaw_task.o: ../USER/AlgorithmLayer/CRC.h
 damiao_test\yaw_task.o: ..\USER\Task\Ins_task.h

@@ -67,3 +67,4 @@ damiao_test\communicate.o: ../USER/Task/Exchange_task.h
 damiao_test\communicate.o: ../USER/Task/Pitch_task.h
 damiao_test\communicate.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 damiao_test\communicate.o: ../Core/Inc/stm32f4xx_it.h
+damiao_test\communicate.o: ../USER/AlgorithmLayer/CRC.h

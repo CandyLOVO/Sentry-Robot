@@ -46,3 +46,4 @@ damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semph
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 damiao_test\freertos.o: ../Task/FrictionTask.h
 damiao_test\freertos.o: ../Task/FrictionTask_v2.h
+damiao_test\freertos.o: ../Task/INS_Task.h

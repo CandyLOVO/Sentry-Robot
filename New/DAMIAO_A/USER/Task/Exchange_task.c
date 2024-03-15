@@ -102,18 +102,24 @@ static void Stm_pc_send()
 	memcpy(&vision_send_L[1],&Sentry.Flag_judge,1); //红蓝方检测，置0为裁判系统寄了，置1为我方是红色方，置2为我方是蓝色方
 	memcpy(&vision_send_L[2],&vision.L_yaw,4);
 	memcpy(&vision_send_L[6],&vision.L_pitch,4);
-	memcpy(&vision_send_L[10],&vision.checksum,2);
+	vision.checksum_L = Get_CRC16_Check_Sum(vision_send_L,10,0xffff);
+	memcpy(&vision_send_L[10],&vision.checksum_L,2);
 //	memcpy(&vision_send_L[17],&Sentry.Flag_mode,1);//哨兵目前的模式
 //	memcpy(&vision_send_L[18],&Sentry.Flag_progress,1);//裁判系统比赛进程数据
-	HAL_UART_Transmit_DMA(&huart4,vision_send_L,12);
+	memcpy(&vision_send_L[12],&vision.ending,1);
+//	HAL_UART_Transmit_DMA(&huart4,vision_send_L,13);
+	HAL_UART_Transmit(&huart4,vision_send_L,13,0xff);
 	
 	memcpy(&vision_send_R[0],&vision.header,1);
 	memcpy(&vision_send_R[1],&Sentry.Flag_judge,1); //红蓝方检测，置0为裁判系统寄了，置1为我方是红色方，置2为我方是蓝色方
 	memcpy(&vision_send_R[2],&vision.R_yaw,4);
 	memcpy(&vision_send_R[6],&vision.R_pitch,4);
 	//crc
-	memcpy(&vision_send_R[10],&vision.checksum,2);
-	HAL_UART_Transmit_DMA(&huart5,vision_send_R,12);
+	vision.checksum_R = Get_CRC16_Check_Sum(vision_send_R,10,0xffff);
+	memcpy(&vision_send_R[10],&vision.checksum_R,2);
+	memcpy(&vision_send_R[12],&vision.ending,1);
+//	HAL_UART_Transmit_DMA(&huart5,vision_send_R,13);
+	HAL_UART_Transmit(&huart5,vision_send_R,13,0xff);
 }
 
 //================================================弹道补偿API接口================================================//
@@ -292,5 +298,5 @@ static void Vision_Init()
 	vision.L_yaw = Yaw_left_c;
 	vision.R_pitch = Gimbal_right;
 	vision.R_yaw = Yaw_right_c;
-	vision.checksum = 0xAAAA;	//CRC16校验，我没用，发了个定值做校验	
+	vision.ending = 0xAA;
 }

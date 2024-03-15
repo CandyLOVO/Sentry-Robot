@@ -1540,6 +1540,11 @@
               <FileType>1</FileType>
               <FilePath>..\Task\FrictionTask_v2.c</FilePath>
             </File>
+            <File>
+              <FileName>INS_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Task\INS_Task.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

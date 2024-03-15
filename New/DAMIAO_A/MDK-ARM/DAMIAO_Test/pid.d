@@ -67,3 +67,4 @@ damiao_test\pid.o: ../USER/Task/Pitch_task.h
 damiao_test\pid.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 damiao_test\pid.o: ../USER/Task/Exchange_task.h
 damiao_test\pid.o: ../Core/Inc/stm32f4xx_it.h
+damiao_test\pid.o: ../USER/AlgorithmLayer/CRC.h

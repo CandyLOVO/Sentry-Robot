@@ -67,3 +67,4 @@ damiao_test\can_user.o: ../USER/Task/Pitch_task.h
 damiao_test\can_user.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 damiao_test\can_user.o: ../USER/Task/Exchange_task.h
 damiao_test\can_user.o: ../Core/Inc/stm32f4xx_it.h
+damiao_test\can_user.o: ../USER/AlgorithmLayer/CRC.h

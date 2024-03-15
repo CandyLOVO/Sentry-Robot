@@ -68,4 +68,5 @@ damiao_test\freertos.o: ../USER/Task/Pitch_task.h
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 damiao_test\freertos.o: ../USER/Task/Exchange_task.h
 damiao_test\freertos.o: ../Core/Inc/stm32f4xx_it.h
+damiao_test\freertos.o: ../USER/AlgorithmLayer/CRC.h
 damiao_test\freertos.o: ../USER/Task/Ins_task.h

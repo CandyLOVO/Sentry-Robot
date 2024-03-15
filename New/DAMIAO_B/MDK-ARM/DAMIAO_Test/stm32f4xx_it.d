@@ -41,3 +41,4 @@ damiao_test\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/m
 damiao_test\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 damiao_test\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
 damiao_test\stm32f4xx_it.o: ../USER/remote/drv_usart.h
+damiao_test\stm32f4xx_it.o: ../Task/INS_Task.h

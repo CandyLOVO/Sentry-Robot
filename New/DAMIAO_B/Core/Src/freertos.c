@@ -27,6 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include "FrictionTask.h"
 #include "FrictionTask_v2.h"
+#include "INS_Task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,6 +55,7 @@ osThreadId defaultTaskHandle;
 /* USER CODE BEGIN FunctionPrototypes */
 osThreadId FrictionTaskHandle;
 osThreadId FrictionTask_v2Handle;
+osThreadId INSTaskHandle;
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
@@ -117,6 +119,9 @@ void MX_FREERTOS_Init(void) {
   osThreadDef(Friction_v2,FrictionTask_v2, osPriorityNormal, 0, 512);
   FrictionTask_v2Handle = osThreadCreate(osThread(Friction_v2), NULL);
 	}
+	
+	osThreadDef(INS, INS_Task, osPriorityRealtime, 0, 1024);
+	INSTaskHandle = osThreadCreate(osThread(INS), NULL);
   /* USER CODE END RTOS_THREADS */
 
 }

@@ -14,6 +14,7 @@
 #include "Motor.h"
 #include "Yaw_task.h"
 #include "Pitch_task.h"
+#include "CRC.h"
 
 #define BUFFER_SIZE 100
 
@@ -28,7 +29,9 @@ typedef struct
   float L_yaw;
 	float R_pitch;
 	float R_yaw;
-  uint16_t checksum;     // crc16校验位 	
+  uint16_t checksum_L;
+	uint16_t checksum_R; 	
+	uint8_t ending;
 } 	Vision_t; //视觉通信发送结构体
 
 //================================================ minipc -> stm32 (接收结构体)================================================//
