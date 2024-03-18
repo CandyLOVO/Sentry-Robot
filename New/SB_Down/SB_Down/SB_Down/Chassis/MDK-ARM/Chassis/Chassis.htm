@@ -3,7 +3,7 @@
 <title>Static Call Graph - [Chassis\Chassis.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image Chassis\Chassis.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Tue Mar 19 00:22:18 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Tue Mar 19 03:06:13 2024
 <BR><P>
 <H3>Maximum Stack Usage =        360 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -941,7 +941,7 @@ Global Symbols
 <LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_CAN1_Init
 </UL>
 
-<P><STRONG><a name="[6c]"></a>Exchange_task</STRONG> (Thumb, 360 bytes, Stack size 0 bytes, exchange_task.o(i.Exchange_task))
+<P><STRONG><a name="[6c]"></a>Exchange_task</STRONG> (Thumb, 372 bytes, Stack size 0 bytes, exchange_task.o(i.Exchange_task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = Exchange_task &rArr; osDelay &rArr; vTaskDelay &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
@@ -1602,8 +1602,8 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> freertos.o(.constdata)
 </UL>
-<P><STRONG><a name="[11c]"></a>JUDGE_Receive</STRONG> (Thumb, 416 bytes, Stack size 32 bytes, judge.o(i.JUDGE_Receive))
-<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = JUDGE_Receive &rArr; Verify_CRC8_Check_Sum &rArr; Get_CRC8_Check_Sum
+<P><STRONG><a name="[11c]"></a>JUDGE_Receive</STRONG> (Thumb, 488 bytes, Stack size 24 bytes, judge.o(i.JUDGE_Receive))
+<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = JUDGE_Receive &rArr; Verify_CRC8_Check_Sum &rArr; Get_CRC8_Check_Sum
 </UL>
 <BR>[Calls]<UL><LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Update_data
 <LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Verify_CRC8_Check_Sum
@@ -3259,8 +3259,8 @@ Local Symbols
 <P><STRONG><a name="[67]"></a>prvTaskExitError</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, port.o(i.prvTaskExitError))
 <BR>[Address Reference Count : 1]<UL><LI> port.o(i.pxPortInitialiseStack)
 </UL>
-<P><STRONG><a name="[120]"></a>Update_data</STRONG> (Thumb, 114 bytes, Stack size 8 bytes, judge.o(i.Update_data))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Update_data
+<P><STRONG><a name="[120]"></a>Update_data</STRONG> (Thumb, 154 bytes, Stack size 12 bytes, judge.o(i.Update_data))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = Update_data
 </UL>
 <BR>[Called By]<UL><LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;JUDGE_Receive
 </UL>

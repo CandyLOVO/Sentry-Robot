@@ -93,14 +93,16 @@ typedef __packed struct
 typedef __packed struct
 {
     uint8_t level;
-    uint8_t foul_robot_id;
+		uint8_t offending_robot_id;
+		uint8_t count;
 } ext_referee_warning_t;
 
 
 
 typedef __packed struct
 {
-    uint8_t dart_remaining_time;
+		uint8_t dart_remaining_time;
+		uint16_t dart_info;
 } ext_dart_remaining_time_t;
 
 
@@ -120,13 +122,13 @@ uint8_t power_management_chassis_output : 1;
 
 typedef __packed struct
 {
-    uint16_t chassis_volt;
-    uint16_t chassis_current;
-    float chassis_power;
-    uint16_t chassis_power_buffer;
-    uint16_t shooter_id1_17mm_cooling_heat;
-    uint16_t shooter_id2_17mm_cooling_heat;
-    uint16_t shooter_id1_42mm_cooling_heat;
+ uint16_t chassis_voltage;
+ uint16_t chassis_current;
+ float chassis_power;
+ uint16_t buffer_energy;
+ uint16_t shooter_17mm_1_barrel_heat;
+ uint16_t shooter_17mm_2_barrel_heat;
+ uint16_t shooter_42mm_barrel_heat;
 } ext_power_heat_data_t;
 
 
@@ -134,42 +136,46 @@ typedef __packed struct
 {
  float x;
  float y;
- float z;
- float yaw;
+ float angle;
 } ext_game_robot_pos_t;
 
 
 typedef __packed struct
 {
-    uint8_t power_rune_buff;
+ uint8_t recovery_buff;
+ uint8_t cooling_buff;
+ uint8_t defence_buff;
+ uint8_t vulnerability_buff;
+ uint16_t attack_buff;
 }ext_buff_t;
 
 
 typedef __packed struct
-{
-    uint8_t attack_time;
+{	
+	 uint8_t airforce_status;
+	 uint8_t time_remain;
 } aerial_robot_energy_t;
 
 typedef __packed struct
 {
-    uint8_t armor_id : 4;
-    uint8_t hurt_type : 4;
+	uint8_t armor_id : 4;
+	uint8_t HP_deduction_reason : 4;
 } ext_robot_hurt_t;
 
 
 typedef __packed struct
 {
- uint8_t bullet_type;
- uint8_t shooter_id;
- uint8_t bullet_freq;
- float bullet_speed;
+	int8_t bullet_type;
+  uint8_t shooter_number;
+  uint8_t launching_frequency;
+  float initial_speed;
 } ext_shoot_data_t;
 
 typedef __packed struct
 {
-    uint16_t bullet_remaining_num_17mm;
-    uint16_t bullet_remaining_num_42mm;
-    uint16_t coin_remaining_num;
+ uint16_t projectile_allowance_17mm;
+ uint16_t projectile_allowance_42mm;
+ uint16_t remaining_gold_coin;
 } ext_bullet_remaining_t;
 
 
@@ -182,10 +188,10 @@ typedef __packed struct
 
 typedef __packed struct
 {
-    uint8_t dart_launch_opening_status;
-    uint8_t dart_attack_target;
-    uint16_t target_change_time;
-    uint16_t operate_launch_cmd_time;
+	 uint8_t dart_launch_opening_status;
+	 uint8_t reserved;
+   uint16_t target_change_time;
+   uint16_t latest_launch_cmd_time;
 } ext_dart_client_cmd_t;
 
 typedef __packed struct
@@ -195,7 +201,39 @@ typedef __packed struct
  uint16_t receiver_ID;
 }ext_student_interactive_header_data_t;
 
+typedef __packed struct
+{
+ float hero_x;
+ float hero_y;
+ float engineer_x;
+ float engineer_y;
+ float standard_3_x;
+ float standard_3_y;
+ float standard_4_x;
+ float standard_4_y;
+ float standard_5_x;
+ float standard_5_y;
+}ground_robot_position_t;
 
+typedef __packed struct
+{
+ uint8_t mark_hero_progress;
+ uint8_t mark_engineer_progress;
+ uint8_t mark_standard_3_progress;
+ uint8_t mark_standard_4_progress;
+ uint8_t mark_standard_5_progress;
+ uint8_t mark_sentry_progress;
+}radar_mark_data_t;
+
+typedef __packed struct
+{
+ uint32_t sentry_info;
+} sentry_info_t;
+
+typedef __packed struct
+{
+ uint8_t radar_info;
+} radar_info_t;
 
 enum judge_robot_ID{
 	hero_red       = 1,
@@ -226,7 +264,7 @@ typedef __packed struct JUDGE_MODULE_DATA
      ext_event_data_t event_data;
      ext_supply_projectile_action_t supply_status;
      ext_referee_warning_t warning;
-     ext_dart_remaining_time_t dart_remaining_time;
+     ext_dart_remaining_time_t dart_remaining_time_t;
 
 
      ext_game_robot_status_t    robot_status;
@@ -240,8 +278,13 @@ typedef __packed struct JUDGE_MODULE_DATA
      ext_shoot_data_t shoot_data;
      ext_bullet_remaining_t bullet_remain;
 
-     ext_rfid_status_t rfid_status;
+     ext_rfid_status_t rfid_status_t;
      ext_dart_client_cmd_t dart_client_cmd;
+		 
+		 ground_robot_position_t ground_robot_position;
+		 radar_mark_data_t radar_mark_data;
+		 sentry_info_t sentry_information;
+		 radar_info_t radar_information;
 }JUDGE_MODULE_DATA;
 
 typedef __packed struct Sentry_t
@@ -264,14 +307,17 @@ typedef __packed struct Sentry_t
 	uint16_t Myself_chassis_power_limit;	//底盘功率上限
 
 	//=======================================================实时数据(50HZ)===============================================================//
+	uint8_t shooter_ID; //发射机构ID
 	uint16_t Myself_chassis_power_buffer;	//实时缓冲能量
 	float Myself_chassis_power;		//实时底盘功率
 	uint16_t Myself_17mm_speed_id1;		//实时枪管1热量
 	uint16_t Myself_17mm_speed_id2;		//实时枪管2热量
 	
 	//实时
-	uint8_t bullet_frequence;	//实时射频（单位为HZ）
-	float bullet_speed;	//实时射速(单位m/s)
+	uint8_t bullet_frequence_1;	//实时射频枪管1（单位为HZ）
+	float bullet_speed_1;	//实时射速枪管1(单位m/s)
+	uint8_t bullet_frequence_2;	//实时射频枪管2（单位为HZ）
+	float bullet_speed_2;	//实时射速枪管2(单位m/s)
 	uint8_t armor_id:4;	//受伤的装甲板编号（应该0是非装甲板受伤，1-4是装甲板伤害，需测试验证）
 	uint8_t hurt_type:4;	//受伤类型
 	

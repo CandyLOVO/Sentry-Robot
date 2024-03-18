@@ -9,7 +9,7 @@ chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 chassis\ins_task.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 chassis\ins_task.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h
 chassis\ins_task.o: ../Drivers/CMSIS/Include/core_cm4.h
-chassis\ins_task.o: C:\Keil_v5\ARM\Installer\Bin\..\include\stdint.h
+chassis\ins_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
 chassis\ins_task.o: ../Drivers/CMSIS/Include/cmsis_version.h
 chassis\ins_task.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 chassis\ins_task.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -17,7 +17,7 @@ chassis\ins_task.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 chassis\ins_task.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-chassis\ins_task.o: C:\Keil_v5\ARM\Installer\Bin\..\include\stddef.h
+chassis\ins_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h
@@ -39,8 +39,8 @@ chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 chassis\ins_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 chassis\ins_task.o: ..\Drivers\CMSIS\DSP\Include\arm_math.h
 chassis\ins_task.o: ../Drivers/CMSIS/Include/core_cm4.h
-chassis\ins_task.o: C:\Keil_v5\ARM\Installer\Bin\..\include\string.h
-chassis\ins_task.o: C:\Keil_v5\ARM\Installer\Bin\..\include\math.h
+chassis\ins_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
+chassis\ins_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 chassis\ins_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 chassis\ins_task.o: ../Core/Inc/FreeRTOSConfig.h

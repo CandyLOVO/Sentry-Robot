@@ -36,13 +36,13 @@ void Exchange_task(void const * argument)
 		can_remote(Trans,0x61);
 		osDelay(1);
 		
-		Trans[0] = (int32_t)Sentry.bullet_speed & 0xff; //实时射速(单位m/s)//////////////////////////////实时射速\实时射频
-		Trans[1] = ((int32_t)Sentry.bullet_speed >> 8) & 0xff;
-		Trans[2] = ((int32_t)Sentry.bullet_speed >> 16) & 0xff;
-		Trans[3] = ((int32_t)Sentry.bullet_speed >> 24) & 0xff;
+		Trans[0] = (int32_t)Sentry.bullet_speed_1 & 0xff; //实时射速(单位m/s)//////////////////////////////实时射速\实时射频
+		Trans[1] = ((int32_t)Sentry.bullet_speed_1 >> 8) & 0xff;
+		Trans[2] = ((int32_t)Sentry.bullet_speed_1 >> 16) & 0xff;
+		Trans[3] = ((int32_t)Sentry.bullet_speed_1 >> 24) & 0xff;
 		Trans[4] = Sentry.Myself_17mm_speed_id1 & 0xff; //实时枪管1热量-1
 		Trans[5] = (Sentry.Myself_17mm_speed_id1 >> 8) & 0xff;
-		Trans[6] = Sentry.bullet_frequence; //实时射频（单位为HZ）
+		Trans[6] = Sentry.bullet_frequence_1; //实时射频（单位为HZ）
 		can_remote(Trans,0x62);
 		osDelay(1);
 		
@@ -55,13 +55,13 @@ void Exchange_task(void const * argument)
 		can_remote(Trans,0x63);
 		osDelay(1);
 		
-		Trans[0] = (int32_t)Sentry.bullet_speed & 0xff; //实时射速(单位m/s)//////////////////////////////实时射速\实时射频
-		Trans[1] = ((int32_t)Sentry.bullet_speed >> 8) & 0xff;
-		Trans[2] = ((int32_t)Sentry.bullet_speed >> 16) & 0xff;
-		Trans[3] = ((int32_t)Sentry.bullet_speed >> 24) & 0xff;
+		Trans[0] = (int32_t)Sentry.bullet_speed_2 & 0xff; //实时射速(单位m/s)//////////////////////////////实时射速\实时射频
+		Trans[1] = ((int32_t)Sentry.bullet_speed_2 >> 8) & 0xff;
+		Trans[2] = ((int32_t)Sentry.bullet_speed_2 >> 16) & 0xff;
+		Trans[3] = ((int32_t)Sentry.bullet_speed_2 >> 24) & 0xff;
 		Trans[4] = Sentry.Myself_17mm_speed_id2 & 0xff; //实时枪管2热量
 		Trans[5] = (Sentry.Myself_17mm_speed_id2 >> 8) & 0xff;
-		Trans[6] = Sentry.bullet_frequence; //实时射频（单位为HZ）
+		Trans[6] = Sentry.bullet_frequence_2; //实时射频（单位为HZ）
 		can_remote(Trans,0x64);
 		osDelay(1);
 		

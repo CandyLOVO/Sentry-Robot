@@ -2,8 +2,8 @@ chassis\exchange_task.o: ..\USER\Task\Exchange_task.c
 chassis\exchange_task.o: ..\USER\Task\Exchange_task.h
 chassis\exchange_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 chassis\exchange_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-chassis\exchange_task.o: C:\Keil_v5\ARM\Installer\Bin\..\include\stddef.h
-chassis\exchange_task.o: C:\Keil_v5\ARM\Installer\Bin\..\include\stdint.h
+chassis\exchange_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
+chassis\exchange_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
 chassis\exchange_task.o: ../Core/Inc/FreeRTOSConfig.h
 chassis\exchange_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 chassis\exchange_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -51,6 +51,6 @@ chassis\exchange_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 chassis\exchange_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 chassis\exchange_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 chassis\exchange_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
-chassis\exchange_task.o: C:\Keil_v5\ARM\Installer\Bin\..\include\string.h
+chassis\exchange_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
 chassis\exchange_task.o: ../USER/PotocaLayer/judge.h
 chassis\exchange_task.o: ../USER/DriverLayer/drv_usart.h

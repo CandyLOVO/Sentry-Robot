@@ -1,7 +1,7 @@
 chassis\chassis.o: ..\USER\Task\chassis.c
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/freertos.h
-chassis\chassis.o: C:\Keil_v5\ARM\Installer\Bin\..\include\stddef.h
-chassis\chassis.o: C:\Keil_v5\ARM\Installer\Bin\..\include\stdint.h
+chassis\chassis.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
+chassis\chassis.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
 chassis\chassis.o: ../Core/Inc/FreeRTOSConfig.h
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 chassis\chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
