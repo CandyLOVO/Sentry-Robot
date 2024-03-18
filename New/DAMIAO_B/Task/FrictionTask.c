@@ -71,7 +71,8 @@ void FrictionTask(void const * argument)
 	Friction_init();	//PID初始化
 	
   for(;;)
-  {re_control();
+  {
+		re_control();
 		re_shoot_rate_calc();
 		//===============================================摩擦轮================================================//
 		//开启摩擦轮
@@ -84,7 +85,6 @@ void FrictionTask(void const * argument)
 			Friction_down();	
 		}
 		can_send_mocalun(motor_m3508[0].send_I,motor_m3508[1].send_I,motor_m3508[2].send_I,motor_m3508[3].send_I);//摩擦轮电流发送
-		osDelay(1);
 		//===============================================拨盘================================================//
       //===========================================自动模式 begin================================//
 if(remote_mode==22)

@@ -69,7 +69,6 @@ void FrictionTask_v2(void const * argument)
 			Friction_down();	
 		}
 		can_send_mocalun(motor_m3508[0].send_I,motor_m3508[1].send_I,motor_m3508[2].send_I,motor_m3508[3].send_I);//摩擦轮电流发送
-		osDelay(1);
 		
 		//===============================================拨盘================================================//		
 		if(Shooter_L.Fire_Flag==1)//左枪管发射

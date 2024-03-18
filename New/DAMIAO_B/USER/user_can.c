@@ -108,7 +108,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 	  if(can_rx_message.StdId == 0x53)
 		{
 			Shooter_L.Fire_Flag = can_receive_data[0];   //视觉目标识别标识left
-			Shooter_R.Fire_Flag = can_receive_data[1];   //视觉目标识别表示right
+			Shooter_R.Fire_Flag = can_receive_data[1];   //视觉目标识别标识right
 		}
 	
 		if(can_rx_message.StdId == 0x61)//左枪管数据接收

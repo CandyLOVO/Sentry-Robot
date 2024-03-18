@@ -84,9 +84,9 @@ void Vision_read(uint8_t rx_buffer[])
 	memcpy(&vision_receive.L_chase_yaw,&rx_buffer[3],4);
 	memcpy(&vision_receive.L_chase_pitch,&rx_buffer[7],4);
 	memcpy(&vision_receive.L_distance,&rx_buffer[11],4);
-//	memcpy(&vision_receive.naving,&rx_buffer[17],1);
-//	memcpy(&vision_receive.nav_vx,&rx_buffer[18],4);
-//	memcpy(&vision_receive.nav_vy,&rx_buffer[22],4);
+	memcpy(&vision_receive.naving,&rx_buffer[17],1);
+	memcpy(&vision_receive.nav_vx,&rx_buffer[18],4);
+	memcpy(&vision_receive.nav_vy,&rx_buffer[22],4);
 }
 
 //================================================数据stm32 -> 上位机================================================//

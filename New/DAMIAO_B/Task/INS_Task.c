@@ -31,11 +31,10 @@ void INS_Task(void const * argument)
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_RESET);
 		osDelay(5);
     osDelay(1);
-    osDelay(1);
   }
 }
 
-void DRV_USART2_IRQHandler(UART_HandleTypeDef *huart)
+ void DRV_USART2_IRQHandler(UART_HandleTypeDef *huart)
 {
 	if(huart->Instance == USART2)
 	{
@@ -53,9 +52,9 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		HAL_UART_DMAStop(&huart2);
 		if(Rx[0]==0x50 && Rx[1]==0x03)
 		{
-			GX = (((short)Rx[11]<<8)|Rx[12])/32768*2000;
-			GY = (((short)Rx[13]<<8)|Rx[14])/32768*2000;
-			GZ = (((short)Rx[15]<<8)|Rx[16])/32768*2000;
+			GX = (((short)Rx[17]<<8)|Rx[18])/32768.0*2000;
+			GY = (((short)Rx[19]<<8)|Rx[20])/32768.0*2000;
+			GZ = (((short)Rx[21]<<8)|Rx[22])/32768.0*2000;
 			
 			Roll = (((short)Rx[29]<<8)|Rx[30])/32768.0*180; //½Ç¶ÈÖÆ 0~360
 			Pitch = (((short)Rx[31]<<8)|Rx[32])/32768.0*180;
