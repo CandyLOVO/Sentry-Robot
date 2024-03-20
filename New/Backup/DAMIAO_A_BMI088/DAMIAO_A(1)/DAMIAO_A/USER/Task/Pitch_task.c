@@ -66,11 +66,17 @@ static void Gimbal_init()
 {
 	
 //上场用PID 硬的一批
-	pid_init(&motor_pid_can_2[2],200,0.1,0,30000,30000); //左头速度环  
-	pid_init(&motor_pid_sita_can_2[2],30,0,100,30000,30000); //左头角度环
+//	pid_init(&motor_pid_can_2[2],170,0.1,0,30000,30000); //左头速度环  
+//	pid_init(&motor_pid_sita_can_2[2],30,0,100,30000,30000); //左头角度环
+//	
+//	pid_init(&motor_pid_can_2[3],170,0.1,0,30000,30000); //右头速度环
+//	pid_init(&motor_pid_sita_can_2[3],30,0,100,30000,30000); //右头角度环
 	
-	pid_init(&motor_pid_can_2[3],200,0.1,0,30000,30000); //右头速度环
-	pid_init(&motor_pid_sita_can_2[3],30,0,100,30000,30000); //右头角度环
+	pid_init(&motor_pid_can_2[2],170,0.1,0,30000,30000); //左头速度环  
+	pid_init(&motor_pid_sita_can_2[2],30,0,80,30000,30000); //左头角度环
+	
+	pid_init(&motor_pid_can_2[3],170,0.1,0,30000,30000); //右头速度环
+	pid_init(&motor_pid_sita_can_2[3],30,0,80,30000,30000); //右头角度环
 	
 //调试用PID
 //	pid_init(&motor_pid_can_2[2],1,0,0,30000,30000); //左头速度环  

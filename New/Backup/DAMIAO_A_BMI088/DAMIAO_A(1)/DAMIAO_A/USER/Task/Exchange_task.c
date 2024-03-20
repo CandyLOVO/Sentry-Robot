@@ -36,7 +36,12 @@ extern UART_HandleTypeDef huart4;
 extern UART_HandleTypeDef huart5;
 volatile uint8_t rx_len_uart4 = 0;  //接收一帧数据的长度
 volatile uint8_t recv_end_flag_uart4 = 0; //一帧数据接收完成标志
-uint8_t rx_buffer[100]={0};  //接收数据缓存数组
+
+volatile uint8_t rx_len_uart5 = 0;  //接收一帧数据的长度
+volatile uint8_t recv_end_flag_uart5 = 0; //一帧数据接收完成标志
+
+uint8_t rx_buffer_L[100]={0};  //接收数据缓存数组
+uint8_t rx_buffer_R[100]; 
 uint8_t vision_send_L[100];	//视觉接口发送数据帧
 uint8_t vision_send_R[100];
 
@@ -53,7 +58,10 @@ void Exchange_task(void const * argument)
 	Vision_Init();
 	Sentry_Init();	//哨兵状态量及裁判系统数据初始化
 	__HAL_UART_ENABLE_IT(&huart4, UART_IT_IDLE); //使能uart4的IDLE中断
-	HAL_UART_Receive_DMA(&huart4,rx_buffer,100); //开启接收
+	HAL_UART_Receive_DMA(&huart4,rx_buffer_L,100); //开启接收
+	
+	__HAL_UART_ENABLE_IT(&huart5, UART_IT_IDLE); //使能uart5的IDLE中断
+	HAL_UART_Receive_DMA(&huart5,rx_buffer_R,100); //开启接收
   for(;;)
   {
 		osDelay(1);
@@ -77,7 +85,7 @@ static void Get_keyboard()
 }
 
 //================================================通信读取解算任务================================================//
-void Vision_read(uint8_t rx_buffer[])
+void Vision_read_L(uint8_t rx_buffer[])
 {
 	memcpy(&vision_receive.L_tracking,&rx_buffer[1],1);
 	memcpy(&vision_receive.L_shoot,&rx_buffer[2],1);
@@ -90,6 +98,45 @@ void Vision_read(uint8_t rx_buffer[])
 	memcpy(&vision_receive.nav_vy,&rx_buffer[24],4);
 }
 
+void Vision_read_R(uint8_t rx_buffer[])
+{
+	memcpy(&vision_receive.R_tracking,&rx_buffer[1],1);
+	memcpy(&vision_receive.R_shoot,&rx_buffer[2],1);
+	memcpy(&vision_receive.yaw_R,&rx_buffer[3],4);
+	memcpy(&vision_receive.R_chase_yaw,&rx_buffer[7],4);
+	memcpy(&vision_receive.R_chase_pitch,&rx_buffer[11],4);
+	memcpy(&vision_receive.R_distance,&rx_buffer[15],4);
+}
+void uart_send_UART5(uint16_t send_size,uint8_t *DATA_BUF)
+{
+uint8_t *p; 
+p=(uint8_t *) DATA_BUF; //设定指针地址
+ 
+//发送部分：
+for(int i=0;i<send_size;i++)
+{
+UART5->DR = p[i];    //将一个字节数据写入TDR寄存器
+while((UART5->SR&0x40)==0); //检测写入TDR的这个字节是否发送完毕
+	osDelay(1);
+	__nop();
+	
+}
+}
+void uart_send_UART4(uint16_t send_size,uint8_t *DATA_BUF)
+{
+uint8_t *p; 
+p=(uint8_t *) DATA_BUF; //设定指针地址
+ 
+//发送部分：
+for(int i=0;i<send_size;i++)
+{
+UART4->DR = p[i];    //将一个字节数据写入TDR寄存器
+while((UART4->SR&0x40)==0); //检测写入TDR的这个字节是否发送完毕
+	osDelay(1);
+	//__nop();
+	
+}
+}
 //================================================数据stm32 -> 上位机================================================//
 static void Stm_pc_send()
 {
@@ -108,19 +155,16 @@ static void Stm_pc_send()
 //	memcpy(&vision_send_L[17],&Sentry.Flag_mode,1);//哨兵目前的模式
 //	memcpy(&vision_send_L[18],&Sentry.Flag_progress,1);//裁判系统比赛进程数据
 	memcpy(&vision_send_L[12],&vision.ending,1);
-//	HAL_UART_Transmit_DMA(&huart4,vision_send_L,13);
-	HAL_UART_Transmit(&huart4,vision_send_L,13,0xff);
+	uart_send_UART4(13,vision_send_L);
 	
 	memcpy(&vision_send_R[0],&vision.header,1);
 	memcpy(&vision_send_R[1],&Sentry.Flag_judge,1); //红蓝方检测，置0为裁判系统寄了，置1为我方是红色方，置2为我方是蓝色方
 	memcpy(&vision_send_R[2],&vision.R_yaw,4);
 	memcpy(&vision_send_R[6],&vision.R_pitch,4);
-	//crc
 	vision.checksum_R = Get_CRC16_Check_Sum(vision_send_R,10,0xffff);
 	memcpy(&vision_send_R[10],&vision.checksum_R,2);
 	memcpy(&vision_send_R[12],&vision.ending,1);
-//	HAL_UART_Transmit_DMA(&huart5,vision_send_R,13);
-	HAL_UART_Transmit(&huart5,vision_send_R,13,0xff);
+	uart_send_UART4(13,vision_send_R);
 }
 
 //================================================弹道补偿API接口================================================//

@@ -31,6 +31,9 @@ damiao_test\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 damiao_test\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 damiao_test\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 damiao_test\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+damiao_test\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h
+damiao_test\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h
+damiao_test\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h
 damiao_test\main.o: ../USER/struct_typedef.h
 damiao_test\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 damiao_test\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
@@ -50,6 +53,12 @@ damiao_test\main.o: ../Core/Inc/can.h
 damiao_test\main.o: ../Core/Inc/dma.h
 damiao_test\main.o: ../Core/Inc/spi.h
 damiao_test\main.o: ../Core/Inc/usart.h
+damiao_test\main.o: ../USB_DEVICE/App/usb_device.h
+damiao_test\main.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h
+damiao_test\main.o: ../USB_DEVICE/Target/usbd_conf.h
+damiao_test\main.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdio.h
+damiao_test\main.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdlib.h
+damiao_test\main.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
 damiao_test\main.o: ../Core/Inc/gpio.h
 damiao_test\main.o: ../USER/DriverLayer/Can_user.h
 damiao_test\main.o: ../USER/PotocaLayer/remote_control.h

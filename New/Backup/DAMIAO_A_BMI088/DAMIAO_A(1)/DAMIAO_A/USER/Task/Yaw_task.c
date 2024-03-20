@@ -16,7 +16,7 @@ float target_yaw_middle ; //9025电机转动的目标值
 //需要修改对应的数值，根据安装后读取的电机编码值修改
 int16_t Init_encoder_left = 7904;		//左脑袋编码器正前方初始值(安装好后值固定)
 int16_t Init_encoder_right = 3640;		//右脑袋
-uint16_t Init_encoder_middle = 5072; //一级云台,正前方要和底盘C板正前方朝向一致
+uint16_t Init_encoder_middle = 26028; //一级云台,正前方要和底盘C板正前方朝向一致
 
 float Yaw_middle_c;	//一级云台yaw(只有绝对坐标) 9025转化为0~+-180后的编码值
 //逆时针：0~180,-180~0
@@ -116,22 +116,22 @@ void Yaw_task(void const *pvParameters)
 //================================================YAW轴PID参数和目标IMU初始化================================================//
 static void Yaw_init()
 {
-	pid_init(&motor_pid_can_2[7],800,0.01,0,30000,30000); //9025电机速度环
-	pid_init(&motor_pid_sita_can_2[7],5.5,0,20,30000,30000); //9025电机角度环
+	pid_init(&motor_pid_can_2[7],800,3,0,30000,30000); //9025电机速度环
+	pid_init(&motor_pid_sita_can_2[7],19,0,3000,30000,30000); //9025电机角度环
 	
 //上场用PID 硬的一批
-	pid_init(&motor_pid_can_2[0],200,0.01,0,30000,30000); //左头速度环
-	pid_init(&motor_pid_sita_can_2[0],25,0,10,30000,30000); //左头角度环
-	
-	pid_init(&motor_pid_can_2[1],200,0.01,0,30000,30000); //右头速度环
-	pid_init(&motor_pid_sita_can_2[1],25,0,10,30000,30000); //右头角度环
+//	pid_init(&motor_pid_can_2[0],200,0.01,0,30000,30000); //左头速度环
+//	pid_init(&motor_pid_sita_can_2[0],25,0,10,30000,30000); //左头角度环
+//	
+//	pid_init(&motor_pid_can_2[1],200,0.01,0,30000,30000); //右头速度环
+//	pid_init(&motor_pid_sita_can_2[1],25,0,10,30000,30000); //右头角度环
 	
 //调试用PID
-//	pid_init(&motor_pid_can_2[0],94,0,0,30000,30000); //左头速度环
-//	pid_init(&motor_pid_sita_can_2[0],1,0,0,30000,30000); //左头角度环
-//	
-//	pid_init(&motor_pid_can_2[1],1,0,0,30000,30000); //右头速度环
-//	pid_init(&motor_pid_sita_can_2[1],1,0,0,30000,30000); //右头角度环
+	pid_init(&motor_pid_can_2[0],150,0.01,0,30000,30000); //左头速度环
+	pid_init(&motor_pid_sita_can_2[0],25,0,8,30000,30000); //左头角度环
+	
+	pid_init(&motor_pid_can_2[1],150,0.01,0,30000,30000); //右头速度环
+	pid_init(&motor_pid_sita_can_2[1],25,0,8,30000,30000); //右头角度环
 	
 	Encoder_MF_read(motor_info_can_2[7].can_id);//9025读取当前编码器值
 	Yaw_value = MF_value(Init_encoder_middle , motor_info_can_2[7].rotor_angle , 65535); //将9025编码值转换到-180~0、0~180
@@ -193,39 +193,39 @@ static void Yaw_mode_searching()
 {
 	if(Sentry.L_Flag_yaw_direction == 1)
 	{
-		target_yaw_remote_left+=0.09;
+		target_yaw_remote_left+=0.3;
 		if(target_yaw_remote_left>=10)
 		{
 			Sentry.L_Flag_yaw_direction=2;
-			target_yaw_remote_left-=0.09;
+			target_yaw_remote_left-=0.3;
 		}
 	}
 	else if(Sentry.L_Flag_yaw_direction == 2)
 	{
-		target_yaw_remote_left-=0.09;
+		target_yaw_remote_left-=0.3;
 		if(target_yaw_remote_left<=-190)
 		{
 			Sentry.L_Flag_yaw_direction=1;
-			target_yaw_remote_left+=0.09;
+			target_yaw_remote_left+=0.3;
 		}		
 	}
 	
 	if(Sentry.R_Flag_yaw_direction == 1)
 	{
-		target_yaw_remote_right-=0.09;
+		target_yaw_remote_right-=0.3;
 		if(target_yaw_remote_right<=-10)
 		{
 			Sentry.R_Flag_yaw_direction=2; //反方向旋转
-			target_yaw_remote_right+=0.09;
+			target_yaw_remote_right+=0.3;
 		}
 	}
 	else if(Sentry.R_Flag_yaw_direction == 2)
 	{
-		target_yaw_remote_right+=0.09;
+		target_yaw_remote_right+=0.3;
 		if(target_yaw_remote_right>=190)
 		{
 			Sentry.R_Flag_yaw_direction=1;
-			target_yaw_remote_right-=0.09;
+			target_yaw_remote_right-=0.3;
 		}		
 	}
 }
@@ -342,14 +342,14 @@ static void Site_Control_MF()
 static void Voltage_Control_MF()
 {
 	target_speed_can_2[7] += pid_calc_sita_span(&motor_pid_sita_can_2[7], target_yaw_middle, Yaw_middle_c);  //Yaw_middle_c->IMU -180~+180
-	motor_info_can_2[7].set_voltage = pid_calc(&motor_pid_can_2[7], target_speed_can_2[7],gyro[2]); //陀螺仪yaw的角速度
+	motor_info_can_2[7].set_voltage = pid_calc(&motor_pid_can_2[7], target_speed_can_2[7],(9.55f * gyro[2])); //陀螺仪yaw的角速度
 //	motor_info_can_2[7].set_voltage = pid_calc(&motor_pid_can_2[7], target_speed_can_2[7],motor_info_can_2[7].rotor_speed);
 }
 
 //================================================9025巡航模式===============================================//
 static void Searching_Control_MF()
 {
-	target_yaw_middle+=0.03;
+	target_yaw_middle+=0.1;
 	if(target_yaw_middle>180)
 	{
 		target_yaw_middle-=360;
@@ -443,3 +443,6 @@ float Delta_calc(float distance)
 	Delta = fabs(Delta);
 	return Delta;
 }
+
+//================================================================一阶低通滤波===============================================================//
+

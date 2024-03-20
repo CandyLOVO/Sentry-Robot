@@ -23,6 +23,7 @@
 #include "dma.h"
 #include "spi.h"
 #include "usart.h"
+#include "usb_device.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -110,9 +111,8 @@ int main(void)
 	__HAL_UART_ENABLE_IT(&huart2,UART_IT_IDLE);
 	HAL_UART_Receive_DMA(&huart2,(uint8_t *)Rx,sizeof(Rx)); //Õ”¬›“«Ω” ’÷–∂œ
 	
-	__HAL_UART_ENABLE_IT(&huart5,UART_IT_IDLE); 
-	HAL_UART_Receive_DMA(&huart5,(uint8_t *)Rx_R,sizeof(Rx_R));
-	
+//	__HAL_UART_ENABLE_IT(&huart5,UART_IT_IDLE);
+//	HAL_UART_Receive_DMA(&huart5,(uint8_t *)Rx,sizeof(Rx));
 	  DWT_Init(168);
       while(BMI088_init())
     {
@@ -162,7 +162,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLM = 6;
   RCC_OscInitStruct.PLL.PLLN = 168;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  RCC_OscInitStruct.PLL.PLLQ = 2;
+  RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 2;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {

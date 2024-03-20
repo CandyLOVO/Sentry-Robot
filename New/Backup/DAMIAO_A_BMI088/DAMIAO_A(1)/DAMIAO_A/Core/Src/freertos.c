@@ -63,6 +63,7 @@ osThreadId insHandle;
 
 void StartDefaultTask(void const * argument);
 
+extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
@@ -127,11 +128,11 @@ void MX_FREERTOS_Init(void) {
   exchangeHandle = osThreadCreate(osThread(exchangetask), NULL);
 	
 	//ÍÓÂÝÒÇÈÎÎñ
-	osThreadDef(insTask, InsTask, osPriorityRealtime, 0, 1024);
-	insTaskHandle = osThreadCreate(osThread(insTask), NULL);
+//	osThreadDef(insTask, InsTask, osPriorityRealtime, 0, 1024);
+//	insTaskHandle = osThreadCreate(osThread(insTask), NULL);
 	
-//		osThreadDef(ins, imu_temp_control_task, osPriorityRealtime, 0, 1024);
-//	insHandle = osThreadCreate(osThread(ins), NULL);
+		osThreadDef(ins, imu_temp_control_task, osPriorityRealtime, 0, 1024);
+	insHandle = osThreadCreate(osThread(ins), NULL);
 //	
   /* USER CODE END RTOS_THREADS */
 
@@ -146,6 +147,8 @@ void MX_FREERTOS_Init(void) {
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const * argument)
 {
+  /* init code for USB_DEVICE */
+  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
   for(;;)

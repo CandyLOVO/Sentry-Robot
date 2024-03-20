@@ -114,13 +114,18 @@ typedef struct
 
 extern volatile uint8_t rx_len_uart4;  //接收一帧数据的长度
 extern volatile uint8_t recv_end_flag_uart4; //一帧数据接收完成标志
-extern uint8_t rx_buffer[100];  //接收数据缓存数组
+
+extern volatile uint8_t rx_len_uart5;  //接收一帧数据的长度
+extern volatile uint8_t recv_end_flag_uart5; //一帧数据接收完成标志
+extern uint8_t rx_buffer_L[100];  //接收数据缓存数组
+extern uint8_t rx_buffer_R[100];  //接收数据缓存数组
 extern remote_flag_t remote;	//键盘按键读取(结构体)
 extern Sentry_t Sentry;	//哨兵状态量和裁判系统数据结构体
 extern Vision_t vision;
 extern Vision_receive_t vision_receive;
 
-void Vision_read(uint8_t rx_buffer[]);
+void Vision_read_L(uint8_t rx_buffer[]);
+void Vision_read_R(uint8_t rx_buffer[]);
 
 
 

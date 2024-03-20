@@ -31,6 +31,9 @@ damiao_test\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pw
 damiao_test\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 damiao_test\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
 damiao_test\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+damiao_test\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h
+damiao_test\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h
+damiao_test\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h
 damiao_test\stm32f4xx_it.o: ../USER/struct_typedef.h
 damiao_test\stm32f4xx_it.o: ../Core/Inc/stm32f4xx_it.h
 damiao_test\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
@@ -67,3 +70,4 @@ damiao_test\stm32f4xx_it.o: ../USER/Task/Pitch_task.h
 damiao_test\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 damiao_test\stm32f4xx_it.o: ../USER/AlgorithmLayer/CRC.h
 damiao_test\stm32f4xx_it.o: ../USER/Task/Ins_task.h
+damiao_test\stm32f4xx_it.o: ../USER/AlgorithmLayer/Communicate.h
