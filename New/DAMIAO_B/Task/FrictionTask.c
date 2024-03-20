@@ -6,13 +6,13 @@
 #include "rc_potocal.h"
 
 
-#define mocalun_speed   19*350    //摩擦轮转速(根据实际情况更改快速调整射速）
+#define mocalun_speed   19*380    //摩擦轮转速(根据实际情况更改快速调整射速）
 
 
 #define K_shoot_rate_correct 1 //射频修正参数（根据实际情况更改快速调整射频）
-#define C_bopan_block_I 6000   //拨盘堵转电流（测试后更改）
+#define C_bopan_block_I 9000   //拨盘堵转电流（测试后更改）
 #define C_bopan_unblock_I 50   //拨盘正常旋转电流（测试后更改）
-#define K_rc_to_bopanSpeed 3 //遥控通道值切换到拨盘速度（更改可快速调整1-1模式下遥控与拨盘映射关系）
+#define K_rc_to_bopanSpeed 6 //遥控通道值切换到拨盘速度（更改可快速调整1-1模式下遥控与拨盘映射关系）
 
 
 pidTypeDef motor_m3508_pid[4];
@@ -30,7 +30,7 @@ static void Friction_calc(void);
 static void Friction_down(void);
 
 //拨盘堵转检测
-static void Bopan_judge(void);
+//static void Bopan_judge(void);
 
 //摩擦轮Pid输出值发送
 extern void can_send_mocalun(int16_t motor1,int16_t motor2,int16_t motor3,int16_t motor4);
@@ -91,7 +91,8 @@ if(remote_mode==22)
 {
 		
 		if(Shooter_L.Fire_Flag==1 )//左枪管发射
-	{  if(bopan_reversal_flag_L==1)
+	{  
+		if(bopan_reversal_flag_L==1)
 			{
 			Bopan_speed_calc_L(bopan_reversal_shoot_rate,bopan_reversal_shoot_rate,bopan_reversal_shoot_rate);//最高射频，最低射频，无裁判系统射频
 			}
@@ -140,7 +141,7 @@ Bopan_speed_calc_R(0,0,0);
 }
 		            
 		Bopan_calc();//转速-->电流
-		Bopan_judge();//拨盘堵转检测
+//		Bopan_judge();//拨盘堵转检测
 		can_send_bopan(motor_m2006[0].send_I,motor_m2006[1].send_I);//拨盘电流发送
     osDelay(1);
   }
@@ -179,20 +180,61 @@ static void Friction_init()
 	pid_init(&motor_m3508_pid[2],40,0.8,1);
 	pid_init(&motor_m3508_pid[3],40,0.8,1);
 	
-	pid_init(&motor_m2006_pid[0],15,0.03,0.5);//拨盘()
-	pid_init(&motor_m2006_pid[1],15,0.03,0.5);//20，0.03，0.5
+	pid_init(&motor_m2006_pid[0],20,0.03,0.5);//拨盘()
+	pid_init(&motor_m2006_pid[1],20,0.03,0.5);//20，0.03，0.5
 	
 	Shooter_L.shooter_heat=1025;
 	Shooter_R.shooter_heat=1025;
+	motor_m3508[0].set_v = 0;
+	motor_m3508[1].set_v =0;
+	motor_m3508[2].set_v = 0;
+	motor_m3508[3].set_v =0;
 }
 
 //==============================================摩擦轮转速->电流================================================//
 static void Friction_calc()
 {
-	motor_m3508[0].set_v=-mocalun_speed;
-	motor_m3508[1].set_v= mocalun_speed;
-	motor_m3508[2].set_v=-mocalun_speed;
-	motor_m3508[3].set_v= mocalun_speed;
+	if(motor_m3508[0].set_v>-mocalun_speed)
+	{
+	motor_m3508[0].set_v -= 10;
+	
+	}
+	else
+	{
+	motor_m3508[0].set_v = -mocalun_speed;
+	}
+	
+		if(motor_m3508[1].set_v<mocalun_speed)
+	{
+	motor_m3508[1].set_v += 10;
+	
+	}
+	else
+	{
+	motor_m3508[1].set_v = mocalun_speed;
+	}
+	
+		if(motor_m3508[2].set_v>-mocalun_speed)
+	{
+	motor_m3508[2].set_v -= 10;
+	
+	}
+	else
+	{
+	motor_m3508[2].set_v = -mocalun_speed;
+	}
+	
+		if(motor_m3508[3].set_v<mocalun_speed)
+	{
+	motor_m3508[3].set_v += 10;
+	
+	}
+	else
+	{
+	motor_m3508[3].set_v = mocalun_speed;
+	}
+	
+
 	
 	motor_m3508[0].send_I = pid_cal_s(&motor_m3508_pid[0], motor_m3508[0].speed, motor_m3508[0].set_v,16384,16384);
 	motor_m3508[1].send_I = pid_cal_s(&motor_m3508_pid[1], motor_m3508[1].speed, motor_m3508[1].set_v,16384,16384);
@@ -204,17 +246,15 @@ static void Friction_calc()
 //===============================================摩擦轮减速到零================================================//
 static void Friction_down()
 {
-	motor_m3508[0].set_v=0;
-	motor_m3508[1].set_v=0;
-	motor_m3508[2].set_v=0;
-	motor_m3508[3].set_v=0;
-	
-	
-	motor_m3508[0].send_I = pid_cal_s(&motor_m3508_pid[0], motor_m3508[0].speed, motor_m3508[0].set_v,16384,16384);
-	motor_m3508[1].send_I = pid_cal_s(&motor_m3508_pid[1], motor_m3508[1].speed, motor_m3508[1].set_v,16384,16384);
-	motor_m3508[2].send_I = pid_cal_s(&motor_m3508_pid[2], motor_m3508[2].speed, motor_m3508[2].set_v,16384,16384);
-	motor_m3508[3].send_I = pid_cal_s(&motor_m3508_pid[3], motor_m3508[3].speed, motor_m3508[3].set_v,16384,16384);
-}
+	motor_m3508[0].set_v = 0;
+	motor_m3508[1].set_v = 0;
+	motor_m3508[2].set_v = 0;
+	motor_m3508[3].set_v = 0;
+	motor_m3508[0].send_I = 0;
+	motor_m3508[1].send_I = 0;
+	motor_m3508[2].send_I = 0;
+	motor_m3508[3].send_I = 0;
+}   
 
 
 
@@ -275,26 +315,26 @@ static void Bopan_speed_calc_R(int speed_rate_high, int speed_rate_low,int speed
 	}
 }
 //=====================================================拨盘堵转检测=======================================//
-static void Bopan_judge()
-{if(motor_m2006[0].tor_current<-C_bopan_block_I)
-	{
-		bopan_reversal_flag_L=1;
-	}
-	else if(motor_m2006[0].tor_current>C_bopan_block_I)
-	{
-		bopan_reversal_flag_L=0;
-	}		
-	
-	if(motor_m2006[1].tor_current<-C_bopan_block_I)
-	{
-		bopan_reversal_flag_R=1;
-	}
-	else if(motor_m2006[1].tor_current>C_bopan_block_I)
-	{
-		bopan_reversal_flag_R=0;
-	}		
-	
-}
+//static void Bopan_judge()
+//{if(motor_m2006[0].tor_current<-C_bopan_block_I)
+//	{
+//		bopan_reversal_flag_L=1;
+//	}
+//	else if(motor_m2006[0].tor_current>C_bopan_block_I)
+//	{
+//		bopan_reversal_flag_L=0;
+//	}		
+//	
+//	if(motor_m2006[1].tor_current<-C_bopan_block_I)
+//	{
+//		bopan_reversal_flag_R=1;
+//	}
+//	else if(motor_m2006[1].tor_current>C_bopan_block_I)
+//	{
+//		bopan_reversal_flag_R=0;
+//	}		
+//	
+//}
 //=========================================拨盘退弹==============================================//
 /*
 static void Bopan_back_L(int flag)  //反转左拨盘

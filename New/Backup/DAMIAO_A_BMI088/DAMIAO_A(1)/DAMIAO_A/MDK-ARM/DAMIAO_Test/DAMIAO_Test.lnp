@@ -74,7 +74,7 @@
 "damiao_test\usbd_ctlreq.o"
 "damiao_test\usbd_ioreq.o"
 "damiao_test\usbd_cdc.o"
---library_type=microlib --strict --scatter "DAMIAO_Test\DAMIAO_Test.sct"
+--strict --scatter "DAMIAO_Test\DAMIAO_Test.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "DAMIAO_Test.map" -o DAMIAO_Test\DAMIAO_Test.axf

@@ -73,10 +73,10 @@ static void Gimbal_init()
 //	pid_init(&motor_pid_sita_can_2[3],30,0,100,30000,30000); //右头角度环
 	
 	pid_init(&motor_pid_can_2[2],170,0.1,0,30000,30000); //左头速度环  
-	pid_init(&motor_pid_sita_can_2[2],30,0,80,30000,30000); //左头角度环
+	pid_init(&motor_pid_sita_can_2[2],30,0,50,30000,30000); //左头角度环
 	
 	pid_init(&motor_pid_can_2[3],170,0.1,0,30000,30000); //右头速度环
-	pid_init(&motor_pid_sita_can_2[3],30,0,80,30000,30000); //右头角度环
+	pid_init(&motor_pid_sita_can_2[3],30,0,50,30000,30000); //右头角度环
 	
 //调试用PID
 //	pid_init(&motor_pid_can_2[2],1,0,0,30000,30000); //左头速度环  
@@ -125,29 +125,29 @@ static void Gimbal_can_send()
 //仰角限位40度，俯角限位25度
 static void Gimbal_target_restrict()
 {
-	if(target_gimbal_left > 22)
-		target_gimbal_left=22;
-	else if(target_gimbal_left < -15)
-		target_gimbal_left=-15;
+	if(target_gimbal_left > 24)
+		target_gimbal_left=24;
+	else if(target_gimbal_left < -12)
+		target_gimbal_left=-12;
 	
-	if(target_gimbal_right > 22)
-		target_gimbal_right=22;
-	else if(target_gimbal_right < -15)
-		target_gimbal_right=-15;
+	if(target_gimbal_right > 24)
+		target_gimbal_right=24;
+	else if(target_gimbal_right < -12)
+		target_gimbal_right=-12;
 }
 
 //================================================实际值限位（注意有稳态误差时会有bug，未使用）================================================//
 static void Gimbal_imu_restrict()
 {
-	if(Gimbal_left > 22)
-		target_gimbal_left=22;
-	else if(Gimbal_left < -15)
-		target_gimbal_left=-15;
+	if(Gimbal_left > 24)
+		target_gimbal_left=24;
+	else if(Gimbal_left < -12)
+		target_gimbal_left=-12;
 	
-	if(Gimbal_right > 22)
-		target_gimbal_right=22;
-	else if(Gimbal_right < -15)
-		target_gimbal_right=-15;
+	if(Gimbal_right > 24)
+		target_gimbal_right=24;
+	else if(Gimbal_right < -12)
+		target_gimbal_right=-12;
 }
 
 //================================================电流值计算================================================//
@@ -183,7 +183,7 @@ static void Gimbal_mode_searching()
 	if(Sentry.L_Flag_pitch_direction == 1)
 	{
 		target_gimbal_left-=0.05;
-		if(target_gimbal_left<-15)
+		if(target_gimbal_left<-12)
 		{
 			target_gimbal_left+=0.05;
 			Sentry.L_Flag_pitch_direction=2;
@@ -192,7 +192,7 @@ static void Gimbal_mode_searching()
 	else if(Sentry.L_Flag_pitch_direction == 2)
 	{
 		target_gimbal_left+=0.05;
-		if(target_gimbal_left>22)
+		if(target_gimbal_left>24)
 		{
 			target_gimbal_left-=0.05;
 			Sentry.L_Flag_pitch_direction=1;
@@ -202,7 +202,7 @@ static void Gimbal_mode_searching()
 	if(Sentry.R_Flag_pitch_direction == 1)
 	{
 		target_gimbal_right-=0.05;
-		if(target_gimbal_right<-15)
+		if(target_gimbal_right<-12)
 		{
 			target_gimbal_right+=0.05;
 			Sentry.R_Flag_pitch_direction=2;
@@ -211,7 +211,7 @@ static void Gimbal_mode_searching()
 	else if(Sentry.R_Flag_pitch_direction == 2)
 	{
 		target_gimbal_right+=0.05;
-		if(target_gimbal_right>22)
+		if(target_gimbal_right>24)
 		{
 			target_gimbal_right-=0.05;
 			Sentry.R_Flag_pitch_direction=1;

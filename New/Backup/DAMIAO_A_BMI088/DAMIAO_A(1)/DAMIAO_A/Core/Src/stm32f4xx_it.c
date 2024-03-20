@@ -375,32 +375,33 @@ void DMA1_Stream7_IRQHandler(void)
 void UART4_IRQHandler(void)
 {
   /* USER CODE BEGIN UART4_IRQn 0 */
-	uint32_t tmp_flag = 0;
-	uint32_t temp;
-	tmp_flag =__HAL_UART_GET_FLAG(&huart4,UART_FLAG_IDLE); //获取IDLE标志位
-	if((tmp_flag != RESET))//idle标志被置位
-	{ 
-		__HAL_UART_CLEAR_IDLEFLAG(&huart4);//清除标志位
-		HAL_UART_DMAStop(&huart4); //停止DMA
-		temp  =  __HAL_DMA_GET_COUNTER(&hdma_uart4_rx);// 获取DMA中未传输的数据个数   
-		rx_len_uart4 =  100 - temp; //总计数减去未传输的数据个数，得到已经接收的数据个数
-		recv_end_flag_uart4 = 1;	// 接受完成标志位置1	
-		
-		if(recv_end_flag_uart4 == 1)
-		{			
-			if(rx_buffer_L[0] == 0xA5)
-			{
-				Vision_read_L(rx_buffer_L);
-			}	
-			recv_end_flag_uart4 = 0;
-			for(uint8_t i=0;i<rx_len_uart4;i++)
-			{
-				rx_buffer_L[i]=0;
-			}
-			rx_len_uart4 = 0;
-		}
-	 }
-	HAL_UART_Receive_DMA(&huart4,rx_buffer_L,BUFFER_SIZE);
+//	uint32_t tmp_flag = 0;
+//	uint32_t temp;
+//	tmp_flag =__HAL_UART_GET_FLAG(&huart4,UART_FLAG_IDLE); //获取IDLE标志位
+//	if((tmp_flag != RESET))//idle标志被置位
+//	{ 
+//		__HAL_UART_CLEAR_IDLEFLAG(&huart4);//清除标志位
+//		HAL_UART_DMAStop(&huart4); //停止DMA
+//		temp  =  __HAL_DMA_GET_COUNTER(&hdma_uart4_rx);// 获取DMA中未传输的数据个数   
+//		rx_len_uart4 =  100 - temp; //总计数减去未传输的数据个数，得到已经接收的数据个数
+//		recv_end_flag_uart4 = 1;	// 接受完成标志位置1	
+//		
+//		if(recv_end_flag_uart4 == 1)
+//		{			
+//			if(rx_buffer_L[0] == 0xA5)
+//			{
+//				Vision_read_L(rx_buffer_L);
+//			}	
+//			recv_end_flag_uart4 = 0;
+//			for(uint8_t i=0;i<rx_len_uart4;i++)
+//			{
+//				rx_buffer_L[i]=0;
+//			}
+//			rx_len_uart4 = 0;
+//		}
+//	 }
+//	HAL_UART_Receive_DMA(&huart4,rx_buffer_L,BUFFER_SIZE);
+ UART4_IRQHandler_remote();
   /* USER CODE END UART4_IRQn 0 */
   HAL_UART_IRQHandler(&huart4);
   /* USER CODE BEGIN UART4_IRQn 1 */
@@ -414,32 +415,33 @@ void UART4_IRQHandler(void)
 void UART5_IRQHandler(void)
 {
   /* USER CODE BEGIN UART5_IRQn 0 */
-	uint32_t tmp_flag = 0;
-	uint32_t temp;
-	tmp_flag =__HAL_UART_GET_FLAG(&huart5,UART_FLAG_IDLE); //获取IDLE标志位
-	if((tmp_flag != RESET))//idle标志被置位
-	{ 
-		__HAL_UART_CLEAR_IDLEFLAG(&huart5);//清除标志位
-		HAL_UART_DMAStop(&huart5); //停止DMA
-		temp  =  __HAL_DMA_GET_COUNTER(&hdma_uart5_rx);// 获取DMA中未传输的数据个数   
-		rx_len_uart5 =  100 - temp; //总计数减去未传输的数据个数，得到已经接收的数据个数
-		recv_end_flag_uart5 = 1;	// 接受完成标志位置1	
-		
-		if(recv_end_flag_uart5 == 1)
-		{			
-			if(rx_buffer_R[0] == 0xA5)
-			{
-				Vision_read_R(rx_buffer_R);
-			}	
-			recv_end_flag_uart5 = 0;
-			for(uint8_t i=0;i<rx_len_uart5;i++)
-			{
-				rx_buffer_R[i]=0;
-			}
-			rx_len_uart5 = 0;
-		}
-	 }
-	HAL_UART_Receive_DMA(&huart5,rx_buffer_R,BUFFER_SIZE);
+//	uint32_t tmp_flag = 0;
+//	uint32_t temp;
+//	tmp_flag =__HAL_UART_GET_FLAG(&huart5,UART_FLAG_IDLE); //获取IDLE标志位
+//	if((tmp_flag != RESET))//idle标志被置位
+//	{ 
+//		__HAL_UART_CLEAR_IDLEFLAG(&huart5);//清除标志位
+//		HAL_UART_DMAStop(&huart5); //停止DMA
+//		temp  =  __HAL_DMA_GET_COUNTER(&hdma_uart5_rx);// 获取DMA中未传输的数据个数   
+//		rx_len_uart5 =  100 - temp; //总计数减去未传输的数据个数，得到已经接收的数据个数
+//		recv_end_flag_uart5 = 1;	// 接受完成标志位置1	
+//		
+//		if(recv_end_flag_uart5 == 1)
+//		{			
+//			if(rx_buffer_R[0] == 0xA5)
+//			{
+//				Vision_read_R(rx_buffer_R);
+//			}	
+//			recv_end_flag_uart5 = 0;
+//			for(uint8_t i=0;i<rx_len_uart5;i++)
+//			{
+//				rx_buffer_R[i]=0;
+//			}
+//			rx_len_uart5 = 0;
+//		}
+//	 }
+//	HAL_UART_Receive_DMA(&huart5,rx_buffer_R,BUFFER_SIZE);
+	UART5_IRQHandler_remote();
   /* USER CODE END UART5_IRQn 0 */
   HAL_UART_IRQHandler(&huart5);
   /* USER CODE BEGIN UART5_IRQn 1 */

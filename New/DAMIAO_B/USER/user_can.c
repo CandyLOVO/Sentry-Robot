@@ -79,7 +79,7 @@ void can_send_bopan(int16_t motor1,int16_t motor2)
 	CAN_TxHeaderTypeDef can_tx_messgae;
 	uint8_t can_send_data[8];
 	uint32_t send_mail_box;
-	can_tx_messgae.StdId = 0x1FF;
+	can_tx_messgae.StdId = 0x1FF;                                            
 	can_tx_messgae.IDE = CAN_ID_STD;
 	can_tx_messgae.RTR = CAN_RTR_DATA;
 	can_tx_messgae.DLC = 0x08;
@@ -142,6 +142,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 			rc_ctrl.rc.ch[0] = (can_receive_data[0]<<8) | can_receive_data[1];
 			rc_ctrl.rc.ch[1] = (can_receive_data[2]<<8) | can_receive_data[3];
 			rc_ctrl.rc.ch[2] = (can_receive_data[4]<<8) | can_receive_data[5];
+			rc_ctrl.rc.ch[3] = (can_receive_data[6]<<8) | can_receive_data[7];
 		}
                 
 		if(can_rx_message.StdId == 0x31)

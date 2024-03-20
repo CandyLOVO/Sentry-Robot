@@ -13,7 +13,7 @@
 #include "rt_nonfinite.h"
 #include "rt_defines.h"
 #include "rt_nonfinite.h"
-#include "arm_math.h"
+#include "math.h"
 
 /* Function Declarations */
 static double rt_atan2d_snf(double u0, double u1);
@@ -88,11 +88,11 @@ void imuekf(double gx, double gy, double gz, double ax, double ay, double az,
             double p[36], const double xhat_o[6], double dt, double *Yaw,
             double *Pitch, double *Roll, double xhat[6])
 {
-  static const double Q[36] = {
+    static const double Q[36] = {
       0.02, 0.0, 0.0,   0.0, 0.0,    0.0, 0.0, 0.02, 0.0, 0.0,   0.0, 0.0,
       0.0,   0.0, 0.02, 0.0, 0.0,    0.0, 0.0, 0.0,   0.0, 0.02, 0.0, 0.0,
       0.0,   0.0, 0.0,   0.0, 1.0E-5, 0.0, 0.0, 0.0,   0.0, 0.0,   0.0, 1.0E-5};
-  static const long long R[9] = {200000000, 0, 0, 0, 200000000, 0, 0, 0, 200000000000};
+  static const long long R[9] = {20000000000000, 0, 0, 0, 20000000000000, 0, 0, 0, 20000000000000};
   static const signed char a[36] = {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
                                     0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                     0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1};

@@ -156,16 +156,10 @@ static void Friction_calc()
 //===============================================Ä¦²ÁÂÖ¼õËÙµ½Áã================================================//
 static void Friction_down()
 {
-	motor_m3508[0].set_v=0;
-	motor_m3508[1].set_v=0;
-	motor_m3508[2].set_v=0;
-	motor_m3508[3].set_v=0;
-	
-	
-	motor_m3508[0].send_I = pid_cal_s(&motor_m3508_pid[0], motor_m3508[0].speed, motor_m3508[0].set_v,5000,2500);
-	motor_m3508[1].send_I = pid_cal_s(&motor_m3508_pid[1], motor_m3508[1].speed, motor_m3508[1].set_v,5000,2500);
-	motor_m3508[2].send_I = pid_cal_s(&motor_m3508_pid[2], motor_m3508[2].speed, motor_m3508[2].set_v,5000,2500);
-	motor_m3508[3].send_I = pid_cal_s(&motor_m3508_pid[3], motor_m3508[3].speed, motor_m3508[3].set_v,5000,2500);
+	motor_m3508[0].send_I = 0;
+	motor_m3508[1].send_I = 0;
+	motor_m3508[2].send_I = 0;
+	motor_m3508[3].send_I = 0;
 }
 
 

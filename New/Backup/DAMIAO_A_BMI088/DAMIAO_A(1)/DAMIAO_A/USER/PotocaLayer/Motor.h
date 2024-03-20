@@ -14,6 +14,7 @@ typedef struct
     int16_t  rotor_speed;		//现在的转速
     int16_t  torque_current;		//实际转矩电流
     uint8_t  temp;		//电机温度
+	 uint16_t last_angle;
 }moto_info_t;
 
 //================================================电机结构体声明================================================//

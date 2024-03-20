@@ -25,6 +25,7 @@ float Yaw_left;	//现在时刻左脑袋的yaw（相对坐标） 编码值转化为0~+-180后的编码值
 float Yaw_right;	//编码值转化为0~+-180后的编码值
 float Yaw_left_c;	//现在时刻左脑袋的yaw（绝对坐标） 相对于整车IMU正方向的角度值
 float Yaw_right_c; //相对于整车正方向的角度值
+float angle[2];
 
 extern fp32 gyro[3];
 
@@ -94,6 +95,10 @@ void Yaw_task(void const *pvParameters)
 		Yaw_loop_init();//循环初始化三个电机的速度环输入为0
 		
 		//三个电机编码值转化
+		for(int i=0;i<2;i++)
+		{
+			angle[i] = rcLfFiter(motor_info_can_2[i].rotor_angle, motor_info_can_2[i].last_angle);
+		}
 		Yaw_read_imu();//获取Imu角度
 		
 		//模式选择，计算目标值
@@ -108,6 +113,10 @@ void Yaw_task(void const *pvParameters)
 		Yaw_can_send();//发送6020
 		Voltage_Control_MF();//电流环计算
 		Current_Control_MF_send(motor_info_can_2[7].can_id,motor_info_can_2[7].set_voltage);//发送9025
+		for(int i=0;i<2;i++)
+		{
+			motor_info_can_2[i].last_angle = motor_info_can_2[i].rotor_angle;
+		}
     osDelay(1);
   }
 
@@ -128,10 +137,10 @@ static void Yaw_init()
 	
 //调试用PID
 	pid_init(&motor_pid_can_2[0],150,0.01,0,30000,30000); //左头速度环
-	pid_init(&motor_pid_sita_can_2[0],25,0,8,30000,30000); //左头角度环
+	pid_init(&motor_pid_sita_can_2[0],15,0,3,30000,30000); //左头角度环
 	
 	pid_init(&motor_pid_can_2[1],150,0.01,0,30000,30000); //右头速度环
-	pid_init(&motor_pid_sita_can_2[1],25,0,8,30000,30000); //右头角度环
+	pid_init(&motor_pid_sita_can_2[1],15,0,3,30000,30000); //右头角度环
 	
 	Encoder_MF_read(motor_info_can_2[7].can_id);//9025读取当前编码器值
 	Yaw_value = MF_value(Init_encoder_middle , motor_info_can_2[7].rotor_angle , 65535); //将9025编码值转换到-180~0、0~180
@@ -155,8 +164,8 @@ static void Yaw_read_imu()
 	
 	//三个电机编码值转化到0~+-180
 	Yaw_value = MF_value(Init_encoder_middle , motor_info_can_2[7].rotor_angle , 65535); //将9025编码值转换到-180~0、0~180
-	Yaw_left = -motor_value(Init_encoder_left,motor_info_can_2[0].rotor_angle);
-	Yaw_right = -motor_value(Init_encoder_right,motor_info_can_2[1].rotor_angle);
+	Yaw_left = -motor_value(Init_encoder_left,angle[0]);
+	Yaw_right = -motor_value(Init_encoder_right,angle[1]);
 	
 	//以C板上电那一刻的坐标系为基坐标系(绝对坐标系)
 	Yaw_left_c = Yaw_left + Yaw_middle_c;
@@ -445,4 +454,8 @@ float Delta_calc(float distance)
 }
 
 //================================================================一阶低通滤波===============================================================//
-
+float rcLfFiter(float pre, float val)
+{
+    pre=((float)val*0.4+pre*(1-0.4));
+    return pre;
+}

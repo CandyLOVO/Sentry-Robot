@@ -65,6 +65,10 @@ void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN 0 */
 uint8_t Rx[128];
 uint8_t Rx_R[128];
+uint8_t Rx_1[128];
+uint8_t Rx_2[128];
+uint8_t Rx_3[128];
+uint8_t Rx_4[128];
 /* USER CODE END 0 */
 
 /**
@@ -107,7 +111,8 @@ int main(void)
 	can_1_user_init(&hcan1);//配置can1的过滤器
 	can_2_user_init(&hcan2);//配置can2的过滤器
 	remote_control_init(); //遥控器初始化
-	
+	VS_init(Rx_1, Rx_2, 19);
+	VS_init4(Rx_3, Rx_4, 28);
 	__HAL_UART_ENABLE_IT(&huart2,UART_IT_IDLE);
 	HAL_UART_Receive_DMA(&huart2,(uint8_t *)Rx,sizeof(Rx)); //陀螺仪接收中断
 	

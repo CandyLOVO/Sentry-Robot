@@ -1,9 +1,18 @@
 //================================================遥控器数据接收================================================//
 #include "remote_control.h"
+#include "Exchange_task.h"
 
 extern UART_HandleTypeDef huart3;
 extern DMA_HandleTypeDef hdma_usart3_rx;
-
+extern UART_HandleTypeDef huart4;
+extern DMA_HandleTypeDef hdma_uart4_rx;
+extern UART_HandleTypeDef huart5;
+extern DMA_HandleTypeDef hdma_uart5_rx;
+extern uint8_t Rx_1[128];
+extern uint8_t Rx_2[128];
+extern uint8_t Rx_3[128];
+extern uint8_t Rx_4[128];
+extern Vision_receive_t vision_receive;
 /**
   * @brief          remote control protocol resolution
   * @param[in]      sbus_buf: raw data point
@@ -154,7 +163,7 @@ void USART3_IRQHandler_remote(void)
 
 //================================================遥控器数据解析函数================================================//
 extern UART_HandleTypeDef huart4;
-extern float target_speed[7];
+//extern float target_speed[7];
 static void sbus_to_rc(volatile const uint8_t *sbus_buf, RC_ctrl_t *rc_ctrl)
 {
     if (sbus_buf == NULL || rc_ctrl == NULL)
@@ -185,3 +194,184 @@ static void sbus_to_rc(volatile const uint8_t *sbus_buf, RC_ctrl_t *rc_ctrl)
 		
 		
 	}
+
+	int debugl = 0;
+	void UART5_IRQHandler_remote(void)
+{
+
+    if(huart5.Instance->SR & UART_FLAG_RXNE)//接收到数据
+    {							
+        __HAL_UART_CLEAR_PEFLAG(&huart5);
+    }
+    else if(UART5->SR & UART_FLAG_IDLE)
+    {	
+        static uint16_t this_time_rx_len = 0;
+
+        __HAL_UART_CLEAR_PEFLAG(&huart5);			
+
+        if (hdma_uart5_rx.Instance->CR & DMA_SxCR_CT)
+        {
+            /* Current memory buffer used is Memory 0 */
+
+            //disable DMA
+            //失效DMA
+            __HAL_DMA_DISABLE(&hdma_uart5_rx);
+
+            //get receive data length, length = set_data_length - remain_length
+            //获取接收数据长度,长度 = 设定长度 - 剩余长度
+            this_time_rx_len = 19 - hdma_uart5_rx.Instance->NDTR;
+
+            //reset set_data_lenght
+            //重新设定数据长度
+            hdma_uart5_rx.Instance->NDTR = 19;
+
+            //set memory buffer 1
+            //设定缓冲区1
+            hdma_uart5_rx.Instance->CR |= DMA_SxCR_CT;
+            
+            //enable DMA
+            //使能DMA
+            __HAL_DMA_ENABLE(&hdma_uart5_rx);
+						debugl = this_time_rx_len;
+            if(Rx_1[0] == 0xA5)
+            {
+                //sbus_to_rc(sbus_rx_buf[0], &rc_ctrl);
+							memcpy(&vision_receive.R_tracking,&Rx_1[1],1);
+							memcpy(&vision_receive.R_shoot,&Rx_1[2],1);
+							memcpy(&vision_receive.yaw_R,&Rx_1[3],4);
+							memcpy(&vision_receive.R_chase_yaw,&Rx_1[7],4);
+							memcpy(&vision_receive.R_chase_pitch,&Rx_1[11],4);
+							memcpy(&vision_receive.R_distance,&Rx_1[15],4);
+            }
+        }
+        else
+        {
+            /* Current memory buffer used is Memory 1 */
+            //disable DMA
+            //失效DMA
+            __HAL_DMA_DISABLE(&hdma_uart5_rx);
+
+            //get receive data length, length = set_data_length - remain_length
+            //获取接收数据长度,长度 = 设定长度 - 剩余长度
+            this_time_rx_len = 19 - hdma_uart5_rx.Instance->NDTR;
+
+            //reset set_data_lenght
+            //重新设定数据长度
+            hdma_uart5_rx.Instance->NDTR = 19;
+
+            //set memory buffer 0
+            //设定缓冲区0
+            DMA1_Stream1->CR &= ~(DMA_SxCR_CT);
+            
+            //enable DMA
+            //使能DMA
+            __HAL_DMA_ENABLE(&hdma_uart5_rx);
+
+            if(Rx_2[0] == 0xA5)//经判断从这里进的
+            {
+                //处理遥控器数据
+                //sbus_to_rc(sbus_rx_buf[1], &rc_ctrl);
+							memcpy(&vision_receive.R_tracking,&Rx_2[1],1);
+							memcpy(&vision_receive.R_shoot,&Rx_2[2],1);
+							memcpy(&vision_receive.yaw_R,&Rx_2[3],4);
+							memcpy(&vision_receive.R_chase_yaw,&Rx_2[7],4);
+							memcpy(&vision_receive.R_chase_pitch,&Rx_2[11],4);
+							memcpy(&vision_receive.R_distance,&Rx_2[15],4);
+
+            }
+        }
+    }
+}
+
+void UART4_IRQHandler_remote(void)
+{
+
+    if(huart4.Instance->SR & UART_FLAG_RXNE)//接收到数据
+    {							
+        __HAL_UART_CLEAR_PEFLAG(&huart4);
+    }
+    else if(UART4->SR & UART_FLAG_IDLE)
+    {	
+        static uint16_t this_time_rx_len = 0;
+
+        __HAL_UART_CLEAR_PEFLAG(&huart4);			
+
+        if (hdma_uart4_rx.Instance->CR & DMA_SxCR_CT)
+        {
+            /* Current memory buffer used is Memory 0 */
+
+            //disable DMA
+            //失效DMA
+            __HAL_DMA_DISABLE(&hdma_uart4_rx);
+
+            //get receive data length, length = set_data_length - remain_length
+            //获取接收数据长度,长度 = 设定长度 - 剩余长度
+            this_time_rx_len = 28 - hdma_uart5_rx.Instance->NDTR;
+
+            //reset set_data_lenght
+            //重新设定数据长度
+            hdma_uart4_rx.Instance->NDTR = 28;
+
+            //set memory buffer 1
+            //设定缓冲区1
+            hdma_uart4_rx.Instance->CR |= DMA_SxCR_CT;
+            
+            //enable DMA
+            //使能DMA
+            __HAL_DMA_ENABLE(&hdma_uart4_rx);
+						debugl = this_time_rx_len;
+            if(Rx_3[0] == 0xA5)
+            {
+                //sbus_to_rc(sbus_rx_buf[0], &rc_ctrl);
+							memcpy(&vision_receive.L_tracking,&Rx_3[1],1);
+							memcpy(&vision_receive.L_shoot,&Rx_3[2],1);
+							memcpy(&vision_receive.yaw_L,&Rx_3[3],4);
+							memcpy(&vision_receive.L_chase_yaw,&Rx_3[7],4);
+							memcpy(&vision_receive.L_chase_pitch,&Rx_3[11],4);
+							memcpy(&vision_receive.L_distance,&Rx_3[15],4);
+							memcpy(&vision_receive.naving,&Rx_3[19],1);
+							memcpy(&vision_receive.nav_vx,&Rx_3[20],4);
+							memcpy(&vision_receive.nav_vy,&Rx_3[24],4);
+            }
+        }
+        else
+        {
+            /* Current memory buffer used is Memory 1 */
+            //disable DMA
+            //失效DMA
+            __HAL_DMA_DISABLE(&hdma_uart4_rx);
+
+            //get receive data length, length = set_data_length - remain_length
+            //获取接收数据长度,长度 = 设定长度 - 剩余长度
+            this_time_rx_len = 28 - hdma_uart4_rx.Instance->NDTR;
+
+            //reset set_data_lenght
+            //重新设定数据长度
+            hdma_uart4_rx.Instance->NDTR = 28;
+
+            //set memory buffer 0
+            //设定缓冲区0
+            DMA1_Stream1->CR &= ~(DMA_SxCR_CT);
+            
+            //enable DMA
+            //使能DMA
+            __HAL_DMA_ENABLE(&hdma_uart4_rx);
+
+            if(Rx_4[0] == 0xA5)//经判断从这里进的
+            {
+                //处理遥控器数据
+                //sbus_to_rc(sbus_rx_buf[1], &rc_ctrl);
+								memcpy(&vision_receive.L_tracking,&Rx_4[1],1);
+								memcpy(&vision_receive.L_shoot,&Rx_4[2],1);
+								memcpy(&vision_receive.yaw_L,&Rx_4[3],4);
+								memcpy(&vision_receive.L_chase_yaw,&Rx_4[7],4);
+								memcpy(&vision_receive.L_chase_pitch,&Rx_4[11],4);
+								memcpy(&vision_receive.L_distance,&Rx_4[15],4);
+								memcpy(&vision_receive.naving,&Rx_4[19],1);
+								memcpy(&vision_receive.nav_vx,&Rx_4[20],4);
+								memcpy(&vision_receive.nav_vy,&Rx_4[24],4);
+            }
+        }
+    }
+}
+

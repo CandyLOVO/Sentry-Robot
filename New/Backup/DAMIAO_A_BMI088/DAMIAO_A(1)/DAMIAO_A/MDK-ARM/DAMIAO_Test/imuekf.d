@@ -6,11 +6,4 @@ damiao_test\imuekf.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\s
 damiao_test\imuekf.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdlib.h
 damiao_test\imuekf.o: ../Core/Inc/rt_nonfinite.h
 damiao_test\imuekf.o: ../Core/Inc/rt_defines.h
-damiao_test\imuekf.o: ../Drivers/CMSIS/DSP/Include/arm_math.h
-damiao_test\imuekf.o: ../Drivers/CMSIS/Include/core_cm4.h
-damiao_test\imuekf.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
-damiao_test\imuekf.o: ../Drivers/CMSIS/Include/cmsis_version.h
-damiao_test\imuekf.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
-damiao_test\imuekf.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
-damiao_test\imuekf.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
 damiao_test\imuekf.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h

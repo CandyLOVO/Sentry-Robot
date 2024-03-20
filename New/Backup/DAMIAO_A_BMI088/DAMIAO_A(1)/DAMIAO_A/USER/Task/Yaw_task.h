@@ -28,6 +28,7 @@ extern float Yaw;
 //¶¨Òåº¯Êý
 void Yaw_task(void const *pvParameters);
 static void Yaw_can_send();
+float rcLfFiter(float pre, float val);
 
 #ifdef __cplusplus
 }

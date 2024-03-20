@@ -60,8 +60,8 @@ void Exchange_task(void const * argument)
 	__HAL_UART_ENABLE_IT(&huart4, UART_IT_IDLE); //使能uart4的IDLE中断
 	HAL_UART_Receive_DMA(&huart4,rx_buffer_L,100); //开启接收
 	
-	__HAL_UART_ENABLE_IT(&huart5, UART_IT_IDLE); //使能uart5的IDLE中断
-	HAL_UART_Receive_DMA(&huart5,rx_buffer_R,100); //开启接收
+//	__HAL_UART_ENABLE_IT(&huart5, UART_IT_IDLE); //使能uart5的IDLE中断
+//	HAL_UART_Receive_DMA(&huart5,rx_buffer_R,100); //开启接收
   for(;;)
   {
 		osDelay(1);
@@ -164,7 +164,7 @@ static void Stm_pc_send()
 	vision.checksum_R = Get_CRC16_Check_Sum(vision_send_R,10,0xffff);
 	memcpy(&vision_send_R[10],&vision.checksum_R,2);
 	memcpy(&vision_send_R[12],&vision.ending,1);
-	uart_send_UART4(13,vision_send_R);
+	uart_send_UART5(13,vision_send_R);
 }
 
 //================================================弹道补偿API接口================================================//
