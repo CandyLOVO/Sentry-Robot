@@ -1,7 +1,8 @@
 //================================================遥控器数据接收================================================//
 #include "remote_control.h"
 #include "Exchange_task.h"
-
+#include "iwdg.h"
+extern IWDG_HandleTypeDef hiwdg;
 extern UART_HandleTypeDef huart3;
 extern DMA_HandleTypeDef hdma_usart3_rx;
 extern UART_HandleTypeDef huart4;
@@ -352,7 +353,7 @@ void UART4_IRQHandler_remote(void)
             //set memory buffer 0
             //设定缓冲区0
             DMA1_Stream1->CR &= ~(DMA_SxCR_CT);
-            
+               
             //enable DMA
             //使能DMA
             __HAL_DMA_ENABLE(&hdma_uart4_rx);
@@ -370,6 +371,7 @@ void UART4_IRQHandler_remote(void)
 								memcpy(&vision_receive.naving,&Rx_4[19],1);
 								memcpy(&vision_receive.nav_vx,&Rx_4[20],4);
 								memcpy(&vision_receive.nav_vy,&Rx_4[24],4);
+							
             }
         }
     }

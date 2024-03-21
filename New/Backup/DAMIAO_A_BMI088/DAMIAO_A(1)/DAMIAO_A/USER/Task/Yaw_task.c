@@ -125,9 +125,11 @@ void Yaw_task(void const *pvParameters)
 //================================================YAW轴PID参数和目标IMU初始化================================================//
 static void Yaw_init()
 {
-	pid_init(&motor_pid_can_2[7],800,3,0,30000,30000); //9025电机速度环
-	pid_init(&motor_pid_sita_can_2[7],19,0,3000,30000,30000); //9025电机角度环
-	
+//	pid_init(&motor_pid_can_2[7],1000,3,0,24000,24000); //9025电机速度环
+//	pid_init(&motor_pid_sita_can_2[7],19,0,3000,24000,24000); //9025电机角度环
+		pid_init(&motor_pid_can_2[7],6000,2,0,72000,72000); //9025电机速度环
+	pid_init(&motor_pid_sita_can_2[7],3,0,50,72000,72000); //9025电机角度环
+//	
 //上场用PID 硬的一批
 //	pid_init(&motor_pid_can_2[0],200,0.01,0,30000,30000); //左头速度环
 //	pid_init(&motor_pid_sita_can_2[0],25,0,10,30000,30000); //左头角度环
@@ -335,7 +337,10 @@ static void Site_Control_MF()
 {
 	if(rc_ctrl.rc.ch[0] >= -660 && rc_ctrl.rc.ch[0]<= 660)
 	{
-		target_yaw_middle -= rc_ctrl.rc.ch[0]/660.0 * Yaw_sita_weight;
+		if(rc_ctrl.rc.ch[0] <0){
+		target_yaw_middle -= 1;}
+				if(rc_ctrl.rc.ch[0] >0){
+		target_yaw_middle += 1;}
 		if(target_yaw_middle > 180)
 		{
 			target_yaw_middle -= 360;
@@ -350,7 +355,7 @@ static void Site_Control_MF()
 //================================================MF9025电流环计算(调用了限制函数)===============================================//
 static void Voltage_Control_MF()
 {
-	target_speed_can_2[7] += pid_calc_sita_span(&motor_pid_sita_can_2[7], target_yaw_middle, Yaw_middle_c);  //Yaw_middle_c->IMU -180~+180
+	target_speed_can_2[7] = pid_calc_sita_span(&motor_pid_sita_can_2[7], target_yaw_middle, Yaw_middle_c);  //Yaw_middle_c->IMU -180~+180
 	motor_info_can_2[7].set_voltage = pid_calc(&motor_pid_can_2[7], target_speed_can_2[7],(9.55f * gyro[2])); //陀螺仪yaw的角速度
 //	motor_info_can_2[7].set_voltage = pid_calc(&motor_pid_can_2[7], target_speed_can_2[7],motor_info_can_2[7].rotor_speed);
 }

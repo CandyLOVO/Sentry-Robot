@@ -27,6 +27,7 @@ damiao_test\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_ca
 damiao_test\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
 damiao_test\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
 damiao_test\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
+damiao_test\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_iwdg.h
 damiao_test\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 damiao_test\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 damiao_test\stm32f4xx_it.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
@@ -71,3 +72,4 @@ damiao_test\stm32f4xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTO
 damiao_test\stm32f4xx_it.o: ../USER/AlgorithmLayer/CRC.h
 damiao_test\stm32f4xx_it.o: ../USER/Task/Ins_task.h
 damiao_test\stm32f4xx_it.o: ../USER/AlgorithmLayer/Communicate.h
+damiao_test\stm32f4xx_it.o: ../Core/Inc/iwdg.h

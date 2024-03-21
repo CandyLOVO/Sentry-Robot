@@ -27,6 +27,7 @@ damiao_test\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_can.h
 damiao_test\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h
 damiao_test\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
 damiao_test\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
+damiao_test\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_iwdg.h
 damiao_test\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 damiao_test\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 damiao_test\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h
@@ -51,6 +52,7 @@ damiao_test\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 damiao_test\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 damiao_test\main.o: ../Core/Inc/can.h
 damiao_test\main.o: ../Core/Inc/dma.h
+damiao_test\main.o: ../Core/Inc/iwdg.h
 damiao_test\main.o: ../Core/Inc/spi.h
 damiao_test\main.o: ../Core/Inc/usart.h
 damiao_test\main.o: ../USB_DEVICE/App/usb_device.h

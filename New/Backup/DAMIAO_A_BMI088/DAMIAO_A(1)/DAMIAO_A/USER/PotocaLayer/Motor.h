@@ -9,7 +9,7 @@
 typedef struct
 {
     uint16_t can_id;		//ID号
-    int16_t  set_voltage;		//发送信息
+    int32_t  set_voltage;		//发送信息
     uint16_t rotor_angle;		//现在的角度
     int16_t  rotor_speed;		//现在的转速
     int16_t  torque_current;		//实际转矩电流

@@ -28,6 +28,8 @@
 #include "remote_control.h"
 #include "Ins_task.h"
 #include "Communicate.h"
+#include "remote_control.h"
+#include "iwdg.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -78,7 +80,7 @@ extern UART_HandleTypeDef huart5;
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
 /* USER CODE BEGIN EV */
-
+extern int error_uart ;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -442,6 +444,8 @@ void UART5_IRQHandler(void)
 //	 }
 //	HAL_UART_Receive_DMA(&huart5,rx_buffer_R,BUFFER_SIZE);
 	UART5_IRQHandler_remote();
+	error_uart = 0;
+	//HAL_IWDG_Refresh(&hiwdg);
   /* USER CODE END UART5_IRQn 0 */
   HAL_UART_IRQHandler(&huart5);
   /* USER CODE BEGIN UART5_IRQn 1 */

@@ -128,8 +128,8 @@ void MX_FREERTOS_Init(void) {
   exchangeHandle = osThreadCreate(osThread(exchangetask), NULL);
 	
 	//мсбщргхннЯ
-//	osThreadDef(insTask, InsTask, osPriorityRealtime, 0, 1024);
-//	insTaskHandle = osThreadCreate(osThread(insTask), NULL);
+	osThreadDef(insTask, InsTask, osPriorityRealtime, 0, 128);
+	insTaskHandle = osThreadCreate(osThread(insTask), NULL);
 	
 		osThreadDef(ins, imu_temp_control_task, osPriorityRealtime, 0, 1024);
 	insHandle = osThreadCreate(osThread(ins), NULL);

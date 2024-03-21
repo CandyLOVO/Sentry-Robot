@@ -47,10 +47,10 @@ void Chassis(void const * argument)
 	Chassis_init();
 	
 	//设置初始角度		
-	initial_angle[0] = 1775; //初始角度（底盘正前方各轮子角度）
-	initial_angle[1] = 7840;
-	initial_angle[2] = 5885;
-	initial_angle[3] = 3800;
+	initial_angle[0] = 1702; //初始角度（底盘正前方各轮子角度）
+	initial_angle[1] = 7891;
+	initial_angle[2] = 5662;
+	initial_angle[3] = 3685;
 
   for(;;)
   {
