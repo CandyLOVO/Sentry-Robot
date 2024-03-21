@@ -1045,6 +1045,7 @@ HAL_StatusTypeDef HAL_CAN_Start(CAN_HandleTypeDef *hcan)
     tickstart = HAL_GetTick();
 
     /* Wait the acknowledge */
+
     while ((hcan->Instance->MSR & CAN_MSR_INAK) != 0U)
     {
       /* Check for the Timeout */

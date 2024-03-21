@@ -4,14 +4,13 @@
 #include "user_can.h"
 #include "user_pid.h"
 #include "rc_potocal.h"
+#include "user_tim.h"
 
 
 #define mocalun_speed   19*380    //摩擦轮转速(根据实际情况更改快速调整射速）
-
-
+#define C_bopan_reversal_time 0.2f   //拨盘反转时间(s)
 #define K_shoot_rate_correct 1 //射频修正参数（根据实际情况更改快速调整射频）
 #define C_bopan_block_I 9000   //拨盘堵转电流（测试后更改）
-#define C_bopan_unblock_I 50   //拨盘正常旋转电流（测试后更改）
 #define K_rc_to_bopanSpeed 6 //遥控通道值切换到拨盘速度（更改可快速调整1-1模式下遥控与拨盘映射关系）
 
 
@@ -30,7 +29,7 @@ static void Friction_calc(void);
 static void Friction_down(void);
 
 //拨盘堵转检测
-//static void Bopan_judge(void);
+static void Bopan_judge(void);
 
 //摩擦轮Pid输出值发送
 extern void can_send_mocalun(int16_t motor1,int16_t motor2,int16_t motor3,int16_t motor4);
@@ -56,11 +55,11 @@ extern RC_ctrl_t rc_ctrl;
 extern RC_ctrl_t rc_ctrl;
 int16_t bopan_shoot_rate_max = 360;	//最高射频（个/min）
 int16_t bopan_shoot_rate_min = 240; //最低射频
-int16_t bopan_shoot_rate_test = 100;//无裁判系统射频
+int16_t bopan_shoot_rate_test = 150;//无裁判系统射频
 int16_t bopan_reversal_shoot_rate = -100;	//拨盘反转射频
 uint8_t bopan_reversal_flag_L= 0,bopan_reversal_flag_R= 0;	//拨盘反转标志位，0为正转，1为反转
 int16_t remote_mode;         //遥控模式，1-1为Fire Control 模式，摩擦轮旋转，遥控左右摇杆控制拨盘旋转；2-2为上场模式，摩擦轮旋转，根据视觉识别位发弹
-int bopan_back_targetPos;    //拨盘反转位置环，目标位置
+extern float Sys_time;
 
 
 void FrictionTask(void const * argument)
@@ -94,11 +93,11 @@ if(remote_mode==22)
 	{  
 		if(bopan_reversal_flag_L==1)
 			{
-			Bopan_speed_calc_L(bopan_reversal_shoot_rate,bopan_reversal_shoot_rate,bopan_reversal_shoot_rate);//最高射频，最低射频，无裁判系统射频
+			Bopan_speed_calc_L(bopan_reversal_shoot_rate,bopan_reversal_shoot_rate,bopan_reversal_shoot_rate);
 			}
 			else if(bopan_reversal_flag_L==0)
 			{
-			Bopan_speed_calc_L(bopan_shoot_rate_max,bopan_shoot_rate_min,bopan_shoot_rate_test);		
+			Bopan_speed_calc_L(bopan_shoot_rate_max,bopan_shoot_rate_min,bopan_shoot_rate_test);	//最高射频，最低射频，无裁判系统射频	
 	   	}
 	}
 				
@@ -116,7 +115,7 @@ if(remote_mode==22)
 			}
 		 else if(bopan_reversal_flag_R==0)
 			{
-			Bopan_speed_calc_R(bopan_shoot_rate_max,bopan_shoot_rate_min,bopan_shoot_rate_test);		
+			Bopan_speed_calc_R(bopan_shoot_rate_max,bopan_shoot_rate_min,bopan_shoot_rate_test);		//最高射频，最低射频，无裁判系统射频
 	   	}
 	}
 				
@@ -126,12 +125,12 @@ if(remote_mode==22)
 	}
 	
 }
-//===========================自动模式 end==============================//  
+
+//========================遥控模式==============================//  
 		
 else if (remote_mode==11)
 {
 		re_shoot_rate_calc();  //遥控控制拨盘，左右摇杆上推
-
 }
 
 else
@@ -140,8 +139,8 @@ Bopan_speed_calc_L(0,0,0);
 Bopan_speed_calc_R(0,0,0);
 }
 		            
-		Bopan_calc();//转速-->电流
-//		Bopan_judge();//拨盘堵转检测
+	  Bopan_judge();//拨盘堵转检测
+    Bopan_calc();//转速-->电流
 		can_send_bopan(motor_m2006[0].send_I,motor_m2006[1].send_I);//拨盘电流发送
     osDelay(1);
   }
@@ -260,8 +259,7 @@ static void Friction_down()
 
 //===============================================拨盘PID计算================================================//
 static void Bopan_calc()
-{
-	
+{	
 	motor_m2006[0].send_I = pid_cal_s(&motor_m2006_pid[0], motor_m2006[0].speed, -motor_m2006[0].set_v,16384,16384);
 	motor_m2006[1].send_I = pid_cal_s(&motor_m2006_pid[1], motor_m2006[1].speed, -motor_m2006[1].set_v,16384,16384);
 }
@@ -315,36 +313,32 @@ static void Bopan_speed_calc_R(int speed_rate_high, int speed_rate_low,int speed
 	}
 }
 //=====================================================拨盘堵转检测=======================================//
-//static void Bopan_judge()
-//{if(motor_m2006[0].tor_current<-C_bopan_block_I)
-//	{
-//		bopan_reversal_flag_L=1;
-//	}
-//	else if(motor_m2006[0].tor_current>C_bopan_block_I)
-//	{
-//		bopan_reversal_flag_L=0;
-//	}		
-//	
-//	if(motor_m2006[1].tor_current<-C_bopan_block_I)
-//	{
-//		bopan_reversal_flag_R=1;
-//	}
-//	else if(motor_m2006[1].tor_current>C_bopan_block_I)
-//	{
-//		bopan_reversal_flag_R=0;
-//	}		
-//	
-//}
-//=========================================拨盘退弹==============================================//
-/*
-static void Bopan_back_L(int flag)  //反转左拨盘
-{
-	bopan_back_targetPos=motor_m2006[0].angle+C_bopan_back_position;
-	 if(bopan_back_targetPos>8191)
-	 {
-		 bopan_back_targetPos=bopan_back_targetPos-8191;
+static void Bopan_judge()
+{if(motor_m2006[0].tor_current<-C_bopan_block_I)
+	{
+		bopan_reversal_flag_L=1;
+		Shooter_L.tim_reversal_begin=Sys_time;
 	}
+else if(Sys_time-Shooter_L.tim_reversal_begin> C_bopan_reversal_time)
+{
+		bopan_reversal_flag_L=0;
+		Shooter_L.tim_reversal_begin=0;
+}
 	
+	if(motor_m2006[1].tor_current<-C_bopan_block_I)
+	{
+		bopan_reversal_flag_R=1;
+		Shooter_R.tim_reversal_begin=Sys_time;
+	}
+	else if(Sys_time-Shooter_R.tim_reversal_begin> C_bopan_reversal_time)
+{
+		bopan_reversal_flag_R=0;
+		Shooter_R.tim_reversal_begin=0;
+}
+
+
+
+
 	
-	
-}	*/
+}
+

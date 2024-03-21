@@ -2,7 +2,7 @@ damiao_test\system_stm32f4xx.o: ../Core/Src/system_stm32f4xx.c
 damiao_test\system_stm32f4xx.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 damiao_test\system_stm32f4xx.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f446xx.h
 damiao_test\system_stm32f4xx.o: ../Drivers/CMSIS/Include/core_cm4.h
-damiao_test\system_stm32f4xx.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
+damiao_test\system_stm32f4xx.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stdint.h
 damiao_test\system_stm32f4xx.o: ../Drivers/CMSIS/Include/cmsis_version.h
 damiao_test\system_stm32f4xx.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 damiao_test\system_stm32f4xx.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -14,7 +14,7 @@ damiao_test\system_stm32f4xx.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ha
 damiao_test\system_stm32f4xx.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 damiao_test\system_stm32f4xx.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 damiao_test\system_stm32f4xx.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-damiao_test\system_stm32f4xx.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
+damiao_test\system_stm32f4xx.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stddef.h
 damiao_test\system_stm32f4xx.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 damiao_test\system_stm32f4xx.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
 damiao_test\system_stm32f4xx.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h
@@ -28,4 +28,6 @@ damiao_test\system_stm32f4xx.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ha
 damiao_test\system_stm32f4xx.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
 damiao_test\system_stm32f4xx.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 damiao_test\system_stm32f4xx.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+damiao_test\system_stm32f4xx.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+damiao_test\system_stm32f4xx.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 damiao_test\system_stm32f4xx.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h

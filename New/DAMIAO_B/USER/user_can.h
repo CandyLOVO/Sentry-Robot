@@ -28,6 +28,7 @@ typedef struct
 	uint16_t shooter_heat; //实时枪管热量
 	uint8_t shoot_rate; //实时射频
 	float shoot_speed; //实时射速 
+	float tim_reversal_begin; //反转启动时间
 }Shooter_t;
 
 extern motor_info motor_m3508[4];/*摩擦轮电机 id 1~4*/
