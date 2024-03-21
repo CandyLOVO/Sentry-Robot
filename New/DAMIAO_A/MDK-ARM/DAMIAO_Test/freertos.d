@@ -1,7 +1,7 @@
 damiao_test\freertos.o: ../Core/Src/freertos.c
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-damiao_test\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
-damiao_test\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
+damiao_test\freertos.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stddef.h
+damiao_test\freertos.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stdint.h
 damiao_test\freertos.o: ../Core/Inc/FreeRTOSConfig.h
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -59,8 +59,8 @@ damiao_test\freertos.o: ../USER/Task/Exchange_task.h
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 damiao_test\freertos.o: ../Drivers/CMSIS/DSP/Include/arm_math.h
 damiao_test\freertos.o: ../Drivers/CMSIS/Include/core_cm4.h
-damiao_test\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
-damiao_test\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h
+damiao_test\freertos.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\string.h
+damiao_test\freertos.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\math.h
 damiao_test\freertos.o: ../Core/Inc/can.h
 damiao_test\freertos.o: ../USER/AlgorithmLayer/SolveTrajectory.h
 damiao_test\freertos.o: ../USER/Task/Yaw_task.h
