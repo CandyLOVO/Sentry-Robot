@@ -10,6 +10,8 @@ extern uint8_t first_y;
 //定义2个结构体，一个官方接收的，一个自己使用的
 JUDGE_MODULE_DATA Judge_Hero;
 Sentry_t Sentry;
+int32_t event;
+int8_t data[4];
 
 static void Update_data();//更新定义一些需要用到的变量并实时更新数值方便其他文件调用（主要在这个函数里面修改）
 	
@@ -175,14 +177,21 @@ static void Update_data()
 	//比赛进程
 	Sentry.Flag_progress =  Judge_Hero.status.game_progress;	//比赛进程,1为准备阶段，2为自检，3为倒计时，4为对战阶段，5为比赛结束(结算时)
 	Sentry.Time_remain = Judge_Hero.status.stage_remain_time;		//比赛剩余时间
+	event = Judge_Hero.event_data.event_type;	
+	memcpy(&data[0],&event,4);
 	
 	//判断我方是红方还是蓝方（数字针对我是哨兵）
 	if(Sentry.Myself_id == 7)//红色方
 	{
 		Sentry.Flag_judge = 1;
+		Sentry.Myself_remain_HP = Judge_Hero.robot_hp.red_7_robot_HP;
+		Sentry.base_HP = Judge_Hero.robot_hp.red_base_HP;
 	}
 	else if(Sentry.Myself_id == 107)
 	{
 		Sentry.Flag_judge = 2;
+		Sentry.Myself_remain_HP = Judge_Hero.robot_hp.blue_7_robot_HP;
+		Sentry.base_HP = Judge_Hero.robot_hp.blue_base_HP;
 	}
+	Sentry.supply_projectile_num = Judge_Hero.supply_status.supply_projectile_num;
 }

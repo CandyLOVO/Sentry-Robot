@@ -82,6 +82,10 @@ void Chassis(void const * argument)
 			{
 				navigation_control();
 			}
+			else
+			{
+				rotate_control_none();
+			}
 		}
     osDelay(2);
   }

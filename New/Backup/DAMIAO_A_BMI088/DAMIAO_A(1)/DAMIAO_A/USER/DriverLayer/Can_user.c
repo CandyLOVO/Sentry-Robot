@@ -91,14 +91,25 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖĞ¶Ï»Øµ÷º¯Ê
 			Sentry.Flag_judge = rx_data[1];  //ÅĞ¶ÏÎÒ·½ÊÇºìÉ«·½»¹ÊÇÀ¶É«·½
 			Sentry.Flag_armour = rx_data[2];  //ÊÜ»÷´ò×°¼×°å±àºÅ
 			Sentry.Time_remain = (rx_data[4]<<8) | rx_data[3];  //±ÈÈüÊ£ÓàÊ±¼ä
-			//memcpy(&Sentry.Time_remain,&rx_data[3],2);//ÓëÉÏÃæµÈ¼Û			
+			//memcpy(&Sentry.Time_remain,&rx_data[3],2);//ÓëÉÏÃæµÈ¼Û		
+			Sentry.Myself_remain_HP = (rx_data[6]<<8) | rx_data[5];	//±¾»úÆ÷ÈËÊ£ÓàÑªÁ¿			
 		}
 		
-		if(rx_header.StdId == 0x55)
+//		if(rx_header.StdId == 0x55)
+//		{
+//			Sentry.Myself_remain_HP = (rx_data[1]<<8) | rx_data[0];	//±¾»úÆ÷ÈËÊ£ÓàÑªÁ¿
+//			Sentry.Myself_17mm_cooling_heat_id1 = (rx_data[3]<<8) | rx_data[2];	//ÊµÊ±Ç¹¹Ü1ÈÈÁ¿
+//			Sentry.Myself_17mm_cooling_heat_id2 = (rx_data[5]<<8) | rx_data[4];	//ÊµÊ±Ç¹¹Ü2ÈÈÁ¿	
+//		}
+		
+		if(rx_header.StdId == 0x61)
 		{
-			Sentry.Myself_remain_HP = (rx_data[1]<<8) | rx_data[0];	//±¾»úÆ÷ÈËÊ£ÓàÑªÁ¿
-			Sentry.Myself_17mm_cooling_heat_id1 = (rx_data[3]<<8) | rx_data[2];	//ÊµÊ±Ç¹¹Ü1ÈÈÁ¿
-			Sentry.Myself_17mm_cooling_heat_id2 = (rx_data[5]<<8) | rx_data[4];	//ÊµÊ±Ç¹¹Ü2ÈÈÁ¿	
+			Sentry.base_HP = (rx_data[7]<<8) | rx_data[6];
+		}
+		
+		if(rx_header.StdId == 0x63)
+		{
+			Sentry.event_data = rx_data[6];
 		}
 		
   }

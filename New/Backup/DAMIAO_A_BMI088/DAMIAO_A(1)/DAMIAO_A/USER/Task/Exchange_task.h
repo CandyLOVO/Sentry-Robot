@@ -106,6 +106,8 @@ typedef struct
 	uint16_t Time_remain;		//比赛剩余时间
 	
 	uint16_t Myself_remain_HP;	//本机器人剩余血量
+	uint16_t base_HP;
+	uint8_t event_data;
 	uint16_t Myself_17mm_cooling_heat_id1;		//实时枪管1热量
 	uint16_t Myself_17mm_cooling_heat_id2;		//实时枪管2热量
 	

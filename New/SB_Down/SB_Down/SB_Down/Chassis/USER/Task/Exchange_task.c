@@ -5,6 +5,7 @@
 #include "judge.h"
 
 uint8_t Trans[8] = {0}; //CAN1上发信息
+extern int8_t data[4];
 
 void Exchange_task(void const * argument)
 {
@@ -15,17 +16,19 @@ void Exchange_task(void const * argument)
 		Trans[2] = Sentry.armor_id; //受伤的装甲板编号（应该0是非装甲板受伤，1-4是装甲板伤害)
 		Trans[3] = Sentry.Time_remain & 0xff; //比赛剩余时间
 		Trans[4] = (Sentry.Time_remain >> 8) & 0xff;
+		Trans[5] = Sentry.Myself_remain_HP & 0xff; //本机器人剩余血量（10HZ)
+		Trans[6] = (Sentry.Myself_remain_HP >> 8) & 0xff;
 		can_remote(Trans,0x54);
     osDelay(1);
 		
-		Trans[0] = Sentry.Myself_remain_HP & 0xff; //本机器人剩余血量（10HZ)
-		Trans[1] = (Sentry.Myself_remain_HP >> 8) & 0xff;
-		Trans[2] = Sentry.Myself_17mm_speed_id1 & 0xff; //实时枪管1热量
-		Trans[3] = (Sentry.Myself_17mm_speed_id1 >> 8) & 0xff;
-		Trans[4] = Sentry.Myself_17mm_speed_id2 & 0xff; //实时枪管2热量
-		Trans[5] = (Sentry.Myself_17mm_speed_id2 >> 8) & 0xff;
-		can_remote(Trans,0x55);
-		osDelay(1);
+//		Trans[0] = Sentry.Myself_remain_HP & 0xff; //本机器人剩余血量（10HZ)
+//		Trans[1] = (Sentry.Myself_remain_HP >> 8) & 0xff;
+//		Trans[2] = Sentry.Myself_17mm_speed_id1 & 0xff; //实时枪管1热量
+//		Trans[3] = (Sentry.Myself_17mm_speed_id1 >> 8) & 0xff;
+//		Trans[4] = Sentry.Myself_17mm_speed_id2 & 0xff; //实时枪管2热量
+//		Trans[5] = (Sentry.Myself_17mm_speed_id2 >> 8) & 0xff;
+//		can_remote(Trans,0x55);
+//		osDelay(1);
 		
 		Trans[0] = Sentry.Myself_17mm_speed_limit_id1 & 0xff; //本机器人17mm射速限制-1
 		Trans[1] = (Sentry.Myself_17mm_speed_limit_id1 >> 8) & 0xff;
@@ -33,6 +36,11 @@ void Exchange_task(void const * argument)
 		Trans[3] = (Sentry.Myself_17mm_cooling_limit_id1 >> 8) & 0xff;
 		Trans[4] = Sentry.Myself_17mm_cooling_rate_id1 & 0xff; //本机器人17mm热量每秒冷却值-1
 		Trans[5] = (Sentry.Myself_17mm_cooling_rate_id1 >> 8) & 0xff;
+		
+		//DAMIAO_A -> miniPC
+		Trans[6] = Sentry.base_HP & 0xff; //基地剩余血量（10HZ)
+		Trans[7] = (Sentry.base_HP >> 8) & 0xff;
+		
 		can_remote(Trans,0x61);
 		osDelay(1);
 		
@@ -52,6 +60,10 @@ void Exchange_task(void const * argument)
 		Trans[3] = (Sentry.Myself_17mm_cooling_limit_id2 >> 8) & 0xff;
 		Trans[4] = Sentry.Myself_17mm_cooling_rate_id2 & 0xff; //本机器人17mm热量每秒冷却值-2
 		Trans[5] = (Sentry.Myself_17mm_cooling_rate_id2 >> 8) & 0xff;
+		
+		//DAMIAO_A -> miniPC
+		Trans[6] = data[3];
+		
 		can_remote(Trans,0x63);
 		osDelay(1);
 		

@@ -326,6 +326,9 @@ typedef __packed struct Sentry_t
 	uint16_t Time_remain;		//比赛剩余时间
 	uint8_t Flag_judge;		//判断红蓝方
 	uint8_t Flag_first;		//哨兵开环方案专用
+	uint8_t supply_projectile_num;
+	uint16_t base_HP;
+	
 }Sentry_t;
 
 extern JUDGE_MODULE_DATA Judge_Hero;

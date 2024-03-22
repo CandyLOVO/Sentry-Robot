@@ -150,12 +150,15 @@ static void Stm_pc_send()
 	memcpy(&vision_send_L[1],&Sentry.Flag_judge,1); //红蓝方检测，置0为裁判系统寄了，置1为我方是红色方，置2为我方是蓝色方
 	memcpy(&vision_send_L[2],&vision.L_yaw,4);
 	memcpy(&vision_send_L[6],&vision.L_pitch,4);
-	vision.checksum_L = Get_CRC16_Check_Sum(vision_send_L,10,0xffff);
-	memcpy(&vision_send_L[10],&vision.checksum_L,2);
-//	memcpy(&vision_send_L[17],&Sentry.Flag_mode,1);//哨兵目前的模式
-//	memcpy(&vision_send_L[18],&Sentry.Flag_progress,1);//裁判系统比赛进程数据
-	memcpy(&vision_send_L[12],&vision.ending,1);
-	uart_send_UART4(13,vision_send_L);
+	memcpy(&vision_send_L[10],&Sentry.Time_remain,2); //time
+	memcpy(&vision_send_L[12],&Sentry.Myself_remain_HP,2);
+	memcpy(&vision_send_L[14],&Sentry.base_HP,2);
+	memcpy(&vision_send_L[16],&Sentry.event_data,1);
+	
+	vision.checksum_L = Get_CRC16_Check_Sum(vision_send_L,17,0xffff);
+	memcpy(&vision_send_L[17],&vision.checksum_L,2);
+	memcpy(&vision_send_L[19],&vision.ending,1);
+	uart_send_UART4(20,vision_send_L);
 	
 	memcpy(&vision_send_R[0],&vision.header,1);
 	memcpy(&vision_send_R[1],&Sentry.Flag_judge,1); //红蓝方检测，置0为裁判系统寄了，置1为我方是红色方，置2为我方是蓝色方
@@ -260,8 +263,8 @@ static void Judge_minipc()
 	else if(rc_ctrl.rc.s[1]==2 && rc_ctrl.rc.s[0]==2)
 		Sentry.Remote_mode = 22;
 	
-	else if(rc_ctrl.rc.s[1]==0 && rc_ctrl.rc.s[0]==0)//未开启遥控器默认为上场模式
-		Sentry.Remote_mode = 22;		
+//	else if(rc_ctrl.rc.s[1]==0 && rc_ctrl.rc.s[0]==0)//未开启遥控器默认为上场模式
+//		Sentry.Remote_mode = 22;		
 	
 	//左右脑袋目标识别判断
 	if(vision_receive.L_chase_pitch && vision_receive.L_chase_yaw)

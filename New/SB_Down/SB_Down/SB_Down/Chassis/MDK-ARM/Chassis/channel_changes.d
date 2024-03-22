@@ -46,3 +46,6 @@ chassis\channel_changes.o: ../USER/motion_overlay.h
 chassis\channel_changes.o: ../USER/handle_value.h
 chassis\channel_changes.o: ../USER/DriverLayer/user_can.h
 chassis\channel_changes.o: ../USER/DriverLayer/user_pid.h
+chassis\channel_changes.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h
+chassis\channel_changes.o: ../USER/PotocaLayer/judge.h
+chassis\channel_changes.o: ../USER/DriverLayer/drv_usart.h

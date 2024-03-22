@@ -2,14 +2,24 @@
 #include "handle_value.h"
 #include "math.h"
 #include "chassis.h"
+#include "user_can.h"
 
 #define cosin 0.707106781187 //二分之根号二
-#define omega 13 //旋转叠加计算中的角速度 【严禁给15以上!!! yaw的6020给转烂了！！！！！！！！！】
+#define omega 15 //旋转叠加计算中的角速度 【严禁给15以上!!! yaw的6020给转烂了！！！！！！！！！】
 #define radius 313.487 //舵轮距离车体中心的距离 杰舵248.248mm 哨兵313.487mm
 extern fp32 error_theta;
+extern motor_info motor[8];
 
 int16_t motor_angle[4]; //需要6020转到的角度
 int16_t motor_speed[4];
+int16_t motor_speed_last[4];
+int16_t motor_angle_last[4];
+
+float rcLfFiter(float pre, float val,float value)
+{
+	val=((float)pre*value+val*(1-value));
+  return val;
+}
 
 //3508和6020各运动方式的分别控制
 
@@ -17,10 +27,12 @@ int16_t motor_speed[4];
 //仅旋转的3508速度
 void rotate_3508(int16_t vw)
 {
-	motor_speed[0] = vw*(9000/660);
-	motor_speed[1] = vw*(9000/660);
-	motor_speed[2] = vw*(9000/660);
-	motor_speed[3] = vw*(9000/660);
+	for(int i=0;i<4;i++)
+	{
+		motor_speed_last[i] = motor[i].speed;
+		motor_speed[i] = vw*(9000/660);
+		motor_speed[i] = rcLfFiter(motor_speed_last[i],motor_speed[i],0.7);
+	}
 }	
 
 //仅旋转的6020角度
@@ -30,6 +42,11 @@ void rotate_6020()
 	motor_angle[1] = remote_value((+ omega*radius*cosin), ( - omega*radius*cosin));
 	motor_angle[2] = remote_value((- omega*radius*cosin), ( - omega*radius*cosin));
 	motor_angle[3] = remote_value((- omega*radius*cosin), ( + omega*radius*cosin));
+//	for(int i=0;i<4;i++)
+//	{
+//		motor_angle_last[i] = motor[i+4].angle;
+//		motor_angle[i] = rcLfFiter(motor_angle_last[i],motor_angle[i],0.4);
+//	}
 }
 /********************************************************************************************************************************/
 
@@ -73,6 +90,10 @@ void compound_movement_3508(int16_t x,int16_t y)
 	motor_speed[1] =  sqrt(pow(((float)vx + omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
 	motor_speed[2] =  sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy - omega*radius*cosin),2));
 	motor_speed[3] =  sqrt(pow(((float)vx - omega*radius*cosin),2) + pow(((float)vy + omega*radius*cosin),2));
+	for(int i=0;i<4;i++)
+	{
+		motor_speed[i] = rcLfFiter(motor_speed_last[i],motor_speed[i],0.7);
+	}
 }
 
 //旋转+平移的6020角度

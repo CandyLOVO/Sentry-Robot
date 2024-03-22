@@ -46,9 +46,9 @@ compiling chassis.c...
   #endif
 ../USER/handle_value.h(8): warning:  #1-D: last line of file ends without a newline
   #endif
-../USER/motion_overlay.h(11): warning:  #1295-D: Deprecated declaration rotate_6020 - give arg types
+../USER/motion_overlay.h(12): warning:  #1295-D: Deprecated declaration rotate_6020 - give arg types
   void rotate_6020();
-../USER/motion_overlay.h(13): warning:  #1-D: last line of file ends without a newline
+../USER/motion_overlay.h(14): warning:  #1-D: last line of file ends without a newline
   #endif
 ../USER/Control/channel_changes.h(4): warning:  #1295-D: Deprecated declaration translational_control - give arg types
   void translational_control();
@@ -56,19 +56,21 @@ compiling chassis.c...
   void compound_control();
 ../USER/Control/channel_changes.h(6): warning:  #1295-D: Deprecated declaration rotate_control - give arg types
   void rotate_control();
-../USER/Control/channel_changes.h(7): warning:  #1295-D: Deprecated declaration navigation_control - give arg types
+../USER/Control/channel_changes.h(7): warning:  #1295-D: Deprecated declaration rotate_control_none - give arg types
+  void rotate_control_none();
+../USER/Control/channel_changes.h(8): warning:  #1295-D: Deprecated declaration navigation_control - give arg types
   void navigation_control();
-../USER/Control/channel_changes.h(8): warning:  #1-D: last line of file ends without a newline
+../USER/Control/channel_changes.h(9): warning:  #1-D: last line of file ends without a newline
   #endif
-..\USER\Task\chassis.c(106): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\USER\Task\chassis.c(110): warning:  #1035-D: single-precision operand implicitly converted to double-precision
   	error_theta = error_theta*3.1415926/180; //转化为弧度制
-..\USER\Task\chassis.c(107): warning:  #1-D: last line of file ends without a newline
+..\USER\Task\chassis.c(111): warning:  #1-D: last line of file ends without a newline
   }
-..\USER\Task\chassis.c: 18 warnings, 0 errors
+..\USER\Task\chassis.c: 19 warnings, 0 errors
 linking...
-Program Size: Code=43172 RO-data=2028 RW-data=504 ZI-data=20888  
+Program Size: Code=44828 RO-data=2028 RW-data=588 ZI-data=20892  
 FromELF: creating hex file...
-"Chassis\Chassis.axf" - 0 Error(s), 18 Warning(s).
+"Chassis\Chassis.axf" - 0 Error(s), 19 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -92,7 +94,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.6.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

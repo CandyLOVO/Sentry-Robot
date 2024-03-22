@@ -42,3 +42,4 @@ chassis\motion_overlay.o: ..\USER\Task\chassis.h
 chassis\motion_overlay.o: ../Core/Inc/can.h
 chassis\motion_overlay.o: ../USER/struct_typedef.h
 chassis\motion_overlay.o: ..\USER\Task\chassis.h
+chassis\motion_overlay.o: ../USER/DriverLayer/user_can.h
