@@ -148,26 +148,28 @@ static void Stm_pc_send()
 	
 	memcpy(&vision_send_L[0],&vision.header,1);
 	memcpy(&vision_send_L[1],&Sentry.Flag_judge,1); //红蓝方检测，置0为裁判系统寄了，置1为我方是红色方，置2为我方是蓝色方
-	memcpy(&vision_send_L[2],&vision.L_yaw,4);
-	memcpy(&vision_send_L[6],&vision.L_pitch,4);
-	memcpy(&vision_send_L[10],&Sentry.Time_remain,2); //time
-	memcpy(&vision_send_L[12],&Sentry.Myself_remain_HP,2);
-	memcpy(&vision_send_L[14],&Sentry.base_HP,2);
-	memcpy(&vision_send_L[16],&Sentry.event_data,1);
+	memcpy(&vision_send_L[2],&Sentry.bullet_speed_1,4);
+	memcpy(&vision_send_L[6],&vision.L_yaw,4);
+	memcpy(&vision_send_L[10],&vision.L_pitch,4);
+	memcpy(&vision_send_L[14],&Sentry.Time_remain,2); //time
+	memcpy(&vision_send_L[16],&Sentry.Myself_remain_HP,2);
+	memcpy(&vision_send_L[18],&Sentry.base_HP,2);
+	memcpy(&vision_send_L[20],&Sentry.event_data,1);
 	
-	vision.checksum_L = Get_CRC16_Check_Sum(vision_send_L,17,0xffff);
-	memcpy(&vision_send_L[17],&vision.checksum_L,2);
-	memcpy(&vision_send_L[19],&vision.ending,1);
-	uart_send_UART4(20,vision_send_L);
+	vision.checksum_L = Get_CRC16_Check_Sum(vision_send_L,21,0xffff);
+	memcpy(&vision_send_L[21],&vision.checksum_L,2);
+	memcpy(&vision_send_L[23],&vision.ending,1);
+	uart_send_UART4(24,vision_send_L);
 	
 	memcpy(&vision_send_R[0],&vision.header,1);
 	memcpy(&vision_send_R[1],&Sentry.Flag_judge,1); //红蓝方检测，置0为裁判系统寄了，置1为我方是红色方，置2为我方是蓝色方
-	memcpy(&vision_send_R[2],&vision.R_yaw,4);
-	memcpy(&vision_send_R[6],&vision.R_pitch,4);
-	vision.checksum_R = Get_CRC16_Check_Sum(vision_send_R,10,0xffff);
-	memcpy(&vision_send_R[10],&vision.checksum_R,2);
-	memcpy(&vision_send_R[12],&vision.ending,1);
-	uart_send_UART5(13,vision_send_R);
+	memcpy(&vision_send_L[2],&Sentry.bullet_speed_2,4);
+	memcpy(&vision_send_R[6],&vision.R_yaw,4);
+	memcpy(&vision_send_R[10],&vision.R_pitch,4);
+	vision.checksum_R = Get_CRC16_Check_Sum(vision_send_R,14,0xffff);
+	memcpy(&vision_send_R[14],&vision.checksum_R,2);
+	memcpy(&vision_send_R[16],&vision.ending,1);
+	uart_send_UART5(17,vision_send_R);
 }
 
 //================================================弹道补偿API接口================================================//
@@ -231,8 +233,10 @@ static void Send_to_CAN1()
 		osDelay(1);
 		
 		//0x53，哨兵状态信息
-		memcpy(&ins_buf[0],&vision_receive.L_tracking,1); //左头发射识别标志位
-		memcpy(&ins_buf[1],&vision_receive.R_tracking,1); //右头发射识别标志位
+//		memcpy(&ins_buf[0],&vision_receive.L_tracking,1); //左头发射识别标志位
+//		memcpy(&ins_buf[1],&vision_receive.R_tracking,1); //右头发射识别标志位
+		memcpy(&ins_buf[0],&vision_receive.L_shoot,1); 
+		memcpy(&ins_buf[1],&vision_receive.R_shoot,1);
 		memcpy(&ins_buf[2],&Yaw_value,4);//9025编码值（转化为0~+-180）
 		can_remote(ins_buf,0x53);
 		osDelay(1);

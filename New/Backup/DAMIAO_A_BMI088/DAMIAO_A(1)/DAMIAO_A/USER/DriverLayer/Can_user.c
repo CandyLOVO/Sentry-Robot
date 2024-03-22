@@ -109,9 +109,17 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)//½ÓÊÜÖĞ¶Ï»Øµ÷º¯Ê
 		
 		if(rx_header.StdId == 0x63)
 		{
-			Sentry.event_data = rx_data[6];
+			Sentry.event_data = rx_data[6]; //ÖĞĞÄÔöÒæ×´¿ö
 		}
 		
+		if(rx_header.StdId == 0x62)
+		{
+			memcpy(&Sentry.bullet_speed_1,&rx_data[0],4);
+		}
+		if(rx_header.StdId == 0x64)
+		{
+			memcpy(&Sentry.bullet_speed_2,&rx_data[0],4);
+		}
   }
 	
 	

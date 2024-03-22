@@ -8,7 +8,7 @@
 
 
 #define mocalun_speed   19*380    //摩擦轮转速(根据实际情况更改快速调整射速）
-#define C_bopan_reversal_time 0.2f   //拨盘反转时间(s)
+#define C_bopan_reversal_time 0.8f   //拨盘反转时间(s)
 #define K_shoot_rate_correct 1 //射频修正参数（根据实际情况更改快速调整射频）
 #define C_bopan_block_I 9000   //拨盘堵转电流（测试后更改）
 #define K_rc_to_bopanSpeed 6 //遥控通道值切换到拨盘速度（更改可快速调整1-1模式下遥控与拨盘映射关系）
@@ -53,7 +53,7 @@ extern Shooter_t Shooter_L;
 extern Shooter_t Shooter_R;
 extern RC_ctrl_t rc_ctrl;
 extern RC_ctrl_t rc_ctrl;
-int16_t bopan_shoot_rate_max = 480;	//最高射频（个/min）
+int16_t bopan_shoot_rate_max = 360;	//最高射频（个/min）
 int16_t bopan_shoot_rate_min = 240; //最低射频
 int16_t bopan_shoot_rate_test = 150;//无裁判系统射频
 int16_t bopan_reversal_shoot_rate = -100;	//拨盘反转射频
@@ -274,19 +274,19 @@ static void Bopan_speed_calc_L(int speed_rate_high, int speed_rate_low,int speed
 	else if(Shooter_L.shooter_heat>300 && Shooter_L.shooter_heat<=360)//300<热量<=360，根据热量降射频
 	{
 		motor_m2006[0].set_v=((speed_rate_low-speed_rate_high)/60*Shooter_L.shooter_heat+6*speed_rate_high-5*speed_rate_low)/8*36*K_shoot_rate_correct;
-	}
-	else if(Shooter_L.shooter_heat>360 && Shooter_L.shooter_heat<400)//360<热量<400,以最低射频发弹
-	{
-		motor_m2006[0].set_v=speed_rate_low/8*36*K_shoot_rate_correct;
-	}
-	else if(Shooter_L.shooter_heat==1025)   //无裁判系统时初始化枪管热量为1025，低速发弹
-	{
-		motor_m2006[0].set_v=speed_rate_test/8*36*K_shoot_rate_correct;
-	}
-	else                                    //超热量或裁判系统故障，发弹暂停
-	{
-		motor_m2006[0].set_v=0;
-	}
+}
+else if(Shooter_L.shooter_heat>360 && Shooter_L.shooter_heat<400)//360<热量<400,以最低射频发弹
+{
+	motor_m2006[0].set_v=speed_rate_low/8*36*K_shoot_rate_correct;
+}
+else if(Shooter_L.shooter_heat==1025)   //无裁判系统时初始化枪管热量为1025，低速发弹
+{
+	motor_m2006[0].set_v=speed_rate_test/8*36*K_shoot_rate_correct;
+}
+else                                    //超热量或裁判系统故障，发弹暂停
+{
+	motor_m2006[0].set_v=0;
+}
 }
 
 static void Bopan_speed_calc_R(int speed_rate_high, int speed_rate_low,int speed_rate_test)//变量：最高射频，最低射频，无裁判系统射频

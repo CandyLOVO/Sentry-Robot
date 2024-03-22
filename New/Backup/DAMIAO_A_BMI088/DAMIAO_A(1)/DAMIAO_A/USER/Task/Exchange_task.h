@@ -110,6 +110,8 @@ typedef struct
 	uint8_t event_data;
 	uint16_t Myself_17mm_cooling_heat_id1;		//实时枪管1热量
 	uint16_t Myself_17mm_cooling_heat_id2;		//实时枪管2热量
+	uint32_t bullet_speed_1; //speed1
+	uint32_t bullet_speed_2; //speed2
 	
 } Sentry_t;
 
