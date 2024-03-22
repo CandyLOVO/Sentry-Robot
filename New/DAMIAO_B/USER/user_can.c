@@ -87,7 +87,7 @@ void can_send_bopan(int16_t motor1,int16_t motor2)
 	can_send_data[1] = motor1&0xff;
 	can_send_data[2] = (motor2>>8)&0xff;
 	can_send_data[3] = motor2&0xff;
-	can_send_data[4] = 0;
+	can_send_data[4] = 0;	
 	can_send_data[5] = 0;
 	can_send_data[6] = 0;
 	can_send_data[7] = 0;

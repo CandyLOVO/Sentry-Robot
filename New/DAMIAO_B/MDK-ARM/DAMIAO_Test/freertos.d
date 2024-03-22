@@ -1,7 +1,7 @@
 damiao_test\freertos.o: ../Core/Src/freertos.c
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-damiao_test\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
-damiao_test\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
+damiao_test\freertos.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stddef.h
+damiao_test\freertos.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stdint.h
 damiao_test\freertos.o: ../Core/Inc/FreeRTOSConfig.h
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -38,6 +38,8 @@ damiao_test\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_
 damiao_test\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
 damiao_test\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 damiao_test\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+damiao_test\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+damiao_test\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 damiao_test\freertos.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 damiao_test\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h

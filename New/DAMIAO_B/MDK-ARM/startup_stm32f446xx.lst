@@ -877,12 +877,11 @@ ARM Macro Assembler    Page 14
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
 interwork --depend=damiao_test\startup_stm32f446xx.d -odamiao_test\startup_stm3
-2f446xx.o -I../Core/Inc -I.\RTE\_DAMIAO_Test -ID:\Software\KeilMDK538\KeilMDK53
-8\ARM\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include -ID:\Software\KeilMDK538\KeilMDK5
-38\ARM\Pack\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include
- --predefine="__UVISION_VERSION SETA 538" --predefine="_RTE_ SETA 1" --predefin
-e="STM32F446xx SETA 1" --predefine="_RTE_ SETA 1" --list=startup_stm32f446xx.ls
-t startup_stm32f446xx.s
+2f446xx.o -I../Core/Inc -I.\RTE\_DAMIAO_Test -ID:\RoboterMaster\keil\ARM\CMSIS\
+5.8.0\CMSIS\Core\Include -ID:\RoboterMaster\keil\Keil\STM32F4xx_DFP\2.13.0\Driv
+ers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__UVISION_VERSION SETA 535" 
+--predefine="_RTE_ SETA 1" --predefine="STM32F446xx SETA 1" --predefine="_RTE_ 
+SETA 1" --list=startup_stm32f446xx.lst startup_stm32f446xx.s
 
 
 

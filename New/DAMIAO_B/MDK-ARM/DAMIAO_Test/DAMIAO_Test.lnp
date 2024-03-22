@@ -5,6 +5,7 @@
 "damiao_test\freertos.o"
 "damiao_test\can.o"
 "damiao_test\dma.o"
+"damiao_test\tim.o"
 "damiao_test\usart.o"
 "damiao_test\stm32f4xx_it.o"
 "damiao_test\stm32f4xx_hal_msp.o"
@@ -44,6 +45,7 @@
 "damiao_test\user_static.o"
 "damiao_test\drv_usart.o"
 "damiao_test\rc_potocal.o"
+"damiao_test\user_tim.o"
 --strict --scatter "DAMIAO_Test\DAMIAO_Test.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

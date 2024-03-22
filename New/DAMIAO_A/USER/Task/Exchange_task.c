@@ -216,8 +216,8 @@ static void Judge_minipc()
 	else if(rc_ctrl.rc.s[1]==2 && rc_ctrl.rc.s[0]==2)
 		Sentry.Remote_mode = 22;
 	
-	else if(rc_ctrl.rc.s[1]==0 && rc_ctrl.rc.s[0]==0)//未开启遥控器默认为上场模式
-		Sentry.Remote_mode = 22;		
+//	else if(rc_ctrl.rc.s[1]==0 && rc_ctrl.rc.s[0]==0)//未开启遥控器默认为上场模式
+//		Sentry.Remote_mode = 22;		
 	
 	//左右脑袋目标识别判断
 	if(vision_receive.L_chase_pitch && vision_receive.L_chase_yaw)
