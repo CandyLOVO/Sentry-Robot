@@ -150,7 +150,7 @@ Bopan_speed_calc_R(0,0,0);
 //===================================================Ò£¿Ø¿ØÖÆ===============================================//
 static void re_control()
 {
-		if(rc_ctrl.rc.s[1]==2 && rc_ctrl.rc.s[0]==2)
+		if((rc_ctrl.rc.s[1]==2 && rc_ctrl.rc.s[0]==2)||(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==2))
 		{
 		remote_mode=22;
 		}

@@ -77,7 +77,7 @@ void Chassis(void const * argument)
 			compound_control(); //旋转加平移运动
 		}
 		
-		else if(rc_ctrl.rc.s[0]==2 && rc_ctrl.rc.s[1]==2)
+		else if(rc_ctrl.rc.s[0]==2 && rc_ctrl.rc.s[1]==2) //左下 右下 -> 进行导航的上场模式
 		{
 			if(Receive.naving==1)
 			{
@@ -87,6 +87,10 @@ void Chassis(void const * argument)
 			{
 				rotate_control_none();
 			}
+		}
+		else if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==2) //左下 右中 -> 不进行导航的上场模式
+		{
+			rotate_control_none();
 		}
     osDelay(2);
   }

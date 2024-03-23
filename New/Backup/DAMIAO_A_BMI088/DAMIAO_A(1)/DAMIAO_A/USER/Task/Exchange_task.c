@@ -151,6 +151,10 @@ static void Stm_pc_send()
 	memcpy(&vision_send_L[2],&Sentry.bullet_speed_1,4);
 	memcpy(&vision_send_L[6],&vision.L_yaw,4);
 	memcpy(&vision_send_L[10],&vision.L_pitch,4);
+	if(Sentry.Flag_progress==0x44) //高校联盟赛3V3-比赛中
+		Sentry.Time_remain = Sentry.Time_remain;
+	else
+		Sentry.Time_remain = 0;	
 	memcpy(&vision_send_L[14],&Sentry.Time_remain,2); //time
 	memcpy(&vision_send_L[16],&Sentry.Myself_remain_HP,2);
 	memcpy(&vision_send_L[18],&Sentry.base_HP,2);

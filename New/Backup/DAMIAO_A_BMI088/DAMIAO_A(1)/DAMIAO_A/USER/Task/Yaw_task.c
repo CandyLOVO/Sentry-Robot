@@ -388,7 +388,7 @@ static void Yaw_mode_judge()
 	}
 	
 	
-	else if(Sentry.Remote_mode==22)	//上场模式
+	else if(Sentry.Remote_mode==22 || Sentry.Remote_mode==23)	//上场模式
 	{
 		//两个头都没有识别到
 		if(vision_receive.L_tracking == 0 && vision_receive.R_tracking == 0)

@@ -196,7 +196,6 @@ static void sbus_to_rc(volatile const uint8_t *sbus_buf, RC_ctrl_t *rc_ctrl)
 		
 	}
 
-	int debugl = 0;
 	void UART5_IRQHandler_remote(void)
 {
 
@@ -233,7 +232,7 @@ static void sbus_to_rc(volatile const uint8_t *sbus_buf, RC_ctrl_t *rc_ctrl)
             //enable DMA
             //使能DMA
             __HAL_DMA_ENABLE(&hdma_uart5_rx);
-						debugl = this_time_rx_len;
+
             if(Rx_1[0] == 0xA5)
             {
                 //sbus_to_rc(sbus_rx_buf[0], &rc_ctrl);
@@ -284,7 +283,6 @@ static void sbus_to_rc(volatile const uint8_t *sbus_buf, RC_ctrl_t *rc_ctrl)
     }
 }
 
-int debug2 = 0;
 void UART4_IRQHandler_remote(void)
 {
 
@@ -321,7 +319,7 @@ void UART4_IRQHandler_remote(void)
             //enable DMA
             //使能DMA
             __HAL_DMA_ENABLE(&hdma_uart4_rx);
-						debug2 = this_time_rx_len;
+						
             if(Rx_3[0] == 0xA5)
             {
                 //sbus_to_rc(sbus_rx_buf[0], &rc_ctrl);
