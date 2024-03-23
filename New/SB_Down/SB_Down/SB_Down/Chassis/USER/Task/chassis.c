@@ -35,6 +35,7 @@ pidTypeDef PID_angle[4];
 pidTypeDef PID_speed_3508[4];
 pidTypeDef PID_speed_6020[4];
 fp32 error_theta; //云台坐标系与底盘坐标系间夹角(此时为0~360度) 后期接收后需要对所得theta进行处理
+int16_t motor_speed_last[4];
 
 //PID初始化
 void Chassis_init(void);

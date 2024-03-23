@@ -21,7 +21,10 @@ extern uint8_t Rx_3[128];
 extern uint8_t Rx_4[128];
 extern uint8_t Rx[128];
 extern float Yaw_middle_c;	//一级云台yaw(只有绝对坐标) 9025转化为0~+-180后的编码值
-int error_uart = 0;
+extern void VS_init(uint8_t *rx1_buf, uint8_t *rx2_buf, uint16_t dma_buf_num);
+extern void VS_init4(uint8_t *rx1_buf, uint8_t *rx2_buf, uint16_t dma_buf_num);
+int error_uart_4 = 0;
+int error_uart_5 = 0;
 void InsTask(void const * argument)
 {
   for(;;)
@@ -34,12 +37,15 @@ void InsTask(void const * argument)
 //		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_RESET);
 //		osDelay(5);
 //		osDelay(1);
-		error_uart++;
-		if(error_uart>1000)
+		error_uart_4++;
+		if(error_uart_4>1000)
+		{
+			VS_init4(Rx_3, Rx_4, 28);
+		}
+		error_uart_5++;
+		if(error_uart_5>1000)
 		{
 			VS_init(Rx_1, Rx_2, 19);
-	VS_init4(Rx_3, Rx_4, 28);
-		
 		}
 	//imu_temp_control_task();
 		    osDelay(1);

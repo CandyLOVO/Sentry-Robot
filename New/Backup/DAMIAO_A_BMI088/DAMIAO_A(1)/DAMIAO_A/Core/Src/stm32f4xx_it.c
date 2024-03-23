@@ -80,7 +80,8 @@ extern UART_HandleTypeDef huart5;
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
 /* USER CODE BEGIN EV */
-extern int error_uart ;
+extern int error_uart_4 ;
+extern int error_uart_5 ;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -403,7 +404,8 @@ void UART4_IRQHandler(void)
 //		}
 //	 }
 //	HAL_UART_Receive_DMA(&huart4,rx_buffer_L,BUFFER_SIZE);
- UART4_IRQHandler_remote();
+	UART4_IRQHandler_remote();
+	error_uart_4 = 0;
   /* USER CODE END UART4_IRQn 0 */
   HAL_UART_IRQHandler(&huart4);
   /* USER CODE BEGIN UART4_IRQn 1 */
@@ -444,7 +446,7 @@ void UART5_IRQHandler(void)
 //	 }
 //	HAL_UART_Receive_DMA(&huart5,rx_buffer_R,BUFFER_SIZE);
 	UART5_IRQHandler_remote();
-	error_uart = 0;
+	error_uart_5 = 0;
 	//HAL_IWDG_Refresh(&hiwdg);
   /* USER CODE END UART5_IRQn 0 */
   HAL_UART_IRQHandler(&huart5);

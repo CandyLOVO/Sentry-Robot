@@ -284,6 +284,7 @@ static void sbus_to_rc(volatile const uint8_t *sbus_buf, RC_ctrl_t *rc_ctrl)
     }
 }
 
+int debug2 = 0;
 void UART4_IRQHandler_remote(void)
 {
 
@@ -307,7 +308,7 @@ void UART4_IRQHandler_remote(void)
 
             //get receive data length, length = set_data_length - remain_length
             //获取接收数据长度,长度 = 设定长度 - 剩余长度
-            this_time_rx_len = 28 - hdma_uart5_rx.Instance->NDTR;
+            this_time_rx_len = 28 - hdma_uart4_rx.Instance->NDTR;
 
             //reset set_data_lenght
             //重新设定数据长度
@@ -320,7 +321,7 @@ void UART4_IRQHandler_remote(void)
             //enable DMA
             //使能DMA
             __HAL_DMA_ENABLE(&hdma_uart4_rx);
-						debugl = this_time_rx_len;
+						debug2 = this_time_rx_len;
             if(Rx_3[0] == 0xA5)
             {
                 //sbus_to_rc(sbus_rx_buf[0], &rc_ctrl);

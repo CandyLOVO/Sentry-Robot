@@ -201,14 +201,14 @@ void rotate_control()
 
 void rotate_control_none()
 {
-	rotate_6020(); 
+	compound_movement_6020(0, 0);
+	compound_movement_3508(0, 0);
+	
 	for(int i=0;i<4;i++){
 		get_6020[i] = -motor_value(initial_angle[i],motor[i+4].angle);
 		speed_6020[i] = pid_cal_a(&PID_angle[i],get_6020[i],motor_angle[i],Max_out_a,Max_iout_a); 
+		
 		output_6020[i] = pid_cal_s(&PID_speed_6020[i],motor[i+4].speed,speed_6020[i],Max_out_s,Max_iout_s);
-	}
-	rotate_3508(500); //滚轮控制旋转
-	for(int i=0;i<4;i++){
 		output_3508[i] = pid_cal_s(&PID_speed_3508[i],motor[i].speed,motor_speed[i],Max_out_s,Max_iout_s);
 	}
 	Chassis_Power_Limit(40000);

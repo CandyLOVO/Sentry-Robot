@@ -14,8 +14,8 @@ float target_yaw_remote_right;
 float target_yaw_middle ; //9025电机转动的目标值
 
 //需要修改对应的数值，根据安装后读取的电机编码值修改
-int16_t Init_encoder_left = 7904;		//左脑袋编码器正前方初始值(安装好后值固定)
-int16_t Init_encoder_right = 3640;		//右脑袋
+int16_t Init_encoder_left = 7912;		//左脑袋编码器正前方初始值(安装好后值固定)
+int16_t Init_encoder_right = 3580;		//右脑袋
 uint16_t Init_encoder_middle = 26028; //一级云台,正前方要和底盘C板正前方朝向一致
 
 float Yaw_middle_c;	//一级云台yaw(只有绝对坐标) 9025转化为0~+-180后的编码值
@@ -127,7 +127,7 @@ static void Yaw_init()
 {
 	pid_init(&motor_pid_can_2[7],6000,2,0,72000,72000); //9025电机速度环
 	pid_init(&motor_pid_sita_can_2[7],3,0,50,72000,72000); //9025电机角度环
-//	
+	
 //上场用PID 硬的一批
 //	pid_init(&motor_pid_can_2[0],200,0.01,0,30000,30000); //左头速度环
 //	pid_init(&motor_pid_sita_can_2[0],25,0,10,30000,30000); //左头角度环
@@ -137,10 +137,10 @@ static void Yaw_init()
 	
 //调试用PID
 	pid_init(&motor_pid_can_2[0],150,0.01,0,30000,30000); //左头速度环
-	pid_init(&motor_pid_sita_can_2[0],15,0,3,30000,30000); //左头角度环
+	pid_init(&motor_pid_sita_can_2[0],10,0,5,30000,30000); //左头角度环
 	
 	pid_init(&motor_pid_can_2[1],150,0.01,0,30000,30000); //右头速度环
-	pid_init(&motor_pid_sita_can_2[1],15,0,3,30000,30000); //右头角度环
+	pid_init(&motor_pid_sita_can_2[1],10,0,5,30000,30000); //右头角度环
 	
 	Encoder_MF_read(motor_info_can_2[7].can_id);//9025读取当前编码器值
 	Yaw_value = MF_value(Init_encoder_middle , motor_info_can_2[7].rotor_angle , 65535); //将9025编码值转换到-180~0、0~180

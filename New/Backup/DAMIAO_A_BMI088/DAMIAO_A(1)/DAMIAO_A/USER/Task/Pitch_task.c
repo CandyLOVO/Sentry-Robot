@@ -2,8 +2,8 @@
 
 //===============================================全局变量================================================//
 //安装好后测量水平时两个pitch的值
-int16_t Init_encoder_left_gimbal = 54;		//左脑袋编码器水平时初始值(安装好后值固定)
-int16_t Init_encoder_right_gimbal = 52;		//右脑袋
+int16_t Init_encoder_left_gimbal = 8189;		//左脑袋编码器水平时初始值(安装好后值固定)
+int16_t Init_encoder_right_gimbal = 26;		//右脑袋
 float target_gimbal_left;	//左右脑袋的目标pitch（相对坐标）
 float target_gimbal_right;
 float Gimbal_left;

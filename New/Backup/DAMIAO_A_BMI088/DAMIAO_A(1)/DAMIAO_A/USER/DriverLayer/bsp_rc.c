@@ -89,7 +89,7 @@ void VS_init4(uint8_t *rx1_buf, uint8_t *rx2_buf, uint16_t dma_buf_num)
 {
     //enable the DMA transfer for the receiver request
     //使能DMA串口接收
-    SET_BIT(huart5.Instance->CR3, USART_CR3_DMAR);
+    SET_BIT(huart4.Instance->CR3, USART_CR3_DMAR);
 
     //enalbe idle interrupt
     //使能空闲中断
