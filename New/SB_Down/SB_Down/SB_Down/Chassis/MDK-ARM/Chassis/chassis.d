@@ -61,3 +61,5 @@ chassis\chassis.o: ../USER/handle_value.h
 chassis\chassis.o: ../USER/motion_overlay.h
 chassis\chassis.o: ../USER/Control/channel_changes.h
 chassis\chassis.o: ..\USER\Task\INS_Task\ins_task\INS_task.h
+chassis\chassis.o: ../USER/PotocaLayer/judge.h
+chassis\chassis.o: ../USER/DriverLayer/drv_usart.h

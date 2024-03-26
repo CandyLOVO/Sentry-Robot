@@ -18,6 +18,7 @@
 #include "motion_overlay.h"
 #include "channel_changes.h"
 #include "INS_task.h"
+#include "judge.h"
 
 extern motor_info motor[8]; //底盘电机数据
 extern RC_ctrl_t rc_ctrl; //遥控器数据
@@ -25,6 +26,7 @@ extern fp32 INS_angle[3]; //下C板陀螺仪数据
 extern up_data Receive; //上C板数据
 extern int16_t motor_angle[4]; //6020角度 在motion_overlay.c中计算 作为全局变量
 extern int16_t motor_speed[4]; //3508速度
+extern Sentry_t Sentry;
 
 uint16_t initial_angle[4];
 int16_t Max_out_a = 20000;
@@ -79,9 +81,16 @@ void Chassis(void const * argument)
 		
 		else if(rc_ctrl.rc.s[0]==2 && rc_ctrl.rc.s[1]==2) //左下 右下 -> 进行导航的上场模式
 		{
-			if(Receive.naving==1)
+			if(Sentry.Flag_progress==0x04)
 			{
-				navigation_control();
+				if(Receive.naving==1)
+				{
+					navigation_control();
+				}
+				else
+				{
+					rotate_control_none();
+				}
 			}
 			else
 			{

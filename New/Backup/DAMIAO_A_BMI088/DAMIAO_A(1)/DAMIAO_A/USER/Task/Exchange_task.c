@@ -49,7 +49,8 @@ Vision_t vision;	//视觉数据发送结构体
 Vision_receive_t vision_receive;	//视觉数据接收结构体
 remote_flag_t remote;	//键盘按键读取(结构体)
 Sentry_t Sentry;	//哨兵状态量和裁判系统数据结构体
-
+extern int error_uart_4;
+extern int error_uart_5;
 
 void Exchange_task(void const * argument)
 {
@@ -148,22 +149,25 @@ static void Stm_pc_send()
 	
 	memcpy(&vision_send_L[0],&vision.header,1);
 	memcpy(&vision_send_L[1],&Sentry.Flag_judge,1); //红蓝方检测，置0为裁判系统寄了，置1为我方是红色方，置2为我方是蓝色方
-	memcpy(&vision_send_L[2],&Sentry.bullet_speed_1,4);
-	memcpy(&vision_send_L[6],&vision.L_yaw,4);
-	memcpy(&vision_send_L[10],&vision.L_pitch,4);
-	if(Sentry.Flag_progress==0x44) //高校联盟赛3V3-比赛中
+	memcpy(&vision_send_L[2],&vision.L_yaw,4);
+	memcpy(&vision_send_L[6],&vision.L_pitch,4);
+	if(Sentry.Flag_progress==0x04) //高校联盟赛3V3-比赛中
+	{
 		Sentry.Time_remain = Sentry.Time_remain;
+	}
 	else
+	{
 		Sentry.Time_remain = 0;	
-	memcpy(&vision_send_L[14],&Sentry.Time_remain,2); //time
-	memcpy(&vision_send_L[16],&Sentry.Myself_remain_HP,2);
-	memcpy(&vision_send_L[18],&Sentry.base_HP,2);
-	memcpy(&vision_send_L[20],&Sentry.event_data,1);
+	}
+	memcpy(&vision_send_L[10],&Sentry.Time_remain,2); //time
+	memcpy(&vision_send_L[12],&Sentry.Myself_remain_HP,2);
+	memcpy(&vision_send_L[14],&Sentry.base_HP,2);
+	memcpy(&vision_send_L[16],&Sentry.event_data,1);
 	
-	vision.checksum_L = Get_CRC16_Check_Sum(vision_send_L,21,0xffff);
-	memcpy(&vision_send_L[21],&vision.checksum_L,2);
-	memcpy(&vision_send_L[23],&vision.ending,1);
-	uart_send_UART4(24,vision_send_L);
+	vision.checksum_L = Get_CRC16_Check_Sum(vision_send_L,17,0xffff);
+	memcpy(&vision_send_L[17],&vision.checksum_L,2);
+	memcpy(&vision_send_L[19],&vision.ending,1);
+	uart_send_UART4(20,vision_send_L);
 //	HAL_UART_Transmit_DMA(&huart4,vision_send_L,24);
 	
 	memcpy(&vision_send_R[0],&vision.header,1);
@@ -224,6 +228,21 @@ static void Stm_pc_send()
 //================================================向can1上发送信息================================================//
 static void Send_to_CAN1()
 {
+		if(error_uart_4>1300)
+		{
+			vision_receive.L_shoot = 0;
+		}
+		else
+		{
+			vision_receive.L_shoot = vision_receive.L_shoot;
+		}
+		if(error_uart_5>1300)
+		{
+			vision_receive.R_shoot = 0;
+		}
+		else{
+			vision_receive.R_shoot = vision_receive.R_shoot;
+		}
 		uint8_t ins_buf[8] = {0};
 		//0x51，陀螺仪值(范围为-180到180)和导航标志位
 		memcpy(&ins_buf[0],&Yaw_middle_c,4);

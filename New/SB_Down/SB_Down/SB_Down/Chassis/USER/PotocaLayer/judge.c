@@ -185,13 +185,13 @@ static void Update_data()
 	{
 		Sentry.Flag_judge = 1;
 		Sentry.Myself_remain_HP = Judge_Hero.robot_hp.red_7_robot_HP;
-		Sentry.base_HP = Judge_Hero.robot_hp.red_base_HP;
+		Sentry.base_HP = Judge_Hero.robot_hp.blue_base_HP; //敌方基地血量
 	}
 	else if(Sentry.Myself_id == 107)
 	{
 		Sentry.Flag_judge = 2;
 		Sentry.Myself_remain_HP = Judge_Hero.robot_hp.blue_7_robot_HP;
-		Sentry.base_HP = Judge_Hero.robot_hp.blue_base_HP;
+		Sentry.base_HP = Judge_Hero.robot_hp.red_base_HP; //敌方基地血量
 	}
 	Sentry.supply_projectile_num = Judge_Hero.supply_status.supply_projectile_num;
 }

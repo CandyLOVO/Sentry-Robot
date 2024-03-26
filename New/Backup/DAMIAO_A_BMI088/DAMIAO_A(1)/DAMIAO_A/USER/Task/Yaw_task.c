@@ -1,5 +1,6 @@
 #include "Yaw_task.h"
 #include "imu_temp_control_task.h"
+#include "Ins_task.h"
 //================================================YAW轴电机控制任务================================================//
 
 //	此文件是三云台控制任务，基于一级云台上的C板坐标系来解算二级云台的坐标
@@ -28,6 +29,8 @@ float Yaw_right_c; //相对于整车正方向的角度值
 float angle[2];
 
 extern fp32 gyro[3];
+extern int error_uart_4;
+extern int error_uart_5;
 
 int8_t get_flag = 0; //两个头都没识别到0，左头识别到1，右头识别到2
 //================================================函数================================================//
@@ -390,6 +393,14 @@ static void Yaw_mode_judge()
 	
 	else if(Sentry.Remote_mode==22 || Sentry.Remote_mode==23)	//上场模式
 	{
+		if(error_uart_4>1300)
+		{
+			vision_receive.L_tracking = 0;
+		}
+		if(error_uart_5>1300)
+		{
+			vision_receive.R_tracking = 0;
+		}
 		//两个头都没有识别到
 		if(vision_receive.L_tracking == 0 && vision_receive.R_tracking == 0)
 		{

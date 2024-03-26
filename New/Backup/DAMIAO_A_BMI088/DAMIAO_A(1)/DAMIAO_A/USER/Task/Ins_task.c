@@ -2,6 +2,7 @@
 #include "cmsis_os.h"
 #include "string.h"
 #include "imu_temp_control_task.h"
+#include "Exchange_task.h"
 
 //uint8_t Tx[8] = {0x50,0x03,0x00,0x30,0x00,0x30,0x48,0x50};
 uint8_t Tx[8] = {0x50,0x03,0x00,0x3D,0x00,0x03,0x99,0x86}; //读取陀螺仪角度
@@ -21,6 +22,7 @@ extern uint8_t Rx_3[128];
 extern uint8_t Rx_4[128];
 extern uint8_t Rx[128];
 extern float Yaw_middle_c;	//一级云台yaw(只有绝对坐标) 9025转化为0~+-180后的编码值
+extern Vision_receive_t vision_receive;
 extern void VS_init(uint8_t *rx1_buf, uint8_t *rx2_buf, uint16_t dma_buf_num);
 extern void VS_init4(uint8_t *rx1_buf, uint8_t *rx2_buf, uint16_t dma_buf_num);
 int error_uart_4 = 0;
@@ -38,14 +40,18 @@ void InsTask(void const * argument)
 //		osDelay(5);
 //		osDelay(1);
 		error_uart_4++;
-		if(error_uart_4>1000)
+		if(error_uart_4>1300)
 		{
 			VS_init4(Rx_3, Rx_4, 28);
+			vision_receive.L_shoot = 0;
+			vision_receive.L_tracking = 0;
 		}
 		error_uart_5++;
-		if(error_uart_5>1000)
+		if(error_uart_5>1300)
 		{
 			VS_init(Rx_1, Rx_2, 19);
+			vision_receive.R_shoot = 0;
+			vision_receive.R_tracking = 0;
 		}
 	//imu_temp_control_task();
 		    osDelay(1);
