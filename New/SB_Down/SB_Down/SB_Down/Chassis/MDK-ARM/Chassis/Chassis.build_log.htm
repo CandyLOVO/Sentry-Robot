@@ -27,7 +27,30 @@ Project File Date:  03/19/2024
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin'
 Build target 'Chassis'
-"Chassis\Chassis.axf" - 0 Error(s), 0 Warning(s).
+compiling motion_overlay.c...
+..\USER\motion_overlay.h(12): warning:  #1295-D: Deprecated declaration rotate_6020 - give arg types
+  void rotate_6020();
+..\USER\motion_overlay.h(14): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\handle_value.h(8): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\Task\chassis.h(6): warning:  #1295-D: Deprecated declaration Yaw_Diff - give arg types
+  void Yaw_Diff();
+..\USER\Task\chassis.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif
+../USER/DriverLayer/user_can.h(5): warning:  #1295-D: Deprecated declaration CAN1_Init - give arg types
+  void CAN1_Init();
+../USER/DriverLayer/user_can.h(6): warning:  #1295-D: Deprecated declaration CAN2_Init - give arg types
+  void CAN2_Init();
+../USER/DriverLayer/user_can.h(26): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\motion_overlay.c: 9 warnings, 0 errors
+linking...
+Program Size: Code=45228 RO-data=2028 RW-data=580 ZI-data=20892  
+FromELF: creating hex file...
+"Chassis\Chassis.axf" - 0 Error(s), 9 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -51,7 +74,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.6.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

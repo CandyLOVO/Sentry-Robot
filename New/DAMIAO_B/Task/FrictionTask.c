@@ -10,7 +10,7 @@
 #define mocalun_speed   19*380    //摩擦轮转速(根据实际情况更改快速调整射速）
 #define C_bopan_reversal_time 0.8f   //拨盘反转时间(s)
 #define K_shoot_rate_correct 1 //射频修正参数（根据实际情况更改快速调整射频）
-#define C_bopan_block_I 9000   //拨盘堵转电流（测试后更改）
+#define C_bopan_block_I 10000   //拨盘堵转电流（测试后更改）
 #define K_rc_to_bopanSpeed 8 //遥控通道值切换到拨盘速度（更改可快速调整1-1模式下遥控与拨盘映射关系）
 
 
@@ -53,8 +53,8 @@ extern Shooter_t Shooter_L;
 extern Shooter_t Shooter_R;
 extern RC_ctrl_t rc_ctrl;
 extern RC_ctrl_t rc_ctrl;
-int16_t bopan_shoot_rate_max = 21*60;	//最高射频（个/min）
-int16_t bopan_shoot_rate_min = 8*60; //最低射频
+int16_t bopan_shoot_rate_max = 3*60;	//最高射频（个/min）
+int16_t bopan_shoot_rate_min = 1*60; //最低射频
 int16_t bopan_shoot_rate_test = 200;//无裁判系统射频
 int16_t bopan_reversal_shoot_rate = -100;	//拨盘反转射频
 uint8_t bopan_reversal_flag_L= 0,bopan_reversal_flag_R= 0;	//拨盘反转标志位，0为正转，1为反转

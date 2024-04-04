@@ -81,8 +81,8 @@ void Chassis(void const * argument)
 		
 		else if(rc_ctrl.rc.s[0]==2 && rc_ctrl.rc.s[1]==2) //左下 右下 -> 进行导航的上场模式
 		{
-			if(Sentry.Flag_progress==0x04)
-			{
+//			if(Sentry.Flag_progress==0x04)
+//			{
 				if(Receive.naving==1)
 				{
 					navigation_control();
@@ -91,11 +91,11 @@ void Chassis(void const * argument)
 				{
 					rotate_control_none();
 				}
-			}
-			else
-			{
-				rotate_control_none();
-			}
+//			}
+//			else
+//			{
+//				rotate_control_none();
+//			}
 		}
 		else if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==2) //左下 右中 -> 不进行导航的上场模式
 		{
