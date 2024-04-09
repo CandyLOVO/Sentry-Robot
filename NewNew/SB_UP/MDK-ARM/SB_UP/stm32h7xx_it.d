@@ -38,6 +38,13 @@ sb_up\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr.h
 sb_up\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h
 sb_up\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h
 sb_up\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h
+sb_up\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h
+sb_up\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h
+sb_up\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h
+sb_up\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
+sb_up\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd.h
+sb_up\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usb.h
+sb_up\stm32h7xx_it.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h
 sb_up\stm32h7xx_it.o: ../Core/Inc/stm32h7xx_it.h
 sb_up\stm32h7xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 sb_up\stm32h7xx_it.o: ../Core/Inc/FreeRTOSConfig.h
@@ -48,3 +55,5 @@ sb_up\stm32h7xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/A
 sb_up\stm32h7xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
 sb_up\stm32h7xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 sb_up\stm32h7xx_it.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+sb_up\stm32h7xx_it.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
+sb_up\stm32h7xx_it.o: ../USER/Task/yaw_task.h

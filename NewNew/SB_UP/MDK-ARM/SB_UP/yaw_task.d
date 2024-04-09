@@ -39,6 +39,13 @@ sb_up\yaw_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr.h
 sb_up\yaw_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h
 sb_up\yaw_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi.h
 sb_up\yaw_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h
+sb_up\yaw_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h
+sb_up\yaw_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h
+sb_up\yaw_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h
+sb_up\yaw_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
+sb_up\yaw_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd.h
+sb_up\yaw_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usb.h
+sb_up\yaw_task.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h
 sb_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 sb_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 sb_up\yaw_task.o: ../Core/Inc/FreeRTOSConfig.h
@@ -53,5 +60,5 @@ sb_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 sb_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 sb_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 sb_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-sb_up\yaw_task.o: ..\USER\can_user.h
+sb_up\yaw_task.o: ../USER/can_user.h
 sb_up\yaw_task.o: ../Core/Inc/fdcan.h

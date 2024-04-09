@@ -2,6 +2,7 @@
 #include "cmsis_os.h"
 #include "can_user.h"
 #include "fdcan.h"
+#include "main.h"
 
 uint8_t can_send_data[8];
 extern motor_info motor[8];
@@ -13,7 +14,6 @@ void Yaw_Task(void const * argument)
 
   for(;;)
   {
-		canx_send_data(&hfdcan1,0x1ff,can_send_data,8);
-    osDelay(1);
+		osDelay(1);
   }
 }

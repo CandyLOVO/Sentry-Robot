@@ -53,10 +53,19 @@ osThreadId defaultTaskHandle;
 /* USER CODE BEGIN FunctionPrototypes */
 osThreadId yawTaskHandle;
 osThreadId lcdTaskHandle;
+uint32_t defaultTaskBuffer[ 128 ];
+osStaticThreadDef_t defaultTaskControlBlock;
+osThreadId imuTempCtrlHandle;
+uint32_t imuTempCtrlBuffer[ 512 ];
+osStaticThreadDef_t imuTemoCtrlControlBlock;
+osSemaphoreId imuBinarySem01Handle;
+osStaticSemaphoreDef_t imuBinarySemControlBlock;
+void IMU_TempCtrlTask(void const * argument);
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
 
+extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /* GetIdleTaskMemory prototype (linked to static allocation support) */
@@ -107,11 +116,16 @@ void MX_FREERTOS_Init(void) {
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
-  osThreadDef(yawTask, Yaw_Task, osPriorityNormal, 0, 128);
+	osThreadDef(yawTask, Yaw_Task, osPriorityNormal, 0, 256);
 	yawTaskHandle = osThreadCreate(osThread(yawTask), NULL);
 	
-	osThreadDef(lcdTask, LCD_Task, osPriorityNormal, 0, 128);
-	lcdTaskHandle = osThreadCreate(osThread(lcdTask), NULL);
+	osThreadDef(imuTempCtrl, IMU_TempCtrlTask, osPriorityNormal, 0, 2048);
+	imuTempCtrlHandle = osThreadCreate(osThread(imuTempCtrl), NULL);
+	
+//	osThreadStaticDef(imuTempCtrl, IMU_TempCtrlTask, osPriorityHigh, 0, 512, imuTempCtrlBuffer, &imuTemoCtrlControlBlock);
+//  imuTempCtrlHandle = osThreadCreate(osThread(imuTempCtrl), NULL);
+//	osSemaphoreStaticDef(imuBinarySem01, &imuBinarySemControlBlock);
+//  imuBinarySem01Handle = osSemaphoreCreate(osSemaphore(imuBinarySem01), 1);
   /* USER CODE END RTOS_THREADS */
 
 }
@@ -125,6 +139,8 @@ void MX_FREERTOS_Init(void) {
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const * argument)
 {
+  /* init code for USB_DEVICE */
+  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
   for(;;)

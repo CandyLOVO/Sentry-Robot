@@ -23,12 +23,13 @@
 #include "dma.h"
 #include "fdcan.h"
 #include "spi.h"
+#include "tim.h"
+#include "usart.h"
+#include "usb_device.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "lcd.h"
-#include "pic.h"
 #include "can_user.h"
 /* USER CODE END Includes */
 
@@ -62,7 +63,7 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint16_t adc_val[1];
+uint16_t adc_val[1]; //存储ADC采集到的数据
 /* USER CODE END 0 */
 
 /**
@@ -97,15 +98,14 @@ int main(void)
   MX_ADC1_Init();
   MX_SPI1_Init();
   MX_FDCAN1_Init();
+  MX_USART2_UART_Init();
+  MX_USART3_UART_Init();
+  MX_SPI2_Init();
+  MX_TIM3_Init();
+  MX_FDCAN2_Init();
   /* USER CODE BEGIN 2 */
 	FDCAN1_Config(); //FDCAN过滤器配置
 	
-	// 开启LCD背光
-	LCD_Init();//LCD初始化
-	LCD_Fill(0,0,LCD_W, LCD_H,BLACK);	
-	
-	HAL_ADCEx_Calibration_Start(&hadc1, ADC_CALIB_OFFSET, ADC_SINGLE_ENDED);
-	HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adc_val,1);	// 读取ADC按键键值
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
@@ -122,12 +122,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-//		LCD_ShowString(120, 72,(uint8_t *)"dmBot", BRRED, BLACK, 24, 0);
-//		LCD_ShowChinese(84, 100, (uint8_t *)"达妙科技", WHITE, BLACK, 32, 0);
-//		LCD_DrawLine(10, 0, 10,  280,WHITE);
-//		LCD_DrawLine(270,0, 270, 280,WHITE);
-//		LCD_ShowIntNum(50, 170, adc_val[0], 5, WHITE, BLACK, 32);
-//		LCD_ShowPicture(180, 150, 80, 80, gImage_1);
   }
   /* USER CODE END 3 */
 }
@@ -154,8 +148,9 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI48|RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  RCC_OscInitStruct.HSI48State = RCC_HSI48_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 3;
