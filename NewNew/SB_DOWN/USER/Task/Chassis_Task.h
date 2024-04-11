@@ -5,4 +5,6 @@
 
 void Chassis_Task(void const * argument);
 
+extern void task_init(void);
+extern void Yaw_Diff(void);
 #endif

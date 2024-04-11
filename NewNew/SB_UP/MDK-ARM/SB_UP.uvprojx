@@ -323,7 +323,7 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>2</wLevel>
+            <wLevel>1</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
@@ -1792,6 +1792,11 @@
               <FileName>bsp_dwt.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\Inc\bsp_dwt.c</FilePath>
+            </File>
+            <File>
+              <FileName>pid_user.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\pid_user.c</FilePath>
             </File>
           </Files>
         </Group>

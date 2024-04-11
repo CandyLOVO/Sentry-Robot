@@ -17,12 +17,12 @@ typedef struct //CAN
 	uint16_t temperture;
 }motor_info;
 
-//typedef struct //C
-//{
-//	float yaw_value;
-//	uint8_t naving;
-//	float nav_vx;
-//	float nav_vy;
-//}up_data;
+typedef struct //C
+{
+	float yaw_value;
+	uint8_t naving;
+	float nav_vx;
+	float nav_vy;
+}up_data;
 
 #endif

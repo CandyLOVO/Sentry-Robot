@@ -7,7 +7,7 @@ extern CAN_HandleTypeDef hcan2;
 CAN_TxHeaderTypeDef can_tx_message;
 uint8_t can_send_data[8];
 motor_info motor[8];
-//up_data Receive;
+up_data Receive;
 
 void CAN1_Init()
 {
@@ -66,7 +66,7 @@ void can_remote(uint8_t sbus_buf[],uint8_t can_send_id)
 
 
 /****************************************************CAN2***************************************************/
-void can_cmd_send_3508(int motor1,int motor2,int motor3,int motor4) //can2 3508 (motor[]:0-3)
+void can_cmd_send_3508(int motor1,int motor2,int motor3,int motor4)
 {
 	uint32_t send_mail_box = (uint32_t)CAN_TX_MAILBOX0;
 	can_tx_message.StdId = 0x200;
@@ -85,7 +85,7 @@ void can_cmd_send_3508(int motor1,int motor2,int motor3,int motor4) //can2 3508 
 	HAL_CAN_AddTxMessage(&hcan2,&can_tx_message,can_send_data,&send_mail_box);
 }
 
-void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4) //can2 6020 (motor[]:4-7)
+void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4)
 {
 	uint32_t send_mail_box = (uint32_t)CAN_TX_MAILBOX0;
 	can_tx_message.StdId = 0x1FF;
@@ -106,7 +106,6 @@ void can_cmd_send_6020(int motor1,int motor2,int motor3,int motor4) //can2 6020 
 /*******************************************************************************************************************/
 
 /*********************************************CAN fifo0*********************************************/
-int error = 0;
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
 	if(hcan->Instance == CAN1)

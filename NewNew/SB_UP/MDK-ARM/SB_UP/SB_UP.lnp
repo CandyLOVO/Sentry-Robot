@@ -58,6 +58,7 @@
 "sb_up\rtgetinf.o"
 "sb_up\rtgetnan.o"
 "sb_up\bsp_dwt.o"
+"sb_up\pid_user.o"
 "sb_up\yaw_task.o"
 "sb_up\imu_temp_ctrl.o"
 "sb_up\usb_device.o"

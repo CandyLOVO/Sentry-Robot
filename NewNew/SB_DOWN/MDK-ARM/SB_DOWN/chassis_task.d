@@ -30,6 +30,7 @@ sb_down\chassis_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_
 sb_down\chassis_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
 sb_down\chassis_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 sb_down\chassis_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+sb_down\chassis_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 sb_down\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 sb_down\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 sb_down\chassis_task.o: ../Core/Inc/FreeRTOSConfig.h
@@ -44,3 +45,8 @@ sb_down\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timer
 sb_down\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 sb_down\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 sb_down\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+sb_down\chassis_task.o: ../USER/pid_user.h
+sb_down\chassis_task.o: ../USER/can_user.h
+sb_down\chassis_task.o: ../USER/rc_potocal.h
+sb_down\chassis_task.o: ../USER/struct_typedef.h
+sb_down\chassis_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h
