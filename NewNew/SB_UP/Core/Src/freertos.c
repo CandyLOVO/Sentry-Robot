@@ -119,7 +119,7 @@ void MX_FREERTOS_Init(void) {
 	osThreadDef(yawTask, Yaw_Task, osPriorityNormal, 0, 256);
 	yawTaskHandle = osThreadCreate(osThread(yawTask), NULL);
 	
-	osThreadDef(imuTempCtrl, IMU_TempCtrlTask, osPriorityNormal, 0, 2048);
+	osThreadDef(imuTempCtrl, IMU_TempCtrlTask, osPriorityRealtime, 0, 2048);
 	imuTempCtrlHandle = osThreadCreate(osThread(imuTempCtrl), NULL);
 	
 //	osThreadStaticDef(imuTempCtrl, IMU_TempCtrlTask, osPriorityHigh, 0, 512, imuTempCtrlBuffer, &imuTemoCtrlControlBlock);

@@ -35,14 +35,21 @@ float err_ll = 0;
          double a = 0.22f;
         double b = 0.78f;
         double c;
+ double t_sum;
+ double yaw_after = 0;
+ double yaw1,pitch1,roll1;
+ double yaw2,pitch2,roll2;
+ double k;
+ double dt01;
+ double dt02;
 
 double p[36] = {100000, 0.1, 0.1, 0.1, 0.1, 0.1,
                                  0.1, 100000, 0.1, 0.1, 0.1, 0.1,
                                  0.1, 0.1, 100000, 0.1, 0.1, 0.1,
                                  0.1, 0.1, 0.1, 100000, 0.1, 0.1,
-                                 0.1, 0.1, 0.1, 0.1, 10000, 0.1,
-                                 0.1, 0.1, 0.1, 0.1, 0.1, 10000};
-                                 double qt[6] = {1, 0, 0, 0, 0.1, 0.1};
+                                 0.1, 0.1, 0.1, 0.1, 100, 0.1,
+                                 0.1, 0.1, 0.1, 0.1, 0.1, 100};
+                                 double qt[6] = {1, 0, 0, 0, 0, 0};
                                  double dt1 = 0.002;
                                  uint32_t INS_DWT_Count = 0;
                                  double insb[3] = {0, 0, 0};
@@ -55,12 +62,22 @@ void IMU_TempCtrlTask(void const * argument)
     {
         ;
     }
+//		dt01 = DWT_GetDeltaT(&INS_DWT_Count);
+//		BMI088_read(gyro, accel, &temp);
+//		imuekf((double)gyro[0], (double)gyro[1], (double)gyro[2], (double)accel[0], (double)accel[1], (double)accel[2],p,qt,dt01,&yaw1,&pitch1,&roll1,qt);
+//		osDelay(2000);
+//		dt02 = DWT_GetDeltaT(&INS_DWT_Count);
+//		BMI088_read(gyro, accel, &temp);
+//		imuekf((double)gyro[0], (double)gyro[1], (double)gyro[2], (double)accel[0], (double)accel[1], (double)accel[2],p,qt,dt02,&yaw2,&pitch2,&roll2,qt);
+//		k = (yaw2 - yaw1)/2.0;
     for (;;)
     {
        // osSemaphoreWait(imuBinarySem01Handle, osWaitForever);
         dt1 = DWT_GetDeltaT(&INS_DWT_Count);
         BMI088_read(gyro, accel, &temp);
-			imuekf((double)gyro[0], (double)gyro[1], (double)gyro[2], (double)accel[0], (double)accel[1], (double)accel[2],p,qt,dt1,&yaw12,&pitch12,&roll12,qt); 
+				t_sum += dt1;
+				imuekf((double)gyro[0], (double)gyro[1], (double)gyro[2], (double)accel[0], (double)accel[1], (double)accel[2],p,qt,dt1,&yaw12,&pitch12,&roll12,qt); 
+				yaw_after = yaw12 - 1.6990142*t_sum; 
         err_ll = err_l;
         err_l = err;
         err = DES_TEMP - temp;

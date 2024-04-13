@@ -53,7 +53,7 @@ extern Shooter_t Shooter_L;
 extern Shooter_t Shooter_R;
 extern RC_ctrl_t rc_ctrl;
 extern RC_ctrl_t rc_ctrl;
-int16_t bopan_shoot_rate_max = 3*60;	//最高射频（个/min）
+int16_t bopan_shoot_rate_max = 15*60;	//最高射频（个/s）
 int16_t bopan_shoot_rate_min = 1*60; //最低射频
 int16_t bopan_shoot_rate_test = 200;//无裁判系统射频
 int16_t bopan_reversal_shoot_rate = -100;	//拨盘反转射频

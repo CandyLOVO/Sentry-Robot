@@ -9,11 +9,18 @@ extern motor_info motor[8];
 
 void Yaw_Task(void const * argument)
 {
-	can_send_data[0] = (1000>>8)&0xff;
-	can_send_data[1] = 1000&0xff;
+//	can_send_data[0] = (1000>>8)&0xff;
+//	can_send_data[1] = 1000&0xff;
+	can_send_data[0] = 0x01;
+	can_send_data[1] = 0x02;
+	can_send_data[2] = 0x03;
+	can_send_data[3] = 0x04;
+	can_send_data[4] = 0x05;
+	can_send_data[5] = 0x06;
 
   for(;;)
   {
+//		canx_send_data(&hfdcan3, 0x31, can_send_data, 6);
 		osDelay(1);
   }
 }

@@ -41,7 +41,8 @@ void Chassis_Task(void const * argument)
 		if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3)
 		{
 			omega = rc_ctrl.rc.ch[4]*0.05; //²¦ÂÖ¿ØÖÆĞ¡ÍÓÂİ
-			chassis_calculate(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]); //ÓÒ²¦¸Ë¿ØÖÆµ×ÅÌ
+//			chassis_calculate(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]); //ÓÒ²¦¸Ë¿ØÖÆµ×ÅÌ
+			chassis_calculate(rc_ctrl.rc.ch[2], rc_ctrl.rc.ch[3]); //×ó²¦¸Ë¿ØÖÆµ×ÅÌ
 			for(int i=0;i<4;i++)
 			{
 				out_speed[i] = pid_cal_s(&pid_3508, motor[i].speed, target_speed[i]);
@@ -69,7 +70,7 @@ void Chassis_Task(void const * argument)
 void task_init()
 {
 	//PID²ÎÊı³õÊ¼»¯
-	pid_init(&pid_3508,1,0,0,30000,30000);
+	pid_init(&pid_3508,10,0,0,30000,30000);
 }
 
 void Yaw_Diff()

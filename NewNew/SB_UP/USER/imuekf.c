@@ -89,10 +89,10 @@ void imuekf(double gx, double gy, double gz, double ax, double ay, double az,
             double *Pitch, double *Roll, double xhat[6])
 {
   static const double Q[36] = {
-      0.001, 0.0, 0.0,   0.0, 0.0,    0.0, 0.0, 0.001, 0.0, 0.0,   0.0, 0.0,
-      0.0,   0.0, 0.001, 0.0, 0.0,    0.0, 0.0, 0.0,   0.0, 0.001, 0.0, 0.0,
-      0.0,   0.0, 0.0,   0.0, 1.0E-5, 0.0, 0.0, 0.0,   0.0, 0.0,   0.0, 1.0E-5};
-  static const long long R[9] = {100000000, 0, 0, 0, 100000000, 0, 0, 0, 100000000};
+      0.01, 0.0, 0.0,   0.0, 0.0,    0.0, 0.0, 0.01, 0.0, 0.0,   0.0, 0.0,
+      0.0,   0.0, 0.001, 0.0, 0.0,    0.0, 0.0, 0.0,   0.0, 0.01, 0.0, 0.0,
+      0.0,   0.0, 0.0,   0.0, 1.0E-6, 0.0, 0.0, 0.0,   0.0, 0.0,   0.0, 1.0E-6};
+  static const long long R[9] = {10000000, 0, 0, 0, 10000000, 0, 0, 0, 10000000};
   static const signed char a[36] = {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
                                     0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                     0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1};
@@ -242,6 +242,7 @@ void imuekf(double gx, double gy, double gz, double ax, double ay, double az,
   H[11] = 2.0 * xhat[3];
   H[14] = 0.0;
   H[17] = 0.0;
+
   for (H_tmp = 0; H_tmp < 6; H_tmp++) {
     for (r1 = 0; r1 < 6; r1++) {
       maxval = 0.0;
@@ -278,6 +279,7 @@ void imuekf(double gx, double gy, double gz, double ax, double ay, double az,
   /*  ay = 0; */
   /*  az = 10; */
   /* 记得归一化 四元数归一化 加速度归一化 */
+
   maxval = 1/invSqrt((ax * ax + ay * ay) + az * az);
   ek[0] = ax / maxval - 2.0 * (xhat[1] * xhat[3] - xhat[0] * xhat[2]);
   ek[1] = ay / maxval - 2.0 * (xhat[2] * xhat[3] + xhat[0] * xhat[1]);
@@ -333,8 +335,8 @@ void imuekf(double gx, double gy, double gz, double ax, double ay, double az,
                                         gy * gy +
                                         gz * gz);
     double accelInvNorm = invSqrt(ax *ax + ay * ay + az * az);
-    
     double accl_norm = 1.0f / accelInvNorm;
+					
   if (((Y[0] * ek[0] + Y[1] * ek[1]) + Y[2] * ek[2] < 0.00001)&&(gyro_norm < 0.3f && accl_norm > 9.8f - 0.5f && accl_norm < 9.8f + 0.5f)) { //碰撞检测
     double d_A[18];
     for (H_tmp = 0; H_tmp < 6; H_tmp++) {
@@ -417,7 +419,7 @@ void imuekf(double gx, double gy, double gz, double ax, double ay, double az,
   xhat[2] /= maxval;
   xhat[3] /= maxval;
   maxval = xhat[0] * xhat[0];
-  *Yaw = atan2f(2.0 * (xhat[0] * xhat[3] + xhat[1] * xhat[2]),
+	*Yaw = atan2f(2.0 * (xhat[0] * xhat[3] + xhat[1] * xhat[2]),
                        2.0 * (maxval + xhat[1] * xhat[1]) - 1.0) *
          57.29577;
   *Pitch = atan2f(2.0 * (xhat[0] * xhat[1] + xhat[2] * xhat[3]),

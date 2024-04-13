@@ -1,6 +1,6 @@
 #include "uart_user.h"
 #include "rc_potocal.h" //遥控器 DBUS USART3
-#include "judge.h" //裁判系统 USART6
+#include "judge.h" //裁判系统 UART5
 
 int value = 0;
 

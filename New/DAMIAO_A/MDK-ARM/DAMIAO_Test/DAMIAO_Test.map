@@ -3737,50 +3737,50 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       156         14          0          0          0     595902   bsp_rc.o
-       552         40          0          4         80       2566   can.o
-       768         36          0          0          0       3409   can_user.o
-       142          0          0          0          0      23199   cmsis_os.o
-       140         18          0          0          0       1202   communicate.o
-        52          6        770          0          0       1507   crc.o
-       232          6          0          0          0        914   dma.o
-         0          0          0          0          0      16996   event_groups.o
-      1076        120          0          2        410       7411   exchange_task.o
-       186         36        196         20        596       7557   freertos.o
-       260         12          0          0          0       1071   gpio.o
-       236         10          0          0          0        834   handle_value.o
-       724         74          0         32      15360       7555   heap_4.o
-       496         82          0         64          0       2893   ins_task.o
-       148          0          0          0          0       3690   list.o
-       358         40          0          0        139     753226   main.o
-       480         22          0          0          0       3023   mf_user.o
-         0          0          0          0        256       1166   motor.o
-      1632         72          0          0       1664       5372   pid.o
-      1790        204          0         20          0       5962   pitch_task.o
-       894         78          0         12          0      11352   port.o
-       530         32          0          2         94       4343   remote_control.o
-        64         26        452          0       1536        864   startup_stm32f446xx.o
-        96         20          0          9          0       8050   stm32f4xx_hal.o
-      2134          6          0          0          0      14683   stm32f4xx_hal_can.o
-       252         22          0          0          0      33798   stm32f4xx_hal_cortex.o
-      1436         16          8          0          0       7190   stm32f4xx_hal_dma.o
-       496         40          0          0          0       2160   stm32f4xx_hal_gpio.o
-        84          6          0          0          0        898   stm32f4xx_hal_msp.o
-       532         56          0          0          0       4051   stm32f4xx_hal_rcc.o
-      1536         40          0          0          0       2870   stm32f4xx_hal_rcc_ex.o
-       902         76          0          0          0       6642   stm32f4xx_hal_tim.o
-         4          0          0          0          0       1621   stm32f4xx_hal_tim_ex.o
-       180         20          0          0         72       1524   stm32f4xx_hal_timebase_tim.o
-      3012         26          0          0          0      17367   stm32f4xx_hal_uart.o
-       534        142          0          0          0      15604   stm32f4xx_it.o
-         0          0          0          0          0        412   stream_buffer.o
-        20          6         24          4          0       1187   system_stm32f4xx.o
-      2158        270          0         60        240      20789   tasks.o
-      1800        156          0          0       1300       5624   usart.o
-      3452        474          0         52          0       9742   yaw_task.o
+       156         14          0          0          0     595774   bsp_rc.o
+       552         40          0          4         80       2450   can.o
+       768         36          0          0          0       3293   can_user.o
+       142          0          0          0          0      23023   cmsis_os.o
+       140         18          0          0          0       1162   communicate.o
+        52          6        770          0          0       1435   crc.o
+       232          6          0          0          0        870   dma.o
+         0          0          0          0          0      16940   event_groups.o
+      1076        120          0          2        410       7167   exchange_task.o
+       186         36        196         20        596       7429   freertos.o
+       260         12          0          0          0       1031   gpio.o
+       236         10          0          0          0        814   handle_value.o
+       724         74          0         32      15360       7411   heap_4.o
+       496         82          0         64          0       2797   ins_task.o
+       148          0          0          0          0       3562   list.o
+       358         40          0          0        139     752742   main.o
+       480         22          0          0          0       2931   mf_user.o
+         0          0          0          0        256       1106   motor.o
+      1632         72          0          0       1664       5196   pid.o
+      1790        204          0         20          0       5726   pitch_task.o
+       894         78          0         12          0      11096   port.o
+       530         32          0          2         94       4207   remote_control.o
+        64         26        452          0       1536        840   startup_stm32f446xx.o
+        96         20          0          9          0       7922   stm32f4xx_hal.o
+      2134          6          0          0          0      14247   stm32f4xx_hal_can.o
+       252         22          0          0          0      33674   stm32f4xx_hal_cortex.o
+      1436         16          8          0          0       6994   stm32f4xx_hal_dma.o
+       496         40          0          0          0       2088   stm32f4xx_hal_gpio.o
+        84          6          0          0          0        854   stm32f4xx_hal_msp.o
+       532         56          0          0          0       3923   stm32f4xx_hal_rcc.o
+      1536         40          0          0          0       2810   stm32f4xx_hal_rcc_ex.o
+       902         76          0          0          0       6422   stm32f4xx_hal_tim.o
+         4          0          0          0          0       1557   stm32f4xx_hal_tim_ex.o
+       180         20          0          0         72       1456   stm32f4xx_hal_timebase_tim.o
+      3012         26          0          0          0      16887   stm32f4xx_hal_uart.o
+       534        142          0          0          0      14988   stm32f4xx_it.o
+         0          0          0          0          0        432   stream_buffer.o
+        20          6         24          4          0       1115   system_stm32f4xx.o
+      2158        270          0         60        240      20401   tasks.o
+      1800        156          0          0       1300       5456   usart.o
+      3452        474          0         52          0       9378   yaw_task.o
 
     ----------------------------------------------------------------------
-     29588       2308       1484        288      21752    1616226   Object Totals
+     29588       2308       1484        288      21752    1609606   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         44          4          2          7          5          0   (incl. Padding)
 
@@ -3856,8 +3856,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     34564       2678       1564        288      21848    1597186   Grand Totals
-     34564       2678       1564        288      21848    1597186   ELF Image Totals
+     34564       2678       1564        288      21848    1590566   Grand Totals
+     34564       2678       1564        288      21848    1590566   ELF Image Totals
      34564       2678       1564        288          0          0   ROM Totals
 
 ==============================================================================
