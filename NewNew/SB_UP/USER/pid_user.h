@@ -3,31 +3,19 @@
 
 #include "main.h"
 
-#define LIMIT_MIN_MAX(x,min,max) (x) = (((x)<=(min))?(min):(((x)>=(max))?(max):(x)))		//越界则赋边界值
-
-typedef struct _pid_struct_t
+typedef struct
 {
-  float kp;
-  float ki;
-  float kd;
-  float i_max;
-  float out_max;
-  
-  float ref;      // target value
-  float fdb;      // feedback value  
-  float err[2];   // error and last error
-
-  float p_out;
-  float i_out;
-  float d_out;
-  float output;
-}pid_struct_t;
-
-void pid_init(pid_struct_t *pid,
-              float kp,
-              float ki,
-              float kd,
-              float i_max,
-              float out_max);
+	float Kp, Ki, Kd;
+	int16_t error[2];
+	int16_t get, set;
+	int32_t pout, iout, dout, out;
+	int16_t Max_out;
+	int16_t Max_iout;
+}pidTypeDef;
+	
+extern int16_t limit_max(int32_t value,int32_t Max_out);
+extern void pid_init(pidTypeDef *PID,float p,float i,float d,int16_t Max_out,int16_t Max_iout);
+extern int16_t pid_cal_s(pidTypeDef *PID,int16_t get,int16_t set);
+extern int16_t pid_cal_a(pidTypeDef *PID,float get,float set);
 
 #endif

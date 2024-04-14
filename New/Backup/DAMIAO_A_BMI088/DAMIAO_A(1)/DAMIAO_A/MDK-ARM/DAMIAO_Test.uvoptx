@@ -163,7 +163,7 @@
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>rx_data</ItemText>
+          <ItemText>rx_data,0x10</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>

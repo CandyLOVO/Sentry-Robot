@@ -71,6 +71,7 @@
 "sb_up\usbd_cdc.o"
 "sb_up\bmi088driver.o"
 "sb_up\bmi088middleware.o"
+"sb_up\mg5010_control.o"
 --strict --scatter "SB_UP\SB_UP.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

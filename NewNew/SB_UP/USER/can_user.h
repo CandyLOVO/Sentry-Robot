@@ -16,4 +16,11 @@ typedef struct //CAN
 	uint16_t temperture;
 }motor_info;
 
+typedef struct
+{
+	int8_t temperture;
+	int16_t tor_current;
+	int16_t speed;
+	uint16_t angle;
+}motor_5010_info;
 #endif

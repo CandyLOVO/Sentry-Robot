@@ -3,11 +3,15 @@
 #include "string.h"
 
 motor_info motor[8];
+motor_5010_info motor_5010;
 FDCAN_RxHeaderTypeDef RxHeader1;
 uint8_t g_Can1RxData[64];
 
 FDCAN_RxHeaderTypeDef RxHeader2;
 uint8_t g_Can2RxData[64];
+
+FDCAN_RxHeaderTypeDef RxHeader3;
+uint8_t g_Can3RxData[64];
 
 void FDCAN1_Config(void)
 {
@@ -170,20 +174,32 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 			memset(g_Can1RxData, 0, sizeof(g_Can1RxData));	//接收前先清空数组	
       HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &RxHeader1, g_Can1RxData);
 			
-			if((RxHeader1.Identifier >= 0x201) && (RxHeader1.Identifier <= 0x208)){
+			if((RxHeader1.Identifier >= 0x201) && (RxHeader1.Identifier <= 0x208))
+			{
 				uint8_t index = RxHeader1.Identifier - 0x201;
 				motor[index].angle = ((g_Can1RxData[0] << 8) | g_Can1RxData[1]);
 				motor[index].speed = ((g_Can1RxData[2] << 8) | g_Can1RxData[3]);
 				motor[index].tor_current = ((g_Can1RxData[4] << 8) | g_Can1RxData[5]);
 				motor[index].temperture = g_Can1RxData[6];
 			}
+			
+			if(RxHeader1.Identifier == 0x141)
+			{
+				if(g_Can1RxData[0] == 0xA2)
+				{
+					motor_5010.temperture = g_Can1RxData[1];
+					motor_5010.tor_current = (g_Can1RxData[2] | (g_Can1RxData[3] << 8));
+					motor_5010.speed = (g_Can1RxData[4] | (g_Can1RxData[5] << 8));
+					motor_5010.angle = (g_Can1RxData[6] | (g_Can1RxData[7] << 8));
+				}
+			}
 	  }
 		
 		if(hfdcan->Instance == FDCAN3)
     {
       /* Retrieve Rx messages from RX FIFO0 */
-			memset(g_Can1RxData, 0, sizeof(g_Can1RxData));	//接收前先清空数组	
-      HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &RxHeader1, g_Can1RxData);
+			memset(g_Can3RxData, 0, sizeof(g_Can3RxData));	//接收前先清空数组	
+      HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &RxHeader3, g_Can3RxData);
 	  }
   }
 }
@@ -197,13 +213,15 @@ void HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo1ITs)
       /* Retrieve Rx messages from RX FIFO1 */
 			memset(g_Can2RxData, 0, sizeof(g_Can2RxData));
       HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO1, &RxHeader2, g_Can2RxData);
+			
+			if((RxHeader2.Identifier >= 0x201) && (RxHeader2.Identifier <= 0x208))
+			{
+				uint8_t index = RxHeader2.Identifier - 0x201;
+				motor[index].angle = ((g_Can2RxData[0] << 8) | g_Can2RxData[1]);
+				motor[index].speed = ((g_Can2RxData[2] << 8) | g_Can2RxData[3]);
+				motor[index].tor_current = ((g_Can2RxData[4] << 8) | g_Can2RxData[5]);
+				motor[index].temperture = g_Can2RxData[6];
+			}
     }
-		
-		if(hfdcan->Instance == FDCAN3)
-    {
-      /* Retrieve Rx messages from RX FIFO1 */
-			memset(g_Can2RxData, 0, sizeof(g_Can2RxData));	//接收前先清空数组	
-      HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO1, &RxHeader2, g_Can2RxData);
-	  }
   }
 }
