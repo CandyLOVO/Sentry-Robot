@@ -12,7 +12,6 @@ extern motor_info motor[8];
 void Yaw_Task(void const * argument)
 {
 	start_5010();
-	
   for(;;)
   {
 		

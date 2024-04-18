@@ -889,6 +889,11 @@
               <FileType>1</FileType>
               <FilePath>..\USER\Task\Chassis_Task.c</FilePath>
             </File>
+            <File>
+              <FileName>Exchange_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\Task\Exchange_Task.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

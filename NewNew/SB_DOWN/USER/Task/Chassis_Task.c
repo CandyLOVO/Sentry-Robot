@@ -41,7 +41,7 @@ void Chassis_Task(void const * argument)
 		if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3)
 		{
 			omega = rc_ctrl.rc.ch[4]*0.05; //²¦ÂÖ¿ØÖÆĞ¡ÍÓÂİ
-//			chassis_calculate(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]); //ÓÒ²¦¸Ë¿ØÖÆµ×ÅÌ
+//			chassis_calculate(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]); //ÓÒ²¦¸Ë¿ØÖÆµ×ÅÌ Ò£¿ØÆ÷ÓÒ²¦¸ËÓĞÎÊÌâ
 			chassis_calculate(rc_ctrl.rc.ch[2], rc_ctrl.rc.ch[3]); //×ó²¦¸Ë¿ØÖÆµ×ÅÌ
 			for(int i=0;i<4;i++)
 			{
@@ -61,6 +61,7 @@ void Chassis_Task(void const * argument)
 			}
 			can_cmd_send_3508(out_speed[0], out_speed[1], out_speed[2], out_speed[3]);
 		}
+		
     osDelay(1);
   }
 }

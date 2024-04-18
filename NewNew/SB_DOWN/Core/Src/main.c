@@ -96,11 +96,14 @@ int main(void)
   MX_CAN2_Init();
   MX_USART3_UART_Init();
   MX_UART5_Init();
+  MX_USART1_UART_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 	CAN1_Init();
 	CAN2_Init();
 	USART3_Init();
 	UART5_Init();
+	USART1_Init(); //收发导航数据 RS485
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

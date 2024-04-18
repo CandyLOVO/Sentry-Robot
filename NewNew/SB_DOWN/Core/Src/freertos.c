@@ -26,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Chassis_Task.h"
+#include "Exchange_Task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -52,6 +53,7 @@ osThreadId defaultTaskHandle;
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
 osThreadId chassisTaskHandle;
+osThreadId exchangeTaskHandle;
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
@@ -108,6 +110,9 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_THREADS */
   osThreadDef(chassisTask, Chassis_Task, osPriorityAboveNormal, 0, 256);
 	chassisTaskHandle = osThreadCreate(osThread(chassisTask), NULL);
+	
+	osThreadDef(exchangeTask, Exchange_Task, osPriorityRealtime, 0, 1024);
+	exchangeTaskHandle = osThreadCreate(osThread(exchangeTask), NULL);
   /* USER CODE END RTOS_THREADS */
 
 }

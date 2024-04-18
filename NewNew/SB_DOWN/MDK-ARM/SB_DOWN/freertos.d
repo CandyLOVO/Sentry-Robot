@@ -45,3 +45,4 @@ sb_down\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 sb_down\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 sb_down\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 sb_down\freertos.o: ../USER/Task/Chassis_Task.h
+sb_down\freertos.o: ../USER/Task/Exchange_Task.h

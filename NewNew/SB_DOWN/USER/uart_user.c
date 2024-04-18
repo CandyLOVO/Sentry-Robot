@@ -1,9 +1,13 @@
 #include "uart_user.h"
 #include "rc_potocal.h" //遥控器 DBUS USART3
 #include "judge.h" //裁判系统 UART5
+#include "string.h"
 
 int value = 0;
+uint8_t Rx[128]; //接收缓冲数组
 
+extern UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef huart2;
 extern UART_HandleTypeDef huart3;
 extern UART_HandleTypeDef huart5;
 extern DMA_HandleTypeDef hdma_usart5_rx;
@@ -14,6 +18,30 @@ extern DMA_HandleTypeDef hdma_usart5_tx;
 uint8_t usart3_dma_rxbuf[2][USART3_RX_BUF_LEN];
 volatile uint8_t judge_dma_buffer[2][UART5_RX_BUF_LEN] ={0}  ;
 uint8_t judge_receive_length=0;
+
+void USART1_Init(void)
+{
+	HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(DIR_1_GPIO_Port,DIR_1_Pin,GPIO_PIN_RESET);
+	__HAL_UART_ENABLE_IT(&huart1,UART_IT_IDLE);
+	HAL_UART_Receive_DMA(&huart1,(uint8_t *)Rx,sizeof(Rx));
+}
+
+void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx_it.c文件USART1_IRQHandler调用
+{
+	if(huart->Instance == USART1)
+	{
+		if(RESET != __HAL_UART_GET_FLAG(&huart1,UART_FLAG_IDLE)){
+			__HAL_UART_CLEAR_IDLEFLAG(&huart1);
+			HAL_UART_DMAStop(&huart1);
+			
+//			memset(Rx,0x00,sizeof(Rx)); //清空缓存，重新接收
+			HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(DIR_1_GPIO_Port,DIR_1_Pin,GPIO_PIN_RESET);
+			HAL_UART_Receive_DMA(&huart1,(uint8_t *)Rx,sizeof(Rx));
+		}
+	}
+}
 
 void USART3_Init(void)
 {

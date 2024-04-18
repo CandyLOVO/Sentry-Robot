@@ -34,3 +34,4 @@ sb_down\uart_user.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 sb_down\uart_user.o: ..\USER\rc_potocal.h
 sb_down\uart_user.o: ..\USER\struct_typedef.h
 sb_down\uart_user.o: ..\USER\judge.h
+sb_down\uart_user.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
