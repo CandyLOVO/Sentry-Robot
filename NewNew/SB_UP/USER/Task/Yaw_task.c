@@ -16,7 +16,7 @@ void Yaw_Task(void const * argument)
   {
 		
 		speed_control_send(100000);
-		canx_send_data(&hfdcan1, 0x141, can_send_data_5010, 8);
+		canx_send_data(&hfdcan3, 0x141, can_send_data_5010, 8);
 		osDelay(1);
   }
 }

@@ -1,6 +1,7 @@
 #include "can_user.h"
 #include "fdcan.h"
 #include "string.h"
+#include "tim.h"
 
 motor_info motor[8];
 motor_5010_info motor_5010;
@@ -159,7 +160,9 @@ uint8_t canx_send_data(FDCAN_HandleTypeDef *hcan, uint16_t id, uint8_t *data, ui
   if(HAL_FDCAN_AddMessageToTxFifoQ(hcan, &TxHeader, data) != HAL_OK)
   {
         // ∑¢ÀÕ ß∞‹¥¶¿Ì
-       Error_Handler();      
+//       Error_Handler();
+		MX_TIM3_Init();
+		FDCAN3_Config();
   }
 	 return 0;
 }

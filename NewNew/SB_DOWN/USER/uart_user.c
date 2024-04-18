@@ -2,10 +2,15 @@
 #include "rc_potocal.h" //遥控器 DBUS USART3
 #include "judge.h" //裁判系统 UART5
 #include "string.h"
+#include "Exchange_Task.h"
 
 int value = 0;
+int count = 0; //发送数据标志位
 uint8_t Rx[128]; //接收缓冲数组
+uint32_t length = 0;
+extern uint8_t Rx_flag;
 
+extern DMA_HandleTypeDef hdma_usart1_rx;
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
 extern UART_HandleTypeDef huart3;
@@ -34,12 +39,15 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 		if(RESET != __HAL_UART_GET_FLAG(&huart1,UART_FLAG_IDLE)){
 			__HAL_UART_CLEAR_IDLEFLAG(&huart1);
 			HAL_UART_DMAStop(&huart1);
+			length = 128 - (__HAL_DMA_GET_COUNTER(&hdma_usart1_rx)); //DMA中未传输的数据个数
 			
-//			memset(Rx,0x00,sizeof(Rx)); //清空缓存，重新接收
+			Rx_flag = 2; //收到一帧数据
+			count = 0;
+			memset(Rx,0x00,sizeof(Rx)); //清空缓存，重新接收
 			HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(DIR_1_GPIO_Port,DIR_1_Pin,GPIO_PIN_RESET);
 			HAL_UART_Receive_DMA(&huart1,(uint8_t *)Rx,sizeof(Rx));
-		}
+		} 
 	}
 }
 
