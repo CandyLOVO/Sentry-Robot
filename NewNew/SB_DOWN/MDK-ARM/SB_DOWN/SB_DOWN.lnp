@@ -44,6 +44,8 @@
 "sb_down\crc.o"
 "sb_down\chassis_task.o"
 "sb_down\exchange_task.o"
+"sb_down\yaw_task.o"
+"sb_down\mg5010_control.o"
 --strict --scatter "SB_DOWN\SB_DOWN.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

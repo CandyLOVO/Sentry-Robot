@@ -62,4 +62,3 @@ sb_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 sb_up\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 sb_up\yaw_task.o: ../USER/can_user.h
 sb_up\yaw_task.o: ../Core/Inc/fdcan.h
-sb_up\yaw_task.o: ..\USER\Motor\MG5010_control.h

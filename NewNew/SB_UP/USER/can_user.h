@@ -16,11 +16,26 @@ typedef struct //CAN
 	uint16_t temperture;
 }motor_info;
 
-typedef struct
+typedef __packed struct
 {
-	int8_t temperture;
-	int16_t tor_current;
-	int16_t speed;
-	uint16_t angle;
-}motor_5010_info;
+        __packed struct
+        {
+                int16_t ch[5];
+                char s[2];
+        } rc;
+        __packed struct
+        {
+                int16_t x;
+                int16_t y;
+                int16_t z;
+                uint8_t press_l;
+                uint8_t press_r;
+        } mouse;
+        __packed struct
+        {
+                uint16_t v;
+        } key;
+
+} RC_ctrl_t;
+
 #endif

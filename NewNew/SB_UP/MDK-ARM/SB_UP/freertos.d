@@ -60,3 +60,4 @@ sb_up\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 sb_up\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 sb_up\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 sb_up\freertos.o: ../USER/Task/Yaw_task.h
+sb_up\freertos.o: ../USER/Task/Exchange_task.h

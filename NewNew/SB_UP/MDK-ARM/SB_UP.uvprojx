@@ -1798,6 +1798,11 @@
               <FileType>1</FileType>
               <FilePath>..\USER\pid_user.c</FilePath>
             </File>
+            <File>
+              <FileName>CRC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\CRC.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1812,6 +1817,11 @@
               <FileName>imu_temp_ctrl.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\USER\Task\imu_temp_ctrl.c</FilePath>
+            </File>
+            <File>
+              <FileName>Exchange_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\Task\Exchange_task.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2497,16 +2507,6 @@
               <FileName>BMI088Middleware.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BMI088\BMI088Middleware.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Motor</GroupName>
-          <Files>
-            <File>
-              <FileName>MG5010_control.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\USER\Motor\MG5010_control.c</FilePath>
             </File>
           </Files>
         </Group>

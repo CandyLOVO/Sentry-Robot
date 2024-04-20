@@ -43,7 +43,7 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 			
 			Rx_flag = 2; //收到一帧数据
 			count = 0;
-			memset(Rx,0x00,sizeof(Rx)); //清空缓存，重新接收
+//			memset(Rx,0x00,sizeof(Rx)); //清空缓存，重新接收
 			HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(DIR_1_GPIO_Port,DIR_1_Pin,GPIO_PIN_RESET);
 			HAL_UART_Receive_DMA(&huart1,(uint8_t *)Rx,sizeof(Rx));

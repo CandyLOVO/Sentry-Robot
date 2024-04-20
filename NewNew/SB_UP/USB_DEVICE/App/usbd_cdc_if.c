@@ -22,7 +22,8 @@
 #include "usbd_cdc_if.h"
 
 /* USER CODE BEGIN INCLUDE */
-
+#include "Exchange_task.h"
+#include "CRC.h"
 /* USER CODE END INCLUDE */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -30,6 +31,8 @@
 /* Private macro -------------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+receive_vision Rx_vision;
+uint8_t length;
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE END PV */
@@ -261,11 +264,33 @@ static int8_t CDC_Control_HS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
   * @param  Len: Number of data received (in bytes)
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAILL
   */
+uint16_t checksum = 0;
 static int8_t CDC_Receive_HS(uint8_t* Buf, uint32_t *Len)
 {
   /* USER CODE BEGIN 11 */
   USBD_CDC_SetRxBuffer(&hUsbDeviceHS, &Buf[0]);
   USBD_CDC_ReceivePacket(&hUsbDeviceHS);
+	
+	length = *Len;
+	if(Buf[0] == 0xA5)
+	{
+		memcpy(&Rx_vision.checksum, &Buf[26], 2);
+		checksum = Get_CRC16_Check_Sum(Buf,26,0xffff);
+		if(Rx_vision.checksum == checksum)
+		{
+			Rx_vision.L_tracking = Buf[1];
+			Rx_vision.R_tracking = Buf[2];
+			Rx_vision.M_tracking = Buf[3];
+			Rx_vision.L_shoot = Buf[4];
+			Rx_vision.R_shoot = Buf[5];
+			memcpy(&Rx_vision.yaw, &Buf[6], 4);
+			memcpy(&Rx_vision.L_yaw, &Buf[10], 4);
+			memcpy(&Rx_vision.L_pitch, &Buf[14], 4);
+			memcpy(&Rx_vision.R_yaw, &Buf[18], 4);
+			memcpy(&Rx_vision.R_pitch, &Buf[22], 4);
+		}
+	}
+	memset(Buf,0x00,128); //清空缓存，重新接收
   return (USBD_OK);
   /* USER CODE END 11 */
 }

@@ -4,7 +4,8 @@
 #include "tim.h"
 
 motor_info motor[8];
-motor_5010_info motor_5010;
+RC_ctrl_t rc_ctrl;
+
 FDCAN_RxHeaderTypeDef RxHeader1;
 uint8_t g_Can1RxData[64];
 
@@ -185,17 +186,6 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 				motor[index].tor_current = ((g_Can1RxData[4] << 8) | g_Can1RxData[5]);
 				motor[index].temperture = g_Can1RxData[6];
 			}
-			
-			if(RxHeader1.Identifier == 0x141)
-			{
-				if(g_Can1RxData[0] == 0xA2)
-				{
-					motor_5010.temperture = g_Can1RxData[1];
-					motor_5010.tor_current = (g_Can1RxData[2] | (g_Can1RxData[3] << 8));
-					motor_5010.speed = (g_Can1RxData[4] | (g_Can1RxData[5] << 8));
-					motor_5010.angle = (g_Can1RxData[6] | (g_Can1RxData[7] << 8));
-				}
-			}
 	  }
 		
 		if(hfdcan->Instance == FDCAN3)
@@ -203,6 +193,30 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
       /* Retrieve Rx messages from RX FIFO0 */
 			memset(g_Can3RxData, 0, sizeof(g_Can3RxData));	//接收前先清空数组	
       HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &RxHeader3, g_Can3RxData);
+			if(RxHeader3.Identifier == 0x30) //rc_ctrl.rc.ch[0]~[3]
+			{
+				rc_ctrl.rc.ch[0] = (g_Can3RxData[0]<<8) | g_Can3RxData[1];
+				rc_ctrl.rc.ch[1] = (g_Can3RxData[2]<<8) | g_Can3RxData[3];
+				rc_ctrl.rc.ch[2] = (g_Can3RxData[4]<<8) | g_Can3RxData[5];
+				rc_ctrl.rc.ch[3] = (g_Can3RxData[6]<<8) | g_Can3RxData[7];
+			}
+			
+			if(RxHeader3.Identifier == 0x31) //rc_ctrl.rc[4]&rc_ctrl.rc.s&rc_ctrl.key
+			{
+				rc_ctrl.rc.ch[4] = (g_Can3RxData[0]<<8) | g_Can3RxData[1];
+				rc_ctrl.rc.s[0] = g_Can3RxData[2];
+				rc_ctrl.rc.s[1] = g_Can3RxData[3];
+				rc_ctrl.key.v = (g_Can3RxData[4]<<8) | g_Can3RxData[5];
+			}
+		
+			if(RxHeader3.Identifier == 0x32) //rc_ctrl.mouse
+			{
+				rc_ctrl.mouse.x = (g_Can3RxData[0]<<8) | g_Can3RxData[1];
+				rc_ctrl.mouse.y = (g_Can3RxData[2]<<8) | g_Can3RxData[3];
+				rc_ctrl.mouse.z = (g_Can3RxData[4]<<8) | g_Can3RxData[5];
+				rc_ctrl.mouse.press_l = g_Can3RxData[6];
+				rc_ctrl.mouse.press_r = g_Can3RxData[7];
+			}
 	  }
   }
 }

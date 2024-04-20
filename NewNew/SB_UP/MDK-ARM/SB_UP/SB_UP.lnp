@@ -59,8 +59,10 @@
 "sb_up\rtgetnan.o"
 "sb_up\bsp_dwt.o"
 "sb_up\pid_user.o"
+"sb_up\crc.o"
 "sb_up\yaw_task.o"
 "sb_up\imu_temp_ctrl.o"
+"sb_up\exchange_task.o"
 "sb_up\usb_device.o"
 "sb_up\usbd_desc.o"
 "sb_up\usbd_cdc_if.o"
@@ -71,7 +73,6 @@
 "sb_up\usbd_cdc.o"
 "sb_up\bmi088driver.o"
 "sb_up\bmi088middleware.o"
-"sb_up\mg5010_control.o"
 --strict --scatter "SB_UP\SB_UP.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

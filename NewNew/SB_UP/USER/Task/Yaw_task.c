@@ -3,20 +3,15 @@
 #include "can_user.h"
 #include "fdcan.h"
 #include "main.h"
-#include "MG5010_control.h"
 
 uint8_t can_send_data[8];
-uint8_t can_send_data_5010[8];
 extern motor_info motor[8];
 
 void Yaw_Task(void const * argument)
 {
-	start_5010();
+	osDelay(3000);
   for(;;)
   {
-		
-		speed_control_send(100000);
-		canx_send_data(&hfdcan3, 0x141, can_send_data_5010, 8);
 		osDelay(1);
   }
 }

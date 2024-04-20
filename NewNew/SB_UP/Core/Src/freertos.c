@@ -26,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Yaw_task.h"
+#include "Exchange_task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -52,6 +53,7 @@ osThreadId defaultTaskHandle;
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
 osThreadId yawTaskHandle;
+osThreadId exchangeTaskHandle;
 osThreadId lcdTaskHandle;
 uint32_t defaultTaskBuffer[ 128 ];
 osStaticThreadDef_t defaultTaskControlBlock;
@@ -118,6 +120,9 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_THREADS */
 	osThreadDef(yawTask, Yaw_Task, osPriorityNormal, 0, 256);
 	yawTaskHandle = osThreadCreate(osThread(yawTask), NULL);
+	
+	osThreadDef(exchangeTask, Exchange_Task, osPriorityRealtime, 0, 1024);
+	exchangeTaskHandle = osThreadCreate(osThread(exchangeTask), NULL);
 	
 	osThreadDef(imuTempCtrl, IMU_TempCtrlTask, osPriorityRealtime, 0, 2048);
 	imuTempCtrlHandle = osThreadCreate(osThread(imuTempCtrl), NULL);

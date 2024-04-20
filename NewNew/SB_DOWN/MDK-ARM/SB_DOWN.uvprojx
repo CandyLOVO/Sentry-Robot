@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F446xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../USER;../USER/Task</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../USER;../USER/Task;..\USER\Motor</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -893,6 +893,21 @@
               <FileName>Exchange_Task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\USER\Task\Exchange_Task.c</FilePath>
+            </File>
+            <File>
+              <FileName>Yaw_Task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\Task\Yaw_Task.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Motor</GroupName>
+          <Files>
+            <File>
+              <FileName>MG5010_control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\Motor\MG5010_control.c</FilePath>
             </File>
           </Files>
         </Group>

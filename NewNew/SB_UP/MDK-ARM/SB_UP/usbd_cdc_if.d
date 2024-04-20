@@ -56,3 +56,6 @@ sb_up\usbd_cdc_if.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h
 sb_up\usbd_cdc_if.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h
 sb_up\usbd_cdc_if.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
 sb_up\usbd_cdc_if.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
+sb_up\usbd_cdc_if.o: ../USER/Task/Exchange_task.h
+sb_up\usbd_cdc_if.o: ../USER/CRC.h
+sb_up\usbd_cdc_if.o: ../USER/struct_typedef.h

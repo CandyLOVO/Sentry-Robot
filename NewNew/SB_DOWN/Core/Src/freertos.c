@@ -27,6 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include "Chassis_Task.h"
 #include "Exchange_Task.h"
+#include "Yaw_Task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,6 +54,7 @@ osThreadId defaultTaskHandle;
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
 osThreadId chassisTaskHandle;
+osThreadId yawTaskHandle;
 osThreadId exchangeTaskHandle;
 /* USER CODE END FunctionPrototypes */
 
@@ -108,8 +110,11 @@ void MX_FREERTOS_Init(void) {
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
-  osThreadDef(chassisTask, Chassis_Task, osPriorityAboveNormal, 0, 256);
+  osThreadDef(chassisTask, Chassis_Task, osPriorityNormal, 0, 256);
 	chassisTaskHandle = osThreadCreate(osThread(chassisTask), NULL);
+	
+	osThreadDef(yawTask, Yaw_task, osPriorityNormal, 0, 256);
+	yawTaskHandle = osThreadCreate(osThread(yawTask), NULL);
 	
 	osThreadDef(exchangeTask, Exchange_Task, osPriorityRealtime, 0, 1024);
 	exchangeTaskHandle = osThreadCreate(osThread(exchangeTask), NULL);
