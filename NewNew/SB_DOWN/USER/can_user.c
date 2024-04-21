@@ -8,12 +8,12 @@ CAN_TxHeaderTypeDef can_tx_message;
 uint8_t can_send_data[8];
 motor_info motor[8];
 motor_5010_info motor_5010;
-double yaw12;
-float yaw;
-float yaw_gyro;
-uint8_t L_tracking;
-uint8_t R_tracking;
-uint8_t M_tracking;
+double yaw12; //云台陀螺仪yaw值
+float yaw; //视觉传来的目标yaw值
+float yaw_gyro; //云台陀螺仪yaw角速度值
+uint8_t L_tracking; //左头是否锁住
+uint8_t R_tracking; //右头是否锁住
+uint8_t M_tracking; //云台前后摄像头是否锁住
 
 void CAN1_Init()
 {

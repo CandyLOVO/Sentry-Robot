@@ -39,8 +39,8 @@ void Chassis_Task(void const * argument)
 		//计算底盘与云台差角
 		Yaw_Diff();
 		
-		//遥控器控制模式，左->中间，右->中间
-		if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3)
+		//遥控器控制模式，左->中间，右->中间              左->最上，右->中间
+		if((rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3) || (rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==1))
 		{
 			omega = rc_ctrl.rc.ch[4]*0.05; //拨轮控制小陀螺
 			chassis_calculate(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]); //右拨杆控制底盘 遥控器右拨杆有问题
@@ -51,7 +51,7 @@ void Chassis_Task(void const * argument)
 			can_cmd_send_3508(out_speed[0], out_speed[1], out_speed[2], out_speed[3]);
 		}
 		
-		//导航上场模式，左->最下，右->最下
+//		//导航上场模式，左->最下，右->最下
 //		else if(rc_ctrl.rc.s[0]==2 && rc_ctrl.rc.s[1]==2)
 //		{
 //			omega = 25; //给定小陀螺转速

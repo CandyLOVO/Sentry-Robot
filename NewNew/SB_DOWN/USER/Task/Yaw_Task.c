@@ -17,7 +17,9 @@ int16_t output_5010;
 
 extern RC_ctrl_t rc_ctrl;
 extern motor_5010_info motor_5010;
-extern double yaw_gyro;
+extern double yaw12; //云台陀螺仪yaw值
+extern float yaw; //视觉传来的目标yaw值
+extern float yaw_gyro; //云台陀螺仪yaw角速度值
 extern uint8_t L_tracking;
 extern uint8_t R_tracking;
 extern uint8_t M_tracking;
@@ -32,6 +34,12 @@ void Yaw_task(void const * argument)
   {
 		yaw_angle = -motor_value(initial_angle, motor_5010.angle, 65535); //将5010编码值转化为0~+-180【面向两个头，向左转为-，向右转为+】
 		
+		//遥控器控制模式，左->中间，右->中间
+		if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3)
+		{
+			yaw_control();
+		}
+		
 		//导航上场模式，左->最下，右->最下
 		if(rc_ctrl.rc.s[0]==2 && rc_ctrl.rc.s[1]==2)
 		{
@@ -40,8 +48,18 @@ void Yaw_task(void const * argument)
 			{
 				yaw_finding(); //大yaw巡航
 			}
+			//至少有一个摄像头识别到
+			else if(L_tracking==1 || R_tracking==1 || M_tracking==1)
+			{
+				yaw_suoing(); //大yaw响应
+			}
 		}
-		speed_control_send(10000);
+		
+		//PID控制
+		target_speed_5010 = pid_I_control(&pid_5010_a, yaw12, target_angle_5010);
+		output_5010 = pid_cal_s(&pid_5010_s, (9.55f*yaw_gyro), target_speed_5010);
+		//CAN2数据发送
+		speed_control_send(output_5010);
 		can_cmd_send_5010(can_send_data_5010);
     osDelay(1);
   }
@@ -56,6 +74,19 @@ void yaw_init(void)
 	pid_init(&pid_5010_a,1,0,0,30000,30000);
 }
 
+void yaw_control(void)
+{
+	target_angle_5010 += rc_ctrl.rc.ch[2]*360/660;
+	if(target_angle_5010 > 180)
+	{
+		target_angle_5010 -= 360;
+	}
+	else if(target_angle_5010 < -180)
+	{
+		target_angle_5010 += 360;
+	}
+}
+
 void yaw_finding(void)
 {
 	//大yaw巡航
@@ -68,14 +99,36 @@ void yaw_finding(void)
 	{
 		target_angle_5010 += 360;
 	}
-	target_speed_5010 = pid_cal_a(&pid_5010_a, yaw_angle, target_angle_5010);
-	output_5010 = pid_cal_s(&pid_5010_s, (9.55f*yaw_gyro), target_speed_5010);
 }
 
-//将MG5010电机(通用版)的角度以初始角度为0，映射到0~+-180度 (k:设定的初始角度“0” ； n:想要映射的角度) 得到的是倒装电机转化的0~+-180
-//第3个参数是编码器最大值
+void yaw_suoing(void)
+{
+	//至少有一个摄像头瞄准时
+	if(L_tracking==1 && R_tracking==1) //两个头都锁住
+	{
+		if((yaw-yaw12)<20 && (yaw-yaw12)>-20) //转动角度小于阈值
+		{
+			target_angle_5010 = target_angle_5010;
+		}
+		else
+		{
+			target_angle_5010 = yaw;
+		}
+	}
+	else if(L_tracking==0 || R_tracking==0) //有一个头没有锁住
+	{
+		target_angle_5010 = yaw;
+	}
+	else //中间的头锁住
+	{
+		target_angle_5010 = yaw;
+	}
+}
+
 float motor_value(int32_t k, int32_t n, int32_t max)
 {
+	//将MG5010电机(通用版)的角度以初始角度为0，映射到0~+-180度 (k:设定的初始角度“0” ； n:想要映射的角度) 得到的是倒装电机转化的0~+-180
+	//第3个参数是编码器最大值
 	int32_t middle = (max+1)/2;
 	float output;
 	if(k>=0 && k<middle){

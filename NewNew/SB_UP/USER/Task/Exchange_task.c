@@ -11,6 +11,7 @@ transmit_vision Tx_vision;
 uint8_t Tx_yaw12[8];
 uint8_t Tx_yaw[8];
 uint8_t Tx_gyro[8];
+uint8_t Tx_shijue[25];
 
 extern FDCAN_HandleTypeDef hfdcan3;
 extern double yaw12;
@@ -21,7 +22,7 @@ void Exchange_Task(void const * argument)
 {
   for(;;)
   {
-		vision_value();
+		vision_value(); //发送给视觉的数值
 		yaw_value(); //云台陀螺仪yaw传到底盘控制5010
     osDelay(1);
   }
@@ -29,8 +30,25 @@ void Exchange_Task(void const * argument)
 
 void vision_value(void)
 {
-	
-//	CDC_Transmit_HS(Tx_vision, sizeof(Tx_vision)); //发给自瞄的值
+	Tx_vision.header = 0x5A;
+	Tx_vision.color = 1;
+	Tx_vision.yaw = yaw12;
+	Tx_vision.L_yaw = yaw12;
+	Tx_vision.L_pitch = 0;
+	Tx_vision.R_yaw = yaw12;
+	Tx_vision.R_pitch = 0;
+	Tx_vision.ending = 0xAA;
+	memcpy(&Tx_shijue[0], &Tx_vision.header, 1);
+	memcpy(&Tx_shijue[1], &Tx_vision.color, 1);
+	memcpy(&Tx_shijue[2], &Tx_vision.yaw, 4);
+	memcpy(&Tx_shijue[6], &Tx_vision.L_yaw, 4);
+	memcpy(&Tx_shijue[10], &Tx_vision.L_pitch, 4);
+	memcpy(&Tx_shijue[14], &Tx_vision.R_yaw, 4);
+	memcpy(&Tx_shijue[18], &Tx_vision.R_pitch, 4);
+	Tx_vision.checksum = Get_CRC16_Check_Sum(Tx_shijue, 22, 0xffff);
+	memcpy(&Tx_shijue[22], &Tx_vision.checksum, 2);
+	memcpy(&Tx_shijue[24], &Tx_vision.ending, 1);
+	CDC_Transmit_HS(Tx_shijue, sizeof(Tx_shijue)); //发给自瞄的值
 }
 
 void yaw_value(void)
