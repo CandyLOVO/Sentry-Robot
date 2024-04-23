@@ -3,10 +3,12 @@
 #include "uart_user.h"
 #include "CRC.h"
 #include "string.h"
+#include "judge.h"
 
-uint8_t Tx[13];
+uint8_t Tx[128];
+uint8_t Rx_flag = 0; //程序初始化标志位
 uint16_t checksum;
-uint8_t Rx_flag = 0;
+Tx_naving Tx_nav;
 
 extern UART_HandleTypeDef huart1;
 extern uint8_t Rx[128];
@@ -44,19 +46,44 @@ void Exchange_Task(void const * argument)
 
 void RS485_Trans(void)
 {
-	Tx[0] = 0x5A;
-	Tx[1] = 0;
-	Tx[2] = 0;
-	Tx[3] = 0x04;
-	Tx[4] = 0x08;
-	Tx[5] = 0xA0;
-	Tx[6] = 0x56;
-	Tx[7] = 0x04;
-	Tx[8] = 0x01;
-	Tx[9] = 0x34;
-	checksum = Get_CRC16_Check_Sum(Tx,10,0xffff);
-	memcpy(&Tx[10],&checksum,2);
-	Tx[12] = 0xAA;
+	Tx_nav.header = 0x5A;
+	if(Sentry.Flag_progress == 0x04) //比赛中
+	{
+		Tx_nav.Flag_progress = 1;
+	}
+	else
+	{
+		Tx_nav.Flag_progress = 0;
+	}
+	Tx_nav.color = Sentry.Flag_judge; //1 red 2 blue
+	Tx_nav.projectile_allowance_17mm = Sentry.projectile_allowance_17mm;
+	Tx_nav.remaining_gold_coin = Sentry.remaining_gold_coin;
+	Tx_nav.supply_robot_id = Sentry.supply_robot_id;
+	Tx_nav.supply_projectile_num = Sentry.supply_projectile_num;
+	Tx_nav.red_7_HP = Sentry.red_remain_HP;
+	Tx_nav.red_outpost_HP = Sentry.red_outpost_HP;
+	Tx_nav.red_base_HP = Sentry.red_base_HP;
+	Tx_nav.blue_7_HP = Sentry.blue_remain_HP;
+	Tx_nav.blue_outpost_HP = Sentry.blue_outpost_HP;
+	Tx_nav.blue_base_HP = Sentry.blue_base_HP;
+	Tx_nav.ending = 0xAA;
+	
+	Tx[0] = Tx_nav.header;
+	Tx[1] = Tx_nav.Flag_progress;
+	Tx[2] = Tx_nav.color;
+	memcpy(&Tx[3], &Tx_nav.projectile_allowance_17mm, 2);
+	memcpy(&Tx[5], &Tx_nav.remaining_gold_coin, 2);
+	memcpy(&Tx[7], &Tx_nav.supply_robot_id, 1);
+	memcpy(&Tx[8], &Tx_nav.supply_projectile_num, 1);
+	memcpy(&Tx[9], &Tx_nav.red_7_HP, 2);
+	memcpy(&Tx[11], &Tx_nav.red_outpost_HP, 2);
+	memcpy(&Tx[13], &Tx_nav.red_base_HP, 2);
+	memcpy(&Tx[15], &Tx_nav.blue_7_HP, 2);
+	memcpy(&Tx[17], &Tx_nav.blue_outpost_HP, 2);
+	memcpy(&Tx[19], &Tx_nav.blue_base_HP, 2);
+	Tx_nav.checksum = Get_CRC16_Check_Sum(Tx, 21, 0xffff);
+	memcpy(&Tx[21], &Tx_nav.checksum, 2);
+	Tx[23] = Tx_nav.ending;
 	
 	HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_SET);
 	HAL_GPIO_WritePin(DIR_1_GPIO_Port,DIR_1_Pin,GPIO_PIN_SET);
@@ -64,7 +91,7 @@ void RS485_Trans(void)
 	osDelay(10);
 }
 
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) //在 uart_user.c 中进行接收
 {
     if(huart->Instance == USART1)
     {

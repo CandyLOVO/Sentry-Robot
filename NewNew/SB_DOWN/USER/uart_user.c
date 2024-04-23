@@ -3,11 +3,15 @@
 #include "judge.h" //裁判系统 UART5
 #include "string.h"
 #include "Exchange_Task.h"
+#include "CRC.h"
 
 int value = 0;
 int count = 0; //发送数据标志位
 uint8_t Rx[128]; //接收缓冲数组
 uint32_t length = 0;
+int16_t checksum_Rx;
+Rx_naving Rx_nav;
+
 extern uint8_t Rx_flag;
 
 extern DMA_HandleTypeDef hdma_usart1_rx;
@@ -47,7 +51,20 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 			HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(DIR_1_GPIO_Port,DIR_1_Pin,GPIO_PIN_RESET);
 			HAL_UART_Receive_DMA(&huart1,(uint8_t *)Rx,sizeof(Rx));
-		} 
+			
+			if(Rx[0] == 0xA5)
+			{
+				checksum_Rx = Get_CRC16_Check_Sum(Rx, 14, 0xffff);
+				memcpy(&Rx_nav.checksum, &Rx[14], 2);
+				if(Rx_nav.checksum == checksum_Rx)
+				{
+					Rx_nav.naving = Rx[1];
+					memcpy(&Rx_nav.nav_x, &Rx[2], 4);
+					memcpy(&Rx_nav.nav_y, &Rx[6], 4);
+					memcpy(&Rx_nav.sentry_decision, &Rx[10], 4);
+				}
+			}
+		}
 	}
 }
 

@@ -49,3 +49,4 @@ sb_down\exchange_task.o: ../USER/uart_user.h
 sb_down\exchange_task.o: ../USER/CRC.h
 sb_down\exchange_task.o: ../USER/struct_typedef.h
 sb_down\exchange_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
+sb_down\exchange_task.o: ../USER/judge.h

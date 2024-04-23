@@ -36,3 +36,4 @@ sb_down\uart_user.o: ..\USER\struct_typedef.h
 sb_down\uart_user.o: ..\USER\judge.h
 sb_down\uart_user.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
 sb_down\uart_user.o: ../USER/Task/Exchange_Task.h
+sb_down\uart_user.o: ..\USER\CRC.h

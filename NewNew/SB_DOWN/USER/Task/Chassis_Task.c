@@ -6,6 +6,8 @@
 #include "struct_typedef.h"
 #include "math.h"
 #include "Yaw_Task.h"
+#include "uart_user.h"
+#include "Exchange_Task.h"
 
 /*********************************************************变量定义*********************************************************/
 #define radius 3.075 // 615mm/2 m
@@ -20,6 +22,7 @@ int16_t out_speed[4]; //控制电流值
 extern motor_info motor[8];
 extern RC_ctrl_t rc_ctrl;
 extern float yaw_angle;
+extern Rx_naving Rx_nav;
 /**************************************************************************************************************************/
 
 /*********************************************************函数定义*********************************************************/
@@ -51,17 +54,17 @@ void Chassis_Task(void const * argument)
 			can_cmd_send_3508(out_speed[0], out_speed[1], out_speed[2], out_speed[3]);
 		}
 		
-//		//导航上场模式，左->最下，右->最下
-//		else if(rc_ctrl.rc.s[0]==2 && rc_ctrl.rc.s[1]==2)
-//		{
-//			omega = 25; //给定小陀螺转速
-//			chassis_calculate(Receive.nav_vx, Receive.nav_vy); //输入导航x、y值，CAN1传来
-//			for(int i=0;i<4;i++)
-//			{
-//				out_speed[i] = pid_cal_s(&pid_3508, motor[i].speed, target_speed[i]);
-//			}
-//			can_cmd_send_3508(out_speed[0], out_speed[1], out_speed[2], out_speed[3]);
-//		}
+		//导航上场模式，左->最下，右->最下
+		else if(rc_ctrl.rc.s[0]==2 && rc_ctrl.rc.s[1]==2)
+		{
+			omega = 25; //给定小陀螺转速
+			chassis_calculate(Rx_nav.nav_x, Rx_nav.nav_y); //输入导航x、y值，CAN1传来
+			for(int i=0;i<4;i++)
+			{
+				out_speed[i] = pid_cal_s(&pid_3508, motor[i].speed, target_speed[i]);
+			}
+			can_cmd_send_3508(out_speed[0], out_speed[1], out_speed[2], out_speed[3]);
+		}
     osDelay(1);
   }
 }
