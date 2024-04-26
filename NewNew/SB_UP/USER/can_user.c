@@ -177,10 +177,9 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
       /* Retrieve Rx messages from RX FIFO0 */
 			memset(g_Can1RxData, 0, sizeof(g_Can1RxData));	//接收前先清空数组	
       HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &RxHeader1, g_Can1RxData);
-			
-			if((RxHeader1.Identifier >= 0x201) && (RxHeader1.Identifier <= 0x208))
+			if((RxHeader1.Identifier >= 0x205) && (RxHeader1.Identifier <= 0x208))
 			{
-				uint8_t index = RxHeader1.Identifier - 0x201;
+				uint8_t index = RxHeader1.Identifier - 0x205;
 				motor[index].angle = ((g_Can1RxData[0] << 8) | g_Can1RxData[1]);
 				motor[index].speed = ((g_Can1RxData[2] << 8) | g_Can1RxData[3]);
 				motor[index].tor_current = ((g_Can1RxData[4] << 8) | g_Can1RxData[5]);

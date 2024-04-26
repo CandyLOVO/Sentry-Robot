@@ -14,8 +14,8 @@ typedef struct //CAN
 {
 	uint16_t angle;
 	int16_t speed;
-	uint16_t tor_current;
-	uint16_t temperture;
+	int16_t tor_current;
+	uint8_t temperture;
 }motor_info;
 
 typedef struct

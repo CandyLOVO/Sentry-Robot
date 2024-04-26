@@ -45,7 +45,7 @@ void Chassis_Task(void const * argument)
 		//遥控器控制模式，左->中间，右->中间              左->最上，右->中间
 		if((rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3) || (rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==1))
 		{
-			omega = rc_ctrl.rc.ch[4]*0.05; //拨轮控制小陀螺
+			omega = rc_ctrl.rc.ch[4]*0.5; //拨轮控制小陀螺
 			chassis_calculate(rc_ctrl.rc.ch[0], rc_ctrl.rc.ch[1]); //右拨杆控制底盘 遥控器右拨杆有问题
 			for(int i=0;i<4;i++)
 			{
@@ -57,7 +57,7 @@ void Chassis_Task(void const * argument)
 		//导航上场模式，左->最下，右->最下
 		else if(rc_ctrl.rc.s[0]==2 && rc_ctrl.rc.s[1]==2)
 		{
-			omega = 25; //给定小陀螺转速
+			omega = 0; //给定小陀螺转速
 			chassis_calculate(Rx_nav.nav_x, Rx_nav.nav_y); //输入导航x、y值，CAN1传来
 			for(int i=0;i<4;i++)
 			{
@@ -74,14 +74,15 @@ void Chassis_Task(void const * argument)
 void task_init()
 {
 	//PID参数初始化
-	pid_init(&pid_3508,10,0,0,30000,30000);
+	pid_init(&pid_3508,10,0.1,1,30000,30000);
 }
 
 void Yaw_Diff()
 {
 	//计算底盘与云台间的相差角度
-	error_theta = yaw_angle;; //云台与底盘的夹角，使用5010编码值【yaw_task得到的0~180、0~-180】
-	error_theta = error_theta*3.1415926/180; //转化为弧度制
+//	error_theta = yaw_angle;; //云台与底盘的夹角，使用5010编码值【yaw_task得到的0~180、0~-180】
+//	error_theta = error_theta*3.1415926/180; //转化为弧度制
+	error_theta = 0;
 }
 
 void chassis_calculate(int16_t x, int16_t y)

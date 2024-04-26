@@ -70,6 +70,8 @@ void yaw_init(void)
 {
 	//大yaw5010数值初始化
 	initial_angle = 65535; //头朝向底盘正方向时的编码值
+	target_angle_5010 = 0;
+	target_speed_5010 = 0;
 	pid_init(&pid_5010_s,10,0,0,30000,30000); //PID初始化
 	pid_init(&pid_5010_a,1,0,0,30000,30000);
 }
