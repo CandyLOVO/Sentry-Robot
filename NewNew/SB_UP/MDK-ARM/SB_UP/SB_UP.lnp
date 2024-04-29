@@ -63,6 +63,8 @@
 "sb_up\yaw_task.o"
 "sb_up\imu_temp_ctrl.o"
 "sb_up\exchange_task.o"
+"sb_up\pitch_task.o"
+"sb_up\launch_task.o"
 "sb_up\usb_device.o"
 "sb_up\usbd_desc.o"
 "sb_up\usbd_cdc_if.o"

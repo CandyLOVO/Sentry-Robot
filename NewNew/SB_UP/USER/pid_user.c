@@ -1,7 +1,10 @@
 #include "pid_user.h"
 #include "Yaw_task.h"
 
-int16_t limit_max(int32_t value,int32_t Max_out)
+extern int16_t up_limit;
+extern int16_t low_limit;
+
+float limit_max(float value,float Max_out)
 {
 	if(value > Max_out){
 		value = Max_out;
@@ -26,7 +29,7 @@ void pid_init(pidTypeDef *PID,float p,float i,float d,int16_t Max_out,int16_t Ma
 	PID->Max_iout = Max_iout;
 }
 
-int16_t pid_cal_s(pidTypeDef *PID,int16_t get,int16_t set) //set is target
+float pid_cal_s(pidTypeDef *PID,float get,float set) //set is target
 {
 	PID->get = get;
 	PID->set = set;
@@ -43,7 +46,7 @@ int16_t pid_cal_s(pidTypeDef *PID,int16_t get,int16_t set) //set is target
 	return PID->out;
 }
 
-int16_t pid_cal_a(pidTypeDef *PID,float get,float set) //set is target
+float pid_cal_a(pidTypeDef *PID,float get,float set) //set is target
 {
 	PID->get = get;
 	PID->set = set;
@@ -70,3 +73,48 @@ int16_t pid_cal_a(pidTypeDef *PID,float get,float set) //set is target
 	return PID->out;
 }
 
+float pid_cal_yaw_a(pidTypeDef *PID,float get,float set,uint8_t warning_flag) //set is target
+{
+	PID->get = get;
+	PID->set = set;
+
+	PID->error[0] = PID->error[1];
+	PID->error[1] = PID->set - PID->get;
+	
+	if(PID->error[1] > 180){
+		PID->error[1] = PID->error[1] - 360;
+	}
+	else if(PID->error[1] < -180){
+		PID->error[1] = PID->error[1] + 360;
+	}
+	else{
+		PID->error[1] = PID->error[1];
+	}
+	
+	if(warning_flag == 1)
+	{
+		if((PID->error[1]>-180) && (PID->error[1]<up_limit))
+		{
+			PID->error[1] += 360;
+		}
+	}
+	else if(warning_flag == 2)
+	{
+		if((PID->error[1]>low_limit) && (PID->error[1]<180))
+		{
+			PID->error[1] -= 360;
+		}
+	}
+	else
+	{
+		PID->error[1] = PID->error[1];
+	}
+	
+	PID->pout = PID->Kp * PID->error[1];
+	PID->iout += PID->Ki * PID->error[1];
+	PID->iout = limit_max(PID->iout,PID->Max_iout);
+	PID->dout = PID->Kd * (PID->error[1] - PID->error[0]);
+	PID->out = PID->pout + PID->iout + PID->dout;
+	PID->out = limit_max(PID->out,PID->Max_out);
+	return PID->out;
+}

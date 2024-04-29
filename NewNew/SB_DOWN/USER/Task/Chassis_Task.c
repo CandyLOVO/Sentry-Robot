@@ -23,6 +23,7 @@ extern motor_info motor[8];
 extern RC_ctrl_t rc_ctrl;
 extern float yaw_angle;
 extern Rx_naving Rx_nav;
+extern int8_t flag;
 /**************************************************************************************************************************/
 
 /*********************************************************函数定义*********************************************************/
@@ -35,10 +36,11 @@ void chassis_calculate(int16_t x, int16_t y);
 void Chassis_Task(void const * argument)
 {
 	task_init();
-	osDelay(3000);
 	
   for(;;)
   {
+		if(flag == 1)
+		{
 		//计算底盘与云台差角
 		Yaw_Diff();
 		
@@ -65,6 +67,7 @@ void Chassis_Task(void const * argument)
 			}
 			can_cmd_send_3508(out_speed[0], out_speed[1], out_speed[2], out_speed[3]);
 		}
+		}
     osDelay(1);
   }
 }
@@ -80,9 +83,9 @@ void task_init()
 void Yaw_Diff()
 {
 	//计算底盘与云台间的相差角度
-//	error_theta = yaw_angle;; //云台与底盘的夹角，使用5010编码值【yaw_task得到的0~180、0~-180】
-//	error_theta = error_theta*3.1415926/180; //转化为弧度制
-	error_theta = 0;
+	error_theta = yaw_angle+180; //云台与底盘的夹角，使用5010编码值【yaw_task得到的0~180、0~-180】
+	error_theta = error_theta*3.1415926/180; //转化为弧度制
+//	error_theta = 0;
 }
 
 void chassis_calculate(int16_t x, int16_t y)

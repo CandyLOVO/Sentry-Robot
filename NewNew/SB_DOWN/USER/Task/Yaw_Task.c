@@ -11,9 +11,9 @@ pidTypeDef pid_5010_a;
 uint8_t can_send_data_5010[8];
 int32_t initial_angle; //5010【面向底盘正方向】的初始编码值
 float yaw_angle; //大yaw5010当前角度（0~+-180）
-int16_t target_angle_5010;
-int16_t target_speed_5010;
-int16_t output_5010;
+float target_angle_5010;
+int32_t target_speed_5010;
+int32_t output_5010;
 
 extern RC_ctrl_t rc_ctrl;
 extern motor_5010_info motor_5010;
@@ -23,6 +23,7 @@ extern float yaw_gyro; //云台陀螺仪yaw角速度值
 extern uint8_t L_tracking;
 extern uint8_t R_tracking;
 extern uint8_t M_tracking;
+extern int8_t flag;
 
 void Yaw_task(void const * argument)
 {
@@ -32,6 +33,8 @@ void Yaw_task(void const * argument)
 	
   for(;;)
   {
+		if(flag == 1)
+		{
 		yaw_angle = -motor_value(initial_angle, motor_5010.angle, 65535); //将5010编码值转化为0~+-180【面向两个头，向左转为-，向右转为+】
 		
 		//遥控器控制模式，左->中间，右->中间
@@ -56,11 +59,12 @@ void Yaw_task(void const * argument)
 		}
 		
 		//PID控制
-		target_speed_5010 = pid_I_control(&pid_5010_a, yaw12, target_angle_5010);
+		target_speed_5010 = pid_cal_a(&pid_5010_a, yaw12, target_angle_5010);
 		output_5010 = pid_cal_s(&pid_5010_s, (9.55f*yaw_gyro), target_speed_5010);
 		//CAN2数据发送
 		speed_control_send(output_5010);
 		can_cmd_send_5010(can_send_data_5010);
+		}
     osDelay(1);
   }
 }
@@ -69,16 +73,16 @@ void Yaw_task(void const * argument)
 void yaw_init(void)
 {
 	//大yaw5010数值初始化
-	initial_angle = 65535; //头朝向底盘正方向时的编码值
+	initial_angle = 1300; //头朝向底盘正方向时的编码值
 	target_angle_5010 = 0;
 	target_speed_5010 = 0;
-	pid_init(&pid_5010_s,10,0,0,30000,30000); //PID初始化
-	pid_init(&pid_5010_a,1,0,0,30000,30000);
+	pid_init(&pid_5010_s,8000,0.1,0,300000,300000); //PID初始化 PI
+	pid_init(&pid_5010_a,3,0,10,300000,300000); //PD
 }
 
 void yaw_control(void)
 {
-	target_angle_5010 += rc_ctrl.rc.ch[2]*360/660;
+	target_angle_5010 += rc_ctrl.rc.ch[2]*0.3/660;
 	if(target_angle_5010 > 180)
 	{
 		target_angle_5010 -= 360;
@@ -92,7 +96,7 @@ void yaw_control(void)
 void yaw_finding(void)
 {
 	//大yaw巡航
-	target_angle_5010 += 10;
+	target_angle_5010 += 0.5;
 	if(target_angle_5010 > 180)
 	{
 		target_angle_5010 -= 360;

@@ -14,6 +14,7 @@ float yaw_gyro; //云台陀螺仪yaw角速度值
 uint8_t L_tracking; //左头是否锁住
 uint8_t R_tracking; //右头是否锁住
 uint8_t M_tracking; //云台前后摄像头是否锁住
+int8_t flag;
 
 void CAN1_Init()
 {
@@ -144,6 +145,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 			L_tracking = can_recevie_data[4];
 			R_tracking = can_recevie_data[5];
 			M_tracking = can_recevie_data[6];
+			flag = can_recevie_data[7];
 		}
 		
 		if(can_rx_message.StdId == 0x35)

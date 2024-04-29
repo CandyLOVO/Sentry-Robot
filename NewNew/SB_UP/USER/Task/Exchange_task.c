@@ -17,6 +17,7 @@ extern FDCAN_HandleTypeDef hfdcan3;
 extern double yaw12;
 extern float gyro[3];
 extern receive_vision Rx_vision;
+extern int8_t flag;
 
 void Exchange_Task(void const * argument)
 {
@@ -60,6 +61,7 @@ void yaw_value(void)
 	Tx_gyro[4] = Rx_vision.L_tracking; //yaw的标志位
 	Tx_gyro[5] = Rx_vision.R_tracking;
 	Tx_gyro[6] = Rx_vision.M_tracking;
+	Tx_gyro[7] = flag;
 	canx_send_data(&hfdcan3, 0x34, Tx_gyro, 8);
 	
 	memcpy(&Tx_yaw[0], &Rx_vision.yaw, 4); //视觉传来yaw的目标值

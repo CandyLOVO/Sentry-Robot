@@ -88,7 +88,7 @@ void IMU_TempCtrlTask(void const * argument)
 			
 				if(flag == 0)
 				{
-					if(err<0.5&&err>-0.5)
+					if(err<1&&err>-1)
 					{
 						gyro_sum[0] += gyro[0];
 						gyro_sum[1] += gyro[1];

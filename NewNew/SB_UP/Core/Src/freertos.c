@@ -26,7 +26,10 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Yaw_task.h"
+#include "Pitch_task.h"
+#include "Launch_task.h"
 #include "Exchange_task.h"
+#include "imu_temp_ctrl.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,6 +56,8 @@ osThreadId defaultTaskHandle;
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
 osThreadId yawTaskHandle;
+osThreadId pitchTaskHandle;
+osThreadId launchTaskHandle;
 osThreadId exchangeTaskHandle;
 osThreadId lcdTaskHandle;
 uint32_t defaultTaskBuffer[ 128 ];
@@ -114,14 +119,20 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
-  defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
+//  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
+//  defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
 	osThreadDef(yawTask, Yaw_Task, osPriorityNormal, 0, 256);
 	yawTaskHandle = osThreadCreate(osThread(yawTask), NULL);
 	
-	osThreadDef(exchangeTask, Exchange_Task, osPriorityRealtime, 0, 1024);
+	osThreadDef(pitchTask, Pitch_Task, osPriorityNormal, 0, 256);
+	pitchTaskHandle = osThreadCreate(osThread(pitchTask), NULL);
+	
+	osThreadDef(launchTask, Launch_Task, osPriorityNormal, 0, 256);
+	launchTaskHandle = osThreadCreate(osThread(launchTask), NULL);
+	
+	osThreadDef(exchangeTask, Exchange_Task, osPriorityRealtime, 0, 512);
 	exchangeTaskHandle = osThreadCreate(osThread(exchangeTask), NULL);
 	
 	osThreadDef(imuTempCtrl, IMU_TempCtrlTask, osPriorityRealtime, 0, 2048);
@@ -150,6 +161,7 @@ void StartDefaultTask(void const * argument)
   /* Infinite loop */
   for(;;)
   {
+//		Pitch_Task();
     osDelay(1);
   }
   /* USER CODE END StartDefaultTask */

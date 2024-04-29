@@ -1,6 +1,6 @@
 #include "pid_user.h"
 
-int16_t limit_max(int32_t value,int32_t Max_out)
+int32_t limit_max(int32_t value,int32_t Max_out)
 {
 	if(value > Max_out){
 		value = Max_out;
@@ -14,7 +14,7 @@ int16_t limit_max(int32_t value,int32_t Max_out)
 	return value;
 }
 
-void pid_init(pidTypeDef *PID,float p,float i,float d,int16_t Max_out,int16_t Max_iout)
+void pid_init(pidTypeDef *PID,float p,float i,float d,int32_t Max_out,int32_t Max_iout)
 {
 	PID->error[0] = 0;
 	PID->error[1] = 0;
@@ -25,7 +25,7 @@ void pid_init(pidTypeDef *PID,float p,float i,float d,int16_t Max_out,int16_t Ma
 	PID->Max_iout = Max_iout;
 }
 
-int16_t pid_cal_s(pidTypeDef *PID,int16_t get,int16_t set) //set is target
+int32_t pid_cal_s(pidTypeDef *PID,float get,float set) //set is target
 {
 	PID->get = get;
 	PID->set = set;
@@ -42,7 +42,7 @@ int16_t pid_cal_s(pidTypeDef *PID,int16_t get,int16_t set) //set is target
 	return PID->out;
 }
 
-int16_t pid_cal_a(pidTypeDef *PID,float get,float set) //set is target
+int32_t pid_cal_a(pidTypeDef *PID,float get,float set) //set is target
 {
 	PID->get = get;
 	PID->set = set;
@@ -71,7 +71,7 @@ int16_t pid_cal_a(pidTypeDef *PID,float get,float set) //set is target
 }
 
 //»ı·Ö·ÖÀë
-int16_t pid_I_control(pidTypeDef *PID,float get,float set) //set is target
+int32_t pid_I_control(pidTypeDef *PID,float get,float set) //set is target
 {
 	int index = 0;
 	PID->get = get;

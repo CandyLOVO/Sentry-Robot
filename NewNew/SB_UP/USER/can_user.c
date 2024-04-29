@@ -4,6 +4,7 @@
 #include "tim.h"
 
 motor_info motor[8];
+motor_info motor_friction[8];
 RC_ctrl_t rc_ctrl;
 
 FDCAN_RxHeaderTypeDef RxHeader1;
@@ -233,10 +234,10 @@ void HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo1ITs)
 			if((RxHeader2.Identifier >= 0x201) && (RxHeader2.Identifier <= 0x208))
 			{
 				uint8_t index = RxHeader2.Identifier - 0x201;
-				motor[index].angle = ((g_Can2RxData[0] << 8) | g_Can2RxData[1]);
-				motor[index].speed = ((g_Can2RxData[2] << 8) | g_Can2RxData[3]);
-				motor[index].tor_current = ((g_Can2RxData[4] << 8) | g_Can2RxData[5]);
-				motor[index].temperture = g_Can2RxData[6];
+				motor_friction[index].angle = ((g_Can2RxData[0] << 8) | g_Can2RxData[1]);
+				motor_friction[index].speed = ((g_Can2RxData[2] << 8) | g_Can2RxData[3]);
+				motor_friction[index].tor_current = ((g_Can2RxData[4] << 8) | g_Can2RxData[5]);
+				motor_friction[index].temperture = g_Can2RxData[6];
 			}
     }
   }

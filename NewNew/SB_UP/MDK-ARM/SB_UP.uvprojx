@@ -1823,6 +1823,16 @@
               <FileType>1</FileType>
               <FilePath>..\USER\Task\Exchange_task.c</FilePath>
             </File>
+            <File>
+              <FileName>Pitch_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\Task\Pitch_task.c</FilePath>
+            </File>
+            <File>
+              <FileName>Launch_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\USER\Task\Launch_task.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2529,5 +2539,14 @@
     </components>
     <files/>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>SB_UP</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>

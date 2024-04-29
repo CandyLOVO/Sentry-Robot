@@ -13,9 +13,10 @@ typedef struct
 	int16_t Max_iout;
 }pidTypeDef;
 	
-extern int16_t limit_max(int32_t value,int32_t Max_out);
+extern float limit_max(float value,float Max_out);
 extern void pid_init(pidTypeDef *PID,float p,float i,float d,int16_t Max_out,int16_t Max_iout);
-extern int16_t pid_cal_s(pidTypeDef *PID,int16_t get,int16_t set);
-extern int16_t pid_cal_a(pidTypeDef *PID,float get,float set);
+extern float pid_cal_s(pidTypeDef *PID,float get,float set);
+extern float pid_cal_a(pidTypeDef *PID,float get,float set);
+extern float pid_cal_yaw_a(pidTypeDef *PID,float get,float set,uint8_t warning_flag);
 
 #endif
