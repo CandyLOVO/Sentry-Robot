@@ -2,10 +2,15 @@
 #include "fdcan.h"
 #include "string.h"
 #include "tim.h"
+#include "Launch_task.h"
 
 motor_info motor[8];
 motor_info motor_friction[8];
 RC_ctrl_t rc_ctrl;
+uint8_t heart_id;
+
+extern uint16_t launch_heat_id1;
+extern uint16_t launch_heat_id2;
 
 FDCAN_RxHeaderTypeDef RxHeader1;
 uint8_t g_Can1RxData[64];
@@ -216,6 +221,14 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 				rc_ctrl.mouse.z = (g_Can3RxData[4]<<8) | g_Can3RxData[5];
 				rc_ctrl.mouse.press_l = g_Can3RxData[6];
 				rc_ctrl.mouse.press_r = g_Can3RxData[7];
+			}
+			
+			if(RxHeader3.Identifier == 0x36)
+			{
+				//先收高八位，再收低八位
+				launch_heat_id1 = ((g_Can3RxData[0] << 8) | g_Can3RxData[1]); //枪管1实时热量
+				launch_heat_id1 = ((g_Can3RxData[2] << 8) | g_Can3RxData[3]); //枪管2实时热量
+				heart_id = g_Can3RxData[4]; //受击打装甲板ID
 			}
 	  }
   }

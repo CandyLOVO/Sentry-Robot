@@ -40,13 +40,15 @@ extern int8_t flag;
 
 //**************************************************任务实现**************************************************//
 
-//两个头yaw用的FDCAN1,ID是1和2 【左右ID有待测试，只需要更改motor[]中的序号】
+//黑头（左）ID为2，白头（右）ID为1
+//两个头yaw用的FDCAN1,ID是1和2 【左右ID有待测试，需要更改motor[]中的序号，更改CAN发送电机控制数据的顺序】
 void Yaw_Task(void const * argument)
 {
 	Yaw_init();
 //	osDelay(3000);
   for(;;)
   {
+		//判断陀螺仪是否温补结束
 		if(flag == 1)
 		{
 		//根据yaw的初始位置映射yaw的角度
@@ -56,10 +58,11 @@ void Yaw_Task(void const * argument)
 		//遥控器控小yaw模式，左->中，右->上
 		if(rc_ctrl.rc.s[1]==3 && rc_ctrl.rc.s[0]==1)
 		{
-			target_yaw_a_L += rc_ctrl.rc.ch[2] * 0.5/660;
-			target_yaw_a_R += rc_ctrl.rc.ch[0] * 0.5/660;
-			yaw_control_L(-10, -170); //小yaw目标值软件限位
-			yaw_control_R(170, 10);
+			target_yaw_a_L += rc_ctrl.rc.ch[2] * 0.2/660;
+			target_yaw_a_R += rc_ctrl.rc.ch[0] * 0.2/660;
+			
+			yaw_control_L(-20, -160); //小yaw目标值软件限位
+			yaw_control_R(160, 20);
 		}
 		
 		//自瞄模式，左->下，右->下
@@ -79,8 +82,8 @@ void Yaw_Task(void const * argument)
 				}
 				
 				//小yaw正反转巡航
-				yaw_finding_L(-10, -170);
-				yaw_finding_R(170, 10);
+				yaw_finding_L(-20, -160);
+				yaw_finding_R(160, 20);
 			}
 			
 			//左头识别到
@@ -88,24 +91,24 @@ void Yaw_Task(void const * argument)
 			{
 				rotate_flag_L = 0; //左头不转
 				target_yaw_a_L = Rx_vision.L_yaw - yaw12; //左头目标值绝对坐标系转换
-				yaw_control_L(-10, -170); //左头目标值软件限位
+				yaw_control_L(-20, -160); //左头目标值软件限位
 			}
 			//右头识别到
 			if(Rx_vision.R_tracking == 1)
 			{
 				rotate_flag_R = 0; //右头不转
 				target_yaw_a_R = Rx_vision.R_yaw - yaw12; //右头目标值绝对坐标系转换
-				yaw_control_R(170, 10); //右头目标值软件限位
+				yaw_control_R(160, 20); //右头目标值软件限位
 			}
 			//大yaw上的摄像头识别到
 			if(Rx_vision.M_tracking == 1)
 			{
 				rotate_flag_L = 0;
 				target_yaw_a_L = Rx_vision.L_yaw - yaw12;
-				yaw_control_L(-10, -170);
+				yaw_control_L(-20, -160);
 				rotate_flag_R = 0;
 				target_yaw_a_R = Rx_vision.R_yaw - yaw12;
-				yaw_control_R(170, 10);
+				yaw_control_R(160, 20);
 			}
 		}
 		
@@ -120,6 +123,7 @@ void Yaw_Task(void const * argument)
 //		gimbal_control_6020[1] = yaw_output_L&0xff;
 //		gimbal_control_6020[2] = (yaw_output_R>>8)&0xff;
 //		gimbal_control_6020[3] = yaw_output_R&0xff;
+		
 		gimbal_control_6020[2] = (yaw_output_L>>8)&0xff;
 		gimbal_control_6020[3] = yaw_output_L&0xff;
 		gimbal_control_6020[0] = (yaw_output_R>>8)&0xff;
@@ -143,11 +147,11 @@ static void Yaw_init(void)
 	target_yaw_s_R = 0;
 	
 	//PID初始化
-	pid_init(&pid_yaw_s_L,200,0.01,0,30000,30000); //PID初始化 PI
-	pid_init(&pid_yaw_a_L,5,0,5,30000,30000); //PD
+	pid_init(&pid_yaw_s_L,250,0.01,0,30000,30000); //PID初始化 PI
+	pid_init(&pid_yaw_a_L,6,0,1,30000,30000); //PD
 	
-	pid_init(&pid_yaw_s_R,100,0,0,30000,30000); //PID初始化
-	pid_init(&pid_yaw_a_R,1,0,0,30000,30000);
+	pid_init(&pid_yaw_s_R,250,0.01,0,30000,30000); //PID初始化
+	pid_init(&pid_yaw_a_R,6,0,1,30000,30000);
 }
 
 void yaw_control_L(int16_t max_angle, int16_t min_angle)
@@ -159,16 +163,26 @@ void yaw_control_L(int16_t max_angle, int16_t min_angle)
 	if(target_yaw_a_L>180)
 	{
 		target_yaw_a_L -= 360;
-	}
-	else if(target_yaw_a_L<-180)
+	} 
+	if(target_yaw_a_L<-180)
 	{
 		target_yaw_a_L += 360;
 	}
 	
 	//软件限位（目标值位于禁区内）
-	if((target_yaw_a_L>min_angle) && (target_yaw_a_L<max_angle))
+	if(target_yaw_a_L<0 && target_yaw_a_L>min_angle)
 	{
-		target_yaw_a_L = 0;
+		if(target_yaw_a_L <= max_angle)
+		{
+			target_yaw_a_L = max_angle;
+		}
+	}
+	if((target_yaw_a_L>(-180)) && (target_yaw_a_L <max_angle))
+	{
+		if(target_yaw_a_L >= min_angle)
+		{
+			target_yaw_a_L = min_angle;
+		}
 	}
 	
 	//软件限位（当前值位于危险区内）
@@ -204,9 +218,19 @@ void yaw_control_R(int16_t max_angle, int16_t min_angle)
 	}
 	
 	//软件限位（目标值位于禁区内）
-	if((target_yaw_a_R>min_angle) && (target_yaw_a_R<max_angle))
+	if(target_yaw_a_R>0 && target_yaw_a_R<max_angle)
 	{
-		target_yaw_a_R = 0;
+		if(target_yaw_a_R >= min_angle)
+		{
+			target_yaw_a_R = min_angle;
+		}
+	}
+	if(target_yaw_a_R<180 && target_yaw_a_R>min_angle)
+	{
+		if(target_yaw_a_R <= max_angle)
+		{
+			target_yaw_a_R = max_angle;
+		}
 	}
 	
 	//软件限位（当前值位于危险区内）

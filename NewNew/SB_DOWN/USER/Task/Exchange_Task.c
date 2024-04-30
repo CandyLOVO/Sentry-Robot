@@ -4,8 +4,10 @@
 #include "CRC.h"
 #include "string.h"
 #include "judge.h"
+#include "can_user.h"
 
 uint8_t Tx[128];
+uint8_t Tx_friction[8];
 uint8_t Rx_flag = 0; //程序初始化标志位
 uint16_t checksum;
 Tx_naving Tx_nav;
@@ -14,6 +16,7 @@ extern UART_HandleTypeDef huart1;
 extern uint8_t Rx[128];
 extern uint32_t length; //DMA中未传输的数据个数
 extern int count;
+extern Sentry_t Sentry;
 
 void Exchange_Task(void const * argument)
 {
@@ -40,6 +43,13 @@ void Exchange_Task(void const * argument)
 			count = 0;
 		}
 		
+		//先高八位，再低八位
+		Tx_friction[0] = (Sentry.Myself_17mm_heat_id1 >> 8) & 0xff; //枪管1实时热量
+		Tx_friction[1] = Sentry.Myself_17mm_heat_id1 & 0xff;
+		Tx_friction[2] = (Sentry.Myself_17mm_heat_id2 >> 8) & 0xff; //枪管2实时热量
+		Tx_friction[3] = Sentry.Myself_17mm_heat_id2 & 0xff;
+		Tx_friction[4] = Sentry.armor_id; //受伤装甲板ID
+		can_remote(Tx_friction, 0x36);
     osDelay(1);
   }
 }

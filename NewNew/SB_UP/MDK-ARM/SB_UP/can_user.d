@@ -49,3 +49,4 @@ sb_up\can_user.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h
 sb_up\can_user.o: ../Core/Inc/fdcan.h
 sb_up\can_user.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
 sb_up\can_user.o: ../Core/Inc/tim.h
+sb_up\can_user.o: ../USER/Task/Launch_task.h

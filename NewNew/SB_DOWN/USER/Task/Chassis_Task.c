@@ -59,7 +59,7 @@ void Chassis_Task(void const * argument)
 		//导航上场模式，左->最下，右->最下
 		else if(rc_ctrl.rc.s[0]==2 && rc_ctrl.rc.s[1]==2)
 		{
-			omega = 0; //给定小陀螺转速
+			omega = 100; //给定小陀螺转速
 			chassis_calculate(Rx_nav.nav_x, Rx_nav.nav_y); //输入导航x、y值，CAN1传来
 			for(int i=0;i<4;i++)
 			{
@@ -83,7 +83,7 @@ void task_init()
 void Yaw_Diff()
 {
 	//计算底盘与云台间的相差角度
-	error_theta = yaw_angle+180; //云台与底盘的夹角，使用5010编码值【yaw_task得到的0~180、0~-180】
+	error_theta = yaw_angle; //云台与底盘的夹角，使用5010编码值【yaw_task得到的0~180、0~-180】
 	error_theta = error_theta*3.1415926/180; //转化为弧度制
 //	error_theta = 0;
 }

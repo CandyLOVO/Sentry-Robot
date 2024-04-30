@@ -62,6 +62,7 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 					memcpy(&Rx_nav.nav_x, &Rx[2], 4);
 					memcpy(&Rx_nav.nav_y, &Rx[6], 4);
 					memcpy(&Rx_nav.sentry_decision, &Rx[10], 4);
+					HAL_UART_Transmit_IT(&huart5, &Rx[10], 4);
 				}
 			}
 		}
