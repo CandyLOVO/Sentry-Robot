@@ -1,6 +1,6 @@
 #include "pid_user.h"
 
-int32_t limit_max(int32_t value,int32_t Max_out)
+float limit_max(float value,float Max_out)
 {
 	if(value > Max_out){
 		value = Max_out;
@@ -25,7 +25,7 @@ void pid_init(pidTypeDef *PID,float p,float i,float d,int32_t Max_out,int32_t Ma
 	PID->Max_iout = Max_iout;
 }
 
-int32_t pid_cal_s(pidTypeDef *PID,float get,float set) //set is target
+float pid_cal_s(pidTypeDef *PID,float get,float set) //set is target
 {
 	PID->get = get;
 	PID->set = set;
@@ -42,7 +42,7 @@ int32_t pid_cal_s(pidTypeDef *PID,float get,float set) //set is target
 	return PID->out;
 }
 
-int32_t pid_cal_a(pidTypeDef *PID,float get,float set) //set is target
+float pid_cal_a(pidTypeDef *PID,float get,float set) //set is target
 {
 	PID->get = get;
 	PID->set = set;
@@ -71,7 +71,7 @@ int32_t pid_cal_a(pidTypeDef *PID,float get,float set) //set is target
 }
 
 //»ı·Ö·ÖÀë
-int32_t pid_I_control(pidTypeDef *PID,float get,float set) //set is target
+float pid_I_control(pidTypeDef *PID,float get,float set) //set is target
 {
 	int index = 0;
 	PID->get = get;

@@ -18,6 +18,10 @@ extern double yaw12;
 extern float gyro[3];
 extern receive_vision Rx_vision;
 extern int8_t flag;
+extern float yaw_angle_L;
+extern float yaw_angle_R;
+extern float pitch_angle_L;
+extern float pitch_angle_R;
 
 void Exchange_Task(void const * argument)
 {
@@ -34,10 +38,10 @@ void vision_value(void)
 	Tx_vision.header = 0x5A;
 	Tx_vision.color = 1;
 	Tx_vision.yaw = yaw12;
-	Tx_vision.L_yaw = yaw12;
-	Tx_vision.L_pitch = 0;
-	Tx_vision.R_yaw = yaw12;
-	Tx_vision.R_pitch = 0;
+	Tx_vision.L_yaw = yaw_angle_L + yaw12;
+	Tx_vision.L_pitch = pitch_angle_L;
+	Tx_vision.R_yaw = yaw_angle_R + yaw12;
+	Tx_vision.R_pitch = pitch_angle_R;
 	Tx_vision.ending = 0xAA;
 	memcpy(&Tx_shijue[0], &Tx_vision.header, 1);
 	memcpy(&Tx_shijue[1], &Tx_vision.color, 1);

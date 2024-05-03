@@ -125,14 +125,14 @@ void Pitch_Task(void const * argument)
 static void Pitch_init(void)
 {
 	initial_pitch_L = 8171;
-	initial_pitch_R = 90;
+	initial_pitch_R = 4000;
 	
 	//PID初始化
 	pid_init(&pid_pitch_s_L,170,0.3,0,30000,30000); //PID初始化 PI
 	pid_init(&pid_pitch_a_L,20,0,30,30000,30000); //PD
 	
-	pid_init(&pid_pitch_s_R,1,0,0,30000,30000); //PID初始化
-	pid_init(&pid_pitch_a_R,1,0,0,30000,30000);
+	pid_init(&pid_pitch_s_R,170,0.3,0,30000,30000); //PID初始化
+	pid_init(&pid_pitch_a_R,20,0,30,30000,30000);
 }
 
 void pitch_control_L(int16_t max_angle, int16_t min_angle)
@@ -199,7 +199,7 @@ void pitch_finding(int16_t max_angle, int16_t min_angle)
 	if(nod_flag_R == 1)
 	{
 		target_pitch_a_R -= 0.05;
-		if(target_pitch_a_R < max_angle)
+		if(target_pitch_a_R < min_angle)
 		{
 			nod_flag_R = 2;
 		}

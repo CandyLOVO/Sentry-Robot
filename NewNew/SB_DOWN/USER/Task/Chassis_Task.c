@@ -15,7 +15,7 @@
 
 pidTypeDef pid_3508;
 fp32 error_theta; //云台坐标系与底盘坐标系间夹角(此时为0~360度) 后期接收后需要对所得theta进行处理
-int8_t omega = 0; //旋转叠加计算中的角速度 rad/min
+int omega = 0; //旋转叠加计算中的角速度 rad/min
 int16_t target_speed[4]; //3508目标速度
 int16_t out_speed[4]; //控制电流值
 

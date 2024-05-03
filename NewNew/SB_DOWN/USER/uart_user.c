@@ -9,7 +9,7 @@ int value = 0;
 int count = 0; //发送数据标志位
 uint8_t Rx[128]; //接收缓冲数组
 uint32_t length = 0;
-int16_t checksum_Rx;
+uint16_t checksum_Rx;
 Rx_naving Rx_nav;
 
 extern uint8_t Rx_flag;

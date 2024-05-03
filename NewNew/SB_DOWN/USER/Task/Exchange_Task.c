@@ -37,7 +37,7 @@ void Exchange_Task(void const * argument)
 			count++; //收到一帧数据后置零
 		}
 		
-		if(count>=30) //如果有30ms没有收到导航数据
+		if(count>=20) //如果有15ms没有收到导航数据
 		{
 			RS485_Trans();
 			count = 0;
@@ -98,7 +98,7 @@ void RS485_Trans(void)
 	HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_SET);
 	HAL_GPIO_WritePin(DIR_1_GPIO_Port,DIR_1_Pin,GPIO_PIN_SET);
 	HAL_UART_Transmit_IT(&huart1,Tx,sizeof(Tx));
-	osDelay(10);
+	osDelay(5);
 }
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) //在 uart_user.c 中进行接收

@@ -33,6 +33,7 @@
 /* USER CODE BEGIN PV */
 receive_vision Rx_vision;
 uint8_t length;
+uint16_t checksum;
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE END PV */
@@ -264,7 +265,6 @@ static int8_t CDC_Control_HS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
   * @param  Len: Number of data received (in bytes)
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAILL
   */
-uint16_t checksum = 0;
 static int8_t CDC_Receive_HS(uint8_t* Buf, uint32_t *Len)
 {
   /* USER CODE BEGIN 11 */
