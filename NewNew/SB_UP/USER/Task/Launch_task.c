@@ -95,8 +95,8 @@ void Launch_Task(void const * argument)
 		mocalun_output[1] = pid_cal_s(&pid_mocalun_s[1], motor_friction[1].speed, target_mocalun[1]);
 		mocalun_output[2] = pid_cal_s(&pid_mocalun_s[2], motor_friction[2].speed, target_mocalun[2]);
 		mocalun_output[3] = pid_cal_s(&pid_mocalun_s[3], motor_friction[3].speed, target_mocalun[3]);
-		bopan_output[0] = pid_cal_s(&pid_bopan_s[0], motor_friction[4].speed, -target_bopan[0]);
-		bopan_output[1] = pid_cal_s(&pid_bopan_s[1], motor_friction[5].speed, -target_bopan[1]);
+		bopan_output[0] = pid_cal_s(&pid_bopan_s[0], motor_friction[5].speed, -target_bopan[0]);
+		bopan_output[1] = pid_cal_s(&pid_bopan_s[1], motor_friction[4].speed, -target_bopan[1]);
 		
 		mocalun_control[0] = (mocalun_output[0]>>8) & 0xff;
 		mocalun_control[1] = mocalun_output[0] & 0xff;
@@ -107,11 +107,12 @@ void Launch_Task(void const * argument)
 		mocalun_control[6] = (mocalun_output[3]>>8) & 0xff;
 		mocalun_control[7] = mocalun_output[3] & 0xff;
 		canx_send_data(&hfdcan2, 0x200, mocalun_control, 8);
+		osDelay(1);
 		bopan_control[0] = (bopan_output[1]>>8) & 0xff;
 		bopan_control[1] = bopan_output[1] & 0xff;
 		bopan_control[2] = (bopan_output[0]>>8) & 0xff;
 		bopan_control[3] = bopan_output[0] & 0xff;
-		canx_send_data(&hfdcan2, 0x1ff, bopan_control, 4);
+		canx_send_data(&hfdcan2, 0x1ff, bopan_control, 8);
     osDelay(1);
 		}
 	}

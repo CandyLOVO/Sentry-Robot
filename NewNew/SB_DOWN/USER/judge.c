@@ -147,7 +147,7 @@ static void Update_data()
 //=======================================================实时数据(50HZ)===============================================================//
 	Sentry.Myself_chassis_power_buffer = Judge_Hero.power_heat.buffer_energy;	//实时缓冲能量
 	Sentry.Myself_chassis_power = Judge_Hero.power_heat.chassis_power;	//实时底盘功率
-	
+	Sentry.Myself_chassis_power_limit = Judge_Hero.robot_status.chassis_power_limit;
 	Sentry.Myself_17mm_heat_id1 = Judge_Hero.power_heat.shooter_17mm_1_barrel_heat;	//实时枪管1热量
 	Sentry.Myself_17mm_heat_id2 = Judge_Hero.power_heat.shooter_17mm_2_barrel_heat;	//实时枪管2热量
 	

@@ -30,6 +30,7 @@ typedef struct
 {
 	uint8_t header;
   uint8_t naving;
+	uint8_t poing;
   float nav_x;
   float nav_y;
   uint32_t sentry_decision;

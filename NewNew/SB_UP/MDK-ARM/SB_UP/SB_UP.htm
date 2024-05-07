@@ -3,7 +3,7 @@
 <title>Static Call Graph - [SB_UP\SB_UP.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image SB_UP\SB_UP.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Fri May 03 20:27:22 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sat May 04 23:48:17 2024
 <BR><P>
 <H3>Maximum Stack Usage =       1712 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -211,8 +211,8 @@ Function Pointers
 Global Symbols
 </H3>
 <P><STRONG><a name="[b8]"></a>__main</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, __main.o(!!!main))
-<BR><BR>[Calls]<UL><LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+<BR><BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
 </UL>
 
 <P><STRONG><a name="[b9]"></a>__scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter))
@@ -302,8 +302,8 @@ Global Symbols
 <P><STRONG><a name="[25d]"></a>__rt_lib_shutdown_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000E))
 
 <P><STRONG><a name="[ba]"></a>__rt_entry</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry.o(.ARM.Collect$$rtentry$$00000000))
-<BR><BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_rt2
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
+<BR><BR>[Called By]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_rt2
 </UL>
 
 <P><STRONG><a name="[25e]"></a>__rt_entry_presh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000002))
@@ -813,9 +813,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_errno_addr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[212]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrtf
-<LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan2f
+<BR>[Called By]<UL><LI><a href="#[217]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_atan2f
 <LI><a href="#[211]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_asinf
+<LI><a href="#[212]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrtf
 </UL>
 
 <P><STRONG><a name="[cd]"></a>__aeabi_errno_addr</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, rt_errno_addr_intlibspace.o(.text))
@@ -878,8 +878,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMI088_read
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bmi088_accel_init
+<BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bmi088_accel_init
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMI088_read
 </UL>
 
 <P><STRONG><a name="[d7]"></a>BMI088_ACCEL_NS_L</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, bmi088middleware.o(i.BMI088_ACCEL_NS_L))
@@ -887,8 +887,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMI088_read
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bmi088_accel_init
+<BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bmi088_accel_init
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMI088_read
 </UL>
 
 <P><STRONG><a name="[dd]"></a>BMI088_GPIO_init</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, bmi088middleware.o(i.BMI088_GPIO_init))
@@ -900,8 +900,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMI088_read
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bmi088_gyro_init
+<BR>[Called By]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bmi088_gyro_init
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMI088_read
 </UL>
 
 <P><STRONG><a name="[d9]"></a>BMI088_GYRO_NS_L</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, bmi088middleware.o(i.BMI088_GYRO_NS_L))
@@ -909,8 +909,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMI088_read
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bmi088_gyro_init
+<BR>[Called By]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bmi088_gyro_init
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMI088_read
 </UL>
 
 <P><STRONG><a name="[de]"></a>BMI088_com_init</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, bmi088middleware.o(i.BMI088_com_init))
@@ -963,11 +963,11 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SPI_TransmitReceive
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMI088_read
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bmi088_accel_init
+<BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bmi088_accel_init
 <LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMI088_write_single_reg
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMI088_read_single_reg
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMI088_read_muli_reg
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMI088_read
 </UL>
 
 <P><STRONG><a name="[1d]"></a>BusFault_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32h7xx_it.o(i.BusFault_Handler))
@@ -1360,7 +1360,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FDCAN_IRQHandler
 </UL>
 
-<P><STRONG><a name="[11e]"></a>HAL_FDCAN_RxFifo0Callback</STRONG> (Thumb, 440 bytes, Stack size 16 bytes, can_user.o(i.HAL_FDCAN_RxFifo0Callback))
+<P><STRONG><a name="[11e]"></a>HAL_FDCAN_RxFifo0Callback</STRONG> (Thumb, 460 bytes, Stack size 16 bytes, can_user.o(i.HAL_FDCAN_RxFifo0Callback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = HAL_FDCAN_RxFifo0Callback &rArr; HAL_FDCAN_GetRxMessage
 </UL>
 <BR>[Calls]<UL><LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FDCAN_GetRxMessage
@@ -1369,7 +1369,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FDCAN_IRQHandler
 </UL>
 
-<P><STRONG><a name="[11f]"></a>HAL_FDCAN_RxFifo1Callback</STRONG> (Thumb, 148 bytes, Stack size 16 bytes, can_user.o(i.HAL_FDCAN_RxFifo1Callback))
+<P><STRONG><a name="[11f]"></a>HAL_FDCAN_RxFifo1Callback</STRONG> (Thumb, 166 bytes, Stack size 16 bytes, can_user.o(i.HAL_FDCAN_RxFifo1Callback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = HAL_FDCAN_RxFifo1Callback &rArr; HAL_FDCAN_GetRxMessage
 </UL>
 <BR>[Calls]<UL><LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FDCAN_GetRxMessage
@@ -2126,7 +2126,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> freertos.o(.constdata)
 </UL>
-<P><STRONG><a name="[b5]"></a>Launch_Task</STRONG> (Thumb, 656 bytes, Stack size 0 bytes, launch_task.o(i.Launch_Task))
+<P><STRONG><a name="[b5]"></a>Launch_Task</STRONG> (Thumb, 614 bytes, Stack size 0 bytes, launch_task.o(i.Launch_Task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = Launch_Task &rArr; canx_send_data &rArr; MX_TIM3_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
@@ -2287,7 +2287,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32h723xx.o(RESET)
 </UL>
-<P><STRONG><a name="[b4]"></a>Pitch_Task</STRONG> (Thumb, 598 bytes, Stack size 0 bytes, pitch_task.o(i.Pitch_Task))
+<P><STRONG><a name="[b4]"></a>Pitch_Task</STRONG> (Thumb, 582 bytes, Stack size 0 bytes, pitch_task.o(i.Pitch_Task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = Pitch_Task &rArr; canx_send_data &rArr; MX_TIM3_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
@@ -2731,12 +2731,12 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[14a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_PCD_EP_Receive
 <LI><a href="#[1f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_Get_USB_Status
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_ReceivePacket
-<LI><a href="#[f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_Init
+<BR>[Called By]<UL><LI><a href="#[f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_Init
 <LI><a href="#[1e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CtlPrepareRx
 <LI><a href="#[1eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CtlReceiveStatus
 <LI><a href="#[1e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CtlContinueRx
 <LI><a href="#[13d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_LL_DataInStage
+<LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_ReceivePacket
 </UL>
 
 <P><STRONG><a name="[172]"></a>USBD_LL_Reset</STRONG> (Thumb, 108 bytes, Stack size 16 bytes, usbd_core.o(i.USBD_LL_Reset))
@@ -2813,11 +2813,11 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[14f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_PCD_EP_Transmit
 <LI><a href="#[1f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_Get_USB_Status
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_TransmitPacket
-<LI><a href="#[13]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_DataIn
+<BR>[Called By]<UL><LI><a href="#[13]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_DataIn
 <LI><a href="#[1e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CtlSendData
 <LI><a href="#[1e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CtlSendStatus
 <LI><a href="#[1e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CtlContinueSendData
+<LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_TransmitPacket
 </UL>
 
 <P><STRONG><a name="[1fc]"></a>USBD_ParseSetupRequest</STRONG> (Thumb, 54 bytes, Stack size 16 bytes, usbd_ctlreq.o(i.USBD_ParseSetupRequest))
@@ -3074,7 +3074,7 @@ Global Symbols
 <P><STRONG><a name="[1e]"></a>UsageFault_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32h7xx_it.o(i.UsageFault_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32h723xx.o(RESET)
 </UL>
-<P><STRONG><a name="[b3]"></a>Yaw_Task</STRONG> (Thumb, 684 bytes, Stack size 0 bytes, yaw_task.o(i.Yaw_Task))
+<P><STRONG><a name="[b3]"></a>Yaw_Task</STRONG> (Thumb, 668 bytes, Stack size 0 bytes, yaw_task.o(i.Yaw_Task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = Yaw_Task &rArr; canx_send_data &rArr; MX_TIM3_Init &rArr; HAL_TIM_MspPostInit &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
@@ -3098,12 +3098,12 @@ Global Symbols
 <P><STRONG><a name="[211]"></a>__hardfp_asinf</STRONG> (Thumb, 258 bytes, Stack size 16 bytes, asinf.o(i.__hardfp_asinf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = __hardfp_asinf &rArr; sqrtf &rArr; __set_errno
 </UL>
-<BR>[Calls]<UL><LI><a href="#[212]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrtf
+<BR>[Calls]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
+<LI><a href="#[212]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sqrtf
 <LI><a href="#[214]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_underflow
 <LI><a href="#[216]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_invalid
 <LI><a href="#[215]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_infnan
 <LI><a href="#[213]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_fpclassifyf
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;imuekf
 </UL>
@@ -3111,10 +3111,10 @@ Global Symbols
 <P><STRONG><a name="[217]"></a>__hardfp_atan2f</STRONG> (Thumb, 594 bytes, Stack size 32 bytes, atan2f.o(i.__hardfp_atan2f))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = __hardfp_atan2f &rArr; __set_errno
 </UL>
-<BR>[Calls]<UL><LI><a href="#[214]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_underflow
+<BR>[Calls]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
+<LI><a href="#[214]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_underflow
 <LI><a href="#[218]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_infnan2
 <LI><a href="#[213]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_fpclassifyf
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;imuekf
 </UL>
@@ -3915,10 +3915,10 @@ Local Symbols
 <P><STRONG><a name="[d]"></a>CDC_Receive_HS</STRONG> (Thumb, 126 bytes, Stack size 16 bytes, usbd_cdc_if.o(i.CDC_Receive_HS))
 <BR><BR>[Stack]<UL><LI>Max Depth = 148<LI>Call Chain = CDC_Receive_HS &rArr; USBD_CDC_ReceivePacket &rArr; USBD_LL_PrepareReceive &rArr; HAL_PCD_EP_Receive &rArr; USB_EPStartXfer &rArr; USB_WritePacket
 </UL>
-<BR>[Calls]<UL><LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_SetRxBuffer
+<BR>[Calls]<UL><LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
+<LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_SetRxBuffer
 <LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USBD_CDC_ReceivePacket
 <LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_CRC16_Check_Sum
-<LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> usbd_cdc_if.o(.data)
 </UL>

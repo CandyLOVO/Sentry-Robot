@@ -53,3 +53,4 @@ sb_down\chassis_task.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include
 sb_down\chassis_task.o: ..\USER\Task\Yaw_Task.h
 sb_down\chassis_task.o: ../USER/uart_user.h
 sb_down\chassis_task.o: ..\USER\Task\Exchange_Task.h
+sb_down\chassis_task.o: ../USER/judge.h

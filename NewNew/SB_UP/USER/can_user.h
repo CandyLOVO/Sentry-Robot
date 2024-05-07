@@ -11,7 +11,7 @@ extern uint8_t canx_send_data(FDCAN_HandleTypeDef *hcan, uint16_t id, uint8_t *d
 typedef struct //CAN
 {
 	uint16_t angle;
-	int16_t speed;
+	float speed;
 	uint16_t tor_current;
 	uint16_t temperture;
 }motor_info;
