@@ -97,7 +97,7 @@ void RS485_Trans(void)
 	
 	HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_SET);
 	HAL_GPIO_WritePin(DIR_1_GPIO_Port,DIR_1_Pin,GPIO_PIN_SET);
-	HAL_UART_Transmit_IT(&huart1,Tx,sizeof(Tx));
+	UICharRefresh(Tx);
 	osDelay(5);
 }
 

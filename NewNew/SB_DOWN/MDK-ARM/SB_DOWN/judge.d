@@ -35,3 +35,17 @@ sb_down\judge.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 sb_down\judge.o: ..\USER\CRC.h
 sb_down\judge.o: ..\USER\struct_typedef.h
 sb_down\judge.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
+sb_down\judge.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+sb_down\judge.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+sb_down\judge.o: ../Core/Inc/FreeRTOSConfig.h
+sb_down\judge.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+sb_down\judge.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+sb_down\judge.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+sb_down\judge.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+sb_down\judge.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+sb_down\judge.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+sb_down\judge.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
+sb_down\judge.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+sb_down\judge.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
+sb_down\judge.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
+sb_down\judge.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h

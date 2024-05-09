@@ -2,6 +2,7 @@
 #define JUDGE_H
 
 #include "uart_user.h"
+
 typedef __packed struct
 {
 	uint8_t  SOF;						
@@ -311,6 +312,71 @@ typedef __packed struct Sentry_t
 	uint16_t projectile_allowance_17mm; //17mm弹丸允许发弹量
 	uint16_t remaining_gold_coin; //剩余金币数量
 }Sentry_t;
+
+//**********************************************发给裁判系统**********************************************//
+typedef struct
+{
+	uint8_t Robot_Color;		// 机器人颜色
+	uint16_t Robot_ID;			// 本机器人ID
+	uint16_t Cilent_ID;			// 本机器人对应的客户端ID
+	uint16_t Receiver_Robot_ID; // 机器人车间通信时接收者的ID，必须和本机器人同颜色
+} referee_id_t;
+
+/* 帧头定义 */
+typedef struct
+{
+	uint8_t SOF;
+	uint16_t DataLength;
+	uint8_t Seq;
+	uint8_t CRC8;
+} xFrameHeader;
+
+/****************************机器人交互数据****************************/
+/* 发送的内容数据段最大为 113 检测是否超出大小限制?实际上图形段不会超，数据段最多30个，也不会超*/
+/* 交互数据头结构 */
+typedef struct
+{
+	uint16_t data_cmd_id; // 由于存在多个内容 ID，但整个cmd_id 上行频率最大为 10Hz，请合理安排带宽。注意交互部分的上行频率
+	uint16_t sender_ID;
+	uint16_t receiver_ID;
+} ext_student_interactive_header_data_t;
+
+typedef struct
+{
+   xFrameHeader FrameHeader;
+   uint16_t CmdID;
+   ext_student_interactive_header_data_t datahead;
+   uint8_t *String_Data;
+   uint16_t frametail;
+} UI_CharReFresh_t; // 打印字符串数据
+
+/* 交互数据长度 */
+typedef enum
+{
+	Interactive_Data_LEN_Head = 6, //交互数据帧头
+	UI_Operate_LEN_Del = 2, //删除
+//	UI_Operate_LEN_PerDraw = 15,
+	UI_Operate_LEN_DrawChar = 15 + 30,
+} Interactive_Data_Length_e;
+
+/* 交互数据ID */
+typedef enum
+{
+	UI_Data_ID_DrawChar = 0x110,
+} Interactive_Data_ID_e;
+
+/* 通信协议长度 */
+typedef enum
+{
+	LEN_HEADER = 5, // 帧头长
+	LEN_CMDID = 2,	// 命令码长度
+	LEN_TAIL = 2,	// 帧尾CRC16
+
+	LEN_CRC8 = 4, // 帧头CRC8校验长度=帧头+数据长+包序号
+} JudgeFrameLength_e;
+
+extern void UICharRefresh(uint8_t *string_Data);
+//*******************************************************************************************************//
 
 extern JUDGE_MODULE_DATA Judge_Hero;
 

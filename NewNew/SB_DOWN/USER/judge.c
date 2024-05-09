@@ -3,6 +3,12 @@
 #include "main.h"
 #include "struct_typedef.h"
 #include "string.h"
+#include "cmsis_os.h"
+
+#define REFEREE_SOF 0xA5 // 起始字节,协议固定为0xA5
+#define ID_sentry_cmd 0x0120 // 哨兵自主决策
+uint8_t UI_Seq; // 包序号，供整个referee文件使用
+extern UART_HandleTypeDef huart5; //裁判系统 UART5
 
 //=======================================================裁判系统校验读取(以中断形式)===============================================================//
 extern uint8_t first_x;
@@ -187,3 +193,42 @@ static void Update_data()
 	Sentry.blue_outpost_HP = Judge_Hero.robot_hp.blue_outpost_HP; //己方前哨战血量
 	Sentry.blue_base_HP = Judge_Hero.robot_hp.blue_base_HP; //己方基地血量
 }
+
+/**
+ * @brief 裁判系统数据发送函数
+ * @param
+ */
+void RefereeSend(uint8_t *send, uint16_t tx_len)
+{
+	HAL_UART_Transmit_DMA(&huart5, send, tx_len);
+	osDelay(115);
+}
+
+/************************************************UI推送字符（使更改生效）*********************************/
+void UICharRefresh(uint8_t *string_Data)
+{
+	static UI_CharReFresh_t UI_CharReFresh_data;
+
+	uint8_t temp_datalength = Interactive_Data_LEN_Head + UI_Operate_LEN_DrawChar; // 计算交互数据长度
+
+	UI_CharReFresh_data.FrameHeader.SOF = REFEREE_SOF;
+	UI_CharReFresh_data.FrameHeader.DataLength = temp_datalength;
+	UI_CharReFresh_data.FrameHeader.Seq = UI_Seq;
+	UI_CharReFresh_data.FrameHeader.CRC8 = Get_CRC8_Check_Sum((uint8_t *)&UI_CharReFresh_data, LEN_CRC8, 0xFF);
+
+	UI_CharReFresh_data.CmdID = ID_sentry_cmd;
+
+	UI_CharReFresh_data.datahead.data_cmd_id = UI_Data_ID_DrawChar;
+
+	UI_CharReFresh_data.datahead.receiver_ID = Sentry.Myself_id;
+	UI_CharReFresh_data.datahead.sender_ID = Sentry.Myself_id;
+
+	UI_CharReFresh_data.String_Data = string_Data;
+
+	UI_CharReFresh_data.frametail = Get_CRC16_Check_Sum((uint8_t *)&UI_CharReFresh_data, LEN_HEADER + LEN_CMDID + temp_datalength, 0xFFFF);
+
+	RefereeSend((uint8_t *)&UI_CharReFresh_data, LEN_HEADER + LEN_CMDID + temp_datalength + LEN_TAIL); // 发送
+
+	UI_Seq++; // 包序号+1
+}
+
