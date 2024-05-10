@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-void Pitch_Task(void const * argument);
+void Pitch_Task(void * argument);
 
 static void Pitch_init(void);
 extern void pitch_control_L(int16_t max_angle, int16_t min_angle);

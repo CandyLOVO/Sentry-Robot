@@ -3,7 +3,7 @@
 <title>Static Call Graph - [SB_DOWN\SB_DOWN.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image SB_DOWN\SB_DOWN.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Fri May 10 00:44:42 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sat May 11 00:23:48 2024
 <BR><P>
 <H3>Maximum Stack Usage =        288 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -812,7 +812,7 @@ Global Symbols
 <LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_CAN1_Init
 </UL>
 
-<P><STRONG><a name="[72]"></a>Exchange_Task</STRONG> (Thumb, 96 bytes, Stack size 0 bytes, exchange_task.o(i.Exchange_Task))
+<P><STRONG><a name="[72]"></a>Exchange_Task</STRONG> (Thumb, 54 bytes, Stack size 0 bytes, exchange_task.o(i.Exchange_Task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = Exchange_Task &rArr; RS485_Trans &rArr; UICharRefresh &rArr; RefereeSend &rArr; osDelay &rArr; vTaskDelay &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
@@ -1233,6 +1233,7 @@ Global Symbols
 
 <P><STRONG><a name="[ac]"></a>HAL_UART_Transmit_IT</STRONG> (Thumb, 50 bytes, Stack size 0 bytes, stm32f4xx_hal_uart.o(i.HAL_UART_Transmit_IT))
 <BR><BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRV_USART1_IRQHandler
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RS485_Trans
 </UL>
 
 <P><STRONG><a name="[dc]"></a>HAL_UART_TxCpltCallback</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, exchange_task.o(i.HAL_UART_TxCpltCallback))
@@ -1377,11 +1378,12 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f446xx.o(RESET)
 </UL>
-<P><STRONG><a name="[ae]"></a>RS485_Trans</STRONG> (Thumb, 204 bytes, Stack size 16 bytes, exchange_task.o(i.RS485_Trans))
+<P><STRONG><a name="[ae]"></a>RS485_Trans</STRONG> (Thumb, 216 bytes, Stack size 16 bytes, exchange_task.o(i.RS485_Trans))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = RS485_Trans &rArr; UICharRefresh &rArr; RefereeSend &rArr; osDelay &rArr; vTaskDelay &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit_IT
 <LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UICharRefresh
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_CRC16_Check_Sum
 </UL>
@@ -1608,8 +1610,7 @@ Global Symbols
 <P><STRONG><a name="[10f]"></a>__ieee754_rem_pio2</STRONG> (Thumb, 938 bytes, Stack size 120 bytes, rred.o(i.__ieee754_rem_pio2))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = __ieee754_rem_pio2 &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fabs
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[117]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
@@ -1617,6 +1618,7 @@ Global Symbols
 <LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 <LI><a href="#[112]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dneg
+<LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fabs
 </UL>
 <BR>[Called By]<UL><LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cos
 <LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sin

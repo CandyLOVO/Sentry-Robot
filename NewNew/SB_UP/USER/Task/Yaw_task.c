@@ -42,7 +42,7 @@ extern int8_t flag;
 
 //黑头（左）ID为2，白头（右）ID为1
 //两个头yaw用的FDCAN1,ID是1和2 【左右ID有待测试，需要更改motor[]中的序号，更改CAN发送电机控制数据的顺序】
-void Yaw_Task(void const * argument)
+void Yaw_Task(void * argument)
 {
 	Yaw_init();
 //	osDelay(3000);

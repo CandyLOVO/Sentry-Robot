@@ -1,15 +1,15 @@
-sb_up\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/timers.c
-sb_up\timers.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdlib.h
-sb_up\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-sb_up\timers.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
-sb_up\timers.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
-sb_up\timers.o: ../Core/Inc/FreeRTOSConfig.h
-sb_up\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
-sb_up\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
-sb_up\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
-sb_up\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
-sb_up\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
-sb_up\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
-sb_up\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
-sb_up\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
-sb_up\timers.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
+sb_up/timers.o: ..\Middlewares\Third_Party\FreeRTOS\Source\timers.c \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\stdlib.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\stddef.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\stdint.h \
+  ..\Core\Inc\FreeRTOSConfig.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM4F\portmacro.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\queue.h \
+  ..\Middlewares\Third_Party\FreeRTOS\Source\include\timers.h

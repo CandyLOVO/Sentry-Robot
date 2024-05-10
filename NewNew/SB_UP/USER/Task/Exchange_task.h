@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-void Exchange_Task(void const * argument);
+void Exchange_Task(void * argument);
 
 extern void vision_value(void);
 extern void yaw_value(void);

@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-void Launch_Task(void const * argument);
+void Launch_Task(void * argument);
 
 extern void friction_init(void);
 extern void mocalun_start(void);

@@ -1,0 +1,26 @@
+sb_up/svmfunctionsf16.o: \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.15.0\Source\SVMFunctions\SVMFunctionsF16.c \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.15.0\Source\SVMFunctions\arm_svm_linear_init_f16.c \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.15.0\Include\dsp\svm_functions_f16.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.15.0\Include\arm_math_types_f16.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.15.0\Include\arm_math_types.h \
+  ..\Drivers\CMSIS\Include\cmsis_compiler.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\stdint.h \
+  ..\Drivers\CMSIS\Include\cmsis_armclang.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\arm_compat.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\arm_acle.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\string.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\math.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\float.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\limits.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.15.0\Include\arm_math_memory.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.15.0\Include\dsp\none.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.15.0\Include\dsp\utils.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.15.0\Include\dsp\svm_defines.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.15.0\Source\SVMFunctions\arm_svm_linear_predict_f16.c \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.15.0\Source\SVMFunctions\arm_svm_polynomial_init_f16.c \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.15.0\Source\SVMFunctions\arm_svm_polynomial_predict_f16.c \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.15.0\Source\SVMFunctions\arm_svm_rbf_init_f16.c \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.15.0\Source\SVMFunctions\arm_svm_rbf_predict_f16.c \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.15.0\Source\SVMFunctions\arm_svm_sigmoid_init_f16.c \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DSP\1.15.0\Source\SVMFunctions\arm_svm_sigmoid_predict_f16.c

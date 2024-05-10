@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-void Yaw_Task(void const * argument);
+void Yaw_Task(void * argument);
 
 static void Yaw_init(void);
 extern float motor_value(int16_t k, int16_t n);

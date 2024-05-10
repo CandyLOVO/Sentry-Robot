@@ -23,7 +23,7 @@ extern float yaw_angle_R;
 extern float pitch_angle_L;
 extern float pitch_angle_R;
 
-void Exchange_Task(void const * argument)
+void Exchange_Task(void * argument)
 {
   for(;;)
   {

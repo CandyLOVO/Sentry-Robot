@@ -1272,11 +1272,13 @@ ARM Macro Assembler    Page 20
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M7.fp.dp --apcs=
 interwork --depend=sb_up\startup_stm32h723xx.d -osb_up\startup_stm32h723xx.o -I
 ../Core/Inc -I.\RTE\_SB_UP -ID:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMS
-IS\5.9.0\CMSIS\Core\Include -ID:\Software\KeilMDK538\KeilMDK538\ARM\Pack\Keil\S
-TM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include --predefine="__UVI
-SION_VERSION SETA 538" --predefine="_RTE_ SETA 1" --predefine="STM32H723xx SETA
- 1" --predefine="_RTE_ SETA 1" --list=startup_stm32h723xx.lst startup_stm32h723
-xx.s
+IS-DSP\1.15.0\Include -ID:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS-DS
+P\1.15.0\PrivateInclude -ID:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS\
+5.9.0\CMSIS\Core\Include -ID:\Software\KeilMDK538\KeilMDK538\ARM\Pack\Keil\STM3
+2H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include --predefine="__UVISIO
+N_VERSION SETA 538" --predefine="_RTE_ SETA 1" --predefine="STM32H723xx SETA 1"
+ --predefine="_RTE_ SETA 1" --list=startup_stm32h723xx.lst startup_stm32h723xx.
+s
 
 
 

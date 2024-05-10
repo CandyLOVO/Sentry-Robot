@@ -24,7 +24,7 @@ extern int8_t flag;
 extern receive_vision Rx_vision;
 
 //ºÚÍ·£¨×ó£©Ä¦²ÁÂÖID£º1¡¢2£¬²¦ÅÌID£º6£»°×Í·£¨ÓÒ£©Ä¦²ÁÂÖ£º3¡¢4£¬²¦ÅÌ£º5
-void Launch_Task(void const * argument)
+void Launch_Task(void * argument)
 {
 	friction_init();
 	

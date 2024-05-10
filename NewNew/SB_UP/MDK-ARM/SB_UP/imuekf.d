@@ -1,9 +1,7 @@
-sb_up\imuekf.o: ..\USER\imuekf.c
-sb_up\imuekf.o: ../Core/Inc/imuekf.h
-sb_up\imuekf.o: ../Core/Inc/rtwtypes.h
-sb_up\imuekf.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdbool.h
-sb_up\imuekf.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
-sb_up\imuekf.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdlib.h
-sb_up\imuekf.o: ../Core/Inc/rt_nonfinite.h
-sb_up\imuekf.o: ../Core/Inc/rt_defines.h
-sb_up\imuekf.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\math.h
+sb_up/imuekf.o: ..\USER\imuekf.c ..\Core\Inc\imuekf.h \
+  ..\Core\Inc\rtwtypes.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\stdbool.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\stddef.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\stdlib.h \
+  ..\Core\Inc\rt_nonfinite.h ..\Core\Inc\rt_defines.h \
+  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\math.h

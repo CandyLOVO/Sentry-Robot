@@ -35,7 +35,7 @@ extern int8_t flag;
 //**************************************************任务实现**************************************************//
 
 //黑头（左）ID为4，白头（右）ID为3
-void Pitch_Task(void const * argument)
+void Pitch_Task(void * argument)
 {
 	Pitch_init();
 //	osDelay(3000);
