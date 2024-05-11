@@ -351,7 +351,7 @@ typedef struct
    xFrameHeader FrameHeader;
    uint16_t CmdID;
    ext_student_interactive_header_data_t datahead;
-   uint32_t String_Data;
+   uint8_t String_Data[4];
    uint16_t frametail;
 } UI_CharReFresh_t; // ´òÓ¡×Ö·û´®Êı¾İ
 

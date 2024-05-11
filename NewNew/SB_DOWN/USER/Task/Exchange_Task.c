@@ -12,6 +12,8 @@ uint8_t Rx_flag = 0; //程序初始化标志位
 uint16_t checksum;
 Tx_naving Tx_nav;
 
+uint32_t data_t = 0xC0000000;
+
 extern UART_HandleTypeDef huart1;
 extern uint8_t Rx[128];
 extern uint32_t length; //DMA中未传输的数据个数
@@ -22,27 +24,26 @@ void Exchange_Task(void const * argument)
 {
   for(;;)
   {
-//		if(Rx_flag==0) //程序初始化标志位
-//		{
-//			RS485_Trans();
-//			Rx_flag = 1;
-//		}
-//		else if(Rx_flag == 2) //收到一帧数据后
-//		{
-//			RS485_Trans();
-//			Rx_flag = 1;
-//		}
-//		else
-//		{
-//			count++; //收到一帧数据后置零
-//		}
-//		
-//		if(count>=20) //如果有15ms没有收到导航数据
-//		{
-//			RS485_Trans();
-//			count = 0;
-//		}
-		RS485_Trans();
+		if(Rx_flag==0) //程序初始化标志位
+		{
+			RS485_Trans();
+			Rx_flag = 1;
+		}
+		else if(Rx_flag == 2) //收到一帧数据后
+		{
+			RS485_Trans();
+			Rx_flag = 1;
+		}
+		else
+		{
+			count++; //收到一帧数据后置零
+		}
+		
+		if(count>=20) //如果有15ms没有收到导航数据
+		{
+			RS485_Trans();
+			count = 0;
+		}
 		
 		//先高八位，再低八位
 		Tx_friction[0] = (Sentry.Myself_17mm_heat_id1 >> 8) & 0xff; //枪管1实时热量
@@ -59,6 +60,8 @@ void Exchange_Task(void const * argument)
 		Tx_friction[2] = (Sentry.Myself_17mm_heat_id2 >> 8) & 0xff; //枪管2实时热量
 		Tx_friction[3] = Sentry.Myself_17mm_heat_id2 & 0xff;
 		Tx_friction[4] = Sentry.armor_id; //受伤装甲板ID
+		
+		JudgeSend(data_t,Datacmd_Decision,ID_Dataccenter);
   }
 }
 
@@ -107,7 +110,6 @@ void RS485_Trans(void)
 	HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_SET);
 	HAL_GPIO_WritePin(DIR_1_GPIO_Port,DIR_1_Pin,GPIO_PIN_SET);
 	HAL_UART_Transmit_IT(&huart1,Tx,sizeof(Tx));
-	//UICharRefresh(Tx);
 	osDelay(5);
 }
 
