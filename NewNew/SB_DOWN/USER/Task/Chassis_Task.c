@@ -84,7 +84,8 @@ void Chassis_Task(void const * argument)
 //			}
 //			else
 //			{
-				omega = 400; //给定小陀螺转速
+			//	omega = 400; //给定小陀螺转速
+				omega = 0; //给定小陀螺转速
 				chassis_calculate(Rx_nav.nav_x, Rx_nav.nav_y); //输入导航x、y值，CAN1传来
 //			}
 			

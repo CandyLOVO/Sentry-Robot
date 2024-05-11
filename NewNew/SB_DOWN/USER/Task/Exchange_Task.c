@@ -52,6 +52,13 @@ void Exchange_Task(void const * argument)
 		Tx_friction[4] = Sentry.armor_id; //受伤装甲板ID
 		can_remote(Tx_friction, 0x36);
     osDelay(1);
+		
+		memset(Tx_friction, 0, sizeof(Tx_friction));//接收前清空数组
+		Tx_friction[0] = (Sentry.Myself_17mm_heat_id1 >> 8) & 0xff; //枪管1实时热量
+		Tx_friction[1] = Sentry.Myself_17mm_heat_id1 & 0xff;
+		Tx_friction[2] = (Sentry.Myself_17mm_heat_id2 >> 8) & 0xff; //枪管2实时热量
+		Tx_friction[3] = Sentry.Myself_17mm_heat_id2 & 0xff;
+		Tx_friction[4] = Sentry.armor_id; //受伤装甲板ID
   }
 }
 
@@ -96,10 +103,11 @@ void RS485_Trans(void)
 	memcpy(&Tx[21], &Tx_nav.checksum, 2);
 	Tx[23] = Tx_nav.ending;
 	
+	
 	HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_SET);
 	HAL_GPIO_WritePin(DIR_1_GPIO_Port,DIR_1_Pin,GPIO_PIN_SET);
 	HAL_UART_Transmit_IT(&huart1,Tx,sizeof(Tx));
-	UICharRefresh(Tx);
+	//UICharRefresh(Tx);
 	osDelay(5);
 }
 

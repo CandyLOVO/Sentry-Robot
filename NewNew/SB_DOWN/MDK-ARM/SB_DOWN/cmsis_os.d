@@ -1,9 +1,9 @@
 sb_down\cmsis_os.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c
-sb_down\cmsis_os.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
+sb_down\cmsis_os.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\string.h
 sb_down\cmsis_os.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 sb_down\cmsis_os.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-sb_down\cmsis_os.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
-sb_down\cmsis_os.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
+sb_down\cmsis_os.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stddef.h
+sb_down\cmsis_os.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stdint.h
 sb_down\cmsis_os.o: ../Core/Inc/FreeRTOSConfig.h
 sb_down\cmsis_os.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 sb_down\cmsis_os.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

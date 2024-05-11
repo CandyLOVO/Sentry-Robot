@@ -7,7 +7,9 @@
 
 #define REFEREE_SOF 0xA5 // 起始字节,协议固定为0xA5
 #define ID_sentry_cmd 0x0120 // 哨兵自主决策
+
 uint8_t UI_Seq; // 包序号，供整个referee文件使用
+uint8_t Judge_Seq;
 extern UART_HandleTypeDef huart5; //裁判系统 UART5
 
 //=======================================================裁判系统校验读取(以中断形式)===============================================================//
@@ -200,35 +202,62 @@ static void Update_data()
  */
 void RefereeSend(uint8_t *send, uint16_t tx_len)
 {
+//	HAL_UART_Transmit_DMA(&huart5, send, tx_len);
 	HAL_UART_Transmit_DMA(&huart5, send, tx_len);
 	osDelay(115);
 }
 
 /************************************************UI推送字符（使更改生效）*********************************/
-void UICharRefresh(uint8_t *string_Data)
+//void UICharRefresh(uint8_t *string_Data)
+//{
+//	static UI_CharReFresh_t UI_CharReFresh_data;
+
+//	uint8_t temp_datalength = Interactive_Data_LEN_Head + UI_Operate_LEN_DrawChar; // 计算交互数据长度
+
+//	UI_CharReFresh_data.FrameHeader.SOF = REFEREE_SOF;
+//	UI_CharReFresh_data.FrameHeader.DataLength = temp_datalength;
+//	UI_CharReFresh_data.FrameHeader.Seq = UI_Seq;
+//	UI_CharReFresh_data.FrameHeader.CRC8 = Get_CRC8_Check_Sum((uint8_t *)&UI_CharReFresh_data, LEN_CRC8, 0xFF);
+
+//	UI_CharReFresh_data.CmdID = ID_sentry_cmd;
+
+//	UI_CharReFresh_data.datahead.data_cmd_id = UI_Data_ID_DrawChar;
+
+//	UI_CharReFresh_data.datahead.receiver_ID = Sentry.Myself_id;
+//	UI_CharReFresh_data.datahead.sender_ID = Sentry.Myself_id;
+
+//	UI_CharReFresh_data.String_Data = string_Data;
+
+//	UI_CharReFresh_data.frametail = Get_CRC16_Check_Sum((uint8_t *)&UI_CharReFresh_data, LEN_HEADER + LEN_CMDID + temp_datalength, 0xFFFF);
+
+//	RefereeSend((uint8_t *)&UI_CharReFresh_data, LEN_HEADER + LEN_CMDID + temp_datalength + LEN_TAIL); // 发送
+
+//	UI_Seq++; // 包序号+1
+//}
+void JudgeSend(uint32_t TXData,uint16_t datacmdid,uint16_t revecer_id)
 {
-	static UI_CharReFresh_t UI_CharReFresh_data;
+	static UI_CharReFresh_t senddatatoJudge;
 
-	uint8_t temp_datalength = Interactive_Data_LEN_Head + UI_Operate_LEN_DrawChar; // 计算交互数据长度
+	uint8_t temp_datalength = Interactive_Data_LEN_Head + sizeof(TXData); // 计算交互数据长度
 
-	UI_CharReFresh_data.FrameHeader.SOF = REFEREE_SOF;
-	UI_CharReFresh_data.FrameHeader.DataLength = temp_datalength;
-	UI_CharReFresh_data.FrameHeader.Seq = UI_Seq;
-	UI_CharReFresh_data.FrameHeader.CRC8 = Get_CRC8_Check_Sum((uint8_t *)&UI_CharReFresh_data, LEN_CRC8, 0xFF);
+	senddatatoJudge.FrameHeader.SOF = REFEREE_SOF;
+	senddatatoJudge.FrameHeader.DataLength = temp_datalength;
+	senddatatoJudge.FrameHeader.Seq = Judge_Seq;
+	senddatatoJudge.FrameHeader.CRC8 = Get_CRC8_Check_Sum((uint8_t *)&senddatatoJudge, LEN_CRC8, 0xFF);
 
-	UI_CharReFresh_data.CmdID = ID_sentry_cmd;
+	senddatatoJudge.CmdID =Cmdid_Judge_send;
 
-	UI_CharReFresh_data.datahead.data_cmd_id = UI_Data_ID_DrawChar;
+	senddatatoJudge.datahead.data_cmd_id = datacmdid;
 
-	UI_CharReFresh_data.datahead.receiver_ID = Sentry.Myself_id;
-	UI_CharReFresh_data.datahead.sender_ID = Sentry.Myself_id;
+	senddatatoJudge.datahead.sender_ID = Sentry.Myself_id;
+	senddatatoJudge.datahead.receiver_ID = revecer_id;
+	
+	
+	senddatatoJudge.String_Data = TXData;
 
-	UI_CharReFresh_data.String_Data = string_Data;
+	senddatatoJudge.frametail = Get_CRC16_Check_Sum((uint8_t *)&senddatatoJudge, LEN_HEADER + LEN_CMDID + temp_datalength, 0xFFFF);
 
-	UI_CharReFresh_data.frametail = Get_CRC16_Check_Sum((uint8_t *)&UI_CharReFresh_data, LEN_HEADER + LEN_CMDID + temp_datalength, 0xFFFF);
+	RefereeSend((uint8_t *)&senddatatoJudge, LEN_HEADER + LEN_CMDID + temp_datalength + LEN_TAIL); // 发送
 
-	RefereeSend((uint8_t *)&UI_CharReFresh_data, LEN_HEADER + LEN_CMDID + temp_datalength + LEN_TAIL); // 发送
-
-	UI_Seq++; // 包序号+1
+	Judge_Seq++; // 包序号+1
 }
-

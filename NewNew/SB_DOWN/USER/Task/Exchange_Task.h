@@ -34,6 +34,7 @@ typedef struct
   float nav_x;
   float nav_y;
   uint32_t sentry_decision;
+	uint8_t sentry_decision_buffer[4];
   uint16_t checksum;
 }Rx_naving;
 

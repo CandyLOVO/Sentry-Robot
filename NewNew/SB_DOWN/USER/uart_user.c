@@ -43,6 +43,7 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 		if(RESET != __HAL_UART_GET_FLAG(&huart1,UART_FLAG_IDLE)){
 			__HAL_UART_CLEAR_IDLEFLAG(&huart1);
 			HAL_UART_DMAStop(&huart1);
+
 			length = 128 - (__HAL_DMA_GET_COUNTER(&hdma_usart1_rx)); //DMA中未传输的数据个数
 			
 			Rx_flag = 2; //收到一帧数据
@@ -53,17 +54,24 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 			HAL_UART_Receive_DMA(&huart1,(uint8_t *)Rx,sizeof(Rx));
 			
 			if(Rx[0] == 0xA5)
+
 			{
 				checksum_Rx = Get_CRC16_Check_Sum(Rx, 15, 0xffff);
+
 				memcpy(&Rx_nav.checksum, &Rx[15], 2);
 				if(Rx_nav.checksum == checksum_Rx)
 				{
 					Rx_nav.naving = Rx[1];
+
 					Rx_nav.poing = Rx[2];
 					memcpy(&Rx_nav.nav_x, &Rx[3], 4);
 					memcpy(&Rx_nav.nav_y, &Rx[7], 4);
-					memcpy(&Rx_nav.sentry_decision, &Rx[11], 4);
-					HAL_UART_Transmit_IT(&huart5, &Rx[11], 4);
+					Rx_nav.sentry_decision_buffer[0] = Rx[11];
+					Rx_nav.sentry_decision_buffer[1] = Rx[12];
+					Rx_nav.sentry_decision_buffer[2] = Rx[13];
+					Rx_nav.sentry_decision_buffer[3] = Rx[14];
+					memcpy(&Rx_nav.sentry_decision, &Rx_nav.sentry_decision_buffer[0], 4);
+					JudgeSend(Rx_nav.sentry_decision,Datacmd_Decision,ID_Dataccenter);
 				}
 			}
 		}

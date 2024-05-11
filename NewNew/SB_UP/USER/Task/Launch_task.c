@@ -50,13 +50,13 @@ void Launch_Task(void * argument)
 				target_bopan[0] = 20/8*36;
 				target_bopan[1] = 20/8*36;
 			}
-			if(Rx_vision.L_tracking == 1)
+		else if(Rx_vision.L_tracking == 1)
 			{
-				target_bopan[0] = 20/8*36;
+				target_bopan[0] = 20/8*36*9;
 			}
-			if(Rx_vision.R_tracking == 1)
+			else if(Rx_vision.R_tracking == 1)
 			{
-				target_bopan[1] = 20/8*36;
+				target_bopan[1] = 20/8*36*9;
 			}
 			else
 			{
@@ -82,13 +82,13 @@ void Launch_Task(void * argument)
 ////				target_bopan[1] = 3*60/8*36;
 //				target_bopan[1] = 20*36;
 //			}
-		}
-		
-		else
-		{
-			mocalun_stop();
-			target_bopan[0] = 0;
-			target_bopan[1] = 0;
+//		}
+//		
+//		else
+//		{
+//			mocalun_stop();
+//			target_bopan[0] = 0;
+//			target_bopan[1] = 0;
 		}
 		
 		mocalun_output[0] = pid_cal_s(&pid_mocalun_s[0], motor_friction[0].speed, target_mocalun[0]);

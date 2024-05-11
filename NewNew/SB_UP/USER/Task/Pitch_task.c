@@ -128,11 +128,11 @@ static void Pitch_init(void)
 	initial_pitch_R = 4000;
 	
 	//PID初始化
-	pid_init(&pid_pitch_s_L,170,0.3,0,30000,30000); //PID初始化 PI
-	pid_init(&pid_pitch_a_L,20,0,30,30000,30000); //PD
+	pid_init(&pid_pitch_s_L,170,0.3,0,16384,16384); //PID初始化 PI
+	pid_init(&pid_pitch_a_L,20,0,30,16384,16384); //PD
 	
-	pid_init(&pid_pitch_s_R,170,0.3,0,30000,30000); //PID初始化
-	pid_init(&pid_pitch_a_R,20,0,30,30000,30000);
+	pid_init(&pid_pitch_s_R,170,0.3,0,16384,16384); //PID初始化
+	pid_init(&pid_pitch_a_R,20,0,30,16384,16384);
 }
 
 void pitch_control_L(int16_t max_angle, int16_t min_angle)

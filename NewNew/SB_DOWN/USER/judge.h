@@ -3,6 +3,11 @@
 
 #include "uart_user.h"
 
+
+#define Cmdid_Judge_send 0x301  //裁判系统交互
+
+#define Datacmd_Decision 0x0120  //哨兵自主决策指令
+#define ID_Dataccenter		0x8080 //裁判系统服务器id（用于哨兵和雷达自主决策指令）
 typedef __packed struct
 {
 	uint8_t  SOF;						
@@ -346,7 +351,7 @@ typedef struct
    xFrameHeader FrameHeader;
    uint16_t CmdID;
    ext_student_interactive_header_data_t datahead;
-   uint8_t *String_Data;
+   uint32_t String_Data;
    uint16_t frametail;
 } UI_CharReFresh_t; // 打印字符串数据
 
@@ -356,7 +361,7 @@ typedef enum
 	Interactive_Data_LEN_Head = 6, //交互数据帧头
 	UI_Operate_LEN_Del = 2, //删除
 //	UI_Operate_LEN_PerDraw = 15,
-	UI_Operate_LEN_DrawChar = 15 + 30,
+	UI_Operate_LEN_DrawChar = 32,
 } Interactive_Data_Length_e;
 
 /* 交互数据ID */
@@ -383,5 +388,6 @@ extern JUDGE_MODULE_DATA Judge_Hero;
 extern Sentry_t Sentry;
 
 void JUDGE_Receive(volatile uint8_t *databuffer,uint8_t length);
+void JudgeSend(uint32_t TXData,uint16_t datacmdid,uint16_t revecer_id);
 
 #endif
