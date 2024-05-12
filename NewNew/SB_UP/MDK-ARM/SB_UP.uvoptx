@@ -178,7 +178,7 @@
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>motor</ItemText>
+          <ItemText>motor,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
