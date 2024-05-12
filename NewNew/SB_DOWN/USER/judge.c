@@ -227,7 +227,12 @@ void JudgeSend(uint32_t TXData,uint16_t datacmdid,uint16_t revecer_id)
 	senddatatoJudge.datahead.receiver_ID = revecer_id;
 	
 	int8_t txdata[4];
-	memcpy(&txdata[0], &TXData, 4);
+//	memcpy(&txdata[0], &TXData, 4);
+	txdata[3]=TXData & 0xffff;
+	txdata[2]=(TXData>>8) & 0xffff;
+	txdata[1]=(TXData>>16) & 0xffff;
+	txdata[0]=(TXData>>24) & 0xffff;
+	
 	for(int i=0; i<4; i++)
 	{
 		senddatatoJudge.String_Data[i] = txdata[i];

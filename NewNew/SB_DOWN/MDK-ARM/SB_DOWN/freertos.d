@@ -1,7 +1,7 @@
 sb_down\freertos.o: ../Core/Src/freertos.c
 sb_down\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-sb_down\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
-sb_down\freertos.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
+sb_down\freertos.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stddef.h
+sb_down\freertos.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stdint.h
 sb_down\freertos.o: ../Core/Inc/FreeRTOSConfig.h
 sb_down\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 sb_down\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
