@@ -42,8 +42,8 @@ void Pitch_Task(void * argument)
   for(;;)
   {
 		//判断陀螺仪是否温补结束
-		if(flag == 1)
-		{
+//		if(flag == 1)
+//		{
 		//初始化映射pitch的角度
 		pitch_angle_L = -motor_value(initial_pitch_L, motor[3].angle); //【要给负值！！】
 		pitch_angle_R = motor_value(initial_pitch_R, motor[2].angle); //pitch处的6020电机镜像装配，需要在取反的基础上再取反
@@ -117,22 +117,22 @@ void Pitch_Task(void * argument)
 		canx_send_data(&hfdcan1, 0x1FF, gimbal_control_6020, 8);
     osDelay(1);
 		}
-  }
+//  }
 }
 //***********************************************************************************************************//
 
 //**************************************************代码实现**************************************************//
 static void Pitch_init(void)
 {
-	initial_pitch_L = 2742;
-	initial_pitch_R = 4000;
+	initial_pitch_L = 2770;
+	initial_pitch_R = 2740;
 	
 	//PID初始化
-	pid_init(&pid_pitch_s_L,0,0,0,16384,16384); //PID初始化 PI
-	pid_init(&pid_pitch_a_L,0,0,0,16384,16384); //PD
+	pid_init(&pid_pitch_s_L,500,9.5,0,16384,16384); //PID初始化 PI
+	pid_init(&pid_pitch_a_L,3.5,0,1,16384,16384); //PD
 	
-	pid_init(&pid_pitch_s_R,170,0.3,0,16384,16384); //PID初始化
-	pid_init(&pid_pitch_a_R,20,0,30,16384,16384);
+	pid_init(&pid_pitch_s_R,500,9.5,0,16384,16384); //PID初始化
+	pid_init(&pid_pitch_a_R,3.5,0,1,16384,16384);
 }
 
 void pitch_control_L(int16_t max_angle, int16_t min_angle)
