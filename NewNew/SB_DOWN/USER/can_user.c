@@ -15,6 +15,10 @@ uint8_t L_tracking; //左头是否锁住
 uint8_t R_tracking; //右头是否锁住
 uint8_t M_tracking; //云台前后摄像头是否锁住
 int8_t flag;
+float L_yaw;	
+float L_pitch;
+float R_yaw;	
+float R_pitch;
 
 void CAN1_Init()
 {
@@ -151,6 +155,18 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		if(can_rx_message.StdId == 0x35)
 		{
 			memcpy(&yaw, &can_recevie_data[0], 4);
+		}
+		
+		if(can_rx_message.StdId == 0x38)
+		{
+			memcpy(&L_yaw, &can_recevie_data[0], 4);
+			memcpy(&L_pitch, &can_recevie_data[4], 4);
+		}
+		
+		if(can_rx_message.StdId == 0x39)
+		{
+			memcpy(&R_yaw, &can_recevie_data[0], 4);
+			memcpy(&R_pitch, &can_recevie_data[4], 4);
 		}
 	}
 	

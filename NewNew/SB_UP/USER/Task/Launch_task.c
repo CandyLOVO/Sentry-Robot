@@ -167,12 +167,12 @@ void mocalun_start(void)
 
 void mocalun_stop(void)
 {
-//	mocalun_output[0] = 0;
-//	mocalun_output[1] = 0;
-//	mocalun_output[2] = 0;
-//	mocalun_output[3] = 0;
-	target_mocalun[0] = 0;
-	target_mocalun[1] = 0;
-	target_mocalun[2] = 0;
-	target_mocalun[3] = 0;
+	mocalun_output[0] = 0;
+	mocalun_output[1] = 0;
+	mocalun_output[2] = 0;
+	mocalun_output[3] = 0;
+//	target_mocalun[0] = 0;
+//	target_mocalun[1] = 0;
+//	target_mocalun[2] = 0;
+//	target_mocalun[3] = 0;
 }

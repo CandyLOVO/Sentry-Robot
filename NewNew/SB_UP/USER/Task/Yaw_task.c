@@ -30,12 +30,14 @@ int16_t low_limit;
 uint8_t gimbal_control_6020[8];
 uint8_t rotate_flag_L = 0; //判断是否需要反转
 uint8_t rotate_flag_R = 0;
+uint8_t heart_direction[4];
 
 extern motor_info motor[8];
 extern RC_ctrl_t rc_ctrl;
 extern receive_vision Rx_vision;
 extern double yaw12;
 extern int8_t flag;
+extern uint8_t heart_id; //受击打装甲板ID
 //************************************************************************************************************//
 
 //**************************************************任务实现**************************************************//
@@ -71,19 +73,26 @@ void Yaw_Task(void * argument)
 			//四个摄像头都没有识别到
 			if(Rx_vision.L_tracking==0 && Rx_vision.R_tracking==0 && Rx_vision.M_tracking==0)
 			{
-				//使小yaw开始正转
-				if(rotate_flag_L == 0)
+				if(heart_id == 0)
 				{
-					rotate_flag_L = 1;
-				}
-				if(rotate_flag_R == 0)
-				{
-					rotate_flag_R = 1;
+					//使小yaw开始正转
+					if(rotate_flag_L == 0)
+					{
+						rotate_flag_L = 1;
+					}
+					if(rotate_flag_R == 0)
+					{
+						rotate_flag_R = 1;
+					}
+					//小yaw正反转巡航
+					yaw_finding_L(-20, -160);
+					yaw_finding_R(160, 20);
 				}
 				
-				//小yaw正反转巡航
-				yaw_finding_L(-20, -160);
-				yaw_finding_R(160, 20);
+				else
+				{
+					
+				}
 			}
 			
 			//左头识别到
@@ -139,7 +148,7 @@ void Yaw_Task(void * argument)
 static void Yaw_init(void)
 {
 	//小yaw初始化
-	initial_angle_L = 3646;
+	initial_angle_L = 3563;
 	initial_angle_R = 7830;
 	target_yaw_a_L = 0;
 	target_yaw_s_L = 0;
@@ -152,6 +161,11 @@ static void Yaw_init(void)
 	
 	pid_init(&pid_yaw_s_R,250,0.01,0,30000,30000); //PID初始化
 	pid_init(&pid_yaw_a_R,6,0,1,30000,30000);
+	
+	heart_direction[0] = 0;
+	heart_direction[1] = 90;
+	heart_direction[2] = 180;
+	heart_direction[3] = -90;
 }
 
 void yaw_control_L(int16_t max_angle, int16_t min_angle)

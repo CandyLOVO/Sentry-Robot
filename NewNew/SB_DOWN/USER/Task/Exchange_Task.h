@@ -23,6 +23,10 @@ typedef struct
 	uint16_t blue_outpost_HP;  
 	uint16_t blue_base_HP;
 	uint16_t checksum; 
+	float L_yaw;	
+	float L_pitch;
+	float R_yaw;	
+	float R_pitch; 
 	uint8_t ending;
 }Tx_naving;
 

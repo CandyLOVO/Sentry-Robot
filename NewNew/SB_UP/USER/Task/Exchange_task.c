@@ -12,6 +12,8 @@ uint8_t Tx_yaw12[8];
 uint8_t Tx_yaw[8];
 uint8_t Tx_gyro[8];
 uint8_t Tx_shijue[25];
+uint8_t Tx_shijue_L[8];
+uint8_t Tx_shijue_R[8];
 
 extern FDCAN_HandleTypeDef hfdcan3;
 extern double yaw12;
@@ -60,6 +62,7 @@ void yaw_value(void)
 {
 	memcpy(&Tx_yaw12[0], &yaw12, 8); //陀螺仪yaw值
 	canx_send_data(&hfdcan3, 0x33, Tx_yaw12, 8);
+	osDelay(1);
 	
 	memcpy(&Tx_gyro[0], &gyro[2], 4); //大yaw角速度
 	Tx_gyro[4] = Rx_vision.L_tracking; //yaw的标志位
@@ -67,7 +70,20 @@ void yaw_value(void)
 	Tx_gyro[6] = Rx_vision.M_tracking;
 	Tx_gyro[7] = flag;
 	canx_send_data(&hfdcan3, 0x34, Tx_gyro, 8);
+	osDelay(1);
 	
 	memcpy(&Tx_yaw[0], &Rx_vision.yaw, 4); //视觉传来yaw的目标值
+	
 	canx_send_data(&hfdcan3, 0x35, Tx_yaw, 8);
+	osDelay(1);
+	
+	memcpy(&Tx_shijue_L[0], &Tx_vision.L_yaw, 4);
+	memcpy(&Tx_shijue_L[4], &Tx_vision.L_pitch, 4);
+	canx_send_data(&hfdcan3, 0x38, Tx_shijue_L, 8);
+	osDelay(1);
+	
+	memcpy(&Tx_shijue_R[0], &Tx_vision.R_yaw, 4);
+	memcpy(&Tx_shijue_R[4], &Tx_vision.R_pitch, 4);
+	canx_send_data(&hfdcan3, 0x39, Tx_shijue_R, 8);
+	osDelay(1);
 }

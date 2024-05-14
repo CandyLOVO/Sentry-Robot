@@ -71,7 +71,7 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 					Rx_nav.sentry_decision_buffer[2] = Rx[13];
 					Rx_nav.sentry_decision_buffer[3] = Rx[14];
 					memcpy(&Rx_nav.sentry_decision, &Rx_nav.sentry_decision_buffer[0], 4);
-//					JudgeSend(Rx_nav.sentry_decision,Datacmd_Decision,ID_Dataccenter);
+					JudgeSend(Rx_nav.sentry_decision,Datacmd_Decision,ID_Dataccenter);
 				}
 			}
 		}

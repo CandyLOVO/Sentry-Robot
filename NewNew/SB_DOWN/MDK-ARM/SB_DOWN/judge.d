@@ -9,7 +9,7 @@ sb_down\judge.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h
 sb_down\judge.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 sb_down\judge.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f446xx.h
 sb_down\judge.o: ../Drivers/CMSIS/Include/core_cm4.h
-sb_down\judge.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stdint.h
+sb_down\judge.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
 sb_down\judge.o: ../Drivers/CMSIS/Include/cmsis_version.h
 sb_down\judge.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 sb_down\judge.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -17,7 +17,7 @@ sb_down\judge.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 sb_down\judge.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
 sb_down\judge.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 sb_down\judge.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-sb_down\judge.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stddef.h
+sb_down\judge.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
 sb_down\judge.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h
 sb_down\judge.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h
 sb_down\judge.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h
@@ -34,7 +34,7 @@ sb_down\judge.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 sb_down\judge.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 sb_down\judge.o: ..\USER\CRC.h
 sb_down\judge.o: ..\USER\struct_typedef.h
-sb_down\judge.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\string.h
+sb_down\judge.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\string.h
 sb_down\judge.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 sb_down\judge.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 sb_down\judge.o: ../Core/Inc/FreeRTOSConfig.h

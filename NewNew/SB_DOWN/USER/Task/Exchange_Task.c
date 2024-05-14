@@ -19,6 +19,10 @@ extern uint8_t Rx[128];
 extern uint32_t length; //DMA中未传输的数据个数
 extern int count;
 extern Sentry_t Sentry;
+extern float L_yaw;	
+extern float L_pitch;
+extern float R_yaw;	
+extern float R_pitch;
 
 void Exchange_Task(void const * argument)
 {
@@ -60,8 +64,6 @@ void Exchange_Task(void const * argument)
 		Tx_friction[2] = (Sentry.Myself_17mm_heat_id2 >> 8) & 0xff; //枪管2实时热量
 		Tx_friction[3] = Sentry.Myself_17mm_heat_id2 & 0xff;
 		Tx_friction[4] = Sentry.armor_id; //受伤装甲板ID
-		
-		JudgeSend(data_t,Datacmd_Decision,ID_Dataccenter);
   }
 }
 
@@ -87,6 +89,10 @@ void RS485_Trans(void)
 	Tx_nav.blue_7_HP = Sentry.blue_remain_HP;
 	Tx_nav.blue_outpost_HP = Sentry.blue_outpost_HP;
 	Tx_nav.blue_base_HP = Sentry.blue_base_HP;
+	Tx_nav.L_yaw = L_yaw;
+	Tx_nav.L_pitch = L_pitch;
+	Tx_nav.R_yaw = R_yaw;
+	Tx_nav.R_pitch = R_pitch;
 	Tx_nav.ending = 0xAA;
 	
 	Tx[0] = Tx_nav.header;
@@ -102,9 +108,17 @@ void RS485_Trans(void)
 	memcpy(&Tx[15], &Tx_nav.blue_7_HP, 2);
 	memcpy(&Tx[17], &Tx_nav.blue_outpost_HP, 2);
 	memcpy(&Tx[19], &Tx_nav.blue_base_HP, 2);
+//	memcpy(&Tx[21], &Tx_nav.L_yaw, 4);
+//	memcpy(&Tx[25], &Tx_nav.L_pitch, 4);
+//	memcpy(&Tx[29], &Tx_nav.R_yaw, 4);
+//	memcpy(&Tx[33], &Tx_nav.R_pitch, 4);
+//	Tx_nav.checksum = Get_CRC16_Check_Sum(Tx, 37, 0xffff);
+//	memcpy(&Tx[37], &Tx_nav.checksum, 2);
+//	Tx[39] = Tx_nav.ending;
+
 	Tx_nav.checksum = Get_CRC16_Check_Sum(Tx, 21, 0xffff);
 	memcpy(&Tx[21], &Tx_nav.checksum, 2);
-	Tx[23] = Tx_nav.ending;
+	Tx[21] = Tx_nav.ending;
 	
 	
 	HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_SET);

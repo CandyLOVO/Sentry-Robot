@@ -42,8 +42,8 @@ void Pitch_Task(void * argument)
   for(;;)
   {
 		//判断陀螺仪是否温补结束
-//		if(flag == 1)
-//		{
+		if(flag == 1)
+		{
 		//初始化映射pitch的角度
 		pitch_angle_L = -motor_value(initial_pitch_L, motor[3].angle); //【要给负值！！】
 		pitch_angle_R = motor_value(initial_pitch_R, motor[2].angle); //pitch处的6020电机镜像装配，需要在取反的基础上再取反
@@ -117,7 +117,7 @@ void Pitch_Task(void * argument)
 		canx_send_data(&hfdcan1, 0x1FF, gimbal_control_6020, 8);
     osDelay(1);
 		}
-//  }
+  }
 }
 //***********************************************************************************************************//
 

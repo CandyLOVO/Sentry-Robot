@@ -12,7 +12,7 @@
 #include "judge.h"
 
 /*********************************************************变量定义*********************************************************/
-#define radius 3.075 // 615mm/2 m
+#define radius 3.075 // (615mm/2) m
 #define cosin 0.707106781187 //二分之根号二
 
 pidTypeDef pid_3508;
@@ -46,6 +46,8 @@ extern Sentry_t Sentry;
 void task_init(void);
 void Yaw_Diff(void);
 void chassis_calculate(int16_t x, int16_t y);
+void Motor_Speed_limiting(volatile int16_t *motor_speed,int16_t limit_speed);
+static void Chassis_Power_Limit(double Chassis_pidout_target_limit);
 /**************************************************************************************************************************/
 
 /*******************************************************底盘控制任务*******************************************************/
@@ -70,13 +72,12 @@ void Chassis_Task(void const * argument)
 			{
 				out_speed[i] = pid_cal_s(&pid_3508, motor[i].speed, target_speed[i]);
 			}
-			Chassis_Power_Limit(40000);
-			can_cmd_send_3508(out_speed[0], out_speed[1], out_speed[2], out_speed[3]);
 		}
 		
 		//导航上场模式，左->最下，右->最下
 		else if(rc_ctrl.rc.s[0]==2 && rc_ctrl.rc.s[1]==2)
 		{
+//************************************上坡模式************************************//
 //			if(Rx_nav.poing == 1)
 //			{
 //				omega = 0;
@@ -84,18 +85,21 @@ void Chassis_Task(void const * argument)
 //			}
 //			else
 //			{
-			//	omega = 400; //给定小陀螺转速
-				omega = 0; //给定小陀螺转速
-				chassis_calculate(Rx_nav.nav_x, Rx_nav.nav_y); //输入导航x、y值，CAN1传来
+//				omega = 400; //给定小陀螺转速
+//				chassis_calculate(Rx_nav.nav_x, Rx_nav.nav_y); //输入导航x、y值，CAN1传来
 //			}
+//********************************************************************************//
 			
+//		  omega = 400; //给定小陀螺转速
+			omega = 0; //给定小陀螺转速
 			for(int i=0;i<4;i++)
 			{
 				out_speed[i] = pid_cal_s(&pid_3508, motor[i].speed, target_speed[i]);
 			}
-			Chassis_Power_Limit(40000);
-			can_cmd_send_3508(out_speed[0], out_speed[1], out_speed[2], out_speed[3]);
 		}
+		
+		Chassis_Power_Limit(40000);
+		can_cmd_send_3508(out_speed[0], out_speed[1], out_speed[2], out_speed[3]);
 		}
     osDelay(1);
   }
@@ -106,7 +110,7 @@ void Chassis_Task(void const * argument)
 void task_init()
 {
 	//PID参数初始化
-	pid_init(&pid_3508,10,0.1,1,30000,30000);
+	pid_init(&pid_3508, 30, 0.1, 1, 16384, 16384);
 }
 
 void Yaw_Diff()
@@ -129,27 +133,8 @@ void chassis_calculate(int16_t x, int16_t y)
 	target_speed[3] = omega*radius + vx*cosin + vy*cosin;
 }
 
-//void slow_down(void)
-//{
-//	for(int i=0;i<4;i++)
-//	{
-//		if(motor[i].speed > 0)
-//		{
-//			target_speed[i] -= 100;
-//			if(target_speed[i] < 0)
-//			{
-//				target_speed[i] = 0;
-//			}
-//		}
-//		else if(motor[i].speed < 0)
-//		{
-//			
-//		}
-//	}
-//}
-
 //将3508和6020运动模式结合，形成底盘控制
- void Motor_Speed_limiting(volatile int16_t *motor_speed,int16_t limit_speed)
+void Motor_Speed_limiting(volatile int16_t *motor_speed,int16_t limit_speed)
 {
     uint8_t i=0;
     int16_t max = 0;
