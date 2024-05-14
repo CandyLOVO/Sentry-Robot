@@ -1,9 +1,9 @@
 sb_up/stream_buffer.o: \
   ..\Middlewares\Third_Party\FreeRTOS\Source\stream_buffer.c \
-  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\stdint.h \
-  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\string.h \
+  D:\RoboterMaster\keil\ARM\ARMCLANG\Bin\..\include\stdint.h \
+  D:\RoboterMaster\keil\ARM\ARMCLANG\Bin\..\include\string.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h \
-  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\stddef.h \
+  D:\RoboterMaster\keil\ARM\ARMCLANG\Bin\..\include\stddef.h \
   ..\Core\Inc\FreeRTOSConfig.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h \

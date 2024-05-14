@@ -1,9 +1,9 @@
 sb_up/heap_4.o: \
   ..\Middlewares\Third_Party\FreeRTOS\Source\portable\MemMang\heap_4.c \
-  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\stdlib.h \
+  D:\RoboterMaster\keil\ARM\ARMCLANG\Bin\..\include\stdlib.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\FreeRTOS.h \
-  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\stddef.h \
-  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\stdint.h \
+  D:\RoboterMaster\keil\ARM\ARMCLANG\Bin\..\include\stddef.h \
+  D:\RoboterMaster\keil\ARM\ARMCLANG\Bin\..\include\stdint.h \
   ..\Core\Inc\FreeRTOSConfig.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\projdefs.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\portable.h \

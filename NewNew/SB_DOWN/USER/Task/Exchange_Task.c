@@ -64,6 +64,23 @@ void Exchange_Task(void const * argument)
 		Tx_friction[2] = (Sentry.Myself_17mm_heat_id2 >> 8) & 0xff; //枪管2实时热量
 		Tx_friction[3] = Sentry.Myself_17mm_heat_id2 & 0xff;
 		Tx_friction[4] = Sentry.armor_id; //受伤装甲板ID
+		
+		int16_t	Tx_friction_send;
+		Tx_friction_send=Sentry.bullet_speed ;
+		
+		memset(Tx_friction, 0, sizeof(Tx_friction));//接收前清空数组
+		Tx_friction[0] = Sentry.shooter_ID;												//枪管ID
+		Tx_friction[1] = Sentry.bullet_frequence;									//枪管弹频
+		Tx_friction[2] = (Tx_friction_send >> 8) & 0xff;				//枪管射速（先高8位后低8位）
+		Tx_friction[3] = Tx_friction_send & 0xff;
+		Tx_friction[4] = 0;
+		Tx_friction[5] = 0;
+		Tx_friction[6] = 0;
+		Tx_friction[7] = 0;
+		can_remote(Tx_friction, 0x37);
+		osDelay(1);
+		
+		JudgeSend(data_t,Datacmd_Decision,ID_Dataccenter);
   }
 }
 

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [SB_DOWN\SB_DOWN.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image SB_DOWN\SB_DOWN.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Wed May 15 03:56:49 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Wed May 15 04:14:26 2024
 <BR><P>
 <H3>Maximum Stack Usage =        288 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -812,12 +812,13 @@ Global Symbols
 <LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_CAN1_Init
 </UL>
 
-<P><STRONG><a name="[72]"></a>Exchange_Task</STRONG> (Thumb, 138 bytes, Stack size 0 bytes, exchange_task.o(i.Exchange_Task))
+<P><STRONG><a name="[72]"></a>Exchange_Task</STRONG> (Thumb, 230 bytes, Stack size 0 bytes, exchange_task.o(i.Exchange_Task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = Exchange_Task &rArr; RS485_Trans &rArr; osDelay &rArr; vTaskDelay &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
 <LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;can_remote
 <LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RS485_Trans
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;JudgeSend
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> freertos.o(.constdata)
 </UL>
@@ -1275,6 +1276,7 @@ Global Symbols
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_CRC16_Check_Sum
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DRV_USART1_IRQHandler
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Exchange_Task
 </UL>
 
 <P><STRONG><a name="[103]"></a>MG5010_init</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, mg5010_control.o(i.MG5010_init))

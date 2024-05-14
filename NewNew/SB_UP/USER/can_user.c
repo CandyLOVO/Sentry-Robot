@@ -9,8 +9,9 @@ motor_info motor_friction[8];
 RC_ctrl_t rc_ctrl;
 uint8_t heart_id;
 
-extern uint16_t launch_heat_id1;
-extern uint16_t launch_heat_id2;
+extern Shooter_t Shooter_L;
+extern Shooter_t Shooter_R;
+
 
 FDCAN_RxHeaderTypeDef RxHeader1;
 uint8_t g_Can1RxData[64];
@@ -226,10 +227,25 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 			if(RxHeader3.Identifier == 0x36)
 			{
 				//先收高八位，再收低八位
-				launch_heat_id1 = ((g_Can3RxData[0] << 8) | g_Can3RxData[1]); //枪管1实时热量
-				launch_heat_id1 = ((g_Can3RxData[2] << 8) | g_Can3RxData[3]); //枪管2实时热量
+				Shooter_L.shooter_heat = ((g_Can3RxData[0] << 8) | g_Can3RxData[1]); //枪管1实时热量
+				Shooter_R.shooter_heat = ((g_Can3RxData[2] << 8) | g_Can3RxData[3]); //枪管2实时热量
 				heart_id = g_Can3RxData[4]; //受击打装甲板ID
 			}
+			
+			if(RxHeader3.Identifier == 0x37)
+			{ 
+        if(g_Can3RxData[0] == 0x01)
+        {	
+          Shooter_L.shoot_rate=g_Can3RxData[1];
+          Shooter_L.shoot_speed=((g_Can3RxData[2]<<8) | g_Can3RxData[3]);
+        }
+
+        if(g_Can3RxData[0] == 0x02)
+        {
+          Shooter_R.shoot_rate=g_Can3RxData[1];
+          Shooter_R.shoot_speed=((g_Can3RxData[2]<<8) | g_Can3RxData[3]);
+        }
+			}	
 	  }
   }
 }
