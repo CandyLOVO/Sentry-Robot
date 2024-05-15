@@ -38,6 +38,7 @@ extern receive_vision Rx_vision;
 extern double yaw12;
 extern int8_t flag;
 extern uint8_t heart_id; //受击打装甲板ID
+
 //************************************************************************************************************//
 
 //**************************************************任务实现**************************************************//
@@ -102,6 +103,7 @@ void Yaw_Task(void * argument)
 				target_yaw_a_L = Rx_vision.L_yaw - yaw12; //左头目标值绝对坐标系转换
 				yaw_control_L(-20, -160); //左头目标值软件限位
 			}
+			
 			//右头识别到
 			if(Rx_vision.R_tracking == 1)
 			{
@@ -269,7 +271,7 @@ void yaw_finding_L(int16_t max_angle, int16_t min_angle)
 	//左头巡航
 	if(rotate_flag_L == 1)
 	{
-		target_yaw_a_L += 0.1; //以0.1/度的速度巡航
+		target_yaw_a_L += 0.03; //以0.1/度的速度巡航
 		if(target_yaw_a_L >= (min_angle+360))
 		{
 			rotate_flag_L = 2;
@@ -277,7 +279,7 @@ void yaw_finding_L(int16_t max_angle, int16_t min_angle)
 	}
 	else if(rotate_flag_L == 2) //左头反转
 	{
-		target_yaw_a_L -= 0.1;
+		target_yaw_a_L -= 0.03;
 		if(target_yaw_a_L <= max_angle)
 		{
 			rotate_flag_L = 1;
@@ -290,7 +292,7 @@ void yaw_finding_R(int16_t max_angle, int16_t min_angle)
 	//右头巡航
 	if(rotate_flag_R == 1)
 	{
-		target_yaw_a_R -= 0.1; //以0.1/度的速度巡航
+		target_yaw_a_R -= 0.03; //以0.1/度的速度巡航
 		if(target_yaw_a_R <= (max_angle-360))
 		{
 			rotate_flag_R = 2;
@@ -298,7 +300,7 @@ void yaw_finding_R(int16_t max_angle, int16_t min_angle)
 	}
 	else if(rotate_flag_R == 2) //右头反转
 	{
-		target_yaw_a_R += 0.1;
+		target_yaw_a_R += 0.03;
 		if(target_yaw_a_R >= min_angle)
 		{
 			rotate_flag_R = 1;

@@ -14,6 +14,7 @@ float yaw_angle; //大yaw5010当前角度（0~+-180）
 float target_angle_5010;
 float target_speed_5010;
 int32_t output_5010;
+int32_t time_delay;
 
 extern RC_ctrl_t rc_ctrl;
 extern motor_5010_info motor_5010;

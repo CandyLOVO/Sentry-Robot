@@ -94,7 +94,8 @@ void Launch_Task(void *argument)
                 {	
                     if (bopan_reversal_flag_L == 1) {
                         Bopan_speed_calc_L(bopan_reversal_shoot_rate, bopan_reversal_shoot_rate, bopan_reversal_shoot_rate);
-                    } else if (bopan_reversal_flag_L == 0) {
+                    } 
+										else if (bopan_reversal_flag_L == 0) {
                         Bopan_speed_calc_L(bopan_shoot_rate_max, bopan_shoot_rate_min, bopan_shoot_rate_test); // 最高射频，最低射频，无裁判系统射频
                     }
                 }
@@ -107,7 +108,8 @@ void Launch_Task(void *argument)
                 {
                     if (bopan_reversal_flag_R == 1) {
                         Bopan_speed_calc_R(bopan_reversal_shoot_rate, bopan_reversal_shoot_rate, bopan_reversal_shoot_rate); // 最高射频，最低射频，无裁判系统射频
-                    } else if (bopan_reversal_flag_R == 0) {
+                    } 
+										else if (bopan_reversal_flag_R == 0) {
                         Bopan_speed_calc_R(bopan_shoot_rate_max, bopan_shoot_rate_min, bopan_shoot_rate_test); // 最高射频，最低射频，无裁判系统射频
                     }
                 }
@@ -140,8 +142,6 @@ static void DataUpGrade()
 {	
 		Shooter_L.Fire_Flag=Rx_vision.L_tracking || Rx_vision.M_tracking;
 		Shooter_R.Fire_Flag=Rx_vision.R_tracking || Rx_vision.M_tracking;
-		Shooter_L.Fire_Flag=0;
-		Shooter_R.Fire_Flag=0;
 	
     if ((rc_ctrl.rc.s[1] == 2 && rc_ctrl.rc.s[0] == 2) ) {
         remote_mode = 22;

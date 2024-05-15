@@ -181,7 +181,7 @@ void pitch_finding(int16_t max_angle, int16_t min_angle)
 {
 	if(nod_flag_L == 1)
 	{
-		target_pitch_a_L -= 0.05;
+		target_pitch_a_L -= 0.02;
 		if(target_pitch_a_L < min_angle)
 		{
 			nod_flag_L = 2;
@@ -189,7 +189,7 @@ void pitch_finding(int16_t max_angle, int16_t min_angle)
 	}
 	else if(nod_flag_L == 2)
 	{
-		target_pitch_a_L += 0.05;
+		target_pitch_a_L += 0.02;
 		if(target_pitch_a_L > max_angle)
 		{
 			nod_flag_L = 1;
@@ -198,7 +198,7 @@ void pitch_finding(int16_t max_angle, int16_t min_angle)
 
 	if(nod_flag_R == 1)
 	{
-		target_pitch_a_R -= 0.05;
+		target_pitch_a_R -= 0.02;
 		if(target_pitch_a_R < min_angle)
 		{
 			nod_flag_R = 2;
@@ -206,7 +206,7 @@ void pitch_finding(int16_t max_angle, int16_t min_angle)
 	}
 	else if(nod_flag_R == 2)
 	{
-		target_pitch_a_R += 0.05;
+		target_pitch_a_R += 0.02;
 		if(target_pitch_a_R > max_angle)
 		{
 			nod_flag_R = 1;
