@@ -13,7 +13,7 @@ int32_t initial_angle; //5010【面向底盘正方向】的初始编码值
 float yaw_angle; //大yaw5010当前角度（0~+-180）
 float target_angle_5010;
 float target_speed_5010;
-float output_5010;
+int32_t output_5010;
 
 extern RC_ctrl_t rc_ctrl;
 extern motor_5010_info motor_5010;
@@ -73,11 +73,11 @@ void Yaw_task(void const * argument)
 void yaw_init(void)
 {
 	//大yaw5010数值初始化
-	initial_angle = 59861; //头朝向底盘正方向时的编码值
+	initial_angle = 21401; //头朝向底盘正方向时的编码值
 	target_angle_5010 = 0;
 	target_speed_5010 = 0;
-	pid_init(&pid_5010_s,5000,0.1,0,30000,30000); //PID初始化 PI
-	pid_init(&pid_5010_a,3,0,20,30000,30000); //PD
+	pid_init(&pid_5010_s,10000,5,0,200000,200000); //PID初始化 PI
+	pid_init(&pid_5010_a,3,0,300,200000,200000); //PD
 //	pid_init(&pid_5010_s,1,0,0,200000,200000); //PID初始化 PI
 //	pid_init(&pid_5010_a,1,0,0,200000,200000); //PD
 }
@@ -98,7 +98,7 @@ void yaw_control(void)
 void yaw_finding(void)
 {
 	//大yaw巡航
-	target_angle_5010 += 0.1;
+	target_angle_5010 += 0.03;
 	if(target_angle_5010 > 180)
 	{
 		target_angle_5010 -= 360;

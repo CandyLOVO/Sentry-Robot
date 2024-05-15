@@ -65,7 +65,7 @@ void Chassis_Task(void const * argument)
 		//遥控器控制模式，左->中间，右->中间              左->最上，右->中间
 		if((rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3) || (rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==1))
 		{
-			omega = rc_ctrl.rc.ch[4]*1.5; //拨轮控制小陀螺
+			omega = rc_ctrl.rc.ch[4]*5; //拨轮控制小陀螺
 			chassis_calculate(rc_ctrl.rc.ch[0]*6, rc_ctrl.rc.ch[1]*6); //右拨杆控制底盘 遥控器右拨杆有问题
 			
 			for(int i=0;i<4;i++)
@@ -110,7 +110,7 @@ void Chassis_Task(void const * argument)
 void task_init()
 {
 	//PID参数初始化
-	pid_init(&pid_3508, 30, 0.1, 1, 16384, 16384);
+	pid_init(&pid_3508, 30, 0.3, 0, 16384, 16384);
 }
 
 void Yaw_Diff()
