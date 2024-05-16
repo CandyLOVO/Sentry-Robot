@@ -53,3 +53,5 @@ sb_down\yaw_task.o: ../USER/rc_potocal.h
 sb_down\yaw_task.o: ../USER/struct_typedef.h
 sb_down\yaw_task.o: ../USER/pid_user.h
 sb_down\yaw_task.o: ..\USER\Task\Exchange_Task.h
+sb_down\yaw_task.o: ../USER/judge.h
+sb_down\yaw_task.o: ../USER/uart_user.h

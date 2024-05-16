@@ -5,6 +5,7 @@
 #include "rc_potocal.h"
 #include "pid_user.h"
 #include "Exchange_Task.h"
+#include "judge.h"
 
 pidTypeDef pid_5010_s;
 pidTypeDef pid_5010_a;
@@ -14,6 +15,7 @@ float yaw_angle; //大yaw5010当前角度（0~+-180）
 float target_angle_5010;
 float target_speed_5010;
 int32_t output_5010;
+uint8_t heart_direction[4];
 float last_target_angle_5010;
 uint16_t time_delay = 0;
 uint8_t flag_suo = 0;
@@ -28,6 +30,7 @@ extern uint8_t R_tracking;
 extern uint8_t M_tracking;
 extern int8_t flag;
 extern TIM_HandleTypeDef htim4;
+extern Sentry_t Sentry;
 
 void Yaw_task(void const * argument)
 {
@@ -53,14 +56,22 @@ void Yaw_task(void const * argument)
 			//四个摄像头都没有识别到
 			if(L_tracking==0 && R_tracking==0 && M_tracking==0)
 			{
-				if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，在1000ms内：
+				if(Sentry.armor_id == 0)
 				{
-					target_angle_5010 = last_target_angle_5010; //目标角度为锁住时的角度
+					if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，在1000ms内：
+					{
+						target_angle_5010 = last_target_angle_5010; //目标角度为锁住时的角度
+					}
+					else
+					{
+						yaw_finding(); //大yaw巡航
+						flag_suo = 2; //未锁住标志位
+					}
 				}
+				
 				else
 				{
-					yaw_finding(); //大yaw巡航
-					flag_suo = 2; //未锁住标志位
+					target_angle_5010 = yaw12 + heart_direction[Sentry.armor_id-1];
 				}
 			}
 			//至少有一个摄像头识别到
@@ -96,6 +107,11 @@ void yaw_init(void)
 	pid_init(&pid_5010_a,3,0,300,200000,200000); //PD
 //	pid_init(&pid_5010_s,1,0,0,200000,200000); //PID初始化 PI
 //	pid_init(&pid_5010_a,1,0,0,200000,200000); //PD
+	
+	heart_direction[0] = 0;
+	heart_direction[1] = 90;
+	heart_direction[2] = 180;
+	heart_direction[3] = -90;
 }
 
 void yaw_control(void)

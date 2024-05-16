@@ -104,7 +104,8 @@ void Yaw_Task(void * argument)
 				
 				else
 				{
-					
+					target_yaw_a_L = 0;
+					target_yaw_a_R = 0;
 				}
 			}
 			
