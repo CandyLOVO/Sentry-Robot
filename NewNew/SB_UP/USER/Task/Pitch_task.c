@@ -56,8 +56,14 @@ void Pitch_Task(void * argument)
 		{
 			target_pitch_a_L += rc_ctrl.rc.ch[3] * 0.1/660;
 			target_pitch_a_R += rc_ctrl.rc.ch[1] * 0.1/660;
-			pitch_control_L(12, -24);
-			pitch_control_R(12, -24);
+			pitch_control_L(25, -24);
+			pitch_control_R(25, -24);
+		}
+		
+		if(rc_ctrl.rc.s[1]==3 && rc_ctrl.rc.s[0]==3)
+		{
+			target_pitch_a_L = 0;
+			target_pitch_a_R = 0;
 		}
 		
 		//自瞄模式，左->下，右->下
@@ -75,7 +81,7 @@ void Pitch_Task(void * argument)
 					nod_flag_R = 1;
 				}
 				
-				pitch_finding(12, -24);
+				pitch_finding(25, -24);
 			}
 			
 			//左头识别到目标
@@ -84,23 +90,23 @@ void Pitch_Task(void * argument)
 				//左头停止巡航
 				nod_flag_L = 0;
 				target_pitch_a_L = Rx_vision.L_pitch;
-				pitch_control_L(12, -24);
+				pitch_control_L(25, -24);
 			}
 			if(Rx_vision.R_tracking == 1)
 			{
 				//右头停止巡航
 				nod_flag_R = 0;
 				target_pitch_a_R = Rx_vision.R_pitch;
-				pitch_control_R(12, -24);
+				pitch_control_R(25, -24);
 			}
 			if(Rx_vision.M_tracking == 1)
 			{
 				nod_flag_L = 0;
 				target_pitch_a_L = Rx_vision.L_pitch;
-				pitch_control_L(12, -24);
+				pitch_control_L(25, -24);
 				nod_flag_R = 0;
 				target_pitch_a_R = Rx_vision.R_pitch;
-				pitch_control_R(12, -24);
+				pitch_control_R(25, -24);
 			}
 		}
 		

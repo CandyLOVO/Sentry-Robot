@@ -93,14 +93,14 @@ float pid_cal_yaw_a(pidTypeDef *PID,float get,float set,uint8_t warning_flag) //
 	
 	if(warning_flag == 1)
 	{
-		if((PID->error[1]>-180) && (PID->error[1]<up_limit))
+		if((PID->error[1]>=-180) && (PID->error[1]<=up_limit))
 		{
 			PID->error[1] += 360;
 		}
 	}
 	else if(warning_flag == 2)
 	{
-		if((PID->error[1]>low_limit) && (PID->error[1]<180))
+		if((PID->error[1]>=low_limit) && (PID->error[1]<=180))
 		{
 			PID->error[1] -= 360;
 		}

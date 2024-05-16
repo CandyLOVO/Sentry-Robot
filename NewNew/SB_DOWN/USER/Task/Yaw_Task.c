@@ -103,10 +103,8 @@ void yaw_init(void)
 	initial_angle = 21401; //头朝向底盘正方向时的编码值
 	target_angle_5010 = 0;
 	target_speed_5010 = 0;
-	pid_init(&pid_5010_s,10000,5,0,200000,200000); //PID初始化 PI
-	pid_init(&pid_5010_a,3,0,300,200000,200000); //PD
-//	pid_init(&pid_5010_s,1,0,0,200000,200000); //PID初始化 PI
-//	pid_init(&pid_5010_a,1,0,0,200000,200000); //PD
+	pid_init(&pid_5010_s,15000,10,0,300000,300000); //PID初始化 PI
+	pid_init(&pid_5010_a,3,0,350,300000,300000); //PD
 	
 	heart_direction[0] = 0;
 	heart_direction[1] = 90;

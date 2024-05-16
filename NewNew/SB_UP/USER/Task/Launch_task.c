@@ -23,9 +23,9 @@ extern int8_t flag;
 extern receive_vision Rx_vision;
 
 #define mocalun_speed         19 * 380 // 摩擦轮转速(根据实际情况更改快速调整射速）
-#define C_bopan_reversal_time 0.4f     // 拨盘反转时间(s)
+#define C_bopan_reversal_time 0.1f     // 拨盘反转时间(s)
 #define K_shoot_rate_correct  1        // 射频修正参数（根据实际情况更改快速调整射频）
-#define C_bopan_block_I       12000    // 拨盘堵转电流（测试后更改）
+#define C_bopan_block_I       10000    // 拨盘堵转电流（测试后更改）
 #define K_rc_to_bopanSpeed    8        // 遥控通道值切换到拨盘速度（更改可快速调整1-1模式下遥控与拨盘映射关系）
 
 // PID初始化
@@ -60,8 +60,8 @@ static void re_shoot_rate_calc(void);
 int16_t bopan_shoot_rate_max      = 10 ;                  // 最高射频（个/s）
 int16_t bopan_shoot_rate_min      = 7 ;                   // 最低射频
 int16_t bopan_shoot_rate_test     = 5;                      // 无裁判系统射频
-float bopan_shoot_rate_visiontest =0.5;										//自瞄调试射频
-int16_t bopan_reversal_shoot_rate = -10;                     // 拨盘反转射频
+float bopan_shoot_rate_visiontest = 0.5;										//自瞄调试射频
+int16_t bopan_reversal_shoot_rate = -20;                     // 拨盘反转射频
 uint8_t bopan_reversal_flag_L = 0, bopan_reversal_flag_R = 0; // 拨盘反转标志位，0为正转，1为反转
 int16_t remote_mode;                                          // 遥控模式，1-1为Fire Control 模式，摩擦轮旋转，遥控左右摇杆控制拨盘旋转；2-2为上场模式，摩擦轮旋转，根据视觉识别位发弹
 float Sys_time;
@@ -89,15 +89,17 @@ void Launch_Task(void *argument)
             //===============================================拨盘================================================//
             //===========================================自动模式 begin================================//
             if (remote_mode == 22) {
-
                 if (Shooter_L.Fire_Flag == 1) // 左枪管发射
                 {	
-                    if (bopan_reversal_flag_L == 1) {
-                        Bopan_speed_calc_L(bopan_reversal_shoot_rate, bopan_reversal_shoot_rate, bopan_reversal_shoot_rate);
-                    } 
-										else if (bopan_reversal_flag_L == 0) {
-                        Bopan_speed_calc_L(bopan_shoot_rate_max, bopan_shoot_rate_min, bopan_shoot_rate_test); // 最高射频，最低射频，无裁判系统射频
-                    }
+                  if (bopan_reversal_flag_L == 1) 
+									{
+//                    Bopan_speed_calc_L(bopan_reversal_shoot_rate, bopan_reversal_shoot_rate, bopan_reversal_shoot_rate);
+										target_bopan[1] = bopan_reversal_shoot_rate*60 / 8 * 36;
+                  } 
+									else if (bopan_reversal_flag_L == 0) 
+									{
+                    Bopan_speed_calc_L(bopan_shoot_rate_max, bopan_shoot_rate_min, bopan_shoot_rate_test); // 最高射频，最低射频，无裁判系统射频
+                  }
                 }
 
                 else {
@@ -107,8 +109,9 @@ void Launch_Task(void *argument)
                 if (Shooter_R.Fire_Flag == 1) // 右枪管发射
                 {
                     if (bopan_reversal_flag_R == 1) {
-                        Bopan_speed_calc_R(bopan_reversal_shoot_rate, bopan_reversal_shoot_rate, bopan_reversal_shoot_rate); // 最高射频，最低射频，无裁判系统射频
-                    } 
+//                        Bopan_speed_calc_R(bopan_reversal_shoot_rate, bopan_reversal_shoot_rate, bopan_reversal_shoot_rate); // 最高射频，最低射频，无裁判系统射频
+											target_bopan[0] = bopan_reversal_shoot_rate*60 / 8 * 36;
+										} 
 										else if (bopan_reversal_flag_R == 0) {
                         Bopan_speed_calc_R(bopan_shoot_rate_max, bopan_shoot_rate_min, bopan_shoot_rate_test); // 最高射频，最低射频，无裁判系统射频
                     }

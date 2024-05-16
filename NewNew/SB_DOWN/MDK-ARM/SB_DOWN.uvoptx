@@ -228,7 +228,7 @@
         <Ww>
           <count>15</count>
           <WinNumber>1</WinNumber>
-          <ItemText>pid_5010_s</ItemText>
+          <ItemText>pid_5010_s,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>

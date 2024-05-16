@@ -72,6 +72,12 @@ void Yaw_Task(void * argument)
 			yaw_control_R(160, 20);
 		}
 		
+		if(rc_ctrl.rc.s[1]==3 && rc_ctrl.rc.s[0]==3)
+		{
+			target_yaw_a_L = 0;
+			target_yaw_a_R = 0;
+		}
+		
 		//自瞄模式，左->下，右->下
 		if(rc_ctrl.rc.s[1]==2 && rc_ctrl.rc.s[0]==2)
 		{
@@ -324,124 +330,6 @@ void yaw_finding_R(int16_t max_angle, int16_t min_angle)
 		}
 	}
 }
-
-//void yaw_control_R(int16_t max_angle, int16_t min_angle)
-//{
-//	//控制小yaw，max_angle和min_angle内的区域为禁区 （该软件限位针对于max_angle和min_angle都为负数的情况）
-//	//该函数需要配合pid_user.c的pid_cal_yaw_a函数使用
-//	
-//	//越界处理
-//	if(target_yaw_a_R>180)
-//	{
-//		target_yaw_a_R -= 360;
-//	}
-//	else if(target_yaw_a_R<-180)
-//	{
-//		target_yaw_a_R += 360;
-//	}
-//	
-//	//软件限位（目标值位于禁区内）
-//	if((target_yaw_a_R>min_angle) && (target_yaw_a_R<max_angle))
-//	{
-//		target_yaw_a_R = 0;
-//	}
-//	
-//	//软件限位（当前值位于危险区内）
-//	if(((yaw_angle_R>0) && (yaw_angle_R<(min_angle+180))) || ((yaw_angle_R>max_angle) && (yaw_angle_R<0)))
-//	{
-//		up_limit = min_angle - max_angle;
-//		warning_flag_R = 1; //当前角度位于上方危险区域
-//	}
-//	else if(((yaw_angle_R>(max_angle+180)) && (yaw_angle_R<180)) || ((yaw_angle_R>-180) && (yaw_angle_R<min_angle)))
-//	{
-//		low_limit = max_angle - min_angle;
-//		warning_flag_R = 2; //当前角度位于下方危险区域
-//	}
-//	else
-//	{
-//		warning_flag_R = 0; //当前角度安全
-//	}
-//}
-
-//void yaw_control_L(int16_t max_angle, int16_t min_angle)
-//{
-//	//控制小yaw，max_angle和min_angle内的区域为禁区 （该软件限位针对于max_angle和min_angle都为正数的情况）
-//	//该函数需要配合pid_user.c的pid_cal_yaw_a函数使用
-//	
-//	//越界处理
-//	if(target_yaw_a_L>180)
-//	{
-//		target_yaw_a_L -= 360;
-//	}
-//	else if(target_yaw_a_L<-180)
-//	{
-//		target_yaw_a_L += 360;
-//	}
-//	
-//	//软件限位（目标值位于禁区内）
-//	if((target_yaw_a_L>min_angle) && (target_yaw_a_L<max_angle))
-//	{
-//		target_yaw_a_L = 0;
-//	}
-//	
-//	//软件限位（当前值位于危险区内）
-//	if(((yaw_angle_L>0) && (yaw_angle_L<min_angle)) || ((yaw_angle_L>(max_angle-180)) && (yaw_angle_L<0)))
-//	{
-//		low_limit = max_angle - min_angle;
-//		warning_flag_L = 2; //当前角度位于上方危险区域
-//	}
-//	else if(((yaw_angle_L>max_angle) && (yaw_angle_L<180)) || ((yaw_angle_L>-180) && (yaw_angle_L<(min_angle-180))))
-//	{
-//		up_limit = min_angle - max_angle;
-//		warning_flag_L = 1; //当前角度位于下方危险区域
-//	}
-//	else
-//	{
-//		warning_flag_L = 0; //当前角度安全
-//	}
-//}
-
-//void yaw_finding_R(int16_t max_angle, int16_t min_angle)
-//{
-//	//左头巡航
-//	if(rotate_flag_R == 1)
-//	{
-//		target_yaw_a_R += 0.1; //以0.1/度的速度巡航
-//		if(target_yaw_a_R >= (min_angle+360))
-//		{
-//			rotate_flag_R = 2;
-//		}
-//	}
-//	else if(rotate_flag_R == 2) //左头反转
-//	{
-//		target_yaw_a_R -= 0.1;
-//		if(target_yaw_a_R <= max_angle)
-//		{
-//			rotate_flag_R = 1;
-//		}
-//	}
-//}
-
-//void yaw_finding_L(int16_t max_angle, int16_t min_angle)
-//{
-//	//右头巡航
-//	if(rotate_flag_L == 1)
-//	{
-//		target_yaw_a_L -= 0.1; //以0.1/度的速度巡航
-//		if(target_yaw_a_L <= (max_angle-360))
-//		{
-//			rotate_flag_L = 2;
-//		}
-//	}
-//	else if(rotate_flag_L == 2) //右头反转
-//	{
-//		target_yaw_a_L += 0.1;
-//		if(target_yaw_a_L >= min_angle)
-//		{
-//			rotate_flag_L = 1;
-//		}
-//	}
-//}
 
 float motor_value(int16_t k, int16_t n)
 {
