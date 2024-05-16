@@ -105,6 +105,7 @@ int main(void)
   MX_FDCAN2_Init();
   MX_FDCAN3_Init();
   MX_TIM4_Init();
+  MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
 	FDCAN1_Config(); //FDCAN¹ýÂËÆ÷ÅäÖÃ
 	FDCAN2_Config();

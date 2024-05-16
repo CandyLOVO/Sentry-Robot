@@ -29,6 +29,8 @@ sb_down\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
 sb_down\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
 sb_down\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 sb_down\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+sb_down\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+sb_down\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 sb_down\main.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 sb_down\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 sb_down\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
@@ -46,6 +48,7 @@ sb_down\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 sb_down\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 sb_down\main.o: ../Core/Inc/can.h
 sb_down\main.o: ../Core/Inc/dma.h
+sb_down\main.o: ../Core/Inc/tim.h
 sb_down\main.o: ../Core/Inc/usart.h
 sb_down\main.o: ../Core/Inc/gpio.h
 sb_down\main.o: ../USER/can_user.h

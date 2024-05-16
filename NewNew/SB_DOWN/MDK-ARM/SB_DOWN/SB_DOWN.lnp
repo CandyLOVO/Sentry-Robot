@@ -5,6 +5,7 @@
 "sb_down\freertos.o"
 "sb_down\can.o"
 "sb_down\dma.o"
+"sb_down\tim.o"
 "sb_down\usart.o"
 "sb_down\stm32f4xx_it.o"
 "sb_down\stm32f4xx_hal_msp.o"

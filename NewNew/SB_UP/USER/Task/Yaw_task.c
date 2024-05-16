@@ -31,6 +31,10 @@ uint8_t gimbal_control_6020[8];
 uint8_t rotate_flag_L = 0; //判断是否需要反转
 uint8_t rotate_flag_R = 0;
 uint8_t heart_direction[4];
+float last_target_yaw_a_L;
+float last_target_yaw_a_R;
+uint16_t time_delay;
+uint8_t flag_suo;
 
 extern motor_info motor[8];
 extern RC_ctrl_t rc_ctrl;
@@ -38,7 +42,7 @@ extern receive_vision Rx_vision;
 extern double yaw12;
 extern int8_t flag;
 extern uint8_t heart_id; //受击打装甲板ID
-
+extern TIM_HandleTypeDef htim5;
 //************************************************************************************************************//
 
 //**************************************************任务实现**************************************************//
@@ -76,18 +80,26 @@ void Yaw_Task(void * argument)
 			{
 				if(heart_id == 0)
 				{
-					//使小yaw开始正转
-					if(rotate_flag_L == 0)
+					if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，在1000ms内：
 					{
-						rotate_flag_L = 1;
+						target_yaw_a_L = last_target_yaw_a_L; //目标角度为锁住时的角度
+						target_yaw_a_R = last_target_yaw_a_R;
 					}
-					if(rotate_flag_R == 0)
+					else
 					{
-						rotate_flag_R = 1;
+						//使小yaw开始正转
+						if(rotate_flag_L == 0)
+						{
+							rotate_flag_L = 1;
+						}
+						if(rotate_flag_R == 0)
+						{
+							rotate_flag_R = 1;
+						}
+						//小yaw正反转巡航
+						yaw_finding_L(-20, -160);
+						yaw_finding_R(160, 20);
 					}
-					//小yaw正反转巡航
-					yaw_finding_L(-20, -160);
-					yaw_finding_R(160, 20);
 				}
 				
 				else
@@ -101,6 +113,7 @@ void Yaw_Task(void * argument)
 			{
 				rotate_flag_L = 0; //左头不转
 				target_yaw_a_L = Rx_vision.L_yaw - yaw12; //左头目标值绝对坐标系转换
+				last_target_yaw_a_L = target_yaw_a_L;
 				yaw_control_L(-20, -160); //左头目标值软件限位
 			}
 			
@@ -109,6 +122,7 @@ void Yaw_Task(void * argument)
 			{
 				rotate_flag_R = 0; //右头不转
 				target_yaw_a_R = Rx_vision.R_yaw - yaw12; //右头目标值绝对坐标系转换
+				last_target_yaw_a_R = target_yaw_a_R;
 				yaw_control_R(160, 20); //右头目标值软件限位
 			}
 			//大yaw上的摄像头识别到
@@ -116,9 +130,11 @@ void Yaw_Task(void * argument)
 			{
 				rotate_flag_L = 0;
 				target_yaw_a_L = Rx_vision.L_yaw - yaw12;
+				last_target_yaw_a_L = target_yaw_a_L;
 				yaw_control_L(-20, -160);
 				rotate_flag_R = 0;
 				target_yaw_a_R = Rx_vision.R_yaw - yaw12;
+				last_target_yaw_a_R = target_yaw_a_R;
 				yaw_control_R(160, 20);
 			}
 		}

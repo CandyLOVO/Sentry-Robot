@@ -30,6 +30,9 @@ extern RC_ctrl_t rc_ctrl;
 extern receive_vision Rx_vision;
 extern uint8_t gimbal_control_6020[8];
 extern int8_t flag;
+extern TIM_HandleTypeDef htim5;
+extern uint16_t time_delay;
+extern uint8_t flag_suo;
 //***********************************************************************************************************//
 
 //**************************************************任务实现**************************************************//

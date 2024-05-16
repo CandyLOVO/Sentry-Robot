@@ -30,6 +30,8 @@ sb_down\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h
 sb_down\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
 sb_down\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 sb_down\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+sb_down\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+sb_down\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 sb_down\yaw_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 sb_down\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 sb_down\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
@@ -46,7 +48,7 @@ sb_down\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 sb_down\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 sb_down\yaw_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 sb_down\yaw_task.o: ../USER/can_user.h
-sb_down\yaw_task.o: ..\USER\Motor\MG5010_control.h
+sb_down\yaw_task.o: ../USER/Motor/MG5010_control.h
 sb_down\yaw_task.o: ../USER/rc_potocal.h
 sb_down\yaw_task.o: ../USER/struct_typedef.h
 sb_down\yaw_task.o: ../USER/pid_user.h

@@ -14,7 +14,9 @@ float yaw_angle; //大yaw5010当前角度（0~+-180）
 float target_angle_5010;
 float target_speed_5010;
 int32_t output_5010;
-int32_t time_delay;
+float last_target_angle_5010;
+uint16_t time_delay = 0;
+uint8_t flag_suo = 0;
 
 extern RC_ctrl_t rc_ctrl;
 extern motor_5010_info motor_5010;
@@ -25,6 +27,7 @@ extern uint8_t L_tracking;
 extern uint8_t R_tracking;
 extern uint8_t M_tracking;
 extern int8_t flag;
+extern TIM_HandleTypeDef htim4;
 
 void Yaw_task(void const * argument)
 {
@@ -50,12 +53,24 @@ void Yaw_task(void const * argument)
 			//四个摄像头都没有识别到
 			if(L_tracking==0 && R_tracking==0 && M_tracking==0)
 			{
-				yaw_finding(); //大yaw巡航
+				if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，在1000ms内：
+				{
+					target_angle_5010 = last_target_angle_5010; //目标角度为锁住时的角度
+				}
+				else
+				{
+					yaw_finding(); //大yaw巡航
+					flag_suo = 2; //未锁住标志位
+				}
 			}
 			//至少有一个摄像头识别到
 			else if(L_tracking==1 || R_tracking==1 || M_tracking==1)
 			{
+				time_delay = 0; //初始化延时计数值
+				flag_suo = 1; //锁住标志位
 				yaw_suoing(); //大yaw响应
+				last_target_angle_5010 = target_angle_5010; //保存该次锁住的目标值
+				HAL_TIM_Base_Start_IT(&htim4); //启动定时器TIM4
 			}
 		}
 		
@@ -164,6 +179,14 @@ float motor_value(int32_t k, int32_t n, int32_t max)
 			output = (float)n * 360.f / (float)max;
 			return output;
 		}
+	}
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if (htim == (&htim4))
+  {
+		time_delay++;
 	}
 }
 /**************************************************************************************************************************/

@@ -23,6 +23,8 @@ extern float L_yaw;
 extern float L_pitch;
 extern float R_yaw;	
 extern float R_pitch;
+extern uint16_t time_delay;
+extern uint8_t flag_suo;
 
 void Exchange_Task(void const * argument)
 {
@@ -49,32 +51,26 @@ void Exchange_Task(void const * argument)
 			count = 0;
 		}
 		
+		memset(Tx_friction, 0, sizeof(Tx_friction));//接收前清空数组
 		//先高八位，再低八位
 		Tx_friction[0] = (Sentry.Myself_17mm_heat_id1 >> 8) & 0xff; //枪管1实时热量
 		Tx_friction[1] = Sentry.Myself_17mm_heat_id1 & 0xff;
 		Tx_friction[2] = (Sentry.Myself_17mm_heat_id2 >> 8) & 0xff; //枪管2实时热量
 		Tx_friction[3] = Sentry.Myself_17mm_heat_id2 & 0xff;
 		Tx_friction[4] = Sentry.armor_id; //受伤装甲板ID
+		memcpy(&Tx_friction[5], &time_delay, 2);
+		Tx_friction[7] = flag_suo;
 		can_remote(Tx_friction, 0x36);
     osDelay(1);
 		
+		int32_t bullet_speed = Sentry.bullet_speed;
 		memset(Tx_friction, 0, sizeof(Tx_friction));//接收前清空数组
-		Tx_friction[0] = (Sentry.Myself_17mm_heat_id1 >> 8) & 0xff; //枪管1实时热量
-		Tx_friction[1] = Sentry.Myself_17mm_heat_id1 & 0xff;
-		Tx_friction[2] = (Sentry.Myself_17mm_heat_id2 >> 8) & 0xff; //枪管2实时热量
-		Tx_friction[3] = Sentry.Myself_17mm_heat_id2 & 0xff;
-		Tx_friction[4] = Sentry.armor_id; //受伤装甲板ID
-		
-		int16_t	Tx_friction_send;
-		Tx_friction_send=Sentry.bullet_speed ;
-		
-		memset(Tx_friction, 0, sizeof(Tx_friction));//接收前清空数组
-		Tx_friction[0] = Sentry.shooter_ID;												//枪管ID
-		Tx_friction[1] = Sentry.bullet_frequence;									//枪管弹频
-		Tx_friction[2] = (Tx_friction_send >> 8) & 0xff;				//枪管射速（先高8位后低8位）
-		Tx_friction[3] = Tx_friction_send & 0xff;
-		Tx_friction[4] = 0;
-		Tx_friction[5] = 0;
+		Tx_friction[0] = Sentry.shooter_ID; //枪管ID
+		Tx_friction[1] = Sentry.bullet_frequence;	//枪管弹频
+		Tx_friction[2] = (bullet_speed >> 24) & 0xffff; //枪管射速（先高8位后低8位）
+		Tx_friction[3] = (bullet_speed >> 16) & 0xffff;
+		Tx_friction[4] = (bullet_speed >> 8) & 0xffff;
+		Tx_friction[5] = bullet_speed & 0xff;
 		Tx_friction[6] = 0;
 		Tx_friction[7] = 0;
 		can_remote(Tx_friction, 0x37);

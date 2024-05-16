@@ -11,7 +11,8 @@ uint8_t heart_id;
 
 extern Shooter_t Shooter_L;
 extern Shooter_t Shooter_R;
-
+extern uint16_t time_delay;
+extern uint8_t flag_suo;
 
 FDCAN_RxHeaderTypeDef RxHeader1;
 uint8_t g_Can1RxData[64];
@@ -230,20 +231,22 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 				Shooter_L.shooter_heat = ((g_Can3RxData[0] << 8) | g_Can3RxData[1]); //枪管1实时热量
 				Shooter_R.shooter_heat = ((g_Can3RxData[2] << 8) | g_Can3RxData[3]); //枪管2实时热量
 				heart_id = g_Can3RxData[4]; //受击打装甲板ID
+				memcpy(&time_delay, &g_Can3RxData[5], 2);
+				flag_suo = g_Can3RxData[7];
 			}
 			
 			if(RxHeader3.Identifier == 0x37)
 			{ 
         if(g_Can3RxData[0] == 0x01)
         {	
-          Shooter_L.shoot_rate=g_Can3RxData[1];
-          Shooter_L.shoot_speed=((g_Can3RxData[2]<<8) | g_Can3RxData[3]);
+          Shooter_L.shoot_rate = g_Can3RxData[1];
+          Shooter_L.shoot_speed = ((g_Can3RxData[2] << 24) | (g_Can3RxData[3] << 16) | (g_Can3RxData[4] << 8) | (g_Can3RxData[5]));
         }
 
         if(g_Can3RxData[0] == 0x02)
         {
-          Shooter_R.shoot_rate=g_Can3RxData[1];
-          Shooter_R.shoot_speed=((g_Can3RxData[2]<<8) | g_Can3RxData[3]);
+          Shooter_R.shoot_rate = g_Can3RxData[1];
+          Shooter_R.shoot_speed = ((g_Can3RxData[2] << 24) | (g_Can3RxData[3] << 16) | (g_Can3RxData[4] << 8) | (g_Can3RxData[5]));
         }
 			}	
 	  }
