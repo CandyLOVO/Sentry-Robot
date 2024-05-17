@@ -86,7 +86,7 @@ void Yaw_task(void const * argument)
 		}
 		
 		//PID控制
-		target_speed_5010 = pid_cal_a(&pid_5010_a, yaw12, target_angle_5010);
+		target_speed_5010 = pid_I_control(&pid_5010_a, yaw12, target_angle_5010);
 		output_5010 = pid_cal_s(&pid_5010_s, (9.55f*yaw_gyro), target_speed_5010);
 		//CAN2数据发送
 		speed_control_send(output_5010);
@@ -100,11 +100,13 @@ void Yaw_task(void const * argument)
 void yaw_init(void)
 {
 	//大yaw5010数值初始化
-	initial_angle = 21401; //头朝向底盘正方向时的编码值
+	initial_angle = 56406; //头朝向底盘正方向时的编码值
 	target_angle_5010 = 0;
 	target_speed_5010 = 0;
-	pid_init(&pid_5010_s,15000,10,0,300000,300000); //PID初始化 PI
-	pid_init(&pid_5010_a,3,0,350,300000,300000); //PD
+//	pid_init(&pid_5010_s,15000,10,0,300000,300000); //PID初始化 PI
+//	pid_init(&pid_5010_a,3,0,350,300000,300000); //PD
+	pid_init(&pid_5010_s,7000,2,0,700000,700000); //PID??? PI
+	pid_init(&pid_5010_a,4,0,23,700000,700000); //PD
 	
 	heart_direction[0] = 0;
 	heart_direction[1] = 90;

@@ -131,7 +131,7 @@ void RS485_Trans(void)
 
 	Tx_nav.checksum = Get_CRC16_Check_Sum(Tx, 21, 0xffff);
 	memcpy(&Tx[21], &Tx_nav.checksum, 2);
-	Tx[21] = Tx_nav.ending;
+	Tx[23] = Tx_nav.ending;
 	
 	
 	HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_SET);

@@ -91,7 +91,7 @@ float pid_I_control(pidTypeDef *PID,float get,float set) //set is target
 		PID->error[1] = PID->error[1];
 	}
 	
-	if(PID->error[1]>10) //误差值小于阈值
+	if(PID->error[1]>1) //误差值小于阈值
 	{
 		index = 0; //不加积分项
 	}

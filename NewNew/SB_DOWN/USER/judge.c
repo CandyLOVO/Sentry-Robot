@@ -181,10 +181,12 @@ static void Update_data()
 	if(Sentry.Myself_id == 7)//红色方
 	{
 		Sentry.Flag_judge = 1; //判断红方的标志位
+		Sentry.my_outpost_HP = Sentry.red_outpost_HP;
 	}
 	else if(Sentry.Myself_id == 107)
 	{
 		Sentry.Flag_judge = 2; //判断蓝方的标志位
+		Sentry.my_outpost_HP = Sentry.blue_outpost_HP;
 	}
 	
 	Sentry.red_remain_HP = Judge_Hero.robot_hp.red_7_robot_HP; //己方哨兵血量
@@ -194,6 +196,9 @@ static void Update_data()
 	Sentry.blue_remain_HP = Judge_Hero.robot_hp.blue_7_robot_HP; //己方哨兵血量
 	Sentry.blue_outpost_HP = Judge_Hero.robot_hp.blue_outpost_HP; //己方前哨战血量
 	Sentry.blue_base_HP = Judge_Hero.robot_hp.blue_base_HP; //己方基地血量
+	
+	Sentry.rfid_status = Judge_Hero.rfid_status_t.rfid_status;
+//	memcpy(&Sentry.rfid[0], &Sentry.rfid_status, 4);
 }
 
 /**

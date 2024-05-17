@@ -68,8 +68,8 @@ void Yaw_Task(void * argument)
 			target_yaw_a_L += rc_ctrl.rc.ch[2] * 0.2/660;
 			target_yaw_a_R += rc_ctrl.rc.ch[0] * 0.2/660;
 			
-			yaw_control_L(-20, -160); //小yaw目标值软件限位
-			yaw_control_R(160, 20);
+			yaw_control_L(-20, -140); //小yaw目标值软件限位
+			yaw_control_R(140, 20);
 		}
 		
 		if(rc_ctrl.rc.s[1]==3 && rc_ctrl.rc.s[0]==3)
@@ -103,8 +103,8 @@ void Yaw_Task(void * argument)
 							rotate_flag_R = 1;
 						}
 						//小yaw正反转巡航
-						yaw_finding_L(-20, -160);
-						yaw_finding_R(160, 20);
+						yaw_finding_L(-20, -140);
+						yaw_finding_R(140, 20);
 					}
 				}
 				
@@ -121,7 +121,7 @@ void Yaw_Task(void * argument)
 				rotate_flag_L = 0; //左头不转
 				target_yaw_a_L = Rx_vision.L_yaw - yaw12; //左头目标值绝对坐标系转换
 				last_target_yaw_a_L = target_yaw_a_L;
-				yaw_control_L(-20, -160); //左头目标值软件限位
+				yaw_control_L(-20, -140); //左头目标值软件限位
 			}
 			
 			//右头识别到
@@ -130,7 +130,7 @@ void Yaw_Task(void * argument)
 				rotate_flag_R = 0; //右头不转
 				target_yaw_a_R = Rx_vision.R_yaw - yaw12; //右头目标值绝对坐标系转换
 				last_target_yaw_a_R = target_yaw_a_R;
-				yaw_control_R(160, 20); //右头目标值软件限位
+				yaw_control_R(140, 20); //右头目标值软件限位
 			}
 			//大yaw上的摄像头识别到
 			if(Rx_vision.M_tracking == 1)
@@ -138,11 +138,11 @@ void Yaw_Task(void * argument)
 				rotate_flag_L = 0;
 				target_yaw_a_L = Rx_vision.L_yaw - yaw12;
 				last_target_yaw_a_L = target_yaw_a_L;
-				yaw_control_L(-20, -160);
+				yaw_control_L(-20, -140);
 				rotate_flag_R = 0;
 				target_yaw_a_R = Rx_vision.R_yaw - yaw12;
 				last_target_yaw_a_R = target_yaw_a_R;
-				yaw_control_R(160, 20);
+				yaw_control_R(140, 20);
 			}
 		}
 		
@@ -181,8 +181,8 @@ static void Yaw_init(void)
 	target_yaw_s_R = 0;
 	
 	//PID初始化
-	pid_init(&pid_yaw_s_L,250,0.01,0,30000,30000); //PID初始化 PI
-	pid_init(&pid_yaw_a_L,6,0,1,30000,30000); //PD
+	pid_init(&pid_yaw_s_L,300,1.5,0,30000,30000); //PID初始化 PI
+	pid_init(&pid_yaw_a_L,7,0,1,30000,30000); //PD
 	
 	pid_init(&pid_yaw_s_R,250,0.01,0,30000,30000); //PID初始化
 	pid_init(&pid_yaw_a_R,6,0,1,30000,30000);
@@ -209,19 +209,27 @@ void yaw_control_L(int16_t max_angle, int16_t min_angle)
 	}
 	
 	//软件限位（目标值位于禁区内）
-	if(target_yaw_a_L<0 && target_yaw_a_L>min_angle)
+//	if(target_yaw_a_L<0 && target_yaw_a_L>min_angle)
+//	{
+//		if(target_yaw_a_L <= max_angle)
+//		{
+//			target_yaw_a_L = max_angle;
+//		}
+//	}
+//	if((target_yaw_a_L>(-180)) && (target_yaw_a_L <max_angle))
+//	{
+//		if(target_yaw_a_L >= min_angle)
+//		{
+//			target_yaw_a_L = min_angle;
+//		}
+//	}
+	if(target_yaw_a_L<max_angle && target_yaw_a_L>((max_angle+min_angle)/2))
 	{
-		if(target_yaw_a_L <= max_angle)
-		{
-			target_yaw_a_L = max_angle;
-		}
+		target_yaw_a_L = max_angle;
 	}
-	if((target_yaw_a_L>(-180)) && (target_yaw_a_L <max_angle))
+	if((target_yaw_a_L>min_angle) && (target_yaw_a_L <((max_angle+min_angle)/2)))
 	{
-		if(target_yaw_a_L >= min_angle)
-		{
-			target_yaw_a_L = min_angle;
-		}
+		target_yaw_a_L = min_angle;
 	}
 	
 	//软件限位（当前值位于危险区内）
@@ -257,19 +265,27 @@ void yaw_control_R(int16_t max_angle, int16_t min_angle)
 	}
 	
 	//软件限位（目标值位于禁区内）
-	if(target_yaw_a_R>0 && target_yaw_a_R<max_angle)
+//	if(target_yaw_a_R>0 && target_yaw_a_R<max_angle)
+//	{
+//		if(target_yaw_a_R >= min_angle)
+//		{
+//			target_yaw_a_R = min_angle;
+//		}
+//	}
+//	if(target_yaw_a_R<180 && target_yaw_a_R>min_angle)
+//	{
+//		if(target_yaw_a_R <= max_angle)
+//		{
+//			target_yaw_a_R = max_angle;
+//		}
+//	}
+	if(target_yaw_a_R>min_angle && target_yaw_a_R<((min_angle+max_angle)/2))
 	{
-		if(target_yaw_a_R >= min_angle)
-		{
-			target_yaw_a_R = min_angle;
-		}
+		target_yaw_a_R = min_angle;
 	}
-	if(target_yaw_a_R<180 && target_yaw_a_R>min_angle)
+	if(target_yaw_a_R<max_angle && target_yaw_a_R>((min_angle+max_angle)/2))
 	{
-		if(target_yaw_a_R <= max_angle)
-		{
-			target_yaw_a_R = max_angle;
-		}
+		target_yaw_a_R = max_angle;
 	}
 	
 	//软件限位（当前值位于危险区内）

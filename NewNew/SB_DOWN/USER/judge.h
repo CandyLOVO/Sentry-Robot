@@ -301,6 +301,9 @@ typedef __packed struct Sentry_t
 	uint8_t armor_id:4;	//受伤的装甲板编号（应该0是非装甲板受伤，1-4是装甲板伤害，需测试验证）
 	uint8_t hurt_type:4;	//受伤类型
 	
+	uint32_t rfid_status;
+	uint8_t rfid[4];
+	
 	//=======================================================比赛数据===============================================================//
 	uint8_t Flag_progress;	//比赛进程
 	uint16_t Time_remain;		//比赛剩余时间
@@ -312,6 +315,7 @@ typedef __packed struct Sentry_t
 	uint16_t red_outpost_HP; //红方前哨战血量
 	uint16_t blue_base_HP; //蓝方基地血量
 	uint16_t blue_outpost_HP; //蓝方前哨战血量
+	uint16_t my_outpost_HP; //己方前哨站血量
 	
 	uint32_t event_data; //能量机关、高地占领状态
 	uint16_t projectile_allowance_17mm; //17mm弹丸允许发弹量

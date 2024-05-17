@@ -90,8 +90,14 @@ void Chassis_Task(void const * argument)
 //			}
 //********************************************************************************//
 			
-//		  omega = 400; //给定小陀螺转速
-			omega = 0; //给定小陀螺转速
+		  if((Sentry.my_outpost_HP == 0) && (Sentry.rfid[1] == 0x02))
+			{
+				omega = 2000; //给定小陀螺转速
+			}
+			
+//			omega = 0; //给定小陀螺转速
+			omega = 2000; //给定小陀螺转速
+			chassis_calculate(Rx_nav.nav_x, Rx_nav.nav_y); //输入导航x、y值，CAN1传来
 			for(int i=0;i<4;i++)
 			{
 				out_speed[i] = pid_cal_s(&pid_3508, motor[i].speed, target_speed[i]);
