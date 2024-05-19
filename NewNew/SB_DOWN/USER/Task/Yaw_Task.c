@@ -14,11 +14,12 @@ int32_t initial_angle; //5010【面向底盘正方向】的初始编码值
 float yaw_angle; //大yaw5010当前角度（0~+-180）
 float target_angle_5010;
 float target_speed_5010;
-int32_t output_5010;
-uint8_t heart_direction[4];
-float last_target_angle_5010;
-uint16_t time_delay = 0;
-uint8_t flag_suo = 0;
+float output_5010;
+uint8_t heart_direction[4]; //受击打装甲板
+float last_target_angle_5010; //上一帧目标值
+uint16_t time_delay = 0; //锁住计时
+uint8_t flag_suo = 0; //瞄准后云台锁住
+float tar;
 
 extern RC_ctrl_t rc_ctrl;
 extern motor_5010_info motor_5010;
@@ -31,6 +32,7 @@ extern uint8_t M_tracking;
 extern int8_t flag;
 extern TIM_HandleTypeDef htim4;
 extern Sentry_t Sentry;
+extern Rx_naving Rx_nav;
 
 void Yaw_task(void const * argument)
 {
@@ -44,44 +46,66 @@ void Yaw_task(void const * argument)
 		{
 		yaw_angle = -motor_value(initial_angle, motor_5010.angle, 65535); //将5010编码值转化为0~+-180【面向两个头，向左转为-，向右转为+】
 		
-		//遥控器控制模式，左->中间，右->中间
-		if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3)
+		//遥控器控制模式，左->中间，右->中间            测试底盘跟随云台模式，左->最上，右->中间
+		if((rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3) || (rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==1))
 		{
 			yaw_control();
+			if(Rx_nav.poing == 1) //导航发来的上坡指令
+			{
+				tar = Rx_nav.yaw_target; //将大yaw转向坡的方向
+			}
 		}
 		
 		//导航上场模式，左->最下，右->最下
 		if(rc_ctrl.rc.s[0]==2 && rc_ctrl.rc.s[1]==2)
 		{
-			//四个摄像头都没有识别到
-			if(L_tracking==0 && R_tracking==0 && M_tracking==0)
+			if(Rx_nav.poing == 1) //导航发来的上坡指令
 			{
-				if(Sentry.armor_id == 0)
+				target_angle_5010 = Rx_nav.yaw_target; //将大yaw转向坡的方向
+//				if(target_angle_5010 > 180) //将叠加坡的差角后的角度转化为0~+-180
+//				{
+//					target_angle_5010 -= 360;
+//				}
+//				else if(target_angle_5010 < -180)
+//				{
+//					target_angle_5010 += 360;
+//				}
+			}
+			else //进行自瞄
+			{
+				//四个摄像头都没有识别到
+				if(L_tracking==0 && R_tracking==0 && M_tracking==0)
 				{
-					if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，在1000ms内：
+					//装甲板没有收到击打
+					if(Sentry.armor_id == 0)
 					{
-						target_angle_5010 = last_target_angle_5010; //目标角度为锁住时的角度
+						//大yaw瞄准延时
+						if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，且在1000ms内：
+						{
+							target_angle_5010 = last_target_angle_5010; //目标角度为锁住时的角度
+						}
+						//正常巡航
+						else
+						{
+							yaw_finding(); //大yaw巡航
+							flag_suo = 2; //未锁住标志位
+						}
 					}
+					//装甲板受击打
 					else
 					{
-						yaw_finding(); //大yaw巡航
-						flag_suo = 2; //未锁住标志位
+						target_angle_5010 = yaw12 + heart_direction[Sentry.armor_id-1]; //装甲板受击打方位
 					}
 				}
-				
-				else
+				//至少有一个摄像头识别到
+				else if(L_tracking==1 || R_tracking==1 || M_tracking==1)
 				{
-					target_angle_5010 = yaw12 + heart_direction[Sentry.armor_id-1];
+					time_delay = 0; //初始化延时计数值
+					flag_suo = 1; //锁住标志位
+					yaw_suoing(); //大yaw响应
+					last_target_angle_5010 = target_angle_5010; //保存该次锁住的目标值
+					HAL_TIM_Base_Start_IT(&htim4); //启动定时器TIM4
 				}
-			}
-			//至少有一个摄像头识别到
-			else if(L_tracking==1 || R_tracking==1 || M_tracking==1)
-			{
-				time_delay = 0; //初始化延时计数值
-				flag_suo = 1; //锁住标志位
-				yaw_suoing(); //大yaw响应
-				last_target_angle_5010 = target_angle_5010; //保存该次锁住的目标值
-				HAL_TIM_Base_Start_IT(&htim4); //启动定时器TIM4
 			}
 		}
 		
@@ -100,13 +124,13 @@ void Yaw_task(void const * argument)
 void yaw_init(void)
 {
 	//大yaw5010数值初始化
-	initial_angle = 56406; //头朝向底盘正方向时的编码值
+	initial_angle = 36528; //头朝向底盘正方向时的编码值
 	target_angle_5010 = 0;
 	target_speed_5010 = 0;
-//	pid_init(&pid_5010_s,15000,10,0,300000,300000); //PID初始化 PI
-//	pid_init(&pid_5010_a,3,0,350,300000,300000); //PD
-	pid_init(&pid_5010_s,7000,2,0,700000,700000); //PID??? PI
-	pid_init(&pid_5010_a,4,0,23,700000,700000); //PD
+	pid_init(&pid_5010_s,20000,0,0,700000,700000); //PID初始化 PI
+	pid_init(&pid_5010_a,3,0,0,700000,700000); //PD
+//	pid_init(&pid_5010_s,7000,2,0,700000,700000); //PID??? PI
+//	pid_init(&pid_5010_a,4,0,23,700000,700000); //PD
 	
 	heart_direction[0] = 0;
 	heart_direction[1] = 90;

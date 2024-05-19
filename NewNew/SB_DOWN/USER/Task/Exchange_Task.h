@@ -27,6 +27,7 @@ typedef struct
 	float L_pitch;
 	float R_yaw;	
 	float R_pitch; 
+	double yaw12;
 	uint8_t ending;
 }Tx_naving;
 
@@ -35,6 +36,7 @@ typedef struct
 	uint8_t header;
   uint8_t naving;
 	uint8_t poing;
+	float yaw_target;
   float nav_x;
   float nav_y;
   uint32_t sentry_decision;

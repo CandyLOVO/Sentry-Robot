@@ -10,18 +10,20 @@
 #include "Exchange_Task.h"
 #include "math.h"
 #include "judge.h"
+#include "stdlib.h"
 
 /*********************************************************变量定义*********************************************************/
 #define radius 3.075 // (615mm/2) m
 #define cosin 0.707106781187 //二分之根号二
+#define RANDOM_MAX	2500		//随机数最大值
+#define RANDOM_MIN  1500  	//随机数最小值
 
 pidTypeDef pid_3508;
+pidTypeDef pid_chassis;
 fp32 error_theta; //云台坐标系与底盘坐标系间夹角(此时为0~360度) 后期接收后需要对所得theta进行处理
-int omega = 0; //旋转叠加计算中的角速度 rad/min
+float omega = 0; //旋转叠加计算中的角速度 rad/min
 float target_speed[4]; //3508目标速度
 int16_t out_speed[4]; //控制电流
-float angle_poing = 0;
-float angle_error;
 
 extern motor_info motor[8];
 extern RC_ctrl_t rc_ctrl;
@@ -29,6 +31,8 @@ extern float yaw_angle;
 extern Rx_naving Rx_nav;
 extern int8_t flag;
 extern double yaw12; //云台陀螺仪yaw值
+extern Sentry_t Sentry;
+extern RTC_HandleTypeDef hrtc;
 
 float Watch_Power_Max;
 float Watch_Power;
@@ -39,7 +43,10 @@ static double Scaling1=0,Scaling2=0,Scaling3=0,Scaling4=0;
 float Klimit=1;
 float Plimit=0;
 float Chassis_pidout_max;
-extern Sentry_t Sentry;
+uint32_t random_value;
+RTC_DateTypeDef  date_info;
+RTC_TimeTypeDef  time_info;
+int count_random = 0;
 /**************************************************************************************************************************/
 
 /*********************************************************函数定义*********************************************************/
@@ -59,11 +66,22 @@ void Chassis_Task(void const * argument)
   {
 		if(flag == 1)
 		{
+		count_random++;
+		if(count_random > 2000)
+		{
+			//生成随机数
+			HAL_RTC_GetTime(&hrtc, &time_info, RTC_FORMAT_BIN);
+			HAL_RTC_GetDate(&hrtc, &date_info, RTC_FORMAT_BIN);
+			srand(time_info.Hours+time_info.Minutes+time_info.Seconds); //随机数种子设置
+			random_value = rand() % (RANDOM_MAX + 1 - RANDOM_MIN) + RANDOM_MIN;//随机数生成
+			count_random = 0;
+		}
+		
 		//计算底盘与云台差角
 		Yaw_Diff();
 		
-		//遥控器控制模式，左->中间，右->中间              左->最上，右->中间
-		if((rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3) || (rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==1))
+		//遥控器控制模式，左->中间，右->中间
+		if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3)
 		{
 			omega = rc_ctrl.rc.ch[4]*5; //拨轮控制小陀螺
 			chassis_calculate(rc_ctrl.rc.ch[0]*6, rc_ctrl.rc.ch[1]*6); //右拨杆控制底盘 遥控器右拨杆有问题
@@ -76,28 +94,48 @@ void Chassis_Task(void const * argument)
 		
 		//导航上场模式，左->最下，右->最下
 		else if(rc_ctrl.rc.s[0]==2 && rc_ctrl.rc.s[1]==2)
-		{
-//************************************上坡模式************************************//
-//			if(Rx_nav.poing == 1)
-//			{
-//				omega = 0;
-//				chassis_poing(Rx_nav.nav_x, Rx_nav.nav_y); //输入导航x、y值，CAN1传来
-//			}
-//			else
-//			{
-//				omega = 400; //给定小陀螺转速
-//				chassis_calculate(Rx_nav.nav_x, Rx_nav.nav_y); //输入导航x、y值，CAN1传来
-//			}
-//********************************************************************************//
-			
-		  if((Sentry.my_outpost_HP == 0) && (Sentry.rfid[1] == 0x02))
+		{	
+		  if((Sentry.my_outpost_HP == 0) && (Sentry.rfid[1] == 0x02)) //前哨站被破并且回到巡逻区
 			{
 				omega = 2000; //给定小陀螺转速
 			}
+			else
+			{
+				if(Sentry.my_outpost_HP != 0) //前哨战没有被破 无敌状态
+				{
+					omega = 0;
+				}
+				else
+				{
+					if(Rx_nav.nav_x==0 && Rx_nav.nav_y==0) //导航使它停下
+					{
+						omega = 2000; //给定小陀螺转速
+					}
+					else //导航发值
+					{
+						omega = 0;
+					}
+				}
+			}
 			
-//			omega = 0; //给定小陀螺转速
-			omega = 2000; //给定小陀螺转速
+			//导航传来上坡标志位
+			if(Rx_nav.poing == 1)
+			{
+				omega = pid_cal_a(&pid_chassis, error_theta, 0);
+			}
+			
 			chassis_calculate(Rx_nav.nav_x, Rx_nav.nav_y); //输入导航x、y值，CAN1传来
+			for(int i=0;i<4;i++)
+			{
+				out_speed[i] = pid_cal_s(&pid_3508, motor[i].speed, target_speed[i]);
+			}
+		}
+		
+		//测试底盘跟随云台模式，左->最上，右->中间
+		else if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==1)
+		{
+			omega = pid_cal_a(&pid_chassis, error_theta, 0);
+			chassis_calculate(rc_ctrl.rc.ch[0]*6, rc_ctrl.rc.ch[1]*6); //右拨杆控制底盘
 			for(int i=0;i<4;i++)
 			{
 				out_speed[i] = pid_cal_s(&pid_3508, motor[i].speed, target_speed[i]);
@@ -117,6 +155,8 @@ void task_init()
 {
 	//PID参数初始化
 	pid_init(&pid_3508, 30, 0.3, 0, 16384, 16384);
+	pid_init(&pid_chassis, 2100, 0.1, 30, 16384, 16384);
+	count_random = 0;
 }
 
 void Yaw_Diff()

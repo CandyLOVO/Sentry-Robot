@@ -22,6 +22,8 @@ float target_pitch_a_R;
 float target_pitch_s_R;
 int16_t pitch_output_L;
 int16_t pitch_output_R;
+float last_target_pitch_a_L;
+float last_target_pitch_a_R;
 uint8_t nod_flag_L = 0; //判断是否需要反转
 uint8_t nod_flag_R = 0;
 
@@ -72,16 +74,23 @@ void Pitch_Task(void * argument)
 			//都没有识别到目标，开始巡航
 			if(Rx_vision.L_tracking==0 && Rx_vision.R_tracking==0 && Rx_vision.M_tracking==0)
 			{
-				if(nod_flag_L == 0)
+				if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，在1000ms内：
 				{
-					nod_flag_L = 1;
+					target_pitch_a_L = last_target_pitch_a_L; //目标角度为锁住时的角度
+					target_pitch_a_R = last_target_pitch_a_R;
 				}
-				if(nod_flag_R == 0)
+				else
 				{
-					nod_flag_R = 1;
+					if(nod_flag_L == 0)
+					{
+						nod_flag_L = 1;
+					}
+					if(nod_flag_R == 0)
+					{
+						nod_flag_R = 1;
+					}
+					pitch_finding(25, -24);
 				}
-				
-				pitch_finding(25, -24);
 			}
 			
 			//左头识别到目标

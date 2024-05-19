@@ -143,8 +143,10 @@ void Launch_Task(void *argument)
 }
 static void DataUpGrade()
 {	
-		Shooter_L.Fire_Flag=Rx_vision.L_tracking || Rx_vision.M_tracking;
-		Shooter_R.Fire_Flag=Rx_vision.R_tracking || Rx_vision.M_tracking;
+//		Shooter_L.Fire_Flag=Rx_vision.L_tracking || Rx_vision.M_tracking;
+//		Shooter_R.Fire_Flag=Rx_vision.R_tracking || Rx_vision.M_tracking;
+		Shooter_L.Fire_Flag=Rx_vision.L_shoot;
+		Shooter_R.Fire_Flag=Rx_vision.R_shoot;
 	
     if ((rc_ctrl.rc.s[1] == 2 && rc_ctrl.rc.s[0] == 2) ) {
         remote_mode = 22;

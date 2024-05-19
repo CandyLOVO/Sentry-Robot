@@ -1,8 +1,10 @@
 #include "pid_user.h"
 #include "Yaw_task.h"
 
-extern int16_t up_limit;
-extern int16_t low_limit;
+extern int16_t up_limit_L;
+extern int16_t low_limit_L;
+extern int16_t up_limit_R;
+extern int16_t low_limit_R;
 
 float limit_max(float value,float Max_out)
 {
@@ -73,7 +75,7 @@ float pid_cal_a(pidTypeDef *PID,float get,float set) //set is target
 	return PID->out;
 }
 
-float pid_cal_yaw_a(pidTypeDef *PID,float get,float set,uint8_t warning_flag) //set is target
+float pid_cal_yaw_a(pidTypeDef *PID,float get,float set,uint8_t warning_flag,float up_limit,float low_limit) //set is target
 {
 	PID->get = get;
 	PID->set = set;

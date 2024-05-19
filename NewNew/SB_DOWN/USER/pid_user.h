@@ -6,9 +6,9 @@
 typedef struct
 {
 	float Kp, Ki, Kd;
-	int32_t error[2];
-	int32_t get, set;
-	int32_t pout, iout, dout, out;
+	float error[2];
+	float get, set;
+	float pout, iout, dout, out;
 	int32_t integral;
 	int32_t Max_out;
 	int32_t Max_iout;

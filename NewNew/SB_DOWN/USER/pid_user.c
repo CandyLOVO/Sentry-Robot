@@ -73,7 +73,7 @@ float pid_cal_a(pidTypeDef *PID,float get,float set) //set is target
 //积分分离
 float pid_I_control(pidTypeDef *PID,float get,float set) //set is target
 {
-	int index = 0;
+	float index_pid = 0;
 	PID->get = get;
 	PID->set = set;
 
@@ -91,18 +91,18 @@ float pid_I_control(pidTypeDef *PID,float get,float set) //set is target
 		PID->error[1] = PID->error[1];
 	}
 	
-	if(PID->error[1]>1) //误差值小于阈值
+	if(fabs(PID->error[1])>0.1) //误差值小于阈值
 	{
-		index = 0; //不加积分项
+		index_pid = 0; //不加积分项
 	}
 	else
 	{
-		index = 1; //加入积分项
+		index_pid = 1; //加入积分项
 		PID->integral += PID->error[1];
 	}
 	
 	PID->pout = PID->Kp * PID->error[1];
-	PID->iout = index * PID->Ki * PID->integral;
+	PID->iout = index_pid * PID->Ki * PID->integral;
 	PID->iout = limit_max(PID->iout,PID->Max_iout);
 	PID->dout = PID->Kd * (PID->error[1] - PID->error[0]);
 	PID->out = PID->pout + PID->iout + PID->dout;
