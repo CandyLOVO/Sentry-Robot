@@ -78,6 +78,8 @@ void Yaw_Task(void * argument)
 		{
 			target_yaw_a_L = 0;
 			target_yaw_a_R = 0;
+			yaw_control_L(-20, -175); //小yaw目标值软件限位
+			yaw_control_R(175, 20);
 		}
 		
 		//自瞄模式，左->下，右->下
@@ -183,11 +185,11 @@ static void Yaw_init(void)
 	target_yaw_s_R = 0;
 	
 	//PID初始化
-	pid_init(&pid_yaw_s_L,300,1.5,0,30000,30000); //PID初始化 PI
-	pid_init(&pid_yaw_a_L,7,0,1,30000,30000); //PD
+	pid_init(&pid_yaw_s_L,350,0.08,0,30000,30000); //PID初始化 PI
+	pid_init(&pid_yaw_a_L,8,0,0,30000,30000); //PD
 	
-	pid_init(&pid_yaw_s_R,300,1.5,0,30000,30000); //PID初始化
-	pid_init(&pid_yaw_a_R,7,0,1,30000,30000);
+	pid_init(&pid_yaw_s_R,500,0.2,0,30000,30000); //PID初始化
+	pid_init(&pid_yaw_a_R,10,0,0,30000,30000);
 	
 	heart_direction[0] = 0;
 	heart_direction[1] = 90;

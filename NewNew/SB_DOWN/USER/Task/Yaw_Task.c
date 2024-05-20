@@ -62,14 +62,6 @@ void Yaw_task(void const * argument)
 			if(Rx_nav.poing == 1) //导航发来的上坡指令
 			{
 				target_angle_5010 = Rx_nav.yaw_target; //将大yaw转向坡的方向
-//				if(target_angle_5010 > 180) //将叠加坡的差角后的角度转化为0~+-180
-//				{
-//					target_angle_5010 -= 360;
-//				}
-//				else if(target_angle_5010 < -180)
-//				{
-//					target_angle_5010 += 360;
-//				}
 			}
 			else //进行自瞄
 			{

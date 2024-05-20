@@ -25,7 +25,7 @@ extern receive_vision Rx_vision;
 #define mocalun_speed         19 * 380 // 摩擦轮转速(根据实际情况更改快速调整射速）
 #define C_bopan_reversal_time 0.1f     // 拨盘反转时间(s)
 #define K_shoot_rate_correct  1        // 射频修正参数（根据实际情况更改快速调整射频）
-#define C_bopan_block_I       10000    // 拨盘堵转电流（测试后更改）
+#define C_bopan_block_I       8000    // 拨盘堵转电流（测试后更改）
 #define K_rc_to_bopanSpeed    8        // 遥控通道值切换到拨盘速度（更改可快速调整1-1模式下遥控与拨盘映射关系）
 
 // PID初始化
@@ -90,7 +90,7 @@ void Launch_Task(void *argument)
             //===========================================自动模式 begin================================//
             if (remote_mode == 22) {
                 if (Shooter_L.Fire_Flag == 1) // 左枪管发射
-                {	
+                {
                   if (bopan_reversal_flag_L == 1) 
 									{
 //                    Bopan_speed_calc_L(bopan_reversal_shoot_rate, bopan_reversal_shoot_rate, bopan_reversal_shoot_rate);
@@ -282,20 +282,26 @@ static void Bopan_speed_calc_R(int speed_rate_high, int speed_rate_low, int spee
 //=====================================================拨盘堵转检测=======================================//
 static void Bopan_judge()
 {
-    if (motor_friction[5].tor_current < -C_bopan_block_I) {
-        bopan_reversal_flag_L        = 1;
-        Shooter_L.tim_reversal_begin = Sys_time;
-    } else if (Sys_time - Shooter_L.tim_reversal_begin > C_bopan_reversal_time) {
-        bopan_reversal_flag_L        = 0;
-        Shooter_L.tim_reversal_begin = 0;
+    if (motor_friction[5].tor_current < -C_bopan_block_I) 
+		{
+			bopan_reversal_flag_L        = 1;
+      Shooter_L.tim_reversal_begin = Sys_time;
+    } 
+		else if (Sys_time - Shooter_L.tim_reversal_begin > C_bopan_reversal_time) 
+		{
+      bopan_reversal_flag_L        = 0;
+      Shooter_L.tim_reversal_begin = 0;
     }
 
-    if (motor_friction[4].tor_current < -C_bopan_block_I) {
-        bopan_reversal_flag_R        = 1;
-        Shooter_R.tim_reversal_begin = Sys_time;
-    } else if (Sys_time - Shooter_R.tim_reversal_begin > C_bopan_reversal_time) {
-        bopan_reversal_flag_R        = 0;
-        Shooter_R.tim_reversal_begin = 0;
+    if (motor_friction[4].tor_current < -C_bopan_block_I) 
+		{
+      bopan_reversal_flag_R        = 1;
+      Shooter_R.tim_reversal_begin = Sys_time;
+    } 
+		else if (Sys_time - Shooter_R.tim_reversal_begin > C_bopan_reversal_time)
+		{
+      bopan_reversal_flag_R        = 0;
+      Shooter_R.tim_reversal_begin = 0;
     }
 }
 void can_send_mocalun(int16_t motor1, int16_t motor2, int16_t motor3, int16_t motor4)
