@@ -84,7 +84,7 @@ void Chassis_Task(void const * argument)
 		if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3)
 		{
 			omega = rc_ctrl.rc.ch[4]*5; //╡╕бж©ьжфп║мсбщ
-			chassis_calculate(rc_ctrl.rc.ch[0]*6, rc_ctrl.rc.ch[1]*6); //ср╡╕╦к©ьжф╣вел рё©ьфВср╡╕╦кспнйлБ
+			chassis_calculate(rc_ctrl.rc.ch[0]*10, rc_ctrl.rc.ch[1]*10); //ср╡╕╦к©ьжф╣вел рё©ьфВср╡╕╦кспнйлБ
 			
 			for(int i=0;i<4;i++)
 			{
@@ -136,7 +136,7 @@ void Chassis_Task(void const * argument)
 		else if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==1)
 		{
 			omega = pid_cal_a(&pid_chassis, error_theta, 0);
-			chassis_calculate(rc_ctrl.rc.ch[0]*6, rc_ctrl.rc.ch[1]*6); //ср╡╕╦к©ьжф╣вел
+			chassis_calculate(rc_ctrl.rc.ch[0]*15, rc_ctrl.rc.ch[1]*15); //ср╡╕╦к©ьжф╣вел
 			for(int i=0;i<4;i++)
 			{
 				out_speed[i] = pid_cal_s(&pid_3508, motor[i].speed, target_speed[i]);

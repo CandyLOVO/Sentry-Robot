@@ -108,6 +108,7 @@ int main(void)
 	USART3_Init();
 	UART5_Init();
 	USART1_Init(); //收发导航数据 RS485
+	HAL_TIM_Base_Start_IT(&htim4); //启动定时器TIM4
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */

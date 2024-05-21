@@ -7,7 +7,7 @@
 motor_info motor[8];
 motor_info motor_friction[8];
 RC_ctrl_t rc_ctrl;
-uint8_t heart_id;
+uint8_t flag_heart;
 
 extern Shooter_t Shooter_L;
 extern Shooter_t Shooter_R;
@@ -230,7 +230,7 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 				//先收高八位，再收低八位
 				Shooter_L.shooter_heat = ((g_Can3RxData[0] << 8) | g_Can3RxData[1]); //枪管1实时热量
 				Shooter_R.shooter_heat = ((g_Can3RxData[2] << 8) | g_Can3RxData[3]); //枪管2实时热量
-				heart_id = g_Can3RxData[4]; //受击打装甲板ID
+				flag_heart = g_Can3RxData[4]; //受击打装甲板ID
 				memcpy(&time_delay, &g_Can3RxData[5], 2);
 				flag_suo = g_Can3RxData[7];
 			}

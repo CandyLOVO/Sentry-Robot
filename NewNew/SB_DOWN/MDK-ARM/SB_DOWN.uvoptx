@@ -290,6 +290,16 @@
           <WinNumber>1</WinNumber>
           <ItemText>random_value,0x0A</ItemText>
         </Ww>
+        <Ww>
+          <count>27</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>target_speed,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>28</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>error_theta</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>

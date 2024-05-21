@@ -43,7 +43,7 @@ extern RC_ctrl_t rc_ctrl;
 extern receive_vision Rx_vision;
 extern double yaw12;
 extern int8_t flag;
-extern uint8_t heart_id; //受击打装甲板ID
+extern uint8_t flag_heart; //受击打装甲板ID
 extern TIM_HandleTypeDef htim5;
 //************************************************************************************************************//
 
@@ -69,7 +69,6 @@ void Yaw_Task(void * argument)
 		{
 			target_yaw_a_L += rc_ctrl.rc.ch[2] * 0.2/660;
 			target_yaw_a_R += rc_ctrl.rc.ch[0] * 0.2/660;
-			
 			yaw_control_L(-20, -175); //小yaw目标值软件限位
 			yaw_control_R(175, 20);
 		}
@@ -88,12 +87,21 @@ void Yaw_Task(void * argument)
 			//四个摄像头都没有识别到
 			if(Rx_vision.L_tracking==0 && Rx_vision.R_tracking==0 && Rx_vision.M_tracking==0)
 			{
-				if(heart_id == 0)
+				if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，在1000ms内：
 				{
-					if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，在1000ms内：
+					target_yaw_a_L = last_target_yaw_a_L; //目标角度为锁住时的角度
+					target_yaw_a_R = last_target_yaw_a_R;
+					yaw_control_L(-20, -175); //小yaw目标值软件限位
+					yaw_control_R(175, 20);
+				}
+				else
+				{
+					if(flag_heart == 1)
 					{
-						target_yaw_a_L = last_target_yaw_a_L; //目标角度为锁住时的角度
-						target_yaw_a_R = last_target_yaw_a_R;
+						target_yaw_a_L = 0;
+						target_yaw_a_R = 0;
+						yaw_control_L(-20, -175); //小yaw目标值软件限位
+						yaw_control_R(175, 20);
 					}
 					else
 					{
@@ -111,13 +119,7 @@ void Yaw_Task(void * argument)
 						yaw_finding_R(175, 20);
 					}
 				}
-				
-				else
-				{
-					target_yaw_a_L = 0;
-					target_yaw_a_R = 0;
-				}
-			}
+			}		
 			
 			//左头识别到
 			if(Rx_vision.L_tracking == 1)

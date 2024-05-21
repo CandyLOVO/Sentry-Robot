@@ -57,7 +57,7 @@ static void DataUpGrade(void);
 static void re_shoot_rate_calc(void);
 
 //===============================================全局变量================================================//
-int16_t bopan_shoot_rate_max      = 10 ;                  // 最高射频（个/s）
+int16_t bopan_shoot_rate_max      = 15 ;                  // 最高射频（个/s）
 int16_t bopan_shoot_rate_min      = 7 ;                   // 最低射频
 int16_t bopan_shoot_rate_test     = 5;                      // 无裁判系统射频
 float bopan_shoot_rate_visiontest = 0.5;										//自瞄调试射频

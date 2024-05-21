@@ -17,8 +17,11 @@ float target_speed_5010;
 float output_5010;
 uint8_t heart_direction[4]; //受击打装甲板
 float last_target_angle_5010; //上一帧目标值
-uint16_t time_delay = 0; //锁住计时
+uint32_t time_delay = 0; //锁住计时
+uint32_t time_delay_heart = 0;
 uint8_t flag_suo = 0; //瞄准后云台锁住
+uint8_t flag_heart = 0;
+uint8_t last_id;
 float tar;
 
 extern RC_ctrl_t rc_ctrl;
@@ -33,6 +36,7 @@ extern int8_t flag;
 extern TIM_HandleTypeDef htim4;
 extern Sentry_t Sentry;
 extern Rx_naving Rx_nav;
+extern fp32 error_theta; //云台坐标系与底盘坐标系间夹角(此时为0~360度) 后期接收后需要对所得theta进行处理
 
 void Yaw_task(void const * argument)
 {
@@ -44,6 +48,8 @@ void Yaw_task(void const * argument)
   {
 		if(flag == 1)
 		{
+		flag_suo = 0;
+		flag_heart = 0;
 		yaw_angle = -motor_value(initial_angle, motor_5010.angle, 65535); //将5010编码值转化为0~+-180【面向两个头，向左转为-，向右转为+】
 		
 		//遥控器控制模式，左->中间，右->中间            测试底盘跟随云台模式，左->最上，右->中间
@@ -68,26 +74,27 @@ void Yaw_task(void const * argument)
 				//四个摄像头都没有识别到
 				if(L_tracking==0 && R_tracking==0 && M_tracking==0)
 				{
-					//装甲板没有收到击打
-					if(Sentry.armor_id == 0)
+					//大yaw瞄准延时
+					if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，且在1000ms内：
 					{
-						//大yaw瞄准延时
-						if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，且在1000ms内：
+						target_angle_5010 = last_target_angle_5010; //目标角度为锁住时的角度
+					}
+					//正常巡航
+					else
+					{
+						//装甲板受击打
+						if(Sentry.hurt_type==0 && Sentry.armor_id != last_id)
 						{
-							target_angle_5010 = last_target_angle_5010; //目标角度为锁住时的角度
+							last_id = Sentry.armor_id;
+							target_angle_5010 = error_theta*180/3.14 + heart_direction[Sentry.armor_id]; //装甲板受击打方位
 						}
-						//正常巡航
+						//装甲板没有收到击打
 						else
 						{
 							yaw_finding(); //大yaw巡航
-							flag_suo = 2; //未锁住标志位
 						}
-					}
-					//装甲板受击打
-					else
-					{
-						target_angle_5010 = yaw12 + heart_direction[Sentry.armor_id-1]; //装甲板受击打方位
-					}
+						flag_suo = 2; //未锁住标志位
+					}	
 				}
 				//至少有一个摄像头识别到
 				else if(L_tracking==1 || R_tracking==1 || M_tracking==1)
@@ -96,7 +103,6 @@ void Yaw_task(void const * argument)
 					flag_suo = 1; //锁住标志位
 					yaw_suoing(); //大yaw响应
 					last_target_angle_5010 = target_angle_5010; //保存该次锁住的目标值
-					HAL_TIM_Base_Start_IT(&htim4); //启动定时器TIM4
 				}
 			}
 		}

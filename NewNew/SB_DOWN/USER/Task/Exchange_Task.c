@@ -26,6 +26,7 @@ extern float R_pitch;
 extern uint16_t time_delay;
 extern uint8_t flag_suo;
 extern double yaw12; //云台陀螺仪yaw值
+extern uint8_t flag_heart;
 
 void Exchange_Task(void const * argument)
 {
@@ -58,7 +59,7 @@ void Exchange_Task(void const * argument)
 		Tx_friction[1] = Sentry.Myself_17mm_heat_id1 & 0xff;
 		Tx_friction[2] = (Sentry.Myself_17mm_heat_id2 >> 8) & 0xff; //枪管2实时热量
 		Tx_friction[3] = Sentry.Myself_17mm_heat_id2 & 0xff;
-		Tx_friction[4] = Sentry.armor_id; //受伤装甲板ID
+		Tx_friction[4] = flag_heart; //受伤装甲板ID
 		memcpy(&Tx_friction[5], &time_delay, 2);
 		Tx_friction[7] = flag_suo;
 		can_remote(Tx_friction, 0x36);
