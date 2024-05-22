@@ -128,6 +128,10 @@ void Yaw_Task(void * argument)
 				target_yaw_a_L = Rx_vision.L_yaw - yaw12; //左头目标值绝对坐标系转换
 				last_target_yaw_a_L = target_yaw_a_L;
 				yaw_control_L(-20, -175); //左头目标值软件限位
+				
+				rotate_flag_R = 0; //右头不转
+				target_yaw_a_R = 0;
+				yaw_control_R(175, 20); //右头目标值软件限位
 			}
 			
 			//右头识别到
@@ -137,18 +141,22 @@ void Yaw_Task(void * argument)
 				target_yaw_a_R = Rx_vision.R_yaw - yaw12; //右头目标值绝对坐标系转换
 				last_target_yaw_a_R = target_yaw_a_R;
 				yaw_control_R(175, 20); //右头目标值软件限位
+				
+				rotate_flag_L = 0; //左头不转
+				target_yaw_a_L = 0;
+				yaw_control_L(-20, -175); //左头目标值软件限位
 			}
 			//大yaw上的摄像头识别到
 			if(Rx_vision.M_tracking == 1)
 			{
-				rotate_flag_L = 0;
+				rotate_flag_L = 0; //左头不转
 				target_yaw_a_L = Rx_vision.L_yaw - yaw12;
 				last_target_yaw_a_L = target_yaw_a_L;
 				yaw_control_L(-20, -175);
-				rotate_flag_R = 0;
-				target_yaw_a_R = Rx_vision.R_yaw - yaw12;
-				last_target_yaw_a_R = target_yaw_a_R;
-				yaw_control_R(175, 20);
+				
+				rotate_flag_R = 0; //右头不转
+				target_yaw_a_R = 0;
+				yaw_control_R(175, 20); //右头目标值软件限位
 			}
 		}
 		

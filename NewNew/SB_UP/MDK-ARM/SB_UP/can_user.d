@@ -47,4 +47,5 @@ sb_up/can_user.o: ..\USER\can_user.c ..\USER\can_user.h \
   ..\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_pcd_ex.h \
   ..\Core\Inc\fdcan.h \
   D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\string.h \
-  ..\Core\Inc\tim.h ..\USER\Task\Launch_task.h
+  ..\Core\Inc\tim.h ..\USER\Task\Launch_task.h \
+  ..\USER\Task\Exchange_task.h

@@ -3,16 +3,19 @@
 #include "string.h"
 #include "tim.h"
 #include "Launch_task.h"
+#include "Exchange_task.h"
 
 motor_info motor[8];
 motor_info motor_friction[8];
 RC_ctrl_t rc_ctrl;
 uint8_t flag_heart;
+uint8_t target_shijue;
 
 extern Shooter_t Shooter_L;
 extern Shooter_t Shooter_R;
 extern uint16_t time_delay;
 extern uint8_t flag_suo;
+extern receive_vision Rx_vision;
 
 FDCAN_RxHeaderTypeDef RxHeader1;
 uint8_t g_Can1RxData[64];
@@ -248,7 +251,20 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
           Shooter_R.shoot_rate = g_Can3RxData[1];
           Shooter_R.shoot_speed = ((g_Can3RxData[2] << 24) | (g_Can3RxData[3] << 16) | (g_Can3RxData[4] << 8) | (g_Can3RxData[5]));
         }
-			}	
+			}
+			
+			if(RxHeader3.Identifier == 0x39)
+			{
+				Rx_vision.R_tracking = g_Can3RxData[0];
+				Rx_vision.R_shoot = g_Can3RxData[1];
+				target_shijue = g_Can3RxData[2];
+			}
+			
+			if(RxHeader3.Identifier == 0x40)
+			{
+				memcpy(&Rx_vision.R_yaw, &g_Can3RxData[0], 4);
+				memcpy(&Rx_vision.R_pitch, &g_Can3RxData[4], 4);
+			}
 	  }
   }
 }

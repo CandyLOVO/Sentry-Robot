@@ -27,10 +27,9 @@ float tar;
 extern RC_ctrl_t rc_ctrl;
 extern motor_5010_info motor_5010;
 extern double yaw12; //云台陀螺仪yaw值
-extern float yaw; //视觉传来的目标yaw值
+extern float yaw_From_L; //视觉传来的目标yaw值
 extern float yaw_gyro; //云台陀螺仪yaw角速度值
 extern uint8_t L_tracking;
-extern uint8_t R_tracking;
 extern uint8_t M_tracking;
 extern int8_t flag;
 extern TIM_HandleTypeDef htim4;
@@ -72,7 +71,7 @@ void Yaw_task(void const * argument)
 			else //进行自瞄
 			{
 				//四个摄像头都没有识别到
-				if(L_tracking==0 && R_tracking==0 && M_tracking==0)
+				if(L_tracking==0 && Rx_nav.R_tracking==0 && M_tracking==0)
 				{
 					//大yaw瞄准延时
 					if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，且在1000ms内：
@@ -85,23 +84,71 @@ void Yaw_task(void const * argument)
 						//装甲板受击打
 						if(Sentry.hurt_type==0 && Sentry.armor_id != last_id)
 						{
+							flag_heart = 1;
 							last_id = Sentry.armor_id;
-							target_angle_5010 = error_theta*180/3.14 + heart_direction[Sentry.armor_id]; //装甲板受击打方位
+							target_angle_5010 = heart_direction[Sentry.armor_id] + yaw12 - error_theta*180/3.14; //装甲板受击打方位
+							if(target_angle_5010 > 180)
+							{
+								target_angle_5010 -= 360;
+							}
+							if(target_angle_5010 < -180)
+							{
+								target_angle_5010 += 360;
+							}
+							time_delay = 0; //初始化延时计数值
+							flag_suo = 1; //锁住标志位
 						}
 						//装甲板没有收到击打
 						else
 						{
+							flag_suo = 2; //未锁住标志位
 							yaw_finding(); //大yaw巡航
 						}
-						flag_suo = 2; //未锁住标志位
 					}	
 				}
 				//至少有一个摄像头识别到
-				else if(L_tracking==1 || R_tracking==1 || M_tracking==1)
+				else if(L_tracking==1 || Rx_nav.R_tracking==1 || M_tracking==1)
 				{
 					time_delay = 0; //初始化延时计数值
 					flag_suo = 1; //锁住标志位
-					yaw_suoing(); //大yaw响应
+					
+					if(L_tracking==1 && Rx_nav.R_tracking==1) //两个头都锁住
+					{
+						if((yaw_From_L-yaw12)<20 && (yaw_From_L-yaw12)>-20) //转动角度小于阈值
+						{
+							target_angle_5010 = target_angle_5010;
+						}
+						else
+						{
+							target_angle_5010 = yaw_From_L;
+						}
+					}
+					else if(L_tracking==1) //左头锁住
+					{
+						if((yaw_From_L-yaw12)<20 && (yaw_From_L-yaw12)>-20) //转动角度小于阈值
+						{
+							target_angle_5010 = target_angle_5010;
+						}
+						else
+						{
+							target_angle_5010 = yaw_From_L;
+						}
+					}
+					else if(Rx_nav.R_tracking==1) //右头锁住
+					{
+						if((Rx_nav.yaw_From_R-yaw12)<20 && (Rx_nav.yaw_From_R-yaw12)>-20) //转动角度小于阈值
+						{
+							target_angle_5010 = target_angle_5010;
+						}
+						else
+						{
+							target_angle_5010 = Rx_nav.yaw_From_R;
+						}
+					}
+					else if(M_tracking==1)//中间的头锁住
+					{
+						target_angle_5010 = yaw_From_L;
+					}
 					last_target_angle_5010 = target_angle_5010; //保存该次锁住的目标值
 				}
 			}
@@ -160,30 +207,6 @@ void yaw_finding(void)
 	else if(target_angle_5010 < -180)
 	{
 		target_angle_5010 += 360;
-	}
-}
-
-void yaw_suoing(void)
-{
-	//至少有一个摄像头瞄准时
-	if(L_tracking==1 && R_tracking==1) //两个头都锁住
-	{
-		if((yaw-yaw12)<20 && (yaw-yaw12)>-20) //转动角度小于阈值
-		{
-			target_angle_5010 = target_angle_5010;
-		}
-		else
-		{
-			target_angle_5010 = yaw;
-		}
-	}
-	else if(L_tracking==0 || R_tracking==0) //有一个头没有锁住
-	{
-		target_angle_5010 = yaw;
-	}
-	else //中间的头锁住
-	{
-		target_angle_5010 = yaw;
 	}
 }
 

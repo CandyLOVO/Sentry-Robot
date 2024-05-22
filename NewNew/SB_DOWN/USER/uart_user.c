@@ -56,9 +56,9 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 			if(Rx[0] == 0xA5)
 
 			{
-				checksum_Rx = Get_CRC16_Check_Sum(Rx, 19, 0xffff);
+				checksum_Rx = Get_CRC16_Check_Sum(Rx, 34, 0xffff);
 
-				memcpy(&Rx_nav.checksum, &Rx[19], 2);
+				memcpy(&Rx_nav.checksum, &Rx[34], 2);
 				if(Rx_nav.checksum == checksum_Rx)
 				{
 					Rx_nav.naving = Rx[1];
@@ -69,9 +69,16 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 					Rx_nav.sentry_decision_buffer[1] = Rx[12];
 					Rx_nav.sentry_decision_buffer[2] = Rx[13];
 					Rx_nav.sentry_decision_buffer[3] = Rx[14];
-					memcpy(&Rx_nav.yaw_target, &Rx[15], 4);
 					memcpy(&Rx_nav.sentry_decision, &Rx_nav.sentry_decision_buffer[0], 4);
-					JudgeSend(Rx_nav.sentry_decision,Datacmd_Decision,ID_Dataccenter);
+					JudgeSend(Rx_nav.sentry_decision,Datacmd_Decision);
+					memcpy(&Rx_nav.yaw_target, &Rx[15], 4);
+					
+					Rx_nav.R_tracking = Rx[19];
+					Rx_nav.R_shoot = Rx[20];
+					memcpy(&Rx_nav.yaw_From_R, &Rx[21], 4); //485传来的yaw的目标值，需要发送到上板
+					memcpy(&Rx_nav.R_yaw, &Rx[25], 4);
+					memcpy(&Rx_nav.R_pitch, &Rx[29], 4);
+					Rx_nav.target_shijue = Rx[33];
 				}
 			}
 		}

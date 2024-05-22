@@ -4,7 +4,7 @@
 #include "uart_user.h"
 
 
-#define Cmdid_Judge_send 0x301  //裁判系统交互
+#define Cmdid_Judge_send 0x0301  //裁判系统交互
 
 #define Datacmd_Decision 0x0120  //哨兵自主决策指令
 #define ID_Dataccenter		0x8080 //裁判系统服务器id（用于哨兵和雷达自主决策指令）
@@ -392,6 +392,6 @@ extern JUDGE_MODULE_DATA Judge_Hero;
 extern Sentry_t Sentry;
 
 void JUDGE_Receive(volatile uint8_t *databuffer,uint8_t length);
-void JudgeSend(uint32_t TXData,uint16_t datacmdid,uint16_t revecer_id);
+void JudgeSend(uint32_t TXData,uint16_t datacmdid);
 
 #endif

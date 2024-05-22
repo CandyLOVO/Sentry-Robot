@@ -3,7 +3,7 @@
 <title>Static Call Graph - [SB_UP\SB_UP.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image SB_UP\SB_UP.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Wed May 22 04:05:54 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Thu May 23 02:11:04 2024
 <BR><P>
 <H3>Maximum Stack Usage =        368 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1066,7 +1066,7 @@ Global Symbols
 <LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_PCD_MspInit
 </UL>
 
-<P><STRONG><a name="[b1]"></a>Exchange_Task</STRONG> (Thumb, 200 bytes, Stack size 0 bytes, exchange_task.o(.text.Exchange_Task))
+<P><STRONG><a name="[b1]"></a>Exchange_Task</STRONG> (Thumb, 216 bytes, Stack size 0 bytes, exchange_task.o(.text.Exchange_Task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 188<LI>Call Chain = Exchange_Task &rArr; yaw_value &rArr; canx_send_data &rArr; MX_TIM3_Init &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
@@ -1340,7 +1340,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FDCAN_IRQHandler
 </UL>
 
-<P><STRONG><a name="[108]"></a>HAL_FDCAN_RxFifo0Callback</STRONG> (Thumb, 438 bytes, Stack size 24 bytes, can_user.o(.text.HAL_FDCAN_RxFifo0Callback))
+<P><STRONG><a name="[108]"></a>HAL_FDCAN_RxFifo0Callback</STRONG> (Thumb, 510 bytes, Stack size 24 bytes, can_user.o(.text.HAL_FDCAN_RxFifo0Callback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40 + Unknown Stack Size
 <LI>Call Chain = HAL_FDCAN_RxFifo0Callback &rArr; HAL_FDCAN_GetRxMessage
 </UL>
@@ -3043,7 +3043,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32h723xx.o(RESET)
 </UL>
-<P><STRONG><a name="[ae]"></a>Yaw_Task</STRONG> (Thumb, 1896 bytes, Stack size 0 bytes, yaw_task.o(.text.Yaw_Task))
+<P><STRONG><a name="[ae]"></a>Yaw_Task</STRONG> (Thumb, 1920 bytes, Stack size 0 bytes, yaw_task.o(.text.Yaw_Task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 172<LI>Call Chain = Yaw_Task &rArr; canx_send_data &rArr; MX_TIM3_Init &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
@@ -3572,7 +3572,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_Task
 </UL>
 
-<P><STRONG><a name="[ed]"></a>yaw_value</STRONG> (Thumb, 220 bytes, Stack size 16 bytes, exchange_task.o(.text.yaw_value))
+<P><STRONG><a name="[ed]"></a>yaw_value</STRONG> (Thumb, 236 bytes, Stack size 16 bytes, exchange_task.o(.text.yaw_value))
 <BR><BR>[Stack]<UL><LI>Max Depth = 188<LI>Call Chain = yaw_value &rArr; canx_send_data &rArr; MX_TIM3_Init &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
@@ -3808,7 +3808,7 @@ Local Symbols
 <P><STRONG><a name="[13]"></a>CDC_Control_HS</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, usbd_cdc_if.o(.text.CDC_Control_HS))
 <BR>[Address Reference Count : 1]<UL><LI> usbd_cdc_if.o(.data.USBD_Interface_fops_HS)
 </UL>
-<P><STRONG><a name="[14]"></a>CDC_Receive_HS</STRONG> (Thumb, 148 bytes, Stack size 16 bytes, usbd_cdc_if.o(.text.CDC_Receive_HS))
+<P><STRONG><a name="[14]"></a>CDC_Receive_HS</STRONG> (Thumb, 128 bytes, Stack size 16 bytes, usbd_cdc_if.o(.text.CDC_Receive_HS))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56 + Unknown Stack Size
 <LI>Call Chain = CDC_Receive_HS &rArr; USBD_CDC_ReceivePacket &rArr; USBD_LL_PrepareReceive &rArr; HAL_PCD_EP_Receive &rArr; USB_EPStartXfer
 </UL>

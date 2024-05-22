@@ -11,7 +11,7 @@ transmit_vision Tx_vision;
 uint8_t Tx_yaw12[8];
 uint8_t Tx_yaw[8];
 uint8_t Tx_gyro[8];
-uint8_t Tx_shijue[25];
+uint8_t Tx_shijue[26];
 uint8_t Tx_shijue_L[8];
 uint8_t Tx_shijue_R[8];
 
@@ -24,6 +24,7 @@ extern float yaw_angle_L;
 extern float yaw_angle_R;
 extern float pitch_angle_L;
 extern float pitch_angle_R;
+extern uint8_t target_shijue;
 
 void Exchange_Task(void * argument)
 {
@@ -52,9 +53,10 @@ void vision_value(void)
 	memcpy(&Tx_shijue[10], &Tx_vision.L_pitch, 4);
 	memcpy(&Tx_shijue[14], &Tx_vision.R_yaw, 4);
 	memcpy(&Tx_shijue[18], &Tx_vision.R_pitch, 4);
-	Tx_vision.checksum = Get_CRC16_Check_Sum(Tx_shijue, 22, 0xffff);
-	memcpy(&Tx_shijue[22], &Tx_vision.checksum, 2);
-	memcpy(&Tx_shijue[24], &Tx_vision.ending, 1);
+	Tx_shijue[22] = target_shijue;
+	Tx_vision.checksum = Get_CRC16_Check_Sum(Tx_shijue, 23, 0xffff);
+	memcpy(&Tx_shijue[23], &Tx_vision.checksum, 2);
+	memcpy(&Tx_shijue[25], &Tx_vision.ending, 1);
 	CDC_Transmit_HS(Tx_shijue, sizeof(Tx_shijue)); //发给自瞄的值
 }
 
@@ -72,18 +74,14 @@ void yaw_value(void)
 	canx_send_data(&hfdcan3, 0x34, Tx_gyro, 8);
 	osDelay(1);
 	
-	memcpy(&Tx_yaw[0], &Rx_vision.yaw, 4); //视觉传来yaw的目标值
-	
+	memcpy(&Tx_yaw[0], &Rx_vision.yaw_From_L, 4); //左头识别到时用的，视觉传来yaw的目标值	
 	canx_send_data(&hfdcan3, 0x35, Tx_yaw, 8);
 	osDelay(1);
 	
-	memcpy(&Tx_shijue_L[0], &Tx_vision.L_yaw, 4);
-	memcpy(&Tx_shijue_L[4], &Tx_vision.L_pitch, 4);
-	canx_send_data(&hfdcan3, 0x38, Tx_shijue_L, 8);
-	osDelay(1);
-	
+	Tx_vision.R_yaw = yaw_angle_R + yaw12;
+	Tx_vision.R_pitch = pitch_angle_R;
 	memcpy(&Tx_shijue_R[0], &Tx_vision.R_yaw, 4);
 	memcpy(&Tx_shijue_R[4], &Tx_vision.R_pitch, 4);
-	canx_send_data(&hfdcan3, 0x39, Tx_shijue_R, 8);
+	canx_send_data(&hfdcan3, 0x38, Tx_shijue_R, 8);
 	osDelay(1);
 }

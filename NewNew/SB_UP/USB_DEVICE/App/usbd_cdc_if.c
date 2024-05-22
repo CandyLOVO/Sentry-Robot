@@ -279,15 +279,15 @@ static int8_t CDC_Receive_HS(uint8_t* Buf, uint32_t *Len)
 		if(Rx_vision.checksum == checksum)
 		{
 			Rx_vision.L_tracking = Buf[1];
-			Rx_vision.R_tracking = Buf[2];
+//			Rx_vision.R_tracking = Buf[2];
 			Rx_vision.M_tracking = Buf[3];
 			Rx_vision.L_shoot = Buf[4];
-			Rx_vision.R_shoot = Buf[5];
-			memcpy(&Rx_vision.yaw, &Buf[6], 4);
+//			Rx_vision.R_shoot = Buf[5];
+			memcpy(&Rx_vision.yaw_From_L, &Buf[6], 4);
 			memcpy(&Rx_vision.L_yaw, &Buf[10], 4);
 			memcpy(&Rx_vision.L_pitch, &Buf[14], 4);
-			memcpy(&Rx_vision.R_yaw, &Buf[18], 4);
-			memcpy(&Rx_vision.R_pitch, &Buf[22], 4);
+//			memcpy(&Rx_vision.R_yaw, &Buf[18], 4);
+//			memcpy(&Rx_vision.R_pitch, &Buf[22], 4);
 		}
 	}
 	memset(Buf,0x00,128); //清空缓存，重新接收

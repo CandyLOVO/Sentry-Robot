@@ -8,6 +8,8 @@
 
 uint8_t Tx[128];
 uint8_t Tx_friction[8];
+uint8_t Tx_shijue[8];
+uint8_t Tx_R_yaw[8];
 uint8_t Rx_flag = 0; //程序初始化标志位
 uint16_t checksum;
 Tx_naving Tx_nav;
@@ -27,6 +29,7 @@ extern uint16_t time_delay;
 extern uint8_t flag_suo;
 extern double yaw12; //云台陀螺仪yaw值
 extern uint8_t flag_heart;
+extern Rx_naving Rx_nav;
 
 void Exchange_Task(void const * argument)
 {
@@ -78,7 +81,18 @@ void Exchange_Task(void const * argument)
 		can_remote(Tx_friction, 0x37);
 		osDelay(1);
 		
-		JudgeSend(data_t,Datacmd_Decision,ID_Dataccenter);
+		memset(Tx_shijue, 0, sizeof(Tx_shijue));//接收前清空数组
+		Tx_shijue[0] = Rx_nav.R_tracking; //从RS485收到的右头视觉数据，发到上板
+		Tx_shijue[1] = Rx_nav.R_shoot;
+		Tx_shijue[2] = Rx_nav.target_shijue;
+		can_remote(Tx_shijue, 0x39);
+		osDelay(1);
+		
+		memset(Tx_R_yaw, 0, sizeof(Tx_R_yaw));//接收前清空数组
+		memcpy(&Tx_R_yaw[0], &Rx_nav.R_yaw, 4); //从RS485收到的右头目标值数据，发到上板
+		memcpy(&Tx_R_yaw[4], &Rx_nav.R_pitch, 4);
+		can_remote(Tx_R_yaw, 0x40);
+		osDelay(1);
   }
 }
 
@@ -104,11 +118,10 @@ void RS485_Trans(void)
 	Tx_nav.blue_7_HP = Sentry.blue_remain_HP;
 	Tx_nav.blue_outpost_HP = Sentry.blue_outpost_HP;
 	Tx_nav.blue_base_HP = Sentry.blue_base_HP;
-	Tx_nav.L_yaw = L_yaw;
-	Tx_nav.L_pitch = L_pitch;
+	
+	Tx_nav.yaw12 = yaw12; //当前大yaw、右头yaw、pitch数值
 	Tx_nav.R_yaw = R_yaw;
 	Tx_nav.R_pitch = R_pitch;
-	Tx_nav.yaw12 = yaw12;
 	Tx_nav.ending = 0xAA;
 	
 	Tx[0] = Tx_nav.header;
@@ -125,17 +138,11 @@ void RS485_Trans(void)
 	memcpy(&Tx[17], &Tx_nav.blue_outpost_HP, 2);
 	memcpy(&Tx[19], &Tx_nav.blue_base_HP, 2);
 	memcpy(&Tx[21], &Tx_nav.yaw12, 8);
-//	memcpy(&Tx[21], &Tx_nav.L_yaw, 4);
-//	memcpy(&Tx[25], &Tx_nav.L_pitch, 4);
-//	memcpy(&Tx[29], &Tx_nav.R_yaw, 4);
-//	memcpy(&Tx[33], &Tx_nav.R_pitch, 4);
-//	Tx_nav.checksum = Get_CRC16_Check_Sum(Tx, 37, 0xffff);
-//	memcpy(&Tx[37], &Tx_nav.checksum, 2);
-//	Tx[39] = Tx_nav.ending;
-
-	Tx_nav.checksum = Get_CRC16_Check_Sum(Tx, 29, 0xffff);
-	memcpy(&Tx[29], &Tx_nav.checksum, 2);
-	Tx[31] = Tx_nav.ending;
+	memcpy(&Tx[29], &Tx_nav.R_yaw, 4);
+	memcpy(&Tx[33], &Tx_nav.R_pitch, 4);
+	Tx_nav.checksum = Get_CRC16_Check_Sum(Tx, 37, 0xffff);
+	memcpy(&Tx[37], &Tx_nav.checksum, 2);
+	Tx[39] = Tx_nav.ending;
 	
 	
 	HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_SET);

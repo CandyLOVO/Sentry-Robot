@@ -23,8 +23,6 @@ typedef struct
 	uint16_t blue_outpost_HP;  
 	uint16_t blue_base_HP;
 	uint16_t checksum; 
-	float L_yaw;	
-	float L_pitch;
 	float R_yaw;	
 	float R_pitch; 
 	double yaw12;
@@ -41,9 +39,13 @@ typedef struct
   float nav_y;
   uint32_t sentry_decision;
 	uint8_t sentry_decision_buffer[4];
+	
 	uint8_t R_tracking;
+	uint8_t R_shoot;
+	float yaw_From_R;
 	float R_yaw;
 	float R_pitch;
+	uint8_t target_shijue; //击打目标，从白头发给黑头 
   uint16_t checksum;
 }Rx_naving;
 

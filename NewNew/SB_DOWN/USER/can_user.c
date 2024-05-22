@@ -9,7 +9,7 @@ uint8_t can_send_data[8];
 motor_info motor[8];
 motor_5010_info motor_5010;
 double yaw12; //云台陀螺仪yaw值
-float yaw; //视觉传来的目标yaw值
+float yaw_From_L; //视觉传来的目标yaw值
 float yaw_gyro; //云台陀螺仪yaw角速度值
 uint8_t L_tracking; //左头是否锁住
 uint8_t R_tracking; //右头是否锁住
@@ -154,18 +154,12 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		
 		if(can_rx_message.StdId == 0x35)
 		{
-			memcpy(&yaw, &can_recevie_data[0], 4);
+			memcpy(&yaw_From_L, &can_recevie_data[0], 4);
 		}
 		
 		if(can_rx_message.StdId == 0x38)
 		{
-			memcpy(&L_yaw, &can_recevie_data[0], 4);
-			memcpy(&L_pitch, &can_recevie_data[4], 4);
-		}
-		
-		if(can_rx_message.StdId == 0x39)
-		{
-			memcpy(&R_yaw, &can_recevie_data[0], 4);
+			memcpy(&R_yaw, &can_recevie_data[0], 4); //当前右头yaw值、pitch值
 			memcpy(&R_pitch, &can_recevie_data[4], 4);
 		}
 	}

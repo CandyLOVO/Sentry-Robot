@@ -213,11 +213,11 @@ void RefereeSend(uint8_t *send, uint16_t tx_len)
 }
 
 /************************************************UI推送字符（使更改生效）*********************************/
-void JudgeSend(uint32_t TXData,uint16_t datacmdid,uint16_t revecer_id)
+void JudgeSend(uint32_t TXData,uint16_t datacmdid)
 {
 	static UI_CharReFresh_t senddatatoJudge;
 
-	uint8_t temp_datalength = Interactive_Data_LEN_Head + sizeof(TXData); // 计算交互数据长度
+	uint8_t temp_datalength = Interactive_Data_LEN_Head + 32; // 计算交互数据长度
 
 	senddatatoJudge.FrameHeader.SOF = REFEREE_SOF;
 	senddatatoJudge.FrameHeader.DataLength = temp_datalength;
@@ -228,8 +228,8 @@ void JudgeSend(uint32_t TXData,uint16_t datacmdid,uint16_t revecer_id)
 
 	senddatatoJudge.datahead.data_cmd_id = datacmdid;
 
+	senddatatoJudge.datahead.receiver_ID = 0x8080;
 	senddatatoJudge.datahead.sender_ID = Sentry.Myself_id;
-	senddatatoJudge.datahead.receiver_ID = revecer_id;
 	
 	int8_t txdata[4];
 //	memcpy(&txdata[0], &TXData, 4);
