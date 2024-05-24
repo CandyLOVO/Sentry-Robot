@@ -260,6 +260,16 @@
           <WinNumber>1</WinNumber>
           <ItemText>pid_pitch_a_R</ItemText>
         </Ww>
+        <Ww>
+          <count>22</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>pid_yaw_s_L_nan</ItemText>
+        </Ww>
+        <Ww>
+          <count>23</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>pid_yaw_a_L_nan</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>

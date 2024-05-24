@@ -10,6 +10,8 @@
 //**************************************************变量定义**************************************************//
 pidTypeDef pid_yaw_s_L;
 pidTypeDef pid_yaw_a_L;
+pidTypeDef pid_yaw_s_L_nan;
+pidTypeDef pid_yaw_a_L_nan;
 pidTypeDef pid_yaw_s_R;
 pidTypeDef pid_yaw_a_R;
 uint8_t can_send_data[8];
@@ -161,16 +163,16 @@ void Yaw_Task(void * argument)
 		}
 		
 		//PID计算
-		target_yaw_s_L = pid_cal_yaw_a(&pid_yaw_a_L, yaw_angle_L, target_yaw_a_L, warning_flag_L, up_limit_L, low_limit_L);
-		yaw_output_L = pid_cal_s(&pid_yaw_s_L, motor[1].speed, target_yaw_s_L);
+		target_yaw_s_L = pid_cal_yaw_a_for_nan(&pid_yaw_a_L_nan, yaw_angle_L, target_yaw_a_L, warning_flag_L, up_limit_L, low_limit_L);
+		yaw_output_L = pid_cal_s(&pid_yaw_s_L_nan, motor[1].speed, target_yaw_s_L);
 		target_yaw_s_R = pid_cal_yaw_a(&pid_yaw_a_R, yaw_angle_R, target_yaw_a_R, warning_flag_R, up_limit_R, low_limit_R);
 		yaw_output_R = pid_cal_s(&pid_yaw_s_R, motor[0].speed, target_yaw_s_R);
 		
 		//小yaw6020电机报文发送 CAN1
-		gimbal_control_6020[0] = (yaw_output_L>>8)&0xff;
-		gimbal_control_6020[1] = yaw_output_L&0xff;
-		gimbal_control_6020[2] = (yaw_output_R>>8)&0xff;
-		gimbal_control_6020[3] = yaw_output_R&0xff;
+//		gimbal_control_6020[0] = (yaw_output_L>>8)&0xff;
+//		gimbal_control_6020[1] = yaw_output_L&0xff;
+//		gimbal_control_6020[2] = (yaw_output_R>>8)&0xff;
+//		gimbal_control_6020[3] = yaw_output_R&0xff;
 		
 		gimbal_control_6020[2] = (yaw_output_L>>8)&0xff;
 		gimbal_control_6020[3] = yaw_output_L&0xff;
@@ -187,7 +189,7 @@ void Yaw_Task(void * argument)
 static void Yaw_init(void)
 {
 	//小yaw初始化
-	initial_angle_L = 6440;
+	initial_angle_L = 3714;
 	initial_angle_R = 7835;
 	target_yaw_a_L = 0;
 	target_yaw_s_L = 0;
@@ -199,6 +201,9 @@ static void Yaw_init(void)
 //	pid_init(&pid_yaw_a_L,8,0,0,30000,30000); //PD
 	pid_init(&pid_yaw_s_L,1,0,0,30000,30000); //PID初始化 PI
 	pid_init(&pid_yaw_a_L,1,0,0,30000,30000); //PD
+	
+	pid_init(&pid_yaw_s_L_nan,350,0.12,0,30000,30000); //PID初始化 PI
+	pid_init(&pid_yaw_a_L_nan,8,0,0,30000,30000); //PD
 	
 	pid_init(&pid_yaw_s_R,500,0.2,0,30000,30000); //PID初始化
 	pid_init(&pid_yaw_a_R,10,0,0,30000,30000);
