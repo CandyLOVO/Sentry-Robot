@@ -167,10 +167,10 @@ void Yaw_Task(void * argument)
 		yaw_output_R = pid_cal_s(&pid_yaw_s_R, motor[0].speed, target_yaw_s_R);
 		
 		//小yaw6020电机报文发送 CAN1
-//		gimbal_control_6020[0] = (yaw_output_L>>8)&0xff;
-//		gimbal_control_6020[1] = yaw_output_L&0xff;
-//		gimbal_control_6020[2] = (yaw_output_R>>8)&0xff;
-//		gimbal_control_6020[3] = yaw_output_R&0xff;
+		gimbal_control_6020[0] = (yaw_output_L>>8)&0xff;
+		gimbal_control_6020[1] = yaw_output_L&0xff;
+		gimbal_control_6020[2] = (yaw_output_R>>8)&0xff;
+		gimbal_control_6020[3] = yaw_output_R&0xff;
 		
 		gimbal_control_6020[2] = (yaw_output_L>>8)&0xff;
 		gimbal_control_6020[3] = yaw_output_L&0xff;
@@ -187,16 +187,18 @@ void Yaw_Task(void * argument)
 static void Yaw_init(void)
 {
 	//小yaw初始化
-	initial_angle_L = 3563;
-	initial_angle_R = 7830;
+	initial_angle_L = 6440;
+	initial_angle_R = 7835;
 	target_yaw_a_L = 0;
 	target_yaw_s_L = 0;
 	target_yaw_a_R = 0;
 	target_yaw_s_R = 0;
 	
 	//PID初始化
-	pid_init(&pid_yaw_s_L,350,0.08,0,30000,30000); //PID初始化 PI
-	pid_init(&pid_yaw_a_L,8,0,0,30000,30000); //PD
+//	pid_init(&pid_yaw_s_L,350,0.08,0,30000,30000); //PID初始化 PI
+//	pid_init(&pid_yaw_a_L,8,0,0,30000,30000); //PD
+	pid_init(&pid_yaw_s_L,1,0,0,30000,30000); //PID初始化 PI
+	pid_init(&pid_yaw_a_L,1,0,0,30000,30000); //PD
 	
 	pid_init(&pid_yaw_s_R,500,0.2,0,30000,30000); //PID初始化
 	pid_init(&pid_yaw_a_R,10,0,0,30000,30000);
