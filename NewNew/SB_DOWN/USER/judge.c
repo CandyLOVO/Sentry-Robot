@@ -8,8 +8,7 @@
 #define REFEREE_SOF 0xA5 // 起始字节,协议固定为0xA5
 #define ID_sentry_cmd 0x0120 // 哨兵自主决策
 
-uint8_t UI_Seq; // 包序号，供整个referee文件使用
-uint8_t Judge_Seq;
+uint8_t Judge_Seq; // 包序号，供整个referee文件使用
 extern UART_HandleTypeDef huart5; //裁判系统 UART5
 
 //=======================================================裁判系统校验读取(以中断形式)===============================================================//
@@ -18,6 +17,7 @@ extern uint8_t first_y;
 
 //定义2个结构体，一个官方接收的，一个自己使用的
 JUDGE_MODULE_DATA Judge_Hero;
+SENTRY_DATA Judge_sentry;
 Sentry_t Sentry;
 int32_t event;
 int8_t data[4];
@@ -132,6 +132,10 @@ void JUDGE_Receive(volatile uint8_t *databuffer,uint8_t length)
                         data_length = 1;
                         memcpy((void*)(&Judge_Hero.radar_information), (const void*)(&databuffer[pos+7]), data_length); //雷达
                         break;
+										 case 0x0303:
+                        data_length = 1;
+                        memcpy((void*)(&Judge_Hero.map_command), (const void*)(&databuffer[pos+7]), data_length);
+                        break;
                     default:break;
                 }
                 pos+=(data_length+9);
@@ -197,6 +201,10 @@ static void Update_data()
 	Sentry.blue_outpost_HP = Judge_Hero.robot_hp.blue_outpost_HP; //己方前哨战血量
 	Sentry.blue_base_HP = Judge_Hero.robot_hp.blue_base_HP; //己方基地血量
 	
+	Sentry.target_position_x = Judge_Hero.map_command.target_position_x;
+	Sentry.target_position_y = Judge_Hero.map_command.target_position_y;
+	Sentry.cmd_keyboard = Judge_Hero.map_command.cmd_keyboard;
+	
 	Sentry.rfid_status = Judge_Hero.rfid_status_t.rfid_status;
 //	memcpy(&Sentry.rfid[0], &Sentry.rfid_status, 4);
 }
@@ -205,19 +213,33 @@ static void Update_data()
  * @brief 裁判系统数据发送函数
  * @param
  */
-void RefereeSend(uint8_t *send, uint16_t tx_len)
+static uint8_t uart5_tx_dma_is_busy = 0;
+
+uint8_t get_uart5_tx_dma_busy_flag(void)
 {
-//	HAL_UART_Transmit_DMA(&huart5, send, tx_len);
-	HAL_UART_Transmit_DMA(&huart5, send, tx_len);
-//	osDelay(115);
+	return uart5_tx_dma_is_busy;
 }
 
+void clear_uart5_tx_dma_busy_sign(void)
+{
+	uart5_tx_dma_is_busy = 0;
+}
+
+void RefereeSend(uint8_t *send, uint16_t tx_len)
+{
+	uart5_tx_dma_is_busy = 1;
+	HAL_UART_Transmit_DMA(&huart5, send, tx_len);
+}
+
+
+
 /************************************************UI推送字符（使更改生效）*********************************/
+int8_t txdata[4];
 void JudgeSend(uint32_t TXData,uint16_t datacmdid)
 {
 	static UI_CharReFresh_t senddatatoJudge;
 
-	uint8_t temp_datalength = Interactive_Data_LEN_Head + 32; // 计算交互数据长度
+	uint8_t temp_datalength = Interactive_Data_LEN_Head + 4; // 计算交互数据长度
 
 	senddatatoJudge.FrameHeader.SOF = REFEREE_SOF;
 	senddatatoJudge.FrameHeader.DataLength = temp_datalength;
@@ -231,12 +253,8 @@ void JudgeSend(uint32_t TXData,uint16_t datacmdid)
 	senddatatoJudge.datahead.receiver_ID = 0x8080;
 	senddatatoJudge.datahead.sender_ID = Sentry.Myself_id;
 	
-	int8_t txdata[4];
-//	memcpy(&txdata[0], &TXData, 4);
-	txdata[3]=TXData & 0xffff;
-	txdata[2]=(TXData>>8) & 0xffff;
-	txdata[1]=(TXData>>16) & 0xffff;
-	txdata[0]=(TXData>>24) & 0xffff;
+//	int8_t txdata[4];
+	memcpy(&txdata[0], &TXData, 4);
 	
 	for(int i=0; i<4; i++)
 	{
@@ -245,6 +263,10 @@ void JudgeSend(uint32_t TXData,uint16_t datacmdid)
 
 	senddatatoJudge.frametail = Get_CRC16_Check_Sum((uint8_t *)&senddatatoJudge, LEN_HEADER + LEN_CMDID + temp_datalength, 0xFFFF);
 
+	while(get_uart5_tx_dma_busy_flag())
+	{
+		osDelay(1);
+	}
 	RefereeSend((uint8_t *)&senddatatoJudge, LEN_HEADER + LEN_CMDID + temp_datalength + LEN_TAIL); // 发送
 
 	Judge_Seq++; // 包序号+1

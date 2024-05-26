@@ -26,6 +26,9 @@ typedef struct
 	float R_yaw;	
 	float R_pitch; 
 	double yaw12;
+	float tar_pos_x;
+	float tar_pos_y;
+	uint8_t cmd_key;
 	uint8_t ending;
 }Tx_naving;
 
@@ -38,7 +41,6 @@ typedef struct
   float nav_x;
   float nav_y;
   uint32_t sentry_decision;
-	uint8_t sentry_decision_buffer[4];
 	
 	uint8_t R_tracking;
 	uint8_t R_shoot;
@@ -46,6 +48,11 @@ typedef struct
 	float R_yaw;
 	float R_pitch;
 	uint8_t target_shijue; //击打目标，从白头发给黑头 
+	uint8_t intention;
+	uint16_t start_position_x; 
+	uint16_t start_position_y; 
+	int8_t delta_x[49]; 
+	int8_t delta_y[49];
   uint16_t checksum;
 }Rx_naving;
 

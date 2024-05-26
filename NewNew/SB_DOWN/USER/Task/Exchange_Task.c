@@ -17,6 +17,7 @@ Tx_naving Tx_nav;
 uint32_t data_t = 0xC0000000;
 
 extern UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef huart5;
 extern uint8_t Rx[128];
 extern uint32_t length; //DMAÖÐÎ´´«ÊäµÄÊý¾Ý¸öÊý
 extern int count;
@@ -30,11 +31,12 @@ extern uint8_t flag_suo;
 extern double yaw12; //ÔÆÌ¨ÍÓÂÝÒÇyawÖµ
 extern uint8_t flag_heart;
 extern Rx_naving Rx_nav;
-
+uint32_t data_sentry;
 void Exchange_Task(void const * argument)
 {
   for(;;)
   {
+		JudgeSend(Rx_nav.sentry_decision,Datacmd_Decision);
 		if(Rx_flag==0) //³ÌÐò³õÊ¼»¯±êÖ¾Î»
 		{
 			RS485_Trans();
@@ -122,6 +124,10 @@ void RS485_Trans(void)
 	Tx_nav.yaw12 = yaw12; //µ±Ç°´óyaw¡¢ÓÒÍ·yaw¡¢pitchÊýÖµ
 	Tx_nav.R_yaw = R_yaw;
 	Tx_nav.R_pitch = R_pitch;
+	
+	Tx_nav.tar_pos_x = Sentry.target_position_x;
+	Tx_nav.tar_pos_y = Sentry.target_position_y;
+	Tx_nav.cmd_key = Sentry.cmd_keyboard;
 	Tx_nav.ending = 0xAA;
 	
 	Tx[0] = Tx_nav.header;
@@ -140,9 +146,13 @@ void RS485_Trans(void)
 	memcpy(&Tx[21], &Tx_nav.yaw12, 8);
 	memcpy(&Tx[29], &Tx_nav.R_yaw, 4);
 	memcpy(&Tx[33], &Tx_nav.R_pitch, 4);
-	Tx_nav.checksum = Get_CRC16_Check_Sum(Tx, 37, 0xffff);
-	memcpy(&Tx[37], &Tx_nav.checksum, 2);
-	Tx[39] = Tx_nav.ending;
+	memcpy(&Tx[37], &Tx_nav.tar_pos_x, 4);
+	memcpy(&Tx[41], &Tx_nav.tar_pos_y, 4);
+	memcpy(&Tx[45], &Tx_nav.cmd_key, 1);
+	
+	Tx_nav.checksum = Get_CRC16_Check_Sum(Tx, 46, 0xffff);
+	memcpy(&Tx[46], &Tx_nav.checksum, 2);
+	Tx[48] = Tx_nav.ending;
 	
 	
 	HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_SET);
@@ -158,4 +168,8 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) //ÔÚ uart_user.c ÖÐ½øÐÐ½
 			HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(DIR_1_GPIO_Port,DIR_1_Pin,GPIO_PIN_RESET);
     }
+		if(huart == &huart5)
+		{
+			clear_uart5_tx_dma_busy_sign();
+		}
 }

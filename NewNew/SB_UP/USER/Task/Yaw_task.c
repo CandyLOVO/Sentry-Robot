@@ -121,45 +121,66 @@ void Yaw_Task(void * argument)
 						yaw_finding_R(175, 20);
 					}
 				}
-			}		
-			
-			//左头识别到
-			if(Rx_vision.L_tracking == 1)
+			}	
+			else
 			{
-				rotate_flag_L = 0; //左头不转
-				target_yaw_a_L = Rx_vision.L_yaw - yaw12; //左头目标值绝对坐标系转换
-				last_target_yaw_a_L = target_yaw_a_L;
-				yaw_control_L(-20, -175); //左头目标值软件限位
-				
-				rotate_flag_R = 0; //右头不转
-				target_yaw_a_R = 0;
-				yaw_control_R(175, 20); //右头目标值软件限位
+				//左头识别到
+				if(Rx_vision.L_tracking == 1 && Rx_vision.R_tracking == 0)
+				{
+					rotate_flag_L = 0; //左头不转
+					target_yaw_a_L = Rx_vision.L_yaw - yaw12; //左头目标值绝对坐标系转换
+					last_target_yaw_a_L = target_yaw_a_L;
+					yaw_control_L(-20, -175); //左头目标值软件限位
+					
+					rotate_flag_R = 0; //右头不转
+					target_yaw_a_R = 0;
+					yaw_control_R(175, 20); //右头目标值软件限位
+				}
+				//右头识别到
+				if(Rx_vision.R_tracking == 1 && Rx_vision.L_tracking == 0)
+				{
+					rotate_flag_R = 0; //右头不转
+					target_yaw_a_R = Rx_vision.R_yaw - yaw12; //右头目标值绝对坐标系转换
+					last_target_yaw_a_R = target_yaw_a_R;
+					yaw_control_R(175, 20); //右头目标值软件限位
+					
+					rotate_flag_L = 0; //左头不转
+					target_yaw_a_L = 0;
+					yaw_control_L(-20, -175); //左头目标值软件限位
+				}
+				if(Rx_vision.L_tracking == 1 && Rx_vision.R_tracking == 1)
+				{
+					rotate_flag_L = 0; //左头不转
+					target_yaw_a_L = Rx_vision.L_yaw - yaw12; //左头目标值绝对坐标系转换
+					last_target_yaw_a_L = target_yaw_a_L;
+					yaw_control_L(-20, -175); //左头目标值软件限位
+					
+					rotate_flag_R = 0; //右头不转
+					target_yaw_a_R = Rx_vision.R_yaw - yaw12; //右头目标值绝对坐标系转换
+					last_target_yaw_a_R = target_yaw_a_R;
+					yaw_control_R(175, 20); //右头目标值软件限位
+				}
+				if(Rx_vision.L_tracking == 0 && Rx_vision.R_tracking == 0)
+				{
+					//大yaw上的摄像头识别到
+					if(Rx_vision.M_tracking == 1)
+					{
+						rotate_flag_L = 0; //左头不转
+						target_yaw_a_L = Rx_vision.L_yaw - yaw12;
+						last_target_yaw_a_L = target_yaw_a_L;
+						yaw_control_L(-20, -175);
+						
+						rotate_flag_R = 0; //右头不转
+						target_yaw_a_R = 0;
+						yaw_control_R(175, 20); //右头目标值软件限位
+					}
+				}
 			}
 			
-			//右头识别到
-			if(Rx_vision.R_tracking == 1)
-			{
-				rotate_flag_R = 0; //右头不转
-				target_yaw_a_R = Rx_vision.R_yaw - yaw12; //右头目标值绝对坐标系转换
-				last_target_yaw_a_R = target_yaw_a_R;
-				yaw_control_R(175, 20); //右头目标值软件限位
-				
-				rotate_flag_L = 0; //左头不转
-				target_yaw_a_L = 0;
-				yaw_control_L(-20, -175); //左头目标值软件限位
-			}
-			//大yaw上的摄像头识别到
-			if(Rx_vision.M_tracking == 1)
-			{
-				rotate_flag_L = 0; //左头不转
-				target_yaw_a_L = Rx_vision.L_yaw - yaw12;
-				last_target_yaw_a_L = target_yaw_a_L;
-				yaw_control_L(-20, -175);
-				
-				rotate_flag_R = 0; //右头不转
-				target_yaw_a_R = 0;
-				yaw_control_R(175, 20); //右头目标值软件限位
-			}
+			
+			
+			
+			
 		}
 		
 		//PID计算
@@ -202,8 +223,8 @@ static void Yaw_init(void)
 	pid_init(&pid_yaw_s_L,1,0,0,30000,30000); //PID初始化 PI
 	pid_init(&pid_yaw_a_L,1,0,0,30000,30000); //PD
 	
-	pid_init(&pid_yaw_s_L_nan,350,0.12,0,30000,30000); //PID初始化 PI
-	pid_init(&pid_yaw_a_L_nan,8,0,0,30000,30000); //PD
+	pid_init(&pid_yaw_s_L_nan,400,0.2,0,30000,30000); //PID初始化 PI
+	pid_init(&pid_yaw_a_L_nan,12,0,0,30000,30000); //PD
 	
 	pid_init(&pid_yaw_s_R,500,0.2,0,30000,30000); //PID初始化
 	pid_init(&pid_yaw_a_R,10,0,0,30000,30000);
@@ -232,14 +253,17 @@ void yaw_control_L(float max_angle, float min_angle)
 	}
 	
 	//软件限位（目标值位于禁区内）
-	if(target_yaw_a_L<max_angle && target_yaw_a_L>=((max_angle+min_angle)/2.0))
+	if(target_yaw_a_L<=max_angle && target_yaw_a_L>=((max_angle+min_angle)/2.0))
 	{
 		target_yaw_a_L = max_angle;
 	}
-	if((target_yaw_a_L>min_angle) && (target_yaw_a_L<=((max_angle+min_angle)/2.0)))
+	if((target_yaw_a_L>=min_angle) && (target_yaw_a_L<=((max_angle+min_angle)/2.0)))
 	{
 		target_yaw_a_L = min_angle;
 	}
+	
+	up_limit_L = min_angle - max_angle;
+	low_limit_L = max_angle - min_angle;
 	
 	//当前值位于禁区内
 	if(yaw_angle_L<=max_angle && yaw_angle_L>=((max_angle+min_angle)/2.0))
@@ -253,13 +277,11 @@ void yaw_control_L(float max_angle, float min_angle)
 	
 	//软件限位（当前值位于危险区内）
 	if(((yaw_angle_L>=0) && (yaw_angle_L<=(min_angle+180))) || ((yaw_angle_L>=max_angle) && (yaw_angle_L<=0)))
-	{
-		up_limit_L = min_angle - max_angle; 
+	{ 
 		warning_flag_L = 1; //当前角度位于上方危险区域
 	}
 	else if(((yaw_angle_L>=(max_angle+180)) && (yaw_angle_L<=180)) || ((yaw_angle_L>=-180) && (yaw_angle_L<=min_angle)))
 	{
-		low_limit_L = max_angle - min_angle;
 		warning_flag_L = 2; //当前角度位于下方危险区域
 	}
 }
@@ -282,19 +304,22 @@ void yaw_control_R(float max_angle, float min_angle)
 	}
 	
 	//软件限位（目标值位于禁区内）
-	if(target_yaw_a_R>min_angle && target_yaw_a_R<=((min_angle+max_angle)/2.0))
+	if(target_yaw_a_R>=min_angle && target_yaw_a_R<=((min_angle+max_angle)/2.0))
 	{
 		target_yaw_a_R = min_angle;
 	}
-	if(target_yaw_a_R<max_angle && target_yaw_a_R>=((min_angle+max_angle)/2.0))
+	if(target_yaw_a_R<=max_angle && target_yaw_a_R>=((min_angle+max_angle)/2.0))
 	{
 		target_yaw_a_R = max_angle;
 	}
 	
+	low_limit_R = max_angle - min_angle;
+	up_limit_R = min_angle - max_angle;
+	
 	//当前值位于禁区内
 	if(yaw_angle_R>=min_angle && yaw_angle_R<=((min_angle+max_angle)/2.0))
 	{
-		warning_flag_R = 2; 
+		warning_flag_R = 2;
 	}
 	if(yaw_angle_R<=max_angle && yaw_angle_R>=((min_angle+max_angle)/2.0))
 	{
@@ -304,12 +329,10 @@ void yaw_control_R(float max_angle, float min_angle)
 	//软件限位（当前值位于危险区内）
 	if(((yaw_angle_R>=0) && (yaw_angle_R<=min_angle)) || ((yaw_angle_R>=(max_angle-180)) && (yaw_angle_R<=0)))
 	{
-		low_limit_R = max_angle - min_angle;
 		warning_flag_R = 2; //当前角度位于上方危险区域
 	}
 	else if(((yaw_angle_R>=max_angle) && (yaw_angle_R<=180)) || ((yaw_angle_R>=-180) && (yaw_angle_R<=(min_angle-180))))
 	{
-		up_limit_R = min_angle - max_angle;
 		warning_flag_R = 1; //当前角度位于下方危险区域
 	}
 }
@@ -319,7 +342,7 @@ void yaw_finding_L(float max_angle, float min_angle)
 	//左头巡航
 	if(rotate_flag_L == 1)
 	{
-		target_yaw_a_L += 0.03; //以0.1/度的速度巡航
+		target_yaw_a_L += 0.05; //以0.1/度的速度巡航
 		if(target_yaw_a_L >= (min_angle+360))
 		{
 			rotate_flag_L = 2;
@@ -327,7 +350,7 @@ void yaw_finding_L(float max_angle, float min_angle)
 	}
 	else if(rotate_flag_L == 2) //左头反转
 	{
-		target_yaw_a_L -= 0.03;
+		target_yaw_a_L -= 0.05;
 		if(target_yaw_a_L <= max_angle)
 		{
 			rotate_flag_L = 1;

@@ -7,7 +7,7 @@
 
 int value = 0;
 int count = 0; //发送数据标志位
-uint8_t Rx[128]; //接收缓冲数组
+uint8_t Rx[256]; //接收缓冲数组
 uint32_t length = 0;
 uint16_t checksum_Rx;
 Rx_naving Rx_nav;
@@ -56,21 +56,17 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 			if(Rx[0] == 0xA5)
 
 			{
-				checksum_Rx = Get_CRC16_Check_Sum(Rx, 34, 0xffff);
+				checksum_Rx = Get_CRC16_Check_Sum(Rx, 137, 0xffff);
 
-				memcpy(&Rx_nav.checksum, &Rx[34], 2);
+				memcpy(&Rx_nav.checksum, &Rx[137], 2);
 				if(Rx_nav.checksum == checksum_Rx)
 				{
 					Rx_nav.naving = Rx[1];
 					Rx_nav.poing = Rx[2];
 					memcpy(&Rx_nav.nav_x, &Rx[3], 4);
 					memcpy(&Rx_nav.nav_y, &Rx[7], 4);
-					Rx_nav.sentry_decision_buffer[0] = Rx[11];
-					Rx_nav.sentry_decision_buffer[1] = Rx[12];
-					Rx_nav.sentry_decision_buffer[2] = Rx[13];
-					Rx_nav.sentry_decision_buffer[3] = Rx[14];
-					memcpy(&Rx_nav.sentry_decision, &Rx_nav.sentry_decision_buffer[0], 4);
-					JudgeSend(Rx_nav.sentry_decision,Datacmd_Decision);
+					memcpy(&Rx_nav.sentry_decision, &Rx[11], 4);
+//					JudgeSend(Rx_nav.sentry_decision,Datacmd_Decision);
 					memcpy(&Rx_nav.yaw_target, &Rx[15], 4);
 					
 					Rx_nav.R_tracking = Rx[19];
@@ -79,6 +75,12 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 					memcpy(&Rx_nav.R_yaw, &Rx[25], 4);
 					memcpy(&Rx_nav.R_pitch, &Rx[29], 4);
 					Rx_nav.target_shijue = Rx[33];
+					
+					Rx_nav.intention = Rx[34];
+					memcpy(&Rx_nav.start_position_x, &Rx[35], 2);
+					memcpy(&Rx_nav.start_position_y, &Rx[37], 2);
+					memcpy(&Rx_nav.delta_x[0], &Rx[39], 49);
+					memcpy(&Rx_nav.delta_y[0], &Rx[88], 49);
 				}
 			}
 		}

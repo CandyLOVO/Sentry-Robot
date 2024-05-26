@@ -7,7 +7,7 @@
 
 pidTypeDef pid_mocalun_s[4];
 pidTypeDef pid_bopan_s[2];
-float target_speed = 19 * 380;
+float target_speed = 17 * 380; // 摩擦轮转速(根据实际情况更改快速调整射速）
 float target_mocalun[4];
 float target_bopan[2];
 int16_t mocalun_output[4];
@@ -22,7 +22,6 @@ extern RC_ctrl_t rc_ctrl;
 extern int8_t flag;
 extern receive_vision Rx_vision;
 
-#define mocalun_speed         17 * 380 // 摩擦轮转速(根据实际情况更改快速调整射速）
 #define C_bopan_reversal_time 0.1f     // 拨盘反转时间(s)
 #define K_shoot_rate_correct  1        // 射频修正参数（根据实际情况更改快速调整射频）
 #define C_bopan_block_I       8000    // 拨盘堵转电流（测试后更改）
@@ -57,10 +56,10 @@ static void DataUpGrade(void);
 static void re_shoot_rate_calc(void);
 
 //===============================================全局变量================================================//
-//int16_t bopan_shoot_rate_max      = 15 ;                  // 最高射频（个/s）
-//int16_t bopan_shoot_rate_min      = 7 ;                   // 最低射频
-int16_t bopan_shoot_rate_max      = 3 ;                  // 最高射频（个/s）
-int16_t bopan_shoot_rate_min      = 1 ;                   // 最低射频
+int16_t bopan_shoot_rate_max      = 10 ;                  // 最高射频（个/s）
+int16_t bopan_shoot_rate_min      = 7 ;                   // 最低射频
+//int16_t bopan_shoot_rate_max      = 3 ;                  // 最高射频（个/s）
+//int16_t bopan_shoot_rate_min      = 1 ;                   // 最低射频
 int16_t bopan_shoot_rate_test     = 5;                      // 无裁判系统射频
 float bopan_shoot_rate_visiontest = 0.5;										//自瞄调试射频
 int16_t bopan_reversal_shoot_rate = -20;                     // 拨盘反转射频
@@ -174,10 +173,10 @@ static void re_shoot_rate_calc()
 //===============================================PID初始化================================================//
 static void Friction_init()
 {
-    pid_init(&pid_mocalun_s[0], 40, 0.8, 1,16384,10000); // 摩擦轮
-    pid_init(&pid_mocalun_s[1], 40, 0.8, 1,16384,10000);
-    pid_init(&pid_mocalun_s[2], 40, 0.8, 1,16384,10000);
-    pid_init(&pid_mocalun_s[3], 40, 0.8, 1,16384,10000);
+    pid_init(&pid_mocalun_s[0], 40, 0.8, 2,16384,10000); // 摩擦轮
+    pid_init(&pid_mocalun_s[1], 40, 0.8, 2,16384,10000);
+    pid_init(&pid_mocalun_s[2], 40, 0.8, 2,16384,10000);
+    pid_init(&pid_mocalun_s[3], 40, 0.8, 2,16384,10000);
 
     pid_init(&pid_bopan_s[0], 20, 0.03, 0.5,16384,10000); // 拨盘()
     pid_init(&pid_bopan_s[1], 20, 0.03, 0.5,16384,10000); // 20，0.03，0.5

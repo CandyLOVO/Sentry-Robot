@@ -15,7 +15,7 @@ float yaw_angle; //大yaw5010当前角度（0~+-180）
 float target_angle_5010;
 float target_speed_5010;
 float output_5010;
-uint8_t heart_direction[4]; //受击打装甲板
+int16_t heart_direction[4]; //受击打装甲板
 float last_target_angle_5010; //上一帧目标值
 uint32_t time_delay = 0; //锁住计时
 uint32_t time_delay_heart = 0;
@@ -48,7 +48,6 @@ void Yaw_task(void const * argument)
 		if(flag == 1)
 		{
 		flag_suo = 0;
-		flag_heart = 0;
 		yaw_angle = -motor_value(initial_angle, motor_5010.angle, 65535); //将5010编码值转化为0~+-180【面向两个头，向左转为-，向右转为+】
 		
 		//遥控器控制模式，左->中间，右->中间            测试底盘跟随云台模式，左->最上，右->中间
@@ -101,6 +100,7 @@ void Yaw_task(void const * argument)
 						//装甲板没有收到击打
 						else
 						{
+							flag_heart = 0;
 							flag_suo = 2; //未锁住标志位
 							yaw_finding(); //大yaw巡航
 						}
@@ -123,7 +123,7 @@ void Yaw_task(void const * argument)
 							target_angle_5010 = yaw_From_L;
 						}
 					}
-					else if(L_tracking==1) //左头锁住
+					else if(L_tracking==1 && Rx_nav.R_tracking==0) //左头锁住
 					{
 						if((yaw_From_L-yaw12)<20 && (yaw_From_L-yaw12)>-20) //转动角度小于阈值
 						{
@@ -134,7 +134,7 @@ void Yaw_task(void const * argument)
 							target_angle_5010 = yaw_From_L;
 						}
 					}
-					else if(Rx_nav.R_tracking==1) //右头锁住
+					else if(L_tracking==0 && Rx_nav.R_tracking==1) //右头锁住
 					{
 						if((Rx_nav.yaw_From_R-yaw12)<20 && (Rx_nav.yaw_From_R-yaw12)>-20) //转动角度小于阈值
 						{
@@ -145,7 +145,7 @@ void Yaw_task(void const * argument)
 							target_angle_5010 = Rx_nav.yaw_From_R;
 						}
 					}
-					else if(M_tracking==1)//中间的头锁住
+					else if(L_tracking==0 && Rx_nav.R_tracking==0 && M_tracking==1)//中间的头锁住
 					{
 						target_angle_5010 = yaw_From_L;
 					}
@@ -169,7 +169,7 @@ void Yaw_task(void const * argument)
 void yaw_init(void)
 {
 	//大yaw5010数值初始化
-	initial_angle = 36528; //头朝向底盘正方向时的编码值
+	initial_angle = 50160; //头朝向底盘正方向时的编码值
 	target_angle_5010 = 0;
 	target_speed_5010 = 0;
 	pid_init(&pid_5010_s,20000,0,0,700000,700000); //PID初始化 PI

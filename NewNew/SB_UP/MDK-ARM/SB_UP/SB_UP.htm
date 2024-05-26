@@ -3,7 +3,7 @@
 <title>Static Call Graph - [SB_UP\SB_UP.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image SB_UP\SB_UP.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Sat May 25 00:53:15 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Mon May 27 07:11:29 2024
 <BR><P>
 <H3>Maximum Stack Usage =        368 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -3043,14 +3043,14 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32h723xx.o(RESET)
 </UL>
-<P><STRONG><a name="[ae]"></a>Yaw_Task</STRONG> (Thumb, 1992 bytes, Stack size 0 bytes, yaw_task.o(.text.Yaw_Task))
+<P><STRONG><a name="[ae]"></a>Yaw_Task</STRONG> (Thumb, 2160 bytes, Stack size 0 bytes, yaw_task.o(.text.Yaw_Task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 172<LI>Call Chain = Yaw_Task &rArr; canx_send_data &rArr; MX_TIM3_Init &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
-<LI><a href="#[1e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;yaw_control_R
-<LI><a href="#[1e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;yaw_control_L
-<LI><a href="#[1de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_cal_yaw_a_for_nan
-<LI><a href="#[1df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_cal_yaw_a
+<LI><a href="#[1df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;yaw_control_R
+<LI><a href="#[1de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;yaw_control_L
+<LI><a href="#[1e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_cal_yaw_a_for_nan
+<LI><a href="#[1e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_cal_yaw_a
 <LI><a href="#[195]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_cal_s
 <LI><a href="#[194]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_init
 <LI><a href="#[196]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canx_send_data
@@ -3200,11 +3200,11 @@ Global Symbols
 <LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_Task
 </UL>
 
-<P><STRONG><a name="[1df]"></a>pid_cal_yaw_a</STRONG> (Thumb, 280 bytes, Stack size 0 bytes, pid_user.o(.text.pid_cal_yaw_a))
+<P><STRONG><a name="[1e1]"></a>pid_cal_yaw_a</STRONG> (Thumb, 280 bytes, Stack size 0 bytes, pid_user.o(.text.pid_cal_yaw_a))
 <BR><BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_Task
 </UL>
 
-<P><STRONG><a name="[1de]"></a>pid_cal_yaw_a_for_nan</STRONG> (Thumb, 272 bytes, Stack size 0 bytes, pid_user.o(.text.pid_cal_yaw_a_for_nan))
+<P><STRONG><a name="[1e0]"></a>pid_cal_yaw_a_for_nan</STRONG> (Thumb, 272 bytes, Stack size 0 bytes, pid_user.o(.text.pid_cal_yaw_a_for_nan))
 <BR><BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_Task
 </UL>
 
@@ -3569,11 +3569,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[1ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskStartScheduler
 </UL>
 
-<P><STRONG><a name="[1e0]"></a>yaw_control_L</STRONG> (Thumb, 428 bytes, Stack size 0 bytes, yaw_task.o(.text.yaw_control_L))
+<P><STRONG><a name="[1de]"></a>yaw_control_L</STRONG> (Thumb, 436 bytes, Stack size 0 bytes, yaw_task.o(.text.yaw_control_L))
 <BR><BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_Task
 </UL>
 
-<P><STRONG><a name="[1e1]"></a>yaw_control_R</STRONG> (Thumb, 420 bytes, Stack size 0 bytes, yaw_task.o(.text.yaw_control_R))
+<P><STRONG><a name="[1df]"></a>yaw_control_R</STRONG> (Thumb, 432 bytes, Stack size 0 bytes, yaw_task.o(.text.yaw_control_R))
 <BR><BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Yaw_Task
 </UL>
 

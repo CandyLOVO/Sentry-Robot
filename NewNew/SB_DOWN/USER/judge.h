@@ -7,7 +7,7 @@
 #define Cmdid_Judge_send 0x0301  //裁判系统交互
 
 #define Datacmd_Decision 0x0120  //哨兵自主决策指令
-#define ID_Dataccenter		0x8080 //裁判系统服务器id（用于哨兵和雷达自主决策指令）
+#define ID_Dataccenter	 0x8080 //裁判系统服务器id（用于哨兵和雷达自主决策指令）
 typedef __packed struct
 {
 	uint8_t  SOF;						
@@ -220,10 +220,29 @@ typedef __packed struct
 		uint8_t radar_info;
 } radar_info_t;
 
-typedef __packed struct
-{
-		uint32_t sentry_cmd; 
-} ext_sentry_cmd_t;
+typedef __packed struct 
+{ 
+	float target_position_x; 
+	float target_position_y; 
+	uint8_t cmd_keyboard; 
+	uint8_t target_robot_id; 
+	uint8_t cmd_source; 
+}map_command_t; 
+
+typedef __packed struct 
+{ 
+	uint8_t intention; 
+	uint16_t start_position_x; 
+	uint16_t start_position_y; 
+	int8_t delta_x[49]; 
+	int8_t delta_y[49]; 
+	uint16_t sender_id;
+}map_data_t;
+
+typedef __packed struct 
+{ 
+	uint32_t sentry_cmd; 
+} sentry_cmd_t; 
 
 enum judge_robot_ID{
 		hero_red       = 1,
@@ -266,8 +285,14 @@ typedef __packed struct JUDGE_MODULE_DATA
 		 radar_mark_data_t radar_mark_data;
 		 sentry_info_t sentry_information;
 		 radar_info_t radar_information;
-		 ext_sentry_cmd_t sentry_cmd_t;
+		 map_command_t map_command;
 }JUDGE_MODULE_DATA;
+
+typedef __packed struct SENTRY_DATA
+{
+	sentry_cmd_t sentry_cmd;
+	map_data_t map_data;
+}SENTRY_DATA;
 
 typedef __packed struct Sentry_t
 {
@@ -320,6 +345,10 @@ typedef __packed struct Sentry_t
 	uint32_t event_data; //能量机关、高地占领状态
 	uint16_t projectile_allowance_17mm; //17mm弹丸允许发弹量
 	uint16_t remaining_gold_coin; //剩余金币数量
+	
+	float target_position_x; 
+	float target_position_y; 
+	uint8_t cmd_keyboard; 
 }Sentry_t;
 
 //**********************************************发给裁判系统**********************************************//
@@ -332,7 +361,7 @@ typedef struct
 } referee_id_t;
 
 /* 帧头定义 */
-typedef struct
+typedef __packed struct xFrameHeader
 {
 	uint8_t SOF;
 	uint16_t DataLength;
@@ -343,14 +372,14 @@ typedef struct
 /****************************机器人交互数据****************************/
 /* 发送的内容数据段最大为 113 检测是否超出大小限制?实际上图形段不会超，数据段最多30个，也不会超*/
 /* 交互数据头结构 */
-typedef struct
+typedef __packed struct ext_student_interactive_header_data_t
 {
 	uint16_t data_cmd_id; // 由于存在多个内容 ID，但整个cmd_id 上行频率最大为 10Hz，请合理安排带宽。注意交互部分的上行频率
 	uint16_t sender_ID;
 	uint16_t receiver_ID;
 } ext_student_interactive_header_data_t;
 
-typedef struct
+typedef __packed struct UI_CharReFresh_t
 {
    xFrameHeader FrameHeader;
    uint16_t CmdID;
@@ -363,9 +392,6 @@ typedef struct
 typedef enum
 {
 	Interactive_Data_LEN_Head = 6, //交互数据帧头
-	UI_Operate_LEN_Del = 2, //删除
-//	UI_Operate_LEN_PerDraw = 15,
-	UI_Operate_LEN_DrawChar = 32,
 } Interactive_Data_Length_e;
 
 /* 交互数据ID */
@@ -393,5 +419,9 @@ extern Sentry_t Sentry;
 
 void JUDGE_Receive(volatile uint8_t *databuffer,uint8_t length);
 void JudgeSend(uint32_t TXData,uint16_t datacmdid);
+
+extern void RefereeSend(uint8_t *send, uint16_t tx_len);
+extern uint8_t get_uart5_tx_dma_busy_flag(void);
+extern void clear_uart5_tx_dma_busy_sign(void);
 
 #endif
