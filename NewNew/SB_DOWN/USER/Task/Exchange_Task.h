@@ -30,6 +30,7 @@ typedef struct
 	float tar_pos_y;
 	uint8_t cmd_key;
 	uint8_t ending;
+	float bullet_speed;
 }Tx_naving;
 
 typedef struct

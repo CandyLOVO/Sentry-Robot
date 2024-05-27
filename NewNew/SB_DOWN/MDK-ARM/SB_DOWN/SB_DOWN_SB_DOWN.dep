@@ -144,7 +144,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x660F86B6)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x660F86B6)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x660F86B6)
 I (../USER/Task/Chassis_Task.h)(0x66433147)
-I (../USER/Task/Exchange_Task.h)(0x6651A256)
+I (../USER/Task/Exchange_Task.h)(0x6654231E)
 I (../USER/Task/Yaw_Task.h)(0x66252CFF)
 F (../Core/Src/can.c)(0x660F885C)(--c99 -c --cpu Cortex-M4.fp.sp -g -W -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../USER -I ../USER/Task -I ../USER/Motor-I.\RTE\_SB_DOWN-ID:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Software\KeilMDK538\KeilMDK538\ARM\Pack\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o sb_down\can.o --omf_browse sb_down\can.crf --depend sb_down\can.d)
 I (../Core/Inc/can.h)(0x660F885C)
@@ -1396,7 +1396,7 @@ I (..\USER\rc_potocal.h)(0x6616573E)
 I (..\USER\struct_typedef.h)(0x65DA5612)
 I (..\USER\judge.h)(0x66522C43)
 I (D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\include\string.h)(0x5E8E3CC2)
-I (../USER/Task/Exchange_Task.h)(0x6651A256)
+I (../USER/Task/Exchange_Task.h)(0x6654231E)
 I (..\USER\CRC.h)(0x65DA5612)
 F (..\USER\judge.c)(0x66525BF6)(--c99 -c --cpu Cortex-M4.fp.sp -g -W -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../USER -I ../USER/Task -I ../USER/Motor-I.\RTE\_SB_DOWN-ID:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Software\KeilMDK538\KeilMDK538\ARM\Pack\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o sb_down\judge.o --omf_browse sb_down\judge.crf --depend sb_down\judge.d)
 I (..\USER\judge.h)(0x66522C43)
@@ -1546,11 +1546,11 @@ I (../USER/struct_typedef.h)(0x65DA5612)
 I (D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\include\math.h)(0x5E8E3CC2)
 I (..\USER\Task\Yaw_Task.h)(0x66252CFF)
 I (../USER/uart_user.h)(0x661FCB7B)
-I (..\USER\Task\Exchange_Task.h)(0x6651A256)
+I (..\USER\Task\Exchange_Task.h)(0x6654231E)
 I (../USER/judge.h)(0x66522C43)
 I (D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\include\stdlib.h)(0x5E8E3CC2)
-F (..\USER\Task\Exchange_Task.c)(0x66526189)(--c99 -c --cpu Cortex-M4.fp.sp -g -W -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../USER -I ../USER/Task -I ../USER/Motor-I.\RTE\_SB_DOWN-ID:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Software\KeilMDK538\KeilMDK538\ARM\Pack\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o sb_down\exchange_task.o --omf_browse sb_down\exchange_task.crf --depend sb_down\exchange_task.d)
-I (..\USER\Task\Exchange_Task.h)(0x6651A256)
+F (..\USER\Task\Exchange_Task.c)(0x665426B1)(--c99 -c --cpu Cortex-M4.fp.sp -g -W -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../USER -I ../USER/Task -I ../USER/Motor-I.\RTE\_SB_DOWN-ID:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Software\KeilMDK538\KeilMDK538\ARM\Pack\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o sb_down\exchange_task.o --omf_browse sb_down\exchange_task.crf --depend sb_down\exchange_task.d)
+I (..\USER\Task\Exchange_Task.h)(0x6654231E)
 I (../Core/Inc/main.h)(0x661F640B)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x660F86B5)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x66492A51)
@@ -1660,7 +1660,7 @@ I (../USER/Motor/MG5010_control.h)(0x6622240E)
 I (../USER/rc_potocal.h)(0x6616573E)
 I (../USER/struct_typedef.h)(0x65DA5612)
 I (../USER/pid_user.h)(0x664A0291)
-I (..\USER\Task\Exchange_Task.h)(0x6651A256)
+I (..\USER\Task\Exchange_Task.h)(0x6654231E)
 I (../USER/judge.h)(0x66522C43)
 I (../USER/uart_user.h)(0x661FCB7B)
 F (..\USER\Motor\MG5010_control.c)(0x6622240E)(--c99 -c --cpu Cortex-M4.fp.sp -g -W -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../USER -I ../USER/Task -I ../USER/Motor-I.\RTE\_SB_DOWN-ID:\Software\KeilMDK538\KeilMDK538\ARM\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\Software\KeilMDK538\KeilMDK538\ARM\Pack\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o sb_down\mg5010_control.o --omf_browse sb_down\mg5010_control.crf --depend sb_down\mg5010_control.d)

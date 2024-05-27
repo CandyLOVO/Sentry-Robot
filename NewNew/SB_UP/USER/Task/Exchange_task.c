@@ -11,7 +11,7 @@ transmit_vision Tx_vision;
 uint8_t Tx_yaw12[8];
 uint8_t Tx_yaw[8];
 uint8_t Tx_gyro[8];
-uint8_t Tx_shijue[26];
+uint8_t Tx_shijue[30];
 uint8_t Tx_shijue_L[8];
 uint8_t Tx_shijue_R[8];
 
@@ -54,9 +54,10 @@ void vision_value(void)
 	memcpy(&Tx_shijue[14], &Tx_vision.R_yaw, 4);
 	memcpy(&Tx_shijue[18], &Tx_vision.R_pitch, 4);
 	Tx_shijue[22] = target_shijue;
-	Tx_vision.checksum = Get_CRC16_Check_Sum(Tx_shijue, 23, 0xffff);
-	memcpy(&Tx_shijue[23], &Tx_vision.checksum, 2);
-	memcpy(&Tx_shijue[25], &Tx_vision.ending, 1);
+	memcpy(&Tx_shijue[23], &Tx_vision.shoot_speed, 4);
+	Tx_vision.checksum = Get_CRC16_Check_Sum(Tx_shijue, 27, 0xffff);
+	memcpy(&Tx_shijue[27], &Tx_vision.checksum, 2);
+	memcpy(&Tx_shijue[29], &Tx_vision.ending, 1);
 	CDC_Transmit_HS(Tx_shijue, sizeof(Tx_shijue)); //发给自瞄的值
 }
 

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [SB_DOWN\SB_DOWN.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image SB_DOWN\SB_DOWN.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Mon May 27 06:18:54 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Mon May 27 14:22:43 2024
 <BR><P>
 <H3>Maximum Stack Usage =        288 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -842,7 +842,7 @@ Global Symbols
 <LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_CAN1_Init
 </UL>
 
-<P><STRONG><a name="[72]"></a>Exchange_Task</STRONG> (Thumb, 288 bytes, Stack size 0 bytes, exchange_task.o(i.Exchange_Task))
+<P><STRONG><a name="[72]"></a>Exchange_Task</STRONG> (Thumb, 264 bytes, Stack size 0 bytes, exchange_task.o(i.Exchange_Task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = Exchange_Task &rArr; RS485_Trans &rArr; osDelay &rArr; vTaskDelay &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
@@ -1578,7 +1578,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f446xx.o(RESET)
 </UL>
-<P><STRONG><a name="[b6]"></a>RS485_Trans</STRONG> (Thumb, 310 bytes, Stack size 48 bytes, exchange_task.o(i.RS485_Trans))
+<P><STRONG><a name="[b6]"></a>RS485_Trans</STRONG> (Thumb, 336 bytes, Stack size 48 bytes, exchange_task.o(i.RS485_Trans))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = RS485_Trans &rArr; osDelay &rArr; vTaskDelay &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
 <BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay

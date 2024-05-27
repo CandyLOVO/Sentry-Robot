@@ -33,6 +33,7 @@ typedef struct
   float L_pitch; //角度制 
 	float R_yaw;	
 	float R_pitch;
+	float shoot_speed;
 	uint16_t checksum;
 	uint8_t ending;
 }transmit_vision; //视觉通信发送结构体

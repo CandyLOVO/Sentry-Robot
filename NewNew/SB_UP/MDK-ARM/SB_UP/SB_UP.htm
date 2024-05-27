@@ -3,7 +3,7 @@
 <title>Static Call Graph - [SB_UP\SB_UP.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image SB_UP\SB_UP.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Mon May 27 07:11:29 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Mon May 27 14:22:20 2024
 <BR><P>
 <H3>Maximum Stack Usage =        368 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1066,7 +1066,7 @@ Global Symbols
 <LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_PCD_MspInit
 </UL>
 
-<P><STRONG><a name="[b1]"></a>Exchange_Task</STRONG> (Thumb, 216 bytes, Stack size 0 bytes, exchange_task.o(.text.Exchange_Task))
+<P><STRONG><a name="[b1]"></a>Exchange_Task</STRONG> (Thumb, 222 bytes, Stack size 0 bytes, exchange_task.o(.text.Exchange_Task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 188<LI>Call Chain = Exchange_Task &rArr; yaw_value &rArr; canx_send_data &rArr; MX_TIM3_Init &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
@@ -1340,7 +1340,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_FDCAN_IRQHandler
 </UL>
 
-<P><STRONG><a name="[108]"></a>HAL_FDCAN_RxFifo0Callback</STRONG> (Thumb, 510 bytes, Stack size 24 bytes, can_user.o(.text.HAL_FDCAN_RxFifo0Callback))
+<P><STRONG><a name="[108]"></a>HAL_FDCAN_RxFifo0Callback</STRONG> (Thumb, 512 bytes, Stack size 24 bytes, can_user.o(.text.HAL_FDCAN_RxFifo0Callback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40 + Unknown Stack Size
 <LI>Call Chain = HAL_FDCAN_RxFifo0Callback &rArr; HAL_FDCAN_GetRxMessage
 </UL>

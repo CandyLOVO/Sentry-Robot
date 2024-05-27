@@ -14,8 +14,6 @@ uint8_t Rx_flag = 0; //程序初始化标志位
 uint16_t checksum;
 Tx_naving Tx_nav;
 
-uint32_t data_t = 0xC0000000;
-
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart5;
 extern uint8_t Rx[128];
@@ -70,14 +68,11 @@ void Exchange_Task(void const * argument)
 		can_remote(Tx_friction, 0x36);
     osDelay(1);
 		
-		int32_t bullet_speed = Sentry.bullet_speed;
+		float bullet_speed = Sentry.bullet_speed;
 		memset(Tx_friction, 0, sizeof(Tx_friction));//接收前清空数组
 		Tx_friction[0] = Sentry.shooter_ID; //枪管ID
 		Tx_friction[1] = Sentry.bullet_frequence;	//枪管弹频
-		Tx_friction[2] = (bullet_speed >> 24) & 0xffff; //枪管射速（先高8位后低8位）
-		Tx_friction[3] = (bullet_speed >> 16) & 0xffff;
-		Tx_friction[4] = (bullet_speed >> 8) & 0xffff;
-		Tx_friction[5] = bullet_speed & 0xff;
+		memcpy(&Tx_friction[2], &bullet_speed, 4); //枪管射速
 		Tx_friction[6] = 0;
 		Tx_friction[7] = 0;
 		can_remote(Tx_friction, 0x37);
@@ -128,6 +123,7 @@ void RS485_Trans(void)
 	Tx_nav.tar_pos_x = Sentry.target_position_x;
 	Tx_nav.tar_pos_y = Sentry.target_position_y;
 	Tx_nav.cmd_key = Sentry.cmd_keyboard;
+	Tx_nav.bullet_speed = Sentry.bullet_speed;
 	Tx_nav.ending = 0xAA;
 	
 	Tx[0] = Tx_nav.header;
@@ -149,11 +145,11 @@ void RS485_Trans(void)
 	memcpy(&Tx[37], &Tx_nav.tar_pos_x, 4);
 	memcpy(&Tx[41], &Tx_nav.tar_pos_y, 4);
 	memcpy(&Tx[45], &Tx_nav.cmd_key, 1);
+	memcpy(&Tx[46], &Tx_nav.bullet_speed, 4);
 	
-	Tx_nav.checksum = Get_CRC16_Check_Sum(Tx, 46, 0xffff);
-	memcpy(&Tx[46], &Tx_nav.checksum, 2);
-	Tx[48] = Tx_nav.ending;
-	
+	Tx_nav.checksum = Get_CRC16_Check_Sum(Tx, 50, 0xffff);
+	memcpy(&Tx[50], &Tx_nav.checksum, 2);
+	Tx[52] = Tx_nav.ending;
 	
 	HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_SET);
 	HAL_GPIO_WritePin(DIR_1_GPIO_Port,DIR_1_Pin,GPIO_PIN_SET);

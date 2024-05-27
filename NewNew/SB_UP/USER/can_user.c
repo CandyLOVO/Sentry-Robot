@@ -16,6 +16,7 @@ extern Shooter_t Shooter_R;
 extern uint16_t time_delay;
 extern uint8_t flag_suo;
 extern receive_vision Rx_vision;
+extern transmit_vision Tx_vision;
 
 FDCAN_RxHeaderTypeDef RxHeader1;
 uint8_t g_Can1RxData[64];
@@ -243,14 +244,16 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
         if(g_Can3RxData[0] == 0x01)
         {	
           Shooter_L.shoot_rate = g_Can3RxData[1];
-          Shooter_L.shoot_speed = ((g_Can3RxData[2] << 24) | (g_Can3RxData[3] << 16) | (g_Can3RxData[4] << 8) | (g_Can3RxData[5]));
+          memcpy(&Shooter_L.shoot_speed, &g_Can3RxData[2], 4);
         }
 
         if(g_Can3RxData[0] == 0x02)
         {
           Shooter_R.shoot_rate = g_Can3RxData[1];
-          Shooter_R.shoot_speed = ((g_Can3RxData[2] << 24) | (g_Can3RxData[3] << 16) | (g_Can3RxData[4] << 8) | (g_Can3RxData[5]));
+          memcpy(&Shooter_R.shoot_speed, &g_Can3RxData[2], 4);
         }
+				
+				memcpy(&Tx_vision.shoot_speed, &g_Can3RxData[2], 4);
 			}
 			
 			if(RxHeader3.Identifier == 0x39)
