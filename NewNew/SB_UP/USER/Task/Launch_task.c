@@ -21,6 +21,7 @@ extern motor_info motor_friction[8];
 extern RC_ctrl_t rc_ctrl;
 extern int8_t flag;
 extern receive_vision Rx_vision;
+extern transmit_vision Tx_vision;
 
 #define C_bopan_reversal_time 0.1f     // 拨盘反转时间(s)
 #define K_shoot_rate_correct  1        // 射频修正参数（根据实际情况更改快速调整射频）
@@ -56,10 +57,10 @@ static void DataUpGrade(void);
 static void re_shoot_rate_calc(void);
 
 //===============================================全局变量================================================//
-int16_t bopan_shoot_rate_max      = 10 ;                  // 最高射频（个/s）
-int16_t bopan_shoot_rate_min      = 7 ;                   // 最低射频
-//int16_t bopan_shoot_rate_max      = 3 ;                  // 最高射频（个/s）
-//int16_t bopan_shoot_rate_min      = 1 ;                   // 最低射频
+int16_t bopan_shoot_rate_max_L      = 15;                  // 最高射频（个/s）
+int16_t bopan_shoot_rate_min_L      = 7 ;                   // 最低射频
+int16_t bopan_shoot_rate_max_R      = 3;                  // 最高射频（个/s）
+int16_t bopan_shoot_rate_min_R      = 1 ;                   // 最低射频
 int16_t bopan_shoot_rate_test     = 5;                      // 无裁判系统射频
 float bopan_shoot_rate_visiontest = 0.5;										//自瞄调试射频
 int16_t bopan_reversal_shoot_rate = -20;                     // 拨盘反转射频
@@ -81,6 +82,10 @@ void Launch_Task(void *argument)
             // 开启摩擦轮
             if (remote_mode == 22 || remote_mode == 11) // 摩擦轮开启条件
             {
+								if(Tx_vision.shoot_speed >= 28)
+								{
+									target_speed -= 380;
+								}
                 Friction_calc(); // 转速->电流
             } else               // 摩擦轮关闭
             {
@@ -99,7 +104,7 @@ void Launch_Task(void *argument)
                   } 
 									else if (bopan_reversal_flag_L == 0) 
 									{
-                    Bopan_speed_calc_L(bopan_shoot_rate_max, bopan_shoot_rate_min, bopan_shoot_rate_test); // 最高射频，最低射频，无裁判系统射频
+                    Bopan_speed_calc_L(bopan_shoot_rate_max_L, bopan_shoot_rate_min_L, bopan_shoot_rate_test); // 最高射频，最低射频，无裁判系统射频
                   }
                 }
 
@@ -114,7 +119,7 @@ void Launch_Task(void *argument)
 											target_bopan[0] = bopan_reversal_shoot_rate*60 / 8 * 36;
 										} 
 										else if (bopan_reversal_flag_R == 0) {
-                        Bopan_speed_calc_R(bopan_shoot_rate_max, bopan_shoot_rate_min, bopan_shoot_rate_test); // 最高射频，最低射频，无裁判系统射频
+                        Bopan_speed_calc_R(bopan_shoot_rate_max_R, bopan_shoot_rate_min_R, bopan_shoot_rate_test); // 最高射频，最低射频，无裁判系统射频
                     }
                 }
 

@@ -100,6 +100,11 @@ void Pitch_Task(void * argument)
 				nod_flag_L = 0;
 				target_pitch_a_L = Rx_vision.L_pitch;
 				pitch_control_L(25, -24);
+				
+				//”“Õ∑Õ£÷π—≤∫Ω
+				nod_flag_R = 0;
+				target_pitch_a_R = target_pitch_a_L;
+				pitch_control_R(25, -24);
 			}
 			if(Rx_vision.R_tracking == 1)
 			{
@@ -199,7 +204,7 @@ void pitch_finding(int16_t max_angle, int16_t min_angle)
 {
 	if(nod_flag_L == 1)
 	{
-		target_pitch_a_L -= 0.02;
+		target_pitch_a_L -= 0.03;
 		if(target_pitch_a_L < min_angle)
 		{
 			nod_flag_L = 2;
@@ -207,7 +212,7 @@ void pitch_finding(int16_t max_angle, int16_t min_angle)
 	}
 	else if(nod_flag_L == 2)
 	{
-		target_pitch_a_L += 0.02;
+		target_pitch_a_L += 0.03;
 		if(target_pitch_a_L > max_angle)
 		{
 			nod_flag_L = 1;
@@ -216,7 +221,7 @@ void pitch_finding(int16_t max_angle, int16_t min_angle)
 
 	if(nod_flag_R == 1)
 	{
-		target_pitch_a_R -= 0.02;
+		target_pitch_a_R -= 0.03;
 		if(target_pitch_a_R < min_angle)
 		{
 			nod_flag_R = 2;
@@ -224,7 +229,7 @@ void pitch_finding(int16_t max_angle, int16_t min_angle)
 	}
 	else if(nod_flag_R == 2)
 	{
-		target_pitch_a_R += 0.02;
+		target_pitch_a_R += 0.03;
 		if(target_pitch_a_R > max_angle)
 		{
 			nod_flag_R = 1;

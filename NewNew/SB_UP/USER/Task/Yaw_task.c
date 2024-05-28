@@ -135,7 +135,7 @@ void Yaw_Task(void * argument)
 					yaw_control_L(-20, -175); //左头目标值软件限位
 					
 					rotate_flag_R = 0; //右头不转
-					target_yaw_a_R = 0;
+					target_yaw_a_R = -target_yaw_a_L;
 					yaw_control_R(175, 20); //右头目标值软件限位
 				}
 				//右头识别到
@@ -339,7 +339,7 @@ void yaw_finding_L(float max_angle, float min_angle)
 	//左头巡航
 	if(rotate_flag_L == 1)
 	{
-		target_yaw_a_L += 0.05; //以0.05/度的速度巡航
+		target_yaw_a_L += 0.06; //以0.06/度的速度巡航
 		if(target_yaw_a_L >= (min_angle+360))
 		{
 			rotate_flag_L = 2;
@@ -347,7 +347,7 @@ void yaw_finding_L(float max_angle, float min_angle)
 	}
 	else if(rotate_flag_L == 2) //左头反转
 	{
-		target_yaw_a_L -= 0.05;
+		target_yaw_a_L -= 0.06;
 		if(target_yaw_a_L <= max_angle)
 		{
 			rotate_flag_L = 1;
@@ -360,7 +360,7 @@ void yaw_finding_R(float max_angle, float min_angle)
 	//右头巡航
 	if(rotate_flag_R == 1)
 	{
-		target_yaw_a_R -= 0.05; //以0.05/度的速度巡航
+		target_yaw_a_R -= 0.06; //以0.06/度的速度巡航
 		if(target_yaw_a_R <= (max_angle-360))
 		{
 			rotate_flag_R = 2;
@@ -368,7 +368,7 @@ void yaw_finding_R(float max_angle, float min_angle)
 	}
 	else if(rotate_flag_R == 2) //右头反转
 	{
-		target_yaw_a_R += 0.05;
+		target_yaw_a_R += 0.06;
 		if(target_yaw_a_R >= min_angle)
 		{
 			rotate_flag_R = 1;
