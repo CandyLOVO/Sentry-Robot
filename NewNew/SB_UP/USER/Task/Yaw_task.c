@@ -183,7 +183,8 @@ void Yaw_Task(void * argument)
 		//PID计算
 		target_yaw_s_L = pid_cal_yaw_a_for_nan(&pid_yaw_a_L_nan, yaw_angle_L, target_yaw_a_L, warning_flag_L, up_limit_L, low_limit_L);
 		yaw_output_L = pid_cal_s(&pid_yaw_s_L_nan, motor[1].speed, target_yaw_s_L);
-		target_yaw_s_R = pid_cal_yaw_a(&pid_yaw_a_R, yaw_angle_R, target_yaw_a_R, warning_flag_R, up_limit_R, low_limit_R);
+//		target_yaw_s_R = pid_cal_yaw_a(&pid_yaw_a_R, yaw_angle_R, target_yaw_a_R, warning_flag_R, up_limit_R, low_limit_R);
+		target_yaw_s_R = pid_cal_yaw_a_for_nan(&pid_yaw_a_R, yaw_angle_R, target_yaw_a_R, warning_flag_R, up_limit_R, low_limit_R);
 		yaw_output_R = pid_cal_s(&pid_yaw_s_R, motor[0].speed, target_yaw_s_R);
 		
 		//小yaw6020电机报文发送 CAN1
