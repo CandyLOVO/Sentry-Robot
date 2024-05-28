@@ -169,11 +169,11 @@ void Yaw_task(void const * argument)
 void yaw_init(void)
 {
 	//大yaw5010数值初始化
-	initial_angle = 50160; //头朝向底盘正方向时的编码值
+	initial_angle = 12744; //头朝向底盘正方向时的编码值
 	target_angle_5010 = 0;
 	target_speed_5010 = 0;
-	pid_init(&pid_5010_s,20000,0,0,700000,700000); //PID初始化 PI
-	pid_init(&pid_5010_a,3,0,0,700000,700000); //PD
+	pid_init(&pid_5010_s,25000,0,0,700000,700000); //PID初始化 PI
+	pid_init(&pid_5010_a,1,0,0,700000,700000); //PD
 //	pid_init(&pid_5010_s,7000,2,0,700000,700000); //PID??? PI
 //	pid_init(&pid_5010_a,4,0,23,700000,700000); //PD
 	

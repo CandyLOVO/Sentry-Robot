@@ -285,6 +285,11 @@
           <WinNumber>1</WinNumber>
           <ItemText>target_speed</ItemText>
         </Ww>
+        <Ww>
+          <count>27</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>gyro_correct</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>

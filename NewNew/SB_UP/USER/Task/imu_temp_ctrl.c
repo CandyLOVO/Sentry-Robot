@@ -124,28 +124,28 @@ void IMU_TempCtrlTask(void const * argument)
         }
         yaw_b = yaw12 - 0.2*dtcuout;
         htim3.Instance->CCR4 = (uint16_t)out;
-//			gyro[0] = gyro[0];
-//			gyro[1] = gyro[1];
-//			accel[0] = accel[0];
-//			accel[1] = accel[1];
-			if(zero_c == 0)
-			{
-				if(err<2&&err>-2)//err<0.5&&err>-0.5
-					{
-			            gyro_correct[0]+= gyro[0];
-            gyro_correct[1]+= gyro[1];
-            gyro_correct[2]+= gyro[2];
-            correct_times++;}
-            if(correct_times>=500)
-            {
-              gyro_correct[0]/=500;
-              gyro_correct[1]/=500;
-              gyro_correct[2]/=500;
-             zero_c=2; //go to 2 state
-            }
-			
-			}
-				else{
+				
+//			if(zero_c == 0)
+//			{
+//				if(err<2&&err>-2)//err<0.5&&err>-0.5
+//					{
+//			            gyro_correct[0]+= gyro[0];
+//            gyro_correct[1]+= gyro[1];
+//            gyro_correct[2]+= gyro[2];
+//            correct_times++;}
+//            if(correct_times>=500)
+//            {
+//              gyro_correct[0]/=500;
+//              gyro_correct[1]/=500;
+//              gyro_correct[2]/=500;
+//             zero_c=2; //go to 2 state
+//            }
+//			
+//			}
+//				else{
+					gyro_correct[0] = 0.00304026646;
+					gyro_correct[1] = -0.00554576283;
+					gyro_correct[2] = 0.00161494047;
 					gyro[0]-=gyro_correct[0];   //?????0?
           gyro[1]-=gyro_correct[1];
           gyro[2]-=gyro_correct[2];
@@ -225,7 +225,8 @@ mahony_input(&mahony,Gyro,Accel);
 		{
 		 ins_time++;
 		}
-    }}		
+    }
+//				}		
        // osSemaphoreWait(imuBinarySem01Handle, osWaitForever);
 				osDelay(1);
 		count++;

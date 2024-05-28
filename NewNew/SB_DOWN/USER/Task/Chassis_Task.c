@@ -107,7 +107,7 @@ void Chassis_Task(void const * argument)
 				}
 				else
 				{
-					if(Rx_nav.nav_x==0 && Rx_nav.nav_y==0) //导航使它停下
+					if(fabs(Rx_nav.nav_x)<=1000 && fabs(Rx_nav.nav_y)<=1000) //导航使它停下
 					{
 						omega = 2000; //给定小陀螺转速
 					}
@@ -124,7 +124,7 @@ void Chassis_Task(void const * argument)
 				omega = pid_cal_a(&pid_chassis, error_theta, 0);
 			}
 			
-			omega = 2000; //test**************************************************************************!!!!!!!!!!!!!!!!!!!!!
+//			omega = 0; //test**************************************************************************!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			
 			chassis_calculate(Rx_nav.nav_x, Rx_nav.nav_y); //输入导航x、y值，CAN1传来
 			for(int i=0;i<4;i++)
