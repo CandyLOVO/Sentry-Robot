@@ -95,7 +95,7 @@ void Chassis_Task(void const * argument)
 		//导航上场模式，左->最下，右->最下
 		else if(rc_ctrl.rc.s[0]==2 && rc_ctrl.rc.s[1]==2)
 		{	
-		  if((Sentry.my_outpost_HP == 0) && (Sentry.rfid[1] == 0x02)) //前哨站被破并且回到巡逻区
+		  if(Sentry.my_outpost_HP == 0) //前哨站被破
 			{
 				omega = 2000; //给定小陀螺转速
 			}
@@ -124,7 +124,7 @@ void Chassis_Task(void const * argument)
 				omega = pid_cal_a(&pid_chassis, error_theta, 0);
 			}
 			
-//			omega = 0; //test**************************************************************************!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			omega = 0; //test**************************************************************************!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			
 			chassis_calculate(Rx_nav.nav_x, Rx_nav.nav_y); //输入导航x、y值，CAN1传来
 			for(int i=0;i<4;i++)

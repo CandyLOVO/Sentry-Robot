@@ -35,6 +35,7 @@ extern int8_t flag;
 extern TIM_HandleTypeDef htim5;
 extern uint16_t time_delay;
 extern uint8_t flag_suo;
+extern uint8_t target_shijue;
 //***********************************************************************************************************//
 
 //**************************************************任务实现**************************************************//
@@ -74,8 +75,10 @@ void Pitch_Task(void * argument)
 			//都没有识别到目标，开始巡航
 			if(Rx_vision.L_tracking==0 && Rx_vision.R_tracking==0 && Rx_vision.M_tracking==0)
 			{
-				if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，在1000ms内：
+				if((flag_suo == 2)&&(time_delay <= 1000)) //上一个状态为锁住，在1000ms内：
 				{
+					nod_flag_L == 0;
+					nod_flag_R == 0;
 					target_pitch_a_L = last_target_pitch_a_L; //目标角度为锁住时的角度
 					target_pitch_a_R = last_target_pitch_a_R;
 				}
@@ -89,37 +92,57 @@ void Pitch_Task(void * argument)
 					{
 						nod_flag_R = 1;
 					}
-					pitch_finding(25, -24);
+					
+					if(target_shijue == 2)
+					{
+						pitch_finding(25, 0);
+					}
+					else
+					{
+						pitch_finding(25, -24);
+					}
 				}
 			}
 			
 			//左头识别到目标
 			if(Rx_vision.L_tracking == 1)
 			{
+				if(Rx_vision.R_tracking == 0)
+				{
+					nod_flag_R = 0;
+					target_pitch_a_R = Rx_vision.L_pitch;
+					pitch_control_R(25, -24);
+				}
 				//左头停止巡航
 				nod_flag_L = 0;
 				target_pitch_a_L = Rx_vision.L_pitch;
+				last_target_pitch_a_L = target_pitch_a_L;
 				pitch_control_L(25, -24);
 				
-				//右头停止巡航
-				nod_flag_R = 0;
-				target_pitch_a_R = target_pitch_a_L;
-				pitch_control_R(25, -24);
 			}
 			if(Rx_vision.R_tracking == 1)
 			{
+				if(Rx_vision.L_tracking == 0)
+				{
+					nod_flag_L = 0;
+					target_pitch_a_L = Rx_vision.R_pitch;
+					pitch_control_L(25, -24);
+				}
 				//右头停止巡航
 				nod_flag_R = 0;
 				target_pitch_a_R = Rx_vision.R_pitch;
+				last_target_pitch_a_R = target_pitch_a_R;
 				pitch_control_R(25, -24);
 			}
 			if(Rx_vision.M_tracking == 1)
 			{
 				nod_flag_L = 0;
 				target_pitch_a_L = Rx_vision.L_pitch;
+				last_target_pitch_a_L = target_pitch_a_L;
 				pitch_control_L(25, -24);
 				nod_flag_R = 0;
 				target_pitch_a_R = Rx_vision.R_pitch;
+				last_target_pitch_a_R = target_pitch_a_R;
 				pitch_control_R(25, -24);
 			}
 		}

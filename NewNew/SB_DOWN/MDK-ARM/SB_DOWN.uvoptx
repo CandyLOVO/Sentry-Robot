@@ -370,6 +370,16 @@
           <WinNumber>1</WinNumber>
           <ItemText>flag</ItemText>
         </Ww>
+        <Ww>
+          <count>43</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>pid_5010_a,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>44</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>pid_5010_s,0x0A</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>

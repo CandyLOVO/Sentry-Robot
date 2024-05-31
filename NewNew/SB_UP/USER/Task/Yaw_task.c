@@ -89,7 +89,7 @@ void Yaw_Task(void * argument)
 			//四个摄像头都没有识别到
 			if(Rx_vision.L_tracking==0 && Rx_vision.R_tracking==0 && Rx_vision.M_tracking==0)
 			{
-				if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，在1000ms内：
+				if((flag_suo == 2)&&(time_delay <= 1000)) //上一个状态为锁住，在1000ms内：
 				{
 					rotate_flag_L = 0; //左头不转
 					rotate_flag_R = 0; //右头不转
@@ -135,7 +135,7 @@ void Yaw_Task(void * argument)
 					yaw_control_L(-20, -175); //左头目标值软件限位
 					
 					rotate_flag_R = 0; //右头不转
-					target_yaw_a_R = -target_yaw_a_L;
+					target_yaw_a_R = 0;
 					yaw_control_R(175, 20); //右头目标值软件限位
 				}
 				//右头识别到
@@ -208,7 +208,7 @@ void Yaw_Task(void * argument)
 static void Yaw_init(void)
 {
 	//小yaw初始化
-	initial_angle_L = 3714;
+	initial_angle_L = 3659;
 	initial_angle_R = 7835;
 	target_yaw_a_L = 0;
 	target_yaw_s_L = 0;

@@ -17,7 +17,7 @@ float target_speed_5010;
 float output_5010;
 int16_t heart_direction[4]; //受击打装甲板
 float last_target_angle_5010; //上一帧目标值
-uint32_t time_delay = 0; //锁住计时
+uint16_t time_delay = 0; //锁住计时
 uint32_t time_delay_heart = 0;
 uint8_t flag_suo = 0; //瞄准后云台锁住
 uint8_t flag_heart = 0;
@@ -41,13 +41,14 @@ void Yaw_task(void const * argument)
 {
 	MG5010_init(); //开启5010电机
 	yaw_init(); //初始化5010电机【需要校准大yaw正方向编码值】
+	flag_suo = 0;
+	time_delay=1001;
 	osDelay(3000);
 	
   for(;;)
   {
 		if(flag == 1)
 		{
-		flag_suo = 0;
 		yaw_angle = -motor_value(initial_angle, motor_5010.angle, 65535); //将5010编码值转化为0~+-180【面向两个头，向左转为-，向右转为+】
 		
 		//遥控器控制模式，左->中间，右->中间            测试底盘跟随云台模式，左->最上，右->中间
@@ -73,9 +74,10 @@ void Yaw_task(void const * argument)
 				if(L_tracking==0 && Rx_nav.R_tracking==0 && M_tracking==0)
 				{
 					//大yaw瞄准延时
-					if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，且在1000ms内：
+					if((flag_suo == 2)&&(time_delay <= 1000)) //上一个状态为锁住，且在1000ms内：
 					{
 						target_angle_5010 = last_target_angle_5010; //目标角度为锁住时的角度
+						time_delay++;
 					}
 					//正常巡航
 					else
@@ -94,6 +96,7 @@ void Yaw_task(void const * argument)
 							{
 								target_angle_5010 += 360;
 							}
+							last_target_angle_5010 = target_angle_5010; //保存该次锁住的目标值
 							time_delay = 0; //初始化延时计数值
 							flag_suo = 1; //锁住标志位
 						}
@@ -169,7 +172,7 @@ void Yaw_task(void const * argument)
 void yaw_init(void)
 {
 	//大yaw5010数值初始化
-	initial_angle = 21810; //头朝向底盘正方向时的编码值
+	initial_angle = 43694; //头朝向底盘正方向时的编码值
 	target_angle_5010 = 0;
 	target_speed_5010 = 0;
 	pid_init(&pid_5010_s,25000,0,0,700000,700000); //PID初始化 PI
@@ -243,11 +246,11 @@ float motor_value(int32_t k, int32_t n, int32_t max)
 	}
 }
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-	if (htim == (&htim4))
-  {
-		time_delay++;
-	}
-}
+//void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+//{
+//	if (htim == (&htim4))
+//  {
+//		time_delay++;
+//	}
+//}
 /**************************************************************************************************************************/
