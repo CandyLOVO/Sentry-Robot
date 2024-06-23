@@ -101,7 +101,7 @@ void Yaw_task(void const * argument)
 							flag_suo = 1; //锁住标志位
 						}
 						//装甲板没有收到击打
-						else
+						else if(Rx_nav.Flag_turn == 1)
 						{
 							flag_heart = 0;
 							flag_suo = 2; //未锁住标志位

@@ -82,6 +82,7 @@ void Exchange_Task(void const * argument)
 		Tx_shijue[0] = Rx_nav.R_tracking; //从RS485收到的右头视觉数据，发到上板
 		Tx_shijue[1] = Rx_nav.R_shoot;
 		Tx_shijue[2] = Rx_nav.target_shijue;
+		Tx_shijue[3] = Rx_nav.Flag_turn;
 		can_remote(Tx_shijue, 0x39);
 		osDelay(1);
 		
@@ -104,6 +105,14 @@ void RS485_Trans(void)
 	{
 		Tx_nav.Flag_progress = 0;
 	}
+	if(Sentry.Flag_progress == 0x02) //15s自检阶段
+	{
+		Tx_nav.Flag_start = 1;
+	}
+	else
+	{
+		Tx_nav.Flag_start = 0;
+	}
 	Tx_nav.color = Sentry.Flag_judge; //1 red 2 blue
 	Tx_nav.projectile_allowance_17mm = Sentry.projectile_allowance_17mm;
 	Tx_nav.remaining_gold_coin = Sentry.remaining_gold_coin;
@@ -124,6 +133,7 @@ void RS485_Trans(void)
 	Tx_nav.tar_pos_y = Sentry.target_position_y;
 	Tx_nav.cmd_key = Sentry.cmd_keyboard;
 	Tx_nav.bullet_speed = Sentry.bullet_speed;
+	
 	Tx_nav.ending = 0xAA;
 	
 	Tx[0] = Tx_nav.header;
@@ -146,10 +156,10 @@ void RS485_Trans(void)
 	memcpy(&Tx[41], &Tx_nav.tar_pos_y, 4);
 	memcpy(&Tx[45], &Tx_nav.cmd_key, 1);
 	memcpy(&Tx[46], &Tx_nav.bullet_speed, 4);
-	
-	Tx_nav.checksum = Get_CRC16_Check_Sum(Tx, 50, 0xffff);
-	memcpy(&Tx[50], &Tx_nav.checksum, 2);
-	Tx[52] = Tx_nav.ending;
+	memcpy(&Tx[50], &Tx_nav.Flag_start, 1);
+	Tx_nav.checksum = Get_CRC16_Check_Sum(Tx, 51, 0xffff);
+	memcpy(&Tx[51], &Tx_nav.checksum, 2);
+	Tx[53] = Tx_nav.ending;
 	
 	HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_SET);
 	HAL_GPIO_WritePin(DIR_1_GPIO_Port,DIR_1_Pin,GPIO_PIN_SET);

@@ -46,6 +46,7 @@ extern receive_vision Rx_vision;
 extern double yaw12;
 extern int8_t flag;
 extern uint8_t flag_heart; //受击打装甲板ID
+extern uint8_t Flag_turn; //下板（导航）传来是否转动标志位
 extern TIM_HandleTypeDef htim5;
 //************************************************************************************************************//
 
@@ -107,7 +108,7 @@ void Yaw_Task(void * argument)
 						yaw_control_L(-20, -175); //小yaw目标值软件限位
 						yaw_control_R(175, 20);
 					}
-					else
+					else if(Flag_turn == 1)
 					{
 						//使小yaw开始正转
 						if(rotate_flag_L == 0)

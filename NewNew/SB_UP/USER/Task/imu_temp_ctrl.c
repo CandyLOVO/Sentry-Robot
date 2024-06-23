@@ -146,7 +146,7 @@ void IMU_TempCtrlTask(void const * argument)
 					gyro_correct[0] = 0.00304026646;
 					gyro_correct[1] = -0.00554576283;
 					gyro_correct[2] = 0.00161494047;
-					gyro[0]-=gyro_correct[0];   //?????0?
+					gyro[0]-=gyro_correct[0]; 
           gyro[1]-=gyro_correct[1];
           gyro[2]-=gyro_correct[2];
 			dgyro[0] = (gyro[0] - lgyro[0])/ (DGyroLPF + dt1) + dgyro[0] * DGyroLPF / (DGyroLPF + dt1);

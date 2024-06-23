@@ -10,6 +10,7 @@ motor_info motor_friction[8];
 RC_ctrl_t rc_ctrl;
 uint8_t flag_heart;
 uint8_t target_shijue;
+uint8_t Flag_turn; //下板（导航）传来是否转动标志位
 
 extern Shooter_t Shooter_L;
 extern Shooter_t Shooter_R;
@@ -261,6 +262,7 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 				Rx_vision.R_tracking = g_Can3RxData[0];
 				Rx_vision.R_shoot = g_Can3RxData[1];
 				target_shijue = g_Can3RxData[2];
+				Flag_turn = g_Can3RxData[3];
 			}
 			
 			if(RxHeader3.Identifier == 0x40)

@@ -31,6 +31,7 @@ typedef struct
 	uint8_t cmd_key;
 	uint8_t ending;
 	float bullet_speed;
+	uint8_t Flag_start;
 }Tx_naving;
 
 typedef struct
@@ -54,6 +55,7 @@ typedef struct
 	uint16_t start_position_y; 
 	int8_t delta_x[49]; 
 	int8_t delta_y[49];
+	uint8_t Flag_turn;
   uint16_t checksum;
 }Rx_naving;
 
