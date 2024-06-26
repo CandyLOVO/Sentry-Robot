@@ -56,9 +56,9 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 			if(Rx[0] == 0xA5)
 
 			{
-				checksum_Rx = Get_CRC16_Check_Sum(Rx, 137, 0xffff);
+				checksum_Rx = Get_CRC16_Check_Sum(Rx, 138, 0xffff);
 
-				memcpy(&Rx_nav.checksum, &Rx[137], 2);
+				memcpy(&Rx_nav.checksum, &Rx[138], 2);
 				if(Rx_nav.checksum == checksum_Rx)
 				{
 					Rx_nav.naving = Rx[1];
@@ -81,6 +81,7 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 					memcpy(&Rx_nav.start_position_y, &Rx[37], 2);
 					memcpy(&Rx_nav.delta_x[0], &Rx[39], 49);
 					memcpy(&Rx_nav.delta_y[0], &Rx[88], 49);
+					memcpy(&Rx_nav.Flag_turn, &Rx[137], 1);
 				}
 			}
 		}
