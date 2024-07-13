@@ -379,7 +379,7 @@ typedef __packed struct ext_student_interactive_header_data_t
 	uint16_t receiver_ID;
 } ext_student_interactive_header_data_t;
 
-typedef __packed struct UI_CharReFresh_t
+typedef __packed struct UI_CharReFresh_t //要加__packed！！！！否则发送的决策数据存在补齐的空位，裁判系统端无法正确分析数据
 {
    xFrameHeader FrameHeader;
    uint16_t CmdID;

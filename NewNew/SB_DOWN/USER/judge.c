@@ -263,7 +263,7 @@ void JudgeSend(uint32_t TXData,uint16_t datacmdid)
 
 	senddatatoJudge.frametail = Get_CRC16_Check_Sum((uint8_t *)&senddatatoJudge, LEN_HEADER + LEN_CMDID + temp_datalength, 0xFFFF);
 
-	while(get_uart5_tx_dma_busy_flag())
+	while(get_uart5_tx_dma_busy_flag()) //±ÜÃâ³öÏÖUART¶ÂÈû
 	{
 		osDelay(1);
 	}

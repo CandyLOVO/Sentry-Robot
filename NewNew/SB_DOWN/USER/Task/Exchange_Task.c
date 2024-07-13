@@ -34,7 +34,7 @@ void Exchange_Task(void const * argument)
 {
   for(;;)
   {
-		JudgeSend(Rx_nav.sentry_decision,Datacmd_Decision);
+		JudgeSend(Rx_nav.sentry_decision, Datacmd_Decision);
 		if(Rx_flag==0) //程序初始化标志位
 		{
 			RS485_Trans();
