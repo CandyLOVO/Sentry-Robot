@@ -212,7 +212,8 @@ typedef __packed struct
 
 typedef __packed struct
 {
-		uint32_t sentry_info;
+		uint32_t sentry_info; 
+		uint16_t sentry_info_2;
 } sentry_info_t;
 
 typedef __packed struct
