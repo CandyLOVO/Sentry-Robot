@@ -69,7 +69,7 @@ void JUDGE_Receive(volatile uint8_t *databuffer,uint8_t length)
                          memcpy((void*)(&Judge_Hero.supply_status), (const void*)(&databuffer[pos+7]), data_length); //ฒนตฏ
                          break;
                     case 0x0104 :
-                        data_length = 3;
+                        data_length = 3;  
                         memcpy((void*)(&Judge_Hero.warning), (const void*)(&databuffer[pos+7]), data_length); //ละทฃ
                         break;
                     case 0x0105 :

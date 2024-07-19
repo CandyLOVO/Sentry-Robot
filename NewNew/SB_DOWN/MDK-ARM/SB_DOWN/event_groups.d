@@ -1,8 +1,8 @@
 sb_down\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
-sb_down\event_groups.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdlib.h
+sb_down\event_groups.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stdlib.h
 sb_down\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-sb_down\event_groups.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stddef.h
-sb_down\event_groups.o: D:\Software\KeilMDK538\KeilMDK538\ARM\AC5\Bin\..\include\stdint.h
+sb_down\event_groups.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stddef.h
+sb_down\event_groups.o: D:\RoboterMaster\keil\ARM\ARMCC\Bin\..\include\stdint.h
 sb_down\event_groups.o: ../Core/Inc/FreeRTOSConfig.h
 sb_down\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 sb_down\event_groups.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
