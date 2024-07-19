@@ -350,6 +350,8 @@ typedef __packed struct Sentry_t
 	float target_position_x; 
 	float target_position_y; 
 	uint8_t cmd_keyboard; 
+	
+	uint8_t off_war;
 }Sentry_t;
 
 //**********************************************发给裁判系统**********************************************//

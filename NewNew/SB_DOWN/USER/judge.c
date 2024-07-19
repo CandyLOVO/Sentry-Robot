@@ -207,6 +207,8 @@ static void Update_data()
 	
 	Sentry.rfid_status = Judge_Hero.rfid_status_t.rfid_status;
 //	memcpy(&Sentry.rfid[0], &Sentry.rfid_status, 4);
+	
+	Sentry.off_war = (Judge_Hero.sentry_information.sentry_info_2 & 0x0001);
 }
 
 /**

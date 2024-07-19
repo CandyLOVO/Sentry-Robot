@@ -113,6 +113,7 @@ void RS485_Trans(void)
 	{
 		Tx_nav.Flag_start = 0;
 	}
+	Tx_nav.Flag_off_war = Sentry.off_war;
 	Tx_nav.color = Sentry.Flag_judge; //1 red 2 blue
 	Tx_nav.projectile_allowance_17mm = Sentry.projectile_allowance_17mm;
 	Tx_nav.remaining_gold_coin = Sentry.remaining_gold_coin;
@@ -157,9 +158,10 @@ void RS485_Trans(void)
 	memcpy(&Tx[45], &Tx_nav.cmd_key, 1);
 	memcpy(&Tx[46], &Tx_nav.bullet_speed, 4);
 	memcpy(&Tx[50], &Tx_nav.Flag_start, 1);
-	Tx_nav.checksum = Get_CRC16_Check_Sum(Tx, 51, 0xffff);
-	memcpy(&Tx[51], &Tx_nav.checksum, 2);
-	Tx[53] = Tx_nav.ending;
+	memcpy(&Tx[51], &Tx_nav.Flag_off_war, 1);
+	Tx_nav.checksum = Get_CRC16_Check_Sum(Tx, 52, 0xffff);
+	memcpy(&Tx[52], &Tx_nav.checksum, 2);
+	Tx[54] = Tx_nav.ending;
 	
 	HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_SET);
 	HAL_GPIO_WritePin(DIR_1_GPIO_Port,DIR_1_Pin,GPIO_PIN_SET);
