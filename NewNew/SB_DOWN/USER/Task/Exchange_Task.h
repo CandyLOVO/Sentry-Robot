@@ -33,6 +33,7 @@ typedef struct
 	float bullet_speed;
 	uint8_t Flag_start;
 	uint8_t Flag_off_war;
+	float R_yaw_speed;
 }Tx_naving;
 
 typedef struct

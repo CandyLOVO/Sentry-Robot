@@ -19,6 +19,7 @@ float L_yaw;
 float L_pitch;
 float R_yaw;	
 float R_pitch;
+float R_yaw_speed;
 
 void CAN1_Init()
 {
@@ -155,6 +156,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		if(can_rx_message.StdId == 0x35)
 		{
 			memcpy(&yaw_From_L, &can_recevie_data[0], 4);
+			memcpy(&R_yaw_speed, &can_recevie_data[4], 4);
 		}
 		
 		if(can_rx_message.StdId == 0x38)

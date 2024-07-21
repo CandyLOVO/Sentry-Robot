@@ -11,7 +11,7 @@ transmit_vision Tx_vision;
 uint8_t Tx_yaw12[8];
 uint8_t Tx_yaw[8];
 uint8_t Tx_gyro[8];
-uint8_t Tx_shijue[30];
+uint8_t Tx_shijue[34];
 uint8_t Tx_shijue_L[8];
 uint8_t Tx_shijue_R[8];
 
@@ -25,6 +25,7 @@ extern float yaw_angle_R;
 extern float pitch_angle_L;
 extern float pitch_angle_R;
 extern uint8_t target_shijue;
+extern motor_info motor[8];
 
 void Exchange_Task(void * argument)
 {
@@ -45,6 +46,8 @@ void vision_value(void)
 	Tx_vision.L_pitch = pitch_angle_L;
 	Tx_vision.R_yaw = yaw_angle_R + yaw12;
 	Tx_vision.R_pitch = pitch_angle_R;
+	Tx_vision.L_yaw_speed = motor[1].speed;
+	Tx_vision.R_yaw_speed = motor[0].speed;
 	Tx_vision.ending = 0xAA;
 	memcpy(&Tx_shijue[0], &Tx_vision.header, 1);
 	memcpy(&Tx_shijue[1], &Tx_vision.color, 1);
@@ -55,9 +58,10 @@ void vision_value(void)
 	memcpy(&Tx_shijue[18], &Tx_vision.R_pitch, 4);
 	Tx_shijue[22] = target_shijue;
 	memcpy(&Tx_shijue[23], &Tx_vision.shoot_speed, 4);
-	Tx_vision.checksum = Get_CRC16_Check_Sum(Tx_shijue, 27, 0xffff);
-	memcpy(&Tx_shijue[27], &Tx_vision.checksum, 2);
-	memcpy(&Tx_shijue[29], &Tx_vision.ending, 1);
+	memcpy(&Tx_shijue[27], &Tx_vision.L_yaw_speed, 4);
+	Tx_vision.checksum = Get_CRC16_Check_Sum(Tx_shijue, 31, 0xffff);
+	memcpy(&Tx_shijue[31], &Tx_vision.checksum, 2);
+	memcpy(&Tx_shijue[33], &Tx_vision.ending, 1);
 	CDC_Transmit_HS(Tx_shijue, sizeof(Tx_shijue)); //发给自瞄的值
 }
 
@@ -75,7 +79,8 @@ void yaw_value(void)
 	canx_send_data(&hfdcan3, 0x34, Tx_gyro, 8);
 	osDelay(1);
 	
-	memcpy(&Tx_yaw[0], &Rx_vision.yaw_From_L, 4); //左头识别到时用的，视觉传来yaw的目标值	
+	memcpy(&Tx_yaw[0], &Rx_vision.yaw_From_L, 4); //左头识别到时用的，视觉传来yaw的目标值
+	memcpy(&Tx_yaw[4], &motor[0].speed, 4); //右头6020角速度
 	canx_send_data(&hfdcan3, 0x35, Tx_yaw, 8);
 	osDelay(1);
 	
