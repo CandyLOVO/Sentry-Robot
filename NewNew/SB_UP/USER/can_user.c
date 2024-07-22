@@ -11,6 +11,8 @@ RC_ctrl_t rc_ctrl;
 uint8_t flag_heart;
 uint8_t target_shijue;
 uint8_t Flag_turn; //下板（导航）传来是否转动标志位
+float gyro_yaw_L;
+float gyro_yaw_R;
 
 extern Shooter_t Shooter_L;
 extern Shooter_t Shooter_R;
@@ -198,6 +200,11 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
 				motor[index].tor_current = ((g_Can1RxData[4] << 8) | g_Can1RxData[5]);
 				motor[index].temperture = g_Can1RxData[6];
 			}
+			
+			if(RxHeader1.Identifier == 0x51)
+			{
+				memcpy(&gyro_yaw_L, &g_Can1RxData[0], 4);
+			}
 	  }
 		
 		if(hfdcan->Instance == FDCAN3)
@@ -291,6 +298,11 @@ void HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo1ITs)
 				motor_friction[index].speed = ((g_Can2RxData[2] << 8) | g_Can2RxData[3]);
 				motor_friction[index].tor_current = ((g_Can2RxData[4] << 8) | g_Can2RxData[5]);
 				motor_friction[index].temperture = g_Can2RxData[6];
+			}
+			
+			if(RxHeader2.Identifier == 0x52)
+			{
+				memcpy(&gyro_yaw_R, &g_Can2RxData[0], 4);
 			}
     }
   }

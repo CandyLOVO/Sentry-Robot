@@ -25,7 +25,8 @@ extern float yaw_angle_R;
 extern float pitch_angle_L;
 extern float pitch_angle_R;
 extern uint8_t target_shijue;
-extern motor_info motor[8];
+extern float gyro_yaw_L;
+extern float gyro_yaw_R;
 
 void Exchange_Task(void * argument)
 {
@@ -46,8 +47,8 @@ void vision_value(void)
 	Tx_vision.L_pitch = pitch_angle_L;
 	Tx_vision.R_yaw = yaw_angle_R + yaw12;
 	Tx_vision.R_pitch = pitch_angle_R;
-	Tx_vision.L_yaw_speed = motor[1].speed;
-	Tx_vision.R_yaw_speed = motor[0].speed;
+	Tx_vision.L_yaw_speed = gyro_yaw_L;
+	Tx_vision.R_yaw_speed = gyro_yaw_R;
 	Tx_vision.ending = 0xAA;
 	memcpy(&Tx_shijue[0], &Tx_vision.header, 1);
 	memcpy(&Tx_shijue[1], &Tx_vision.color, 1);
@@ -80,7 +81,7 @@ void yaw_value(void)
 	osDelay(1);
 	
 	memcpy(&Tx_yaw[0], &Rx_vision.yaw_From_L, 4); //左头识别到时用的，视觉传来yaw的目标值
-	memcpy(&Tx_yaw[4], &motor[0].speed, 4); //右头6020角速度
+	memcpy(&Tx_yaw[4], &gyro_yaw_R, 4); //右头6020角速度
 	canx_send_data(&hfdcan3, 0x35, Tx_yaw, 8);
 	osDelay(1);
 	
