@@ -135,6 +135,7 @@ void RS485_Trans(void)
 	Tx_nav.tar_pos_y = Sentry.target_position_y;
 	Tx_nav.cmd_key = Sentry.cmd_keyboard;
 	Tx_nav.bullet_speed = Sentry.bullet_speed;
+	Tx_nav.R_yaw_speed = R_yaw_speed;
 	
 	Tx_nav.ending = 0xAA;
 	

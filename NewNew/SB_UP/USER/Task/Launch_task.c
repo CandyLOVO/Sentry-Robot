@@ -184,7 +184,7 @@ static void Friction_init()
     pid_init(&pid_mocalun_s[3], 40, 0.8, 2,16384,10000);
 
     pid_init(&pid_bopan_s[0], 20, 0.03, 0.5,16384,10000); // ≤¶≈Ã()
-    pid_init(&pid_bopan_s[1], 20, 0.03, 0.5,16384,10000); // 20£¨0.03£¨0.5
+    pid_init(&pid_bopan_s[1], 10, 0.03, 0.5,16384,10000); // 20£¨0.03£¨0.5
 
     Shooter_L.shooter_heat = 1025;
     Shooter_R.shooter_heat = 1025;
