@@ -80,11 +80,15 @@ void Chassis_Task(void const * argument)
 		//计算底盘与云台差角
 		Yaw_Diff();
 		
-		//遥控器控制模式，左->中间，右->中间
-		if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3)
+		//遥控器控制模式，左->中间，右->中间              自瞄调试模式，左->最下，右->中间
+		if((rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3) || (rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==2))
 		{
 			omega = rc_ctrl.rc.ch[4]*5; //拨轮控制小陀螺
-			chassis_calculate(rc_ctrl.rc.ch[0]*10, rc_ctrl.rc.ch[1]*10); //右拨杆控制底盘 遥控器右拨杆有问题
+			if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==2)
+			{
+				error_theta = 0;
+			}
+			chassis_calculate(rc_ctrl.rc.ch[0]*10, rc_ctrl.rc.ch[1]*10);
 			
 			for(int i=0;i<4;i++)
 			{

@@ -84,8 +84,8 @@ void Yaw_Task(void * argument)
 			yaw_control_R(175, 20);
 		}
 		
-		//自瞄模式，左->下，右->下
-		if(rc_ctrl.rc.s[1]==2 && rc_ctrl.rc.s[0]==2)
+		//自瞄上场模式，左->下，右->下                   自瞄调试模式，左->下，右->中
+		if((rc_ctrl.rc.s[1]==2 && rc_ctrl.rc.s[0]==2) || (rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==2))
 		{
 			//四个摄像头都没有识别到
 			if(Rx_vision.L_tracking==0 && Rx_vision.R_tracking==0 && Rx_vision.M_tracking==0)
@@ -108,7 +108,8 @@ void Yaw_Task(void * argument)
 						yaw_control_L(-20, -175); //小yaw目标值软件限位
 						yaw_control_R(175, 20);
 					}
-					else if(Flag_turn == 1)
+					//导航发来巡航指令，或者处于自瞄调试模式
+					else if((Flag_turn == 1) || (rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==2))
 					{
 						//使小yaw开始正转
 						if(rotate_flag_L == 0)

@@ -51,7 +51,7 @@ void Yaw_task(void const * argument)
 		{
 		yaw_angle = -motor_value(initial_angle, motor_5010.angle, 65535); //将5010编码值转化为0~+-180【面向两个头，向左转为-，向右转为+】
 		
-		//遥控器控制模式，左->中间，右->中间            测试底盘跟随云台模式，左->最上，右->中间
+		//遥控器控制模式，左->中间，右->中间             测试底盘跟随云台模式，左->最上，右->中间
 		if((rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3) || (rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==1))
 		{
 			yaw_control();
@@ -61,8 +61,8 @@ void Yaw_task(void const * argument)
 			}
 		}
 		
-		//导航上场模式，左->最下，右->最下
-		if(rc_ctrl.rc.s[0]==2 && rc_ctrl.rc.s[1]==2)
+		//导航上场模式，左->最下，右->最下               自瞄调试模式，左->最下，右->中间
+		if((rc_ctrl.rc.s[0]==2 && rc_ctrl.rc.s[1]==2) || (rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==2))
 		{
 			if(Rx_nav.poing == 1) //导航发来的上坡指令
 			{
@@ -100,8 +100,8 @@ void Yaw_task(void const * argument)
 							time_delay = 0; //初始化延时计数值
 							flag_suo = 1; //锁住标志位
 						}
-						//装甲板没有收到击打
-						else if(Rx_nav.Flag_turn == 1)
+						//装甲板没有收到击打，或者处于自瞄调试模式
+						else if((Rx_nav.Flag_turn == 1) || (rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==2))
 						{
 							flag_heart = 0;
 							flag_suo = 2; //未锁住标志位

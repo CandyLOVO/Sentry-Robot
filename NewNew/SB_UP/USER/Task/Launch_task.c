@@ -80,7 +80,7 @@ void Launch_Task(void *argument)
             re_shoot_rate_calc();
             //===============================================摩擦轮================================================//
             // 开启摩擦轮
-            if (remote_mode == 22 || remote_mode == 11) // 摩擦轮开启条件
+            if (remote_mode == 22 || remote_mode == 11 || remote_mode == 23) // 摩擦轮开启条件
             {
 								if(Tx_vision.shoot_speed >= 28)
 								{
@@ -94,7 +94,7 @@ void Launch_Task(void *argument)
             can_send_mocalun(mocalun_output[0], mocalun_output[1], mocalun_output[2], mocalun_output[3]); // 摩擦轮电流发送
             //===============================================拨盘================================================//
             //===========================================自动模式 begin================================//
-            if (remote_mode == 22) {
+            if (remote_mode == 22 || remote_mode == 23) {
                 if (Shooter_L.Fire_Flag == 1) // 左枪管发射
                 {
                   if (bopan_reversal_flag_L == 1) 
@@ -154,12 +154,21 @@ static void DataUpGrade()
 		Shooter_L.Fire_Flag=Rx_vision.L_shoot;
 		Shooter_R.Fire_Flag=Rx_vision.R_shoot;
 	
-    if ((rc_ctrl.rc.s[1] == 2 && rc_ctrl.rc.s[0] == 2) ) {
-        remote_mode = 22;
-    } else if (rc_ctrl.rc.s[1] == 1 && rc_ctrl.rc.s[0] == 1) {
-        remote_mode = 11;
-    } else {
-        remote_mode = 0;
+    if((rc_ctrl.rc.s[1] == 2 && rc_ctrl.rc.s[0] == 2)) 
+		{
+			remote_mode = 22;
+    } 
+		else if(rc_ctrl.rc.s[1] == 1 && rc_ctrl.rc.s[0] == 1)
+		{
+			remote_mode = 11;
+    }
+		else if(rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==2)
+		{
+			remote_mode = 23;
+		}
+		else
+		{
+			remote_mode = 0;
     }
 	
 		if(rc_ctrl.rc.ch[0]==-660){
