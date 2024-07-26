@@ -6,17 +6,17 @@ sb_up/yaw_task.o: ..\USER\Task\Yaw_task.c ..\USER\Task\Yaw_task.h \
   ..\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h7xx.h \
   ..\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h723xx.h \
   ..\Drivers\CMSIS\Include\core_cm7.h \
-  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\stdint.h \
+  D:\RoboterMaster\keil\ARM\ARMCLANG\Bin\..\include\stdint.h \
   ..\Drivers\CMSIS\Include\cmsis_version.h \
   ..\Drivers\CMSIS\Include\cmsis_compiler.h \
   ..\Drivers\CMSIS\Include\cmsis_armclang.h \
-  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\arm_compat.h \
-  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\arm_acle.h \
+  D:\RoboterMaster\keil\ARM\ARMCLANG\Bin\..\include\arm_compat.h \
+  D:\RoboterMaster\keil\ARM\ARMCLANG\Bin\..\include\arm_acle.h \
   ..\Drivers\CMSIS\Include\mpu_armv7.h \
   ..\Drivers\CMSIS\Device\ST\STM32H7xx\Include\system_stm32h7xx.h \
   ..\Drivers\STM32H7xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h \
-  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\stddef.h \
-  D:\Software\KeilMDK538\KeilMDK538\ARM\ARMCLANG\Bin\..\include\math.h \
+  D:\RoboterMaster\keil\ARM\ARMCLANG\Bin\..\include\stddef.h \
+  D:\RoboterMaster\keil\ARM\ARMCLANG\Bin\..\include\math.h \
   ..\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_rcc_ex.h \
   ..\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_gpio.h \
   ..\Drivers\STM32H7xx_HAL_Driver\Inc\stm32h7xx_hal_gpio_ex.h \
@@ -56,5 +56,6 @@ sb_up/yaw_task.o: ..\USER\Task\Yaw_task.c ..\USER\Task\Yaw_task.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\task.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\list.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS_V2\cmsis_os2.h \
-  ..\USER\can_user.h ..\Core\Inc\fdcan.h ..\USER\pid_user.h \
-  ..\USER\Task\Exchange_task.h ..\USER\imu_temp_ctrl.h
+  ..\USER\can_user.h ..\Core\Inc\fdcan.h ..\Core\Inc\main.h \
+  ..\USER\pid_user.h ..\USER\Task\Exchange_task.h \
+  ..\USER\imu_temp_ctrl.h

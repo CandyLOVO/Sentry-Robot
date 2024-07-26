@@ -19,6 +19,7 @@ extern UART_HandleTypeDef huart5;
 extern uint8_t Rx[128];
 extern uint32_t length; //DMA中未传输的数据个数
 extern int count;
+extern int miss_num;
 extern Sentry_t Sentry;
 extern float L_yaw;	
 extern float L_pitch;
@@ -51,10 +52,11 @@ void Exchange_Task(void const * argument)
 			count++; //收到一帧数据后置零
 		}
 		
-		if(count>=20) //如果有15ms没有收到导航数据
+		if(count>=10) //如果有10ms没有收到导航数据
 		{
 			RS485_Trans();
 			count = 0;
+			miss_num++;
 		}
 		
 		memset(Tx_friction, 0, sizeof(Tx_friction));//接收前清空数组
@@ -169,7 +171,7 @@ void RS485_Trans(void)
 	HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_SET);
 	HAL_GPIO_WritePin(DIR_1_GPIO_Port,DIR_1_Pin,GPIO_PIN_SET);
 	HAL_UART_Transmit_IT(&huart1,Tx,sizeof(Tx));
-	osDelay(5);
+	osDelay(1);
 }
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) //在 uart_user.c 中进行接收
