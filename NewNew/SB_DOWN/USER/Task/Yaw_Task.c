@@ -6,6 +6,9 @@
 #include "pid_user.h"
 #include "Exchange_Task.h"
 #include "judge.h"
+#include <math.h>
+
+#define Pi 3.1415926
 
 pidTypeDef pid_5010_s;
 pidTypeDef pid_5010_a;
@@ -23,6 +26,9 @@ uint8_t flag_suo = 0; //瞄准后云台锁住
 uint8_t flag_heart = 0;
 uint8_t last_id;
 float tar;
+float tar_forwrd; //前进角度
+int counter_yaw = 0; //大yaw旋转延时计数
+
 
 extern RC_ctrl_t rc_ctrl;
 extern motor_5010_info motor_5010;
@@ -55,6 +61,7 @@ void Yaw_task(void const * argument)
 		if((rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==3) || (rc_ctrl.rc.s[0]==3 && rc_ctrl.rc.s[1]==1))
 		{
 			yaw_control();
+		
 			if(Rx_nav.poing == 1) //导航发来的上坡指令
 			{
 				tar = Rx_nav.yaw_target; //将大yaw转向坡的方向
@@ -105,9 +112,16 @@ void Yaw_task(void const * argument)
 						{
 							flag_heart = 0;
 							flag_suo = 2; //未锁住标志位
-							yaw_finding(); //大yaw巡航
+							if(Rx_nav.Flag_headforward==1)
+							{
+								yaw_forward(); //大yaw头朝前进方向
+							}
+							else
+							{
+								yaw_finding(); //大yaw巡航
+							}							
 						}
-					}	
+					}					
 				}
 				//至少有一个摄像头识别到
 				else if(L_tracking==1 || Rx_nav.R_tracking==1 || M_tracking==1)
@@ -197,6 +211,31 @@ void yaw_control(void)
 	{
 		target_angle_5010 += 360;
 	}
+}
+
+void yaw_forward(void)
+{
+	if(counter_yaw==0)
+	{
+		tar_forwrd = atan2(Rx_nav.nav_x, Rx_nav.nav_y) * 180 / Pi;
+    // 调整角度范围到-180到+180
+    if (tar_forwrd > 180) {
+        tar_forwrd -= 360;
+    } else if (tar_forwrd < -180) {
+        tar_forwrd += 360;
+    }
+		target_angle_5010 = yaw12-tar_forwrd;
+	}
+ 
+	if (counter_yaw<800)
+	{
+		counter_yaw++;
+	}
+	else
+	{
+		counter_yaw=0;
+	}
+
 }
 
 void yaw_finding(void)

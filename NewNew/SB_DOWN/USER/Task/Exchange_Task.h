@@ -58,6 +58,7 @@ typedef struct
 	int8_t delta_x[49]; 
 	int8_t delta_y[49];
 	uint8_t Flag_turn;
+	uint8_t Flag_headforward;
   uint16_t checksum;
 }Rx_naving;
 

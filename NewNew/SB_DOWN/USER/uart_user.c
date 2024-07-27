@@ -7,6 +7,7 @@
 
 int value = 0;
 int count = 0; //发送数据标志位
+int miss_num = 0;
 uint8_t Rx[256]; //接收缓冲数组
 uint32_t length = 0;
 uint16_t checksum_Rx;
@@ -44,10 +45,11 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 			__HAL_UART_CLEAR_IDLEFLAG(&huart1);
 			HAL_UART_DMAStop(&huart1);
 
-			length = 128 - (__HAL_DMA_GET_COUNTER(&hdma_usart1_rx)); //DMA中未传输的数据个数
+			length = 256 - (__HAL_DMA_GET_COUNTER(&hdma_usart1_rx)); //DMA中未传输的数据个数
 			
 			Rx_flag = 2; //收到一帧数据
 			count = 0;
+			miss_num = 0;
 //			memset(Rx,0x00,sizeof(Rx)); //清空缓存，重新接收
 			HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(DIR_1_GPIO_Port,DIR_1_Pin,GPIO_PIN_RESET);
@@ -56,9 +58,9 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 			if(Rx[0] == 0xA5)
 
 			{
-				checksum_Rx = Get_CRC16_Check_Sum(Rx, 138, 0xffff);
+				checksum_Rx = Get_CRC16_Check_Sum(Rx, 139, 0xffff);
 
-				memcpy(&Rx_nav.checksum, &Rx[138], 2);
+				memcpy(&Rx_nav.checksum, &Rx[139], 2);
 				if(Rx_nav.checksum == checksum_Rx)
 				{
 					Rx_nav.naving = Rx[1];
@@ -82,6 +84,7 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 					memcpy(&Rx_nav.delta_x[0], &Rx[39], 49);
 					memcpy(&Rx_nav.delta_y[0], &Rx[88], 49);
 					memcpy(&Rx_nav.Flag_turn, &Rx[137], 1);
+					memcpy(&Rx_nav.Flag_headforward, &Rx[138], 1);
 				}
 			}
 		}
