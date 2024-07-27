@@ -27,6 +27,7 @@ uint8_t flag_heart = 0;
 uint8_t last_id;
 float tar;
 float tar_forwrd; //前进角度
+int counter_yaw = 0; //大yaw旋转延时计数
 
 
 extern RC_ctrl_t rc_ctrl;
@@ -111,7 +112,7 @@ void Yaw_task(void const * argument)
 						{
 							flag_heart = 0;
 							flag_suo = 2; //未锁住标志位
-							if(Rx_nav.Flag_turn==1)
+							if(Rx_nav.Flag_headforward==1)
 							{
 								yaw_forward(); //大yaw头朝前进方向
 							}
@@ -214,15 +215,27 @@ void yaw_control(void)
 
 void yaw_forward(void)
 {
-	 tar_forwrd = atan2(Rx_nav.nav_x, Rx_nav.nav_y) * 180 / Pi;
-
+	if(counter_yaw==0)
+	{
+		tar_forwrd = atan2(Rx_nav.nav_x, Rx_nav.nav_y) * 180 / Pi;
     // 调整角度范围到-180到+180
     if (tar_forwrd > 180) {
         tar_forwrd -= 360;
     } else if (tar_forwrd < -180) {
         tar_forwrd += 360;
     }
-		target_angle_5010 = -tar_forwrd;
+		target_angle_5010 = yaw12-tar_forwrd;
+	}
+ 
+	if (counter_yaw<800)
+	{
+		counter_yaw++;
+	}
+	else
+	{
+		counter_yaw=0;
+	}
+
 }
 
 void yaw_finding(void)

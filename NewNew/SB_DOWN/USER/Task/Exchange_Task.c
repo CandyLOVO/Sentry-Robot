@@ -31,6 +31,7 @@ extern double yaw12; //‘∆Ã®Õ”¬›“«yaw÷µ
 extern uint8_t flag_heart;
 extern Rx_naving Rx_nav;
 extern float R_yaw_speed;
+extern float tar_forwrd; 
 
 void Exchange_Task(void const * argument)
 {
@@ -164,9 +165,10 @@ void RS485_Trans(void)
 	memcpy(&Tx[50], &Tx_nav.Flag_start, 1);
 	memcpy(&Tx[51], &Tx_nav.Flag_off_war, 1);
 	memcpy(&Tx[52], &Tx_nav.R_yaw_speed, 4);
-	Tx_nav.checksum = Get_CRC16_Check_Sum(Tx, 56, 0xffff);
-	memcpy(&Tx[56], &Tx_nav.checksum, 2);
-	Tx[58] = Tx_nav.ending;
+	memcpy(&Tx[56], &tar_forwrd,4);
+	Tx_nav.checksum = Get_CRC16_Check_Sum(Tx, 60, 0xffff);
+	memcpy(&Tx[60], &Tx_nav.checksum, 2);
+	Tx[62] = Tx_nav.ending;
 	
 	HAL_GPIO_WritePin(DIR_2_GPIO_Port,DIR_2_Pin,GPIO_PIN_SET);
 	HAL_GPIO_WritePin(DIR_1_GPIO_Port,DIR_1_Pin,GPIO_PIN_SET);
