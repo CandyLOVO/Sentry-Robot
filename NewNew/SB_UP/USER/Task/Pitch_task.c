@@ -75,7 +75,7 @@ void Pitch_Task(void * argument)
 			//都没有识别到目标，开始巡航
 			if(Rx_vision.L_tracking==0 && Rx_vision.R_tracking==0 && Rx_vision.M_tracking==0)
 			{
-				if((flag_suo == 2)&&(time_delay <= 1000)) //上一个状态为锁住，在1000ms内：
+				if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，在1000ms内：
 				{
 					nod_flag_L == 0;
 					nod_flag_R == 0;

@@ -90,7 +90,7 @@ void Yaw_Task(void * argument)
 			//四个摄像头都没有识别到
 			if(Rx_vision.L_tracking==0 && Rx_vision.R_tracking==0 && Rx_vision.M_tracking==0)
 			{
-				if((flag_suo == 2)&&(time_delay <= 1000)) //上一个状态为锁住，在1000ms内：
+				if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，在1000ms内：
 				{
 					rotate_flag_L = 0; //左头不转
 					rotate_flag_R = 0; //右头不转

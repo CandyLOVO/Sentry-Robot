@@ -81,7 +81,7 @@ void Yaw_task(void const * argument)
 				if(L_tracking==0 && Rx_nav.R_tracking==0 && M_tracking==0)
 				{
 					//大yaw瞄准延时
-					if((flag_suo == 2)&&(time_delay <= 1000)) //上一个状态为锁住，且在1000ms内：
+					if((flag_suo == 1)&&(time_delay <= 1000)) //上一个状态为锁住，且在1000ms内：
 					{
 						target_angle_5010 = last_target_angle_5010; //目标角度为锁住时的角度
 						time_delay++;

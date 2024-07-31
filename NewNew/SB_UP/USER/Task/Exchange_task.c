@@ -44,6 +44,14 @@ void vision_value(void)
 	Tx_vision.color = 1;
 	Tx_vision.yaw = yaw12;
 	Tx_vision.L_yaw = yaw_angle_L + yaw12;
+	if(Tx_vision.L_yaw > 180)
+	{
+		Tx_vision.L_yaw -= 360;
+	}
+	else if(Tx_vision.L_yaw < -180)
+	{
+		Tx_vision.L_yaw += 360;
+	}
 	Tx_vision.L_pitch = pitch_angle_L;
 	Tx_vision.R_yaw = yaw_angle_R + yaw12;
 	Tx_vision.R_pitch = pitch_angle_R;
@@ -86,6 +94,14 @@ void yaw_value(void)
 	osDelay(1);
 	
 	Tx_vision.R_yaw = yaw_angle_R + yaw12;
+	if(Tx_vision.R_yaw > 180)
+	{
+		Tx_vision.R_yaw -= 360;
+	}
+	else if(Tx_vision.R_yaw < -180)
+	{
+		Tx_vision.R_yaw += 360;
+	}
 	Tx_vision.R_pitch = pitch_angle_R;
 	memcpy(&Tx_shijue_R[0], &Tx_vision.R_yaw, 4);
 	memcpy(&Tx_shijue_R[4], &Tx_vision.R_pitch, 4);
