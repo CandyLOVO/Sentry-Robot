@@ -8,7 +8,7 @@
 int value = 0;
 int count = 0; //发送数据标志位
 int miss_num = 0;
-uint8_t Rx[256]; //接收缓冲数组
+uint8_t Rx[128]; //接收缓冲数组
 uint32_t length = 0;
 uint16_t checksum_Rx;
 Rx_naving Rx_nav;
@@ -58,9 +58,9 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 			if(Rx[0] == 0xA5)
 
 			{
-				checksum_Rx = Get_CRC16_Check_Sum(Rx, 139, 0xffff);
+				checksum_Rx = Get_CRC16_Check_Sum(Rx, 36, 0xffff);
 
-				memcpy(&Rx_nav.checksum, &Rx[139], 2);
+				memcpy(&Rx_nav.checksum, &Rx[36], 2);
 				if(Rx_nav.checksum == checksum_Rx)
 				{
 					Rx_nav.naving = Rx[1];
@@ -78,13 +78,8 @@ void DRV_USART1_IRQHandler(UART_HandleTypeDef *huart) //与视觉通信 //在stm32f4xx
 					memcpy(&Rx_nav.R_pitch, &Rx[29], 4);
 					Rx_nav.target_shijue = Rx[33];
 					
-					Rx_nav.intention = Rx[34];
-					memcpy(&Rx_nav.start_position_x, &Rx[35], 2);
-					memcpy(&Rx_nav.start_position_y, &Rx[37], 2);
-					memcpy(&Rx_nav.delta_x[0], &Rx[39], 49);
-					memcpy(&Rx_nav.delta_y[0], &Rx[88], 49);
-					memcpy(&Rx_nav.Flag_turn, &Rx[137], 1);
-					memcpy(&Rx_nav.Flag_headforward, &Rx[138], 1);
+					memcpy(&Rx_nav.Flag_turn, &Rx[34], 1);
+					memcpy(&Rx_nav.Flag_headforward, &Rx[35], 1);
 				}
 			}
 		}
